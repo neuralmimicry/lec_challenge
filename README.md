@@ -2,7 +2,7 @@
 
 A native Rust implementation of the LEC Principal AI Engineer assessment: configurable teacher acquisition, durable budgets, isolated executable grading, source-separated curation, real differentiable Qwen LoRA, checkpoint evaluation and conservative promotion.
 
-**The assessment is not yet complete.** No provider credentials, spending authority or account-specific output-training decisions were supplied. There are no real teacher recordings or provider-trained assessment checkpoints. The offline demonstration fails explicitly when these required artifacts are absent. Local transport fixtures, random small-model tests and full-size synthetic tensor training are labelled QA evidence; they do not establish learning from teachers. See [STATUS.md](STATUS.md) and [limitations](docs/limitations.md).
+**The assessment is not yet complete.** No teacher API credentials, spending authority or account-specific API output-training decisions were supplied. Hugging Face access was subsequently authorised for local comparative weights, without saving credentials. There are no real teacher API recordings or provider-trained assessment checkpoints. The offline demonstration fails explicitly when these required artifacts are absent. Local transport fixtures, random small-model tests and full-size synthetic tensor training are labelled QA evidence; they do not establish learning from teachers. See [STATUS.md](STATUS.md) and [limitations](docs/limitations.md).
 
 ## Run
 
@@ -78,3 +78,17 @@ Local verification passed **81 tests**, formatting and strict all-target Clippy;
 `./run.sh package` produces ZIP and tar.gz deliveries with the prebuilt executable, pinned base/tokeniser, saved sandbox image, original notices, source and reports. The generated archives are about 1.4 GB each; their exact hashes are in `deliverables/SHA256SUMS`. The offline QA records the initially tested archive hash. Final packaging adds its evidence and these notes; its runtime inventory must still match `verified_input_asset_inventory_sha256` in the QA report.
 
 Application and candidate logic, model adaptation, statistics and tests are Rust. The shell launcher and OCI/CI build recipes invoke native tools; structured configuration and documentation are not alternative application implementations. No Python trainer or grader is required.
+
+## Local GPU teachers
+
+The optional native CUDA engine now runs on this laptop's 8 GiB RTX 2080 with explicit float16 execution and no CPU fallback. The [pinned comparative roster](config/comparative-models.toml) adds Qwen2.5-Coder-1.5B, DeepSeek-Coder-1.3B and an optional SmolLM2-1.7B general instruction control. The [GPU guide](docs/gpu.md) explains the measured native-toolchain compatibility fix, one-model-at-a-time hosting and actual evidence. The [Hub downloader](docs/hub.md) reads tokens only from ephemeral stdin/environment, verifies publisher hashes and stores no credentials.
+
+```sh
+./run-gpu.sh serve --comparative --device cuda --dtype f16 \
+  --base offline_bundle/comparative/qwen-coder-1_5b \
+  --config config/serving-teacher.toml
+
+./run-gpu.sh compare-models --device cuda --dtype f16
+```
+
+Comparisons use train/development tasks and preserve the sealed held-out set. Original-model scores measure no learning and cannot authorise promotion. DeepSeek output-trained derivatives inherit its licence/use obligations. The earlier delivery archives remain the verified CPU snapshot; rebuild and verify a new package to include this extension. The [full dependency inventory](docs/dependency-notices.md) reports one evidenced upstream notice gap in the optional CUDA build tool, separately from passing software checks.

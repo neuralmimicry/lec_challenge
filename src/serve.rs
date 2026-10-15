@@ -1,6 +1,8 @@
 //! Bounded localhost inference and atomic routing between immutable model processes.
 
-use crate::model::{Generation, GenerationRequest, ModelRuntime, atomic_write, sha256_file};
+use crate::model::{
+    Generation, GenerationRequest, ModelRuntime, RuntimeOptions, atomic_write, sha256_file,
+};
 use anyhow::{Context, Result, ensure};
 use axum::{
     Json, Router,
@@ -91,6 +93,8 @@ pub struct Health {
     pub smoke_elapsed_ms: u128,
     pub immutable: bool,
     pub production_eligible: bool,
+    #[serde(default)]
+    pub execution: serde_json::Value,
 }
 
 #[derive(Serialize)]
@@ -189,6 +193,39 @@ pub async fn run(
     checkpoint: Option<PathBuf>,
     config: ServeConfig,
 ) -> Result<()> {
+    run_with_options(base_dir, checkpoint, config, RuntimeOptions::default()).await
+}
+
+pub async fn run_with_options(
+    base_dir: PathBuf,
+    checkpoint: Option<PathBuf>,
+    config: ServeConfig,
+    options: RuntimeOptions,
+) -> Result<()> {
+    run_inner(base_dir, checkpoint, config, options, false).await
+}
+
+/// Comparative teachers are evaluation-only; they cannot authorise production
+/// student routing, even if their local inference health checks pass.
+pub async fn run_comparative(
+    base_dir: PathBuf,
+    config: ServeConfig,
+    options: RuntimeOptions,
+) -> Result<()> {
+    run_inner(base_dir, None, config, options, true).await
+}
+
+fn assessment_execution_eligible(checkpoint_present: bool, options: &RuntimeOptions) -> bool {
+    !checkpoint_present || *options == RuntimeOptions::default()
+}
+
+async fn run_inner(
+    base_dir: PathBuf,
+    checkpoint: Option<PathBuf>,
+    config: ServeConfig,
+    options: RuntimeOptions,
+    comparative: bool,
+) -> Result<()> {
     let addr = config.validate()?;
     let (tx, mut rx) = mpsc::channel::<Job>(config.queue_capacity);
     let (ready_tx, ready_rx) = oneshot::channel::<std::result::Result<Health, String>>();
@@ -196,17 +233,27 @@ pub async fn run(
         .name("qwen-inference".into())
         .spawn(move || {
             let runtime = (|| -> Result<(ModelRuntime, Health)> {
-                let mut model = ModelRuntime::load(&base_dir, checkpoint.as_deref())?;
-                let production_eligible = match &checkpoint {
-                    None => true,
-                    Some(path) => {
-                        serde_json::from_slice::<crate::train::CheckpointManifest>(&std::fs::read(
-                            path.join("manifest.json"),
-                        )?)?
-                        .training_purpose
-                            == crate::train::TrainingPurpose::Candidate
-                    }
+                // Existing assessment evidence fixes CPU float32 execution.
+                // Tensor identity alone cannot authorise another precision/device.
+                let execution_eligible =
+                    assessment_execution_eligible(checkpoint.is_some(), &options);
+                let mut model = if comparative {
+                    ModelRuntime::load_comparative_with_options(&base_dir, options)?
+                } else {
+                    ModelRuntime::load_with_options(&base_dir, checkpoint.as_deref(), options)?
                 };
+                let production_eligible = !comparative
+                    && execution_eligible
+                    && match &checkpoint {
+                        None => true,
+                        Some(path) => {
+                            serde_json::from_slice::<crate::train::CheckpointManifest>(
+                                &std::fs::read(path.join("manifest.json"))?,
+                            )?
+                            .training_purpose
+                                == crate::train::TrainingPurpose::Candidate
+                        }
+                    };
                 let smoke = model.generate(GenerationRequest {
                     prompt: "Write a Rust expression for adding two integers.".into(),
                     max_new_tokens: 1,
@@ -226,6 +273,7 @@ pub async fn run(
                     smoke_elapsed_ms: smoke.elapsed_ms,
                     immutable: true,
                     production_eligible,
+                    execution: model.execution_metadata(),
                 };
                 Ok((model, health))
             })();
@@ -565,6 +613,28 @@ pub async fn route_generate(
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn untested_device_or_precision_cannot_promote_an_assessment_adapter() {
+        assert!(assessment_execution_eligible(
+            true,
+            &RuntimeOptions::default()
+        ));
+        assert!(!assessment_execution_eligible(
+            true,
+            &RuntimeOptions::cuda(0)
+        ));
+        assert!(!assessment_execution_eligible(
+            true,
+            &RuntimeOptions {
+                device: crate::model::ExecutionDevice::Cuda { ordinal: 0 },
+                dtype: crate::model::InferenceDtype::F32
+            }
+        ));
+        assert!(assessment_execution_eligible(
+            false,
+            &RuntimeOptions::cuda(0)
+        ));
+    }
     #[test]
     fn rollback_retains_incumbent_and_candidate_history() {
         let dir = tempfile::tempdir().unwrap();

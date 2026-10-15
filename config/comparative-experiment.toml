@@ -1,0 +1,25 @@
+# Frozen before exploratory task outcomes. Groups allow the optional control
+# download to finish while the two coding teachers are evaluated.
+schema_version = 1
+purpose = "exploratory_original_model_comparison_not_proof_of_learning"
+registry = "config/comparative-models.toml"
+registry_sha256 = "7be043f6221464476fd3dafd795867fad6b48ec8d25ba51844bc78c8443e8661"
+split = "development"
+decoding_seed = 1729
+temperature = 0.2
+top_p = 0.95
+maximum_new_tokens = 512
+device = "cuda:0"
+precision = "float16"
+maximum_resident_models = 1
+maximum_concurrent_graders = 2
+held_out_allowed = false
+promotable = false
+
+[groups]
+coding = ["qwen-coder-0_5b", "qwen-coder-1_5b", "deepseek-coder-1_3b"]
+instruction_control = ["smollm2-1_7b"]
+
+[outputs]
+coding = "reports/comparative/coding-development"
+instruction_control = "reports/comparative/control-development"

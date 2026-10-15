@@ -3,6 +3,7 @@
 
 # Provenance and checksum-bound evidence must retain the original bytes.
 docs/rights/snapshots/** -text
+docs/comparative-models/provenance/** -text
 offline_bundle/** -text
 recordings/** -text
 reports/** -text

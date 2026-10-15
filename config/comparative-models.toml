@@ -1,0 +1,266 @@
+# Public, immutable open-weight comparators. These are model developers, not
+# three independently owned remote API businesses. No held-out access is allowed.
+schema_version = 1
+reviewed_at_utc = "2026-10-15T12:41:40Z"
+allowed_splits = ["train", "development"]
+held_out_allowed = false
+max_resident_gpu_models = 1
+preferred_gpu_dtype = "F16"
+initial_context_cap = 2048
+credential_policy = "Root agent only; public metadata research used no credentials"
+
+[[models]]
+id = "qwen-coder-0_5b"
+model_id = "Qwen/Qwen2.5-Coder-0.5B-Instruct"
+revision = "ea3f2471cf1b1f0db85067f1ef93848e38e88c25"
+directory = "offline_bundle/base"
+architecture = "qwen2"
+role = "student_baseline"
+licence = "Apache-2.0"
+developer_id = "alibaba-qwen"
+parameter_count = 494032768
+weight_file_bytes = 988097824
+estimated_f16_weight_bytes = 988065536
+estimated_f16_kv_bytes_per_token = 12288
+licence_evidence_path = "docs/comparative-models/provenance/qwen-coder-0.5b/LICENSE"
+licence_evidence_sha256 = "832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e"
+output_training_permission = "Permitted subject to Apache-2.0 notices and applicable output rights"
+evidence_kind = "existing_student_baseline_not_new_teacher"
+
+
+[[models.files]]
+name = "config.json"
+size_bytes = 659
+sha256 = "b1e58593cd31852f7da5c2fc31ddf6135b9c066c0fd9177a4bbe95717083adff"
+verification = "sha256_of_retrieved_pinned_public_bytes"
+
+[[models.files]]
+name = "tokenizer.json"
+size_bytes = 7031645
+sha256 = "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539"
+verification = "existing_checksum_verified_baseline"
+
+[[models.files]]
+name = "tokenizer_config.json"
+size_bytes = 7305
+sha256 = "959e7f1d9a1b7641a6d6ce05ca97b75c7894fcb66cbe5a040406458fb1128ee4"
+verification = "sha256_of_retrieved_pinned_public_bytes"
+
+[[models.files]]
+name = "generation_config.json"
+size_bytes = 243
+sha256 = "fdaccbcb02f3e1e7914ccb0f69ebe899071ffd27cf825166d823163e156870f2"
+verification = "sha256_of_retrieved_pinned_public_bytes"
+
+[[models.files]]
+name = "LICENSE"
+size_bytes = 11343
+sha256 = "832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e"
+verification = "sha256_of_retrieved_pinned_public_bytes"
+
+[[models.files]]
+name = "README.md"
+size_bytes = 5023
+sha256 = "50cd33dcab1f7b9d206d4691df527a419cfddadd0c4648b8d9bffd5a1b7a032d"
+verification = "sha256_of_retrieved_pinned_public_bytes"
+
+[[models.files]]
+name = "model.safetensors"
+size_bytes = 988097824
+sha256 = "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44"
+verification = "existing_checksum_verified_baseline"
+
+[[models]]
+id = "qwen-coder-1_5b"
+model_id = "Qwen/Qwen2.5-Coder-1.5B-Instruct"
+revision = "2e1fd397ee46e1388853d2af2c993145b0f1098a"
+directory = "offline_bundle/comparative/qwen-coder-1_5b"
+architecture = "qwen2"
+role = "coding_teacher"
+licence = "Apache-2.0"
+developer_id = "alibaba-qwen"
+parameter_count = 1543714304
+weight_file_bytes = 3087467144
+estimated_f16_weight_bytes = 3087428608
+estimated_f16_kv_bytes_per_token = 28672
+licence_evidence_path = "docs/comparative-models/provenance/qwen-coder-1.5b/LICENSE"
+licence_evidence_sha256 = "832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e"
+output_training_permission = "Permitted subject to Apache-2.0 notices and applicable output rights"
+evidence_kind = "public_metadata_only_pending_checksum_verified_weights_and_runtime_smoke"
+
+
+[[models.files]]
+name = "config.json"
+size_bytes = 660
+sha256 = "88f9a17863c05fb313515d2ff74b1098e0c35579f99068e32beda00618508ae0"
+verification = "sha256_of_retrieved_pinned_public_bytes"
+
+[[models.files]]
+name = "tokenizer.json"
+size_bytes = 7031645
+sha256 = "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539"
+verification = "sha256_of_retrieved_pinned_public_bytes"
+
+[[models.files]]
+name = "tokenizer_config.json"
+size_bytes = 7305
+sha256 = "959e7f1d9a1b7641a6d6ce05ca97b75c7894fcb66cbe5a040406458fb1128ee4"
+verification = "sha256_of_retrieved_pinned_public_bytes"
+
+[[models.files]]
+name = "generation_config.json"
+size_bytes = 242
+sha256 = "1a628a5775bc69cde01c6749a531150ca4d3189652c618a174f7077923acf3b1"
+verification = "sha256_of_retrieved_pinned_public_bytes"
+
+[[models.files]]
+name = "LICENSE"
+size_bytes = 11343
+sha256 = "832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e"
+verification = "sha256_of_retrieved_pinned_public_bytes"
+
+[[models.files]]
+name = "README.md"
+size_bytes = 5258
+sha256 = "a8504fd3e1247c90e4fe640d84df963237134bf29db02b0de7d502eed6c93c33"
+verification = "sha256_of_retrieved_pinned_public_bytes"
+
+[[models.files]]
+name = "model.safetensors"
+size_bytes = 3087467144
+sha256 = "c1b9b30e907950516ba3c646bdf570d8084c25a6410a0cdca80cf04b11bc13a8"
+verification = "published_hugging_face_lfs_sha256_not_yet_download_verified"
+
+[[models]]
+id = "deepseek-coder-1_3b"
+model_id = "deepseek-ai/deepseek-coder-1.3b-instruct"
+revision = "e063262dac8366fc1f28a4da0ff3c50ea66259ca"
+directory = "offline_bundle/comparative/deepseek-coder-1_3b"
+architecture = "llama"
+role = "coding_teacher"
+licence = "DeepSeek-Model-Licence-1.0"
+developer_id = "deepseek"
+parameter_count = 1346471936
+weight_file_bytes = 2692969128
+estimated_f16_weight_bytes = 2692943872
+estimated_f16_kv_bytes_per_token = 196608
+rope_scaling_type = "linear"
+rope_scaling_factor = 4.0
+licence_evidence_path = "docs/comparative-models/provenance/deepseek-coder-1.3b/LICENSE"
+licence_evidence_sha256 = "a3a0e9449cb691a12f4de1d03725fd41326614fdeaf5d80b28c51187da0bed0e"
+output_training_permission = "Permitted as a derivative: preserve inherited use restrictions, licence, attribution and modification notices; do not label the student Apache-only"
+evidence_kind = "public_metadata_only_pending_checksum_verified_weights_and_runtime_smoke"
+
+
+[[models.files]]
+name = "config.json"
+size_bytes = 631
+sha256 = "5e81a9fd94e640b412725ff4c6eef90b8862e526c93ca4f4c5179244bcf20550"
+verification = "sha256_of_retrieved_pinned_public_bytes"
+
+[[models.files]]
+name = "tokenizer.json"
+size_bytes = 1367962
+sha256 = "ef48ebdc8546c2d8092349d321f1d162de804a1c8900df2b615c7dc8b02ce141"
+verification = "sha256_of_retrieved_pinned_public_bytes"
+
+[[models.files]]
+name = "tokenizer_config.json"
+size_bytes = 1868
+sha256 = "775f116ff1130a5b5bfc3cfdb594f9fcb5a5dc61d5a11ba92b2a7c078d66b7b7"
+verification = "sha256_of_retrieved_pinned_public_bytes"
+
+[[models.files]]
+name = "generation_config.json"
+size_bytes = 119
+sha256 = "186a63b420f66a03e95a035c488373361bb04833a9b83f4bdbaba70c5c816002"
+verification = "sha256_of_retrieved_pinned_public_bytes"
+
+[[models.files]]
+name = "LICENSE"
+size_bytes = 13760
+sha256 = "a3a0e9449cb691a12f4de1d03725fd41326614fdeaf5d80b28c51187da0bed0e"
+verification = "sha256_of_retrieved_pinned_public_bytes"
+
+[[models.files]]
+name = "README.md"
+size_bytes = 3572
+sha256 = "b1739d38e8fe147611ccacb8f8b27ebedcde1acbe25002fbd67ee79c5dac1a17"
+verification = "sha256_of_retrieved_pinned_public_bytes"
+
+[[models.files]]
+name = "model.safetensors"
+size_bytes = 2692969128
+sha256 = "4ff570bf9a558d23c5cb4171bad00daf663be8282150cdb5769e0f6975b0007a"
+verification = "published_hugging_face_lfs_sha256_not_yet_download_verified"
+
+[[models]]
+id = "smollm2-1_7b"
+model_id = "HuggingFaceTB/SmolLM2-1.7B-Instruct"
+revision = "31b70e2e869a7173562077fd711b654946d38674"
+directory = "offline_bundle/comparative/smollm2-1_7b"
+architecture = "llama"
+role = "general_instruction_control"
+licence = "Apache-2.0"
+developer_id = "huggingface-smollm"
+parameter_count = 1711376384
+weight_file_bytes = 3422777952
+estimated_f16_weight_bytes = 3422752768
+estimated_f16_kv_bytes_per_token = 196608
+optional = true
+licence_evidence_path = "docs/comparative-models/provenance/smollm2-1.7b/README.md"
+licence_evidence_sha256 = "b00c0570dbc43674a0028d088fc72f40d83eea90f47cd987706ca2f95ed114c0"
+licence_text_path = "docs/comparative-models/provenance/smollm2-1.7b/LICENSE"
+licence_text_sha256 = "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+output_training_permission = "Official model card declares Apache-2.0; preserve the model card and canonical licence text"
+evidence_kind = "public_metadata_only_pending_checksum_verified_weights_and_runtime_smoke"
+
+
+[[models.files]]
+name = "config.json"
+size_bytes = 908
+sha256 = "994f50b16abb4ae00880baefe03c10260b5bd608d2bf586f7056ca05a534feea"
+verification = "sha256_of_retrieved_pinned_public_bytes"
+
+[[models.files]]
+name = "tokenizer.json"
+size_bytes = 2104556
+sha256 = "9ca9acddb6525a194ec8ac7a87f24fbba7232a9a15ffa1af0c1224fcd888e47c"
+verification = "sha256_of_retrieved_pinned_public_bytes"
+
+[[models.files]]
+name = "tokenizer_config.json"
+size_bytes = 3764
+sha256 = "4ec77d44f62efeb38d7e044a1db318f6a939438425312dfa333b8382dbad98df"
+verification = "sha256_of_retrieved_pinned_public_bytes"
+
+[[models.files]]
+name = "generation_config.json"
+size_bytes = 132
+sha256 = "87b916edaaab66b3899b9d0dd0752727dff6666686da0504d89ae0a6e055a013"
+verification = "sha256_of_retrieved_pinned_public_bytes"
+
+[[models.files]]
+name = "special_tokens_map.json"
+size_bytes = 655
+sha256 = "2b7379f3ae813529281a5c602bc5a11c1d4e0a99107aaa597fe936c1e813ca52"
+verification = "sha256_of_retrieved_pinned_public_bytes"
+
+[[models.files]]
+name = "LICENSE"
+size_bytes = 11358
+sha256 = "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+verification = "sha256_of_retrieved_pinned_public_bytes"
+source_url = "https://www.apache.org/licenses/LICENSE-2.0.txt"
+
+[[models.files]]
+name = "README.md"
+size_bytes = 14928
+sha256 = "b00c0570dbc43674a0028d088fc72f40d83eea90f47cd987706ca2f95ed114c0"
+verification = "sha256_of_retrieved_pinned_public_bytes"
+
+[[models.files]]
+name = "model.safetensors"
+size_bytes = 3422777952
+sha256 = "f55217be716b6a997b97b9d8d7eb6fad02e00858f5010ec24f64603c3a98a0e8"
+verification = "published_hugging_face_lfs_sha256_not_yet_download_verified"

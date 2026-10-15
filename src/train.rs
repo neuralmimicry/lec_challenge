@@ -244,17 +244,21 @@ pub fn encode_sample(
 
 pub fn assistant_loss(model: &mut QwenModel, sample: &EncodedSample) -> Result<Tensor> {
     model.clear_cache();
-    let input = Tensor::from_slice(&sample.input_ids, (1, sample.input_ids.len()), &Device::Cpu)?;
+    let input = Tensor::from_slice(
+        &sample.input_ids,
+        (1, sample.input_ids.len()),
+        model.device(),
+    )?;
     let hidden = model.hidden(&input, 0, false)?.squeeze(0)?;
     // Project only supervised positions: the large vocabulary head need not allocate
     // prompt logits, and prompt targets never enter the objective.
     let selected = hidden.index_select(
-        &Tensor::from_slice(&sample.positions, sample.positions.len(), &Device::Cpu)?,
+        &Tensor::from_slice(&sample.positions, sample.positions.len(), model.device())?,
         0,
     )?;
     let logits = model.logits(&selected)?;
     let log_prob = candle_nn::ops::log_softmax(&logits, D::Minus1)?;
-    let targets = Tensor::from_slice(&sample.targets, (sample.targets.len(), 1), &Device::Cpu)?;
+    let targets = Tensor::from_slice(&sample.targets, (sample.targets.len(), 1), model.device())?;
     Ok(log_prob.gather(&targets, 1)?.mean_all()?.neg()?)
 }
 

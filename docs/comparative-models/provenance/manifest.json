@@ -1,0 +1,165 @@
+{
+  "credentials_used": false,
+  "evidence_kind": "public_metadata_and_small_file_checksum_audit_not_weight_download_or_runtime_qa",
+  "held_out_access": false,
+  "models_checked": [
+    "deepseek-coder-1_3b",
+    "qwen-coder-0_5b",
+    "qwen-coder-1_5b",
+    "smollm2-1_7b"
+  ],
+  "new_expected_weight_bytes": 9203214224,
+  "observed_utc": "2026-10-15T12:41:40Z",
+  "passed": true,
+  "registry_path": "config/comparative-models.toml",
+  "registry_sha256": "7be043f6221464476fd3dafd795867fad6b48ec8d25ba51844bc78c8443e8661",
+  "schema_version": 1,
+  "snapshots": [
+    {
+      "path": "docs/comparative-models/provenance/qwen-coder-0.5b/config.json",
+      "sha256": "b1e58593cd31852f7da5c2fc31ddf6135b9c066c0fd9177a4bbe95717083adff",
+      "size_bytes": 659
+    },
+    {
+      "path": "offline_bundle/base/tokenizer.json",
+      "sha256": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+      "size_bytes": 7031645
+    },
+    {
+      "path": "docs/comparative-models/provenance/qwen-coder-0.5b/tokenizer_config.json",
+      "sha256": "959e7f1d9a1b7641a6d6ce05ca97b75c7894fcb66cbe5a040406458fb1128ee4",
+      "size_bytes": 7305
+    },
+    {
+      "path": "docs/comparative-models/provenance/qwen-coder-0.5b/generation_config.json",
+      "sha256": "fdaccbcb02f3e1e7914ccb0f69ebe899071ffd27cf825166d823163e156870f2",
+      "size_bytes": 243
+    },
+    {
+      "path": "docs/comparative-models/provenance/qwen-coder-0.5b/LICENSE",
+      "sha256": "832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e",
+      "size_bytes": 11343
+    },
+    {
+      "path": "docs/comparative-models/provenance/qwen-coder-0.5b/README.md",
+      "sha256": "50cd33dcab1f7b9d206d4691df527a419cfddadd0c4648b8d9bffd5a1b7a032d",
+      "size_bytes": 5023
+    },
+    {
+      "path": "docs/comparative-models/provenance/qwen-coder-0.5b/api.json",
+      "sha256": "06c1411e08f791f2aec60f7a6617ea8a2341103fee61538cdd2abba695071f6e",
+      "size_bytes": 7506
+    },
+    {
+      "path": "docs/comparative-models/provenance/qwen-coder-1.5b/config.json",
+      "sha256": "88f9a17863c05fb313515d2ff74b1098e0c35579f99068e32beda00618508ae0",
+      "size_bytes": 660
+    },
+    {
+      "path": "docs/comparative-models/provenance/qwen-coder-1.5b/tokenizer.json",
+      "sha256": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+      "size_bytes": 7031645
+    },
+    {
+      "path": "docs/comparative-models/provenance/qwen-coder-1.5b/tokenizer_config.json",
+      "sha256": "959e7f1d9a1b7641a6d6ce05ca97b75c7894fcb66cbe5a040406458fb1128ee4",
+      "size_bytes": 7305
+    },
+    {
+      "path": "docs/comparative-models/provenance/qwen-coder-1.5b/generation_config.json",
+      "sha256": "1a628a5775bc69cde01c6749a531150ca4d3189652c618a174f7077923acf3b1",
+      "size_bytes": 242
+    },
+    {
+      "path": "docs/comparative-models/provenance/qwen-coder-1.5b/LICENSE",
+      "sha256": "832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e",
+      "size_bytes": 11343
+    },
+    {
+      "path": "docs/comparative-models/provenance/qwen-coder-1.5b/README.md",
+      "sha256": "a8504fd3e1247c90e4fe640d84df963237134bf29db02b0de7d502eed6c93c33",
+      "size_bytes": 5258
+    },
+    {
+      "path": "docs/comparative-models/provenance/qwen-coder-1.5b/api.json",
+      "sha256": "63864162193e65500070e9672b25f982019676009d5b222949e0912802dc4e3d",
+      "size_bytes": 8308
+    },
+    {
+      "path": "docs/comparative-models/provenance/deepseek-coder-1.3b/config.json",
+      "sha256": "5e81a9fd94e640b412725ff4c6eef90b8862e526c93ca4f4c5179244bcf20550",
+      "size_bytes": 631
+    },
+    {
+      "path": "docs/comparative-models/provenance/deepseek-coder-1.3b/tokenizer.json",
+      "sha256": "ef48ebdc8546c2d8092349d321f1d162de804a1c8900df2b615c7dc8b02ce141",
+      "size_bytes": 1367962
+    },
+    {
+      "path": "docs/comparative-models/provenance/deepseek-coder-1.3b/tokenizer_config.json",
+      "sha256": "775f116ff1130a5b5bfc3cfdb594f9fcb5a5dc61d5a11ba92b2a7c078d66b7b7",
+      "size_bytes": 1868
+    },
+    {
+      "path": "docs/comparative-models/provenance/deepseek-coder-1.3b/generation_config.json",
+      "sha256": "186a63b420f66a03e95a035c488373361bb04833a9b83f4bdbaba70c5c816002",
+      "size_bytes": 119
+    },
+    {
+      "path": "docs/comparative-models/provenance/deepseek-coder-1.3b/LICENSE",
+      "sha256": "a3a0e9449cb691a12f4de1d03725fd41326614fdeaf5d80b28c51187da0bed0e",
+      "size_bytes": 13760
+    },
+    {
+      "path": "docs/comparative-models/provenance/deepseek-coder-1.3b/README.md",
+      "sha256": "b1739d38e8fe147611ccacb8f8b27ebedcde1acbe25002fbd67ee79c5dac1a17",
+      "size_bytes": 3572
+    },
+    {
+      "path": "docs/comparative-models/provenance/deepseek-coder-1.3b/api.json",
+      "sha256": "3dffa10ed205870269217e475d48bbc85bb33543daf752ccaa384ec54bcdf7b7",
+      "size_bytes": 6544
+    },
+    {
+      "path": "docs/comparative-models/provenance/smollm2-1.7b/config.json",
+      "sha256": "994f50b16abb4ae00880baefe03c10260b5bd608d2bf586f7056ca05a534feea",
+      "size_bytes": 908
+    },
+    {
+      "path": "docs/comparative-models/provenance/smollm2-1.7b/tokenizer.json",
+      "sha256": "9ca9acddb6525a194ec8ac7a87f24fbba7232a9a15ffa1af0c1224fcd888e47c",
+      "size_bytes": 2104556
+    },
+    {
+      "path": "docs/comparative-models/provenance/smollm2-1.7b/tokenizer_config.json",
+      "sha256": "4ec77d44f62efeb38d7e044a1db318f6a939438425312dfa333b8382dbad98df",
+      "size_bytes": 3764
+    },
+    {
+      "path": "docs/comparative-models/provenance/smollm2-1.7b/generation_config.json",
+      "sha256": "87b916edaaab66b3899b9d0dd0752727dff6666686da0504d89ae0a6e055a013",
+      "size_bytes": 132
+    },
+    {
+      "path": "docs/comparative-models/provenance/smollm2-1.7b/special_tokens_map.json",
+      "sha256": "2b7379f3ae813529281a5c602bc5a11c1d4e0a99107aaa597fe936c1e813ca52",
+      "size_bytes": 655
+    },
+    {
+      "path": "docs/comparative-models/provenance/smollm2-1.7b/LICENSE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "size_bytes": 11358
+    },
+    {
+      "path": "docs/comparative-models/provenance/smollm2-1.7b/README.md",
+      "sha256": "b00c0570dbc43674a0028d088fc72f40d83eea90f47cd987706ca2f95ed114c0",
+      "size_bytes": 14928
+    },
+    {
+      "path": "docs/comparative-models/provenance/smollm2-1.7b/api.json",
+      "sha256": "dff4e89f36d2871f42cc9d703344b035487c5b1d4187e9de8f3a6b0ce0980f16",
+      "size_bytes": 9924
+    }
+  ],
+  "weight_bytes_locally_verified_by_this_audit": false
+}

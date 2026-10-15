@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "cargo_lock_sha256": "1f6da15c332cf3d3da327343ac0568cb086493d3aa7d322878e5a6880c2403eb",
+  "cargo_lock_sha256": "bd62f0019341d1a6432ba9153fefdfda757ac26856dc5da297995462176742bb",
   "acquired_unix_ms": 1792056830390,
   "entries": [
     {
@@ -307,6 +307,116 @@
           "upstream_blob_sha1": "31aa79387f27e730e33d871925e152e35e428031",
           "artifact": {
             "path": "offline_bundle/notices/wasip2-1.0.1+wasi-0.2.4/upstream/LICENSE-MIT",
+            "sha256": "23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+            "bytes": 1023
+          }
+        }
+      ]
+    },
+    {
+      "name": "candle-kernels",
+      "version": "0.9.1",
+      "repository": "https://github.com/huggingface/candle",
+      "commit": "cd96fa80da255e34f7b16b4ff98b6a31d557201b",
+      "path_in_vcs": "candle-kernels",
+      "crate_vcs_info": {
+        "path": "offline_bundle/notices/candle-kernels-0.9.1/SOURCE-CARGO-VCS-INFO.json",
+        "sha256": "af1b9d5f2e02d6949f9f1f92f8470303cc35bcb553de0ce967829816df681d74",
+        "bytes": 108
+      },
+      "crate_manifest": {
+        "path": "offline_bundle/notices/candle-kernels-0.9.1/SOURCE-CARGO-TOML.orig",
+        "sha256": "31b442ebfcda85734476bd1ddbcf9c74757e78c86c191179fa59ffa7f33bec22",
+        "bytes": 329
+      },
+      "upstream_tree": {
+        "path": "offline_bundle/notices/candle-kernels-0.9.1/SOURCE-UPSTREAM-TREE.json",
+        "sha256": "c5431bd1006a2d6ef58afec482b459944dad9b054b86f7acfbddb537a418d808",
+        "bytes": 268912
+      },
+      "upstream_tree_url": "https://api.github.com/repos/huggingface/candle/git/trees/cd96fa80da255e34f7b16b4ff98b6a31d557201b?recursive=1",
+      "workspace_manifest": {
+        "url": "https://raw.githubusercontent.com/huggingface/candle/cd96fa80da255e34f7b16b4ff98b6a31d557201b/Cargo.toml",
+        "source_path": "Cargo.toml",
+        "upstream_blob_sha1": "874570bcc915346e561c25337d33294c272b3df3",
+        "artifact": {
+          "path": "offline_bundle/notices/candle-kernels-0.9.1/SOURCE-WORKSPACE-CARGO.toml",
+          "sha256": "05f89c40b5be1b6061771eeb4a13d82f93b3dbb60db9bf3cba5c34f89f8f0514",
+          "bytes": 2842
+        }
+      },
+      "notices": [
+        {
+          "url": "https://raw.githubusercontent.com/huggingface/candle/cd96fa80da255e34f7b16b4ff98b6a31d557201b/LICENSE-APACHE",
+          "source_path": "LICENSE-APACHE",
+          "upstream_blob_sha1": "261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64",
+          "artifact": {
+            "path": "offline_bundle/notices/candle-kernels-0.9.1/upstream/LICENSE-APACHE",
+            "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+            "bytes": 11357
+          }
+        },
+        {
+          "url": "https://raw.githubusercontent.com/huggingface/candle/cd96fa80da255e34f7b16b4ff98b6a31d557201b/LICENSE-MIT",
+          "source_path": "LICENSE-MIT",
+          "upstream_blob_sha1": "31aa79387f27e730e33d871925e152e35e428031",
+          "artifact": {
+            "path": "offline_bundle/notices/candle-kernels-0.9.1/upstream/LICENSE-MIT",
+            "sha256": "23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+            "bytes": 1023
+          }
+        }
+      ]
+    },
+    {
+      "name": "ug-cuda",
+      "version": "0.4.0",
+      "repository": "https://github.com/LaurentMazare/ug",
+      "commit": "854edf4f9d97c86723a48ab89362fc1339675180",
+      "path_in_vcs": "ug-cuda",
+      "crate_vcs_info": {
+        "path": "offline_bundle/notices/ug-cuda-0.4.0/SOURCE-CARGO-VCS-INFO.json",
+        "sha256": "7fcdd5edf15d9c3671333d81a304e5b19b5539c623897b21683b9b856ee39c7e",
+        "bytes": 101
+      },
+      "crate_manifest": {
+        "path": "offline_bundle/notices/ug-cuda-0.4.0/SOURCE-CARGO-TOML.orig",
+        "sha256": "cb847b83a7e998a421cb59ab75b032f4102f85e34af4165217f0f8c2dc6b202b",
+        "bytes": 451
+      },
+      "upstream_tree": {
+        "path": "offline_bundle/notices/ug-cuda-0.4.0/SOURCE-UPSTREAM-TREE.json",
+        "sha256": "a60e057f829fe43e3d2a176e9677e96451c54b0d00d68a28d2c647b8cdc5375b",
+        "bytes": 25295
+      },
+      "upstream_tree_url": "https://api.github.com/repos/LaurentMazare/ug/git/trees/854edf4f9d97c86723a48ab89362fc1339675180?recursive=1",
+      "workspace_manifest": {
+        "url": "https://raw.githubusercontent.com/LaurentMazare/ug/854edf4f9d97c86723a48ab89362fc1339675180/Cargo.toml",
+        "source_path": "Cargo.toml",
+        "upstream_blob_sha1": "e59f01a7998006a438a471b3c27f74f7602a796b",
+        "artifact": {
+          "path": "offline_bundle/notices/ug-cuda-0.4.0/SOURCE-WORKSPACE-CARGO.toml",
+          "sha256": "96a23636975b0c80841d0a1847101e1469438aaef0c4b6688d6508f4d945857d",
+          "bytes": 1617
+        }
+      },
+      "notices": [
+        {
+          "url": "https://raw.githubusercontent.com/LaurentMazare/ug/854edf4f9d97c86723a48ab89362fc1339675180/LICENSE-APACHE",
+          "source_path": "LICENSE-APACHE",
+          "upstream_blob_sha1": "261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64",
+          "artifact": {
+            "path": "offline_bundle/notices/ug-cuda-0.4.0/upstream/LICENSE-APACHE",
+            "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+            "bytes": 11357
+          }
+        },
+        {
+          "url": "https://raw.githubusercontent.com/LaurentMazare/ug/854edf4f9d97c86723a48ab89362fc1339675180/LICENSE-MIT",
+          "source_path": "LICENSE-MIT",
+          "upstream_blob_sha1": "31aa79387f27e730e33d871925e152e35e428031",
+          "artifact": {
+            "path": "offline_bundle/notices/ug-cuda-0.4.0/upstream/LICENSE-MIT",
             "sha256": "23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
             "bytes": 1023
           }

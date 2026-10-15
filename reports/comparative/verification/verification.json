@@ -1,0 +1,111 @@
+{
+  "assessment_complete": false,
+  "dependency_notices_complete": false,
+  "evidence_rule": "Passing software QA does not replace missing dependency grants, real provider recordings, approved data, assessment checkpoints or measured held-out learning.",
+  "local_quality_checks_passed": false,
+  "notice_gap_details": [
+    "bindgen_cuda-0.1.6"
+  ],
+  "observed_unix_ms": 1792070422112,
+  "original_notice_gaps": 1,
+  "project_skill_validated": true,
+  "resolved_dependency_packages": 350,
+  "schema_version": 1,
+  "software_checks_passed": true,
+  "steps": [
+    {
+      "command": [
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "elapsed_seconds": 1.08709038,
+      "evidence": {
+        "bytes": 0,
+        "path": "reports/comparative/verification/verification-format.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "exit_code": 0,
+      "name": "format",
+      "success": true
+    },
+    {
+      "command": [
+        "clippy",
+        "--locked",
+        "--offline",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "elapsed_seconds": 18.158309055,
+      "evidence": {
+        "bytes": 351,
+        "path": "reports/comparative/verification/verification-clippy.log",
+        "sha256": "53215f455eb670f7a18eb77b3af9df09c5e52489066ca8bf853a5eda1945685e"
+      },
+      "exit_code": 0,
+      "name": "clippy",
+      "success": true
+    },
+    {
+      "command": [
+        "test",
+        "--locked",
+        "--offline"
+      ],
+      "elapsed_seconds": 28.148194942,
+      "evidence": {
+        "bytes": 10033,
+        "path": "reports/comparative/verification/verification-unit.log",
+        "sha256": "71e91f40746d14236d69f4cc0a68e2a0cdb5f8eacbb6b52b82f176042803a02c"
+      },
+      "exit_code": 0,
+      "name": "unit",
+      "success": true
+    },
+    {
+      "command": [
+        "test",
+        "--locked",
+        "--offline",
+        "original_tokenizer_masks_prompt_and_preserves_assistant_eos",
+        "--",
+        "--ignored"
+      ],
+      "elapsed_seconds": 2.653739094,
+      "evidence": {
+        "bytes": 756,
+        "path": "reports/comparative/verification/verification-original_tokeniser.log",
+        "sha256": "83e9bb6913324c81c035df8cb4a92a8ae9ad96cb401db6b27dc942736788ea4f"
+      },
+      "exit_code": 0,
+      "name": "original_tokeniser",
+      "success": true
+    },
+    {
+      "command": [
+        "test",
+        "--locked",
+        "--offline",
+        "--test",
+        "sandbox_contract",
+        "--",
+        "--ignored",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "elapsed_seconds": 136.320628193,
+      "evidence": {
+        "bytes": 455,
+        "path": "reports/comparative/verification/verification-real_container_qa.log",
+        "sha256": "07f30420d2e25be2ed565a27c790a166db0e5c07bae293d08ba390ee713bfd29"
+      },
+      "exit_code": 0,
+      "name": "real_container_qa",
+      "success": true
+    }
+  ]
+}

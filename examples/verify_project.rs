@@ -2,10 +2,19 @@
 use anyhow::{Context, Result, ensure};
 use lec_distil::artefact;
 use serde_json::json;
-use std::{fs, path::Path, process::Command, time::Instant};
+use std::{
+    fs,
+    path::{Path, PathBuf},
+    process::Command,
+    time::Instant,
+};
 
 fn main() -> Result<()> {
-    fs::create_dir_all("reports")?;
+    let report_directory = std::env::args_os()
+        .nth(1)
+        .map(PathBuf::from)
+        .unwrap_or_else(|| PathBuf::from("reports"));
+    fs::create_dir_all(&report_directory)?;
     let checks: [(&str, &[&str]); 5] = [
         ("format", &["fmt", "--all", "--", "--check"]),
         (
@@ -59,8 +68,8 @@ fn main() -> Result<()> {
             .with_context(|| format!("start {name}"))?;
         let mut log = output.stdout;
         log.extend_from_slice(&output.stderr);
-        let path = format!("reports/verification-{name}.log");
-        artefact::atomic_write(Path::new(&path), &log)?;
+        let path = report_directory.join(format!("verification-{name}.log"));
+        artefact::atomic_write(&path, &log)?;
         let success = output.status.success();
         passed &= success;
         eprintln!(
@@ -85,12 +94,10 @@ fn main() -> Result<()> {
     );
     let notices: serde_json::Value =
         serde_json::from_slice(&fs::read("offline_bundle/notices/manifest.json")?)?;
-    ensure!(
-        notices["remaining_notice_gaps"]
-            .as_array()
-            .is_some_and(|a| a.is_empty()),
-        "original dependency notice gaps remain"
-    );
+    let notice_gaps = notices["remaining_notice_gaps"]
+        .as_array()
+        .context("notice gap inventory missing")?;
+    let notices_complete = notice_gaps.is_empty();
     ensure!(
         notices["cargo_lock_sha256"] == artefact::file_hash(Path::new("Cargo.lock"))?,
         "dependency notice lock is stale"
@@ -99,9 +106,13 @@ fn main() -> Result<()> {
         .ok()
         .and_then(|b| serde_json::from_slice::<serde_json::Value>(&b).ok())
         .unwrap_or_default();
-    let report = json!({"schema_version":1,"observed_unix_ms":lec_distil::ledger::unix_millis(),"local_quality_checks_passed":passed,"assessment_complete":demo["status"]=="COMPLETE","steps":steps,"project_skill_validated":true,"resolved_dependency_packages":notices["packages"].as_array().map(Vec::len),"original_notice_gaps":0,"evidence_rule":"Passing local QA does not replace absent real provider recordings, approved data, assessment checkpoints or measured held-out learning."});
-    artefact::write_json(Path::new("reports/verification.json"), &report)?;
+    let report = json!({"schema_version":1,"observed_unix_ms":lec_distil::ledger::unix_millis(),"local_quality_checks_passed":passed&&notices_complete,"software_checks_passed":passed,"dependency_notices_complete":notices_complete,"assessment_complete":demo["status"]=="COMPLETE","steps":steps,"project_skill_validated":true,"resolved_dependency_packages":notices["packages"].as_array().map(Vec::len),"original_notice_gaps":notice_gaps.len(),"notice_gap_details":notice_gaps,"evidence_rule":"Passing software QA does not replace missing dependency grants, real provider recordings, approved data, assessment checkpoints or measured held-out learning."});
+    artefact::write_json(&report_directory.join("verification.json"), &report)?;
     println!("{}", serde_json::to_string_pretty(&report)?);
     ensure!(passed, "one or more local QA steps failed");
+    ensure!(
+        notices_complete,
+        "original dependency notice gaps remain; software results and exact gaps were retained"
+    );
     Ok(())
 }

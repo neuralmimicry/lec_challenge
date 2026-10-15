@@ -1,5 +1,6 @@
 {
-  "cargo_lock_sha256": "1f6da15c332cf3d3da327343ac0568cb086493d3aa7d322878e5a6880c2403eb",
+  "cargo_lock_sha256": "bd62f0019341d1a6432ba9153fefdfda757ac26856dc5da297995462176742bb",
+  "notice_acquisition_errors": [],
   "packages": [
     {
       "licence_expression": "MIT OR Apache-2.0",
@@ -18,6 +19,7 @@
         }
       ],
       "repository": "https://github.com/tkaitchuck/ahash",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.8.12"
     },
@@ -38,6 +40,7 @@
         }
       ],
       "repository": "https://github.com/BurntSushi/aho-corasick",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.1.5"
     },
@@ -58,6 +61,7 @@
         }
       ],
       "repository": "https://github.com/rust-cli/anstyle.git",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.0.0"
     },
@@ -78,6 +82,7 @@
         }
       ],
       "repository": "https://github.com/rust-cli/anstyle.git",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.0.14"
     },
@@ -98,6 +103,7 @@
         }
       ],
       "repository": "https://github.com/rust-cli/anstyle.git",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.0.0"
     },
@@ -118,6 +124,7 @@
         }
       ],
       "repository": "https://github.com/rust-cli/anstyle.git",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.1.5"
     },
@@ -138,6 +145,7 @@
         }
       ],
       "repository": "https://github.com/rust-cli/anstyle.git",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "3.0.11"
     },
@@ -158,6 +166,7 @@
         }
       ],
       "repository": "https://github.com/dtolnay/anyhow",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.0.104"
     },
@@ -173,6 +182,7 @@
         }
       ],
       "repository": "https://github.com/brendanzab/approx",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.5.1"
     },
@@ -193,6 +203,7 @@
         }
       ],
       "repository": "https://github.com/rust-fuzz/arbitrary/",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.5.0"
     },
@@ -213,6 +224,7 @@
         }
       ],
       "repository": "https://github.com/dtolnay/async-trait",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.1.92"
     },
@@ -238,6 +250,7 @@
         }
       ],
       "repository": "https://github.com/smol-rs/atomic-waker",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.1.2"
     },
@@ -258,6 +271,7 @@
         }
       ],
       "repository": "https://github.com/cuviper/autocfg",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.5.1"
     },
@@ -273,6 +287,7 @@
         }
       ],
       "repository": "https://github.com/tokio-rs/axum",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.8.9"
     },
@@ -288,6 +303,7 @@
         }
       ],
       "repository": "https://github.com/tokio-rs/axum",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.5.6"
     },
@@ -308,6 +324,7 @@
         }
       ],
       "repository": "https://github.com/marshallpierce/rust-base64",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.13.1"
     },
@@ -328,6 +345,7 @@
         }
       ],
       "repository": "https://github.com/marshallpierce/rust-base64",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.22.1"
     },
@@ -348,8 +366,60 @@
         }
       ],
       "repository": "https://github.com/marshallpierce/rust-base64",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.23.1"
+    },
+    {
+      "licence_expression": "MIT",
+      "name": "bindgen_cuda",
+      "notice_gap": true,
+      "original_notices": [],
+      "repository": "https://github.com/Narsil/bindgen_cuda",
+      "retained_original_source_evidence": [
+        {
+          "bytes": 94,
+          "path": "offline_bundle/notices/bindgen_cuda-0.1.6/SOURCE-CARGO-VCS-INFO.json",
+          "sha256": "0ef69dbdcc47bbfe74a259217e86cd6e3490eeed77333c9aeac9dacc4179eb25"
+        },
+        {
+          "bytes": 607,
+          "path": "offline_bundle/notices/bindgen_cuda-0.1.6/SOURCE-CARGO-TOML.orig",
+          "sha256": "2e7f68c373a5f8a2ce73fa91f1ea3cb099897e26818bd2fc9a36b26758745d2d"
+        },
+        {
+          "bytes": 1268,
+          "path": "offline_bundle/notices/bindgen_cuda-0.1.6/SOURCE-UPSTREAM-TREE.json",
+          "sha256": "f238db956238ae27ff99fa9a981ecbd03b6f13376b033c2d6727cc424f7d4155"
+        },
+        {
+          "bytes": 607,
+          "path": "offline_bundle/notices/bindgen_cuda-0.1.6/SOURCE-WORKSPACE-CARGO.toml",
+          "sha256": "2e7f68c373a5f8a2ce73fa91f1ea3cb099897e26818bd2fc9a36b26758745d2d"
+        },
+        {
+          "bytes": 5497,
+          "path": "offline_bundle/notices/bindgen_cuda-0.1.6/SOURCE-CURRENT-REPOSITORY.json",
+          "sha256": "80d6e31c88d40b2f6fcecf6801ae9c7968bdc5f3ea6419f422ced73a3728586d"
+        },
+        {
+          "bytes": 1571,
+          "path": "offline_bundle/notices/bindgen_cuda-0.1.6/SOURCE-CURRENT-UPSTREAM-TREE.json",
+          "sha256": "e47b75727f409db9ad159098fc82a94d84925d7b72210d8fb23fafe823c37f90"
+        },
+        {
+          "bytes": 5,
+          "path": "offline_bundle/notices/bindgen_cuda-0.1.6/SOURCE-LICENCE-HISTORY.json",
+          "sha256": "2ba33ca0557f1bb5b7ba88d67f9d0093c7185a36ec51fe2b7bd9372d3e001d6d"
+        },
+        {
+          "bytes": 1548,
+          "path": "offline_bundle/notices/bindgen_cuda-0.1.6/SOURCE-RESEARCH.json",
+          "sha256": "d8bf8809d25f60c7ed2f5f131f66b1a0ed3b6b60b1a99e5b964bd38d302fbba3"
+        }
+      ],
+      "supplemental_upstream_provenance": null,
+      "version": "0.1.6"
     },
     {
       "licence_expression": "MIT/Apache-2.0",
@@ -368,6 +438,7 @@
         }
       ],
       "repository": "https://github.com/bitflags/bitflags",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.3.2"
     },
@@ -388,6 +459,7 @@
         }
       ],
       "repository": "https://github.com/bitflags/bitflags",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "2.13.2"
     },
@@ -408,6 +480,7 @@
         }
       ],
       "repository": "https://github.com/RustCrypto/utils",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.10.4"
     },
@@ -428,6 +501,7 @@
         }
       ],
       "repository": "https://github.com/fitzgen/bumpalo",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "3.20.3"
     },
@@ -453,6 +527,7 @@
         }
       ],
       "repository": "https://github.com/Lokathor/bytemuck",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.25.2"
     },
@@ -478,6 +553,7 @@
         }
       ],
       "repository": "https://github.com/Lokathor/bytemuck",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.12.1"
     },
@@ -498,6 +574,7 @@
         }
       ],
       "repository": "https://github.com/BurntSushi/byteorder",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.5.0"
     },
@@ -513,6 +590,7 @@
         }
       ],
       "repository": "https://github.com/tokio-rs/bytes",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.12.1"
     },
@@ -528,7 +606,104 @@
         }
       ],
       "repository": "https://github.com/huggingface/candle",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
+      "version": "0.9.1"
+    },
+    {
+      "licence_expression": "MIT OR Apache-2.0",
+      "name": "candle-kernels",
+      "notice_gap": false,
+      "original_notices": [
+        {
+          "bytes": 11357,
+          "path": "offline_bundle/notices/candle-kernels-0.9.1/upstream/LICENSE-APACHE",
+          "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+        },
+        {
+          "bytes": 1023,
+          "path": "offline_bundle/notices/candle-kernels-0.9.1/upstream/LICENSE-MIT",
+          "sha256": "23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3"
+        }
+      ],
+      "repository": "https://github.com/huggingface/candle",
+      "retained_original_source_evidence": [
+        {
+          "bytes": 108,
+          "path": "offline_bundle/notices/candle-kernels-0.9.1/SOURCE-CARGO-VCS-INFO.json",
+          "sha256": "af1b9d5f2e02d6949f9f1f92f8470303cc35bcb553de0ce967829816df681d74"
+        },
+        {
+          "bytes": 329,
+          "path": "offline_bundle/notices/candle-kernels-0.9.1/SOURCE-CARGO-TOML.orig",
+          "sha256": "31b442ebfcda85734476bd1ddbcf9c74757e78c86c191179fa59ffa7f33bec22"
+        },
+        {
+          "bytes": 268912,
+          "path": "offline_bundle/notices/candle-kernels-0.9.1/SOURCE-UPSTREAM-TREE.json",
+          "sha256": "c5431bd1006a2d6ef58afec482b459944dad9b054b86f7acfbddb537a418d808"
+        },
+        {
+          "bytes": 2842,
+          "path": "offline_bundle/notices/candle-kernels-0.9.1/SOURCE-WORKSPACE-CARGO.toml",
+          "sha256": "05f89c40b5be1b6061771eeb4a13d82f93b3dbb60db9bf3cba5c34f89f8f0514"
+        }
+      ],
+      "supplemental_upstream_provenance": {
+        "commit": "cd96fa80da255e34f7b16b4ff98b6a31d557201b",
+        "crate_manifest": {
+          "bytes": 329,
+          "path": "offline_bundle/notices/candle-kernels-0.9.1/SOURCE-CARGO-TOML.orig",
+          "sha256": "31b442ebfcda85734476bd1ddbcf9c74757e78c86c191179fa59ffa7f33bec22"
+        },
+        "crate_vcs_info": {
+          "bytes": 108,
+          "path": "offline_bundle/notices/candle-kernels-0.9.1/SOURCE-CARGO-VCS-INFO.json",
+          "sha256": "af1b9d5f2e02d6949f9f1f92f8470303cc35bcb553de0ce967829816df681d74"
+        },
+        "name": "candle-kernels",
+        "notices": [
+          {
+            "artifact": {
+              "bytes": 11357,
+              "path": "offline_bundle/notices/candle-kernels-0.9.1/upstream/LICENSE-APACHE",
+              "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+            },
+            "source_path": "LICENSE-APACHE",
+            "upstream_blob_sha1": "261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64",
+            "url": "https://raw.githubusercontent.com/huggingface/candle/cd96fa80da255e34f7b16b4ff98b6a31d557201b/LICENSE-APACHE"
+          },
+          {
+            "artifact": {
+              "bytes": 1023,
+              "path": "offline_bundle/notices/candle-kernels-0.9.1/upstream/LICENSE-MIT",
+              "sha256": "23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3"
+            },
+            "source_path": "LICENSE-MIT",
+            "upstream_blob_sha1": "31aa79387f27e730e33d871925e152e35e428031",
+            "url": "https://raw.githubusercontent.com/huggingface/candle/cd96fa80da255e34f7b16b4ff98b6a31d557201b/LICENSE-MIT"
+          }
+        ],
+        "path_in_vcs": "candle-kernels",
+        "repository": "https://github.com/huggingface/candle",
+        "upstream_tree": {
+          "bytes": 268912,
+          "path": "offline_bundle/notices/candle-kernels-0.9.1/SOURCE-UPSTREAM-TREE.json",
+          "sha256": "c5431bd1006a2d6ef58afec482b459944dad9b054b86f7acfbddb537a418d808"
+        },
+        "upstream_tree_url": "https://api.github.com/repos/huggingface/candle/git/trees/cd96fa80da255e34f7b16b4ff98b6a31d557201b?recursive=1",
+        "version": "0.9.1",
+        "workspace_manifest": {
+          "artifact": {
+            "bytes": 2842,
+            "path": "offline_bundle/notices/candle-kernels-0.9.1/SOURCE-WORKSPACE-CARGO.toml",
+            "sha256": "05f89c40b5be1b6061771eeb4a13d82f93b3dbb60db9bf3cba5c34f89f8f0514"
+          },
+          "source_path": "Cargo.toml",
+          "upstream_blob_sha1": "874570bcc915346e561c25337d33294c272b3df3",
+          "url": "https://raw.githubusercontent.com/huggingface/candle/cd96fa80da255e34f7b16b4ff98b6a31d557201b/Cargo.toml"
+        }
+      },
       "version": "0.9.1"
     },
     {
@@ -548,6 +723,28 @@
         }
       ],
       "repository": "https://github.com/huggingface/candle",
+      "retained_original_source_evidence": [
+        {
+          "bytes": 103,
+          "path": "offline_bundle/notices/candle-nn-0.9.1/SOURCE-CARGO-VCS-INFO.json",
+          "sha256": "9b305188dba90062f1130796ec8da2ceb41448aaf82d4f903546180cd3de6402"
+        },
+        {
+          "bytes": 1144,
+          "path": "offline_bundle/notices/candle-nn-0.9.1/SOURCE-CARGO-TOML.orig",
+          "sha256": "630233369530688c87ac7bdb3b5af0ba334a2846276b89705f36c85ccb5876c7"
+        },
+        {
+          "bytes": 268912,
+          "path": "offline_bundle/notices/candle-nn-0.9.1/SOURCE-UPSTREAM-TREE.json",
+          "sha256": "c5431bd1006a2d6ef58afec482b459944dad9b054b86f7acfbddb537a418d808"
+        },
+        {
+          "bytes": 2842,
+          "path": "offline_bundle/notices/candle-nn-0.9.1/SOURCE-WORKSPACE-CARGO.toml",
+          "sha256": "05f89c40b5be1b6061771eeb4a13d82f93b3dbb60db9bf3cba5c34f89f8f0514"
+        }
+      ],
       "supplemental_upstream_provenance": {
         "commit": "cd96fa80da255e34f7b16b4ff98b6a31d557201b",
         "crate_manifest": {
@@ -617,6 +814,7 @@
         }
       ],
       "repository": "https://github.com/sagebind/castaway",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.2.4"
     },
@@ -637,6 +835,7 @@
         }
       ],
       "repository": "https://github.com/rust-lang/cc-rs",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.8.0"
     },
@@ -657,6 +856,7 @@
         }
       ],
       "repository": "https://github.com/rust-lang/cfg-if",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.0.5"
     },
@@ -677,6 +877,7 @@
         }
       ],
       "repository": "https://github.com/katharostech/cfg_aliases",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.2.2"
     },
@@ -697,6 +898,7 @@
         }
       ],
       "repository": "https://github.com/RustCrypto/stream-ciphers",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.10.2"
     },
@@ -717,6 +919,7 @@
         }
       ],
       "repository": "https://github.com/clap-rs/clap",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "4.6.7"
     },
@@ -737,6 +940,7 @@
         }
       ],
       "repository": "https://github.com/clap-rs/clap",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "4.6.7"
     },
@@ -757,6 +961,7 @@
         }
       ],
       "repository": "https://github.com/clap-rs/clap",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "4.6.7"
     },
@@ -777,6 +982,7 @@
         }
       ],
       "repository": "https://github.com/clap-rs/clap",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.1.1"
     },
@@ -797,6 +1003,7 @@
         }
       ],
       "repository": "https://github.com/rust-cli/anstyle.git",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.0.5"
     },
@@ -812,6 +1019,7 @@
         }
       ],
       "repository": "https://github.com/ParkMyCar/compact_str",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.9.1"
     },
@@ -832,6 +1040,7 @@
         }
       ],
       "repository": "https://github.com/RustCrypto/utils",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.2.17"
     },
@@ -852,6 +1061,7 @@
         }
       ],
       "repository": "https://github.com/RustCrypto/utils",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.3.1"
     },
@@ -872,6 +1082,7 @@
         }
       ],
       "repository": "https://github.com/srijs/rust-crc32fast",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.5.2"
     },
@@ -892,6 +1103,7 @@
         }
       ],
       "repository": "https://github.com/crossbeam-rs/crossbeam",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.8.8"
     },
@@ -912,6 +1124,7 @@
         }
       ],
       "repository": "https://github.com/crossbeam-rs/crossbeam",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.9.21"
     },
@@ -932,6 +1145,7 @@
         }
       ],
       "repository": "https://github.com/crossbeam-rs/crossbeam",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.8.23"
     },
@@ -947,6 +1161,7 @@
         }
       ],
       "repository": "https://github.com/eira-fransham/crunchy",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.2.4"
     },
@@ -967,8 +1182,30 @@
         }
       ],
       "repository": "https://github.com/RustCrypto/traits",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.1.7"
+    },
+    {
+      "licence_expression": "MIT OR Apache-2.0",
+      "name": "cudarc",
+      "notice_gap": false,
+      "original_notices": [
+        {
+          "bytes": 9723,
+          "path": "offline_bundle/notices/cudarc-0.16.6/LICENSE-APACHE",
+          "sha256": "62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a"
+        },
+        {
+          "bytes": 1023,
+          "path": "offline_bundle/notices/cudarc-0.16.6/LICENSE-MIT",
+          "sha256": "23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3"
+        }
+      ],
+      "repository": "https://github.com/coreylowman/cudarc",
+      "retained_original_source_evidence": [],
+      "supplemental_upstream_provenance": null,
+      "version": "0.16.6"
     },
     {
       "licence_expression": "MIT OR Apache-2.0",
@@ -987,6 +1224,7 @@
         }
       ],
       "repository": "https://github.com/daac-tools/daachorse",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "3.0.3"
     },
@@ -1002,6 +1240,7 @@
         }
       ],
       "repository": "https://github.com/TedDriggs/darling",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.20.11"
     },
@@ -1017,6 +1256,7 @@
         }
       ],
       "repository": "https://github.com/TedDriggs/darling",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.20.11"
     },
@@ -1032,6 +1272,7 @@
         }
       ],
       "repository": "https://github.com/TedDriggs/darling",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.20.11"
     },
@@ -1052,6 +1293,7 @@
         }
       ],
       "repository": "https://github.com/hanmertens/dary_heap",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.3.9"
     },
@@ -1072,6 +1314,7 @@
         }
       ],
       "repository": "https://github.com/rust-fuzz/arbitrary",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.5.0"
     },
@@ -1092,6 +1335,7 @@
         }
       ],
       "repository": "https://github.com/colin-kiegel/rust-derive-builder",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.20.2"
     },
@@ -1112,6 +1356,7 @@
         }
       ],
       "repository": "https://github.com/colin-kiegel/rust-derive-builder",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.20.2"
     },
@@ -1132,6 +1377,7 @@
         }
       ],
       "repository": "https://github.com/colin-kiegel/rust-derive-builder",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.20.2"
     },
@@ -1152,6 +1398,7 @@
         }
       ],
       "repository": "https://github.com/RustCrypto/traits",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.10.7"
     },
@@ -1172,6 +1419,7 @@
         }
       ],
       "repository": "https://github.com/yaahc/displaydoc",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.2.7"
     },
@@ -1187,6 +1435,7 @@
         }
       ],
       "repository": "https://github.com/kitegi/dynstack/",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.10.0"
     },
@@ -1202,6 +1451,7 @@
         }
       ],
       "repository": "https://codeberg.org/sarah-quinones/dyn-stack",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.13.2"
     },
@@ -1217,6 +1467,7 @@
         }
       ],
       "repository": "https://github.com/kitegi/dynstack/",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.1.3"
     },
@@ -1237,6 +1488,7 @@
         }
       ],
       "repository": "https://github.com/rayon-rs/either",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.19.0"
     },
@@ -1262,6 +1514,7 @@
         }
       ],
       "repository": "https://github.com/bluejekyll/enum-as-inner",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.6.1"
     },
@@ -1282,6 +1535,7 @@
         }
       ],
       "repository": "https://github.com/indexmap-rs/equivalent",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.0.3"
     },
@@ -1302,6 +1556,7 @@
         }
       ],
       "repository": "https://github.com/lambda-fairy/rust-errno",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.3.14"
     },
@@ -1317,6 +1572,7 @@
         }
       ],
       "repository": "https://github.com/Narsil/esaxx-rs",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.1.10"
     },
@@ -1337,6 +1593,7 @@
         }
       ],
       "repository": "https://github.com/sfackler/rust-fallible-iterator",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.3.0"
     },
@@ -1357,6 +1614,7 @@
         }
       ],
       "repository": "https://github.com/sfackler/fallible-streaming-iterator",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.1.9"
     },
@@ -1377,6 +1635,7 @@
         }
       ],
       "repository": "https://github.com/smol-rs/fastrand",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "2.5.0"
     },
@@ -1397,6 +1656,7 @@
         }
       ],
       "repository": "https://github.com/rust-lang/cc-rs",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.1.14"
     },
@@ -1417,6 +1677,7 @@
         }
       ],
       "repository": "https://github.com/servo/rust-fnv",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.0.7"
     },
@@ -1432,6 +1693,7 @@
         }
       ],
       "repository": "https://github.com/orlp/foldhash",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.1.5"
     },
@@ -1452,6 +1714,7 @@
         }
       ],
       "repository": "https://github.com/servo/rust-url",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.2.2"
     },
@@ -1472,6 +1735,7 @@
         }
       ],
       "repository": "https://github.com/rust-lang/futures-rs",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.3.34"
     },
@@ -1492,6 +1756,7 @@
         }
       ],
       "repository": "https://github.com/rust-lang/futures-rs",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.3.34"
     },
@@ -1512,6 +1777,7 @@
         }
       ],
       "repository": "https://github.com/rust-lang/futures-rs",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.3.34"
     },
@@ -1532,6 +1798,7 @@
         }
       ],
       "repository": "https://github.com/rust-lang/futures-rs",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.3.34"
     },
@@ -1552,6 +1819,7 @@
         }
       ],
       "repository": "https://github.com/rust-lang/futures-rs",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.3.34"
     },
@@ -1572,6 +1840,7 @@
         }
       ],
       "repository": "https://github.com/rust-lang/futures-rs",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.3.34"
     },
@@ -1592,6 +1861,7 @@
         }
       ],
       "repository": "https://github.com/rust-lang/futures-rs",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.3.34"
     },
@@ -1607,6 +1877,7 @@
         }
       ],
       "repository": "https://github.com/sarah-ek/gemm/",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.17.1"
     },
@@ -1622,6 +1893,7 @@
         }
       ],
       "repository": "https://github.com/sarah-ek/gemm/",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.18.2"
     },
@@ -1637,6 +1909,7 @@
         }
       ],
       "repository": "https://github.com/sarah-ek/gemm/",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.17.1"
     },
@@ -1652,6 +1925,7 @@
         }
       ],
       "repository": "https://github.com/sarah-ek/gemm/",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.18.2"
     },
@@ -1667,6 +1941,7 @@
         }
       ],
       "repository": "https://github.com/sarah-ek/gemm/",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.17.1"
     },
@@ -1682,6 +1957,7 @@
         }
       ],
       "repository": "https://github.com/sarah-ek/gemm/",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.18.2"
     },
@@ -1697,6 +1973,7 @@
         }
       ],
       "repository": "https://github.com/sarah-ek/gemm/",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.17.1"
     },
@@ -1712,6 +1989,7 @@
         }
       ],
       "repository": "https://github.com/sarah-ek/gemm/",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.18.2"
     },
@@ -1727,6 +2005,7 @@
         }
       ],
       "repository": "https://github.com/sarah-ek/gemm/",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.17.1"
     },
@@ -1742,6 +2021,7 @@
         }
       ],
       "repository": "https://github.com/sarah-ek/gemm/",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.18.2"
     },
@@ -1757,6 +2037,7 @@
         }
       ],
       "repository": "https://github.com/sarah-ek/gemm/",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.17.1"
     },
@@ -1772,6 +2053,7 @@
         }
       ],
       "repository": "https://github.com/sarah-ek/gemm/",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.18.2"
     },
@@ -1787,6 +2069,7 @@
         }
       ],
       "repository": "https://github.com/sarah-ek/gemm/",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.17.1"
     },
@@ -1802,6 +2085,7 @@
         }
       ],
       "repository": "https://github.com/sarah-ek/gemm/",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.18.2"
     },
@@ -1817,6 +2101,7 @@
         }
       ],
       "repository": "https://github.com/fizyk20/generic-array.git",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.14.7"
     },
@@ -1837,6 +2122,7 @@
         }
       ],
       "repository": "https://github.com/rust-random/getrandom",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.2.17"
     },
@@ -1857,6 +2143,7 @@
         }
       ],
       "repository": "https://github.com/rust-random/getrandom",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.3.4"
     },
@@ -1877,8 +2164,30 @@
         }
       ],
       "repository": "https://github.com/rust-random/getrandom",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.4.3"
+    },
+    {
+      "licence_expression": "MIT OR Apache-2.0",
+      "name": "glob",
+      "notice_gap": false,
+      "original_notices": [
+        {
+          "bytes": 10847,
+          "path": "offline_bundle/notices/glob-0.3.4/LICENSE-APACHE",
+          "sha256": "a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2"
+        },
+        {
+          "bytes": 1071,
+          "path": "offline_bundle/notices/glob-0.3.4/LICENSE-MIT",
+          "sha256": "6485b8ed310d3f0340bf1ad1f47645069ce4069dcc6bb46c7d5c6faf41de1fdb"
+        }
+      ],
+      "repository": "https://github.com/rust-lang/glob",
+      "retained_original_source_evidence": [],
+      "supplemental_upstream_provenance": null,
+      "version": "0.3.4"
     },
     {
       "licence_expression": "MIT OR Apache-2.0",
@@ -1897,6 +2206,7 @@
         }
       ],
       "repository": "https://github.com/VoidStarKat/half-rs",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "2.7.1"
     },
@@ -1917,6 +2227,7 @@
         }
       ],
       "repository": "https://github.com/rust-lang/hashbrown",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.15.5"
     },
@@ -1937,6 +2248,7 @@
         }
       ],
       "repository": "https://github.com/rust-lang/hashbrown",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.17.1"
     },
@@ -1957,6 +2269,7 @@
         }
       ],
       "repository": "https://github.com/kyren/hashlink",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.10.0"
     },
@@ -1977,6 +2290,7 @@
         }
       ],
       "repository": "https://github.com/withoutboats/heck",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.5.0"
     },
@@ -1997,6 +2311,7 @@
         }
       ],
       "repository": "https://github.com/hermit-os/hermit-rs",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.5.3"
     },
@@ -2017,6 +2332,7 @@
         }
       ],
       "repository": "https://github.com/KokaKiwi/rust-hex",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.4.3"
     },
@@ -2037,6 +2353,7 @@
         }
       ],
       "repository": "https://github.com/hyperium/http",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.5.0"
     },
@@ -2052,6 +2369,7 @@
         }
       ],
       "repository": "https://github.com/hyperium/http-body",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.1.0"
     },
@@ -2067,6 +2385,7 @@
         }
       ],
       "repository": "https://github.com/hyperium/http-body",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.1.5"
     },
@@ -2087,6 +2406,7 @@
         }
       ],
       "repository": "https://github.com/seanmonstar/httparse",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.10.1"
     },
@@ -2107,6 +2427,7 @@
         }
       ],
       "repository": "https://github.com/pyfisch/httpdate",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.0.3"
     },
@@ -2122,6 +2443,7 @@
         }
       ],
       "repository": "https://github.com/hyperium/hyper",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.12.0"
     },
@@ -2147,6 +2469,7 @@
         }
       ],
       "repository": "https://github.com/rustls/hyper-rustls",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.27.10"
     },
@@ -2162,6 +2485,7 @@
         }
       ],
       "repository": "https://github.com/hyperium/hyper-util",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.1.21"
     },
@@ -2177,6 +2501,7 @@
         }
       ],
       "repository": "https://github.com/unicode-org/icu4x",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "2.1.1"
     },
@@ -2192,6 +2517,7 @@
         }
       ],
       "repository": "https://github.com/unicode-org/icu4x",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "2.1.1"
     },
@@ -2207,6 +2533,7 @@
         }
       ],
       "repository": "https://github.com/unicode-org/icu4x",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "2.1.1"
     },
@@ -2222,6 +2549,7 @@
         }
       ],
       "repository": "https://github.com/unicode-org/icu4x",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "2.1.1"
     },
@@ -2237,6 +2565,7 @@
         }
       ],
       "repository": "https://github.com/unicode-org/icu4x",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "2.1.2"
     },
@@ -2252,6 +2581,7 @@
         }
       ],
       "repository": "https://github.com/unicode-org/icu4x",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "2.1.2"
     },
@@ -2267,6 +2597,7 @@
         }
       ],
       "repository": "https://github.com/unicode-org/icu4x",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "2.1.1"
     },
@@ -2282,6 +2613,7 @@
         }
       ],
       "repository": "https://github.com/TedDriggs/ident_case",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.0.1"
     },
@@ -2302,6 +2634,7 @@
         }
       ],
       "repository": "https://github.com/servo/rust-url/",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.1.0"
     },
@@ -2322,6 +2655,7 @@
         }
       ],
       "repository": "https://github.com/hsivonen/idna_adapter",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.2.1"
     },
@@ -2342,6 +2676,7 @@
         }
       ],
       "repository": "https://github.com/indexmap-rs/indexmap",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "2.14.2"
     },
@@ -2362,6 +2697,7 @@
         }
       ],
       "repository": "https://github.com/krisprice/ipnet",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "2.12.2"
     },
@@ -2382,6 +2718,7 @@
         }
       ],
       "repository": "https://github.com/polyfill-rs/is_terminal_polyfill",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.70.2"
     },
@@ -2402,6 +2739,7 @@
         }
       ],
       "repository": "https://github.com/rust-itertools/itertools",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.14.0"
     },
@@ -2422,6 +2760,7 @@
         }
       ],
       "repository": "https://github.com/dtolnay/itoa",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.0.18"
     },
@@ -2442,6 +2781,7 @@
         }
       ],
       "repository": "https://github.com/wasm-bindgen/wasm-bindgen/tree/master/crates/js-sys",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.3.106"
     },
@@ -2462,6 +2802,7 @@
         }
       ],
       "repository": "https://github.com/rust-lang-nursery/lazy-static.rs",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.5.1"
     },
@@ -2477,6 +2818,7 @@
         }
       ],
       "repository": null,
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.1.0"
     },
@@ -2497,6 +2839,7 @@
         }
       ],
       "repository": "https://github.com/rust-lang/libc",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.2.190"
     },
@@ -2512,6 +2855,7 @@
         }
       ],
       "repository": "https://github.com/nagisa/rust_libloading/",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.8.9"
     },
@@ -2527,6 +2871,7 @@
         }
       ],
       "repository": "https://github.com/rust-lang/compiler-builtins",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.2.16"
     },
@@ -2542,6 +2887,7 @@
         }
       ],
       "repository": "https://github.com/rusqlite/rusqlite",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.35.0"
     },
@@ -2572,6 +2918,7 @@
         }
       ],
       "repository": "https://github.com/sunfishcode/linux-raw-sys",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.12.1"
     },
@@ -2587,6 +2934,7 @@
         }
       ],
       "repository": "https://github.com/unicode-org/icu4x",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.8.3"
     },
@@ -2607,6 +2955,7 @@
         }
       ],
       "repository": "https://github.com/Amanieu/parking_lot",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.4.14"
     },
@@ -2627,6 +2976,7 @@
         }
       ],
       "repository": "https://github.com/rust-lang/log",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.4.34"
     },
@@ -2652,6 +3002,7 @@
         }
       ],
       "repository": "https://github.com/Ralith/lru-slab",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.1.3"
     },
@@ -2677,6 +3028,7 @@
         }
       ],
       "repository": "https://github.com/danielhenrymantilla/macro_rules_attribute-rs",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.2.3"
     },
@@ -2702,6 +3054,7 @@
         }
       ],
       "repository": "https://github.com/danielhenrymantilla/macro_rules_attribute-rs",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.2.3"
     },
@@ -2717,6 +3070,7 @@
         }
       ],
       "repository": "https://github.com/hawkw/matchers",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.2.0"
     },
@@ -2737,6 +3091,7 @@
         }
       ],
       "repository": "https://github.com/ibraheemdev/matchit",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.8.4"
     },
@@ -2757,6 +3112,7 @@
         }
       ],
       "repository": "https://github.com/bluss/matrixmultiply/",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.3.11"
     },
@@ -2777,6 +3133,7 @@
         }
       ],
       "repository": "https://github.com/BurntSushi/memchr",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "2.8.3"
     },
@@ -2797,8 +3154,25 @@
         }
       ],
       "repository": "https://github.com/RazrFalcon/memmap2-rs",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.9.11"
+    },
+    {
+      "licence_expression": "Apache-2.0",
+      "name": "memo-map",
+      "notice_gap": false,
+      "original_notices": [
+        {
+          "bytes": 10847,
+          "path": "offline_bundle/notices/memo-map-0.3.4/LICENSE",
+          "sha256": "a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2"
+        }
+      ],
+      "repository": "https://github.com/mitsuhiko/memo-map",
+      "retained_original_source_evidence": [],
+      "supplemental_upstream_provenance": null,
+      "version": "0.3.4"
     },
     {
       "licence_expression": "MIT OR Apache-2.0",
@@ -2817,8 +3191,41 @@
         }
       ],
       "repository": "https://github.com/hyperium/mime",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.3.17"
+    },
+    {
+      "licence_expression": "Apache-2.0",
+      "name": "minijinja",
+      "notice_gap": false,
+      "original_notices": [
+        {
+          "bytes": 10847,
+          "path": "offline_bundle/notices/minijinja-2.24.0/LICENSE",
+          "sha256": "a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2"
+        }
+      ],
+      "repository": "https://github.com/mitsuhiko/minijinja",
+      "retained_original_source_evidence": [],
+      "supplemental_upstream_provenance": null,
+      "version": "2.24.0"
+    },
+    {
+      "licence_expression": "Apache-2.0",
+      "name": "minijinja-contrib",
+      "notice_gap": false,
+      "original_notices": [
+        {
+          "bytes": 10847,
+          "path": "offline_bundle/notices/minijinja-contrib-2.24.0/LICENSE",
+          "sha256": "a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2"
+        }
+      ],
+      "repository": "https://github.com/mitsuhiko/minijinja",
+      "retained_original_source_evidence": [],
+      "supplemental_upstream_provenance": null,
+      "version": "2.24.0"
     },
     {
       "licence_expression": "MIT/Apache-2.0",
@@ -2842,6 +3249,7 @@
         }
       ],
       "repository": "https://github.com/Alexhuszagh/minimal-lexical",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.2.1"
     },
@@ -2857,6 +3265,7 @@
         }
       ],
       "repository": "https://github.com/tokio-rs/mio",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.2.4"
     },
@@ -2877,6 +3286,7 @@
         }
       ],
       "repository": "https://github.com/dtolnay/monostate",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.1.18"
     },
@@ -2897,6 +3307,7 @@
         }
       ],
       "repository": "https://github.com/dtolnay/monostate",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.1.18"
     },
@@ -2912,6 +3323,7 @@
         }
       ],
       "repository": "https://github.com/dimforge/nalgebra",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.33.3"
     },
@@ -2927,6 +3339,7 @@
         }
       ],
       "repository": "https://github.com/Geal/nom",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "7.1.3"
     },
@@ -2942,6 +3355,7 @@
         }
       ],
       "repository": "https://github.com/nushell/nu-ansi-term",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.50.3"
     },
@@ -2962,6 +3376,7 @@
         }
       ],
       "repository": "https://github.com/rust-num/num",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.4.3"
     },
@@ -2982,6 +3397,7 @@
         }
       ],
       "repository": "https://github.com/rust-num/num-bigint",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.4.8"
     },
@@ -3002,6 +3418,7 @@
         }
       ],
       "repository": "https://github.com/rust-num/num-complex",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.4.6"
     },
@@ -3022,6 +3439,7 @@
         }
       ],
       "repository": "https://github.com/rust-num/num-integer",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.1.47"
     },
@@ -3042,6 +3460,7 @@
         }
       ],
       "repository": "https://github.com/rust-num/num-iter",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.1.46"
     },
@@ -3062,6 +3481,7 @@
         }
       ],
       "repository": "https://github.com/rust-num/num-rational",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.4.2"
     },
@@ -3082,6 +3502,7 @@
         }
       ],
       "repository": "https://github.com/rust-num/num-traits",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.2.19"
     },
@@ -3102,6 +3523,7 @@
         }
       ],
       "repository": "https://github.com/seanmonstar/num_cpus",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.17.0"
     },
@@ -3127,6 +3549,7 @@
         }
       ],
       "repository": "https://github.com/illicitonion/num_enum",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.7.6"
     },
@@ -3152,6 +3575,7 @@
         }
       ],
       "repository": "https://github.com/illicitonion/num_enum",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.7.6"
     },
@@ -3172,6 +3596,7 @@
         }
       ],
       "repository": "https://github.com/matklad/once_cell",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.21.4"
     },
@@ -3192,6 +3617,7 @@
         }
       ],
       "repository": "https://github.com/polyfill-rs/once_cell_polyfill",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.70.2"
     },
@@ -3207,6 +3633,7 @@
         }
       ],
       "repository": "https://github.com/iwillspeak/rust-onig",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "6.5.3"
     },
@@ -3222,6 +3649,7 @@
         }
       ],
       "repository": "https://github.com/rust-onig/rust-onig",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "69.9.3"
     },
@@ -3242,6 +3670,7 @@
         }
       ],
       "repository": "https://github.com/Amanieu/parking_lot",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.12.5"
     },
@@ -3262,6 +3691,7 @@
         }
       ],
       "repository": "https://github.com/Amanieu/parking_lot",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.9.12"
     },
@@ -3282,6 +3712,7 @@
         }
       ],
       "repository": "https://github.com/dtolnay/paste",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.0.15"
     },
@@ -3302,6 +3733,7 @@
         }
       ],
       "repository": "https://github.com/as1100k/pastey",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.2.3"
     },
@@ -3322,6 +3754,7 @@
         }
       ],
       "repository": "https://github.com/servo/rust-url/",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "2.3.2"
     },
@@ -3342,6 +3775,7 @@
         }
       ],
       "repository": "https://github.com/taiki-e/pin-project-lite",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.2.17"
     },
@@ -3362,6 +3796,7 @@
         }
       ],
       "repository": "https://github.com/rust-lang/pkg-config-rs",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.3.34"
     },
@@ -3377,6 +3812,7 @@
         }
       ],
       "repository": "https://github.com/unicode-org/icu4x",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.1.6"
     },
@@ -3397,6 +3833,7 @@
         }
       ],
       "repository": "https://github.com/cryptocorrosion/cryptocorrosion",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.2.21"
     },
@@ -3417,6 +3854,7 @@
         }
       ],
       "repository": "https://github.com/bkchr/proc-macro-crate",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "3.5.0"
     },
@@ -3437,6 +3875,7 @@
         }
       ],
       "repository": "https://github.com/dtolnay/proc-macro2",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.0.107"
     },
@@ -3452,6 +3891,7 @@
         }
       ],
       "repository": "https://github.com/sarah-ek/pulp/",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.18.22"
     },
@@ -3467,6 +3907,7 @@
         }
       ],
       "repository": "https://github.com/sarah-ek/pulp/",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.21.5"
     },
@@ -3487,6 +3928,7 @@
         }
       ],
       "repository": "https://github.com/quinn-rs/quinn",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.11.12"
     },
@@ -3507,6 +3949,7 @@
         }
       ],
       "repository": "https://github.com/quinn-rs/quinn",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.11.19"
     },
@@ -3527,6 +3970,7 @@
         }
       ],
       "repository": "https://github.com/quinn-rs/quinn",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.5.16"
     },
@@ -3547,6 +3991,7 @@
         }
       ],
       "repository": "https://github.com/dtolnay/quote",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.0.47"
     },
@@ -3562,6 +4007,28 @@
         }
       ],
       "repository": "https://github.com/r-efi/r-efi",
+      "retained_original_source_evidence": [
+        {
+          "bytes": 94,
+          "path": "offline_bundle/notices/r-efi-5.3.0/SOURCE-CARGO-VCS-INFO.json",
+          "sha256": "50e0c72ee0164f182d7b5db0213cdb1626bad950f2443b05d006c28c7f0641b5"
+        },
+        {
+          "bytes": 1226,
+          "path": "offline_bundle/notices/r-efi-5.3.0/SOURCE-CARGO-TOML.orig",
+          "sha256": "57b6d9b9a1b6524f6b4dcc1dd24970ac03e6959786a6cfedaec9ba52878b4d3e"
+        },
+        {
+          "bytes": 16681,
+          "path": "offline_bundle/notices/r-efi-5.3.0/SOURCE-UPSTREAM-TREE.json",
+          "sha256": "e62de5a95c214d29b7358dc6abbfdf3c16becab487e2d2eb8ad482d8314cb599"
+        },
+        {
+          "bytes": 1226,
+          "path": "offline_bundle/notices/r-efi-5.3.0/SOURCE-WORKSPACE-CARGO.toml",
+          "sha256": "57b6d9b9a1b6524f6b4dcc1dd24970ac03e6959786a6cfedaec9ba52878b4d3e"
+        }
+      ],
       "supplemental_upstream_provenance": {
         "commit": "97b55bed1c2c91dcbf787674849f05337ff80b33",
         "crate_manifest": {
@@ -3621,6 +4088,28 @@
         }
       ],
       "repository": "https://github.com/r-efi/r-efi",
+      "retained_original_source_evidence": [
+        {
+          "bytes": 94,
+          "path": "offline_bundle/notices/r-efi-6.0.0/SOURCE-CARGO-VCS-INFO.json",
+          "sha256": "d8d0d853429b028d5e3c7b969f7c6b77b04e17486c57fac0759eb8083a359f3f"
+        },
+        {
+          "bytes": 1107,
+          "path": "offline_bundle/notices/r-efi-6.0.0/SOURCE-CARGO-TOML.orig",
+          "sha256": "b8e89c393831c2161b6d390bd40422910ac34f02903ad39edd85ec38d4513fef"
+        },
+        {
+          "bytes": 16683,
+          "path": "offline_bundle/notices/r-efi-6.0.0/SOURCE-UPSTREAM-TREE.json",
+          "sha256": "5dabced7189181ec206a2bc6d838ec818d975d660e1a6773e9e9deade1467752"
+        },
+        {
+          "bytes": 1107,
+          "path": "offline_bundle/notices/r-efi-6.0.0/SOURCE-WORKSPACE-CARGO.toml",
+          "sha256": "b8e89c393831c2161b6d390bd40422910ac34f02903ad39edd85ec38d4513fef"
+        }
+      ],
       "supplemental_upstream_provenance": {
         "commit": "7e1b0322d31d625f81a5656096330934f9cd835d",
         "crate_manifest": {
@@ -3690,6 +4179,7 @@
         }
       ],
       "repository": "https://github.com/rust-random/rand",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.8.8"
     },
@@ -3715,6 +4205,7 @@
         }
       ],
       "repository": "https://github.com/rust-random/rand",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.9.5"
     },
@@ -3740,6 +4231,7 @@
         }
       ],
       "repository": "https://github.com/rust-random/rand",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.10.3"
     },
@@ -3765,6 +4257,7 @@
         }
       ],
       "repository": "https://github.com/rust-random/rand",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.3.1"
     },
@@ -3790,6 +4283,7 @@
         }
       ],
       "repository": "https://github.com/rust-random/rand",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.9.0"
     },
@@ -3815,6 +4309,7 @@
         }
       ],
       "repository": "https://github.com/rust-random/rand",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.6.4"
     },
@@ -3840,6 +4335,7 @@
         }
       ],
       "repository": "https://github.com/rust-random/rand",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.9.5"
     },
@@ -3865,6 +4361,7 @@
         }
       ],
       "repository": "https://github.com/rust-random/rand_core",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.10.1"
     },
@@ -3890,6 +4387,7 @@
         }
       ],
       "repository": "https://github.com/rust-random/rand",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.4.3"
     },
@@ -3915,6 +4413,7 @@
         }
       ],
       "repository": "https://github.com/rust-random/rand_distr",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.5.1"
     },
@@ -3940,6 +4439,7 @@
         }
       ],
       "repository": "https://github.com/rust-random/rngs",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.10.2"
     },
@@ -3955,6 +4455,7 @@
         }
       ],
       "repository": "https://github.com/gz/rust-cpuid",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "10.7.0"
     },
@@ -3970,6 +4471,7 @@
         }
       ],
       "repository": "https://github.com/gz/rust-cpuid",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "11.6.0"
     },
@@ -3990,6 +4492,7 @@
         }
       ],
       "repository": "https://github.com/bluss/rawpointer/",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.2.1"
     },
@@ -4010,6 +4513,7 @@
         }
       ],
       "repository": "https://github.com/rayon-rs/rayon",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.12.0"
     },
@@ -4030,6 +4534,7 @@
         }
       ],
       "repository": "https://github.com/cuviper/rayon-cond",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.4.0"
     },
@@ -4050,6 +4555,7 @@
         }
       ],
       "repository": "https://github.com/rayon-rs/rayon",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.13.0"
     },
@@ -4065,6 +4571,7 @@
         }
       ],
       "repository": "https://github.com/sarah-ek/reborrow/",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.5.5"
     },
@@ -4080,6 +4587,7 @@
         }
       ],
       "repository": "https://gitlab.redox-os.org/redox-os/syscall",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.5.18"
     },
@@ -4100,6 +4608,7 @@
         }
       ],
       "repository": "https://github.com/rust-lang/regex",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.13.1"
     },
@@ -4120,6 +4629,7 @@
         }
       ],
       "repository": "https://github.com/rust-lang/regex",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.4.18"
     },
@@ -4140,6 +4650,7 @@
         }
       ],
       "repository": "https://github.com/rust-lang/regex",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.8.11"
     },
@@ -4160,6 +4671,7 @@
         }
       ],
       "repository": "https://github.com/seanmonstar/reqwest",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.12.28"
     },
@@ -4185,6 +4697,7 @@
         }
       ],
       "repository": "https://github.com/briansmith/ring",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.17.14"
     },
@@ -4200,6 +4713,7 @@
         }
       ],
       "repository": "https://github.com/rusqlite/rusqlite",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.37.0"
     },
@@ -4220,6 +4734,7 @@
         }
       ],
       "repository": "https://github.com/rust-lang/rustc-hash",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "2.1.3"
     },
@@ -4250,6 +4765,7 @@
         }
       ],
       "repository": "https://github.com/bytecodealliance/rustix",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.1.5"
     },
@@ -4275,6 +4791,7 @@
         }
       ],
       "repository": "https://github.com/rustls/rustls",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.23.46"
     },
@@ -4295,6 +4812,7 @@
         }
       ],
       "repository": "https://github.com/rustls/pki-types",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.15.1"
     },
@@ -4310,6 +4828,7 @@
         }
       ],
       "repository": "https://github.com/rustls/webpki",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.103.15"
     },
@@ -4330,6 +4849,7 @@
         }
       ],
       "repository": "https://github.com/dtolnay/rustversion",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.0.23"
     },
@@ -4350,6 +4870,7 @@
         }
       ],
       "repository": "https://github.com/dtolnay/ryu",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.0.23"
     },
@@ -4375,6 +4896,7 @@
         }
       ],
       "repository": "https://github.com/Lokathor/safe_arch",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.7.4"
     },
@@ -4390,6 +4912,7 @@
         }
       ],
       "repository": "https://github.com/huggingface/safetensors",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.4.5"
     },
@@ -4410,6 +4933,7 @@
         }
       ],
       "repository": "https://github.com/BurntSushi/same-file",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.0.6"
     },
@@ -4430,6 +4954,7 @@
         }
       ],
       "repository": "https://github.com/bluss/scopeguard",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.2.0"
     },
@@ -4450,6 +4975,7 @@
         }
       ],
       "repository": "https://github.com/dtolnay/seq-macro",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.3.6"
     },
@@ -4470,6 +4996,7 @@
         }
       ],
       "repository": "https://github.com/serde-rs/serde",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.0.229"
     },
@@ -4490,6 +5017,7 @@
         }
       ],
       "repository": "https://github.com/serde-rs/serde",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.0.229"
     },
@@ -4510,6 +5038,7 @@
         }
       ],
       "repository": "https://github.com/serde-rs/serde",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.0.229"
     },
@@ -4530,6 +5059,7 @@
         }
       ],
       "repository": "https://github.com/serde-rs/json",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.0.154"
     },
@@ -4550,6 +5080,7 @@
         }
       ],
       "repository": "https://github.com/dtolnay/path-to-error",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.1.20"
     },
@@ -4570,6 +5101,7 @@
         }
       ],
       "repository": "https://github.com/toml-rs/toml",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.1.2"
     },
@@ -4590,8 +5122,30 @@
         }
       ],
       "repository": "https://github.com/nox/serde_urlencoded",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.7.1"
+    },
+    {
+      "licence_expression": "MIT OR Apache-2.0",
+      "name": "sha1",
+      "notice_gap": false,
+      "original_notices": [
+        {
+          "bytes": 10849,
+          "path": "offline_bundle/notices/sha1-0.10.7/LICENSE-APACHE",
+          "sha256": "a9040321c3712d8fd0b09cf52b17445de04a23a10165049ae187cd39e5c86be5"
+        },
+        {
+          "bytes": 1138,
+          "path": "offline_bundle/notices/sha1-0.10.7/LICENSE-MIT",
+          "sha256": "b4eb00df6e2a4d22518fcaa6a2b4646f249b3a3c9814509b22bd2091f1392ff1"
+        }
+      ],
+      "repository": "https://github.com/RustCrypto/hashes",
+      "retained_original_source_evidence": [],
+      "supplemental_upstream_provenance": null,
+      "version": "0.10.7"
     },
     {
       "licence_expression": "MIT OR Apache-2.0",
@@ -4610,6 +5164,7 @@
         }
       ],
       "repository": "https://github.com/RustCrypto/hashes",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.10.9"
     },
@@ -4625,6 +5180,7 @@
         }
       ],
       "repository": "https://github.com/hawkw/sharded-slab",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.1.7"
     },
@@ -4645,6 +5201,7 @@
         }
       ],
       "repository": "https://github.com/comex/rust-shlex",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "2.0.1"
     },
@@ -4665,6 +5222,7 @@
         }
       ],
       "repository": "https://github.com/vorner/signal-hook",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.4.8"
     },
@@ -4680,6 +5238,7 @@
         }
       ],
       "repository": "https://github.com/dimforge/simba",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.9.1"
     },
@@ -4695,6 +5254,7 @@
         }
       ],
       "repository": "https://github.com/tokio-rs/slab",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.4.12"
     },
@@ -4715,6 +5275,7 @@
         }
       ],
       "repository": "https://github.com/servo/rust-smallvec",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.16.3"
     },
@@ -4735,6 +5296,7 @@
         }
       ],
       "repository": "https://github.com/rust-lang/socket2",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.6.5"
     },
@@ -4750,6 +5312,7 @@
         }
       ],
       "repository": "https://github.com/huggingface/spm_precompiled",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.1.4"
     },
@@ -4770,6 +5333,7 @@
         }
       ],
       "repository": "https://github.com/storyyeller/stable_deref_trait",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.2.1"
     },
@@ -4790,6 +5354,7 @@
         }
       ],
       "repository": "https://github.com/nvzqz/static-assertions-rs",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.1.0"
     },
@@ -4805,6 +5370,7 @@
         }
       ],
       "repository": "https://github.com/statrs-dev/statrs",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.18.0"
     },
@@ -4820,6 +5386,7 @@
         }
       ],
       "repository": "https://github.com/rapidfuzz/strsim-rs",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.11.1"
     },
@@ -4835,6 +5402,7 @@
         }
       ],
       "repository": "https://github.com/dalek-cryptography/subtle",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "2.6.1"
     },
@@ -4855,6 +5423,7 @@
         }
       ],
       "repository": "https://github.com/dtolnay/syn",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "2.0.119"
     },
@@ -4875,6 +5444,7 @@
         }
       ],
       "repository": "https://github.com/dtolnay/syn",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "3.0.9"
     },
@@ -4890,6 +5460,7 @@
         }
       ],
       "repository": "https://github.com/Actyx/sync_wrapper",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.0.2"
     },
@@ -4905,6 +5476,7 @@
         }
       ],
       "repository": "https://github.com/mystor/synstructure",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.13.2"
     },
@@ -4920,6 +5492,7 @@
         }
       ],
       "repository": "https://github.com/mystor/synstructure",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.14.0"
     },
@@ -4935,6 +5508,7 @@
         }
       ],
       "repository": "https://github.com/johalun/sysctl-rs",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.5.5"
     },
@@ -4950,6 +5524,7 @@
         }
       ],
       "repository": "https://github.com/johalun/sysctl-rs",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.6.0"
     },
@@ -4970,6 +5545,7 @@
         }
       ],
       "repository": "https://github.com/Stebalien/tempfile",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "3.27.0"
     },
@@ -4990,6 +5566,7 @@
         }
       ],
       "repository": "https://github.com/dtolnay/thiserror",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.0.69"
     },
@@ -5010,6 +5587,7 @@
         }
       ],
       "repository": "https://github.com/dtolnay/thiserror",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "2.0.21"
     },
@@ -5030,6 +5608,7 @@
         }
       ],
       "repository": "https://github.com/dtolnay/thiserror",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.0.69"
     },
@@ -5050,6 +5629,7 @@
         }
       ],
       "repository": "https://github.com/dtolnay/thiserror",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "2.0.21"
     },
@@ -5070,6 +5650,7 @@
         }
       ],
       "repository": "https://github.com/Amanieu/thread_local-rs",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.1.10"
     },
@@ -5085,6 +5666,7 @@
         }
       ],
       "repository": "https://github.com/unicode-org/icu4x",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.8.4"
     },
@@ -5110,6 +5692,7 @@
         }
       ],
       "repository": "https://github.com/Lokathor/tinyvec",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.13.3"
     },
@@ -5125,6 +5708,7 @@
         }
       ],
       "repository": "https://github.com/huggingface/tokenizers",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.23.2"
     },
@@ -5140,6 +5724,7 @@
         }
       ],
       "repository": "https://github.com/tokio-rs/tokio",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.53.3"
     },
@@ -5155,6 +5740,7 @@
         }
       ],
       "repository": "https://github.com/tokio-rs/tokio",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "2.7.2"
     },
@@ -5175,6 +5761,7 @@
         }
       ],
       "repository": "https://github.com/rustls/tokio-rustls",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.26.6"
     },
@@ -5190,6 +5777,7 @@
         }
       ],
       "repository": "https://github.com/tokio-rs/tokio",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.7.20"
     },
@@ -5210,6 +5798,7 @@
         }
       ],
       "repository": "https://github.com/toml-rs/toml",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.9.12+spec-1.1.0"
     },
@@ -5230,6 +5819,7 @@
         }
       ],
       "repository": "https://github.com/toml-rs/toml",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.7.5+spec-1.1.0"
     },
@@ -5250,6 +5840,7 @@
         }
       ],
       "repository": "https://github.com/toml-rs/toml",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.1.2+spec-1.1.0"
     },
@@ -5270,6 +5861,7 @@
         }
       ],
       "repository": "https://github.com/toml-rs/toml",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.25.17+spec-1.1.0"
     },
@@ -5290,6 +5882,7 @@
         }
       ],
       "repository": "https://github.com/toml-rs/toml",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.1.5+spec-1.1.0"
     },
@@ -5310,6 +5903,7 @@
         }
       ],
       "repository": "https://github.com/toml-rs/toml",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.1.3+spec-1.1.0"
     },
@@ -5325,6 +5919,7 @@
         }
       ],
       "repository": "https://github.com/tower-rs/tower",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.5.3"
     },
@@ -5340,6 +5935,7 @@
         }
       ],
       "repository": "https://github.com/tower-rs/tower-http",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.6.11"
     },
@@ -5355,6 +5951,7 @@
         }
       ],
       "repository": "https://github.com/tower-rs/tower",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.3.3"
     },
@@ -5370,6 +5967,7 @@
         }
       ],
       "repository": "https://github.com/tower-rs/tower",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.3.3"
     },
@@ -5385,6 +5983,7 @@
         }
       ],
       "repository": "https://github.com/tokio-rs/tracing",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.1.44"
     },
@@ -5400,6 +5999,7 @@
         }
       ],
       "repository": "https://github.com/tokio-rs/tracing",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.1.31"
     },
@@ -5415,6 +6015,7 @@
         }
       ],
       "repository": "https://github.com/tokio-rs/tracing",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.1.36"
     },
@@ -5430,6 +6031,7 @@
         }
       ],
       "repository": "https://github.com/tokio-rs/tracing",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.2.0"
     },
@@ -5445,6 +6047,7 @@
         }
       ],
       "repository": "https://github.com/tokio-rs/tracing",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.3.23"
     },
@@ -5460,6 +6063,7 @@
         }
       ],
       "repository": "https://github.com/seanmonstar/try-lock",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.2.5"
     },
@@ -5485,6 +6089,7 @@
         }
       ],
       "repository": "https://github.com/paholg/typenum",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.20.1"
     },
@@ -5505,6 +6110,28 @@
         }
       ],
       "repository": "https://github.com/LaurentMazare/ug",
+      "retained_original_source_evidence": [
+        {
+          "bytes": 101,
+          "path": "offline_bundle/notices/ug-0.4.0/SOURCE-CARGO-VCS-INFO.json",
+          "sha256": "01153d0653c7ed7fbb64773a02587e9adb4d9dc9738a54c343a3a9e7b0a8b348"
+        },
+        {
+          "bytes": 623,
+          "path": "offline_bundle/notices/ug-0.4.0/SOURCE-CARGO-TOML.orig",
+          "sha256": "0157105b271d9e0c325947469eeecf5b790b21817a174ec2a64d135ea8683000"
+        },
+        {
+          "bytes": 25295,
+          "path": "offline_bundle/notices/ug-0.4.0/SOURCE-UPSTREAM-TREE.json",
+          "sha256": "a60e057f829fe43e3d2a176e9677e96451c54b0d00d68a28d2c647b8cdc5375b"
+        },
+        {
+          "bytes": 1617,
+          "path": "offline_bundle/notices/ug-0.4.0/SOURCE-WORKSPACE-CARGO.toml",
+          "sha256": "96a23636975b0c80841d0a1847101e1469438aaef0c4b6688d6508f4d945857d"
+        }
+      ],
       "supplemental_upstream_provenance": {
         "commit": "854edf4f9d97c86723a48ab89362fc1339675180",
         "crate_manifest": {
@@ -5563,6 +6190,102 @@
       "version": "0.4.0"
     },
     {
+      "licence_expression": "MIT OR Apache-2.0",
+      "name": "ug-cuda",
+      "notice_gap": false,
+      "original_notices": [
+        {
+          "bytes": 11357,
+          "path": "offline_bundle/notices/ug-cuda-0.4.0/upstream/LICENSE-APACHE",
+          "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+        },
+        {
+          "bytes": 1023,
+          "path": "offline_bundle/notices/ug-cuda-0.4.0/upstream/LICENSE-MIT",
+          "sha256": "23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3"
+        }
+      ],
+      "repository": "https://github.com/LaurentMazare/ug",
+      "retained_original_source_evidence": [
+        {
+          "bytes": 101,
+          "path": "offline_bundle/notices/ug-cuda-0.4.0/SOURCE-CARGO-VCS-INFO.json",
+          "sha256": "7fcdd5edf15d9c3671333d81a304e5b19b5539c623897b21683b9b856ee39c7e"
+        },
+        {
+          "bytes": 451,
+          "path": "offline_bundle/notices/ug-cuda-0.4.0/SOURCE-CARGO-TOML.orig",
+          "sha256": "cb847b83a7e998a421cb59ab75b032f4102f85e34af4165217f0f8c2dc6b202b"
+        },
+        {
+          "bytes": 25295,
+          "path": "offline_bundle/notices/ug-cuda-0.4.0/SOURCE-UPSTREAM-TREE.json",
+          "sha256": "a60e057f829fe43e3d2a176e9677e96451c54b0d00d68a28d2c647b8cdc5375b"
+        },
+        {
+          "bytes": 1617,
+          "path": "offline_bundle/notices/ug-cuda-0.4.0/SOURCE-WORKSPACE-CARGO.toml",
+          "sha256": "96a23636975b0c80841d0a1847101e1469438aaef0c4b6688d6508f4d945857d"
+        }
+      ],
+      "supplemental_upstream_provenance": {
+        "commit": "854edf4f9d97c86723a48ab89362fc1339675180",
+        "crate_manifest": {
+          "bytes": 451,
+          "path": "offline_bundle/notices/ug-cuda-0.4.0/SOURCE-CARGO-TOML.orig",
+          "sha256": "cb847b83a7e998a421cb59ab75b032f4102f85e34af4165217f0f8c2dc6b202b"
+        },
+        "crate_vcs_info": {
+          "bytes": 101,
+          "path": "offline_bundle/notices/ug-cuda-0.4.0/SOURCE-CARGO-VCS-INFO.json",
+          "sha256": "7fcdd5edf15d9c3671333d81a304e5b19b5539c623897b21683b9b856ee39c7e"
+        },
+        "name": "ug-cuda",
+        "notices": [
+          {
+            "artifact": {
+              "bytes": 11357,
+              "path": "offline_bundle/notices/ug-cuda-0.4.0/upstream/LICENSE-APACHE",
+              "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+            },
+            "source_path": "LICENSE-APACHE",
+            "upstream_blob_sha1": "261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64",
+            "url": "https://raw.githubusercontent.com/LaurentMazare/ug/854edf4f9d97c86723a48ab89362fc1339675180/LICENSE-APACHE"
+          },
+          {
+            "artifact": {
+              "bytes": 1023,
+              "path": "offline_bundle/notices/ug-cuda-0.4.0/upstream/LICENSE-MIT",
+              "sha256": "23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3"
+            },
+            "source_path": "LICENSE-MIT",
+            "upstream_blob_sha1": "31aa79387f27e730e33d871925e152e35e428031",
+            "url": "https://raw.githubusercontent.com/LaurentMazare/ug/854edf4f9d97c86723a48ab89362fc1339675180/LICENSE-MIT"
+          }
+        ],
+        "path_in_vcs": "ug-cuda",
+        "repository": "https://github.com/LaurentMazare/ug",
+        "upstream_tree": {
+          "bytes": 25295,
+          "path": "offline_bundle/notices/ug-cuda-0.4.0/SOURCE-UPSTREAM-TREE.json",
+          "sha256": "a60e057f829fe43e3d2a176e9677e96451c54b0d00d68a28d2c647b8cdc5375b"
+        },
+        "upstream_tree_url": "https://api.github.com/repos/LaurentMazare/ug/git/trees/854edf4f9d97c86723a48ab89362fc1339675180?recursive=1",
+        "version": "0.4.0",
+        "workspace_manifest": {
+          "artifact": {
+            "bytes": 1617,
+            "path": "offline_bundle/notices/ug-cuda-0.4.0/SOURCE-WORKSPACE-CARGO.toml",
+            "sha256": "96a23636975b0c80841d0a1847101e1469438aaef0c4b6688d6508f4d945857d"
+          },
+          "source_path": "Cargo.toml",
+          "upstream_blob_sha1": "e59f01a7998006a438a471b3c27f74f7602a796b",
+          "url": "https://raw.githubusercontent.com/LaurentMazare/ug/854edf4f9d97c86723a48ab89362fc1339675180/Cargo.toml"
+        }
+      },
+      "version": "0.4.0"
+    },
+    {
       "licence_expression": "(MIT OR Apache-2.0) AND Unicode-3.0",
       "name": "unicode-ident",
       "notice_gap": false,
@@ -5584,6 +6307,7 @@
         }
       ],
       "repository": "https://github.com/dtolnay/unicode-ident",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.0.27"
     },
@@ -5609,6 +6333,7 @@
         }
       ],
       "repository": "https://github.com/n1t0/unicode-normalization",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.1.12"
     },
@@ -5634,6 +6359,7 @@
         }
       ],
       "repository": "https://github.com/unicode-rs/unicode-segmentation",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.13.3"
     },
@@ -5654,6 +6380,7 @@
         }
       ],
       "repository": "https://github.com/swgillespie/unicode-categories",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.1.1"
     },
@@ -5669,6 +6396,7 @@
         }
       ],
       "repository": "https://github.com/briansmith/untrusted",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.9.0"
     },
@@ -5689,6 +6417,7 @@
         }
       ],
       "repository": "https://github.com/servo/rust-url",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "2.5.8"
     },
@@ -5714,6 +6443,7 @@
         }
       ],
       "repository": "https://github.com/hsivonen/utf8_iter",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.0.4"
     },
@@ -5734,6 +6464,7 @@
         }
       ],
       "repository": "https://github.com/alacritty/vte",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.2.2"
     },
@@ -5754,6 +6485,7 @@
         }
       ],
       "repository": "https://github.com/uuid-rs/uuid",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.26.1"
     },
@@ -5769,6 +6501,28 @@
         }
       ],
       "repository": "https://github.com/tokio-rs/valuable",
+      "retained_original_source_evidence": [
+        {
+          "bytes": 102,
+          "path": "offline_bundle/notices/valuable-0.1.1/SOURCE-CARGO-VCS-INFO.json",
+          "sha256": "34111200d67ce91680f8c64c5bfd537fc251f7ed7bb3a4e6110cb9299dacc0b2"
+        },
+        {
+          "bytes": 977,
+          "path": "offline_bundle/notices/valuable-0.1.1/SOURCE-CARGO-TOML.orig",
+          "sha256": "15a6fb7f15c0ea638610e791d6c5c3e5db5c84d73944f36c46c25bebd0001b63"
+        },
+        {
+          "bytes": 16049,
+          "path": "offline_bundle/notices/valuable-0.1.1/SOURCE-UPSTREAM-TREE.json",
+          "sha256": "1ad6b621e514de8efc7f0232b34bd59e22e78140fda22e0666358a62db36bb31"
+        },
+        {
+          "bytes": 115,
+          "path": "offline_bundle/notices/valuable-0.1.1/SOURCE-WORKSPACE-CARGO.toml",
+          "sha256": "0446aeaf2a5bb89a12e8070b3916177aeb82584e942a90ff28928a814550ba0d"
+        }
+      ],
       "supplemental_upstream_provenance": {
         "commit": "9efc29b6e58cef28f6566a47aa7e142a55fead77",
         "crate_manifest": {
@@ -5833,6 +6587,7 @@
         }
       ],
       "repository": "https://github.com/mcgoo/vcpkg-rs",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.2.15"
     },
@@ -5853,6 +6608,7 @@
         }
       ],
       "repository": "https://github.com/SergioBenitez/version_check",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.9.5"
     },
@@ -5873,6 +6629,7 @@
         }
       ],
       "repository": "https://github.com/BurntSushi/walkdir",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "2.5.0"
     },
@@ -5888,6 +6645,7 @@
         }
       ],
       "repository": "https://github.com/seanmonstar/want",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.3.2"
     },
@@ -5913,6 +6671,7 @@
         }
       ],
       "repository": "https://github.com/bytecodealliance/wasi",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.11.1+wasi-snapshot-preview1"
     },
@@ -5938,6 +6697,28 @@
         }
       ],
       "repository": "https://github.com/bytecodealliance/wasi-rs",
+      "retained_original_source_evidence": [
+        {
+          "bytes": 107,
+          "path": "offline_bundle/notices/wasip2-1.0.1+wasi-0.2.4/SOURCE-CARGO-VCS-INFO.json",
+          "sha256": "009488b807b23328fe46f6eef637e16f791a3bb01e494bcbfc27767fa4558e59"
+        },
+        {
+          "bytes": 1085,
+          "path": "offline_bundle/notices/wasip2-1.0.1+wasi-0.2.4/SOURCE-CARGO-TOML.orig",
+          "sha256": "064c751923c59463e2587ee85890cac5eca5059714087d62a95151df23e2bdf6"
+        },
+        {
+          "bytes": 38566,
+          "path": "offline_bundle/notices/wasip2-1.0.1+wasi-0.2.4/SOURCE-UPSTREAM-TREE.json",
+          "sha256": "694b59b79ae453d326def5da26c5de787c0143b55a30afd5b2f602ab3c019689"
+        },
+        {
+          "bytes": 1643,
+          "path": "offline_bundle/notices/wasip2-1.0.1+wasi-0.2.4/SOURCE-WORKSPACE-CARGO.toml",
+          "sha256": "35267cb6c485c160cf352211720ba3de6ccb6acbd85ecaa9b85b6d7c9e4fe0e3"
+        }
+      ],
       "supplemental_upstream_provenance": {
         "commit": "3da562c06214feafc14d37bf290671636caa6718",
         "crate_manifest": {
@@ -6022,6 +6803,7 @@
         }
       ],
       "repository": "https://github.com/wasm-bindgen/wasm-bindgen",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.2.129"
     },
@@ -6042,6 +6824,7 @@
         }
       ],
       "repository": "https://github.com/wasm-bindgen/wasm-bindgen/tree/master/crates/futures",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.4.79"
     },
@@ -6062,6 +6845,7 @@
         }
       ],
       "repository": "https://github.com/wasm-bindgen/wasm-bindgen/tree/master/crates/macro",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.2.129"
     },
@@ -6082,6 +6866,7 @@
         }
       ],
       "repository": "https://github.com/wasm-bindgen/wasm-bindgen/tree/main/crates/macro-support",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.2.129"
     },
@@ -6102,6 +6887,7 @@
         }
       ],
       "repository": "https://github.com/wasm-bindgen/wasm-bindgen/tree/master/crates/shared",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.2.129"
     },
@@ -6122,6 +6908,7 @@
         }
       ],
       "repository": "https://github.com/MattiasBuelens/wasm-streams/",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.4.2"
     },
@@ -6142,6 +6929,7 @@
         }
       ],
       "repository": "https://github.com/wasm-bindgen/wasm-bindgen/tree/master/crates/web-sys",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.3.106"
     },
@@ -6162,6 +6950,7 @@
         }
       ],
       "repository": "https://github.com/daxpedda/web-time",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.1.0"
     },
@@ -6177,6 +6966,7 @@
         }
       ],
       "repository": "https://github.com/rustls/webpki-roots",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.0.9"
     },
@@ -6192,6 +6982,7 @@
         }
       ],
       "repository": "https://github.com/Lokathor/wide",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.7.33"
     },
@@ -6212,6 +7003,7 @@
         }
       ],
       "repository": "https://github.com/BurntSushi/winapi-util",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.1.11"
     },
@@ -6232,6 +7024,7 @@
         }
       ],
       "repository": "https://github.com/microsoft/windows-rs",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.2.1"
     },
@@ -6252,6 +7045,7 @@
         }
       ],
       "repository": "https://github.com/microsoft/windows-rs",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.52.0"
     },
@@ -6272,6 +7066,7 @@
         }
       ],
       "repository": "https://github.com/microsoft/windows-rs",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.61.2"
     },
@@ -6292,6 +7087,7 @@
         }
       ],
       "repository": "https://github.com/microsoft/windows-rs",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.52.6"
     },
@@ -6312,6 +7108,7 @@
         }
       ],
       "repository": "https://github.com/microsoft/windows-rs",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.52.6"
     },
@@ -6332,6 +7129,7 @@
         }
       ],
       "repository": "https://github.com/microsoft/windows-rs",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.52.6"
     },
@@ -6352,6 +7150,7 @@
         }
       ],
       "repository": "https://github.com/microsoft/windows-rs",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.52.6"
     },
@@ -6372,6 +7171,7 @@
         }
       ],
       "repository": "https://github.com/microsoft/windows-rs",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.52.6"
     },
@@ -6392,6 +7192,7 @@
         }
       ],
       "repository": "https://github.com/microsoft/windows-rs",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.52.6"
     },
@@ -6412,6 +7213,7 @@
         }
       ],
       "repository": "https://github.com/microsoft/windows-rs",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.52.6"
     },
@@ -6432,6 +7234,7 @@
         }
       ],
       "repository": "https://github.com/microsoft/windows-rs",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.52.6"
     },
@@ -6452,6 +7255,7 @@
         }
       ],
       "repository": "https://github.com/microsoft/windows-rs",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.52.6"
     },
@@ -6467,6 +7271,7 @@
         }
       ],
       "repository": "https://github.com/winnow-rs/winnow",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.7.15"
     },
@@ -6482,6 +7287,7 @@
         }
       ],
       "repository": "https://github.com/winnow-rs/winnow",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.0.4"
     },
@@ -6507,6 +7313,7 @@
         }
       ],
       "repository": "https://github.com/bytecodealliance/wit-bindgen",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.46.0"
     },
@@ -6522,6 +7329,7 @@
         }
       ],
       "repository": "https://github.com/unicode-org/icu4x",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.6.4"
     },
@@ -6537,6 +7345,7 @@
         }
       ],
       "repository": "https://github.com/unicode-org/icu4x",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.7.5"
     },
@@ -6552,6 +7361,7 @@
         }
       ],
       "repository": "https://github.com/unicode-org/icu4x",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.8.3"
     },
@@ -6567,6 +7377,7 @@
         }
       ],
       "repository": "https://github.com/unicode-org/icu4x",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.7.5"
     },
@@ -6582,6 +7393,7 @@
         }
       ],
       "repository": "https://github.com/unicode-org/icu4x",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.8.4"
     },
@@ -6607,6 +7419,7 @@
         }
       ],
       "repository": "https://github.com/google/zerocopy",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.8.63"
     },
@@ -6632,6 +7445,7 @@
         }
       ],
       "repository": "https://github.com/google/zerocopy",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.8.63"
     },
@@ -6647,6 +7461,7 @@
         }
       ],
       "repository": "https://github.com/unicode-org/icu4x",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.1.8"
     },
@@ -6662,6 +7477,7 @@
         }
       ],
       "repository": "https://github.com/unicode-org/icu4x",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.1.8"
     },
@@ -6682,6 +7498,7 @@
         }
       ],
       "repository": "https://github.com/RustCrypto/utils",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.9.1"
     },
@@ -6697,6 +7514,7 @@
         }
       ],
       "repository": "https://github.com/unicode-org/icu4x",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.2.5"
     },
@@ -6712,6 +7530,7 @@
         }
       ],
       "repository": "https://github.com/unicode-org/icu4x",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.11.8"
     },
@@ -6727,6 +7546,7 @@
         }
       ],
       "repository": "https://github.com/unicode-org/icu4x",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "0.11.6"
     },
@@ -6742,6 +7562,7 @@
         }
       ],
       "repository": "https://github.com/zip-rs/zip2.git",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.1.4"
     },
@@ -6757,11 +7578,14 @@
         }
       ],
       "repository": "https://github.com/dtolnay/zmij",
+      "retained_original_source_evidence": [],
       "supplemental_upstream_provenance": null,
       "version": "1.0.23"
     }
   ],
-  "remaining_notice_gaps": [],
+  "remaining_notice_gaps": [
+    "bindgen_cuda-0.1.6"
+  ],
   "schema_version": 2,
-  "scope": "Original packaged notices plus exact-commit original upstream notices where workspaces omit packaged files. Includes target-specific dependencies. A licence identifier alone is never substituted for an original notice."
+  "scope": "Original packaged notices plus exact-commit original upstream notices where workspaces omit packaged files. Includes all-feature and target-specific dependencies. A licence identifier alone is never substituted for an original notice."
 }

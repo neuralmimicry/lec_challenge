@@ -10,8 +10,9 @@ use std::{
 
 // Reports and application state are deliberately outside this immutable input
 // set: rehearsal creates new reports/state, and the manifest cannot hash itself.
-const ASSET_ROOTS: [&str; 13] = [
+const ASSET_ROOTS: [&str; 14] = [
     "offline_bundle/base",
+    "offline_bundle/comparative",
     "offline_bundle/images",
     "offline_bundle/bin",
     "offline_bundle/notices",

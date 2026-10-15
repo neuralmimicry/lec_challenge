@@ -1,0 +1,6 @@
+# Exactly one immutable local teacher process at this endpoint.
+address = "127.0.0.1:8081"
+queue_capacity = 2
+maximum_request_bytes = 32768
+maximum_output_tokens = 512
+timeout_seconds = 120

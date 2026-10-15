@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "recorded_at_utc": "2026-10-15T13:12:24Z",
+  "package": "bindgen_cuda-0.1.6",
+  "original_and_current_default_branch_commit": "775cc76b607480819eb14b3658df8a96f6b21dab",
+  "requests_used_authentication": false,
+  "sources": [
+    {
+      "url": "https://api.github.com/repos/Narsil/bindgen_cuda",
+      "artifact": "SOURCE-CURRENT-REPOSITORY.json",
+      "sha256": "80d6e31c88d40b2f6fcecf6801ae9c7968bdc5f3ea6419f422ced73a3728586d",
+      "observation": "Official public repository metadata has license=null."
+    },
+    {
+      "url": "https://api.github.com/repos/Narsil/bindgen_cuda/git/trees/main?recursive=1",
+      "artifact": "SOURCE-CURRENT-UPSTREAM-TREE.json",
+      "sha256": "e47b75727f409db9ad159098fc82a94d84925d7b72210d8fb23fafe823c37f90",
+      "observation": "Complete untruncated current tree equals the original packaged commit; no original licence-grant file is present."
+    },
+    {
+      "url": "https://api.github.com/repos/Narsil/bindgen_cuda/commits?path=LICENSE&per_page=100",
+      "artifact": "SOURCE-LICENCE-HISTORY.json",
+      "sha256": "2ba33ca0557f1bb5b7ba88d67f9d0093c7185a36ec51fe2b7bd9372d3e001d6d",
+      "observation": "Official LICENSE-path commit history response is empty. This query alone does not prove the absence of every licence filename."
+    }
+  ],
+  "conclusion": "The original Cargo manifest declares MIT, but the requested original full grant/copyright notice remains unavailable. No later applicable publisher licence was found; this remains an explicit notice gap."
+}

@@ -18,6 +18,11 @@ rustc-ice-*.txt
 
 # Immutable large assets belong in a separately checksummed delivery bundle.
 offline_bundle/base/*.safetensors
+offline_bundle/comparative/**/*.safetensors
+offline_bundle/comparative/**/.*.partial
+offline_bundle/comparative/**/.*.partial.json
+offline_bundle/comparative/**/.hub-download.lock
+offline_bundle/comparative/**/.*.rejected-*
 offline_bundle/images/
 offline_bundle/bin/
 offline_bundle/vendor/

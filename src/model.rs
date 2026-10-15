@@ -61,6 +61,70 @@ pub struct AssetManifest {
     pub files: BTreeMap<String, String>,
 }
 
+#[derive(Clone, Debug, Default, Serialize, Deserialize, PartialEq, Eq)]
+#[serde(rename_all = "snake_case")]
+pub enum ExecutionDevice {
+    #[default]
+    Cpu,
+    Cuda {
+        ordinal: usize,
+    },
+}
+
+#[derive(Clone, Copy, Debug, Default, Serialize, Deserialize, PartialEq, Eq)]
+#[serde(rename_all = "snake_case")]
+pub enum InferenceDtype {
+    #[default]
+    F32,
+    F16,
+}
+
+#[derive(Clone, Debug, Default, Serialize, Deserialize, PartialEq, Eq)]
+#[serde(deny_unknown_fields)]
+pub struct RuntimeOptions {
+    pub device: ExecutionDevice,
+    pub dtype: InferenceDtype,
+}
+
+impl RuntimeOptions {
+    pub fn cuda(ordinal: usize) -> Self {
+        Self {
+            device: ExecutionDevice::Cuda { ordinal },
+            dtype: InferenceDtype::F16,
+        }
+    }
+
+    fn resolve(&self) -> Result<(Device, DType)> {
+        let dtype = match self.dtype {
+            InferenceDtype::F32 => DType::F32,
+            InferenceDtype::F16 => DType::F16,
+        };
+        let device = match self.device {
+            ExecutionDevice::Cpu => {
+                ensure!(
+                    dtype == DType::F32,
+                    "CPU inference requires explicit float32 precision"
+                );
+                Device::Cpu
+            }
+            ExecutionDevice::Cuda { ordinal } => {
+                ensure!(
+                    cfg!(feature = "cuda"),
+                    "CUDA was requested but this executable has no cuda feature; no CPU fallback is allowed"
+                );
+                let device = Device::new_cuda(ordinal)
+                    .context("create explicitly requested CUDA device; no CPU fallback")?;
+                ensure!(
+                    device.is_cuda(),
+                    "CUDA request did not create a CUDA device"
+                );
+                device
+            }
+        };
+        Ok((device, dtype))
+    }
+}
+
 pub fn sha256_file(path: &Path) -> Result<String> {
     let mut file = fs::File::open(path).with_context(|| format!("open {}", path.display()))?;
     let mut hash = Sha256::new();
@@ -186,6 +250,16 @@ pub fn validate_assets(base_dir: &Path) -> Result<AssetManifest> {
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct QwenConfig {
+    #[serde(default = "qwen_model_type")]
+    pub model_type: String,
+    #[serde(default)]
+    pub attention_bias: Option<bool>,
+    #[serde(default)]
+    pub rope_scaling: Option<RopeScaling>,
+    #[serde(default = "silu_activation")]
+    pub hidden_act: String,
+    #[serde(default)]
+    pub mlp_bias: bool,
     pub vocab_size: usize,
     pub hidden_size: usize,
     pub intermediate_size: usize,
@@ -196,7 +270,71 @@ pub struct QwenConfig {
     pub rope_theta: f64,
     pub rms_norm_eps: f64,
     pub tie_word_embeddings: bool,
+    #[serde(default)]
     pub use_sliding_window: bool,
+}
+
+fn qwen_model_type() -> String {
+    "qwen2".into()
+}
+
+fn silu_activation() -> String {
+    "silu".into()
+}
+
+impl QwenConfig {
+    pub fn validate(&self) -> Result<()> {
+        ensure!(
+            matches!(self.model_type.as_str(), "qwen2" | "llama"),
+            "unsupported model architecture"
+        );
+        ensure!(
+            self.hidden_act == "silu" && !self.mlp_bias && !self.use_sliding_window,
+            "unsupported activation, feed-forward bias or sliding-window semantics"
+        );
+        ensure!(
+            (1..=1_000_000).contains(&self.vocab_size)
+                && (2..=16384).contains(&self.hidden_size)
+                && (1..=65536).contains(&self.intermediate_size)
+                && (1..=128).contains(&self.num_hidden_layers)
+                && (1..=1_000_000).contains(&self.max_position_embeddings),
+            "model dimensions are empty or outside native runtime bounds"
+        );
+        ensure!(
+            self.num_attention_heads > 0
+                && self.num_key_value_heads > 0
+                && self.hidden_size.is_multiple_of(self.num_attention_heads)
+                && self
+                    .num_attention_heads
+                    .is_multiple_of(self.num_key_value_heads)
+                && (self.hidden_size / self.num_attention_heads).is_multiple_of(2),
+            "invalid attention or rotary head dimensions"
+        );
+        ensure!(
+            self.rope_theta.is_finite()
+                && self.rope_theta > 0.
+                && self.rms_norm_eps.is_finite()
+                && self.rms_norm_eps > 0.
+                && self.rms_norm_eps <= 1.,
+            "invalid rotary base or RMS normalisation epsilon"
+        );
+        if let Some(scaling) = &self.rope_scaling {
+            ensure!(
+                scaling.scaling_type == "linear"
+                    && scaling.factor.is_finite()
+                    && (1. ..=64.).contains(&scaling.factor),
+                "unsupported or invalid rotary scaling"
+            );
+        }
+        Ok(())
+    }
+}
+
+#[derive(Clone, Debug, Serialize, Deserialize)]
+pub struct RopeScaling {
+    #[serde(rename = "type", alias = "rope_type")]
+    pub scaling_type: String,
+    pub factor: f64,
 }
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
@@ -261,6 +399,22 @@ impl candle_core::CustomOp2 for FrozenMatmul {
         let (rk, n) = rl.shape().dims2()?;
         if k != rk {
             candle_core::bail!("frozen matmul dimensions disagree");
+        }
+        Ok((lhs.matmul(rhs, (1, m, n, k), ll, rl)?, (m, n).into()))
+    }
+    #[cfg(feature = "cuda")]
+    fn cuda_fwd(
+        &self,
+        lhs: &candle_core::CudaStorage,
+        ll: &candle_core::Layout,
+        rhs: &candle_core::CudaStorage,
+        rl: &candle_core::Layout,
+    ) -> candle_core::Result<(candle_core::CudaStorage, candle_core::Shape)> {
+        use candle_core::backend::BackendStorage;
+        let (m, k) = ll.shape().dims2()?;
+        let (rk, n) = rl.shape().dims2()?;
+        if k != rk {
+            candle_core::bail!("frozen CUDA matmul dimensions disagree");
         }
         Ok((lhs.matmul(rhs, (1, m, n, k), ll, rl)?, (m, n).into()))
     }
@@ -339,6 +493,8 @@ pub struct QwenModel {
     lm_head: Linear,
     cos: Tensor,
     sin: Tensor,
+    device: Device,
+    dtype: DType,
     pub adapter_vars: AdapterVariables,
 }
 
@@ -368,6 +524,7 @@ impl QwenModel {
         loaded: Option<HashMap<String, Tensor>>,
         trainable: bool,
     ) -> Result<Self> {
+        cfg.validate()?;
         ensure!(
             !cfg.use_sliding_window,
             "sliding-window attention is not supported by this pinned architecture"
@@ -381,14 +538,82 @@ impl QwenModel {
                     .is_multiple_of(cfg.num_key_value_heads),
             "invalid Qwen head dimensions"
         );
-        let dev = Device::Cpu;
+        ensure!(
+            matches!(cfg.model_type.as_str(), "qwen2" | "llama"),
+            "unsupported architecture; only verified Qwen2 and common Llama are supported"
+        );
+        let bias = cfg.attention_bias.unwrap_or(cfg.model_type == "qwen2");
         let embed = constant(&weights, "model.embed_tokens.weight")?;
+        let dev = embed.device().clone();
+        let dtype = embed.dtype();
+        ensure!(
+            matches!(dtype, DType::F32 | DType::F16),
+            "model precision must be float32 or float16"
+        );
+        ensure!(
+            !trainable || dtype == DType::F32,
+            "trainable adapters require float32; mixed-precision optimisation is not implemented"
+        );
+        ensure!(
+            weights
+                .values()
+                .all(|t| t.device().same_device(&dev) && t.dtype() == dtype),
+            "base weights have inconsistent devices or precision"
+        );
+        let expect = |name: &str, dimensions: &[usize]| -> Result<()> {
+            ensure!(
+                constant(&weights, name)?.dims() == dimensions,
+                "base tensor has incorrect architecture dimensions: {name}"
+            );
+            Ok(())
+        };
+        expect(
+            "model.embed_tokens.weight",
+            &[cfg.vocab_size, cfg.hidden_size],
+        )?;
+        expect("model.norm.weight", &[cfg.hidden_size])?;
+        if !cfg.tie_word_embeddings {
+            expect("lm_head.weight", &[cfg.vocab_size, cfg.hidden_size])?;
+        }
+        let kv_dimension = cfg.hidden_size / cfg.num_attention_heads * cfg.num_key_value_heads;
+        for index in 0..cfg.num_hidden_layers {
+            let prefix = format!("model.layers.{index}");
+            for (name, out, input) in [
+                ("self_attn.q_proj", cfg.hidden_size, cfg.hidden_size),
+                ("self_attn.k_proj", kv_dimension, cfg.hidden_size),
+                ("self_attn.v_proj", kv_dimension, cfg.hidden_size),
+                ("self_attn.o_proj", cfg.hidden_size, cfg.hidden_size),
+                ("mlp.gate_proj", cfg.intermediate_size, cfg.hidden_size),
+                ("mlp.up_proj", cfg.intermediate_size, cfg.hidden_size),
+                ("mlp.down_proj", cfg.hidden_size, cfg.intermediate_size),
+            ] {
+                expect(&format!("{prefix}.{name}.weight"), &[out, input])?;
+            }
+            for name in ["input_layernorm", "post_attention_layernorm"] {
+                expect(&format!("{prefix}.{name}.weight"), &[cfg.hidden_size])?;
+            }
+            if bias {
+                for (name, size) in [
+                    ("q_proj", cfg.hidden_size),
+                    ("k_proj", kv_dimension),
+                    ("v_proj", kv_dimension),
+                ] {
+                    expect(&format!("{prefix}.self_attn.{name}.bias"), &[size])?;
+                }
+                if cfg.model_type == "llama" {
+                    expect(
+                        &format!("{prefix}.self_attn.o_proj.bias"),
+                        &[cfg.hidden_size],
+                    )?;
+                }
+            }
+        }
         let embedding = Embedding::new(embed.clone(), cfg.hidden_size);
         let mut adapter_vars = BTreeMap::new();
         let mut expected_adapter_names = std::collections::BTreeSet::new();
         let mut rng = StableRng::new(seed);
         let mut projection = |name: &str| -> Result<Projection> {
-            let base = base_linear(&weights, name, true)?;
+            let base = base_linear(&weights, name, bias)?;
             let Some(ac) = &adapter else {
                 return Ok(Projection {
                     base,
@@ -413,7 +638,7 @@ impl QwenModel {
                         .with_context(|| format!("adapter missing {key}"))?
                         .clone()
                 } else if zero {
-                    Tensor::zeros(shape, DType::F32, &dev)?
+                    Tensor::zeros(shape, dtype, &dev)?
                 } else {
                     let bound = (6. / input as f64).sqrt();
                     Tensor::from_vec(
@@ -423,9 +648,12 @@ impl QwenModel {
                         shape,
                         &dev,
                     )?
+                    .to_dtype(dtype)?
                 };
                 ensure!(
-                    t.dims() == [shape.0, shape.1] && t.dtype() == DType::F32,
+                    t.dims() == [shape.0, shape.1]
+                        && t.dtype() == dtype
+                        && t.device().same_device(&dev),
                     "invalid adapter tensor {key}"
                 );
                 if trainable {
@@ -450,9 +678,13 @@ impl QwenModel {
             let p = format!("model.layers.{i}");
             layers.push(Layer {
                 q: projection(&format!("{p}.self_attn.q_proj"))?,
-                k: base_linear(&weights, &format!("{p}.self_attn.k_proj"), true)?,
+                k: base_linear(&weights, &format!("{p}.self_attn.k_proj"), bias)?,
                 v: projection(&format!("{p}.self_attn.v_proj"))?,
-                o: base_linear(&weights, &format!("{p}.self_attn.o_proj"), false)?,
+                o: base_linear(
+                    &weights,
+                    &format!("{p}.self_attn.o_proj"),
+                    cfg.model_type == "llama" && bias,
+                )?,
                 gate: base_linear(&weights, &format!("{p}.mlp.gate_proj"), false)?,
                 up: base_linear(&weights, &format!("{p}.mlp.up_proj"), false)?,
                 down: base_linear(&weights, &format!("{p}.mlp.down_proj"), false)?,
@@ -485,10 +717,22 @@ impl QwenModel {
         let norm = LayerNorm::rms_norm(constant(&weights, "model.norm.weight")?, cfg.rms_norm_eps);
         let dim = cfg.hidden_size / cfg.num_attention_heads;
         ensure!(dim.is_multiple_of(2), "rotary head dimension must be even");
+        let rope_scale = match &cfg.rope_scaling {
+            None => 1.,
+            Some(scaling) => {
+                ensure!(
+                    scaling.scaling_type == "linear"
+                        && scaling.factor.is_finite()
+                        && scaling.factor >= 1.,
+                    "unsupported or invalid rotary scaling"
+                );
+                scaling.factor
+            }
+        };
         let inv = Tensor::from_vec(
             (0..dim)
                 .step_by(2)
-                .map(|i| (1. / cfg.rope_theta.powf(i as f64 / dim as f64)) as f32)
+                .map(|i| (1. / (rope_scale * cfg.rope_theta.powf(i as f64 / dim as f64))) as f32)
                 .collect::<Vec<_>>(),
             (1, dim / 2),
             &dev,
@@ -503,10 +747,19 @@ impl QwenModel {
             layers,
             norm,
             lm_head: Linear::new(head, None),
-            cos: phase.cos()?,
-            sin: phase.sin()?,
+            cos: phase.cos()?.to_dtype(dtype)?,
+            sin: phase.sin()?.to_dtype(dtype)?,
+            device: dev,
+            dtype,
             adapter_vars,
         })
+    }
+
+    pub fn device(&self) -> &Device {
+        &self.device
+    }
+    pub fn dtype(&self) -> DType {
+        self.dtype
     }
 
     pub fn clear_cache(&mut self) {
@@ -517,6 +770,10 @@ impl QwenModel {
 
     pub fn hidden(&mut self, input: &Tensor, offset: usize, cache: bool) -> Result<Tensor> {
         let (batch, seq) = input.dims2()?;
+        ensure!(
+            input.device().same_device(&self.device),
+            "model input is on a different execution device"
+        );
         ensure!(
             seq > 0 && offset + seq <= self.cfg.max_position_embeddings,
             "empty input or context limit exceeded"
@@ -531,21 +788,24 @@ impl QwenModel {
         let cos = self.cos.narrow(0, offset, seq)?;
         let sin = self.sin.narrow(0, offset, seq)?;
         let mask = if seq > 1 {
-            Some(Tensor::from_vec(
-                (0..seq)
-                    .flat_map(|i| {
-                        (0..offset + seq).map(move |j| {
-                            if j > offset + i {
-                                f32::NEG_INFINITY
-                            } else {
-                                0.
-                            }
+            Some(
+                Tensor::from_vec(
+                    (0..seq)
+                        .flat_map(|i| {
+                            (0..offset + seq).map(move |j| {
+                                if j > offset + i {
+                                    f32::NEG_INFINITY
+                                } else {
+                                    0.
+                                }
+                            })
                         })
-                    })
-                    .collect::<Vec<_>>(),
-                (1, 1, seq, offset + seq),
-                &Device::Cpu,
-            )?)
+                        .collect::<Vec<_>>(),
+                    (1, 1, seq, offset + seq),
+                    &self.device,
+                )?
+                .to_dtype(self.dtype)?,
+            )
         } else {
             None
         };
@@ -592,7 +852,8 @@ impl QwenModel {
                 Some(mask) => scores.broadcast_add(mask)?,
                 None => scores,
             };
-            let attention = candle_nn::ops::softmax(&scores, D::Minus1)?
+            let attention = candle_nn::ops::softmax(&scores.to_dtype(DType::F32)?, D::Minus1)?
+                .to_dtype(self.dtype)?
                 .matmul(&v)?
                 .transpose(1, 2)?
                 .reshape((batch, seq, self.cfg.hidden_size))?;
@@ -659,26 +920,239 @@ pub struct ModelRuntime {
     pub tokenizer: Tokenizer,
     pub assets: AssetManifest,
     pub checkpoint_id: String,
+    pub options: RuntimeOptions,
+    chat: ChatFormat,
+    eos_token_ids: Vec<u32>,
+    context_cap: usize,
 }
+
+enum ChatFormat {
+    PinnedQwen,
+    Original {
+        template: String,
+        configuration: serde_json::Value,
+    },
+}
+
+fn render_original_chat(
+    template: &str,
+    configuration: &serde_json::Value,
+    prompt: &str,
+) -> Result<String> {
+    let mut environment = minijinja::Environment::new();
+    // Hugging Face's original apply_chat_template environment strips block
+    // whitespace. Matching those settings avoids adding untrained prompt tokens.
+    environment.set_trim_blocks(true);
+    environment.set_lstrip_blocks(true);
+    environment.set_fuel(Some(1_000_000));
+    environment.set_recursion_limit(64);
+    environment.set_undefined_behavior(minijinja::UndefinedBehavior::Strict);
+    environment.set_unknown_method_callback(minijinja_contrib::pycompat::unknown_method_callback);
+    environment.add_function(
+        "raise_exception",
+        |message: String| -> std::result::Result<String, minijinja::Error> {
+            Err(minijinja::Error::new(
+                minijinja::ErrorKind::InvalidOperation,
+                message,
+            ))
+        },
+    );
+    environment.add_template("original-chat", template)?;
+    let mut context = configuration
+        .as_object()
+        .context("tokeniser configuration must be an object")?
+        .clone();
+    // Original tokeniser metadata can encode special tokens as AddedToken objects.
+    // Jinja receives their original content, exactly as apply_chat_template does.
+    for key in ["bos_token", "eos_token", "pad_token", "unk_token"] {
+        if let Some(value) = context.get_mut(key)
+            && let Some(content) = value.get("content").and_then(serde_json::Value::as_str)
+        {
+            *value = serde_json::Value::String(content.to_owned());
+        }
+    }
+    context.insert(
+        "messages".into(),
+        serde_json::json!([{"role":"user","content":prompt}]),
+    );
+    context.insert("add_generation_prompt".into(), serde_json::json!(true));
+    context.insert("tools".into(), serde_json::Value::Null);
+    context.insert("documents".into(), serde_json::Value::Null);
+    struct BoundedPrompt(Vec<u8>);
+    impl Write for BoundedPrompt {
+        fn write(&mut self, bytes: &[u8]) -> std::io::Result<usize> {
+            if self.0.len().saturating_add(bytes.len()) > 262144 {
+                return Err(std::io::Error::other(
+                    "original chat template exceeds the prompt byte limit",
+                ));
+            }
+            self.0.extend_from_slice(bytes);
+            Ok(bytes.len())
+        }
+        fn flush(&mut self) -> std::io::Result<()> {
+            Ok(())
+        }
+    }
+    let mut output = BoundedPrompt(Vec::new());
+    environment
+        .get_template("original-chat")?
+        .render_captured_to(context, &mut output)?;
+    let rendered = String::from_utf8(output.0)?;
+    ensure!(
+        !rendered.trim().is_empty(),
+        "original chat template produced an empty prompt"
+    );
+    Ok(rendered)
+}
+
+fn original_chat_format(configuration: serde_json::Value) -> Result<ChatFormat> {
+    let value = &configuration["chat_template"];
+    let template = value
+        .as_str()
+        .or_else(|| {
+            value
+                .as_array()?
+                .iter()
+                .find(|item| item["name"] == "default")?["template"]
+                .as_str()
+        })
+        .context("an original default chat template is required; template guessing is forbidden")?
+        .to_owned();
+    Ok(ChatFormat::Original {
+        template,
+        configuration,
+    })
+}
+
+fn parse_eos_ids(value: &serde_json::Value) -> Result<Vec<u32>> {
+    let values = match value {
+        serde_json::Value::Array(values) => values.clone(),
+        _ => vec![value.clone()],
+    };
+    let ids = values
+        .iter()
+        .map(|value| {
+            value
+                .as_u64()
+                .and_then(|id| u32::try_from(id).ok())
+                .context("original EOS token ID must be a nonnegative u32")
+        })
+        .collect::<Result<Vec<_>>>()?;
+    ensure!(!ids.is_empty(), "original model has no EOS token IDs");
+    Ok(ids)
+}
+
 impl ModelRuntime {
     pub fn load(base_dir: &Path, checkpoint: Option<&Path>) -> Result<Self> {
+        Self::load_with_options(base_dir, checkpoint, RuntimeOptions::default())
+    }
+
+    /// The assessment base retains its exact revision/hash/template contract.
+    pub fn load_with_options(
+        base_dir: &Path,
+        checkpoint: Option<&Path>,
+        options: RuntimeOptions,
+    ) -> Result<Self> {
         let assets = validate_assets(base_dir)?;
+        Self::load_validated(
+            base_dir,
+            checkpoint,
+            assets,
+            options,
+            ChatFormat::PinnedQwen,
+            vec![151645, 151643],
+            4096,
+        )
+    }
+
+    /// Comparator assets have independent publisher/revision/hash provenance.
+    /// They cannot weaken the pinned assessment loader or create an adapter.
+    pub fn load_comparative_with_options(base_dir: &Path, options: RuntimeOptions) -> Result<Self> {
+        let assets = crate::hub::validate_downloaded_assets(base_dir)?;
+        let config: serde_json::Value =
+            serde_json::from_slice(&fs::read(base_dir.join("config.json"))?)?;
+        let tokeniser_config =
+            serde_json::from_slice(&fs::read(base_dir.join("tokenizer_config.json"))?)?;
+        let generation = if assets.files.contains_key("generation_config.json") {
+            serde_json::from_slice::<serde_json::Value>(&fs::read(
+                base_dir.join("generation_config.json"),
+            )?)?
+        } else {
+            serde_json::Value::Null
+        };
+        let eos = generation
+            .get("eos_token_id")
+            .filter(|value| !value.is_null())
+            .unwrap_or(&config["eos_token_id"]);
+        let eos = parse_eos_ids(eos)?;
+        Self::load_validated(
+            base_dir,
+            None,
+            assets,
+            options,
+            original_chat_format(tokeniser_config)?,
+            eos,
+            2048,
+        )
+    }
+
+    fn load_validated(
+        base_dir: &Path,
+        checkpoint: Option<&Path>,
+        assets: AssetManifest,
+        options: RuntimeOptions,
+        chat: ChatFormat,
+        eos_token_ids: Vec<u32>,
+        context_cap: usize,
+    ) -> Result<Self> {
+        let (device, dtype) = options.resolve()?;
         let cfg: QwenConfig = serde_json::from_slice(&fs::read(base_dir.join("config.json"))?)?;
-        let weights =
-            candle_core::safetensors::load(base_dir.join("model.safetensors"), &Device::Cpu)?
-                .into_iter()
-                .map(|(k, v)| Ok((k, v.to_dtype(DType::F32)?)))
-                .collect::<Result<HashMap<_, _>>>()?;
+        cfg.validate()?;
+        ensure!(
+            eos_token_ids
+                .iter()
+                .all(|id| (*id as usize) < cfg.vocab_size),
+            "original EOS token is outside the model vocabulary"
+        );
+        let context_cap = context_cap.min(cfg.max_position_embeddings);
+        let weight_files = assets
+            .files
+            .iter()
+            .filter(|(name, _)| name.ends_with(".safetensors"))
+            .collect::<BTreeMap<_, _>>();
+        ensure!(
+            !weight_files.is_empty(),
+            "validated model assets contain no safetensors weights"
+        );
+        let base_checkpoint_id = if weight_files.len() == 1 {
+            (*weight_files.values().next().expect("nonempty weights")).clone()
+        } else {
+            crate::artefact::hash(&serde_json::to_vec(&weight_files)?)
+        };
+        let mut weights = HashMap::new();
+        for name in weight_files.keys() {
+            for (name, value) in candle_core::safetensors::load(base_dir.join(name), &device)? {
+                ensure!(
+                    weights
+                        .insert(name.clone(), value.to_dtype(dtype)?)
+                        .is_none(),
+                    "duplicate model tensor across shards: {name}"
+                );
+            }
+        }
         let tokenizer = Tokenizer::from_file(base_dir.join("tokenizer.json"))
             .map_err(|e| anyhow::anyhow!(e.to_string()))?;
         let (adapter, loaded, checkpoint_id) = match checkpoint {
-            None => (None, None, MODEL_SHA256.to_owned()),
+            None => (None, None, base_checkpoint_id),
             Some(path) => {
                 let manifest: crate::train::CheckpointManifest =
                     serde_json::from_slice(&fs::read(path.join("manifest.json"))?)?;
                 crate::train::validate_checkpoint(path, &manifest, &assets)?;
                 let loaded =
-                    candle_core::safetensors::load(path.join("adapter.safetensors"), &Device::Cpu)?;
+                    candle_core::safetensors::load(path.join("adapter.safetensors"), &device)?
+                        .into_iter()
+                        .map(|(name, tensor)| Ok((name, tensor.to_dtype(dtype)?)))
+                        .collect::<Result<HashMap<_, _>>>()?;
                 (
                     Some(manifest.adapter),
                     Some(loaded),
@@ -692,7 +1166,15 @@ impl ModelRuntime {
             tokenizer,
             assets,
             checkpoint_id,
+            options,
+            chat,
+            eos_token_ids,
+            context_cap,
         })
+    }
+
+    pub fn execution_metadata(&self) -> serde_json::Value {
+        serde_json::json!({"engine":"native_rust_candle","requested":self.options,"actual_device":format!("{:?}",self.model.device().location()),"actual_dtype":format!("{:?}",self.model.dtype()),"cuda_feature_compiled":cfg!(feature="cuda"),"cuda_active":self.model.device().is_cuda(),"cpu_fallback":false,"model_id":self.assets.model_id,"revision":self.assets.revision,"checkpoint_id":self.checkpoint_id,"context_cap":self.context_cap})
     }
 
     pub fn generate(&mut self, request: GenerationRequest) -> Result<Generation> {
@@ -727,13 +1209,23 @@ impl ModelRuntime {
         let deadline = started + Duration::from_secs(request.timeout_seconds);
         let enc = self
             .tokenizer
-            .encode(chat_prefix(&request.prompt), false)
+            .encode(
+                match &self.chat {
+                    ChatFormat::PinnedQwen => chat_prefix(&request.prompt),
+                    ChatFormat::Original {
+                        template,
+                        configuration,
+                    } => render_original_chat(template, configuration, &request.prompt)?,
+                },
+                false,
+            )
             .map_err(|e| anyhow::anyhow!(e.to_string()))?;
         let mut tokens = enc.get_ids().to_vec();
         let input_tokens = tokens.len();
         ensure!(
-            input_tokens + request.max_new_tokens <= 4096,
-            "local inference context cap is 4096 tokens"
+            input_tokens + request.max_new_tokens <= self.context_cap,
+            "local inference context cap is {} tokens",
+            self.context_cap
         );
         let mut rng = StableRng::new(request.seed);
         let mut generated = Vec::new();
@@ -750,15 +1242,23 @@ impl ModelRuntime {
                 } else {
                     (&tokens[tokens.len() - 1..], tokens.len() - 1)
                 };
-                let input = Tensor::from_slice(ids, (1, ids.len()), &Device::Cpu)?;
+                let input = Tensor::from_slice(ids, (1, ids.len()), self.model.device())?;
                 let hidden = self.model.hidden(&input, offset, true)?;
                 let logits = self
                     .model
                     .logits(&hidden.i((.., ids.len() - 1, ..))?)?
                     .flatten_all()?
+                    .to_dtype(DType::F32)?
+                    .to_device(&Device::Cpu)?
                     .to_vec1::<f32>()?;
+                // Host transfer synchronises CUDA. Expiry during a forward pass
+                // must not turn a late EOS into a successful completion.
+                if cancel.load(Ordering::Relaxed) || Instant::now() >= deadline {
+                    reason = "timeout";
+                    break;
+                }
                 let next = sample(&logits, request.temperature, request.top_p, &mut rng)?;
-                if next == 151645 || next == 151643 {
+                if self.eos_token_ids.contains(&next) {
                     reason = "stop";
                     break;
                 }
@@ -773,6 +1273,9 @@ impl ModelRuntime {
             .tokenizer
             .decode(&generated, true)
             .map_err(|e| anyhow::anyhow!(e.to_string()))?;
+        if cancel.load(Ordering::Relaxed) || Instant::now() >= deadline {
+            reason = "timeout";
+        }
         ensure!(
             !completion.trim().is_empty(),
             "model returned no output ({reason})"
@@ -853,6 +1356,103 @@ mod tests {
     }
 
     #[test]
+    fn original_deepseek_template_and_eos_preserve_family_contract() {
+        let configuration: serde_json::Value = serde_json::from_str(include_str!(
+            "../docs/comparative-models/provenance/deepseek-coder-1.3b/tokenizer_config.json"
+        ))
+        .unwrap();
+        let template = configuration["chat_template"].as_str().unwrap();
+        let actual = render_original_chat(template, &configuration, "fn add").unwrap();
+        assert_eq!(
+            actual,
+            "<｜begin▁of▁sentence｜>You are an AI programming assistant, utilizing the Deepseek Coder model, developed by Deepseek Company, and you only answer questions related to computer science. For politically sensitive questions, security and privacy issues, and other non-computer science questions, you will refuse to answer\n### Instruction:\nfn add\n### Response:\n"
+        );
+        assert_eq!(
+            parse_eos_ids(&serde_json::json!(32021)).unwrap(),
+            vec![32021]
+        );
+        assert_eq!(
+            parse_eos_ids(&serde_json::json!([151645, 151643])).unwrap(),
+            vec![151645, 151643]
+        );
+        for invalid in [
+            serde_json::json!(-1),
+            serde_json::json!([]),
+            serde_json::json!("32021"),
+        ] {
+            assert!(parse_eos_ids(&invalid).is_err());
+        }
+    }
+
+    #[test]
+    fn explicit_device_selection_never_silently_falls_back() {
+        let (device, dtype) = RuntimeOptions::default().resolve().unwrap();
+        assert!(!device.is_cuda());
+        assert_eq!(dtype, DType::F32);
+        assert!(
+            RuntimeOptions {
+                device: ExecutionDevice::Cpu,
+                dtype: InferenceDtype::F16
+            }
+            .resolve()
+            .is_err()
+        );
+        #[cfg(not(feature = "cuda"))]
+        assert!(RuntimeOptions::cuda(0).resolve().is_err());
+    }
+
+    #[test]
+    fn original_llama_configuration_rejects_invalid_dimensions_and_semantics() {
+        let original: QwenConfig = serde_json::from_str(include_str!(
+            "../docs/comparative-models/provenance/deepseek-coder-1.3b/config.json"
+        ))
+        .unwrap();
+        original.validate().unwrap();
+        assert_eq!(original.model_type, "llama");
+        assert!(
+            !original
+                .attention_bias
+                .unwrap_or(original.model_type == "qwen2")
+        );
+        assert_eq!(original.rope_scaling.as_ref().unwrap().factor, 4.);
+        for change in 0..8 {
+            let mut cfg = original.clone();
+            match change {
+                0 => cfg.hidden_size = 0,
+                1 => cfg.num_attention_heads = 0,
+                2 => cfg.max_position_embeddings = usize::MAX,
+                3 => cfg.rope_theta = f64::NAN,
+                4 => cfg.rms_norm_eps = 0.,
+                5 => cfg.hidden_act = "gelu".into(),
+                6 => cfg.mlp_bias = true,
+                _ => cfg.rope_scaling.as_mut().unwrap().scaling_type = "unverified_dynamic".into(),
+            }
+            assert!(
+                cfg.validate().is_err(),
+                "invalid configuration variant {change}"
+            );
+        }
+    }
+
+    #[test]
+    fn original_chat_rendering_bounds_output_and_computation() {
+        let cfg = serde_json::json!({"bos_token":"", "eos_token":""});
+        assert!(
+            render_original_chat("{% for i in range(100000000) %}x{% endfor %}", &cfg, "test")
+                .is_err()
+        );
+        assert!(
+            render_original_chat(
+                "{% for i in range(100) %}{{ messages[0].content }}{% endfor %}",
+                &cfg,
+                &"x".repeat(4096)
+            )
+            .is_err()
+        );
+        assert!(render_original_chat("{{ unknown_mandatory_variable }}", &cfg, "test").is_err());
+    }
+
+    #[test]
     fn frozen_projection_matches_generic_forward_and_input_gradient() {
         let input = Var::new(&[[1_f32, 2., 3.], [4., 5., 6.]], &Device::Cpu).unwrap();
         let weight = Tensor::new(&[[0.1_f32, 0.2, 0.3], [0.4, 0.5, 0.6]], &Device::Cpu).unwrap();
@@ -883,6 +1483,11 @@ mod tests {
     #[test]
     fn full_qwen_architecture_backpropagates_and_preserves_frozen_base() {
         let cfg = QwenConfig {
+            model_type: "qwen2".into(),
+            attention_bias: None,
+            rope_scaling: None,
+            hidden_act: "silu".into(),
+            mlp_bias: false,
             vocab_size: 32,
             hidden_size: 16,
             intermediate_size: 32,

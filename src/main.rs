@@ -4,7 +4,7 @@ use anyhow::{Context, Result, bail, ensure};
 use clap::{Parser, Subcommand};
 use futures_util::{StreamExt, stream};
 use lec_distil::{
-    artefact, curate, drills, evaluate,
+    artefact, comparative, curate, drills, evaluate,
     fleet::{self, FleetConfig, FleetRunner, LiveTransport, ReplayTransport, Transport},
     gate::{self, GateConfig},
     ledger::Ledger,
@@ -28,6 +28,39 @@ struct Cli {
     #[command(subcommand)]
     command: Command,
 }
+
+#[derive(clap::Args)]
+struct ExecutionArguments {
+    /// CUDA requests fail explicitly when this binary or host cannot support them.
+    #[arg(long, value_parser = ["cpu", "cuda"])]
+    device: Option<String>,
+    #[arg(long, default_value_t = 0)]
+    gpu: usize,
+    #[arg(long, value_parser = ["f32", "f16"])]
+    dtype: Option<String>,
+}
+impl ExecutionArguments {
+    fn options(&self, default_cuda: bool) -> model::RuntimeOptions {
+        let cuda = self
+            .device
+            .as_deref()
+            .map(|d| d == "cuda")
+            .unwrap_or(default_cuda);
+        model::RuntimeOptions {
+            device: if cuda {
+                model::ExecutionDevice::Cuda { ordinal: self.gpu }
+            } else {
+                model::ExecutionDevice::Cpu
+            },
+            dtype: match self.dtype.as_deref() {
+                Some("f16") => model::InferenceDtype::F16,
+                Some("f32") => model::InferenceDtype::F32,
+                _ if cuda => model::InferenceDtype::F16,
+                _ => model::InferenceDtype::F32,
+            },
+        }
+    }
+}
 #[derive(Subcommand)]
 enum Command {
     /// Measure this host; no provider key values are read into the report.
@@ -43,6 +76,36 @@ enum Command {
         base: PathBuf,
         #[arg(long, default_value = "podman")]
         runtime: String,
+    },
+    /// Explicit authenticated, immutable-revision Hub download; no credential cache.
+    HubDownload {
+        #[arg(long)]
+        model: String,
+        #[arg(long, default_value = "main")]
+        revision: String,
+        #[arg(long)]
+        destination: PathBuf,
+        #[arg(long, default_value_t = 2)]
+        concurrency: usize,
+        #[arg(long)]
+        token_stdin: bool,
+    },
+    /// Compare locally hosted weights on exploratory train/development tasks only.
+    CompareModels {
+        #[arg(long, default_value = "config/comparative-models.toml")]
+        config: PathBuf,
+        #[arg(long, default_value = "reports/comparative/development")]
+        output: PathBuf,
+        #[arg(long, default_value = "development", value_parser = ["train", "development"])]
+        split: String,
+        #[arg(long, value_delimiter = ',')]
+        models: Vec<String>,
+        #[arg(long, default_value_t = 512)]
+        max_tokens: usize,
+        #[arg(long, default_value_t = 1729)]
+        seed: u64,
+        #[command(flatten)]
+        execution: ExecutionArguments,
     },
     /// Verify actual isolation and resource enforcement using executable probes.
     SandboxPreflight,
@@ -96,6 +159,11 @@ enum Command {
         prompt: String,
         #[arg(long, default_value_t = 256)]
         max_tokens: usize,
+        /// Load a checksum-verified comparative model; assessment adapters stay separate.
+        #[arg(long)]
+        comparative: bool,
+        #[command(flatten)]
+        execution: ExecutionArguments,
     },
     /// Freeze a complete decoding plan and evaluate actual checkpoint generations.
     Evaluate {
@@ -129,6 +197,10 @@ enum Command {
         checkpoint: Option<PathBuf>,
         #[arg(long, default_value = "config/serving.toml")]
         config: PathBuf,
+        #[arg(long)]
+        comparative: bool,
+        #[command(flatten)]
+        execution: ExecutionArguments,
     },
     RouteInit {
         #[arg(long)]
@@ -259,6 +331,60 @@ async fn execute(command: Command) -> Result<()> {
             model_result?;
             image_result?;
         }
+        Command::HubDownload {
+            model,
+            revision,
+            destination,
+            concurrency,
+            token_stdin,
+        } => {
+            print(
+                &lec_distil::hub::download_model(lec_distil::hub::HubDownloadOptions {
+                    model_id: model,
+                    revision,
+                    destination,
+                    concurrency,
+                    token_stdin,
+                })
+                .await?,
+            )?;
+        }
+        Command::CompareModels {
+            config,
+            output,
+            split,
+            models,
+            max_tokens,
+            seed,
+            execution,
+        } => {
+            let split = if split == "train" {
+                comparative::ComparisonSplit::Train
+            } else {
+                comparative::ComparisonSplit::Development
+            };
+            let report = comparative::run(comparative::CompareOptions {
+                registry: config,
+                output,
+                split,
+                runtime: execution.options(true),
+                max_tokens,
+                seed,
+                models,
+            })
+            .await?;
+            print(&report)?;
+            ensure!(
+                report["coverage_complete"] == true,
+                "comparative evaluation has missing observations"
+            );
+            ensure!(
+                report["models"].as_array().is_some_and(|rows| rows
+                    .iter()
+                    .all(|row| row["infrastructure_or_generation_errors"] == 0)),
+                "comparative evaluation contains generation/infrastructure failures; see the full denominator report"
+            );
+        }
         Command::SandboxPreflight => {
             let report = sandbox::preflight(&SandboxConfig::default()).await?;
             artefact::write_json(Path::new("reports/sandbox-preflight.json"), &report)?;
@@ -308,9 +434,21 @@ async fn execute(command: Command) -> Result<()> {
             checkpoint,
             prompt,
             max_tokens,
+            comparative,
+            execution,
         } => {
+            ensure!(
+                !comparative || checkpoint.is_none(),
+                "comparative models cannot use assessment adapters"
+            );
+            let options = execution.options(false);
             let generated = tokio::task::spawn_blocking(move || {
-                let mut m = model::ModelRuntime::load(&base, checkpoint.as_deref())?;
+                let mut m = if comparative {
+                    model::ModelRuntime::load_comparative_with_options(&base, options)?
+                } else {
+                    model::ModelRuntime::load_with_options(&base, checkpoint.as_deref(), options)?
+                };
+                eprintln!("inference execution: {}", m.execution_metadata());
                 m.generate(model::GenerationRequest {
                     prompt,
                     max_new_tokens: max_tokens,
@@ -384,7 +522,26 @@ async fn execute(command: Command) -> Result<()> {
             base,
             checkpoint,
             config,
-        } => serve::run(base, checkpoint, serve::ServeConfig::load(&config)?).await?,
+            comparative,
+            execution,
+        } => {
+            ensure!(
+                !comparative || checkpoint.is_none(),
+                "comparative models cannot use assessment adapters"
+            );
+            let options = execution.options(false);
+            if comparative {
+                serve::run_comparative(base, serve::ServeConfig::load(&config)?, options).await?;
+            } else {
+                serve::run_with_options(
+                    base,
+                    checkpoint,
+                    serve::ServeConfig::load(&config)?,
+                    options,
+                )
+                .await?;
+            }
+        }
         Command::RouteInit { url, checkpoint_id } => {
             print(
                 &serve::initialise_routing(

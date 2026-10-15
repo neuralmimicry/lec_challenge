@@ -1,0 +1,46 @@
+{
+  "sha": "775cc76b607480819eb14b3658df8a96f6b21dab",
+  "url": "https://api.github.com/repos/Narsil/bindgen_cuda/git/trees/775cc76b607480819eb14b3658df8a96f6b21dab",
+  "tree": [
+    {
+      "path": ".gitignore",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "96ef6c0b944e24fc22f51f18136cd62ffd5b0b8f",
+      "size": 19,
+      "url": "https://api.github.com/repos/Narsil/bindgen_cuda/git/blobs/96ef6c0b944e24fc22f51f18136cd62ffd5b0b8f"
+    },
+    {
+      "path": "Cargo.toml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1a85e295225eed3a49e68c8d82786db4c9a4532c",
+      "size": 607,
+      "url": "https://api.github.com/repos/Narsil/bindgen_cuda/git/blobs/1a85e295225eed3a49e68c8d82786db4c9a4532c"
+    },
+    {
+      "path": "README.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "18a90423d647afb9a74a4aa2a394dc9e94684393",
+      "size": 1834,
+      "url": "https://api.github.com/repos/Narsil/bindgen_cuda/git/blobs/18a90423d647afb9a74a4aa2a394dc9e94684393"
+    },
+    {
+      "path": "src",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "87796460154267c5a601ef02f1d9c399e84f01a8",
+      "url": "https://api.github.com/repos/Narsil/bindgen_cuda/git/trees/87796460154267c5a601ef02f1d9c399e84f01a8"
+    },
+    {
+      "path": "src/lib.rs",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "833f4bb642fafceed192f3bed59cb914ccd511a3",
+      "size": 20864,
+      "url": "https://api.github.com/repos/Narsil/bindgen_cuda/git/blobs/833f4bb642fafceed192f3bed59cb914ccd511a3"
+    }
+  ],
+  "truncated": false
+}

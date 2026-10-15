@@ -1,0 +1,67 @@
+{
+  "binary_sha256": "6213506f0738c9304fc1197bd2741a91e5e8bef347aa4c2d4c9124cc9d291310",
+  "evidence_kind": "actual_serial_cuda_f16_model_endpoints",
+  "limitation": "Actual GPU inference and endpoint identity checks only; no provider-derived assessment checkpoint, learning gain or quality promotion is claimed.",
+  "maximum_resident_models": 1,
+  "models": [
+    {
+      "elapsed_seconds": 13.646435757999999,
+      "generation": {
+        "checkpoint_id": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+        "complete": true,
+        "completion": "```rust\nfn add(a: i64, b: i64) -> i64 {\n    a + b\n}\n```",
+        "elapsed_ms": 1088,
+        "finish_reason": "stop",
+        "input_tokens": 57,
+        "output_tokens": 29
+      },
+      "gpu_processes_csv": "601173, /home/pbisaacs/Developer/neuralmimicry/lec_challenge/target/cuda/release/lec-distil, 1390\n",
+      "health": {
+        "base_revision": "ea3f2471cf1b1f0db85067f1ef93848e38e88c25",
+        "checkpoint_id": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+        "checksum_validated": true,
+        "execution": {
+          "actual_device": "Cuda { gpu_id: 0 }",
+          "actual_dtype": "F16",
+          "checkpoint_id": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+          "context_cap": 4096,
+          "cpu_fallback": false,
+          "cuda_active": true,
+          "cuda_feature_compiled": true,
+          "engine": "native_rust_candle",
+          "model_id": "Qwen/Qwen2.5-Coder-0.5B-Instruct",
+          "requested": {
+            "device": {
+              "cuda": {
+                "ordinal": 0
+              }
+            },
+            "dtype": "f16"
+          },
+          "revision": "ea3f2471cf1b1f0db85067f1ef93848e38e88c25"
+        },
+        "healthy": true,
+        "immutable": true,
+        "inference_smoke_output": "Certainly",
+        "model_id": "Qwen/Qwen2.5-Coder-0.5B-Instruct",
+        "production_eligible": true,
+        "smoke_elapsed_ms": 300,
+        "tokenizer_sha256": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539"
+      },
+      "model": "qwen-coder-0_5b",
+      "process_id": 601173,
+      "request": {
+        "max_new_tokens": 256,
+        "prompt": "Write a Rust function add(a: i64, b: i64) -> i64. Return only the complete function.",
+        "seed": 1701,
+        "temperature": 0.0,
+        "timeout_seconds": 120,
+        "top_p": 1.0
+      },
+      "server_log": "reports/comparative/gpu-serving-baseline/qwen-coder-0_5b.log"
+    }
+  ],
+  "promotable": false,
+  "quality_assurance_passed": true,
+  "schema_version": 1
+}
