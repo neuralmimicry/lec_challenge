@@ -1,0 +1,3 @@
+Frozen at 2026-10-15T08:30:44Z
+First assessment commit; existing initial commit is retained.
+Design and acceptance only; no assessment implementation code existed at freeze.
