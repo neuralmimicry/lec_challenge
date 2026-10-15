@@ -1,0 +1,28 @@
+{
+  "checkpoint_id": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+  "elapsed_seconds": 12.57084144,
+  "evidence_kind": "actual_immutable_local_endpoint_smoke",
+  "generation": {
+    "checkpoint_id": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+    "complete": true,
+    "completion": "```rust\nfn add(a: i64, b: i64) -> i64 {\n    a + b\n}\n```",
+    "elapsed_ms": 5032,
+    "finish_reason": "stop",
+    "input_tokens": 57,
+    "output_tokens": 29
+  },
+  "health": {
+    "base_revision": "ea3f2471cf1b1f0db85067f1ef93848e38e88c25",
+    "checkpoint_id": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+    "checksum_validated": true,
+    "healthy": true,
+    "immutable": true,
+    "inference_smoke_output": "Certainly",
+    "model_id": "Qwen/Qwen2.5-Coder-0.5B-Instruct",
+    "production_eligible": true,
+    "smoke_elapsed_ms": 320,
+    "tokenizer_sha256": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539"
+  },
+  "log": "reports/base-endpoint.log",
+  "production_routing": "unchanged; smoke is evaluation-only"
+}

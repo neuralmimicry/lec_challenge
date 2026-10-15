@@ -1,0 +1,31 @@
+[
+  {
+    "input": "",
+    "expected": [],
+    "label": "private-edge-0"
+  },
+  {
+    "input": "# #! ##one",
+    "expected": [
+      "one"
+    ],
+    "label": "private-edge-1"
+  },
+  {
+    "input": "#A #a #A_1 #a_1",
+    "expected": [
+      "a",
+      "a_1"
+    ],
+    "label": "private-edge-2"
+  },
+  {
+    "input": "x#tag,#Other-#3",
+    "expected": [
+      "tag",
+      "other",
+      "3"
+    ],
+    "label": "private-edge-3"
+  }
+]

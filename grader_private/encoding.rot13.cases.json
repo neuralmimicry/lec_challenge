@@ -1,0 +1,22 @@
+[
+  {
+    "input": "",
+    "expected": "",
+    "label": "private-edge-0"
+  },
+  {
+    "input": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    "expected": "NOPQRSTUVWXYZABCDEFGHIJKLM",
+    "label": "private-edge-1"
+  },
+  {
+    "input": "abcdefghijklmnopqrstuvwxyz",
+    "expected": "nopqrstuvwxyzabcdefghijklm",
+    "label": "private-edge-2"
+  },
+  {
+    "input": "123 !",
+    "expected": "123 !",
+    "label": "private-edge-3"
+  }
+]

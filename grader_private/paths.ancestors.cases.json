@@ -1,0 +1,32 @@
+[
+  {
+    "input": "/",
+    "expected": [],
+    "label": "private-edge-0"
+  },
+  {
+    "input": "/a",
+    "expected": [
+      "/"
+    ],
+    "label": "private-edge-1"
+  },
+  {
+    "input": "/a/b",
+    "expected": [
+      "/",
+      "/a"
+    ],
+    "label": "private-edge-2"
+  },
+  {
+    "input": "/one/two/three/four",
+    "expected": [
+      "/",
+      "/one",
+      "/one/two",
+      "/one/two/three"
+    ],
+    "label": "private-edge-3"
+  }
+]

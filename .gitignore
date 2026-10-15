@@ -16,6 +16,19 @@ target
 # rustc will dump stack traces when hitting an internal compiler error to PWD
 rustc-ice-*.txt
 
+# Immutable large assets belong in a separately checksummed delivery bundle.
+offline_bundle/base/*.safetensors
+offline_bundle/images/
+offline_bundle/bin/
+offline_bundle/vendor/
+state/
+data/
+deliverables/
+reports/drill-work/
+checkpoints/**/*.safetensors
+*.tar.gz
+.env
+
 # RustRover
 #  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
 #  be found at https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore

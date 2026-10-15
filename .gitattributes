@@ -1,0 +1,12 @@
+# Keep Rust sources and prose consistent across developer checkouts.
+* text=auto eol=lf
+
+# Provenance and checksum-bound evidence must retain the original bytes.
+docs/rights/snapshots/** -text
+offline_bundle/** -text
+recordings/** -text
+reports/** -text
+tasks/** -text
+grader_private/** -text
+*.pdf -text
+*.mp4 -text

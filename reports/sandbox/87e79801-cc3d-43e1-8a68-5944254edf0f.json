@@ -1,0 +1,32 @@
+{
+  "run_id": "87e79801-cc3d-43e1-8a68-5944254edf0f",
+  "task_id": "ledger.sum",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "sandbox/supervisor exit Some(101): \nthread 'main' (1) panicked at /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/std/src/sys/process/unix/unix.rs:155:21:\nthe CLOEXEC pipe failed: Os { code: 1, kind: PermissionDenied, message: \"Operation not permitted\" }\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n"
+  ],
+  "cases_total": 14,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "f5c2df6aba954bcbb204bef72601c84e53103415cae54d9e7ce4a3e66a407219",
+  "image_id": "b8f62faef73ff2ae61455b5cddbc96f77564ffab472feaa60e71bed5eb64b6d0",
+  "oracle_sha256": "7541b56b706d639193532ca94e17b9f9ef4110ca8671b992a692ce234d15f4cc",
+  "code_sha256": "b05ca54af726ce889bd2b92bc0636203c15017f43756d62196dd04c3892ac919",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:1",
+    "expected_image_id": "b8f62faef73ff2ae61455b5cddbc96f77564ffab472feaa60e71bed5eb64b6d0",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/sandbox/87e79801-cc3d-43e1-8a68-5944254edf0f.audit.json",
+  "audit_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "failure": "sandbox/supervisor exit Some(101): \nthread 'main' (1) panicked at /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/std/src/sys/process/unix/unix.rs:155:21:\nthe CLOEXEC pipe failed: Os { code: 1, kind: PermissionDenied, message: \"Operation not permitted\" }\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n",
+  "duration_ms": 6102
+}

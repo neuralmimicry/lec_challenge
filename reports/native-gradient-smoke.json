@@ -1,0 +1,14 @@
+{
+  "evidence_kind": "synthetic_tensor_invariant_only_not_assessment_training",
+  "base_sha256": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+  "sequence_tokens": 64,
+  "supervised_tokens": 32,
+  "trainable_parameters": 540672,
+  "adapter_variables": 96,
+  "loss": 9.763630867004395,
+  "gradient_norm": 7.316696562585226,
+  "changed_parameter_l2": 0.08830761219423873,
+  "frozen_base_sentinel_unchanged": true,
+  "adapter_safetensors_roundtrip": true,
+  "elapsed_seconds": 4.172731037
+}

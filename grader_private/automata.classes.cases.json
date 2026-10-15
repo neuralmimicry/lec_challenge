@@ -1,0 +1,46 @@
+[
+  {
+    "input": "",
+    "expected": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "label": "private-edge-0"
+  },
+  {
+    "input": "AZaz09\t\n!?",
+    "expected": [
+      2,
+      2,
+      2,
+      2,
+      2
+    ],
+    "label": "private-edge-1"
+  },
+  {
+    "input": "   ",
+    "expected": [
+      0,
+      0,
+      0,
+      3,
+      0
+    ],
+    "label": "private-edge-2"
+  },
+  {
+    "input": "a_A",
+    "expected": [
+      1,
+      1,
+      0,
+      0,
+      1
+    ],
+    "label": "private-edge-3"
+  }
+]

@@ -1,0 +1,63 @@
+{
+  "evidence_kind": "captioned_walkthrough_of_actual_reports_with_explicit_gaps",
+  "duration_seconds": 120,
+  "width": 1280,
+  "height": 720,
+  "input_sha256": {
+    "docs/design.md": "bb060f430e13d49b57e39b19f81ff8c5cd1e6944ab3cdc00929433254c794336",
+    "reports/base-inference-smoke.json": "ca7d6970c58df80a8af293ba2716874aec94e9f7833746d55e3869beb0da7b37",
+    "reports/cost-summary.json": "0037b3222239079646827e4f345848328544cb96b5f7df3814e04ee35ea9be4d",
+    "reports/drill.json": "eb0f54721b2a3f72b1f487dfbce6c4b6d0cbf19cc2136902635d8a19aa4f0696",
+    "reports/eval.json": "d963c161dd9457cb717c43c691fede36efda3b21f9e955e91a02b78166a2debe",
+    "reports/native-gradient-512.json": "b5594ab09567296eea2732a06206f894bf160a75407a63f33686e728ec158f79",
+    "reports/serving-smoke.json": "244c6659ea8f00dfe9a86a517ef80a67da18f7c3206f3d8bc9834779e126dd73"
+  },
+  "video_sha256": "318658681e720961ae0bb77a7e0ba62af2e20f42e490e946e9775f635c196fab",
+  "slides": [
+    {
+      "title": "Principal AI Engineer assessment",
+      "caption": "Native Rust implementation and measured local evidence.\nThis is a captioned walkthrough, not a screen recording.\nThe assessment remains INCOMPLETE.\nNo provider-trained student or quality improvement is claimed.\nReports and code are the reviewable evidence."
+    },
+    {
+      "title": "Design: the ceiling drives the loop",
+      "caption": "Tasks -> configurable fleet -> isolated grading -> curation\n-> genuine LoRA -> held-out gate -> local serving.\nA specialised student may beat an individual teacher on this\nnarrow workload by learning verified complementary outputs.\nThis does not establish general superiority over frontier\nmodels.\nAn inconclusive gate means NO SHIP."
+    },
+    {
+      "title": "Task supply and source separation",
+      "caption": "The authored catalogue has 96 Rust coding contracts:\n48 train, 16 development, 32 held out; 24 source groups.\nComplete sources are assigned before model collection.\nLineage, executable oracles and provenance accompany tasks.\nOne author may induce dependence between source groups.\nThe sealed set must never become a tuning dashboard."
+    },
+    {
+      "title": "Fleet and durable budget invariants",
+      "caption": "Recorded local fault observations:\nlabelled_software_assurance_fixtures\nTransactional reservations precede every attempted call.\nFinished request keys are cached; unknown remote acceptance\nretains its reservation.\nSynthetic faults are labelled as fixtures.\nThree independent real provider recordings are still required.\nNo missing completion is fabricated."
+    },
+    {
+      "title": "Sandbox and contamination evidence",
+      "caption": "Grader-gaming drill: PASSED\nEscape-attempt drill: PASSED\nPlanted held-out task: PASSED\nA complete assessment requires observed container enforcement\nand trusted syscall evidence.\nCandidate self-reports and score fixtures cannot complete these\ndrills."
+    },
+    {
+      "title": "Actual Qwen base and gradient QA",
+      "caption": "Pinned real Qwen2.5-Coder-0.5B-Instruct on CPU.\nBase generated 29 output tokens; complete=true; 7244 ms.\nFull-base synthetic tensor QA: 512 input tokens.\nLoss 10.041237; gradient norm 7.327373.\nChanged adapter L2 0.088431; safetensors round trip=true.\nThis is technical QA, not provider-output training."
+    },
+    {
+      "title": "Actual bounded local endpoint",
+      "caption": "Real model health includes checksum and inference checks.\nComplete generated output: 29 tokens.\nOversized body HTTP 413; excessive tokens HTTP 400.\nConcurrent pressure statuses: {\"503\":10,\"504\":2}.\nInitialise -> explicit evaluation route -> atomic rollback.\nThe evaluation alias serves the same base weights.\nNo trained candidate canary is claimed."
+    },
+    {
+      "title": "The gate: quality must be measured",
+      "caption": "Actual evaluation status: INVALID_EVALUATION.\nShip requires both source-level interval lower bounds above the\npredeclared +2 percentage-point margin.\nAll task and decoding-seed outcomes remain in the denominator.\nEight held-out sources give weak statistical power.\nNegative/null score fixtures test the decision logic only.\nActual checkpoint controls remain a separate requirement."
+    },
+    {
+      "title": "Honest remaining evidence",
+      "caption": "Rights/model/account clearance and spending authority.\nReal calls to three independent provider businesses.\nPassing isolated grades and a validated provider dataset.\nActual candidate, second-seed and negative/overfit adapters.\nFrozen held-out evaluation, measured costs and a real gate.\nFull provider-trained disconnected rehearsal.\nLocal security passes do not replace these missing artifacts."
+    },
+    {
+      "title": "Reproduce and review",
+      "caption": "./run.sh demo --offline\nThe full command fails if required evidence is absent.\nInspect reports/drill.json and reports/eval.json.\nNative QA examples: model_smoke, cpu_gradient_smoke,\nserving_smoke.\nRead docs/training.md and docs/reproduction.md.\nThe repository includes source, checksums, tests and explicit\nlimitations.\nNO SHIP keeps the incumbent."
+    }
+  ],
+  "limitations": [
+    "Captioned slides display actual report facts; this is not a claimed screen capture or narrated live demo.",
+    "Fixture QA, base inference and synthetic tensor updates are explicitly distinguished from actual provider-trained assessment evidence.",
+    "ffmpeg/ffprobe provide media encoding and verification; all evidence generation logic is Rust."
+  ]
+}

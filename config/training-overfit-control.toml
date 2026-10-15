@@ -1,0 +1,13 @@
+# Uses only original training-source winners. No held-out tuning is permitted.
+purpose = "overfit_control"
+seed = 1704
+steps = 384
+max_sequence_tokens = 512
+rank = 8
+alpha = 16.0
+learning_rate = 0.001
+beta1 = 0.9
+beta2 = 0.999
+epsilon = 0.00000001
+weight_decay = 0.01
+max_gradient_norm = 1.0

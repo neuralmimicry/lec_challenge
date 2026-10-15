@@ -1,0 +1,34 @@
+[
+  {
+    "input": {
+      "shift": 1,
+      "text": ""
+    },
+    "expected": "",
+    "label": "private-edge-0"
+  },
+  {
+    "input": {
+      "shift": -1,
+      "text": "azAZ!"
+    },
+    "expected": "zyAZ!",
+    "label": "private-edge-1"
+  },
+  {
+    "input": {
+      "shift": 52,
+      "text": "hello"
+    },
+    "expected": "hello",
+    "label": "private-edge-2"
+  },
+  {
+    "input": {
+      "shift": -27,
+      "text": "abc xyz"
+    },
+    "expected": "zab wxy",
+    "label": "private-edge-3"
+  }
+]

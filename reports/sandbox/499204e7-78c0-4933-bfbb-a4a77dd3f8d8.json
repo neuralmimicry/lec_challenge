@@ -1,0 +1,47 @@
+{
+  "run_id": "499204e7-78c0-4933-bfbb-a4a77dd3f8d8",
+  "task_id": "ledger.sum",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "prohibited filesystem attempt: syscall 262 target ",
+    "prohibited filesystem attempt: syscall 262 target ",
+    "candidate exit Some(127): /tmp/candidate: error while loading shared libraries: libgcc_s.so.1: cannot stat shared object: Operation not permitted\n"
+  ],
+  "cases_total": 14,
+  "cases_passed": 0,
+  "trace_complete": true,
+  "policy_sha256": "fb80e9a35fbdf596cf30efb109ca7573cfccf2bb5f1cbe93eeb3392fff6a2e20",
+  "image_id": "b8f62faef73ff2ae61455b5cddbc96f77564ffab472feaa60e71bed5eb64b6d0",
+  "oracle_sha256": "7541b56b706d639193532ca94e17b9f9ef4110ca8671b992a692ce234d15f4cc",
+  "code_sha256": "b05ca54af726ce889bd2b92bc0636203c15017f43756d62196dd04c3892ac919",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:1",
+    "expected_image_id": "b8f62faef73ff2ae61455b5cddbc96f77564ffab472feaa60e71bed5eb64b6d0",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/sandbox"
+  },
+  "audit_events": [
+    {
+      "syscall": 262,
+      "category": "filesystem",
+      "target": "",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 262,
+      "category": "filesystem",
+      "target": "",
+      "result": "denied:EPERM"
+    }
+  ],
+  "audit_path": "reports/sandbox/499204e7-78c0-4933-bfbb-a4a77dd3f8d8.audit.json",
+  "audit_sha256": "d5d207c6b0d4eca89b45e8486461699c64919733f84c046d5c800b0c3ee4b3d4",
+  "failure": "candidate exit Some(127): /tmp/candidate: error while loading shared libraries: libgcc_s.so.1: cannot stat shared object: Operation not permitted\n",
+  "duration_ms": 12807
+}

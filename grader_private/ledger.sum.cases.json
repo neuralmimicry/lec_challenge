@@ -1,0 +1,204 @@
+[
+  {
+    "input": [],
+    "expected": 0,
+    "label": "private-edge-0"
+  },
+  {
+    "input": [
+      0
+    ],
+    "expected": 0,
+    "label": "private-edge-1"
+  },
+  {
+    "input": [
+      -7,
+      -2,
+      -19
+    ],
+    "expected": -28,
+    "label": "private-edge-2"
+  },
+  {
+    "input": [
+      10000,
+      -10000,
+      3,
+      3,
+      0
+    ],
+    "expected": 6,
+    "label": "private-edge-3"
+  },
+  {
+    "input": [
+      -32,
+      -31,
+      -30,
+      -29,
+      -28,
+      -27,
+      -26,
+      -25,
+      -24,
+      -23,
+      -22,
+      -21,
+      -20,
+      -19,
+      -18,
+      -17,
+      -16,
+      -15,
+      -14,
+      -13,
+      -12,
+      -11,
+      -10,
+      -9,
+      -8,
+      -7,
+      -6,
+      -5,
+      -4,
+      -3,
+      -2,
+      -1,
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31
+    ],
+    "expected": -32,
+    "label": "private-edge-4"
+  },
+  {
+    "input": [
+      -29,
+      8,
+      45
+    ],
+    "expected": 24,
+    "label": "generated-ledger-1"
+  },
+  {
+    "input": [
+      -10,
+      27,
+      -33,
+      4
+    ],
+    "expected": -12,
+    "label": "generated-ledger-2"
+  },
+  {
+    "input": [
+      9,
+      46,
+      -14,
+      23,
+      -37
+    ],
+    "expected": 27,
+    "label": "generated-ledger-3"
+  },
+  {
+    "input": [
+      28,
+      -32,
+      5,
+      42,
+      -18,
+      19
+    ],
+    "expected": 44,
+    "label": "generated-ledger-4"
+  },
+  {
+    "input": [
+      47,
+      -13,
+      24,
+      -36,
+      1,
+      38,
+      -22
+    ],
+    "expected": 39,
+    "label": "generated-ledger-5"
+  },
+  {
+    "input": [
+      -31,
+      6,
+      43,
+      -17,
+      20,
+      -40,
+      -3,
+      34
+    ],
+    "expected": 12,
+    "label": "generated-ledger-6"
+  },
+  {
+    "input": [
+      -12,
+      25,
+      -35,
+      2,
+      39,
+      -21,
+      16,
+      -44,
+      -7
+    ],
+    "expected": -37,
+    "label": "generated-ledger-7"
+  },
+  {
+    "input": [
+      7,
+      44,
+      -16,
+      21,
+      -39,
+      -2,
+      35,
+      -25,
+      12,
+      -48
+    ],
+    "expected": -11,
+    "label": "generated-ledger-8"
+  }
+]

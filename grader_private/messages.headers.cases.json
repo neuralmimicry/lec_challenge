@@ -1,0 +1,46 @@
+[
+  {
+    "input": [],
+    "expected": {},
+    "label": "private-edge-0"
+  },
+  {
+    "input": [
+      "A:"
+    ],
+    "expected": {
+      "a": [
+        ""
+      ]
+    },
+    "label": "private-edge-1"
+  },
+  {
+    "input": [
+      " a : x ",
+      "A:y",
+      "B:z:z"
+    ],
+    "expected": {
+      "a": [
+        "x",
+        "y"
+      ],
+      "b": [
+        "z:z"
+      ]
+    },
+    "label": "private-edge-2"
+  },
+  {
+    "input": [
+      "X:  \t "
+    ],
+    "expected": {
+      "x": [
+        ""
+      ]
+    },
+    "label": "private-edge-3"
+  }
+]

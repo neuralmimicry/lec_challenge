@@ -1,0 +1,24 @@
+HTTP/2 200 
+date: Thu, 15 Oct 2026 08:39:48 GMT
+content-type: text/html
+content-length: 33904
+server: openresty
+x-reserved: amazon, aws and amazon web services are trademarks or registered trademarks of Amazon Technologies, Inc
+cloudservicediscount: CDN
+x-amz-request-id: 0000019F64AF71AB981AE270B59C4BD5
+etag: "a4e0bb69a28f8e3920d6e3698452aebe"
+last-modified: Wed, 15 Jul 2026 07:30:02 GMT
+x-amz-version-id: null
+x-amz-id-2: 36AAAQAAEAABAAAQAAEAABAAAQAAEAABAAAaI=AAAAAAAAAAAAAAAAAAAAAAAAAA
+via: EU-GBR-london-EDGE2-CACHE2[13],EU-GBR-london-EDGE2-CACHE2[0,TCP_HIT,6],EU-GBR-london-GLOBAL1-CACHE17[173],EU-GBR-london-GLOBAL1-CACHE21[168,TCP_MISS,173],EA-SGP-GLOBAL1-CACHE14[3],EA-SGP-GLOBAL1-CACHE19[0,TCP_HIT,2],CHN-SH-GLOBAL4-CACHE128[34],CHN-SH-GLOBAL4-CACHE51[29,TCP_MISS,33]
+x-hcs-proxy-type: 1
+x-ccdn-cachettl: 7776000
+x-ccdn-req-id-46b1: 558ac5731e45022664e9f7f760f84874
+nginx-hit: 1
+age: 2760147
+accept-ranges: bytes
+access-control-allow-origin: https://*.deepseek.com
+content-disposition: inline
+strict-transport-security: max-age=31536000
+cache-control: no-store
+

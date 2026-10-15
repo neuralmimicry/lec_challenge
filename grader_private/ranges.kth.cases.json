@@ -1,0 +1,47 @@
+[
+  {
+    "input": {
+      "k": 1,
+      "values": []
+    },
+    "expected": null,
+    "label": "private-edge-0"
+  },
+  {
+    "input": {
+      "k": 2,
+      "values": [
+        2,
+        2
+      ]
+    },
+    "expected": null,
+    "label": "private-edge-1"
+  },
+  {
+    "input": {
+      "k": 1,
+      "values": [
+        4,
+        -3,
+        4,
+        0
+      ]
+    },
+    "expected": -3,
+    "label": "private-edge-2"
+  },
+  {
+    "input": {
+      "k": 3,
+      "values": [
+        4,
+        -3,
+        4,
+        0
+      ]
+    },
+    "expected": 4,
+    "label": "private-edge-3"
+  }
+]

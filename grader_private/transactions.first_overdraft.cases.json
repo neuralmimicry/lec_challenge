@@ -1,0 +1,46 @@
+[
+  {
+    "input": {
+      "deltas": [],
+      "initial": 0
+    },
+    "expected": -1,
+    "label": "private-edge-0"
+  },
+  {
+    "input": {
+      "deltas": [
+        -1,
+        2
+      ],
+      "initial": 0
+    },
+    "expected": 0,
+    "label": "private-edge-1"
+  },
+  {
+    "input": {
+      "deltas": [
+        -5,
+        0,
+        1
+      ],
+      "initial": 5
+    },
+    "expected": -1,
+    "label": "private-edge-2"
+  },
+  {
+    "input": {
+      "deltas": [
+        1,
+        -8,
+        8,
+        -8
+      ],
+      "initial": 3
+    },
+    "expected": 1,
+    "label": "private-edge-3"
+  }
+]

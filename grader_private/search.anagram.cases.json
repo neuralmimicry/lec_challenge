@@ -1,0 +1,42 @@
+[
+  {
+    "input": [
+      "",
+      ""
+    ],
+    "expected": true,
+    "label": "private-edge-0"
+  },
+  {
+    "input": [
+      "a!",
+      "A!"
+    ],
+    "expected": true,
+    "label": "private-edge-1"
+  },
+  {
+    "input": [
+      "a!",
+      "a"
+    ],
+    "expected": false,
+    "label": "private-edge-2"
+  },
+  {
+    "input": [
+      "aab",
+      "abb"
+    ],
+    "expected": false,
+    "label": "private-edge-3"
+  },
+  {
+    "input": [
+      " A\tB ",
+      "ba"
+    ],
+    "expected": true,
+    "label": "private-edge-4"
+  }
+]

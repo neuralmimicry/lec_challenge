@@ -1,0 +1,5 @@
+address = "127.0.0.1:8080"
+queue_capacity = 4
+maximum_request_bytes = 32768
+maximum_output_tokens = 256
+timeout_seconds = 120

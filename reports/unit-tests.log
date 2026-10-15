@@ -1,0 +1,86 @@
+   Compiling lec-distil v0.1.0 (/home/pbisaacs/Developer/neuralmimicry/lec_challenge)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 21.49s
+     Running unittests src/lib.rs (target/debug/deps/lec_distil-35fd5251a26e63f0)
+
+running 55 tests
+test cost::tests::aggregate_overflow_fails_without_partial_mutation ... ok
+test cost::tests::break_even_requires_quality_and_positive_measured_savings ... ok
+test drills::tests::missing_actual_controls_are_not_score_fixture_successes ... ok
+test artefact::tests::checksum_and_traversal_fail_closed ... ok
+test cost::tests::percentage_point_denominator_and_inconclusive_limit_are_exact ... ok
+test curate::tests::evidence_paths_cannot_escape ... ok
+test curate::tests::formatting_and_comments_do_not_evade_ast_deduplication ... ok
+test evaluate::tests::only_complete_fences_are_removed ... ok
+test evaluate::tests::reused_task_seed_and_decoding_caps_are_rejected ... ok
+test evaluate::tests::errors_and_incomplete_generations_cannot_assert_completion ... ok
+test fleet::tests::integer_pricing_rounds_up_and_counts_cached_input_once ... ok
+test fleet::tests::offline_empty_directory_never_invents_recordings ... ok
+test fleet::tests::empty_truncated_missing_usage_are_failures ... ok
+test fleet::tests::canonical_key_keeps_sample_slot_and_full_prompt ... ok
+test gate::tests::missing_duplicate_and_security_are_invalid ... ok
+test cost::tests::no_declared_plan_cannot_be_inferred_from_attempt_counts ... ok
+test curate::tests::empty_and_modified_index_fail_closed ... ok
+test fleet::tests::budget_stop_precedes_transport ... ok
+test ledger::tests::billing_above_reservation_stops_round ... ok
+test fleet::tests::unknown_acceptance_never_retries_or_fails_over ... ok
+test model::tests::chat_template_plain_message_branch ... ok
+test model::tests::deterministic_sampling_and_rejection ... ok
+test fleet::tests::restart_cache_does_not_execute_transport_again ... ok
+test fleet::tests::cache_precedes_credentials_and_open_circuit ... ok
+test sandbox::bundle::tests::archive_checksum_is_checked_before_the_runtime_can_be_invoked ... ok
+test sandbox::bundle::tests::archive_paths_cannot_leave_the_bundle ... ok
+test sandbox::control::tests::cgroup_control_cannot_target_root_ancestors_or_another_container ... ok
+test ledger::tests::concurrent_claim_is_unique_and_reservations_count ... ok
+test ledger::tests::unknown_window_retains_reservation_across_restart ... ok
+test ledger::tests::finished_work_reuses_verified_durable_blob ... ok
+test serve::tests::endpoints_are_strictly_local ... ok
+test ledger::tests::immutable_plan_refuses_unplanned_work_before_reserving ... ok
+test model::tests::frozen_projection_matches_generic_forward_and_input_gradient ... ok
+test fleet::tests::provider_failure_is_attributed_and_fails_over ... ok
+test tasks::tests::fractions_obey_sign_and_reduction ... ok
+test fleet::tests::exact_replay_rejects_missing_sample_and_corrupt_hash ... ok
+test tasks::tests::independent_interval_length_property ... ok
+test train::tests::adam_resume_is_numerically_equivalent ... ok
+test train::tests::only_declared_degraded_control_changes_targets ... ok
+test train::tests::original_tokenizer_masks_prompt_and_preserves_assistant_eos ... ignored, requires explicitly bootstrapped original Qwen tokenizer assets
+test train::tests::non_finite_loss_cannot_update_weights ... ok
+test sandbox::tests::empty_frozen_identity_cannot_verify ... ok
+test serve::tests::rollback_retains_incumbent_and_candidate_history ... ok
+test tasks::tests::private_inputs_break_public_answer_hardcoding ... ok
+test sandbox::tests::freeze_covers_resources_not_output_directory ... ok
+test gate::tests::identical_and_degraded_are_never_wins ... ok
+test gate::tests::bootstrap_reproduces ... ok
+test gate::tests::strong_consistent_gain_and_margin ... ok
+test tasks::tests::serialised_public_catalogue_excludes_private_inputs ... ok
+test tasks::tests::all_public_examples_and_source_split_are_checked ... ok
+test model::tests::full_qwen_architecture_backpropagates_and_preserves_frozen_base ... ok
+test curate::tests::lineage_survives_renaming ... ok
+test gate::tests::simulated_source_moments_match_declared_effect_and_correlation ... ok
+test drills::tests::actual_training_entrypoint_rejects_all_planted_variants_before_loading_assets ... ok
+test gate::tests::optimised_power_rule_matches_full_public_intervals ... ok
+
+test result: ok. 54 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 0.29s
+
+     Running unittests src/main.rs (target/debug/deps/lec_distil-3d61ae2514b3ca3a)
+
+running 2 tests
+test tests::decimal_spend_is_exact_and_rejects_overflow ... ok
+test cli_demo::tests::evaluation_freeze_reuses_exact_plan_and_rejects_posthoc_change ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/sandbox_contract.rs (target/debug/deps/sandbox_contract-06ae0333a91bb523)
+
+running 3 tests
+test offline_oci_archive_round_trip ... ignored, loads the complete verified local OCI archive; never downloads an image
+test real_output_deadline_and_alias_defences ... ignored, executes oversized, hung and alias-probing programmes in fresh containers
+test real_reference_candidates_across_all_splits_and_evidence_tampering ... ignored, requires the explicitly bootstrapped OCI image and actual kernel controls
+
+test result: ok. 0 passed; 0 failed; 3 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests lec_distil
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

@@ -1,0 +1,317 @@
+{
+  "schema_version": 1,
+  "cargo_lock_sha256": "1f6da15c332cf3d3da327343ac0568cb086493d3aa7d322878e5a6880c2403eb",
+  "acquired_unix_ms": 1792056830390,
+  "entries": [
+    {
+      "name": "candle-nn",
+      "version": "0.9.1",
+      "repository": "https://github.com/huggingface/candle",
+      "commit": "cd96fa80da255e34f7b16b4ff98b6a31d557201b",
+      "path_in_vcs": "candle-nn",
+      "crate_vcs_info": {
+        "path": "offline_bundle/notices/candle-nn-0.9.1/SOURCE-CARGO-VCS-INFO.json",
+        "sha256": "9b305188dba90062f1130796ec8da2ceb41448aaf82d4f903546180cd3de6402",
+        "bytes": 103
+      },
+      "crate_manifest": {
+        "path": "offline_bundle/notices/candle-nn-0.9.1/SOURCE-CARGO-TOML.orig",
+        "sha256": "630233369530688c87ac7bdb3b5af0ba334a2846276b89705f36c85ccb5876c7",
+        "bytes": 1144
+      },
+      "upstream_tree": {
+        "path": "offline_bundle/notices/candle-nn-0.9.1/SOURCE-UPSTREAM-TREE.json",
+        "sha256": "c5431bd1006a2d6ef58afec482b459944dad9b054b86f7acfbddb537a418d808",
+        "bytes": 268912
+      },
+      "upstream_tree_url": "https://api.github.com/repos/huggingface/candle/git/trees/cd96fa80da255e34f7b16b4ff98b6a31d557201b?recursive=1",
+      "workspace_manifest": {
+        "url": "https://raw.githubusercontent.com/huggingface/candle/cd96fa80da255e34f7b16b4ff98b6a31d557201b/Cargo.toml",
+        "source_path": "Cargo.toml",
+        "upstream_blob_sha1": "874570bcc915346e561c25337d33294c272b3df3",
+        "artifact": {
+          "path": "offline_bundle/notices/candle-nn-0.9.1/SOURCE-WORKSPACE-CARGO.toml",
+          "sha256": "05f89c40b5be1b6061771eeb4a13d82f93b3dbb60db9bf3cba5c34f89f8f0514",
+          "bytes": 2842
+        }
+      },
+      "notices": [
+        {
+          "url": "https://raw.githubusercontent.com/huggingface/candle/cd96fa80da255e34f7b16b4ff98b6a31d557201b/LICENSE-APACHE",
+          "source_path": "LICENSE-APACHE",
+          "upstream_blob_sha1": "261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64",
+          "artifact": {
+            "path": "offline_bundle/notices/candle-nn-0.9.1/upstream/LICENSE-APACHE",
+            "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+            "bytes": 11357
+          }
+        },
+        {
+          "url": "https://raw.githubusercontent.com/huggingface/candle/cd96fa80da255e34f7b16b4ff98b6a31d557201b/LICENSE-MIT",
+          "source_path": "LICENSE-MIT",
+          "upstream_blob_sha1": "31aa79387f27e730e33d871925e152e35e428031",
+          "artifact": {
+            "path": "offline_bundle/notices/candle-nn-0.9.1/upstream/LICENSE-MIT",
+            "sha256": "23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+            "bytes": 1023
+          }
+        }
+      ]
+    },
+    {
+      "name": "r-efi",
+      "version": "5.3.0",
+      "repository": "https://github.com/r-efi/r-efi",
+      "commit": "97b55bed1c2c91dcbf787674849f05337ff80b33",
+      "path_in_vcs": "",
+      "crate_vcs_info": {
+        "path": "offline_bundle/notices/r-efi-5.3.0/SOURCE-CARGO-VCS-INFO.json",
+        "sha256": "50e0c72ee0164f182d7b5db0213cdb1626bad950f2443b05d006c28c7f0641b5",
+        "bytes": 94
+      },
+      "crate_manifest": {
+        "path": "offline_bundle/notices/r-efi-5.3.0/SOURCE-CARGO-TOML.orig",
+        "sha256": "57b6d9b9a1b6524f6b4dcc1dd24970ac03e6959786a6cfedaec9ba52878b4d3e",
+        "bytes": 1226
+      },
+      "upstream_tree": {
+        "path": "offline_bundle/notices/r-efi-5.3.0/SOURCE-UPSTREAM-TREE.json",
+        "sha256": "e62de5a95c214d29b7358dc6abbfdf3c16becab487e2d2eb8ad482d8314cb599",
+        "bytes": 16681
+      },
+      "upstream_tree_url": "https://api.github.com/repos/r-efi/r-efi/git/trees/97b55bed1c2c91dcbf787674849f05337ff80b33?recursive=1",
+      "workspace_manifest": {
+        "url": "https://raw.githubusercontent.com/r-efi/r-efi/97b55bed1c2c91dcbf787674849f05337ff80b33/Cargo.toml",
+        "source_path": "Cargo.toml",
+        "upstream_blob_sha1": "c09e2aa302d96e51f4a49f505820cd6715e0bd3d",
+        "artifact": {
+          "path": "offline_bundle/notices/r-efi-5.3.0/SOURCE-WORKSPACE-CARGO.toml",
+          "sha256": "57b6d9b9a1b6524f6b4dcc1dd24970ac03e6959786a6cfedaec9ba52878b4d3e",
+          "bytes": 1226
+        }
+      },
+      "notices": [
+        {
+          "url": "https://raw.githubusercontent.com/r-efi/r-efi/97b55bed1c2c91dcbf787674849f05337ff80b33/AUTHORS",
+          "source_path": "AUTHORS",
+          "upstream_blob_sha1": "7397b2bd6a8580d51fe7b23783f8f1a05fa70291",
+          "artifact": {
+            "path": "offline_bundle/notices/r-efi-5.3.0/upstream/AUTHORS",
+            "sha256": "ff92bed461f50338dd703a9ba9aee496a425957873df1d91192776e4bdf5dda7",
+            "bytes": 3693
+          }
+        }
+      ]
+    },
+    {
+      "name": "r-efi",
+      "version": "6.0.0",
+      "repository": "https://github.com/r-efi/r-efi",
+      "commit": "7e1b0322d31d625f81a5656096330934f9cd835d",
+      "path_in_vcs": "",
+      "crate_vcs_info": {
+        "path": "offline_bundle/notices/r-efi-6.0.0/SOURCE-CARGO-VCS-INFO.json",
+        "sha256": "d8d0d853429b028d5e3c7b969f7c6b77b04e17486c57fac0759eb8083a359f3f",
+        "bytes": 94
+      },
+      "crate_manifest": {
+        "path": "offline_bundle/notices/r-efi-6.0.0/SOURCE-CARGO-TOML.orig",
+        "sha256": "b8e89c393831c2161b6d390bd40422910ac34f02903ad39edd85ec38d4513fef",
+        "bytes": 1107
+      },
+      "upstream_tree": {
+        "path": "offline_bundle/notices/r-efi-6.0.0/SOURCE-UPSTREAM-TREE.json",
+        "sha256": "5dabced7189181ec206a2bc6d838ec818d975d660e1a6773e9e9deade1467752",
+        "bytes": 16683
+      },
+      "upstream_tree_url": "https://api.github.com/repos/r-efi/r-efi/git/trees/7e1b0322d31d625f81a5656096330934f9cd835d?recursive=1",
+      "workspace_manifest": {
+        "url": "https://raw.githubusercontent.com/r-efi/r-efi/7e1b0322d31d625f81a5656096330934f9cd835d/Cargo.toml",
+        "source_path": "Cargo.toml",
+        "upstream_blob_sha1": "128d8beaa5b5c5d24d50c26e11997e16b036eb99",
+        "artifact": {
+          "path": "offline_bundle/notices/r-efi-6.0.0/SOURCE-WORKSPACE-CARGO.toml",
+          "sha256": "b8e89c393831c2161b6d390bd40422910ac34f02903ad39edd85ec38d4513fef",
+          "bytes": 1107
+        }
+      },
+      "notices": [
+        {
+          "url": "https://raw.githubusercontent.com/r-efi/r-efi/7e1b0322d31d625f81a5656096330934f9cd835d/AUTHORS",
+          "source_path": "AUTHORS",
+          "upstream_blob_sha1": "79c8b7c4a1dabcfbc718b7fe6d43b1892f9850cd",
+          "artifact": {
+            "path": "offline_bundle/notices/r-efi-6.0.0/upstream/AUTHORS",
+            "sha256": "d027e91dbc9cdbb2f1190068e498bd6b61cff022b6a032b191021ba658d96111",
+            "bytes": 3733
+          }
+        }
+      ]
+    },
+    {
+      "name": "ug",
+      "version": "0.4.0",
+      "repository": "https://github.com/LaurentMazare/ug",
+      "commit": "854edf4f9d97c86723a48ab89362fc1339675180",
+      "path_in_vcs": "ug-core",
+      "crate_vcs_info": {
+        "path": "offline_bundle/notices/ug-0.4.0/SOURCE-CARGO-VCS-INFO.json",
+        "sha256": "01153d0653c7ed7fbb64773a02587e9adb4d9dc9738a54c343a3a9e7b0a8b348",
+        "bytes": 101
+      },
+      "crate_manifest": {
+        "path": "offline_bundle/notices/ug-0.4.0/SOURCE-CARGO-TOML.orig",
+        "sha256": "0157105b271d9e0c325947469eeecf5b790b21817a174ec2a64d135ea8683000",
+        "bytes": 623
+      },
+      "upstream_tree": {
+        "path": "offline_bundle/notices/ug-0.4.0/SOURCE-UPSTREAM-TREE.json",
+        "sha256": "a60e057f829fe43e3d2a176e9677e96451c54b0d00d68a28d2c647b8cdc5375b",
+        "bytes": 25295
+      },
+      "upstream_tree_url": "https://api.github.com/repos/LaurentMazare/ug/git/trees/854edf4f9d97c86723a48ab89362fc1339675180?recursive=1",
+      "workspace_manifest": {
+        "url": "https://raw.githubusercontent.com/LaurentMazare/ug/854edf4f9d97c86723a48ab89362fc1339675180/Cargo.toml",
+        "source_path": "Cargo.toml",
+        "upstream_blob_sha1": "e59f01a7998006a438a471b3c27f74f7602a796b",
+        "artifact": {
+          "path": "offline_bundle/notices/ug-0.4.0/SOURCE-WORKSPACE-CARGO.toml",
+          "sha256": "96a23636975b0c80841d0a1847101e1469438aaef0c4b6688d6508f4d945857d",
+          "bytes": 1617
+        }
+      },
+      "notices": [
+        {
+          "url": "https://raw.githubusercontent.com/LaurentMazare/ug/854edf4f9d97c86723a48ab89362fc1339675180/LICENSE-APACHE",
+          "source_path": "LICENSE-APACHE",
+          "upstream_blob_sha1": "261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64",
+          "artifact": {
+            "path": "offline_bundle/notices/ug-0.4.0/upstream/LICENSE-APACHE",
+            "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+            "bytes": 11357
+          }
+        },
+        {
+          "url": "https://raw.githubusercontent.com/LaurentMazare/ug/854edf4f9d97c86723a48ab89362fc1339675180/LICENSE-MIT",
+          "source_path": "LICENSE-MIT",
+          "upstream_blob_sha1": "31aa79387f27e730e33d871925e152e35e428031",
+          "artifact": {
+            "path": "offline_bundle/notices/ug-0.4.0/upstream/LICENSE-MIT",
+            "sha256": "23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+            "bytes": 1023
+          }
+        }
+      ]
+    },
+    {
+      "name": "valuable",
+      "version": "0.1.1",
+      "repository": "https://github.com/tokio-rs/valuable",
+      "commit": "9efc29b6e58cef28f6566a47aa7e142a55fead77",
+      "path_in_vcs": "valuable",
+      "crate_vcs_info": {
+        "path": "offline_bundle/notices/valuable-0.1.1/SOURCE-CARGO-VCS-INFO.json",
+        "sha256": "34111200d67ce91680f8c64c5bfd537fc251f7ed7bb3a4e6110cb9299dacc0b2",
+        "bytes": 102
+      },
+      "crate_manifest": {
+        "path": "offline_bundle/notices/valuable-0.1.1/SOURCE-CARGO-TOML.orig",
+        "sha256": "15a6fb7f15c0ea638610e791d6c5c3e5db5c84d73944f36c46c25bebd0001b63",
+        "bytes": 977
+      },
+      "upstream_tree": {
+        "path": "offline_bundle/notices/valuable-0.1.1/SOURCE-UPSTREAM-TREE.json",
+        "sha256": "1ad6b621e514de8efc7f0232b34bd59e22e78140fda22e0666358a62db36bb31",
+        "bytes": 16049
+      },
+      "upstream_tree_url": "https://api.github.com/repos/tokio-rs/valuable/git/trees/9efc29b6e58cef28f6566a47aa7e142a55fead77?recursive=1",
+      "workspace_manifest": {
+        "url": "https://raw.githubusercontent.com/tokio-rs/valuable/9efc29b6e58cef28f6566a47aa7e142a55fead77/Cargo.toml",
+        "source_path": "Cargo.toml",
+        "upstream_blob_sha1": "92cffaf7a636ebcb2da3762dea660b5410d4b44a",
+        "artifact": {
+          "path": "offline_bundle/notices/valuable-0.1.1/SOURCE-WORKSPACE-CARGO.toml",
+          "sha256": "0446aeaf2a5bb89a12e8070b3916177aeb82584e942a90ff28928a814550ba0d",
+          "bytes": 115
+        }
+      },
+      "notices": [
+        {
+          "url": "https://raw.githubusercontent.com/tokio-rs/valuable/9efc29b6e58cef28f6566a47aa7e142a55fead77/LICENSE",
+          "source_path": "LICENSE",
+          "upstream_blob_sha1": "4ca822a5cb54142a14070f5be388e60497781615",
+          "artifact": {
+            "path": "offline_bundle/notices/valuable-0.1.1/upstream/LICENSE",
+            "sha256": "ed60d479b8fd1f64e9cbc3de449a16a53ac1b3d1b6aeb9bf9d190a8e93061b44",
+            "bytes": 1065
+          }
+        }
+      ]
+    },
+    {
+      "name": "wasip2",
+      "version": "1.0.1+wasi-0.2.4",
+      "repository": "https://github.com/bytecodealliance/wasi-rs",
+      "commit": "3da562c06214feafc14d37bf290671636caa6718",
+      "path_in_vcs": "crates/wasip2",
+      "crate_vcs_info": {
+        "path": "offline_bundle/notices/wasip2-1.0.1+wasi-0.2.4/SOURCE-CARGO-VCS-INFO.json",
+        "sha256": "009488b807b23328fe46f6eef637e16f791a3bb01e494bcbfc27767fa4558e59",
+        "bytes": 107
+      },
+      "crate_manifest": {
+        "path": "offline_bundle/notices/wasip2-1.0.1+wasi-0.2.4/SOURCE-CARGO-TOML.orig",
+        "sha256": "064c751923c59463e2587ee85890cac5eca5059714087d62a95151df23e2bdf6",
+        "bytes": 1085
+      },
+      "upstream_tree": {
+        "path": "offline_bundle/notices/wasip2-1.0.1+wasi-0.2.4/SOURCE-UPSTREAM-TREE.json",
+        "sha256": "694b59b79ae453d326def5da26c5de787c0143b55a30afd5b2f602ab3c019689",
+        "bytes": 38566
+      },
+      "upstream_tree_url": "https://api.github.com/repos/bytecodealliance/wasi-rs/git/trees/3da562c06214feafc14d37bf290671636caa6718?recursive=1",
+      "workspace_manifest": {
+        "url": "https://raw.githubusercontent.com/bytecodealliance/wasi-rs/3da562c06214feafc14d37bf290671636caa6718/Cargo.toml",
+        "source_path": "Cargo.toml",
+        "upstream_blob_sha1": "aad0d4cb50d5de97e54af21d259ef2271aa7dc4f",
+        "artifact": {
+          "path": "offline_bundle/notices/wasip2-1.0.1+wasi-0.2.4/SOURCE-WORKSPACE-CARGO.toml",
+          "sha256": "35267cb6c485c160cf352211720ba3de6ccb6acbd85ecaa9b85b6d7c9e4fe0e3",
+          "bytes": 1643
+        }
+      },
+      "notices": [
+        {
+          "url": "https://raw.githubusercontent.com/bytecodealliance/wasi-rs/3da562c06214feafc14d37bf290671636caa6718/LICENSE-APACHE",
+          "source_path": "LICENSE-APACHE",
+          "upstream_blob_sha1": "16fe87b06e802f094b3fbb0894b137bca2b16ef1",
+          "artifact": {
+            "path": "offline_bundle/notices/wasip2-1.0.1+wasi-0.2.4/upstream/LICENSE-APACHE",
+            "sha256": "a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2",
+            "bytes": 10847
+          }
+        },
+        {
+          "url": "https://raw.githubusercontent.com/bytecodealliance/wasi-rs/3da562c06214feafc14d37bf290671636caa6718/LICENSE-Apache-2.0_WITH_LLVM-exception",
+          "source_path": "LICENSE-Apache-2.0_WITH_LLVM-exception",
+          "upstream_blob_sha1": "f9d81955f4bcb8f96a025e2ecc46f39ec536d465",
+          "artifact": {
+            "path": "offline_bundle/notices/wasip2-1.0.1+wasi-0.2.4/upstream/LICENSE-Apache-2.0_WITH_LLVM-exception",
+            "sha256": "268872b9816f90fd8e85db5a28d33f8150ebb8dd016653fb39ef1f94f2686bc5",
+            "bytes": 12243
+          }
+        },
+        {
+          "url": "https://raw.githubusercontent.com/bytecodealliance/wasi-rs/3da562c06214feafc14d37bf290671636caa6718/LICENSE-MIT",
+          "source_path": "LICENSE-MIT",
+          "upstream_blob_sha1": "31aa79387f27e730e33d871925e152e35e428031",
+          "artifact": {
+            "path": "offline_bundle/notices/wasip2-1.0.1+wasi-0.2.4/upstream/LICENSE-MIT",
+            "sha256": "23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3",
+            "bytes": 1023
+          }
+        }
+      ]
+    }
+  ]
+}

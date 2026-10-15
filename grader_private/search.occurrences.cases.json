@@ -1,0 +1,55 @@
+[
+  {
+    "input": {
+      "pattern": "a",
+      "text": ""
+    },
+    "expected": [],
+    "label": "private-edge-0"
+  },
+  {
+    "input": {
+      "pattern": "aa",
+      "text": "aaaaa"
+    },
+    "expected": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "label": "private-edge-1"
+  },
+  {
+    "input": {
+      "pattern": "abc",
+      "text": "ab"
+    },
+    "expected": [],
+    "label": "private-edge-2"
+  },
+  {
+    "input": {
+      "pattern": "x",
+      "text": "xxxyxx"
+    },
+    "expected": [
+      0,
+      1,
+      2,
+      4,
+      5
+    ],
+    "label": "private-edge-3"
+  },
+  {
+    "input": {
+      "pattern": "abc",
+      "text": "abc"
+    },
+    "expected": [
+      0
+    ],
+    "label": "private-edge-4"
+  }
+]

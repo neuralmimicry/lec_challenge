@@ -1,0 +1,34 @@
+[
+  {
+    "input": "a@B",
+    "expected": [
+      "a",
+      "b"
+    ],
+    "label": "private-edge-0"
+  },
+  {
+    "input": "UPPER@lower.test",
+    "expected": [
+      "UPPER",
+      "lower.test"
+    ],
+    "label": "private-edge-1"
+  },
+  {
+    "input": "a.b+tag@EXAMPLE.ORG",
+    "expected": [
+      "a.b+tag",
+      "example.org"
+    ],
+    "label": "private-edge-2"
+  },
+  {
+    "input": "X@Y.Z",
+    "expected": [
+      "X",
+      "y.z"
+    ],
+    "label": "private-edge-3"
+  }
+]

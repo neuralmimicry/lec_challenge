@@ -1,0 +1,13 @@
+# Explicit paths avoid selecting a favourable checkpoint after held-out access.
+# These artifacts are presently absent; the drill reports the exact missing set.
+incumbent_heldout = "reports/incumbent-evaluation/evaluation.json"
+candidate_heldout = "reports/candidate-evaluation/evaluation.json"
+degraded_heldout = "reports/degraded-control-evaluation/evaluation.json"
+overfit_heldout = "reports/overfit-control-evaluation/evaluation.json"
+seed_heldout = "reports/seed-control-evaluation/evaluation.json"
+incumbent_train = "reports/base-train-evaluation/evaluation.json"
+overfit_train = "reports/overfit-train-evaluation/evaluation.json"
+candidate_training_config = "config/training.toml"
+seed_training_config = "config/training-seed-control.toml"
+degraded_training_config = "config/training-degraded-control.toml"
+overfit_training_config = "config/training-overfit-control.toml"

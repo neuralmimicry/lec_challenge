@@ -1,0 +1,542 @@
+{
+  "evidence_kind": "simulation_assumptions_not_measured_learning",
+  "gate_configuration": {
+    "alpha": 0.05,
+    "practical_margin": 0.02,
+    "bootstrap_trials": 10000,
+    "bootstrap_seed": 971031,
+    "evaluation_seeds": [
+      1729,
+      2718,
+      3141
+    ],
+    "minimum_sources": 8,
+    "maximum_source_regression": 0.25,
+    "power_trials": 1000,
+    "power_seed": 851053,
+    "power_target": 0.8
+  },
+  "tested_effects": [
+    0.0,
+    0.05,
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5
+  ],
+  "seed": 851053,
+  "trials": 1000,
+  "sources": 8,
+  "tasks_per_source": 4,
+  "decoding_repeats": 3,
+  "points": [
+    {
+      "effect": 0.0,
+      "discordance": 0.1,
+      "source_correlation": 0.0,
+      "estimated_power": 0.001,
+      "monte_carlo_standard_error": 0.0009994998749374609,
+      "monte_carlo_interval": {
+        "lower": 0.00002531748749131502,
+        "upper": 0.0055589242797793315
+      }
+    },
+    {
+      "effect": 0.05,
+      "discordance": 0.1,
+      "source_correlation": 0.0,
+      "estimated_power": 0.02,
+      "monte_carlo_standard_error": 0.004427188724235731,
+      "monte_carlo_interval": {
+        "lower": 0.012258267972406544,
+        "upper": 0.030720032682520992
+      }
+    },
+    {
+      "effect": 0.1,
+      "discordance": 0.1,
+      "source_correlation": 0.0,
+      "estimated_power": 0.092,
+      "monte_carlo_standard_error": 0.00913980306133562,
+      "monte_carlo_interval": {
+        "lower": 0.07480844517786377,
+        "upper": 0.11163577251831303
+      }
+    },
+    {
+      "effect": 0.0,
+      "discordance": 0.1,
+      "source_correlation": 0.25,
+      "estimated_power": 0.001,
+      "monte_carlo_standard_error": 0.0009994998749374609,
+      "monte_carlo_interval": {
+        "lower": 0.00002531748749131502,
+        "upper": 0.0055589242797793315
+      }
+    },
+    {
+      "effect": 0.05,
+      "discordance": 0.1,
+      "source_correlation": 0.25,
+      "estimated_power": 0.004,
+      "monte_carlo_standard_error": 0.001995995991979944,
+      "monte_carlo_interval": {
+        "lower": 0.0010909079877261202,
+        "upper": 0.010209664683930697
+      }
+    },
+    {
+      "effect": 0.1,
+      "discordance": 0.1,
+      "source_correlation": 0.25,
+      "estimated_power": 0.024,
+      "monte_carlo_standard_error": 0.004839834707921336,
+      "monte_carlo_interval": {
+        "lower": 0.015436383233669831,
+        "upper": 0.035500638531301365
+      }
+    },
+    {
+      "effect": 0.0,
+      "discordance": 0.1,
+      "source_correlation": 0.5,
+      "estimated_power": 0.0,
+      "monte_carlo_standard_error": 0.0,
+      "monte_carlo_interval": {
+        "lower": 0.0,
+        "upper": 0.003682083896864863
+      }
+    },
+    {
+      "effect": 0.05,
+      "discordance": 0.1,
+      "source_correlation": 0.5,
+      "estimated_power": 0.002,
+      "monte_carlo_standard_error": 0.0014127986409959489,
+      "monte_carlo_interval": {
+        "lower": 0.00024230111687805825,
+        "upper": 0.007205838911456208
+      }
+    },
+    {
+      "effect": 0.1,
+      "discordance": 0.1,
+      "source_correlation": 0.5,
+      "estimated_power": 0.01,
+      "monte_carlo_standard_error": 0.003146426544510455,
+      "monte_carlo_interval": {
+        "lower": 0.004805510691049674,
+        "upper": 0.01831324305511195
+      }
+    },
+    {
+      "effect": 0.0,
+      "discordance": 0.3,
+      "source_correlation": 0.0,
+      "estimated_power": 0.015,
+      "monte_carlo_standard_error": 0.003843826218756514,
+      "monte_carlo_interval": {
+        "lower": 0.008419049750034383,
+        "upper": 0.024619700096851327
+      }
+    },
+    {
+      "effect": 0.05,
+      "discordance": 0.3,
+      "source_correlation": 0.0,
+      "estimated_power": 0.032,
+      "monte_carlo_standard_error": 0.005565608681896348,
+      "monte_carlo_interval": {
+        "lower": 0.02198884960570945,
+        "upper": 0.04487590283497922
+      }
+    },
+    {
+      "effect": 0.1,
+      "discordance": 0.3,
+      "source_correlation": 0.0,
+      "estimated_power": 0.09,
+      "monte_carlo_standard_error": 0.009049861877399014,
+      "monte_carlo_interval": {
+        "lower": 0.07299046645662641,
+        "upper": 0.10946657313833585
+      }
+    },
+    {
+      "effect": 0.2,
+      "discordance": 0.3,
+      "source_correlation": 0.0,
+      "estimated_power": 0.396,
+      "monte_carlo_standard_error": 0.01546557467409472,
+      "monte_carlo_interval": {
+        "lower": 0.3655323406437469,
+        "upper": 0.4270818445488682
+      }
+    },
+    {
+      "effect": 0.3,
+      "discordance": 0.3,
+      "source_correlation": 0.0,
+      "estimated_power": 0.907,
+      "monte_carlo_standard_error": 0.009184280047995052,
+      "monte_carlo_interval": {
+        "lower": 0.887280582298849,
+        "upper": 0.9242815973931273
+      }
+    },
+    {
+      "effect": 0.0,
+      "discordance": 0.3,
+      "source_correlation": 0.25,
+      "estimated_power": 0.009,
+      "monte_carlo_standard_error": 0.002986469487538756,
+      "monte_carlo_interval": {
+        "lower": 0.0041233956603429715,
+        "upper": 0.01701578306989382
+      }
+    },
+    {
+      "effect": 0.05,
+      "discordance": 0.3,
+      "source_correlation": 0.25,
+      "estimated_power": 0.031,
+      "monte_carlo_standard_error": 0.0054807846153630225,
+      "monte_carlo_interval": {
+        "lower": 0.02115817197028227,
+        "upper": 0.04371508500620813
+      }
+    },
+    {
+      "effect": 0.1,
+      "discordance": 0.3,
+      "source_correlation": 0.25,
+      "estimated_power": 0.062,
+      "monte_carlo_standard_error": 0.007626008130076967,
+      "monte_carlo_interval": {
+        "lower": 0.04786184811337265,
+        "upper": 0.07877994966102309
+      }
+    },
+    {
+      "effect": 0.2,
+      "discordance": 0.3,
+      "source_correlation": 0.25,
+      "estimated_power": 0.233,
+      "monte_carlo_standard_error": 0.013368283360252356,
+      "monte_carlo_interval": {
+        "lower": 0.20711600666527147,
+        "upper": 0.2604659791245214
+      }
+    },
+    {
+      "effect": 0.3,
+      "discordance": 0.3,
+      "source_correlation": 0.25,
+      "estimated_power": 0.627,
+      "monte_carlo_standard_error": 0.015292841462592882,
+      "monte_carlo_interval": {
+        "lower": 0.59618784240187,
+        "upper": 0.6570619651881666
+      }
+    },
+    {
+      "effect": 0.0,
+      "discordance": 0.3,
+      "source_correlation": 0.5,
+      "estimated_power": 0.006,
+      "monte_carlo_standard_error": 0.002442130217658346,
+      "monte_carlo_interval": {
+        "lower": 0.002204982485150942,
+        "upper": 0.013013423270973323
+      }
+    },
+    {
+      "effect": 0.05,
+      "discordance": 0.3,
+      "source_correlation": 0.5,
+      "estimated_power": 0.023,
+      "monte_carlo_standard_error": 0.004740358636221525,
+      "monte_carlo_interval": {
+        "lower": 0.014634582325363004,
+        "upper": 0.034312337612793176
+      }
+    },
+    {
+      "effect": 0.1,
+      "discordance": 0.3,
+      "source_correlation": 0.5,
+      "estimated_power": 0.045,
+      "monte_carlo_standard_error": 0.0065555320150236475,
+      "monte_carlo_interval": {
+        "lower": 0.0330096254311744,
+        "upper": 0.05975283269339515
+      }
+    },
+    {
+      "effect": 0.2,
+      "discordance": 0.3,
+      "source_correlation": 0.5,
+      "estimated_power": 0.179,
+      "monte_carlo_standard_error": 0.01212266472356635,
+      "monte_carlo_interval": {
+        "lower": 0.1557127345579273,
+        "upper": 0.20419391015831223
+      }
+    },
+    {
+      "effect": 0.3,
+      "discordance": 0.3,
+      "source_correlation": 0.5,
+      "estimated_power": 0.396,
+      "monte_carlo_standard_error": 0.01546557467409472,
+      "monte_carlo_interval": {
+        "lower": 0.3655323406437469,
+        "upper": 0.4270818445488682
+      }
+    },
+    {
+      "effect": 0.0,
+      "discordance": 0.5,
+      "source_correlation": 0.0,
+      "estimated_power": 0.017,
+      "monte_carlo_standard_error": 0.004087909000944126,
+      "monte_carlo_interval": {
+        "lower": 0.009933512592717332,
+        "upper": 0.02707949686471578
+      }
+    },
+    {
+      "effect": 0.05,
+      "discordance": 0.5,
+      "source_correlation": 0.0,
+      "estimated_power": 0.037,
+      "monte_carlo_standard_error": 0.005969170796685248,
+      "monte_carlo_interval": {
+        "lower": 0.02618270884378204,
+        "upper": 0.05064112305990387
+      }
+    },
+    {
+      "effect": 0.1,
+      "discordance": 0.5,
+      "source_correlation": 0.0,
+      "estimated_power": 0.073,
+      "monte_carlo_standard_error": 0.008226238508577295,
+      "monte_carlo_interval": {
+        "lower": 0.05765362522793835,
+        "upper": 0.09091417539449531
+      }
+    },
+    {
+      "effect": 0.2,
+      "discordance": 0.5,
+      "source_correlation": 0.0,
+      "estimated_power": 0.265,
+      "monte_carlo_standard_error": 0.013956181426163821,
+      "monte_carlo_interval": {
+        "lower": 0.23787137789370535,
+        "upper": 0.29351959120427784
+      }
+    },
+    {
+      "effect": 0.3,
+      "discordance": 0.5,
+      "source_correlation": 0.0,
+      "estimated_power": 0.565,
+      "monte_carlo_standard_error": 0.015677212762477903,
+      "monte_carlo_interval": {
+        "lower": 0.5336196136786977,
+        "upper": 0.5959966293684229
+      }
+    },
+    {
+      "effect": 0.4,
+      "discordance": 0.5,
+      "source_correlation": 0.0,
+      "estimated_power": 0.855,
+      "monte_carlo_standard_error": 0.011134406135937382,
+      "monte_carlo_interval": {
+        "lower": 0.8316336779080733,
+        "upper": 0.8762527827282388
+      }
+    },
+    {
+      "effect": 0.5,
+      "discordance": 0.5,
+      "source_correlation": 0.0,
+      "estimated_power": 0.998,
+      "monte_carlo_standard_error": 0.0014127986409959495,
+      "monte_carlo_interval": {
+        "lower": 0.9927941610885438,
+        "upper": 0.9997576988831219
+      }
+    },
+    {
+      "effect": 0.0,
+      "discordance": 0.5,
+      "source_correlation": 0.25,
+      "estimated_power": 0.012,
+      "monte_carlo_standard_error": 0.003443254274665175,
+      "monte_carlo_interval": {
+        "lower": 0.006215525559596003,
+        "upper": 0.02086767959103475
+      }
+    },
+    {
+      "effect": 0.05,
+      "discordance": 0.5,
+      "source_correlation": 0.25,
+      "estimated_power": 0.034,
+      "monte_carlo_standard_error": 0.005730968504537431,
+      "monte_carlo_interval": {
+        "lower": 0.02365864810765342,
+        "upper": 0.04718943861568081
+      }
+    },
+    {
+      "effect": 0.1,
+      "discordance": 0.5,
+      "source_correlation": 0.25,
+      "estimated_power": 0.062,
+      "monte_carlo_standard_error": 0.007626008130076967,
+      "monte_carlo_interval": {
+        "lower": 0.04786184811337265,
+        "upper": 0.07877994966102309
+      }
+    },
+    {
+      "effect": 0.2,
+      "discordance": 0.5,
+      "source_correlation": 0.25,
+      "estimated_power": 0.185,
+      "monte_carlo_standard_error": 0.012279047194306243,
+      "monte_carlo_interval": {
+        "lower": 0.1613889981787859,
+        "upper": 0.21048137777334375
+      }
+    },
+    {
+      "effect": 0.3,
+      "discordance": 0.5,
+      "source_correlation": 0.25,
+      "estimated_power": 0.385,
+      "monte_carlo_standard_error": 0.015387494922826133,
+      "monte_carlo_interval": {
+        "lower": 0.3547175030177355,
+        "upper": 0.4159617164035897
+      }
+    },
+    {
+      "effect": 0.4,
+      "discordance": 0.5,
+      "source_correlation": 0.25,
+      "estimated_power": 0.68,
+      "monte_carlo_standard_error": 0.014751271131668619,
+      "monte_carlo_interval": {
+        "lower": 0.65008961814714,
+        "upper": 0.7088462891186463
+      }
+    },
+    {
+      "effect": 0.5,
+      "discordance": 0.5,
+      "source_correlation": 0.25,
+      "estimated_power": 0.984,
+      "monte_carlo_standard_error": 0.00396787096564392,
+      "monte_carlo_interval": {
+        "lower": 0.974146750918787,
+        "upper": 0.9908276807307771
+      }
+    },
+    {
+      "effect": 0.0,
+      "discordance": 0.5,
+      "source_correlation": 0.5,
+      "estimated_power": 0.022,
+      "monte_carlo_standard_error": 0.0046385342512479085,
+      "monte_carlo_interval": {
+        "lower": 0.013837414172290759,
+        "upper": 0.03311966451491821
+      }
+    },
+    {
+      "effect": 0.05,
+      "discordance": 0.5,
+      "source_correlation": 0.5,
+      "estimated_power": 0.028,
+      "monte_carlo_standard_error": 0.005216895628628198,
+      "monte_carlo_interval": {
+        "lower": 0.01868468619563771,
+        "upper": 0.04021488737380374
+      }
+    },
+    {
+      "effect": 0.1,
+      "discordance": 0.5,
+      "source_correlation": 0.5,
+      "estimated_power": 0.059,
+      "monte_carlo_standard_error": 0.007451107300260815,
+      "monte_carlo_interval": {
+        "lower": 0.0452133544028109,
+        "upper": 0.07544907308423388
+      }
+    },
+    {
+      "effect": 0.2,
+      "discordance": 0.5,
+      "source_correlation": 0.5,
+      "estimated_power": 0.131,
+      "monte_carlo_standard_error": 0.010669536072388528,
+      "monte_carlo_interval": {
+        "lower": 0.1106984610312228,
+        "upper": 0.15350117040014988
+      }
+    },
+    {
+      "effect": 0.3,
+      "discordance": 0.5,
+      "source_correlation": 0.5,
+      "estimated_power": 0.287,
+      "monte_carlo_standard_error": 0.01430492922037715,
+      "monte_carlo_interval": {
+        "lower": 0.25912420282271476,
+        "upper": 0.3161358360754728
+      }
+    },
+    {
+      "effect": 0.4,
+      "discordance": 0.5,
+      "source_correlation": 0.5,
+      "estimated_power": 0.523,
+      "monte_carlo_standard_error": 0.01579465099329517,
+      "monte_carlo_interval": {
+        "lower": 0.4915140103158732,
+        "upper": 0.55435021968353
+      }
+    },
+    {
+      "effect": 0.5,
+      "discordance": 0.5,
+      "source_correlation": 0.5,
+      "estimated_power": 0.875,
+      "monte_carlo_standard_error": 0.010458250331675944,
+      "monte_carlo_interval": {
+        "lower": 0.8528930172212336,
+        "upper": 0.894870238445404
+      }
+    }
+  ],
+  "mde_by_assumption": {
+    "discordance=0.10, correlation=0.00": null,
+    "discordance=0.10, correlation=0.25": null,
+    "discordance=0.10, correlation=0.50": null,
+    "discordance=0.30, correlation=0.00": 0.3,
+    "discordance=0.30, correlation=0.25": null,
+    "discordance=0.30, correlation=0.50": null,
+    "discordance=0.50, correlation=0.00": 0.4,
+    "discordance=0.50, correlation=0.25": 0.5,
+    "discordance=0.50, correlation=0.50": 0.5
+  },
+  "interpretation": "MDE is the first tested effect reaching 80% power, not an interpolated precision claim; null means MDE above tested range or unachievable at the specified discordance. Includes the exact reported t/bootstrap/slice gate configuration, with maximally shared seed outcomes; reduced settings are diagnostic, not the final predeclared MDE. Task/source dependence assumptions require development calibration and sensitivity review."
+}

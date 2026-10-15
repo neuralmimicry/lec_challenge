@@ -1,0 +1,68 @@
+[
+  {
+    "input": {
+      "size": 3,
+      "values": []
+    },
+    "expected": [],
+    "label": "private-edge-0"
+  },
+  {
+    "input": {
+      "size": 1,
+      "values": [
+        1,
+        2
+      ]
+    },
+    "expected": [
+      [
+        1
+      ],
+      [
+        2
+      ]
+    ],
+    "label": "private-edge-1"
+  },
+  {
+    "input": {
+      "size": 9,
+      "values": [
+        0,
+        -1,
+        2
+      ]
+    },
+    "expected": [
+      [
+        0,
+        -1,
+        2
+      ]
+    ],
+    "label": "private-edge-2"
+  },
+  {
+    "input": {
+      "size": 2,
+      "values": [
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    "expected": [
+      [
+        1,
+        2
+      ],
+      [
+        3,
+        4
+      ]
+    ],
+    "label": "private-edge-3"
+  }
+]

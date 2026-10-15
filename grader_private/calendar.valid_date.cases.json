@@ -1,0 +1,65 @@
+[
+  {
+    "input": [
+      0,
+      1,
+      1
+    ],
+    "expected": false,
+    "label": "private-edge-0"
+  },
+  {
+    "input": [
+      10000,
+      1,
+      1
+    ],
+    "expected": false,
+    "label": "private-edge-1"
+  },
+  {
+    "input": [
+      2000,
+      2,
+      29
+    ],
+    "expected": true,
+    "label": "private-edge-2"
+  },
+  {
+    "input": [
+      1900,
+      2,
+      29
+    ],
+    "expected": false,
+    "label": "private-edge-3"
+  },
+  {
+    "input": [
+      2023,
+      0,
+      2
+    ],
+    "expected": false,
+    "label": "private-edge-4"
+  },
+  {
+    "input": [
+      2023,
+      4,
+      31
+    ],
+    "expected": false,
+    "label": "private-edge-5"
+  },
+  {
+    "input": [
+      2023,
+      12,
+      0
+    ],
+    "expected": false,
+    "label": "private-edge-6"
+  }
+]

@@ -1,0 +1,226 @@
+[
+  {
+    "task_id": "geometry.box",
+    "source_id": "private-geometry-v1",
+    "lineage_id": "local-contract-pack-16",
+    "specification": "Input is an array of integer [x,y] points. Return [min_x,min_y,max_x,max_y], or null when empty.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "4c9903b5930302cf7e6463f3739d9027f932c1b65a58c8d674ed2e61bcc339d0"
+  },
+  {
+    "task_id": "geometry.manhattan",
+    "source_id": "private-geometry-v1",
+    "lineage_id": "local-contract-pack-16",
+    "specification": "Input is an array of integer [x,y] points. Return each point's Manhattan distance from the origin in input order.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "65cb9964ce92a505793f8072ee0fd909d31d239244a36cf27d7e6b4bcd9229f5"
+  },
+  {
+    "task_id": "geometry.area2",
+    "source_id": "private-geometry-v1",
+    "lineage_id": "local-contract-pack-16",
+    "specification": "Input is an array of integer polygon vertices in boundary order, at least three vertices. Return signed twice-area by shoelace; counter-clockwise is positive.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "bfed91abef97a0927f1c885a33bd6c3ef049b10b321fe76aba48b48d847f3061"
+  },
+  {
+    "task_id": "geometry.quadrants",
+    "source_id": "private-geometry-v1",
+    "lineage_id": "local-contract-pack-16",
+    "specification": "Input is an array of integer [x,y] points. Return counts [QI,QII,QIII,QIV,axis], treating either coordinate zero as axis.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "4f102df697e40ae6320ad617cc381b3d7b69159b5601a1eef499446066fe72ce"
+  },
+  {
+    "task_id": "statistics.median2",
+    "source_id": "private-statistics-v1",
+    "lineage_id": "local-contract-pack-17",
+    "specification": "Input is a nonempty integer array. Return twice the mathematical median; for even length use the sum of the two central sorted values.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "78b110b7e1adc76c50f61298ce9e46c0eccf89fb980f3cf36ab56fee3d0ddbe2"
+  },
+  {
+    "task_id": "statistics.mode",
+    "source_id": "private-statistics-v1",
+    "lineage_id": "local-contract-pack-17",
+    "specification": "Input is a nonempty integer array. Return its most frequent value, choosing the smallest on ties.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "11d2e8eaf9c25b42d6c82458660e362f5137cbb30c305323dc3c8a81649fa832"
+  },
+  {
+    "task_id": "statistics.ranks",
+    "source_id": "private-statistics-v1",
+    "lineage_id": "local-contract-pack-17",
+    "specification": "Input is an integer array. Return dense ascending ranks starting at one for each original element; equal values share a rank.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "d067718bf34f97db297654b58b9ae8275b9731cbcef715a95b5f6b9ba89cfa81"
+  },
+  {
+    "task_id": "statistics.quantile",
+    "source_id": "private-statistics-v1",
+    "lineage_id": "local-contract-pack-17",
+    "specification": "Input {values,p} has nonempty integer values and integer percentile p in 1..100. Return the nearest-rank quantile at sorted index ceil(p*n/100)-1.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "83092344da1bac953e4e7429d5f97da505eeb0debb97522f402bd73ee5a56bb5"
+  },
+  {
+    "task_id": "sets.intersection",
+    "source_id": "private-sets-v1",
+    "lineage_id": "local-contract-pack-18",
+    "specification": "Input [a,b] has integer arrays representing sets (duplicates permitted). Return their intersection sorted ascending with no duplicates.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "2e85dff50ed8b02441440ff4bcab459dceb3441145b43eb11ad46d42538a8696"
+  },
+  {
+    "task_id": "sets.symmetric",
+    "source_id": "private-sets-v1",
+    "lineage_id": "local-contract-pack-18",
+    "specification": "Input [a,b] has integer arrays representing sets. Return values in exactly one set, sorted ascending without duplicates. The returned array may contain up to 128 items.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "08073c95dac0d61ac0ca302eca08bf6badf91acdbc86d47a8625ed2be2fbea4c"
+  },
+  {
+    "task_id": "sets.jaccard",
+    "source_id": "private-sets-v1",
+    "lineage_id": "local-contract-pack-18",
+    "specification": "Input [a,b] has integer arrays representing sets. Return reduced integer fraction [intersection_size,union_size]; two empty sets have similarity [1,1].\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "462da508c46b0d3341f9f6b3a6f683d0300a088ed94b487988f875c2f968d57e"
+  },
+  {
+    "task_id": "sets.subset",
+    "source_id": "private-sets-v1",
+    "lineage_id": "local-contract-pack-18",
+    "specification": "Input [a,b] has integer arrays representing sets. Return whether every distinct value in a occurs in b.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "da0ec903d1966302f59d1c7f7741405b70593e94e7bfc56feb0adccca66f2e4e"
+  },
+  {
+    "task_id": "rational.reduce",
+    "source_id": "private-rational-v1",
+    "lineage_id": "local-contract-pack-19",
+    "specification": "Input [numerator,denominator] has denominator nonzero. Return reduced fraction with positive denominator; zero is [0,1]. Magnitudes <=10000.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "5acce84982f7dd67673aa380ca1fd7a2627af67e789da881781a4e84e48ee3ea"
+  },
+  {
+    "task_id": "rational.add",
+    "source_id": "private-rational-v1",
+    "lineage_id": "local-contract-pack-19",
+    "specification": "Input [[a,b],[c,d]] contains two fractions with nonzero denominators. Return their sum reduced with positive denominator. Magnitudes <=1000.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "e3f484fc6a69d96a65e2b8baa11312322aebd5ca83406a634cb424144489ed83"
+  },
+  {
+    "task_id": "rational.compare",
+    "source_id": "private-rational-v1",
+    "lineage_id": "local-contract-pack-19",
+    "specification": "Input [[a,b],[c,d]] contains fractions with nonzero denominators. Return -1,0,1 according as the first is less/equal/greater. Magnitudes <=1000.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "ee5d98f9f60c6e21b7e6d97efdf0d7be9e8d745324614b22730aa5eee5dd764a"
+  },
+  {
+    "task_id": "rational.reciprocal",
+    "source_id": "private-rational-v1",
+    "lineage_id": "local-contract-pack-19",
+    "specification": "Input [numerator,denominator] with denominator nonzero. Return the reciprocal in reduced form with positive denominator, or null for zero numerator.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "f1d21e7feade20e34ac5817d4340b2eb9fa309e4ebaa926ff5ef4db860db3dfb"
+  },
+  {
+    "task_id": "messages.headers",
+    "source_id": "private-messages-v1",
+    "lineage_id": "local-contract-pack-20",
+    "specification": "Input is an array of ASCII header lines. Every line has a colon. Split at the first colon; trim ASCII whitespace; lowercase name; return object of arrays of trimmed values in input order per name.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "4464509041d3fbc2b099a3a94ac8ad72b065c46a4465154b0f667ee9d2d086a4"
+  },
+  {
+    "task_id": "messages.address",
+    "source_id": "private-messages-v1",
+    "lineage_id": "local-contract-pack-20",
+    "specification": "Input is an ASCII string with exactly one @ and nonempty sides. Return [unchanged local part,lowercase domain].\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "666a1ba9ced4c5d0d2ac1a572e9bef71684ebdde111813571cd4103f892f574a"
+  },
+  {
+    "task_id": "messages.hashtags",
+    "source_id": "private-messages-v1",
+    "lineage_id": "local-contract-pack-20",
+    "specification": "Input is ASCII text. A hashtag is # followed by one or more ASCII letters/digits/underscores. Return lowercase hashtag bodies in first-seen order, without duplicates. The returned array may contain up to 128 items.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "b3b7b5e4149529116b438552953400714754616a144b4afdc436d766da734804"
+  },
+  {
+    "task_id": "messages.wrap",
+    "source_id": "private-messages-v1",
+    "lineage_id": "local-contract-pack-20",
+    "specification": "Input {text,width} has ASCII-whitespace-separated words each no longer than positive width. Greedily fit words on lines with single spaces. Return an array of lines; blank text yields []. The returned array may contain up to 128 items.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "34ac3ebfa6314fbd5f2b349a501adda6007eb0c0d10b0fa0591a4713f154764a"
+  },
+  {
+    "task_id": "automata.divisible3",
+    "source_id": "private-automata-v1",
+    "lineage_id": "local-contract-pack-21",
+    "specification": "Input is a nonempty binary digit string (leading zeros allowed). Return whether its nonnegative value is divisible by three, without fixed-width overflow.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "e69280b23bbc9f979dbb722c91a04fa27bdd150b7356b37fc1304675f9264f74"
+  },
+  {
+    "task_id": "automata.balanced_prefix",
+    "source_id": "private-automata-v1",
+    "lineage_id": "local-contract-pack-21",
+    "specification": "Input is a string containing only ( and ). Return the length of the longest prefix that is well-formed parentheses, or zero; once a prefix has negative balance no longer prefix is valid.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "4fc06e87a8fdcbf590c7b45f07c028c7827a30cb8e016bed213096bc28b3ef41"
+  },
+  {
+    "task_id": "automata.classes",
+    "source_id": "private-automata-v1",
+    "lineage_id": "local-contract-pack-21",
+    "specification": "Input is an ASCII string. Count [uppercase,lowercase,digits,ASCII_whitespace,other]. Every character contributes to exactly one category.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "807925749f98f12a8f7168e7d415010b6ce392c34f9d368085fece9826415c60"
+  },
+  {
+    "task_id": "automata.transitions",
+    "source_id": "private-automata-v1",
+    "lineage_id": "local-contract-pack-21",
+    "specification": "Input is a binary string. Return [count_00,count_01,count_10,count_11] across adjacent pairs, including overlaps.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "968aab2c549ff8be9207ee510a527defc37ced1d5fa554c828b33620a575d82d"
+  },
+  {
+    "task_id": "transactions.balance",
+    "source_id": "private-transactions-v1",
+    "lineage_id": "local-contract-pack-22",
+    "specification": "Input {initial,deltas} has integer initial balance and integer transaction deltas. Return final balance.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "c87cd21421a6760f845bbab1060079ef85043ebce7ece99afd981bb77f6af1a0"
+  },
+  {
+    "task_id": "transactions.running_min",
+    "source_id": "private-transactions-v1",
+    "lineage_id": "local-contract-pack-22",
+    "specification": "Input {initial,deltas} contains an initial balance and deltas. Return minimum balance observed, including the initial state.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "4efd9386711b9318def78644ed373e7fdfa7457ed2a6ac5cde16c4148eb4ecd1"
+  },
+  {
+    "task_id": "transactions.first_overdraft",
+    "source_id": "private-transactions-v1",
+    "lineage_id": "local-contract-pack-22",
+    "specification": "Input {initial,deltas} has nonnegative initial and integer deltas. Return zero-based index of first transaction after which balance is negative, or -1.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "77978610b28cd2cddaa51e13b98ea61f4750b8a6a5db4767c6f92e58f6a17fd5"
+  },
+  {
+    "task_id": "transactions.settle",
+    "source_id": "private-transactions-v1",
+    "lineage_id": "local-contract-pack-22",
+    "specification": "Input is an array of [from,to,amount] with integer account IDs and nonnegative amount. Return sorted [account,net_change] including every mentioned account; subtract from sender and add to recipient. The returned array may contain up to 128 items.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "e66b51cbfc76a83cc421b8374595f4816e88765798b1dc64c1d1c59953223655"
+  },
+  {
+    "task_id": "ranges.expand",
+    "source_id": "private-ranges-v1",
+    "lineage_id": "local-contract-pack-23",
+    "specification": "Input is an array of inclusive integer [start,end] ranges, start<=end and total expansion <=256. Return sorted union of represented integers without duplicates. The returned array may contain up to 256 integers.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "c3f67de92fef1dbcbcb044b75b4b99d52fb79a9ce0140398a8dd8e561d843c95"
+  },
+  {
+    "task_id": "ranges.compress",
+    "source_id": "private-ranges-v1",
+    "lineage_id": "local-contract-pack-23",
+    "specification": "Input is an integer array. Sort/deduplicate and return maximal inclusive consecutive ranges [start,end].\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "802143a518baef9b9010ce7ccb49bc5c51455b6402e9c8c9574339cd2da3fcd4"
+  },
+  {
+    "task_id": "ranges.missing",
+    "source_id": "private-ranges-v1",
+    "lineage_id": "local-contract-pack-23",
+    "specification": "Input {values,low,high} has integers with low<=high and high-low<=256. Return every integer in inclusive bounds absent from values, ascending. The returned array may contain up to 257 integers.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "440c484ede034af61f11cac30bcbf5d6f7c6098c3fcf4efb5a51669405857e76"
+  },
+  {
+    "task_id": "ranges.kth",
+    "source_id": "private-ranges-v1",
+    "lineage_id": "local-contract-pack-23",
+    "specification": "Input {values,k} has an integer array and positive one-based k. Return the kth smallest distinct value, or null when too few distinct values.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "bed8c1fec74758da258df619c5bd48a6f8a1d6443c213434873c9726e15b3332"
+  }
+]

@@ -1,0 +1,93 @@
+# This is a disabled roster, not evidence of account/model/rights clearance.
+# Prices are deliberately absent; no assumed rate can authorise a paid call.
+max_parallel_tasks = 4
+
+[budgets]
+round_nanos = 20000000000
+ task_nanos = 250000000
+provider_nanos = 10000000000
+model_nanos = 10000000000
+
+[[providers]]
+id = "deepseek"
+business_id = "deepseek"
+enabled = false
+endpoint = "https://api.deepseek.com/chat/completions"
+api_key_environment = "DEEPSEEK_API_KEY"
+model = "UNRESOLVED_PIN_LIVE_MODEL"
+model_revision = "UNRESOLVED_PROVIDER_REVISION_POLICY"
+timeout_seconds = 60
+requests_per_minute = 10
+tokens_per_minute = 100000
+concurrency = 2
+max_input_tokens = 8192
+max_output_tokens = 2048
+output_cap_parameter = "max_tokens"
+output_cap_includes_reasoning = false
+max_response_bytes = 1048576
+retries = 1
+circuit_breaker_failures = 2
+circuit_breaker_seconds = 30
+failover = ["together", "mistral"]
+[providers.permission]
+approved_for_output_training = false
+decision_id = "UNRESOLVED_MODEL_ACCOUNT_DECISION"
+reviewed_at = ""
+evidence_sha256 = ""
+model_licence = ""
+
+[[providers]]
+id = "together"
+business_id = "together-ai"
+enabled = false
+endpoint = "https://api.together.xyz/v1/chat/completions"
+api_key_environment = "TOGETHER_API_KEY"
+model = "UNRESOLVED_PIN_LIVE_MODEL_AND_LICENCE"
+model_revision = "UNRESOLVED_PROVIDER_REVISION_POLICY"
+timeout_seconds = 60
+requests_per_minute = 10
+tokens_per_minute = 100000
+concurrency = 2
+max_input_tokens = 8192
+max_output_tokens = 2048
+output_cap_parameter = "max_tokens"
+output_cap_includes_reasoning = false
+max_response_bytes = 1048576
+retries = 1
+circuit_breaker_failures = 2
+circuit_breaker_seconds = 30
+failover = ["mistral", "deepseek"]
+[providers.permission]
+approved_for_output_training = false
+decision_id = "UNRESOLVED_MODEL_ACCOUNT_DECISION"
+reviewed_at = ""
+evidence_sha256 = ""
+model_licence = ""
+
+[[providers]]
+id = "mistral"
+business_id = "mistral-ai"
+enabled = false
+endpoint = "https://api.mistral.ai/v1/chat/completions"
+api_key_environment = "MISTRAL_API_KEY"
+model = "UNRESOLVED_PIN_LIVE_MODEL"
+model_revision = "UNRESOLVED_PROVIDER_REVISION_POLICY"
+timeout_seconds = 60
+requests_per_minute = 10
+tokens_per_minute = 100000
+concurrency = 2
+max_input_tokens = 8192
+max_output_tokens = 2048
+output_cap_parameter = "max_tokens"
+output_cap_includes_reasoning = false
+max_response_bytes = 1048576
+retries = 1
+circuit_breaker_failures = 2
+circuit_breaker_seconds = 30
+failover = ["deepseek", "together"]
+[providers.permission]
+approved_for_output_training = false
+decision_id = "UNRESOLVED_MODEL_ACCOUNT_DECISION"
+reviewed_at = ""
+evidence_sha256 = ""
+model_licence = ""

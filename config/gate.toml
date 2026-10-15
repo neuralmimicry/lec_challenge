@@ -1,0 +1,11 @@
+# Freeze before confirmatory held-out access. Source groups are the sampling units.
+alpha = 0.05
+practical_margin = 0.02
+bootstrap_trials = 10000
+bootstrap_seed = 971031
+evaluation_seeds = [1729, 2718, 3141]
+minimum_sources = 8
+maximum_source_regression = 0.25
+power_trials = 1000
+power_seed = 851053
+power_target = 0.80

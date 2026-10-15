@@ -1,0 +1,39 @@
+[
+  {
+    "input": "",
+    "expected": [],
+    "label": "private-edge-0"
+  },
+  {
+    "input": "fF01",
+    "expected": [
+      255,
+      1
+    ],
+    "label": "private-edge-1"
+  },
+  {
+    "input": "a",
+    "expected": null,
+    "label": "private-edge-2"
+  },
+  {
+    "input": "xz",
+    "expected": null,
+    "label": "private-edge-3"
+  },
+  {
+    "input": "01 2",
+    "expected": null,
+    "label": "private-edge-4"
+  },
+  {
+    "input": "abcdef",
+    "expected": [
+      171,
+      205,
+      239
+    ],
+    "label": "private-edge-5"
+  }
+]

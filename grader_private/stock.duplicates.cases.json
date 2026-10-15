@@ -1,0 +1,56 @@
+[
+  {
+    "input": [],
+    "expected": [],
+    "label": "private-edge-0"
+  },
+  {
+    "input": [
+      "z"
+    ],
+    "expected": [],
+    "label": "private-edge-1"
+  },
+  {
+    "input": [
+      "",
+      "a",
+      "",
+      "b",
+      "a"
+    ],
+    "expected": [
+      "",
+      "a"
+    ],
+    "label": "private-edge-2"
+  },
+  {
+    "input": [
+      "Z",
+      "a",
+      "Z",
+      "a"
+    ],
+    "expected": [
+      "Z",
+      "a"
+    ],
+    "label": "private-edge-3"
+  },
+  {
+    "input": [
+      "x",
+      "x",
+      "x",
+      "y",
+      "z",
+      "y"
+    ],
+    "expected": [
+      "x",
+      "y"
+    ],
+    "label": "private-edge-4"
+  }
+]

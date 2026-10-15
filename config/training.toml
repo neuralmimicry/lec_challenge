@@ -1,0 +1,13 @@
+# Fixed before sealed evaluation. Seed control uses 1702 with all other settings identical.
+purpose = "candidate"
+seed = 1701
+steps = 48
+max_sequence_tokens = 512
+rank = 8
+alpha = 16.0
+learning_rate = 0.0002
+beta1 = 0.9
+beta2 = 0.999
+epsilon = 0.00000001
+weight_decay = 0.01
+max_gradient_norm = 1.0

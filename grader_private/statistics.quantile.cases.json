@@ -1,0 +1,64 @@
+[
+  {
+    "input": {
+      "p": 1,
+      "values": [
+        7
+      ]
+    },
+    "expected": 7,
+    "label": "private-edge-0"
+  },
+  {
+    "input": {
+      "p": 1,
+      "values": [
+        4,
+        3,
+        2,
+        1
+      ]
+    },
+    "expected": 1,
+    "label": "private-edge-1"
+  },
+  {
+    "input": {
+      "p": 100,
+      "values": [
+        4,
+        3,
+        2,
+        1
+      ]
+    },
+    "expected": 4,
+    "label": "private-edge-2"
+  },
+  {
+    "input": {
+      "p": 50,
+      "values": [
+        1,
+        2,
+        3
+      ]
+    },
+    "expected": 2,
+    "label": "private-edge-3"
+  },
+  {
+    "input": {
+      "p": 80,
+      "values": [
+        -5,
+        -2,
+        0,
+        0,
+        9
+      ]
+    },
+    "expected": 0,
+    "label": "private-edge-4"
+  }
+]

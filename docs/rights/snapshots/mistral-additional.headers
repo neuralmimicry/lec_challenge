@@ -1,0 +1,15 @@
+HTTP/2 200 
+accept-ranges: bytes
+age: 5034
+cache-control: public,max-age=0,must-revalidate
+cache-status: "Netlify Edge"; hit; ttl=31530967
+content-security-policy: default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline'; frame-src *; style-src 'self' 'unsafe-inline'; img-src * blob: data:; media-src *; connect-src *; font-src 'self' data:; form-action 'self'; frame-ancestors 'self' https://legal.mistral.ai https://legal-center-v2.netlify.app; upgrade-insecure-requests;
+content-type: text/html; charset=UTF-8
+date: Thu, 15 Oct 2026 08:39:47 GMT
+etag: "521e365f0b1599b6a0d842a1657dba63-ssl"
+server: Netlify
+strict-transport-security: max-age=31536000
+vary: Accept-Encoding
+x-nf-request-id: 01M4ZBFBPGCAJ5XVSM2S8E729Z
+content-length: 221801
+

@@ -1,0 +1,13 @@
+{
+  "retrieved_utc": "2026-10-15T08:39:52Z",
+  "timestamp_semantics": "local completion timestamp immediately following successful parallel public-document retrieval",
+  "documents": [
+    {"file":"deepseek-terms.html","url":"https://cdn.deepseek.com/policies/en-US/deepseek-open-platform-terms-of-service.html","http_status":200,"bytes":33904,"sha256":"2b433c53cbac75491959025eba5a27908f9f1886352dce0a05f3d5a936d87790"},
+    {"file":"together-terms.html","url":"https://www.together.ai/terms-of-service","http_status":200,"bytes":322261,"sha256":"7436ea36b68330caefd2fb6bef754b1aa2c64add086a25d342e7f14024b8cbb5"},
+    {"file":"mistral-commercial.html","url":"https://legal.mistral.ai/terms/commercial-terms-of-service/","http_status":200,"bytes":240090,"sha256":"329171653dcd00befe40355a6978785066f226187a97beea3b7a80fe5f3d8f8f"},
+    {"file":"mistral-additional.html","url":"https://legal.mistral.ai/terms/additional-terms/","http_status":200,"bytes":221801,"sha256":"427140b5e3ffd639605e6a40f379088b3cd0f9c009b5b1e5726f56807afea6cb"},
+    {"file":"qwen-licence.html","url":"https://huggingface.co/Qwen/Qwen2.5-Coder-0.5B-Instruct/raw/main/LICENSE","http_status":200,"bytes":11343,"sha256":"832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e"}
+  ],
+  "provider_training_clearance": "unresolved; all providers remain disabled",
+  "prices_and_live_model_ids": "unresolved; no paid calls authorised or made"
+}

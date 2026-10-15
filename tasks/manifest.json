@@ -1,0 +1,8 @@
+{
+  "tasks": 96,
+  "train": 48,
+  "development": 16,
+  "held_out": 32,
+  "sources": 24,
+  "corpus_sha256": "a52104fe09a8bba2a4a1834d101404f6b6a6e2fb224897961615e3dc251a92d1"
+}

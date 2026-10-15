@@ -1,0 +1,27 @@
+[
+  {
+    "input": "/",
+    "expected": "/",
+    "label": "private-edge-0"
+  },
+  {
+    "input": "////",
+    "expected": "/",
+    "label": "private-edge-1"
+  },
+  {
+    "input": "/a",
+    "expected": "a",
+    "label": "private-edge-2"
+  },
+  {
+    "input": "/a/..",
+    "expected": "..",
+    "label": "private-edge-3"
+  },
+  {
+    "input": "/x/.//",
+    "expected": ".",
+    "label": "private-edge-4"
+  }
+]

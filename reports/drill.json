@@ -1,0 +1,734 @@
+{
+  "schema_version": 2,
+  "complete": false,
+  "observed_unix_ms": 1792059333259,
+  "cases": [
+    {
+      "name": "kill_orchestrator_mid_round",
+      "status": "INCOMPLETE",
+      "evidence_kind": "missing_required_real_evidence",
+      "detail": {
+        "reason": "Original real recording replay is incomplete: three independently owned, enabled and rights-cleared providers are required; found 0. Labelled local SIGKILL/UNKNOWN/retry assertions remain in invariant_qa, without substituting for real acquisition evidence."
+      }
+    },
+    {
+      "name": "provider_error_then_rate_limit",
+      "status": "INCOMPLETE",
+      "evidence_kind": "missing_required_real_evidence",
+      "detail": {
+        "reason": "Original real recording replay is incomplete: three independently owned, enabled and rights-cleared providers are required; found 0. Labelled local SIGKILL/UNKNOWN/retry assertions remain in invariant_qa, without substituting for real acquisition evidence."
+      }
+    },
+    {
+      "name": "grader_gaming",
+      "status": "PASSED",
+      "evidence_kind": "executed_adversarial_candidates_with_trusted_exact_denial_assertions",
+      "detail": {
+        "evidence_kind": "executed_adversarial_rust_candidates",
+        "passed": true,
+        "runs": [
+          {
+            "attack": "skip",
+            "cases_passed": 0,
+            "cases_total": 14,
+            "failure": "expected 14 responses, observed 0",
+            "passed": false,
+            "quarantined": true,
+            "run_id": "ddb181aa-105f-4492-9d16-8bd52d15648d"
+          },
+          {
+            "attack": "fake_success",
+            "cases_passed": 0,
+            "cases_total": 14,
+            "failure": "host oracle mismatch at case 0",
+            "passed": false,
+            "quarantined": true,
+            "run_id": "952fe803-19f5-4c02-a7ae-11e8a837721e"
+          },
+          {
+            "attack": "public_hardcode",
+            "cases_passed": 2,
+            "cases_total": 14,
+            "failure": "host oracle mismatch at case 1",
+            "passed": false,
+            "quarantined": true,
+            "run_id": "4c04e962-099b-40b9-bc2d-6961b4f3e451"
+          }
+        ]
+      }
+    },
+    {
+      "name": "escape_attempts",
+      "status": "PASSED",
+      "evidence_kind": "executed_adversarial_candidates_with_trusted_exact_denial_assertions",
+      "detail": {
+        "candidate_correct_answers_do_not_override_quarantine": true,
+        "events": [
+          {
+            "category": "network",
+            "result": "denied:EPERM",
+            "syscall": 41,
+            "target": ""
+          },
+          {
+            "category": "filesystem",
+            "result": "denied:EPERM",
+            "syscall": 257,
+            "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/host-only-sentinel.txt"
+          },
+          {
+            "category": "filesystem",
+            "result": "denied:EPERM",
+            "syscall": 257,
+            "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/heldout-index.json"
+          },
+          {
+            "category": "filesystem",
+            "result": "denied:EPERM",
+            "syscall": 257,
+            "target": "/root-write-probe"
+          },
+          {
+            "category": "network",
+            "result": "denied:EPERM",
+            "syscall": 41,
+            "target": ""
+          },
+          {
+            "category": "filesystem",
+            "result": "denied:EPERM",
+            "syscall": 257,
+            "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/host-only-sentinel.txt"
+          },
+          {
+            "category": "filesystem",
+            "result": "denied:EPERM",
+            "syscall": 257,
+            "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/heldout-index.json"
+          },
+          {
+            "category": "filesystem",
+            "result": "denied:EPERM",
+            "syscall": 257,
+            "target": "/root-write-probe"
+          },
+          {
+            "category": "network",
+            "result": "denied:EPERM",
+            "syscall": 41,
+            "target": ""
+          },
+          {
+            "category": "filesystem",
+            "result": "denied:EPERM",
+            "syscall": 257,
+            "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/host-only-sentinel.txt"
+          },
+          {
+            "category": "filesystem",
+            "result": "denied:EPERM",
+            "syscall": 257,
+            "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/heldout-index.json"
+          },
+          {
+            "category": "filesystem",
+            "result": "denied:EPERM",
+            "syscall": 257,
+            "target": "/root-write-probe"
+          },
+          {
+            "category": "network",
+            "result": "denied:EPERM",
+            "syscall": 41,
+            "target": ""
+          },
+          {
+            "category": "filesystem",
+            "result": "denied:EPERM",
+            "syscall": 257,
+            "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/host-only-sentinel.txt"
+          },
+          {
+            "category": "filesystem",
+            "result": "denied:EPERM",
+            "syscall": 257,
+            "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/heldout-index.json"
+          },
+          {
+            "category": "filesystem",
+            "result": "denied:EPERM",
+            "syscall": 257,
+            "target": "/root-write-probe"
+          },
+          {
+            "category": "network",
+            "result": "denied:EPERM",
+            "syscall": 41,
+            "target": ""
+          },
+          {
+            "category": "filesystem",
+            "result": "denied:EPERM",
+            "syscall": 257,
+            "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/host-only-sentinel.txt"
+          },
+          {
+            "category": "filesystem",
+            "result": "denied:EPERM",
+            "syscall": 257,
+            "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/heldout-index.json"
+          },
+          {
+            "category": "filesystem",
+            "result": "denied:EPERM",
+            "syscall": 257,
+            "target": "/root-write-probe"
+          },
+          {
+            "category": "network",
+            "result": "denied:EPERM",
+            "syscall": 41,
+            "target": ""
+          },
+          {
+            "category": "filesystem",
+            "result": "denied:EPERM",
+            "syscall": 257,
+            "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/host-only-sentinel.txt"
+          },
+          {
+            "category": "filesystem",
+            "result": "denied:EPERM",
+            "syscall": 257,
+            "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/heldout-index.json"
+          },
+          {
+            "category": "filesystem",
+            "result": "denied:EPERM",
+            "syscall": 257,
+            "target": "/root-write-probe"
+          },
+          {
+            "category": "network",
+            "result": "denied:EPERM",
+            "syscall": 41,
+            "target": ""
+          },
+          {
+            "category": "filesystem",
+            "result": "denied:EPERM",
+            "syscall": 257,
+            "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/host-only-sentinel.txt"
+          },
+          {
+            "category": "filesystem",
+            "result": "denied:EPERM",
+            "syscall": 257,
+            "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/heldout-index.json"
+          },
+          {
+            "category": "filesystem",
+            "result": "denied:EPERM",
+            "syscall": 257,
+            "target": "/root-write-probe"
+          },
+          {
+            "category": "network",
+            "result": "denied:EPERM",
+            "syscall": 41,
+            "target": ""
+          },
+          {
+            "category": "filesystem",
+            "result": "denied:EPERM",
+            "syscall": 257,
+            "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/host-only-sentinel.txt"
+          },
+          {
+            "category": "filesystem",
+            "result": "denied:EPERM",
+            "syscall": 257,
+            "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/heldout-index.json"
+          },
+          {
+            "category": "filesystem",
+            "result": "denied:EPERM",
+            "syscall": 257,
+            "target": "/root-write-probe"
+          },
+          {
+            "category": "network",
+            "result": "denied:EPERM",
+            "syscall": 41,
+            "target": ""
+          },
+          {
+            "category": "filesystem",
+            "result": "denied:EPERM",
+            "syscall": 257,
+            "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/host-only-sentinel.txt"
+          },
+          {
+            "category": "filesystem",
+            "result": "denied:EPERM",
+            "syscall": 257,
+            "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/heldout-index.json"
+          },
+          {
+            "category": "filesystem",
+            "result": "denied:EPERM",
+            "syscall": 257,
+            "target": "/root-write-probe"
+          },
+          {
+            "category": "network",
+            "result": "denied:EPERM",
+            "syscall": 41,
+            "target": ""
+          },
+          {
+            "category": "filesystem",
+            "result": "denied:EPERM",
+            "syscall": 257,
+            "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/host-only-sentinel.txt"
+          },
+          {
+            "category": "filesystem",
+            "result": "denied:EPERM",
+            "syscall": 257,
+            "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/heldout-index.json"
+          },
+          {
+            "category": "filesystem",
+            "result": "denied:EPERM",
+            "syscall": 257,
+            "target": "/root-write-probe"
+          },
+          {
+            "category": "network",
+            "result": "denied:EPERM",
+            "syscall": 41,
+            "target": ""
+          },
+          {
+            "category": "filesystem",
+            "result": "denied:EPERM",
+            "syscall": 257,
+            "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/host-only-sentinel.txt"
+          },
+          {
+            "category": "filesystem",
+            "result": "denied:EPERM",
+            "syscall": 257,
+            "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/heldout-index.json"
+          },
+          {
+            "category": "filesystem",
+            "result": "denied:EPERM",
+            "syscall": 257,
+            "target": "/root-write-probe"
+          },
+          {
+            "category": "network",
+            "result": "denied:EPERM",
+            "syscall": 41,
+            "target": ""
+          },
+          {
+            "category": "filesystem",
+            "result": "denied:EPERM",
+            "syscall": 257,
+            "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/host-only-sentinel.txt"
+          },
+          {
+            "category": "filesystem",
+            "result": "denied:EPERM",
+            "syscall": 257,
+            "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/heldout-index.json"
+          },
+          {
+            "category": "filesystem",
+            "result": "denied:EPERM",
+            "syscall": 257,
+            "target": "/root-write-probe"
+          },
+          {
+            "category": "network",
+            "result": "denied:EPERM",
+            "syscall": 41,
+            "target": ""
+          },
+          {
+            "category": "filesystem",
+            "result": "denied:EPERM",
+            "syscall": 257,
+            "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/host-only-sentinel.txt"
+          },
+          {
+            "category": "filesystem",
+            "result": "denied:EPERM",
+            "syscall": 257,
+            "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/heldout-index.json"
+          },
+          {
+            "category": "filesystem",
+            "result": "denied:EPERM",
+            "syscall": 257,
+            "target": "/root-write-probe"
+          },
+          {
+            "category": "network",
+            "result": "denied:EPERM",
+            "syscall": 41,
+            "target": ""
+          },
+          {
+            "category": "filesystem",
+            "result": "denied:EPERM",
+            "syscall": 257,
+            "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/host-only-sentinel.txt"
+          },
+          {
+            "category": "filesystem",
+            "result": "denied:EPERM",
+            "syscall": 257,
+            "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/heldout-index.json"
+          },
+          {
+            "category": "filesystem",
+            "result": "denied:EPERM",
+            "syscall": 257,
+            "target": "/root-write-probe"
+          }
+        ],
+        "evidence_kind": "executed_adversarial_rust_candidate",
+        "passed": true,
+        "run_id": "75b4c933-a7d9-461c-89ef-5ebba3b33412",
+        "trace_sha256": "02475a705c450f8aad727f3af5f5e725519f93f955b2faf01e85def4e2f191a3"
+      }
+    },
+    {
+      "name": "planted_heldout_task",
+      "status": "PASSED",
+      "evidence_kind": "temporary_planted_datasets_rejected_by_actual_training_entrypoint",
+      "detail": {
+        "canonical_dataset_modified": false,
+        "evidence_kind": "labelled_contamination_fault_injections_in_real_manifest_and_training_entrypoint",
+        "observations": [
+          {
+            "checkpoint_directory_created": false,
+            "dataset": "reports/drill-work/428ca7c0-1535-4b5d-8787-57bc7da3cd8b/contamination/exact_heldout_origin",
+            "error": "held-out lineage contamination: geometry.box",
+            "rejected_by": "actual_train_entrypoint_before_model_or_optimiser",
+            "variant": "exact_heldout_origin"
+          },
+          {
+            "checkpoint_directory_created": false,
+            "dataset": "reports/drill-work/428ca7c0-1535-4b5d-8787-57bc7da3cd8b/contamination/reworded_retained_lineage",
+            "error": "held-out lineage contamination: geometry.box",
+            "rejected_by": "actual_train_entrypoint_before_model_or_optimiser",
+            "variant": "reworded_retained_lineage"
+          },
+          {
+            "checkpoint_directory_created": false,
+            "dataset": "reports/drill-work/428ca7c0-1535-4b5d-8787-57bc7da3cd8b/contamination/near_specification_hidden_metadata",
+            "error": "held-out exact/near specification match: geometry.box (review required)",
+            "rejected_by": "actual_train_entrypoint_before_model_or_optimiser",
+            "variant": "near_specification_hidden_metadata"
+          }
+        ],
+        "optimiser_steps": 0,
+        "passed": true,
+        "screening_unit_fixtures": {
+          "evidence_kind": "labelled_contamination_fixture",
+          "exact_rejected": true,
+          "near_specification_rejected": true,
+          "optimiser_steps": 0,
+          "passed": true,
+          "reworded_lineage_rejected": true
+        }
+      }
+    },
+    {
+      "name": "deliberately_worse_checkpoint",
+      "status": "INCOMPLETE",
+      "evidence_kind": "missing_required_real_evidence",
+      "detail": {
+        "reason": "missing required real artifacts: reports/incumbent-evaluation/evaluation.json, reports/degraded-control-evaluation/evaluation.json"
+      }
+    },
+    {
+      "name": "train_gain_heldout_loss",
+      "status": "INCOMPLETE",
+      "evidence_kind": "missing_required_real_evidence",
+      "detail": {
+        "reason": "missing required real artifacts: reports/incumbent-evaluation/evaluation.json, reports/overfit-control-evaluation/evaluation.json, reports/base-train-evaluation/evaluation.json, reports/overfit-train-evaluation/evaluation.json"
+      }
+    },
+    {
+      "name": "seed_only_checkpoints",
+      "status": "INCOMPLETE",
+      "evidence_kind": "missing_required_real_evidence",
+      "detail": {
+        "reason": "missing required real artifacts: reports/candidate-evaluation/evaluation.json, reports/seed-control-evaluation/evaluation.json"
+      }
+    },
+    {
+      "name": "round_budget_exceeded",
+      "status": "PASSED",
+      "evidence_kind": "deterministic_budget_fault_through_production_reservation_and_no_dispatch_assertions",
+      "detail": {
+        "passed": true,
+        "progress_saved": true,
+        "reopened_ledger_events": [
+          {
+            "detail": "round: used=0; requested=1540000; cap=1",
+            "kind": "budget_stop",
+            "request_key": "c784bf8858eb6d09bba207ea53ea18303d49e1848f12d6a137c9e8224fab13ad",
+            "round_id": "fixture-round",
+            "timestamp_ms": 1792059273404
+          }
+        ],
+        "transport_calls": 0
+      }
+    }
+  ],
+  "invariant_qa": {
+    "all_assertions_passed": true,
+    "evidence_rule": "Fixtures and tensor QA do not establish provider-trained checkpoint performance.",
+    "fleet": {
+      "artifact_directory": "reports/drill-work/428ca7c0-1535-4b5d-8787-57bc7da3cd8b/fleet-fixtures/fleet-fixtures-f4a37baf-34d7-4baa-a071-9bd391c14926",
+      "assessment_real_recording_drill_complete": false,
+      "budget_stop": {
+        "passed": true,
+        "progress_saved": true,
+        "reopened_ledger_events": [
+          {
+            "detail": "round: used=0; requested=1540000; cap=1",
+            "kind": "budget_stop",
+            "request_key": "c784bf8858eb6d09bba207ea53ea18303d49e1848f12d6a137c9e8224fab13ad",
+            "round_id": "fixture-round",
+            "timestamp_ms": 1792059273404
+          }
+        ],
+        "transport_calls": 0
+      },
+      "error_then_rate_limit": {
+        "attempts": [
+          {
+            "artifact_sha256": "c159495a6f8e2b9a962cd9a556d0aff924c402287c6acc7e59dae6a7a1e2048f",
+            "attempt_id": "6c51357a-8f50-4785-853d-2f958842df61",
+            "business_id": "fixture-a-fixture-business",
+            "cached_input_tokens": null,
+            "historical_lower_nanos": 0,
+            "historical_upper_nanos": 1540000,
+            "input_tokens": null,
+            "model": "LABELLED_FIXTURE_MODEL",
+            "new_api_lower_nanos": 0,
+            "new_api_upper_nanos": 0,
+            "ordinal": 1,
+            "output_tokens": null,
+            "provider_id": "fixture-a",
+            "reason": "provider HTTP 500",
+            "reasoning_tokens": null,
+            "replayed": true,
+            "request_key": "c784bf8858eb6d09bba207ea53ea18303d49e1848f12d6a137c9e8224fab13ad",
+            "round_id": "fixture-round",
+            "state": "failed",
+            "task_id": "labelled-fixture-task"
+          },
+          {
+            "artifact_sha256": "4d4c719902204a79da2f026ee3348e4c861bc4c68be0eefeb1fbe215221c12b4",
+            "attempt_id": "f780bdab-08d4-4ec0-94e6-c5036bf6ec01",
+            "business_id": "fixture-a-fixture-business",
+            "cached_input_tokens": null,
+            "historical_lower_nanos": 0,
+            "historical_upper_nanos": 1540000,
+            "input_tokens": null,
+            "model": "LABELLED_FIXTURE_MODEL",
+            "new_api_lower_nanos": 0,
+            "new_api_upper_nanos": 0,
+            "ordinal": 2,
+            "output_tokens": null,
+            "provider_id": "fixture-a",
+            "reason": "provider HTTP 429",
+            "reasoning_tokens": null,
+            "replayed": true,
+            "request_key": "c784bf8858eb6d09bba207ea53ea18303d49e1848f12d6a137c9e8224fab13ad",
+            "round_id": "fixture-round",
+            "state": "failed",
+            "task_id": "labelled-fixture-task"
+          },
+          {
+            "artifact_sha256": "4267f53b4a5ab8da7d7cc4b5287c2b57457fb96a87f5a981b9ce4a9bb6651332",
+            "attempt_id": "b4136522-d728-480f-86b1-4d7fb648a469",
+            "business_id": "fixture-b-fixture-business",
+            "cached_input_tokens": 0,
+            "historical_lower_nanos": 70000,
+            "historical_upper_nanos": 70000,
+            "input_tokens": 40,
+            "model": "LABELLED_FIXTURE_MODEL",
+            "new_api_lower_nanos": 0,
+            "new_api_upper_nanos": 0,
+            "ordinal": 1,
+            "output_tokens": 15,
+            "provider_id": "fixture-b",
+            "reason": null,
+            "reasoning_tokens": 0,
+            "replayed": true,
+            "request_key": "7336814a8908ef95da957326beac03a7b39ab12e01b39f820550e83c0365bac7",
+            "round_id": "fixture-round",
+            "state": "completed",
+            "task_id": "labelled-fixture-task"
+          }
+        ],
+        "completed_provider": "fixture-b",
+        "injected_statuses": [
+          500,
+          429
+        ],
+        "passed": true
+      },
+      "evidence_kind": "labelled_software_assurance_fixtures",
+      "missing": "three independently owned real provider recordings are absent",
+      "sigkill_resume": {
+        "cached": true,
+        "passed": true,
+        "signal": "SIGKILL",
+        "transport_calls_after": 1,
+        "transport_calls_before": 1
+      },
+      "unknown_window": {
+        "passed": true,
+        "reservation_retained": true,
+        "transport_calls": 1
+      }
+    },
+    "gate_fixtures": {
+      "evidence_kind": "synthetic_decision_fixtures_not_checkpoint_evaluation",
+      "null": {
+        "candidate_rate": 1.0,
+        "decision": "NO_SHIP_INCONCLUSIVE",
+        "effect": 0.0,
+        "evidence_kind": "synthetic_decision_fixture",
+        "incumbent_rate": 1.0,
+        "limitations": [
+          "Eight locally authored source groups give fragile interval coverage; shared authorship may create dependence between groups.",
+          "A confidence interval containing zero is insufficient evidence of improvement, and does not prove equality.",
+          "Public-algorithm familiarity and pretraining contamination cannot be ruled out by novel local wording.",
+          "A NO SHIP result retains the incumbent; train gains cannot rescue a held-out regression."
+        ],
+        "observations": 96,
+        "practical_margin": 0.02,
+        "reason": "The complete evaluation does not establish an improvement beyond the practical margin.",
+        "source_bootstrap_interval": {
+          "lower": 0.0,
+          "upper": 0.0
+        },
+        "source_effects": {
+          "fixture-source-0": 0.0,
+          "fixture-source-1": 0.0,
+          "fixture-source-2": 0.0,
+          "fixture-source-3": 0.0,
+          "fixture-source-4": 0.0,
+          "fixture-source-5": 0.0,
+          "fixture-source-6": 0.0,
+          "fixture-source-7": 0.0
+        },
+        "sources": 8,
+        "t_interval": {
+          "lower": 0.0,
+          "upper": 0.0
+        },
+        "tasks": 32
+      },
+      "train_gain_heldout_loss": {
+        "candidate_rate": 0.0,
+        "decision": "NO_SHIP_REGRESSION",
+        "effect": -1.0,
+        "evidence_kind": "synthetic_heldout_loss_fixture_train_gain_is_irrelevant",
+        "incumbent_rate": 1.0,
+        "limitations": [
+          "Eight locally authored source groups give fragile interval coverage; shared authorship may create dependence between groups.",
+          "A confidence interval containing zero is insufficient evidence of improvement, and does not prove equality.",
+          "Public-algorithm familiarity and pretraining contamination cannot be ruled out by novel local wording.",
+          "A NO SHIP result retains the incumbent; train gains cannot rescue a held-out regression."
+        ],
+        "observations": 96,
+        "practical_margin": 0.02,
+        "reason": "Measured held-out difference is negative or a predeclared source slice regresses beyond its ceiling.",
+        "source_bootstrap_interval": {
+          "lower": -1.0,
+          "upper": -1.0
+        },
+        "source_effects": {
+          "fixture-source-0": -1.0,
+          "fixture-source-1": -1.0,
+          "fixture-source-2": -1.0,
+          "fixture-source-3": -1.0,
+          "fixture-source-4": -1.0,
+          "fixture-source-5": -1.0,
+          "fixture-source-6": -1.0,
+          "fixture-source-7": -1.0
+        },
+        "sources": 8,
+        "t_interval": {
+          "lower": -1.0,
+          "upper": -1.0
+        },
+        "tasks": 32
+      },
+      "worse": {
+        "candidate_rate": 0.0,
+        "decision": "NO_SHIP_REGRESSION",
+        "effect": -1.0,
+        "evidence_kind": "synthetic_decision_fixture",
+        "incumbent_rate": 1.0,
+        "limitations": [
+          "Eight locally authored source groups give fragile interval coverage; shared authorship may create dependence between groups.",
+          "A confidence interval containing zero is insufficient evidence of improvement, and does not prove equality.",
+          "Public-algorithm familiarity and pretraining contamination cannot be ruled out by novel local wording.",
+          "A NO SHIP result retains the incumbent; train gains cannot rescue a held-out regression."
+        ],
+        "observations": 96,
+        "practical_margin": 0.02,
+        "reason": "Measured held-out difference is negative or a predeclared source slice regresses beyond its ceiling.",
+        "source_bootstrap_interval": {
+          "lower": -1.0,
+          "upper": -1.0
+        },
+        "source_effects": {
+          "fixture-source-0": -1.0,
+          "fixture-source-1": -1.0,
+          "fixture-source-2": -1.0,
+          "fixture-source-3": -1.0,
+          "fixture-source-4": -1.0,
+          "fixture-source-5": -1.0,
+          "fixture-source-6": -1.0,
+          "fixture-source-7": -1.0
+        },
+        "sources": 8,
+        "t_interval": {
+          "lower": -1.0,
+          "upper": -1.0
+        },
+        "tasks": 32
+      }
+    },
+    "unhandled_infrastructure_error": {
+      "actual_production_routing_unchanged": true,
+      "assertion_passed": true,
+      "checkpoint_created": false,
+      "exit_code": 1,
+      "failure": {
+        "error": "deliberately injected unhandled infrastructure failure",
+        "observed_unix_ms": 1792059332988,
+        "promotion": "incumbent_retained",
+        "status": "FAILURE"
+      },
+      "failure_report": "reports/drill-work/428ca7c0-1535-4b5d-8787-57bc7da3cd8b/infrastructure/reports/last-failure.json",
+      "isolated_routing_unchanged": true,
+      "stdout": "{\"error\":\"deliberately injected unhandled infrastructure failure\",\"observed_unix_ms\":1792059332988,\"promotion\":\"incumbent_retained\",\"status\":\"FAILURE\"}\n"
+    }
+  }
+}

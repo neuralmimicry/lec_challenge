@@ -1,0 +1,32 @@
+[
+  {
+    "input": "",
+    "expected": false,
+    "label": "private-edge-0"
+  },
+  {
+    "input": "_",
+    "expected": true,
+    "label": "private-edge-1"
+  },
+  {
+    "input": "1a",
+    "expected": false,
+    "label": "private-edge-2"
+  },
+  {
+    "input": "a-b",
+    "expected": false,
+    "label": "private-edge-3"
+  },
+  {
+    "input": "fn",
+    "expected": true,
+    "label": "private-edge-4"
+  },
+  {
+    "input": "Z_09",
+    "expected": true,
+    "label": "private-edge-5"
+  }
+]

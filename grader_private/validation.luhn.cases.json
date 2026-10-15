@@ -1,0 +1,37 @@
+[
+  {
+    "input": "",
+    "expected": false,
+    "label": "private-edge-0"
+  },
+  {
+    "input": "0",
+    "expected": false,
+    "label": "private-edge-1"
+  },
+  {
+    "input": "00",
+    "expected": true,
+    "label": "private-edge-2"
+  },
+  {
+    "input": "79927398714",
+    "expected": false,
+    "label": "private-edge-3"
+  },
+  {
+    "input": "4532015112830366",
+    "expected": true,
+    "label": "private-edge-4"
+  },
+  {
+    "input": "12 3",
+    "expected": false,
+    "label": "private-edge-5"
+  },
+  {
+    "input": "ab",
+    "expected": false,
+    "label": "private-edge-6"
+  }
+]

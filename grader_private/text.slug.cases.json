@@ -1,0 +1,27 @@
+[
+  {
+    "input": "",
+    "expected": "",
+    "label": "private-edge-0"
+  },
+  {
+    "input": " \t\n\r",
+    "expected": "",
+    "label": "private-edge-1"
+  },
+  {
+    "input": "A--B__C 123",
+    "expected": "a-b-c-123",
+    "label": "private-edge-2"
+  },
+  {
+    "input": "UPPER lower",
+    "expected": "upper-lower",
+    "label": "private-edge-3"
+  },
+  {
+    "input": "a\u000bb\fc",
+    "expected": "a-b-c",
+    "label": "private-edge-4"
+  }
+]

@@ -1,0 +1,56 @@
+[
+  {
+    "input": {
+      "jobs": [],
+      "quantum": 1
+    },
+    "expected": [],
+    "label": "private-edge-0"
+  },
+  {
+    "input": {
+      "jobs": [
+        0,
+        1,
+        0
+      ],
+      "quantum": 2
+    },
+    "expected": [
+      0,
+      2,
+      1
+    ],
+    "label": "private-edge-1"
+  },
+  {
+    "input": {
+      "jobs": [
+        5,
+        5,
+        1
+      ],
+      "quantum": 1
+    },
+    "expected": [
+      2,
+      0,
+      1
+    ],
+    "label": "private-edge-2"
+  },
+  {
+    "input": {
+      "jobs": [
+        2,
+        2
+      ],
+      "quantum": 8
+    },
+    "expected": [
+      0,
+      1
+    ],
+    "label": "private-edge-3"
+  }
+]

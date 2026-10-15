@@ -1,0 +1,90 @@
+{
+  "evidence_kind": "actual_pinned_base_endpoint_qa_not_trained_candidate_canary",
+  "health": {
+    "healthy": true,
+    "checkpoint_id": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+    "model_id": "Qwen/Qwen2.5-Coder-0.5B-Instruct",
+    "base_revision": "ea3f2471cf1b1f0db85067f1ef93848e38e88c25",
+    "tokenizer_sha256": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+    "checksum_validated": true,
+    "inference_smoke_output": "Certainly",
+    "smoke_elapsed_ms": 294,
+    "immutable": true,
+    "production_eligible": true
+  },
+  "generation": {
+    "completion": "```rust\nfn add(a: i64, b: i64) -> i64 {\n    a + b\n}\n```",
+    "checkpoint_id": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+    "finish_reason": "stop",
+    "input_tokens": 58,
+    "output_tokens": 29,
+    "elapsed_ms": 4560,
+    "complete": true
+  },
+  "oversized_body_status": 413,
+  "excessive_output_status": 400,
+  "pressure_status_counts": {
+    "503": 10,
+    "504": 2
+  },
+  "bounded_queue_rejected": true,
+  "deadline_enforced": true,
+  "initial_routing": {
+    "schema_version": 1,
+    "generation": 0,
+    "incumbent": {
+      "url": "http://127.0.0.1:46371/",
+      "checkpoint_id": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44"
+    },
+    "candidate": null,
+    "canary_percent": 0,
+    "gate_report_sha256": null,
+    "rollback_reason": null
+  },
+  "evaluation_routing": {
+    "schema_version": 1,
+    "generation": 1,
+    "incumbent": {
+      "url": "http://127.0.0.1:46371/",
+      "checkpoint_id": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44"
+    },
+    "candidate": {
+      "url": "http://127.0.0.1:46371/",
+      "checkpoint_id": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44"
+    },
+    "canary_percent": 0,
+    "gate_report_sha256": null,
+    "rollback_reason": "evaluation-only staging; production incumbent retained"
+  },
+  "evaluation_generation": {
+    "completion": "```rust\nfn add(a: i64, b: i64) -> i64 {\n    a + b\n}\n```",
+    "checkpoint_id": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+    "finish_reason": "stop",
+    "input_tokens": 58,
+    "output_tokens": 29,
+    "elapsed_ms": 4446,
+    "complete": true
+  },
+  "rollback_routing": {
+    "schema_version": 1,
+    "generation": 2,
+    "incumbent": {
+      "url": "http://127.0.0.1:46371/",
+      "checkpoint_id": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44"
+    },
+    "candidate": {
+      "url": "http://127.0.0.1:46371/",
+      "checkpoint_id": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44"
+    },
+    "canary_percent": 0,
+    "gate_report_sha256": null,
+    "rollback_reason": "controlled local base evaluation-alias rollback"
+  },
+  "elapsed_seconds": 17.303929598,
+  "limitations": [
+    "The evaluation endpoint intentionally aliases the same immutable base tensor; no trained candidate or quality gain is claimed.",
+    "No SHIP gate or 5% candidate canary was exercised because rights-cleared provider training/evaluation artifacts are absent.",
+    "Inference cancellation is cooperative at token boundaries; a matrix multiplication already executing is not pre-empted.",
+    "Generated Rust output was not executed outside the required sandbox."
+  ]
+}

@@ -1,0 +1,34 @@
+[
+  {
+    "input": [],
+    "expected": "",
+    "label": "private-edge-0"
+  },
+  {
+    "input": [
+      1,
+      16,
+      128
+    ],
+    "expected": "011080",
+    "label": "private-edge-1"
+  },
+  {
+    "input": [
+      255,
+      254,
+      253
+    ],
+    "expected": "fffefd",
+    "label": "private-edge-2"
+  },
+  {
+    "input": [
+      0,
+      0,
+      0
+    ],
+    "expected": "000000",
+    "label": "private-edge-3"
+  }
+]

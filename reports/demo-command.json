@@ -1,0 +1,104 @@
+{
+  "offline": true,
+  "phases": [
+    {
+      "assessment_ready": false,
+      "phase": "host_inventory",
+      "status": "observed"
+    },
+    {
+      "evidence": {
+        "corpus_sha256": "a52104fe09a8bba2a4a1834d101404f6b6a6e2fb224897961615e3dc251a92d1",
+        "development": 16,
+        "held_out": 32,
+        "sources": 24,
+        "tasks": 96,
+        "train": 48
+      },
+      "phase": "corpus",
+      "status": "complete"
+    },
+    {
+      "error": null,
+      "phase": "base_assets",
+      "status": "complete"
+    },
+    {
+      "error": null,
+      "evidence": {
+        "checkpoint_id": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+        "elapsed_seconds": 12.57084144,
+        "evidence_kind": "actual_immutable_local_endpoint_smoke",
+        "generation": {
+          "checkpoint_id": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+          "complete": true,
+          "completion": "```rust\nfn add(a: i64, b: i64) -> i64 {\n    a + b\n}\n```",
+          "elapsed_ms": 5032,
+          "finish_reason": "stop",
+          "input_tokens": 57,
+          "output_tokens": 29
+        },
+        "health": {
+          "base_revision": "ea3f2471cf1b1f0db85067f1ef93848e38e88c25",
+          "checkpoint_id": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+          "checksum_validated": true,
+          "healthy": true,
+          "immutable": true,
+          "inference_smoke_output": "Certainly",
+          "model_id": "Qwen/Qwen2.5-Coder-0.5B-Instruct",
+          "production_eligible": true,
+          "smoke_elapsed_ms": 320,
+          "tokenizer_sha256": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539"
+        },
+        "log": "reports/base-endpoint.log",
+        "production_routing": "unchanged; smoke is evaluation-only"
+      },
+      "phase": "base_serving_qa",
+      "status": "complete"
+    },
+    {
+      "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+      "phase": "offline_container_image",
+      "policy_sha256": "0bf995b5f69865792503015f6af52b457c861b679877956e939c2137ddb4a562",
+      "status": "verified_existing"
+    },
+    {
+      "error": "three independently owned, enabled and rights-cleared providers are required; found 0",
+      "phase": "recorded_fleet_and_grading",
+      "status": "failed"
+    },
+    {
+      "phase": "actual_training_evaluation_pipeline",
+      "reason": "upstream real recordings, rights-cleared dataset, assets or sandbox enforcement unavailable",
+      "status": "blocked_or_failed"
+    },
+    {
+      "phase": "missing_training_or_controls",
+      "reason": "missing upstream real evidence is never replaced with fixtures",
+      "status": "blocked"
+    },
+    {
+      "phase": "missing_real_checkpoint_evaluations",
+      "reason": "missing upstream real evidence is never replaced with fixtures",
+      "status": "blocked"
+    },
+    {
+      "phase": "missing_verified_gate_or_candidate_serving",
+      "reason": "missing upstream real evidence is never replaced with fixtures",
+      "status": "blocked"
+    },
+    {
+      "phase": "nine_drills",
+      "status": "incomplete"
+    },
+    {
+      "phase": "disconnected_clean_directory_rehearsal",
+      "reason": "This invocation is not evidence that it ran in a newly unpacked directory with outbound access disabled.",
+      "status": "external_rehearsal_required"
+    }
+  ],
+  "promotion": "only_verified_gate_can_authorise",
+  "status": "INCOMPLETE",
+  "training_fast_mode": false
+}
+{"error":"full offline assessment incomplete; inspect reports/demo.json and reports/drill.md","observed_unix_ms":1792059336913,"promotion":"incumbent_retained","status":"FAILURE"}

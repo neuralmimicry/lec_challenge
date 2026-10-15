@@ -1,0 +1,27 @@
+[
+  {
+    "input": "file",
+    "expected": "",
+    "label": "private-edge-0"
+  },
+  {
+    "input": ".bashrc",
+    "expected": "",
+    "label": "private-edge-1"
+  },
+  {
+    "input": "a.",
+    "expected": "",
+    "label": "private-edge-2"
+  },
+  {
+    "input": ".config.JSON",
+    "expected": "json",
+    "label": "private-edge-3"
+  },
+  {
+    "input": "x.TXT",
+    "expected": "txt",
+    "label": "private-edge-4"
+  }
+]

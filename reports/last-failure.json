@@ -1,0 +1,6 @@
+{
+  "error": "full offline assessment incomplete; inspect reports/demo.json and reports/drill.md",
+  "observed_unix_ms": 1792059336913,
+  "promotion": "incumbent_retained",
+  "status": "FAILURE"
+}

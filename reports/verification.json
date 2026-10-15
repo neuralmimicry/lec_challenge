@@ -1,0 +1,106 @@
+{
+  "assessment_complete": false,
+  "evidence_rule": "Passing local QA does not replace absent real provider recordings, approved data, assessment checkpoints or measured held-out learning.",
+  "local_quality_checks_passed": true,
+  "observed_unix_ms": 1792059659501,
+  "original_notice_gaps": 0,
+  "project_skill_validated": true,
+  "resolved_dependency_packages": 341,
+  "schema_version": 1,
+  "steps": [
+    {
+      "command": [
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "elapsed_seconds": 0.877735531,
+      "evidence": {
+        "bytes": 0,
+        "path": "reports/verification-format.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "exit_code": 0,
+      "name": "format",
+      "success": true
+    },
+    {
+      "command": [
+        "clippy",
+        "--locked",
+        "--offline",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "elapsed_seconds": 12.585318371,
+      "evidence": {
+        "bytes": 351,
+        "path": "reports/verification-clippy.log",
+        "sha256": "c0c245f5f4f9093aa5a2a4f0e9b862d6744e2e18f2de7c00cd794a49236015b2"
+      },
+      "exit_code": 0,
+      "name": "clippy",
+      "success": true
+    },
+    {
+      "command": [
+        "test",
+        "--locked",
+        "--offline"
+      ],
+      "elapsed_seconds": 20.883343159,
+      "evidence": {
+        "bytes": 7843,
+        "path": "reports/verification-unit.log",
+        "sha256": "72a1d92b21b6cd536d0cca06deed42170e7259190ed15eac1a0b7c4cec95229e"
+      },
+      "exit_code": 0,
+      "name": "unit",
+      "success": true
+    },
+    {
+      "command": [
+        "test",
+        "--locked",
+        "--offline",
+        "original_tokenizer_masks_prompt_and_preserves_assistant_eos",
+        "--",
+        "--ignored"
+      ],
+      "elapsed_seconds": 2.059740414,
+      "evidence": {
+        "bytes": 756,
+        "path": "reports/verification-original_tokeniser.log",
+        "sha256": "d0142446805c00b0ff51eca239ec926645cbd84bea09d712a2270036ee962a3c"
+      },
+      "exit_code": 0,
+      "name": "original_tokeniser",
+      "success": true
+    },
+    {
+      "command": [
+        "test",
+        "--locked",
+        "--offline",
+        "--test",
+        "sandbox_contract",
+        "--",
+        "--ignored",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "elapsed_seconds": 116.796510961,
+      "evidence": {
+        "bytes": 455,
+        "path": "reports/verification-real_container_qa.log",
+        "sha256": "d889f6ba2f5499b140b120f2a508b795c8c709ec83001e83a6e8655e41e62b22"
+      },
+      "exit_code": 0,
+      "name": "real_container_qa",
+      "success": true
+    }
+  ]
+}
