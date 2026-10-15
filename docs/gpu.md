@@ -6,6 +6,16 @@ Comparative models use independently verified Hugging Face assets, immutable rev
 
 Comparative inference has a 2,048-token total context cap; the assessment runtime retains 4,096. HTTP work uses the existing bounded dedicated worker. Model computation is cooperatively cancelled at token boundaries, with another deadline check after synchronised logits; a hard interruption of an executing CUDA kernel requires process supervision. Fuel and the writer bound template execution/output, while the selected original templates remain trusted inputs: arbitrary intermediate template allocations do not have a separate process memory limit.
 
+Weights, projections, values and the KV cache use the requested precision. Queries
+and keys are promoted to float32 **before** their attention-score matrix product;
+scaling, masking and softmax also use float32. Qwen 1.5B's original float16 score
+product overflowed before a later cast could repair it. The original failed
+endpoint log is retained under
+`reports/comparative/gpu-serving-coding-teachers/`. A regression test reproduces
+the overflow with finite inputs and verifies finite corrected probabilities.
+The CPU float32 reference also produced complete code. This fix preserves the
+differentiable training graph and keeps the weights/cache in float16 on CUDA.
+
 Existing assessment checkpoint evidence fixes CPU float32. A trained assessment adapter served with any other device or precision remains evaluation-only, even if its tensor hash matches a CPU-gated checkpoint. Comparative teachers also remain evaluation-only. Device or precision changes require matching quality evidence before production eligibility.
 
 ## This workstation's compatibility preparation
@@ -40,6 +50,15 @@ The [first CUDA smoke](../reports/comparative/gpu-smoke/c92b5eef-f65d-44dc-ab44-
 The reusable smoke records cold and warmed generations, parses their outputs as Rust and optionally runs the identical prompt on CPU float32. It never executes generated code on the host, opens a task split, trains an adapter or establishes assessment improvement. Each invocation writes a new UUID-named report under `reports/comparative/gpu-smoke/`, preserving earlier and user-run evidence.
 
 The [matched warm/CPU smoke](../reports/comparative/gpu-smoke/47fa9803-6a1f-4766-9b2f-12b36fb237d5.json) used the same 57-input/29-output-token prompt and produced identical complete Rust source: 1.309 seconds for the GPU process's first generation, 1.046 seconds warm, and 5.653 seconds for the CPU reference. The GPU allocation observed for that process was 1,180 MiB. This is a single smoke observation on one laptop, rather than a controlled throughput benchmark or a quality improvement result.
+
+After the precision fix, the [three teacher endpoint checks](../reports/comparative/gpu-serving-teachers-fixed/report.json)
+all returned complete code with actual CUDA/F16 metadata and matching driver
+process allocations. Qwen 1.5B generated 29 tokens in 1.949 seconds with
+3,598 MiB observed; DeepSeek 1.3B generated 77 tokens in 1.785 seconds with
+3,022 MiB observed; SmolLM2 1.7B generated 31 tokens in 0.771 seconds with
+3,694 MiB observed. Each used its original chat template. Their different output
+lengths/tokenisers make these smoke observations unsuitable as a throughput
+ranking. Allocations are snapshots after generation, rather than peak VRAM.
 
 ## Local teacher commands
 

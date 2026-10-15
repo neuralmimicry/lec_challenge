@@ -1,0 +1,14 @@
+{
+  "model_id": "deepseek-ai/deepseek-coder-1.3b-instruct",
+  "revision": "e063262dac8366fc1f28a4da0ff3c50ea66259ca",
+  "licence": "other",
+  "files": {
+    "LICENSE": "a3a0e9449cb691a12f4de1d03725fd41326614fdeaf5d80b28c51187da0bed0e",
+    "README.md": "b1739d38e8fe147611ccacb8f8b27ebedcde1acbe25002fbd67ee79c5dac1a17",
+    "config.json": "5e81a9fd94e640b412725ff4c6eef90b8862e526c93ca4f4c5179244bcf20550",
+    "generation_config.json": "186a63b420f66a03e95a035c488373361bb04833a9b83f4bdbaba70c5c816002",
+    "model.safetensors": "4ff570bf9a558d23c5cb4171bad00daf663be8282150cdb5769e0f6975b0007a",
+    "tokenizer.json": "ef48ebdc8546c2d8092349d321f1d162de804a1c8900df2b615c7dc8b02ce141",
+    "tokenizer_config.json": "775f116ff1130a5b5bfc3cfdb594f9fcb5a5dc61d5a11ba92b2a7c078d66b7b7"
+  }
+}

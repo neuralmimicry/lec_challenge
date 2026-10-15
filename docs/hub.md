@@ -5,11 +5,13 @@ native model loader. This explicit online operation is separate from offline
 model loading and assessment evaluation. It does not evaluate held-out tasks or
 make a quality claim about a comparator.
 
-Build the Rust helper with `cargo build --locked --offline --example hub_assets`.
+Build the optimised Rust helper with `cargo build --locked --offline --release --example hub_assets`.
+Use a release build for multi-gigabyte files: unoptimised checksum verification
+can take substantially longer, even after all network bytes have arrived.
 For a public repository, run:
 
 ```sh
-target/debug/examples/hub_assets \
+target/release/examples/hub_assets \
   --model Qwen/Qwen2.5-Coder-1.5B-Instruct \
   --revision 2e1fd397ee46e1388853d2af2c993145b0f1098a \
   --destination offline_bundle/comparative/qwen-coder-1_5b \

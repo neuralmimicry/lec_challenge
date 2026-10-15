@@ -448,6 +448,24 @@ fn frozen_linear(base: &Linear, x: &Tensor) -> candle_core::Result<Tensor> {
     }
 }
 
+/// Float16 Qwen queries can have a finite dot product above 65,504. Casting
+/// an already-overflowed GEMM result cannot recover it. Promote activations
+/// before the score GEMM, while retaining the requested weight/KV precision.
+fn stable_attention_scores(
+    q: &Tensor,
+    k: &Tensor,
+    head_dim: usize,
+    mask: Option<&Tensor>,
+) -> candle_core::Result<Tensor> {
+    let q = q.to_dtype(DType::F32)?.contiguous()?;
+    let k = k.to_dtype(DType::F32)?;
+    let scores = (q.matmul(&k.transpose(2, 3)?)? / (head_dim as f64).sqrt())?;
+    match mask {
+        Some(mask) => scores.broadcast_add(&mask.to_dtype(DType::F32)?),
+        None => Ok(scores),
+    }
+}
+
 #[derive(Clone)]
 struct Projection {
     base: Linear,
@@ -847,11 +865,7 @@ impl QwenModel {
             };
             let k = repeat(k)?;
             let v = repeat(v)?;
-            let scores = (q.contiguous()?.matmul(&k.transpose(2, 3)?)? / (head_dim as f64).sqrt())?;
-            let scores = match &mask {
-                Some(mask) => scores.broadcast_add(mask)?,
-                None => scores,
-            };
+            let scores = stable_attention_scores(&q, &k, head_dim, mask.as_ref())?;
             let attention = candle_nn::ops::softmax(&scores.to_dtype(DType::F32)?, D::Minus1)?
                 .to_dtype(self.dtype)?
                 .matmul(&v)?
@@ -1476,6 +1490,43 @@ mod tests {
             gg.get(&input).unwrap().to_vec2::<f32>().unwrap()
         );
         assert!(fg.get(base.weight()).is_none());
+    }
+
+    #[test]
+    fn finite_float16_queries_cannot_overflow_attention_scores_before_scaling() {
+        let q = Tensor::from_slice(&[300_f32, 300.], (1, 1, 1, 2), &Device::Cpu)
+            .unwrap()
+            .to_dtype(DType::F16)
+            .unwrap();
+        let k = Tensor::from_slice(&[300_f32, 300., 0., 0.], (1, 1, 2, 2), &Device::Cpu)
+            .unwrap()
+            .to_dtype(DType::F16)
+            .unwrap();
+        let naive = q
+            .matmul(&k.transpose(2, 3).unwrap())
+            .unwrap()
+            .to_dtype(DType::F32)
+            .unwrap()
+            .flatten_all()
+            .unwrap()
+            .to_vec1::<f32>()
+            .unwrap();
+        assert!(
+            naive[0].is_infinite(),
+            "the fixture must exercise a dot product outside float16's finite range"
+        );
+        let stable = stable_attention_scores(&q, &k, 2, None).unwrap();
+        assert_eq!(stable.dtype(), DType::F32);
+        let scores = stable.flatten_all().unwrap().to_vec1::<f32>().unwrap();
+        assert!(scores.iter().all(|value| value.is_finite()));
+        assert!((scores[0] - 180000_f32 / 2_f32.sqrt()).abs() < 0.02);
+        let probabilities = candle_nn::ops::softmax(&stable, D::Minus1)
+            .unwrap()
+            .flatten_all()
+            .unwrap()
+            .to_vec1::<f32>()
+            .unwrap();
+        assert_eq!(probabilities, vec![1., 0.]);
     }
 
     /// A random unit model verifies the complete backward architecture. It is not

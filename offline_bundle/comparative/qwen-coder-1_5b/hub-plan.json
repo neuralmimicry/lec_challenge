@@ -1,0 +1,78 @@
+{
+  "model_id": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+  "revision": "2e1fd397ee46e1388853d2af2c993145b0f1098a",
+  "files": {
+    "LICENSE": {
+      "filename": "LICENSE",
+      "bytes": 11343,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "6634c8cc3133b3848ec74b9f275acaaa1ea618ab"
+      }
+    },
+    "README.md": {
+      "filename": "README.md",
+      "bytes": 5258,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "ae7c2e1a888ccc658813a6779ba63625ceeac946"
+      }
+    },
+    "config.json": {
+      "filename": "config.json",
+      "bytes": 660,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "b4831594221a81ea1540f0c6aeae93b6a8aeae56"
+      }
+    },
+    "generation_config.json": {
+      "filename": "generation_config.json",
+      "bytes": 242,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "b7849b3dad857bc1e227afd6ca21d1e4cb3f8f82"
+      }
+    },
+    "merges.txt": {
+      "filename": "merges.txt",
+      "bytes": 1671839,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "20024bfe7c83998e9aeaf98a0cd6a2ce6306c2f0"
+      }
+    },
+    "model.safetensors": {
+      "filename": "model.safetensors",
+      "bytes": 3087467144,
+      "publisher_identity": {
+        "kind": "lfs_sha256",
+        "digest": "c1b9b30e907950516ba3c646bdf570d8084c25a6410a0cdca80cf04b11bc13a8"
+      }
+    },
+    "tokenizer.json": {
+      "filename": "tokenizer.json",
+      "bytes": 7031645,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "443909a61d429dff23010e5bddd28ff530edda00"
+      }
+    },
+    "tokenizer_config.json": {
+      "filename": "tokenizer_config.json",
+      "bytes": 7305,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "acee076f49bf3c0298e15de0909d1da7b392f0c3"
+      }
+    },
+    "vocab.json": {
+      "filename": "vocab.json",
+      "bytes": 2776833,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "4783fe10ac3adce15ac8f358ef5462739852c569"
+      }
+    }
+  }
+}

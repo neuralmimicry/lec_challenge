@@ -1,0 +1,78 @@
+{
+  "model_id": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+  "revision": "31b70e2e869a7173562077fd711b654946d38674",
+  "files": {
+    "README.md": {
+      "filename": "README.md",
+      "bytes": 14928,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "0c7f9199785f566968e8759a10eaf5c69223c25b"
+      }
+    },
+    "config.json": {
+      "filename": "config.json",
+      "bytes": 908,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "207e75b189e8d8b72a8966dddcce5502f653e5ba"
+      }
+    },
+    "generation_config.json": {
+      "filename": "generation_config.json",
+      "bytes": 132,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "da6c4d71a43aa7e6f785bdbb28ea5025438a73fa"
+      }
+    },
+    "merges.txt": {
+      "filename": "merges.txt",
+      "bytes": 466391,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "69503b13f727ba3812b6803e97442a6de05ef5eb"
+      }
+    },
+    "model.safetensors": {
+      "filename": "model.safetensors",
+      "bytes": 3422777952,
+      "publisher_identity": {
+        "kind": "lfs_sha256",
+        "digest": "f55217be716b6a997b97b9d8d7eb6fad02e00858f5010ec24f64603c3a98a0e8"
+      }
+    },
+    "special_tokens_map.json": {
+      "filename": "special_tokens_map.json",
+      "bytes": 655,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "44719d2e365acac0637fd25a3acf46494ca45940"
+      }
+    },
+    "tokenizer.json": {
+      "filename": "tokenizer.json",
+      "bytes": 2104556,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "f922b1797f0c88e71addc8393787831f2477a4bd"
+      }
+    },
+    "tokenizer_config.json": {
+      "filename": "tokenizer_config.json",
+      "bytes": 3764,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "8c7b22013909450429303ed10be4398bd63f5457"
+      }
+    },
+    "vocab.json": {
+      "filename": "vocab.json",
+      "bytes": 800662,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "0ad5ecc2035b7031b88afb544ee95e2d49baa484"
+      }
+    }
+  }
+}

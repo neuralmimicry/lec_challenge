@@ -1,0 +1,62 @@
+{
+  "model_id": "deepseek-ai/deepseek-coder-1.3b-instruct",
+  "revision": "e063262dac8366fc1f28a4da0ff3c50ea66259ca",
+  "files": {
+    "LICENSE": {
+      "filename": "LICENSE",
+      "bytes": 13760,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "9489e95c444dd3a396ec884bfd8afa719e59160f"
+      }
+    },
+    "README.md": {
+      "filename": "README.md",
+      "bytes": 3572,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "e383bba6398a1e0c8c0959182b511f4c7ddce793"
+      }
+    },
+    "config.json": {
+      "filename": "config.json",
+      "bytes": 631,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "046e13b1173d8e6befdd89205495e36518f7b56d"
+      }
+    },
+    "generation_config.json": {
+      "filename": "generation_config.json",
+      "bytes": 119,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "19a930a8e7a08b1d002e8fa317438423b61fff22"
+      }
+    },
+    "model.safetensors": {
+      "filename": "model.safetensors",
+      "bytes": 2692969128,
+      "publisher_identity": {
+        "kind": "lfs_sha256",
+        "digest": "4ff570bf9a558d23c5cb4171bad00daf663be8282150cdb5769e0f6975b0007a"
+      }
+    },
+    "tokenizer.json": {
+      "filename": "tokenizer.json",
+      "bytes": 1367962,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "0dfa4268afc2cf45515dec553772d7ca79f79762"
+      }
+    },
+    "tokenizer_config.json": {
+      "filename": "tokenizer_config.json",
+      "bytes": 1868,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "68f6f5bd3350366399a8c53d32a602c825390806"
+      }
+    }
+  }
+}

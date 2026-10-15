@@ -1,0 +1,509 @@
+{
+  "schema_version": 1,
+  "model_id": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+  "requested_revision": "31b70e2e869a7173562077fd711b654946d38674",
+  "revision": "31b70e2e869a7173562077fd711b654946d38674",
+  "licence": "apache-2.0",
+  "licence_files": [],
+  "licence_evidence": "Original pinned model card and API metadata declare a recognised SPDX licence; repository has no separate licence file; retain canonical full text separately for distribution",
+  "recorded_unix_seconds": 1792071566,
+  "metadata_url": "https://huggingface.co/api/models/HuggingFaceTB/SmolLM2-1.7B-Instruct/revision/31b70e2e869a7173562077fd711b654946d38674?blobs=true",
+  "metadata_sha256": "2346c6edd1832e815b245fd0cfc021c8f79afadbd03b75deebb23ab3f2890275",
+  "metadata": {
+    "_id": "6723892e4a49116d8ead173e",
+    "author": "HuggingFaceTB",
+    "cardData": {
+      "base_model": [
+        "HuggingFaceTB/SmolLM2-1.7B"
+      ],
+      "language": [
+        "en"
+      ],
+      "library_name": "transformers",
+      "license": "apache-2.0",
+      "pipeline_tag": "text-generation",
+      "tags": [
+        "safetensors",
+        "onnx",
+        "transformers.js"
+      ]
+    },
+    "config": {
+      "architectures": [
+        "LlamaForCausalLM"
+      ],
+      "model_type": "llama",
+      "tokenizer_config": {
+        "bos_token": "<|im_start|>",
+        "chat_template": "{% for message in messages %}{% if loop.first and messages[0]['role'] != 'system' %}{{ '<|im_start|>system\nYou are a helpful AI assistant named SmolLM, trained by Hugging Face<|im_end|>\n' }}{% endif %}{{'<|im_start|>' + message['role'] + '\n' + message['content'] + '<|im_end|>' + '\n'}}{% endfor %}{% if add_generation_prompt %}{{ '<|im_start|>assistant\n' }}{% endif %}",
+        "eos_token": "<|im_end|>",
+        "pad_token": "<|im_end|>",
+        "unk_token": "<|endoftext|>"
+      }
+    },
+    "createdAt": "2024-10-31T13:42:06.000Z",
+    "disabled": false,
+    "downloads": 233563,
+    "gated": false,
+    "id": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+    "lastModified": "2025-04-21T20:51:14.000Z",
+    "library_name": "transformers",
+    "likes": 763,
+    "model-index": null,
+    "modelId": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+    "pipeline_tag": "text-generation",
+    "private": false,
+    "safetensors": {
+      "parameters": {
+        "BF16": 1711376384
+      },
+      "total": 1711376384
+    },
+    "sha": "31b70e2e869a7173562077fd711b654946d38674",
+    "siblings": [
+      {
+        "blobId": "a056c1f51b847bc012f06c7edfa8cfc38e764ff9",
+        "rfilename": ".gitattributes",
+        "size": 1638
+      },
+      {
+        "blobId": "0c7f9199785f566968e8759a10eaf5c69223c25b",
+        "rfilename": "README.md",
+        "size": 14928
+      },
+      {
+        "blobId": "e2ca806da61203321ede9440811cbbf85fc81153",
+        "rfilename": "all_results.json",
+        "size": 785
+      },
+      {
+        "blobId": "207e75b189e8d8b72a8966dddcce5502f653e5ba",
+        "rfilename": "config.json",
+        "size": 908
+      },
+      {
+        "blobId": "0b08a289ffeba25c147e94e12ace0c99154937ce",
+        "rfilename": "eval_results.json",
+        "size": 587
+      },
+      {
+        "blobId": "da6c4d71a43aa7e6f785bdbb28ea5025438a73fa",
+        "rfilename": "generation_config.json",
+        "size": 132
+      },
+      {
+        "blobId": "0efe49ec66c6310f2d37a02703ee2bbe36bb02d9",
+        "rfilename": "instructions_function_calling.md",
+        "size": 7279
+      },
+      {
+        "blobId": "69503b13f727ba3812b6803e97442a6de05ef5eb",
+        "rfilename": "merges.txt",
+        "size": 466391
+      },
+      {
+        "blobId": "f96523abc9c9bcd1ee9375f137dddd420372c258",
+        "lfs": {
+          "pointerSize": 135,
+          "sha256": "f55217be716b6a997b97b9d8d7eb6fad02e00858f5010ec24f64603c3a98a0e8",
+          "size": 3422777952
+        },
+        "rfilename": "model.safetensors",
+        "size": 3422777952
+      },
+      {
+        "blobId": "b69ac087826fbedefba1dbe97b9d17cf48675792",
+        "lfs": {
+          "pointerSize": 131,
+          "sha256": "c538daa78f811830dc9028aa228a63a218147ab478c0c65ef6e2d8cab532380a",
+          "size": 165580
+        },
+        "rfilename": "onnx/model.onnx",
+        "size": 165580
+      },
+      {
+        "blobId": "aed3bffe07e9e2a2fc68503e0425f830ddc87a3b",
+        "lfs": {
+          "pointerSize": 135,
+          "sha256": "023686a59a534e45af70bc5f99ae70e592481701680591f9844fc140a3db220a",
+          "size": 6847602688
+        },
+        "rfilename": "onnx/model.onnx_data",
+        "size": 6847602688
+      },
+      {
+        "blobId": "c3ab9a75c21b830771d5b924b250c5dc724c87b4",
+        "lfs": {
+          "pointerSize": 135,
+          "sha256": "ac7400ca170e6644d95d26394846d2cce8083298e8519b1df7ac1eaa0ab2b5b6",
+          "size": 1311307655
+        },
+        "rfilename": "onnx/model_bnb4.onnx",
+        "size": 1311307655
+      },
+      {
+        "blobId": "07b5ef0888039365fe64cd30a0d4bedcf1ccbc84",
+        "lfs": {
+          "pointerSize": 135,
+          "sha256": "3d891d77661f6339f727b3188f1c21b1429a1e4e55c40d1f60f85048b00a4348",
+          "size": 1326807956
+        },
+        "rfilename": "onnx/model_fp16.onnx",
+        "size": 1326807956
+      },
+      {
+        "blobId": "187b37c4f0b643f43e2c2b120fa6374e5265b163",
+        "lfs": {
+          "pointerSize": 135,
+          "sha256": "5f48c05c14ed97738f8dc5854c20c229ddc8661f43fa914085843901a4ba8740",
+          "size": 2097152000
+        },
+        "rfilename": "onnx/model_fp16.onnx_data",
+        "size": 2097152000
+      },
+      {
+        "blobId": "4ea45ed05b995911304345e9d5dde087f7a7c148",
+        "lfs": {
+          "pointerSize": 135,
+          "sha256": "db5cb9057f4e7014f00c38fd9764f0103e60bb4d145ad600b7144625f0d56930",
+          "size": 1714119778
+        },
+        "rfilename": "onnx/model_int8.onnx",
+        "size": 1714119778
+      },
+      {
+        "blobId": "cecf443db34b2f4b3df139036fbb4543845dcf55",
+        "lfs": {
+          "pointerSize": 135,
+          "sha256": "467b7b8f62d99f184d3628d24b8d65c151e331695f6e9ea997616c4e279e9a51",
+          "size": 1411969607
+        },
+        "rfilename": "onnx/model_q4.onnx",
+        "size": 1411969607
+      },
+      {
+        "blobId": "369e89655598bf48287847b0e90b4e780f6a14e2",
+        "lfs": {
+          "pointerSize": 135,
+          "sha256": "d94946187fb5f27579f3db4ba21fb7f7466c7cbd18956bd420d3981f75282f9c",
+          "size": 1108730338
+        },
+        "rfilename": "onnx/model_q4f16.onnx",
+        "size": 1108730338
+      },
+      {
+        "blobId": "e06dd6dc1f43a3e2a750286d4d45846125588314",
+        "lfs": {
+          "pointerSize": 135,
+          "sha256": "b1110061268f161512c234c4d43cd9dbe61eeb1454e9b94b652edf4de55ae51c",
+          "size": 1714119846
+        },
+        "rfilename": "onnx/model_quantized.onnx",
+        "size": 1714119846
+      },
+      {
+        "blobId": "e06dd6dc1f43a3e2a750286d4d45846125588314",
+        "lfs": {
+          "pointerSize": 135,
+          "sha256": "b1110061268f161512c234c4d43cd9dbe61eeb1454e9b94b652edf4de55ae51c",
+          "size": 1714119846
+        },
+        "rfilename": "onnx/model_uint8.onnx",
+        "size": 1714119846
+      },
+      {
+        "blobId": "e0e5c2257f92d02ae3a363620ecf7d646cbd5150",
+        "lfs": {
+          "pointerSize": 131,
+          "sha256": "e6bfce1916438dd2e6553aa0a62d418087b3ae04f8af75e714ad1f01b7663db6",
+          "size": 114828
+        },
+        "rfilename": "runs/Oct31_06-24-59_ip-26-0-174-36/events.out.tfevents.1730356365.ip-26-0-174-36.3169719.0",
+        "size": 114828
+      },
+      {
+        "blobId": "65c6108f73fbfa9d467552f3c3c89d5e8e602c96",
+        "lfs": {
+          "pointerSize": 128,
+          "sha256": "b3d7723fd0715ce6dcbccf7bb2097f59490b0ac670f798f5378ef5abb7d1301d",
+          "size": 828
+        },
+        "rfilename": "runs/Oct31_06-24-59_ip-26-0-174-36/events.out.tfevents.1730363825.ip-26-0-174-36.3169719.1",
+        "size": 828
+      },
+      {
+        "blobId": "44719d2e365acac0637fd25a3acf46494ca45940",
+        "rfilename": "special_tokens_map.json",
+        "size": 655
+      },
+      {
+        "blobId": "f922b1797f0c88e71addc8393787831f2477a4bd",
+        "rfilename": "tokenizer.json",
+        "size": 2104556
+      },
+      {
+        "blobId": "8c7b22013909450429303ed10be4398bd63f5457",
+        "rfilename": "tokenizer_config.json",
+        "size": 3764
+      },
+      {
+        "blobId": "c2887933e0831fe68a40c4f67908e807012f6a59",
+        "rfilename": "train_results.json",
+        "size": 232
+      },
+      {
+        "blobId": "63a8580fdebbf1b5854709d40f08b181989973c9",
+        "rfilename": "trainer_state.json",
+        "size": 86369
+      },
+      {
+        "blobId": "9f64868ce2affd56e5c700a6c20498c96480f4f5",
+        "lfs": {
+          "pointerSize": 129,
+          "sha256": "7649586c424c337f6c403fdb617ac9d954daf9a7192f3afe5b6318f37e9bb19e",
+          "size": 6520
+        },
+        "rfilename": "training_args.bin",
+        "size": 6520
+      },
+      {
+        "blobId": "0ad5ecc2035b7031b88afb544ee95e2d49baa484",
+        "rfilename": "vocab.json",
+        "size": 800662
+      }
+    ],
+    "spaces": [
+      "pliny-the-prompter/obliteratus",
+      "EuroEval/euroeval_leaderboard",
+      "cvachet/pdf-chatbot",
+      "logikon/open_cot_leaderboard",
+      "burtenshaw/autotrain-mcp",
+      "aizip-dev/SLM-RAG-Arena",
+      "AiActivity/AI-Assistant",
+      "bethgelab/lm-similarity",
+      "Nymbo/SmolLM2-1.7B-Instruct-Serverless",
+      "Intel/synthetic-data-generator",
+      "cot-leaderboard/open-cot-dashboard",
+      "stanley-00/slm-testing",
+      "build-small-hackathon/HearthNet",
+      "LLM-course/lipogram-challenge-submission",
+      "rohanjain1648/alice-rl-environment",
+      "pmolchanov/Hymba-chat",
+      "cstr/PDF-Summarizer",
+      "david-thrower/basic-SmolLM2-chatbot",
+      "abuelzoz33/vram-calculator",
+      "Harley-ml/SmolLM2_Chat",
+      "Siddhant/Voice_Assistant_Demo",
+      "cherry-ghosts/SmolLM",
+      "shmuelamar/igcs-demo",
+      "HandsomeSB/Speculative-Decoding-Demo",
+      "dumbordumber/obliteratus",
+      "Kodacoda/obliteratus",
+      "Shasidharyadavr/netweaver_sre",
+      "tsrinath/Scaler-Round-2",
+      "build-small-hackathon/BackroomsSpreadsheet",
+      "AwaisAdilKhokhar/modelDNA",
+      "crystal99/HuggingFaceTB-SmolLM2-1.7B-Instruct",
+      "Kabilash10/HuggingFaceTB-SmolLM2-1.7B-Instruct",
+      "Alexis-Az/math-llm-demo_v2",
+      "Michaelj1/MedQA-BI",
+      "jbjbjb55/First_agent_template",
+      "Canstralian/HuggingFaceTB-SmolLM2-1.7B-Instruct",
+      "JayosChaos/Fine_tuning_my_first_model_or_agent",
+      "FelixPhilip/DeepFundingOracle",
+      "moeru-ai/conversational-webgpu-vue",
+      "davideuler/SmolLM2-chatbot",
+      "tuc111/duncan-gamabunta-chat",
+      "S-Dreamer/Uncensored-HackerCoding-GPT",
+      "MCP-1st-Birthday/cx_ai_agent",
+      "muzakkirhussain011/cx_ai_agent_v1",
+      "BATUTO-ART/BATUTO_neurocoreWeb",
+      "BATUTO-ART/BATUTO_mcp_core",
+      "grace-dev/Agent-ISTL",
+      "dromero14521/obliteratus",
+      "rbinrs/obliteratus",
+      "kicfk/obliteratus",
+      "viirii/glass_bridge",
+      "aaahmet/obliteratus",
+      "Deadmon/obliteratus",
+      "Ngixdev/obliteratus",
+      "tomiconic/3DModelGen",
+      "darwhite08/OpenEnv-SecOps",
+      "flipova-app/flippa-ai",
+      "jeeya-ahuja05/skill-graph-adaptive-env",
+      "jesuszambrano13/Youtube-Recomendantions-Boost-AI",
+      "azettl/the-place-that-sends-you-mad",
+      "build-small-hackathon/tinybard",
+      "build-small-hackathon/nova-triangle-demo",
+      "build-small-hackathon/the-garden",
+      "build-small-hackathon/HearthNet-Nemotron",
+      "specimba/nexus-os-space",
+      "sharadchoudhury27/Column_Finder_LLM",
+      "HemanM/EvoTransformerV11",
+      "hari7775/fsconvo",
+      "abdullahkhankakar/quiz-generator",
+      "RavichandranJ/obliteratus",
+      "S-Dreamer/obliteratus",
+      "AlanaSky/asgaard",
+      "marchkamal51/obliteratus",
+      "vedantjadhav701/razorshield-api",
+      "Ayobamisalau/Personalized_Chatbot",
+      "Geenoble/church-content-ai",
+      "tree3po/HuggingFaceTB-SmolLM2-1.7B-Instruct",
+      "wang12311/HuggingFaceTB-SmolLM2-1.7B-Instruct",
+      "silasyl/silas_portfolio",
+      "Eightsds/HuggingFaceTB-SmolLM2-1.7B-Instruct",
+      "yichennn/HuggingFaceTB-SmolLM2-1.7B-Instruct",
+      "Bgiangiordano/HuggingFaceTB-SmolLM2-1.7B-Instruct",
+      "freddyaboulton/smollm-voice-code-editor",
+      "alyliann/CTP-Wordle-Suggestions",
+      "willbraun/WordSync",
+      "cibey/HuggingFaceTB-SmolLM2-1.7B-Instruct",
+      "cibey/Cibey_chatbot",
+      "milk639/HuggingFaceTB-SmolLM2-1.7B-Instruct",
+      "Twistedtre/HuggingFaceTB-SmolLM2-1.7B-Instruct",
+      "brunoxcruz/HuggingFaceTB-SmolLM2-1.7B-Instruct",
+      "brunoxcruz/HuggingFaceTB-SmolLM2-1.7B-Instruct2",
+      "Jeff28/Rie08",
+      "NAITIVEAIAGENCY/HuggingFaceTB-SmolLM2-1.7B-Instruct",
+      "derricka59/HuggingFaceTB-SmolLM2-1.7B-Instruct",
+      "Artificial-superintelligence/SmolLM2-1.7B-Instruct",
+      "soutrik/gradio_demo",
+      "Joash2024/math-llm-demo",
+      "Joash2024/math-llm-demo-test",
+      "datacipen/ifisia",
+      "Joash2024/math-llm-demo_v2"
+    ],
+    "tags": [
+      "transformers",
+      "tensorboard",
+      "onnx",
+      "safetensors",
+      "llama",
+      "text-generation",
+      "transformers.js",
+      "conversational",
+      "en",
+      "arxiv:2502.02737",
+      "base_model:HuggingFaceTB/SmolLM2-1.7B",
+      "base_model:quantized:HuggingFaceTB/SmolLM2-1.7B",
+      "license:apache-2.0",
+      "text-generation-inference",
+      "endpoints_compatible",
+      "region:us"
+    ],
+    "transformersInfo": {
+      "auto_model": "AutoModelForCausalLM",
+      "pipeline_tag": "text-generation",
+      "processor": "AutoTokenizer"
+    },
+    "usedStorage": 47826596336,
+    "widgetData": [
+      {
+        "text": "Hi, what can you help me with?"
+      },
+      {
+        "text": "What is 84 * 3 / 2?"
+      },
+      {
+        "text": "Tell me an interesting fact about the universe!"
+      },
+      {
+        "text": "Explain quantum computing in simple terms."
+      }
+    ]
+  },
+  "files": {
+    "README.md": {
+      "filename": "README.md",
+      "bytes": 14928,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "0c7f9199785f566968e8759a10eaf5c69223c25b"
+      },
+      "canonical_url": "https://huggingface.co/HuggingFaceTB/SmolLM2-1.7B-Instruct/resolve/31b70e2e869a7173562077fd711b654946d38674/README.md",
+      "sha256": "b00c0570dbc43674a0028d088fc72f40d83eea90f47cd987706ca2f95ed114c0"
+    },
+    "config.json": {
+      "filename": "config.json",
+      "bytes": 908,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "207e75b189e8d8b72a8966dddcce5502f653e5ba"
+      },
+      "canonical_url": "https://huggingface.co/HuggingFaceTB/SmolLM2-1.7B-Instruct/resolve/31b70e2e869a7173562077fd711b654946d38674/config.json",
+      "sha256": "994f50b16abb4ae00880baefe03c10260b5bd608d2bf586f7056ca05a534feea"
+    },
+    "generation_config.json": {
+      "filename": "generation_config.json",
+      "bytes": 132,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "da6c4d71a43aa7e6f785bdbb28ea5025438a73fa"
+      },
+      "canonical_url": "https://huggingface.co/HuggingFaceTB/SmolLM2-1.7B-Instruct/resolve/31b70e2e869a7173562077fd711b654946d38674/generation_config.json",
+      "sha256": "87b916edaaab66b3899b9d0dd0752727dff6666686da0504d89ae0a6e055a013"
+    },
+    "merges.txt": {
+      "filename": "merges.txt",
+      "bytes": 466391,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "69503b13f727ba3812b6803e97442a6de05ef5eb"
+      },
+      "canonical_url": "https://huggingface.co/HuggingFaceTB/SmolLM2-1.7B-Instruct/resolve/31b70e2e869a7173562077fd711b654946d38674/merges.txt",
+      "sha256": "0b54e8aa4e53d5383e2e4bc635a56b43f9647f7b13832d5d9ecd8f82dac4f510"
+    },
+    "model.safetensors": {
+      "filename": "model.safetensors",
+      "bytes": 3422777952,
+      "publisher_identity": {
+        "kind": "lfs_sha256",
+        "digest": "f55217be716b6a997b97b9d8d7eb6fad02e00858f5010ec24f64603c3a98a0e8"
+      },
+      "canonical_url": "https://huggingface.co/HuggingFaceTB/SmolLM2-1.7B-Instruct/resolve/31b70e2e869a7173562077fd711b654946d38674/model.safetensors",
+      "sha256": "f55217be716b6a997b97b9d8d7eb6fad02e00858f5010ec24f64603c3a98a0e8"
+    },
+    "special_tokens_map.json": {
+      "filename": "special_tokens_map.json",
+      "bytes": 655,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "44719d2e365acac0637fd25a3acf46494ca45940"
+      },
+      "canonical_url": "https://huggingface.co/HuggingFaceTB/SmolLM2-1.7B-Instruct/resolve/31b70e2e869a7173562077fd711b654946d38674/special_tokens_map.json",
+      "sha256": "2b7379f3ae813529281a5c602bc5a11c1d4e0a99107aaa597fe936c1e813ca52"
+    },
+    "tokenizer.json": {
+      "filename": "tokenizer.json",
+      "bytes": 2104556,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "f922b1797f0c88e71addc8393787831f2477a4bd"
+      },
+      "canonical_url": "https://huggingface.co/HuggingFaceTB/SmolLM2-1.7B-Instruct/resolve/31b70e2e869a7173562077fd711b654946d38674/tokenizer.json",
+      "sha256": "9ca9acddb6525a194ec8ac7a87f24fbba7232a9a15ffa1af0c1224fcd888e47c"
+    },
+    "tokenizer_config.json": {
+      "filename": "tokenizer_config.json",
+      "bytes": 3764,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "8c7b22013909450429303ed10be4398bd63f5457"
+      },
+      "canonical_url": "https://huggingface.co/HuggingFaceTB/SmolLM2-1.7B-Instruct/resolve/31b70e2e869a7173562077fd711b654946d38674/tokenizer_config.json",
+      "sha256": "4ec77d44f62efeb38d7e044a1db318f6a939438425312dfa333b8382dbad98df"
+    },
+    "vocab.json": {
+      "filename": "vocab.json",
+      "bytes": 800662,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "0ad5ecc2035b7031b88afb544ee95e2d49baa484"
+      },
+      "canonical_url": "https://huggingface.co/HuggingFaceTB/SmolLM2-1.7B-Instruct/resolve/31b70e2e869a7173562077fd711b654946d38674/vocab.json",
+      "sha256": "82b84012e3add4d01d12ba14442026e49b8cbbaead1f79ecf3d919784f82dc79"
+    }
+  },
+  "authentication_policy": "Optional bearer applied to initial HTTPS huggingface.co request only; all redirects strip authentication; no token persisted"
+}

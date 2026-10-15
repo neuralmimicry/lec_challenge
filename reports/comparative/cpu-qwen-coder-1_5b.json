@@ -1,0 +1,9 @@
+{
+  "completion": "```rust\nfn add(a: i64, b: i64) -> i64 {\n    a + b\n}\n```",
+  "checkpoint_id": "c1b9b30e907950516ba3c646bdf570d8084c25a6410a0cdca80cf04b11bc13a8",
+  "finish_reason": "stop",
+  "input_tokens": 57,
+  "output_tokens": 29,
+  "elapsed_ms": 21499,
+  "complete": true
+}
