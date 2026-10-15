@@ -21,6 +21,11 @@ use std::{
 };
 use tokenizers::Tokenizer;
 
+mod asset_lease;
+mod quantised;
+use asset_lease::AssetLease;
+pub use quantised::{QuantisedMemoryEstimate, estimate_quantised_memory};
+
 pub const MODEL_ID: &str = "Qwen/Qwen2.5-Coder-0.5B-Instruct";
 pub const MODEL_REVISION: &str = "ea3f2471cf1b1f0db85067f1ef93848e38e88c25";
 pub const MODEL_SHA256: &str = "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44";
@@ -94,7 +99,7 @@ impl RuntimeOptions {
         }
     }
 
-    fn resolve(&self) -> Result<(Device, DType)> {
+    pub(crate) fn resolve(&self) -> Result<(Device, DType)> {
         let dtype = match self.dtype {
             InferenceDtype::F32 => DType::F32,
             InferenceDtype::F16 => DType::F16,
@@ -467,13 +472,43 @@ fn stable_attention_scores(
 }
 
 #[derive(Clone)]
+enum LinearBackend {
+    Dense(Linear),
+    Quantised {
+        weight: candle_core::quantized::QMatMul,
+        bias: Option<Tensor>,
+    },
+}
+
+impl LinearBackend {
+    fn forward(&self, input: &Tensor) -> candle_core::Result<Tensor> {
+        match self {
+            Self::Dense(base) => frozen_linear(base, input),
+            Self::Quantised { weight, bias } => {
+                let output = weight.forward(&input.contiguous()?)?;
+                match bias {
+                    None => Ok(output),
+                    Some(bias) => output.broadcast_add(bias),
+                }
+            }
+        }
+    }
+}
+
+impl From<Linear> for LinearBackend {
+    fn from(linear: Linear) -> Self {
+        Self::Dense(linear)
+    }
+}
+
+#[derive(Clone)]
 struct Projection {
-    base: Linear,
+    base: LinearBackend,
     adapter: Option<(Tensor, Tensor, f64)>,
 }
 impl Projection {
     fn forward(&self, x: &Tensor) -> candle_core::Result<Tensor> {
-        let base = frozen_linear(&self.base, x)?;
+        let base = self.base.forward(x)?;
         match &self.adapter {
             None => Ok(base),
             Some((a, b, scale)) => {
@@ -491,12 +526,12 @@ impl Projection {
 
 struct Layer {
     q: Projection,
-    k: Linear,
+    k: LinearBackend,
     v: Projection,
-    o: Linear,
-    gate: Linear,
-    up: Linear,
-    down: Linear,
+    o: LinearBackend,
+    gate: LinearBackend,
+    up: LinearBackend,
+    down: LinearBackend,
     norm1: LayerNorm,
     norm2: LayerNorm,
     kv: Option<(Tensor, Tensor)>,
@@ -508,12 +543,25 @@ pub struct QwenModel {
     embedding: Embedding,
     layers: Vec<Layer>,
     norm: LayerNorm,
-    lm_head: Linear,
+    lm_head: LinearBackend,
     cos: Tensor,
     sin: Tensor,
     device: Device,
     dtype: DType,
+    quantisation: Option<serde_json::Value>,
+    interleaved_rotary: bool,
     pub adapter_vars: AdapterVariables,
+    // Fields drop in declaration order. Keep the shared asset descriptor until
+    // all model tensors have dropped, including when moved out of a runtime.
+    _asset_lease: Option<AssetLease>,
+}
+
+/// Selected-layer traces retain the student's backward graph. Teacher callers
+/// detach and transfer only their selected rows before releasing a model.
+pub struct ModelTrace {
+    pub final_hidden: Tensor,
+    pub layer_hidden: Tensor,
+    pub mean_attention: Tensor,
 }
 
 fn constant(weights: &HashMap<String, Tensor>, name: &str) -> Result<Tensor> {
@@ -634,7 +682,7 @@ impl QwenModel {
             let base = base_linear(&weights, name, bias)?;
             let Some(ac) = &adapter else {
                 return Ok(Projection {
-                    base,
+                    base: base.into(),
                     adapter: None,
                 });
             };
@@ -683,7 +731,7 @@ impl QwenModel {
                 }
             }
             Ok(Projection {
-                base,
+                base: base.into(),
                 adapter: Some((
                     params.remove(0),
                     params.remove(0),
@@ -696,16 +744,17 @@ impl QwenModel {
             let p = format!("model.layers.{i}");
             layers.push(Layer {
                 q: projection(&format!("{p}.self_attn.q_proj"))?,
-                k: base_linear(&weights, &format!("{p}.self_attn.k_proj"), bias)?,
+                k: base_linear(&weights, &format!("{p}.self_attn.k_proj"), bias)?.into(),
                 v: projection(&format!("{p}.self_attn.v_proj"))?,
                 o: base_linear(
                     &weights,
                     &format!("{p}.self_attn.o_proj"),
                     cfg.model_type == "llama" && bias,
-                )?,
-                gate: base_linear(&weights, &format!("{p}.mlp.gate_proj"), false)?,
-                up: base_linear(&weights, &format!("{p}.mlp.up_proj"), false)?,
-                down: base_linear(&weights, &format!("{p}.mlp.down_proj"), false)?,
+                )?
+                .into(),
+                gate: base_linear(&weights, &format!("{p}.mlp.gate_proj"), false)?.into(),
+                up: base_linear(&weights, &format!("{p}.mlp.up_proj"), false)?.into(),
+                down: base_linear(&weights, &format!("{p}.mlp.down_proj"), false)?.into(),
                 norm1: LayerNorm::rms_norm(
                     constant(&weights, &format!("{p}.input_layernorm.weight"))?,
                     cfg.rms_norm_eps,
@@ -764,12 +813,15 @@ impl QwenModel {
             embedding,
             layers,
             norm,
-            lm_head: Linear::new(head, None),
+            lm_head: Linear::new(head, None).into(),
             cos: phase.cos()?.to_dtype(dtype)?,
             sin: phase.sin()?.to_dtype(dtype)?,
             device: dev,
             dtype,
+            quantisation: None,
+            interleaved_rotary: false,
             adapter_vars,
+            _asset_lease: None,
         })
     }
 
@@ -780,6 +832,10 @@ impl QwenModel {
         self.dtype
     }
 
+    pub fn configuration(&self) -> &QwenConfig {
+        &self.cfg
+    }
+
     pub fn clear_cache(&mut self) {
         for layer in &mut self.layers {
             layer.kv = None;
@@ -787,6 +843,30 @@ impl QwenModel {
     }
 
     pub fn hidden(&mut self, input: &Tensor, offset: usize, cache: bool) -> Result<Tensor> {
+        Ok(self.hidden_inner(input, offset, cache, None)?.0)
+    }
+
+    pub fn forward_trace(&mut self, input: &Tensor, layer: usize) -> Result<ModelTrace> {
+        ensure!(layer < self.layers.len(), "trace layer outside model");
+        ensure!(
+            input.dim(0)? == 1,
+            "trace capture requires one bounded sequence"
+        );
+        let (final_hidden, hidden, attention) = self.hidden_inner(input, 0, false, Some(layer))?;
+        Ok(ModelTrace {
+            final_hidden,
+            layer_hidden: hidden.context("selected hidden trace was not captured")?,
+            mean_attention: attention.context("selected attention trace was not captured")?,
+        })
+    }
+
+    fn hidden_inner(
+        &mut self,
+        input: &Tensor,
+        offset: usize,
+        cache: bool,
+        capture: Option<usize>,
+    ) -> Result<(Tensor, Option<Tensor>, Option<Tensor>)> {
         let (batch, seq) = input.dims2()?;
         ensure!(
             input.device().same_device(&self.device),
@@ -827,15 +907,19 @@ impl QwenModel {
         } else {
             None
         };
-        let mut x = self.embedding.forward(input)?;
-        for layer in &mut self.layers {
+        let mut x = self.embedding.forward(input)?.to_dtype(self.dtype)?;
+        let mut captured_hidden = None;
+        let mut captured_attention = None;
+        for (layer_index, layer) in self.layers.iter_mut().enumerate() {
             let norm = layer.norm1.forward(&x)?;
             let q = layer
                 .q
                 .forward(&norm)?
                 .reshape((batch, seq, heads, head_dim))?
                 .transpose(1, 2)?;
-            let k = frozen_linear(&layer.k, &norm)?
+            let k = layer
+                .k
+                .forward(&norm)?
                 .reshape((batch, seq, kv_heads, head_dim))?
                 .transpose(1, 2)?;
             let v = layer
@@ -844,8 +928,17 @@ impl QwenModel {
                 .reshape((batch, seq, kv_heads, head_dim))?
                 .transpose(1, 2)?;
             // Slow here means ordinary tensor operations with a correct backward graph.
-            let q = candle_nn::rotary_emb::rope_slow(&q, &cos, &sin)?;
-            let k = candle_nn::rotary_emb::rope_slow(&k, &cos, &sin)?;
+            let rotate = |input: &Tensor| {
+                if self.interleaved_rotary {
+                    // GGUF Llama conversion interleaves q/k rows. Dense HF and
+                    // GGUF Qwen2 use the original split-half rotary convention.
+                    candle_nn::rotary_emb::rope_i(&input.contiguous()?, &cos, &sin)
+                } else {
+                    candle_nn::rotary_emb::rope_slow(input, &cos, &sin)
+                }
+            };
+            let q = rotate(&q)?;
+            let k = rotate(&k)?;
             let (k, v) = if cache && offset > 0 {
                 let (pk, pv) = layer.kv.as_ref().context("missing decoding cache")?;
                 ensure!(pk.dim(2)? == offset, "decoding cache offset mismatch");
@@ -866,22 +959,29 @@ impl QwenModel {
             let k = repeat(k)?;
             let v = repeat(v)?;
             let scores = stable_attention_scores(&q, &k, head_dim, mask.as_ref())?;
-            let attention = candle_nn::ops::softmax(&scores.to_dtype(DType::F32)?, D::Minus1)?
+            let probabilities = candle_nn::ops::softmax(&scores.to_dtype(DType::F32)?, D::Minus1)?;
+            if capture == Some(layer_index) {
+                captured_attention = Some(probabilities.mean(1)?.squeeze(0)?);
+            }
+            let attention = probabilities
                 .to_dtype(self.dtype)?
                 .matmul(&v)?
                 .transpose(1, 2)?
                 .reshape((batch, seq, self.cfg.hidden_size))?;
-            x = (&x + frozen_linear(&layer.o, &attention)?)?;
+            x = (&x + layer.o.forward(&attention)?)?;
             let norm = layer.norm2.forward(&x)?;
-            let ff = (candle_nn::ops::silu(&frozen_linear(&layer.gate, &norm)?)?
-                * frozen_linear(&layer.up, &norm)?)?;
-            x = (&x + frozen_linear(&layer.down, &ff)?)?;
+            let ff =
+                (candle_nn::ops::silu(&layer.gate.forward(&norm)?)? * layer.up.forward(&norm)?)?;
+            x = (&x + layer.down.forward(&ff)?)?;
+            if capture == Some(layer_index) {
+                captured_hidden = Some(x.squeeze(0)?);
+            }
         }
-        Ok(self.norm.forward(&x)?)
+        Ok((self.norm.forward(&x)?, captured_hidden, captured_attention))
     }
 
     pub fn logits(&self, hidden: &Tensor) -> Result<Tensor> {
-        Ok(frozen_linear(&self.lm_head, hidden)?)
+        Ok(self.lm_head.forward(hidden)?)
     }
 }
 
@@ -946,6 +1046,85 @@ enum ChatFormat {
         template: String,
         configuration: serde_json::Value,
     },
+}
+
+/// Reuse one original tokeniser/template for memory planning across task prompts.
+/// Small auxiliary hashes are checked here; the full trial/runtime validators
+/// separately verify publisher provenance and every weight before inference.
+pub struct ComparativePromptEncoder {
+    tokenizer: Tokenizer,
+    chat: ChatFormat,
+}
+
+impl ComparativePromptEncoder {
+    pub fn load(base_dir: &Path, gguf: bool) -> Result<Self> {
+        let manifest: AssetManifest = serde_json::from_slice(&fs::read(base_dir.join(if gguf {
+            "gguf-assets.json"
+        } else {
+            "assets.json"
+        }))?)?;
+        let source = if gguf {
+            base_dir.join("source")
+        } else {
+            base_dir.to_owned()
+        };
+        let root = base_dir.canonicalize()?;
+        for name in ["tokenizer.json", "tokenizer_config.json"] {
+            let relative = if gguf {
+                format!("source/{name}")
+            } else {
+                name.to_owned()
+            };
+            let expected = manifest
+                .files
+                .get(&relative)
+                .context("tokeniser/template checksum is absent from the model manifest")?;
+            let path = source.join(name).canonicalize()?;
+            ensure!(
+                path.starts_with(&root),
+                "tokeniser/template escapes the model directory"
+            );
+            ensure!(
+                &sha256_file(&path)? == expected,
+                "original tokeniser/template bytes changed"
+            );
+        }
+        let tokenizer = Tokenizer::from_file(source.join("tokenizer.json"))
+            .map_err(|error| anyhow::anyhow!(error.to_string()))?;
+        let configuration =
+            serde_json::from_slice(&fs::read(source.join("tokenizer_config.json"))?)?;
+        let chat = if !gguf && manifest.model_id == MODEL_ID && manifest.revision == MODEL_REVISION
+        {
+            ChatFormat::PinnedQwen
+        } else {
+            original_chat_format(configuration)?
+        };
+        Ok(Self { tokenizer, chat })
+    }
+
+    pub fn input_tokens(&self, prompt: &str) -> Result<usize> {
+        ensure!(
+            !prompt.trim().is_empty() && prompt.len() <= 65536,
+            "prompt must contain 1–65536 bytes"
+        );
+        let rendered = match &self.chat {
+            ChatFormat::PinnedQwen => chat_prefix(prompt),
+            ChatFormat::Original {
+                template,
+                configuration,
+            } => render_original_chat(template, configuration, prompt)?,
+        };
+        Ok(self
+            .tokenizer
+            .encode(rendered, false)
+            .map_err(|error| anyhow::anyhow!(error.to_string()))?
+            .get_ids()
+            .len())
+    }
+}
+
+pub fn comparative_input_tokens(base_dir: &Path, gguf: bool, prompt: &str) -> Result<usize> {
+    ComparativePromptEncoder::load(base_dir, gguf)?.input_tokens(prompt)
 }
 
 fn render_original_chat(
@@ -1057,6 +1236,19 @@ fn parse_eos_ids(value: &serde_json::Value) -> Result<Vec<u32>> {
 }
 
 impl ModelRuntime {
+    pub fn formatted_prompt(&self, prompt: &str) -> Result<String> {
+        match &self.chat {
+            ChatFormat::PinnedQwen => Ok(chat_prefix(prompt)),
+            ChatFormat::Original {
+                template,
+                configuration,
+            } => render_original_chat(template, configuration, prompt),
+        }
+    }
+
+    pub fn primary_eos_token_id(&self) -> u32 {
+        self.eos_token_ids[0]
+    }
     pub fn load(base_dir: &Path, checkpoint: Option<&Path>) -> Result<Self> {
         Self::load_with_options(base_dir, checkpoint, RuntimeOptions::default())
     }
@@ -1082,6 +1274,10 @@ impl ModelRuntime {
     /// Comparator assets have independent publisher/revision/hash provenance.
     /// They cannot weaken the pinned assessment loader or create an adapter.
     pub fn load_comparative_with_options(base_dir: &Path, options: RuntimeOptions) -> Result<Self> {
+        if base_dir.join("gguf-assets.json").exists() {
+            return Self::load_quantised_with_options(base_dir, options);
+        }
+        let lease = AssetLease::acquire(base_dir)?;
         let assets = crate::hub::validate_downloaded_assets(base_dir)?;
         let config: serde_json::Value =
             serde_json::from_slice(&fs::read(base_dir.join("config.json"))?)?;
@@ -1099,7 +1295,7 @@ impl ModelRuntime {
             .filter(|value| !value.is_null())
             .unwrap_or(&config["eos_token_id"]);
         let eos = parse_eos_ids(eos)?;
-        Self::load_validated(
+        let mut runtime = Self::load_validated(
             base_dir,
             None,
             assets,
@@ -1107,7 +1303,105 @@ impl ModelRuntime {
             original_chat_format(tokeniser_config)?,
             eos,
             2048,
-        )
+        )?;
+        runtime.model._asset_lease = Some(lease.with_device(runtime.model.device()));
+        Ok(runtime)
+    }
+
+    /// GGUF weights and original source tokeniser/config have independent,
+    /// immutable publisher provenance. Quantised matmul uses F32 activations;
+    /// this never expands the complete matrix set into floating-point weights.
+    pub fn load_quantised_with_options(base_dir: &Path, options: RuntimeOptions) -> Result<Self> {
+        Self::load_quantised_with_context(base_dir, options, 1024)
+    }
+
+    pub fn load_quantised_with_context(
+        base_dir: &Path,
+        options: RuntimeOptions,
+        context_tokens: usize,
+    ) -> Result<Self> {
+        ensure!(
+            (1..=4096).contains(&context_tokens),
+            "quantised runtime context must be 1–4096 tokens"
+        );
+        ensure!(
+            options.dtype == InferenceDtype::F32,
+            "native GGUF matmul requires explicit F32 activations; choose dtype f32, while weights remain quantised"
+        );
+        let lease = AssetLease::acquire(base_dir)?;
+        let proof = crate::hub::validate_gguf_assets(base_dir)?;
+        let source = base_dir.join(&proof.source_assets.directory);
+        let configuration: serde_json::Value =
+            serde_json::from_slice(&fs::read(source.join("config.json"))?)?;
+        let cfg: QwenConfig = serde_json::from_value(configuration.clone())?;
+        cfg.validate()?;
+        let context_cap = context_tokens.min(cfg.max_position_embeddings);
+        let tokeniser_configuration =
+            serde_json::from_slice(&fs::read(source.join("tokenizer_config.json"))?)?;
+        let generation = if proof
+            .source_assets
+            .manifest
+            .files
+            .contains_key("generation_config.json")
+        {
+            serde_json::from_slice::<serde_json::Value>(&fs::read(
+                source.join("generation_config.json"),
+            )?)?
+        } else {
+            serde_json::Value::Null
+        };
+        let eos_token_ids = parse_eos_ids(
+            generation
+                .get("eos_token_id")
+                .filter(|value| !value.is_null())
+                .unwrap_or(&configuration["eos_token_id"]),
+        )?;
+        ensure!(
+            eos_token_ids
+                .iter()
+                .all(|id| (*id as usize) < cfg.vocab_size),
+            "GGUF original EOS is outside its vocabulary"
+        );
+        let tokenizer = Tokenizer::from_file(source.join("tokenizer.json"))
+            .map_err(|error| anyhow::anyhow!(error.to_string()))?;
+        let chat = original_chat_format(tokeniser_configuration)?;
+        let (device, _) = options.resolve()?;
+        let mut file = fs::File::open(base_dir.join(&proof.filename))?;
+        let content = candle_core::quantized::gguf_file::Content::read(&mut file)?;
+        quantised::validate_tokeniser_metadata(
+            &content,
+            &tokenizer,
+            &configuration,
+            &eos_token_ids,
+        )?;
+        let mut model = QwenModel::from_gguf(
+            cfg,
+            &content,
+            &mut file,
+            &device,
+            proof.file_bytes,
+            context_cap,
+        )?;
+        if let Some(metadata) = model.quantisation.as_mut() {
+            metadata["original_source_model_id"] =
+                serde_json::json!(proof.source_assets.manifest.model_id);
+            metadata["original_source_revision"] =
+                serde_json::json!(proof.source_assets.manifest.revision);
+            metadata["quantised_publisher_model_id"] = serde_json::json!(proof.model_id);
+            metadata["quantised_publisher_revision"] = serde_json::json!(proof.revision);
+            metadata["weight_sha256"] = serde_json::json!(proof.file_sha256);
+        }
+        model._asset_lease = Some(lease.with_device(model.device()));
+        Ok(Self {
+            model,
+            tokenizer,
+            assets: proof.assets,
+            checkpoint_id: proof.file_sha256,
+            options,
+            chat,
+            eos_token_ids,
+            context_cap,
+        })
     }
 
     fn load_validated(
@@ -1188,7 +1482,24 @@ impl ModelRuntime {
     }
 
     pub fn execution_metadata(&self) -> serde_json::Value {
-        serde_json::json!({"engine":"native_rust_candle","requested":self.options,"actual_device":format!("{:?}",self.model.device().location()),"actual_dtype":format!("{:?}",self.model.dtype()),"cuda_feature_compiled":cfg!(feature="cuda"),"cuda_active":self.model.device().is_cuda(),"cpu_fallback":false,"model_id":self.assets.model_id,"revision":self.assets.revision,"checkpoint_id":self.checkpoint_id,"context_cap":self.context_cap})
+        serde_json::json!({
+            "engine": "native_rust_candle",
+            "requested": self.options,
+            "actual_device": format!("{:?}", self.model.device().location()),
+            "actual_dtype": format!("{:?}", self.model.dtype()),
+            "weight_format": if self.model.quantisation.is_some() {"gguf"} else {"safetensors"},
+            "quantisation": self.model.quantisation,
+            "cuda_feature_compiled": cfg!(feature = "cuda"),
+            "cuda_active": self.model.device().is_cuda(),
+            "cpu_fallback": false,
+            "asset_lifetime_shared_lease": self.model._asset_lease.is_some(),
+            "available_cpu_threads": std::thread::available_parallelism().ok().map(usize::from),
+            "candle_cpu_threads": candle_core::utils::get_num_threads(),
+            "model_id": self.assets.model_id,
+            "revision": self.assets.revision,
+            "checkpoint_id": self.checkpoint_id,
+            "context_cap": self.context_cap,
+        })
     }
 
     pub fn generate(&mut self, request: GenerationRequest) -> Result<Generation> {
@@ -1306,7 +1617,12 @@ impl ModelRuntime {
     }
 }
 
-fn sample(logits: &[f32], temperature: f64, top_p: f64, rng: &mut StableRng) -> Result<u32> {
+pub(crate) fn sample(
+    logits: &[f32],
+    temperature: f64,
+    top_p: f64,
+    rng: &mut StableRng,
+) -> Result<u32> {
     ensure!(
         !logits.is_empty() && logits.iter().all(|v| v.is_finite()),
         "non-finite or empty generation logits"
@@ -1750,5 +2066,45 @@ mod tests {
                 .to_vec1::<f32>()
                 .unwrap()
         );
+        let trace = model.forward_trace(&input, 0).unwrap();
+        assert_eq!(trace.layer_hidden.dims(), &[5, 16]);
+        assert_eq!(trace.mean_attention.dims(), &[5, 5]);
+        assert_eq!(trace.final_hidden.dims(), &[1, 5, 16]);
+        assert!(
+            trace
+                .mean_attention
+                .sum(1)
+                .unwrap()
+                .to_vec1::<f32>()
+                .unwrap()
+                .iter()
+                .all(|x| (x - 1.).abs() < 1e-6)
+        );
+        let trace_loss = (trace.layer_hidden.sqr().unwrap().mean_all().unwrap()
+            + trace.mean_attention.sqr().unwrap().mean_all().unwrap())
+        .unwrap();
+        let trace_gradients = trace_loss.backward().unwrap();
+        for (name, var) in &model.adapter_vars {
+            if name.contains("layers.0") {
+                let gradient = trace_gradients
+                    .get(var)
+                    .unwrap_or_else(|| panic!("captured layer lost gradient {name}"));
+                assert!(
+                    gradient
+                        .sqr()
+                        .unwrap()
+                        .sum_all()
+                        .unwrap()
+                        .to_scalar::<f32>()
+                        .unwrap()
+                        .is_finite()
+                );
+            } else {
+                assert!(
+                    trace_gradients.get(var).is_none(),
+                    "later layer unexpectedly enters a selected-layer objective"
+                );
+            }
+        }
     }
 }

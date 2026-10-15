@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "purpose": "Immutable original Linux x86_64 V1 policy source bytes; historical report verification only",
+  "default_policy_sha256": "0bf995b5f69865792503015f6af52b457c861b679877956e939c2137ddb4a562",
+  "files": {
+    "audit.rs": "20f1f315fd34e1704dc6e80c4e956549e443c17495e417fbff8eeb8a2f79f41f",
+    "Containerfile": "967394529f4533dbc28d3bf4b635a1439f3c7b520d5d956276a4f8264294a5f7",
+    "controller.rs": "a8ffe490736285cf3d8521f598255bfe552552de6393c8f3f3524b33e0e23f7b",
+    "control.rs": "09fd3c3c08d0dd09bfcf3d2a751956bf767229380aad130e622a9dce4637920d",
+    "seccomp.json": "60d333659954efdc72390eac8677a1fe272163fffe305c60a66b5c50ca64be9f"
+  }
+}

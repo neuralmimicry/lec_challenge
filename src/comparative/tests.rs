@@ -22,6 +22,7 @@ impl Fixture {
             role: "fixture".into(),
             licence: "fixture-only".into(),
             developer_id: "fixture-only".into(),
+            weight_format: WeightFormat::Safetensors,
         };
         let assets = model::AssetManifest {
             model_id: model.model_id.clone(),
@@ -53,11 +54,14 @@ impl Fixture {
             models: vec![frozen.clone()],
             tasks,
             split: ComparisonSplit::Development,
+            pack: ComparisonPack::Original,
             runtime: serde_json::to_value(RuntimeOptions::default()).unwrap(),
             max_tokens: 64,
             seed: 1729,
             temperature: 0.2,
             top_p: 0.95,
+            generation_timeout_seconds: 120,
+            maximum_concurrent_graders: 2,
             sandbox: SandboxConfig {
                 runtime: "/nonexistent-labelled-fixture-runtime".into(),
                 report_dir: "sandbox".into(),

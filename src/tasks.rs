@@ -896,6 +896,9 @@ fn days(y: i64, m: i64) -> i64 {
 
 /// Host-only oracle. It is never copied into a candidate container or prompt.
 pub fn oracle(id: &str, v: &Value) -> Result<Value> {
+    if crate::teacher_search::qualification::is_task(id) {
+        return crate::teacher_search::qualification::oracle(id, v);
+    }
     domain::validate_input(id, v)?;
     let out = match id {
         "ledger.sum" => json!(ints(v).iter().sum::<i64>()),
@@ -1717,6 +1720,9 @@ pub fn oracle(id: &str, v: &Value) -> Result<Value> {
 
 /// Private edge cases are separate from the serialised public task catalogue.
 pub fn private_cases(task: &Task) -> Result<Vec<Case>> {
+    if crate::teacher_search::qualification::is_task(&task.id) {
+        return crate::teacher_search::qualification::private_cases(task);
+    }
     let id = task.id.as_str();
     let inputs: Vec<Value> = match id {
         x if x.starts_with("ledger.") => vec![

@@ -1,0 +1,7 @@
+# Build contexts contain only trusted sandbox sources, never weights, provider
+# records, private graders, credentials, generated outputs or local build state.
+**
+!sandbox/
+!sandbox/**
+sandbox/**/target/
+sandbox/**/target/**

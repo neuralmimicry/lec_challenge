@@ -1,13 +1,4 @@
-# Keep Rust sources and prose consistent across developer checkouts.
-* text=auto eol=lf
-
-# Provenance and checksum-bound evidence must retain the original bytes.
-docs/rights/snapshots/** -text
-docs/comparative-models/provenance/** -text
-offline_bundle/** -text
-recordings/** -text
-reports/** -text
-tasks/** -text
-grader_private/** -text
-*.pdf -text
-*.mp4 -text
+# Publisher evidence and reviewed diffs retain their exact original bytes.
+docs/comparative-models/replacements/** -whitespace
+docs/bitnet/*.patch -whitespace
+docs/bitnet/provenance/upstream-notices/** -whitespace

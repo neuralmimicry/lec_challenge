@@ -8,6 +8,8 @@ use std::{
     process::Command,
     time::Instant,
 };
+#[path = "support/source_inputs.rs"]
+mod source_inputs;
 
 fn main() -> Result<()> {
     let report_directory = std::env::args_os()
@@ -15,7 +17,9 @@ fn main() -> Result<()> {
         .map(PathBuf::from)
         .unwrap_or_else(|| PathBuf::from("reports"));
     fs::create_dir_all(&report_directory)?;
-    let checks: [(&str, &[&str]); 5] = [
+    let original_sources = source_inputs::capture()?;
+    let verifier_sha256 = artefact::file_hash(&std::env::current_exe()?)?;
+    let checks: [(&str, &[&str]); 8] = [
         ("format", &["fmt", "--all", "--", "--check"]),
         (
             "clippy",
@@ -30,6 +34,36 @@ fn main() -> Result<()> {
             ],
         ),
         ("unit", &["test", "--locked", "--offline"]),
+        (
+            "launcher_recovery",
+            &[
+                "test",
+                "--locked",
+                "--offline",
+                "--example",
+                "platform_launch",
+            ],
+        ),
+        (
+            "diagnostic_lifecycle",
+            &[
+                "test",
+                "--locked",
+                "--offline",
+                "--example",
+                "quantised_prefix_qa",
+            ],
+        ),
+        (
+            "numerical_helper_launch",
+            &[
+                "test",
+                "--locked",
+                "--offline",
+                "--example",
+                "distillation_qa",
+            ],
+        ),
         (
             "original_tokeniser",
             &[
@@ -79,19 +113,22 @@ fn main() -> Result<()> {
         );
         steps.push(json!({"name":name,"command":args,"success":success,"exit_code":output.status.code(),"elapsed_seconds":start.elapsed().as_secs_f64(),"evidence":artefact::Artefact::capture(&root,path)?}));
     }
-    let skill = fs::read_to_string(".agents/skills/rust-distillation-evidence/SKILL.md")?;
-    let frontmatter = skill
-        .strip_prefix("---\n")
-        .and_then(|s| s.split_once("\n---\n"))
-        .context("project skill frontmatter missing")?
-        .0;
-    ensure!(
-        frontmatter
-            .lines()
-            .any(|l| l == "name: rust-distillation-evidence")
-            && frontmatter.lines().any(|l| l.starts_with("description: ")),
-        "project skill metadata invalid"
-    );
+    let skill_names = ["rust-distillation-evidence", "rust-distillation-study"];
+    for name in skill_names {
+        let skill = fs::read_to_string(format!(".agents/skills/{name}/SKILL.md"))?;
+        let frontmatter = skill
+            .strip_prefix("---\n")
+            .and_then(|s| s.split_once("\n---\n"))
+            .context("project skill frontmatter missing")?
+            .0;
+        ensure!(
+            frontmatter.lines().any(|l| l == format!("name: {name}"))
+                && frontmatter.lines().any(|l| l
+                    .strip_prefix("description: ")
+                    .is_some_and(|d| !d.trim().is_empty())),
+            "project skill metadata invalid: {name}"
+        );
+    }
     let notices: serde_json::Value =
         serde_json::from_slice(&fs::read("offline_bundle/notices/manifest.json")?)?;
     let notice_gaps = notices["remaining_notice_gaps"]
@@ -102,13 +139,32 @@ fn main() -> Result<()> {
         notices["cargo_lock_sha256"] == artefact::file_hash(Path::new("Cargo.lock"))?,
         "dependency notice lock is stale"
     );
+    let source_inputs_unchanged = source_inputs::capture()? == original_sources;
+    passed &= source_inputs_unchanged;
     let demo = fs::read("reports/demo.json")
         .ok()
         .and_then(|b| serde_json::from_slice::<serde_json::Value>(&b).ok())
         .unwrap_or_default();
-    let report = json!({"schema_version":1,"observed_unix_ms":lec_distil::ledger::unix_millis(),"local_quality_checks_passed":passed&&notices_complete,"software_checks_passed":passed,"dependency_notices_complete":notices_complete,"assessment_complete":demo["status"]=="COMPLETE","steps":steps,"project_skill_validated":true,"resolved_dependency_packages":notices["packages"].as_array().map(Vec::len),"original_notice_gaps":notice_gaps.len(),"notice_gap_details":notice_gaps,"evidence_rule":"Passing software QA does not replace missing dependency grants, real provider recordings, approved data, assessment checkpoints or measured held-out learning."});
-    artefact::write_json(&report_directory.join("verification.json"), &report)?;
-    println!("{}", serde_json::to_string_pretty(&report)?);
+    let report = json!({"schema_version":1,"observed_unix_ms":lec_distil::ledger::unix_millis(),"local_quality_checks_passed":passed&&notices_complete,"software_checks_passed":passed,"dependency_notices_complete":notices_complete,"assessment_complete":demo["status"]=="COMPLETE","steps":steps,"project_skill_validated":true,"validated_project_skills":skill_names,"resolved_dependency_packages":notices["packages"].as_array().map(Vec::len),"original_notice_gaps":notice_gaps.len(),"notice_gap_details":notice_gaps,"evidence_rule":"Passing software QA does not replace missing dependency grants, real provider recordings, approved data, assessment checkpoints or measured held-out learning."});
+    let mut report = report;
+    report["source_inputs_unchanged"] = source_inputs_unchanged.into();
+    report["source_inputs"] = serde_json::to_value(original_sources)?;
+    report["verifier_executable_sha256"] = verifier_sha256.into();
+    let report_path = report_directory.join("verification.json");
+    artefact::write_json(&report_path, &report)?;
+    println!(
+        "{}",
+        serde_json::to_string_pretty(&json!({
+            "report":artefact::Artefact::capture(&root, report_path)?,
+            "software_checks_passed":passed,
+            "dependency_notices_complete":notices_complete,
+            "source_inputs_unchanged":source_inputs_unchanged,
+            "checks_passed":report["steps"].as_array().map(|steps| steps.iter().filter(|s| s["success"] == true).count()),
+            "checks_total":checks.len(),
+            "original_notice_gaps":notice_gaps.len(),
+            "assessment_complete":report["assessment_complete"]
+        }))?
+    );
     ensure!(passed, "one or more local QA steps failed");
     ensure!(
         notices_complete,

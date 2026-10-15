@@ -1,0 +1,14 @@
+# Portable policy V2: build natively on the explicitly recorded Linux ABI.
+# The reviewed OCI index includes the unchanged original amd64 manifest and a
+# separately pinned arm64 manifest. Exact publisher index bytes are retained.
+FROM docker.io/library/rust@sha256:114c7a4425406451c2866b6aafe69fe29b1b298832db1277d411ac73c82d04d6
+WORKDIR /build
+COPY sandbox/deps/ /build/deps/
+RUN cargo build --locked --release --manifest-path /build/deps/Cargo.toml && mkdir -p /opt/deps && cp /build/deps/target/release/deps/*.rlib /opt/deps/ && find /opt/deps -name 'libserde_json-*.rlib' > /opt/deps/serde_json.path
+COPY sandbox/audit_v2.rs /build/audit.rs
+COPY sandbox/ptrace_v2.rs sandbox/syscalls_v2.rs /build/
+COPY sandbox/probe.rs /build/probe.rs
+RUN rustc --edition=2024 -O -L dependency=/opt/deps --extern serde_json=$(cat /opt/deps/serde_json.path) /build/audit.rs -o /usr/local/bin/lec-audit && rustc --edition=2024 -O -L dependency=/opt/deps --extern serde_json=$(cat /opt/deps/serde_json.path) /build/probe.rs -o /usr/local/bin/lec-probe && touch /opt/rootfs-probe && chmod 666 /opt/rootfs-probe && rm -rf /build
+USER 65532:65532
+WORKDIR /tmp
+ENTRYPOINT ["/usr/local/bin/lec-audit"]

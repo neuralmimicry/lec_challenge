@@ -12,9 +12,16 @@ The required assessment entry point is:
 ./run.sh demo --offline
 ```
 
+The additional local research workflow is `./run.sh` (or `./run.sh explore
+--offline` for cached-only execution). It resumes teacher search, data collection
+and bounded method/student studies, recording gaps and a nonzero result whenever
+the declared quality target or required evidence is unmet. Its default maximum
+wall time is 24 hours; use `--maximum-run-seconds` to set a shorter invocation.
+Interrupted work remains available to the next invocation.
+
 It prints phase results, saves partial evidence and exits nonzero while required recordings/checkpoints are missing. `./run.sh drill --offline` executes independent assertions and reports every required drill, including incomplete actual-checkpoint cases. An honest NO SHIP from a complete valid evaluation is a completed decision; missing evidence is a failure.
 
-The supported machine is Linux x86-64 with enforced cgroup v2 CPU/memory/swap/PID controls and native Podman or a verified Docker-compatible runtime. The measured workstation has 16 logical CPUs, about 60 GiB RAM and an 8 GiB RTX 2080; the implemented and verified model path uses CPU float32. CUDA is not required. Allow several GB for model/runtime assets and additional space for Cargo builds. See [reproduction](docs/reproduction.md) for exact prerequisites and measured timings.
+The supported machine is Linux x86-64 with enforced cgroup v2 CPU/memory/swap/PID controls and native Podman or a verified Docker-compatible runtime. The measured workstation has 16 logical CPUs, about 60 GiB RAM and an 8 GiB RTX 2080. The assessment path defaults to CPU float32; the additional comparative engine has verified CUDA float16 execution. CUDA is not required for the assessment commands. Allow several GB for model/runtime assets and additional space for Cargo builds. See [reproduction](docs/reproduction.md) for exact prerequisites and measured timings.
 
 For a source checkout, install the pinned Rust toolchain, perform an explicit initial online dependency build, then use the offline launcher:
 
@@ -38,7 +45,7 @@ cargo test --locked --offline
 | Training data | `curate` | Immutable held-out lineage/index and real provider/controller evidence verified before opening optimiser |
 | Model adaptation | `model`, `train` | Frozen 0.5B base; differentiable q/v LoRA, assistant-only targets, finite gradients and resumable AdamW |
 | Decision | `evaluate`, `gate` | Complete checkpoint/request-bound outcomes; source t and cluster bootstrap lower bounds both exceed +2 points |
-| Serving | `serve` | Bounded CPU worker; immutable checkpoint IDs; verified gate before production canary; atomic rollback |
+| Serving | `serve` | Bounded dedicated model worker; immutable checkpoint IDs; verified gate before production canary; atomic rollback |
 | Orchestration | `main`, `drills`, `artefact` | Live progress, durable reports, explicit failures, fixtures separated from required real evidence |
 
 The frozen [three-page design](docs/design.pdf), [editable design](docs/design.md), [deviations](docs/deviations.md), [acceptance checklist](docs/acceptance.md) and [agent plan](agents/PLAN.md) explain the choices. The first assessment commit is `74eba150f766a0d93c2a8ad18066daac562314cf`; the repository's earlier initial README commit is preserved.
@@ -83,12 +90,60 @@ Application and candidate logic, model adaptation, statistics and tests are Rust
 
 The optional native CUDA engine now runs on this laptop's 8 GiB RTX 2080 with explicit float16 execution and no CPU fallback. The [pinned comparative roster](config/comparative-models.toml) adds Qwen2.5-Coder-1.5B, DeepSeek-Coder-1.3B and an optional SmolLM2-1.7B general instruction control. The [GPU guide](docs/gpu.md) explains the measured native-toolchain compatibility fix, one-model-at-a-time hosting and actual evidence. The [Hub downloader](docs/hub.md) reads tokens only from ephemeral stdin/environment, verifies publisher hashes and stores no credentials.
 
-```sh
-./run-gpu.sh serve --comparative --device cuda --dtype f16 \
-  --base offline_bundle/comparative/qwen-coder-1_5b \
-  --config config/serving-teacher.toml
+All three initial alternatives were downloaded and publisher-verified: 9,203,214,224 weight
+bytes in total. The adaptive search subsequently pruned those weaker weights,
+preserving their provenance and measured evidence. Their [actual serial GPU endpoint checks](reports/comparative/gpu-serving-teachers-fixed/report.json)
+passed. The first Qwen 1.5B failure and its float32 attention-score fix remain
+documented. Post-fix verification passed **106 tests**, formatting and strict
+all-target Clippy; the [verification report](reports/comparative/verification-attention-fix/verification.json)
+separately retains the unresolved optional build-tool notice gap.
 
-./run-gpu.sh compare-models --device cuda --dtype f16
+The [completed development comparison](docs/comparative-models.md#completed-development-experiment--15-october-2026)
+contains all 64 planned observations: Qwen 0.5B **0/16**, Qwen 1.5B **2/16**,
+DeepSeek 1.3B **0/16**, SmolLM2 1.7B **0/16**. All generations completed; compile
+and contract failures remain failures. The [resource table](reports/comparative/resources/resources.md)
+and its JSON retain actual per-task times/tokens and evidence hashes. These are
+descriptive original-model results, with no learning or promotion claim.
+
+The adaptive [search roster](config/teacher-search.toml) now starts with a verified
+7B Q4 teacher and visits further immutable coding alternatives. It retains the
+strongest measured model, requires a separate fresh development confirmation for
+qualification, and prunes owned inactive poor weights while preserving evidence.
+The 7B model currently passes **7/16 development tasks**; no qualifying fleet or
+learning gain is claimed. The original small-model roster remains a historical
+experiment whose pruned assets require explicit online rehydration before new inference.
+
+```sh
+# Resume original engine/data; live download, verification and grading progress.
+./run.sh select-teachers
+
+# Cached-only mode: no Hub metadata requests or downloads.
+./run.sh select-teachers --offline
+
+# Detect affinity/cgroup CPU, available RAM, GPU and VRAM.
+./run.sh hardware
 ```
+
+Interrupted runs resume validated cached work by default. Teacher/model/data or
+training-policy changes require an explicit new protocol; `--fresh` preserves
+the previous directory and prints a new output path. The
+[local-study skill](.agents/skills/rust-distillation-study/SKILL.md) records the
+agent execution contracts. The conventional and genuinely ternary study tracks
+are additional local research; see [current status](STATUS.md) for measured
+checkpoints, comparisons and unfinished work. `bitnet.cpp` is the documented
+native C++ inference exception; training and orchestration remain Rust.
+
+The [actual SFT development comparison](reports/local-study/sft-development-comparison-c7c.md)
+retains both 0/16 scores and explicitly marks the quality comparison unavailable:
+seven adapter grades lack complete infrastructure evidence. Real operator
+rounds and fresh-process reloads establish executable SFT, KL, hidden-feature
+and attention objectives; they do not establish learning. Official-base BitNet
+rounds at three and 48 steps changed no effective trits. The separate
+[64-step round](reports/local-study/native-bitnet-64-result.md) changed 230,999
+effective trits and passed independent reload; native numerical comparisons still
+fail their fixed tolerance. These claims remain separate from coding quality.
+The [latest completed verification](reports/local-study/verification-006/verification.json)
+passed all eight software checks and 254 ordinary tests while retaining the
+optional dependency-notice gap.
 
 Comparisons use train/development tasks and preserve the sealed held-out set. Original-model scores measure no learning and cannot authorise promotion. DeepSeek output-trained derivatives inherit its licence/use obligations. The earlier delivery archives remain the verified CPU snapshot; rebuild and verify a new package to include this extension. The [full dependency inventory](docs/dependency-notices.md) reports one evidenced upstream notice gap in the optional CUDA build tool, separately from passing software checks.

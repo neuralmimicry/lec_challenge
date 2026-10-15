@@ -15,6 +15,7 @@ use std::{
     collections::{BTreeMap, BTreeSet},
     path::{Path, PathBuf},
 };
+mod resume;
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct CheckpointEvidence {
@@ -279,89 +280,98 @@ pub fn verify(eval: &Evaluation, root: &Path, gate_path: &Path, cfg: &GateConfig
     // behind a filter and then reuse the same file as a clean sealed evaluation.
     for outcome in &eval.outcomes {
         ensure!(
-            outcome.split == eval.split,
-            "evaluation contains mixed split outcomes"
-        );
-        ensure!(
             observed.insert((outcome.task_id.clone(), outcome.seed)),
             "duplicate evaluation task/seed"
         );
-        let task = corpus
-            .iter()
-            .find(|task| task.id == outcome.task_id)
-            .context("unknown evaluation task")?;
-        ensure!(
-            task.split == eval.split
-                && task.source_id == outcome.source_id
-                && task.specification_sha256 == outcome.specification_sha256
-                && task.oracle_sha256 == outcome.oracle_sha256,
-            "task/source/grader mismatch"
-        );
-        ensure!(
-            outcome.checkpoint_id == eval.checkpoint.checkpoint_id,
-            "mixed checkpoint outcomes"
-        );
-        let generated: GenerationEvidence =
-            serde_json::from_slice(&std::fs::read(outcome.generation.verify(root)?)?)?;
-        verify_generation(
-            &generated,
-            &prereg.inference,
-            task.prompt(),
-            outcome.seed,
-            &outcome.checkpoint_id,
-        )?;
-        match (&generated.generation, &generated.model_error) {
-            (None, Some(_)) => ensure!(
-                !outcome.success
-                    && !outcome.generation_complete
-                    && outcome.sandbox_report.is_none(),
-                "generation error was counted as success or supplied invented execution"
-            ),
-            (Some(generation), None) => {
-                ensure!(
-                    generation.complete == outcome.generation_complete,
-                    "generation completion state mismatch"
-                );
-                if !generation.complete || generation.completion.trim().is_empty() {
-                    ensure!(
-                        !outcome.success && outcome.sandbox_report.is_none(),
-                        "incomplete/empty output did not fail before execution"
-                    );
-                    continue;
-                }
-                let mut report: SandboxReport = serde_json::from_slice(&std::fs::read(
-                    outcome
-                        .sandbox_report
-                        .as_ref()
-                        .context("completed generation lacks trusted grading report")?
-                        .verify(root)?,
-                )?)?;
-                bind_audit_to_root(&mut report, root)?;
-                let code = extract_code(&generation.completion);
-                sandbox::verify_report(&report, &prereg.sandbox_config, task, &code)?;
-                ensure!(
-                    report.policy_sha256 == prereg.sandbox_policy_sha256
-                        && report.image_id == prereg.sandbox_image_id,
-                    "execution used a different sandbox image/policy"
-                );
-                let required = task.public_examples.len() + tasks::private_cases(task)?.len();
-                let passed = report.passed
-                    && !report.quarantined
-                    && report.trace_complete
-                    && report.cases_total == required
-                    && report.cases_passed == required;
-                ensure!(
-                    outcome.success == passed,
-                    "success disagrees with complete trusted verdict"
-                );
-            }
-            _ => anyhow::bail!("generation must contain exactly one real result or model error"),
-        }
+        verify_cached_outcome(outcome, &eval.checkpoint, &prereg, &corpus, root)?;
     }
     ensure!(
         observed == expected,
         "evaluation lacks expected held-out task/seed, or includes extras"
     );
+    Ok(())
+}
+
+fn verify_cached_outcome(
+    outcome: &Outcome,
+    checkpoint: &CheckpointEvidence,
+    prereg: &Preregistration,
+    corpus: &[tasks::Task],
+    root: &Path,
+) -> Result<()> {
+    ensure!(
+        outcome.split == prereg.split,
+        "evaluation contains mixed split outcomes"
+    );
+    let task = corpus
+        .iter()
+        .find(|task| task.id == outcome.task_id)
+        .context("unknown evaluation task")?;
+    ensure!(
+        task.split == prereg.split
+            && task.source_id == outcome.source_id
+            && task.specification_sha256 == outcome.specification_sha256
+            && task.oracle_sha256 == outcome.oracle_sha256,
+        "task/source/grader mismatch"
+    );
+    ensure!(
+        outcome.checkpoint_id == checkpoint.checkpoint_id,
+        "mixed checkpoint outcomes"
+    );
+    let generated: GenerationEvidence =
+        serde_json::from_slice(&std::fs::read(outcome.generation.verify(root)?)?)?;
+    verify_generation(
+        &generated,
+        &prereg.inference,
+        task.prompt(),
+        outcome.seed,
+        &outcome.checkpoint_id,
+    )?;
+    match (&generated.generation, &generated.model_error) {
+        (None, Some(_)) => ensure!(
+            !outcome.success && !outcome.generation_complete && outcome.sandbox_report.is_none(),
+            "generation error was counted as success or supplied invented execution"
+        ),
+        (Some(generation), None) => {
+            ensure!(
+                generation.complete == outcome.generation_complete,
+                "generation completion state mismatch"
+            );
+            if !generation.complete || generation.completion.trim().is_empty() {
+                ensure!(
+                    !outcome.success && outcome.sandbox_report.is_none(),
+                    "incomplete/empty output did not fail before execution"
+                );
+                return Ok(());
+            }
+            let mut report: SandboxReport = serde_json::from_slice(&std::fs::read(
+                outcome
+                    .sandbox_report
+                    .as_ref()
+                    .context("completed generation lacks trusted grading report")?
+                    .verify(root)?,
+            )?)?;
+            bind_audit_to_root(&mut report, root)?;
+            let code = extract_code(&generation.completion);
+            sandbox::verify_report(&report, &prereg.sandbox_config, task, &code)?;
+            ensure!(
+                report.policy_sha256 == prereg.sandbox_policy_sha256
+                    && report.image_id == prereg.sandbox_image_id,
+                "execution used a different sandbox image/policy"
+            );
+            let required = task.public_examples.len() + tasks::private_cases(task)?.len();
+            let passed = report.passed
+                && !report.quarantined
+                && report.trace_complete
+                && report.cases_total == required
+                && report.cases_passed == required;
+            ensure!(
+                outcome.success == passed,
+                "success disagrees with complete trusted verdict"
+            );
+        }
+        _ => anyhow::bail!("generation must contain exactly one real result or model error"),
+    }
     Ok(())
 }
 
@@ -556,17 +566,99 @@ pub async fn run_split(
         timeout_seconds: 120,
     };
     inference.validate()?;
+    let root = root.canonicalize()?;
     std::fs::create_dir_all(&output)?;
-    ensure!(
-        !output.join("preregistration.json").exists(),
-        "evaluation output already contains a preregistration; retain it and use a fresh explicitly frozen evaluation"
-    );
+    let _lease = crate::engine::RunLease::acquire(&output.join(".evaluation.lock"))?;
+    let relative = |path: &Path| -> Result<PathBuf> {
+        Ok(path.canonicalize()?.strip_prefix(&root)?.to_owned())
+    };
     let assets_dir = base_dir.clone();
     let assets = tokio::task::spawn_blocking(move || model::validate_assets(&assets_dir)).await??;
+    let tensor_path = checkpoint
+        .as_ref()
+        .map(|p| p.join("adapter.safetensors"))
+        .unwrap_or_else(|| base_dir.join("model.safetensors"));
+    let metadata_path = checkpoint
+        .as_ref()
+        .map(|p| p.join("manifest.json"))
+        .unwrap_or_else(|| base_dir.join("assets.json"));
+    let tensor = Artefact::capture(&root, relative(&tensor_path)?)?;
+    let evidence = CheckpointEvidence {
+        checkpoint_id: tensor.sha256.clone(),
+        tensor,
+        metadata: Artefact::capture(&root, relative(&metadata_path)?)?,
+        base_assets: Artefact::capture(&root, relative(&base_dir.join("assets.json"))?)?,
+        base_tensor_sha256: model::MODEL_SHA256.into(),
+        tokenizer_sha256: assets.files["tokenizer.json"].clone(),
+    };
+    let corpus = tasks::corpus();
+    let corpus_sha256 = artefact::hash(&serde_json::to_vec(&corpus)?);
+    let config_sha256 = artefact::file_hash(&gate_path)?;
+    let prereg_path = output.join("preregistration.json");
+    let existing = if prereg_path.exists() {
+        Some(serde_json::from_slice::<Preregistration>(&std::fs::read(
+            &prereg_path,
+        )?)?)
+    } else {
+        ensure!(
+            !output.join("partial.json").exists()
+                && !output.join("evaluation.json").exists()
+                && !std::fs::read_dir(&output)?.any(|entry| entry.is_ok_and(|e| e
+                    .file_name()
+                    .to_string_lossy()
+                    .ends_with("-generation.json")
+                    || e.file_name().to_string_lossy().ends_with("-outcome.json"))),
+            "orphan evaluation evidence lacks its original preregistration; retain it and use an explicit fresh output"
+        );
+        None
+    };
+    if let Some(prereg) = &existing {
+        if sandbox_config.expected_image_id.is_empty() {
+            sandbox_config.expected_image_id = prereg.sandbox_image_id.clone();
+        }
+        resume::validate(
+            prereg,
+            &resume::Intent {
+                checkpoint: &evidence,
+                config_sha256: &config_sha256,
+                corpus_sha256: &corpus_sha256,
+                split,
+                seeds: &cfg.evaluation_seeds,
+                inference: &inference,
+                sandbox: &sandbox_config,
+            },
+        )?;
+        prereg.sandbox_preflight.verify(&root)?;
+        let completed_path = output.join("evaluation.json");
+        if completed_path.exists() {
+            let completed: Evaluation = serde_json::from_slice(&std::fs::read(&completed_path)?)?;
+            ensure!(
+                same_serialised(
+                    &completed.preregistration,
+                    &Artefact::capture(&root, relative(&prereg_path)?)?
+                )?,
+                "finished evaluation refers to another preregistration"
+            );
+            let checked = completed.clone();
+            let checked_root = root.clone();
+            let checked_gate = gate_path.clone();
+            let checked_cfg = cfg.clone();
+            tokio::task::spawn_blocking(move || {
+                verify_split(&checked, &checked_root, &checked_gate, &checked_cfg, split)
+            })
+            .await??;
+            eprintln!(
+                "evaluate: reusing complete verified evaluation; no model or containers started"
+            );
+            return Ok(completed);
+        }
+    }
+    // A resumed incomplete run must verify the current effective sandbox too.
+    // Its original successful preflight artefact and timestamps remain immutable.
     let preflight = sandbox::preflight(&sandbox_config).await?;
     ensure!(
         preflight.probes_passed,
-        "sandbox probes failed before held-out access"
+        "sandbox probes failed before evaluation access"
     );
     if sandbox_config.expected_image_id.is_empty() {
         sandbox_config.expected_image_id = preflight.image_id.clone();
@@ -575,84 +667,104 @@ pub async fn run_split(
         sandbox_config.expected_image_id == preflight.image_id,
         "configured sandbox image does not match verified image"
     );
-    let relative = |path: &Path| -> Result<PathBuf> {
-        Ok(path
-            .canonicalize()?
-            .strip_prefix(root.canonicalize()?)?
-            .to_owned())
+    let prereg = if let Some(prereg) = existing {
+        prereg
+    } else {
+        let preflight_path = output.join("sandbox-preflight.json");
+        artefact::write_json(&preflight_path, &preflight)?;
+        let prereg = Preregistration {
+            schema_version: 1,
+            frozen_unix_ms: crate::ledger::unix_millis(),
+            checkpoint: evidence.clone(),
+            gate_config_sha256: config_sha256,
+            corpus_sha256,
+            split,
+            evaluation_seeds: cfg.evaluation_seeds.clone(),
+            inference: inference.clone(),
+            sandbox_policy_sha256: sandbox::policy_sha256(&sandbox_config)?,
+            sandbox_image_id: preflight.image_id,
+            sandbox_config: sandbox_config.clone(),
+            sandbox_preflight: Artefact::capture(&root, relative(&preflight_path)?)?,
+        };
+        artefact::write_json(&prereg_path, &prereg)?;
+        prereg
     };
-    let tensor_path = checkpoint
-        .as_ref()
-        .map(|path| path.join("adapter.safetensors"))
-        .unwrap_or_else(|| base_dir.join("model.safetensors"));
-    let metadata_path = checkpoint
-        .as_ref()
-        .map(|path| path.join("manifest.json"))
-        .unwrap_or_else(|| base_dir.join("assets.json"));
-    let tensor = Artefact::capture(&root, relative(&tensor_path)?)?;
-    let metadata = Artefact::capture(&root, relative(&metadata_path)?)?;
-    let evidence = CheckpointEvidence {
-        checkpoint_id: tensor.sha256.clone(),
-        tensor,
-        metadata,
-        base_assets: Artefact::capture(&root, relative(&base_dir.join("assets.json"))?)?,
-        base_tensor_sha256: model::MODEL_SHA256.into(),
-        tokenizer_sha256: assets.files["tokenizer.json"].clone(),
-    };
-    let mut runtime =
-        tokio::task::spawn_blocking(move || ModelRuntime::load(&base_dir, checkpoint.as_deref()))
-            .await??;
-    let corpus = tasks::corpus();
-    let freeze_ms = crate::ledger::unix_millis();
-    let preflight_path = output.join("sandbox-preflight.json");
-    artefact::write_json(&preflight_path, &preflight)?;
-    let prereg = Preregistration {
-        schema_version: 1,
-        frozen_unix_ms: freeze_ms,
-        checkpoint: evidence.clone(),
-        gate_config_sha256: artefact::file_hash(&gate_path)?,
-        corpus_sha256: artefact::hash(&serde_json::to_vec(&corpus)?),
-        split,
-        evaluation_seeds: cfg.evaluation_seeds.clone(),
-        inference: inference.clone(),
-        sandbox_policy_sha256: sandbox::policy_sha256(&sandbox_config)?,
-        sandbox_image_id: preflight.image_id,
-        sandbox_config: sandbox_config.clone(),
-        sandbox_preflight: Artefact::capture(&root, relative(&preflight_path)?)?,
-    };
-    let prereg_path = output.join("preregistration.json");
-    artefact::write_json(&prereg_path, &prereg)?;
     let preregistration = Artefact::capture(&root, relative(&prereg_path)?)?;
-    let mut outcomes = Vec::new();
+    let copied_output = output.clone();
+    let copied_prereg = prereg.clone();
+    let copied_corpus = corpus.clone();
+    let copied_root = root.clone();
+    let mut completed = tokio::task::spawn_blocking(move || {
+        resume::outcomes(&copied_output, &copied_prereg, &copied_corpus, &copied_root)
+    })
+    .await??;
+    let mut runtime: Option<ModelRuntime> = None;
     for task in corpus.iter().filter(|task| task.split == split) {
         for &seed in &cfg.evaluation_seeds {
-            eprintln!(
-                "evaluate: {} seed={seed} checkpoint={}",
-                task.id, evidence.checkpoint_id
-            );
-            let request = inference.request(task.prompt(), seed);
-            let generation_request = request.clone();
-            let result = tokio::task::spawn_blocking(move || {
-                let generated = runtime.generate(generation_request);
-                (runtime, generated)
-            })
-            .await?;
-            runtime = result.0;
-            let (generation, model_error) = match result.1 {
-                Ok(generation) => (Some(generation), None),
-                Err(error) => (None, Some(format!("{error:#}"))),
-            };
-            let generated = GenerationEvidence {
-                schema_version: 1,
-                checkpoint_id: evidence.checkpoint_id.clone(),
-                request_sha256: artefact::hash(&serde_json::to_vec(&request)?),
-                request,
-                generation,
-                model_error,
-            };
+            let key = (task.id.clone(), seed);
+            if completed.contains_key(&key) {
+                eprintln!(
+                    "evaluate: reusing trusted graded outcome {} seed={seed}",
+                    task.id
+                );
+                continue;
+            }
             let generation_path = output.join(format!("{}-{seed}-generation.json", task.id));
-            artefact::write_json(&generation_path, &generated)?;
-            let (success, complete, sandbox_report) = if let Some(generation) =
+            let generated =
+                if let Some(record) = resume::generation(&generation_path, &prereg, task, seed)? {
+                    eprintln!(
+                        "evaluate: reusing durable raw generation {} seed={seed}",
+                        task.id
+                    );
+                    record
+                } else {
+                    if runtime.is_none() {
+                        let copied_base = base_dir.clone();
+                        let copied_checkpoint = checkpoint.clone();
+                        runtime = Some(
+                            tokio::task::spawn_blocking(move || {
+                                ModelRuntime::load(&copied_base, copied_checkpoint.as_deref())
+                            })
+                            .await??,
+                        );
+                    }
+                    eprintln!(
+                        "evaluate: generating {} seed={seed} checkpoint={}",
+                        task.id, evidence.checkpoint_id
+                    );
+                    let request = inference.request(task.prompt(), seed);
+                    let generation_request = request.clone();
+                    let mut worker = runtime.take().context("evaluation model was not loaded")?;
+                    let (returned, result) = tokio::task::spawn_blocking(move || {
+                        let generated = worker.generate(generation_request);
+                        (worker, generated)
+                    })
+                    .await?;
+                    runtime = Some(returned);
+                    let (generation, model_error) = match result {
+                        Ok(generation) => (Some(generation), None),
+                        Err(error) => (None, Some(format!("{error:#}"))),
+                    };
+                    let generated = GenerationEvidence {
+                        schema_version: 1,
+                        checkpoint_id: evidence.checkpoint_id.clone(),
+                        request_sha256: artefact::hash(&serde_json::to_vec(&request)?),
+                        request,
+                        generation,
+                        model_error,
+                    };
+                    verify_generation(
+                        &generated,
+                        &inference,
+                        task.prompt(),
+                        seed,
+                        &evidence.checkpoint_id,
+                    )?;
+                    // The raw result is durable before any grading, including errors.
+                    artefact::write_json(&generation_path, &generated)?;
+                    generated
+                };
+            let (success, generation_complete, sandbox_report) = if let Some(generation) =
                 &generated.generation
             {
                 if generation.complete && !generation.completion.trim().is_empty() {
@@ -673,12 +785,12 @@ pub async fn run_split(
                         Some(Artefact::capture(&root, relative(&report_path)?)?),
                     )
                 } else {
-                    (false, false, None)
+                    (false, generation.complete, None)
                 }
             } else {
                 (false, false, None)
             };
-            outcomes.push(Outcome {
+            let outcome = Outcome {
                 task_id: task.id.clone(),
                 source_id: task.source_id.clone(),
                 split: task.split,
@@ -687,11 +799,20 @@ pub async fn run_split(
                 oracle_sha256: task.oracle_sha256.clone(),
                 checkpoint_id: evidence.checkpoint_id.clone(),
                 success,
-                generation_complete: complete,
+                generation_complete,
                 generation: Artefact::capture(&root, relative(&generation_path)?)?,
                 sandbox_report,
-            });
-            artefact::write_json(&output.join("partial.json"), &outcomes)?;
+            };
+            verify_cached_outcome(&outcome, &evidence, &prereg, &corpus, &root)?;
+            artefact::write_json(
+                &output.join(format!("{}-{seed}-outcome.json", task.id)),
+                &outcome,
+            )?;
+            completed.insert(key, outcome);
+            artefact::write_json(
+                &output.join("partial.json"),
+                &completed.values().collect::<Vec<_>>(),
+            )?;
         }
     }
     let eval = Evaluation {
@@ -702,11 +823,18 @@ pub async fn run_split(
         gate_config_sha256: prereg.gate_config_sha256,
         corpus_sha256: prereg.corpus_sha256,
         split,
-        outcomes,
-        frozen_before_heldout_unix_ms: freeze_ms,
+        outcomes: completed.into_values().collect(),
+        frozen_before_heldout_unix_ms: prereg.frozen_unix_ms,
         completed_unix_ms: crate::ledger::unix_millis(),
     };
-    verify(&eval, &root, &gate_path, &cfg)?;
+    let checked = eval.clone();
+    let checked_root = root.clone();
+    let checked_gate = gate_path.clone();
+    let checked_cfg = cfg.clone();
+    tokio::task::spawn_blocking(move || {
+        verify(&checked, &checked_root, &checked_gate, &checked_cfg)
+    })
+    .await??;
     artefact::write_json(&output.join("evaluation.json"), &eval)?;
     Ok(eval)
 }

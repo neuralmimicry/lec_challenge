@@ -79,3 +79,60 @@ exercise same-origin and cross-origin redirects, publisher checksum corruption,
 commit/metadata mismatch, licence provenance, traversal, symlinks and resumed
 range validation. Those fixtures are software QA, rather than downloaded model
 or learning evidence.
+
+GGUF acquisition uses the separate `download_gguf` API and the
+`hub_gguf_assets` Rust example. Selection names one exact `.gguf` file; the
+immutable publisher hash and size can additionally be constrained to the
+authorised candidate. The independently pinned original model supplies only
+config/tokeniser/template/licence/documentation data under `source/`. Its
+floating-point weights are excluded. The composite `gguf-assets.json` binds
+the selected weight and every original source asset; `gguf-provenance.json`
+retains both repository commits and original API responses. Model-card licence
+declarations remain visible, and original source licences are preserved even
+when a quantisation repository has no licence file.
+
+`validate_gguf_assets` verifies both publisher identities, all manifest
+relationships and GGUF magic/version. It records the declared source binding;
+it does not establish that quantisation preserves every original tensor.
+The native loader separately checks tensor/config compatibility. Safetensors
+validation remains unchanged and rejects this different manifest format.
+Transfer and hashing progress report bytes/total, mean MiB/s and ETA every
+fifteen seconds, including stalled network waits, and print to stderr whether
+or not a terminal is attached. Partial receipt/hash progress is explicitly
+labelled as awaiting publisher checksum verification.
+
+Large files use at most four conditional HTTP range streams. A stable strong
+ETag, exact `206` boundaries/lengths and the pinned whole-file publisher hash
+bind all segments to one object. Existing sequential prefixes are retained;
+separate segment files and an immutable plan permit interrupted transfer and
+assembly to resume without holding the model in RAM. Unexpected full responses,
+changed ETags, mismatched plans and symlink/hardlink artefacts fail closed.
+Segment data are removed only after whole-file hash verification succeeds.
+
+A complete published GGUF cache is validated before credentials or any metadata
+request. Availability failures have a sanitised typed classification; permanent
+authentication/model errors and corrupted bytes do not become offline signals.
+Explicit offline operation is controlled by the discovery loop and never calls
+the online downloader.
+
+Owned pruning records `.pruned-weights.json` before removing model files. It
+binds the original manifest hash, immutable candidate identity and measured
+weight hashes/sizes; completion is recorded afterwards and earlier proofs are
+archived. A later online download may rehydrate only those known missing
+weights after validating every remaining original metadata/source asset.
+Changed existing bytes or a forged prune record remain errors. Pruning never
+turns a missing checkpoint into a valid serving artifact, and offline runs
+report pruned models as unavailable.
+
+Historical teacher evidence uses the explicitly separate
+`validate_downloaded_asset_metadata` and `validate_gguf_asset_metadata` APIs.
+They revalidate the original commit metadata, immutable download plans,
+manifests, publisher identities, licence notices, original tokeniser and chat
+template bytes. Large LFS weights are not read; their recorded SHA-256 must
+equal the original publisher's LFS identity. Missing weights additionally need
+the preserved ownership tuple and durable prune proof bound to the original
+manifest, hash and size. Unusual Git-blob weights retain full verification.
+Callers must bind this historical identity to the original generation's frozen
+manifest and raw output. These APIs deliberately do not prove that present
+weights are undamaged, and cannot authorise new inference. All model loaders,
+new generation and tensor-capture paths continue to use full weight checksums.

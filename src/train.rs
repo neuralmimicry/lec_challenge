@@ -291,7 +291,12 @@ impl ResumableAdam {
             config: cfg.clone(),
         })
     }
-    fn load(vars: &AdapterVariables, cfg: &TrainConfig, path: &Path, step: usize) -> Result<Self> {
+    pub(crate) fn load(
+        vars: &AdapterVariables,
+        cfg: &TrainConfig,
+        path: &Path,
+        step: usize,
+    ) -> Result<Self> {
         let tensors = candle_core::safetensors::load(path, &Device::Cpu)?;
         ensure!(
             tensors.len() == vars.len() * 2,
@@ -303,11 +308,11 @@ impl ResumableAdam {
                 let m = tensors
                     .get(&format!("{key}.m"))
                     .context("missing first moment")?
-                    .clone();
+                    .to_device(var.device())?;
                 let v = tensors
                     .get(&format!("{key}.v"))
                     .context("missing second moment")?
-                    .clone();
+                    .to_device(var.device())?;
                 ensure!(
                     m.shape() == var.shape()
                         && v.shape() == var.shape()
@@ -325,13 +330,36 @@ impl ResumableAdam {
         })
     }
     pub(crate) fn update(&mut self, vars: &AdapterVariables, loss: &Tensor) -> Result<f64> {
+        self.update_inner(vars, loss, false)
+    }
+
+    /// Intermediate-layer objectives deliberately leave later adapters inactive.
+    /// Their tensors and moments remain unchanged; the strict assessment entry
+    /// point above continues to reject every unexpectedly missing gradient.
+    pub(crate) fn update_selected(
+        &mut self,
+        vars: &AdapterVariables,
+        loss: &Tensor,
+    ) -> Result<f64> {
+        self.update_inner(vars, loss, true)
+    }
+
+    fn update_inner(
+        &mut self,
+        vars: &AdapterVariables,
+        loss: &Tensor,
+        allow_inactive: bool,
+    ) -> Result<f64> {
         let grads = loss
             .backward()
             .context("differentiable training backward failed")?;
         let mut norm2 = 0.;
         let mut seen = 0;
         for var in vars.values() {
-            let g = grads.get(var).context("missing adapter gradient")?;
+            let Some(g) = grads.get(var) else {
+                ensure!(allow_inactive, "missing adapter gradient");
+                continue;
+            };
             let n = g.sqr()?.sum_all()?.to_scalar::<f32>()? as f64;
             ensure!(n.is_finite(), "non-finite adapter gradient");
             norm2 += n;
@@ -350,8 +378,12 @@ impl ResumableAdam {
         // leave a half-updated in-memory optimiser, and durable state is published last.
         let mut updates = Vec::new();
         for (key, var) in vars {
+            let Some(gradient) = grads.get(var) else {
+                ensure!(allow_inactive, "gradient disappeared");
+                continue;
+            };
             let moment = &self.moments[key];
-            let g = (grads.get(var).context("gradient disappeared")? * clip)?;
+            let g = (gradient * clip)?;
             let m = ((&moment.m * b1)? + (&g * (1. - b1))?)?;
             let v = ((&moment.v * b2)? + (g.sqr()? * (1. - b2))?)?;
             let mh = (&m / (1. - b1.powf(step as f64)))?;
@@ -373,7 +405,7 @@ impl ResumableAdam {
         self.step = step;
         Ok(norm)
     }
-    fn tensors(&self) -> BTreeMap<String, Tensor> {
+    pub(crate) fn tensors(&self) -> BTreeMap<String, Tensor> {
         self.moments
             .iter()
             .flat_map(|(k, m)| {
@@ -776,6 +808,26 @@ pub fn native_gradient_smoke(
 mod tests {
     use super::*;
     use candle_core::Var;
+    #[test]
+    fn selected_layer_update_preserves_inactive_tensors_and_strict_mode_rejects_them() {
+        let cfg = TrainConfig::default();
+        let mut variables = BTreeMap::new();
+        variables.insert(
+            "early".into(),
+            Var::new(&[1_f32, 2.], &Device::Cpu).unwrap(),
+        );
+        variables.insert("late".into(), Var::new(&[3_f32, 4.], &Device::Cpu).unwrap());
+        let mut optimiser = ResumableAdam::new(&variables, &cfg).unwrap();
+        let loss = variables["early"].sqr().unwrap().sum_all().unwrap();
+        assert!(optimiser.update(&variables, &loss).is_err());
+        assert_eq!(optimiser.step, 0);
+        assert!(optimiser.update_selected(&variables, &loss).unwrap() > 0.);
+        assert_eq!(variables["late"].to_vec1::<f32>().unwrap(), vec![3., 4.]);
+        assert_eq!(
+            optimiser.moments["late"].m.to_vec1::<f32>().unwrap(),
+            vec![0., 0.]
+        );
+    }
     #[test]
     fn adam_resume_is_numerically_equivalent() {
         let cfg = TrainConfig::default();

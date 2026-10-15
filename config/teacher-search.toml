@@ -1,0 +1,119 @@
+# Bounded exploratory teacher selection. No held-out tasks or training are opened.
+# The target is three DISTINCT ORIGINAL MODELS, each passing at least 13/16 tasks
+# separately on the original and independently frozen fresh development packs.
+# Revisions and LFS SHA-256 values were reviewed through public Hub metadata.
+schema_version = 1
+target_models = 3
+minimum_pass_rate = 0.80
+maximum_iterations = 6
+# Logical asset allocation: expected weight bytes plus 64 MiB auxiliaries/model.
+# This is not a measured network transfer or a monetary budget.
+maximum_download_bytes = 34359738368
+minimum_free_disk_bytes = 8589934592
+device = "auto"
+gpu_ordinal = 0
+context_tokens = 1024
+max_new_tokens = 512
+seed = 1729
+managed_roots = ["offline_bundle/comparative"]
+keep_models = []
+initial_registry = "config/comparative-models.toml"
+initial_comparisons = ["reports/comparative/coding-development", "reports/comparative/control-development"]
+
+[[candidates]]
+id = "qwen-coder-7b-q4_k_m"
+model_id = "Qwen/Qwen2.5-Coder-7B-Instruct-GGUF"
+revision = "13fb94bfda8c8cf22497dc57b78f391a9acb426a"
+source_model_id = "Qwen/Qwen2.5-Coder-7B-Instruct"
+source_revision = "c03e6d358207e414f1eca0bb1891e29f1db0e242"
+filename = "qwen2.5-coder-7b-instruct-q4_k_m.gguf"
+sha256 = "509287f78cb4d4cf6b3843734733b914b2c158e43e22a7f4bf5e963800894d3c"
+bytes = 4683073536
+directory = "offline_bundle/comparative/qwen-coder-7b-q4_k_m"
+architecture = "qwen2"
+licence = "Apache-2.0"
+developer_id = "alibaba-qwen"
+dense_embedding_bytes = 2179989504
+kv_bytes_per_token = 114688
+
+[[candidates]]
+id = "deepseek-coder-6_7b-q4_k_m"
+model_id = "TheBloke/deepseek-coder-6.7B-instruct-GGUF"
+revision = "9e221e6b41cb1bf1c5d8f9718e81e3dc781f7557"
+source_model_id = "deepseek-ai/deepseek-coder-6.7b-instruct"
+source_revision = "e5d64addd26a6a1db0f9b863abf6ee3141936807"
+filename = "deepseek-coder-6.7b-instruct.Q4_K_M.gguf"
+sha256 = "92da6238854f2fa902d8b2ad79d548536af1d3ab06821f323bd5bbcea2013276"
+bytes = 4083015904
+directory = "offline_bundle/comparative/deepseek-coder-6_7b-q4_k_m"
+architecture = "llama"
+licence = "DeepSeek-Model-Licence-1.0"
+developer_id = "deepseek"
+dense_embedding_bytes = 528482304
+kv_bytes_per_token = 1048576
+
+[[candidates]]
+id = "magicoder-s-ds-6_7b-q4_k_m"
+model_id = "TheBloke/Magicoder-S-DS-6.7B-GGUF"
+revision = "d41a33f9393ebc06c6beb44b1ded091b6d19496c"
+source_model_id = "ise-uiuc/Magicoder-S-DS-6.7B"
+source_revision = "b3ed7cb1578a3643ceaf2ebf996a3d8e85f75d8f"
+filename = "magicoder-s-ds-6.7b.Q4_K_M.gguf"
+sha256 = "4b340a9d033091627273fa0f95a4d43b5fe95500c714f9d2f683fbe266c9bc52"
+bytes = 4082886528
+directory = "offline_bundle/comparative/magicoder-s-ds-6_7b-q4_k_m"
+architecture = "llama"
+licence = "DeepSeek-Model-Licence-1.0"
+developer_id = "illinois-magicoder"
+dense_embedding_bytes = 528482304
+kv_bytes_per_token = 1048576
+
+[[candidates]]
+id = "qwen-coder-14b-q2_k"
+model_id = "Qwen/Qwen2.5-Coder-14B-Instruct-GGUF"
+revision = "d0a692ef765eefbf2fabb130b3cb2e8917e3d225"
+source_model_id = "Qwen/Qwen2.5-Coder-14B-Instruct"
+source_revision = "aedcc2d42b622764e023cf882b6652e646b95671"
+filename = "qwen2.5-coder-14b-instruct-q2_k.gguf"
+sha256 = "4542a8bb0c0ae6fb3dafeb305c61a8d6b2f894e96bb667d60cda105a1f313176"
+bytes = 5770497408
+directory = "offline_bundle/comparative/qwen-coder-14b-q2_k"
+architecture = "qwen2"
+licence = "Apache-2.0"
+developer_id = "alibaba-qwen"
+dense_embedding_bytes = 3114270720
+kv_bytes_per_token = 393216
+
+[[candidates]]
+id = "qwen-general-7b-q4_k_m"
+model_id = "bartowski/Qwen2.5-7B-Instruct-GGUF"
+revision = "8911e8a47f92bac19d6f5c64a2e2095bd2f7d031"
+source_model_id = "Qwen/Qwen2.5-7B-Instruct"
+source_revision = "a09a35458c702b33eeacc393d103063234e8bc28"
+filename = "Qwen2.5-7B-Instruct-Q4_K_M.gguf"
+sha256 = "65b8fcd92af6b4fefa935c625d1ac27ea29dcb6ee14589c55a8f115ceaaa1423"
+bytes = 4683074240
+directory = "offline_bundle/comparative/qwen-general-7b-q4_k_m"
+architecture = "qwen2"
+licence = "Apache-2.0"
+developer_id = "alibaba-qwen"
+dense_embedding_bytes = 2179989504
+kv_bytes_per_token = 114688
+
+# Higher precision repeat: shares the first candidate's ORIGINAL source identity,
+# so it can replace that quantisation but can never add a fourth distinct model.
+[[candidates]]
+id = "qwen-coder-7b-q6_k"
+model_id = "Qwen/Qwen2.5-Coder-7B-Instruct-GGUF"
+revision = "13fb94bfda8c8cf22497dc57b78f391a9acb426a"
+source_model_id = "Qwen/Qwen2.5-Coder-7B-Instruct"
+source_revision = "c03e6d358207e414f1eca0bb1891e29f1db0e242"
+filename = "qwen2.5-coder-7b-instruct-q6_k.gguf"
+sha256 = "46291ddea1bfb608fe63d9a1907eea6918bda87a7626593edc4bf97c5fd73f9d"
+bytes = 6254198784
+directory = "offline_bundle/comparative/qwen-coder-7b-q6_k"
+architecture = "qwen2"
+licence = "Apache-2.0"
+developer_id = "alibaba-qwen"
+dense_embedding_bytes = 2179989504
+kv_bytes_per_token = 114688

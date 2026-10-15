@@ -8,7 +8,7 @@ use lec_distil::{
     fleet::{self, FleetConfig, FleetRunner, LiveTransport, ReplayTransport, Transport},
     gate::{self, GateConfig},
     ledger::Ledger,
-    model, preflight,
+    model, platform, preflight,
     sandbox::{self, SandboxConfig},
     serve,
     tasks::{self, Split},
@@ -32,7 +32,7 @@ struct Cli {
 #[derive(clap::Args)]
 struct ExecutionArguments {
     /// CUDA requests fail explicitly when this binary or host cannot support them.
-    #[arg(long, value_parser = ["cpu", "cuda"])]
+    #[arg(long, value_parser = ["auto", "cpu", "cuda"])]
     device: Option<String>,
     #[arg(long, default_value_t = 0)]
     gpu: usize,
@@ -40,29 +40,339 @@ struct ExecutionArguments {
     dtype: Option<String>,
 }
 impl ExecutionArguments {
-    fn options(&self, default_cuda: bool) -> model::RuntimeOptions {
-        let cuda = self
-            .device
-            .as_deref()
-            .map(|d| d == "cuda")
-            .unwrap_or(default_cuda);
-        model::RuntimeOptions {
-            device: if cuda {
-                model::ExecutionDevice::Cuda { ordinal: self.gpu }
-            } else {
-                model::ExecutionDevice::Cpu
-            },
-            dtype: match self.dtype.as_deref() {
-                Some("f16") => model::InferenceDtype::F16,
-                Some("f32") => model::InferenceDtype::F32,
-                _ if cuda => model::InferenceDtype::F16,
-                _ => model::InferenceDtype::F32,
-            },
+    fn frozen_options(&self, saved: model::RuntimeOptions) -> Result<model::RuntimeOptions> {
+        if let Some(device) = self.device.as_deref() {
+            ensure!(
+                device == "auto"
+                    || (device == "cpu" && matches!(saved.device, model::ExecutionDevice::Cpu))
+                    || (device == "cuda"
+                        && matches!(saved.device, model::ExecutionDevice::Cuda { ordinal } if ordinal == self.gpu)),
+                "requested execution device differs from the original run"
+            );
         }
+        if let Some(dtype) = self.dtype.as_deref() {
+            ensure!(
+                (dtype == "f32") == (saved.dtype == model::InferenceDtype::F32),
+                "requested precision differs from the original run"
+            );
+        }
+        eprintln!(
+            "execution: resuming original frozen runtime {saved:?}; resource availability is checked before new computation"
+        );
+        Ok(saved)
+    }
+
+    fn options_from_plan(&self, path: &Path) -> Result<Option<model::RuntimeOptions>> {
+        if !path.is_file() {
+            return Ok(None);
+        }
+        let plan: serde_json::Value = serde_json::from_slice(&std::fs::read(path)?)?;
+        Ok(Some(self.frozen_options(serde_json::from_value(
+            plan["runtime"].clone(),
+        )?)?))
+    }
+
+    fn options_for_model(&self, base: &Path) -> Result<model::RuntimeOptions> {
+        let quantised = base.join("gguf-assets.json").is_file();
+        let config_path = base.join(if quantised {
+            "source/config.json"
+        } else {
+            "config.json"
+        });
+        let cfg: model::QwenConfig = serde_json::from_slice(&std::fs::read(config_path)?)?;
+        let manifest: model::AssetManifest =
+            serde_json::from_slice(&std::fs::read(base.join(if quantised {
+                "gguf-assets.json"
+            } else {
+                "assets.json"
+            }))?)?;
+        let mut bytes = 0_u64;
+        for name in manifest
+            .files
+            .keys()
+            .filter(|name| name.ends_with(".gguf") || name.ends_with(".safetensors"))
+        {
+            ensure!(
+                Path::new(name)
+                    .components()
+                    .all(|component| matches!(component, std::path::Component::Normal(_))),
+                "unsafe weight path"
+            );
+            bytes = bytes
+                .checked_add(std::fs::metadata(base.join(name))?.len())
+                .context("weight size overflow")?;
+        }
+        let (gpu_bytes, cpu_bytes) = if quantised {
+            (
+                model::estimate_quantised_memory(
+                    &cfg,
+                    bytes,
+                    1024.min(cfg.max_position_embeddings),
+                    true,
+                )?
+                .conservative_total_bytes,
+                model::estimate_quantised_memory(
+                    &cfg,
+                    bytes,
+                    1024.min(cfg.max_position_embeddings),
+                    false,
+                )?
+                .conservative_total_bytes,
+            )
+        } else {
+            (
+                bytes
+                    .saturating_mul(if self.dtype.as_deref() == Some("f32") {
+                        2
+                    } else {
+                        1
+                    })
+                    .saturating_add(768 * 1024 * 1024),
+                bytes.saturating_mul(2).saturating_add(1024 * 1024 * 1024),
+            )
+        };
+        self.options_with_estimate(quantised, gpu_bytes, cpu_bytes)
+    }
+
+    fn options_with_estimate(
+        &self,
+        quantised: bool,
+        gpu_bytes: u64,
+        cpu_bytes: u64,
+    ) -> Result<model::RuntimeOptions> {
+        let hardware = platform::detect()?;
+        let selected = platform::select_runtime(
+            &hardware,
+            self.device.as_deref().unwrap_or("auto"),
+            self.gpu,
+            quantised,
+            gpu_bytes,
+            cpu_bytes,
+        )?;
+        eprintln!(
+            "execution: {}; available CPU threads={}, usable RAM={} bytes",
+            selected.reason, hardware.available_cpu_threads, hardware.usable_ram_bytes
+        );
+        let mut options = selected.options;
+        if let Some(dtype) = &self.dtype {
+            options.dtype = if dtype == "f16" {
+                model::InferenceDtype::F16
+            } else {
+                model::InferenceDtype::F32
+            };
+        }
+        Ok(options)
     }
 }
 #[derive(Subcommand)]
 enum Command {
+    /// Resume adaptive teacher selection and bounded local distillation studies.
+    Explore {
+        #[arg(long, default_value = "reports/local-study/explore/round-001")]
+        output: PathBuf,
+        #[arg(long, default_value = "reports/comparative/search/round-001")]
+        search_output: PathBuf,
+        #[arg(long, default_value_t = 86400)]
+        maximum_run_seconds: u64,
+        #[arg(long)]
+        maximum_parallel_jobs: Option<usize>,
+        #[arg(long, default_value_t = 48)]
+        content_maximum_tasks: usize,
+        #[arg(long, default_value_t = 2)]
+        top_groups: usize,
+        #[arg(long)]
+        offline: bool,
+        #[arg(long)]
+        fresh: bool,
+    },
+    /// Detect CPU affinity, usable RAM and available accelerator memory.
+    Hardware,
+    /// Retain verified teachers and replace weak models with pinned Hub alternatives.
+    SelectTeachers {
+        #[arg(long, default_value = "config/teacher-search.toml")]
+        config: PathBuf,
+        #[arg(long, default_value = "reports/comparative/search/round-001")]
+        output: PathBuf,
+        #[arg(long)]
+        offline: bool,
+        /// Begin a fresh search in a new directory, preserving previous evidence.
+        #[arg(long)]
+        fresh: bool,
+    },
+    /// Collect independently graded local-teacher training evidence.
+    CollectTeacherEvidence {
+        #[arg(long)]
+        registry: PathBuf,
+        #[arg(long, default_value = "reports/local-study/evidence")]
+        output: PathBuf,
+        #[arg(long)]
+        comparison: Vec<PathBuf>,
+        #[arg(long, value_delimiter = ',')]
+        models: Vec<String>,
+        #[arg(long, default_value_t = 512)]
+        max_tokens: usize,
+        #[arg(long)]
+        offline: bool,
+        #[command(flatten)]
+        execution: ExecutionArguments,
+    },
+    /// Acquire genuine process, context and tool-feedback variants on train only.
+    CollectTeacherContent {
+        #[arg(long, default_value = "reports/local-study/evidence/bundle.json")]
+        bundle: PathBuf,
+        #[arg(long, default_value = "reports/local-study/content")]
+        output: PathBuf,
+        /// Preserve the previous run and begin in a new sibling directory.
+        #[arg(long)]
+        fresh: bool,
+        #[arg(
+            long,
+            value_delimiter = ',',
+            default_value = "process,context,tool_trajectory"
+        )]
+        content: Vec<String>,
+        #[arg(long, default_value_t = 48)]
+        maximum_tasks: usize,
+        #[arg(long, default_value_t = 768)]
+        max_tokens: usize,
+        #[arg(long)]
+        offline: bool,
+        #[command(flatten)]
+        execution: ExecutionArguments,
+    },
+    /// Collect frozen-student attempts, actual corrective generations and regrades.
+    CollectStudentRollouts {
+        #[arg(
+            long,
+            default_value = "reports/local-study/qwen7b-evidence/bundle.json"
+        )]
+        bundle: PathBuf,
+        #[arg(long, default_value = "reports/local-study/student-rollouts")]
+        output: PathBuf,
+        /// Preserve the previous run and begin in a new sibling directory.
+        #[arg(long)]
+        fresh: bool,
+        #[arg(long, default_value = "offline_bundle/base")]
+        student_base: PathBuf,
+        /// Omit only to collect from the actual frozen base weights.
+        #[arg(long)]
+        student_checkpoint: Option<PathBuf>,
+        /// Link an original batch without regenerating or regrading its outputs.
+        #[arg(long)]
+        reuse_student_attempts_from: Option<PathBuf>,
+        #[arg(long, default_value="conventional_qwen_lora",value_parser=["conventional_qwen_lora","ternary_bitnet"])]
+        student_kind: String,
+        #[arg(long,default_value="on_policy",value_parser=["on_policy","self_distillation"])]
+        mode: String,
+        #[arg(long, value_delimiter = ',')]
+        teachers: Vec<String>,
+        #[arg(long, default_value_t = 4)]
+        maximum_tasks: usize,
+        #[arg(long, default_value_t = 512)]
+        max_tokens: usize,
+        #[arg(long, default_value_t = 1729)]
+        seed: u64,
+        #[arg(long,value_parser=["cpu","cuda"])]
+        student_device: Option<String>,
+        #[arg(long, default_value_t = 0)]
+        student_gpu: usize,
+        #[arg(long)]
+        offline: bool,
+        #[command(flatten)]
+        execution: ExecutionArguments,
+    },
+    /// Freeze the finite, capability-checked local distillation catalogue.
+    StudyPlan {
+        #[arg(long, default_value = "config/distillation-study.toml")]
+        config: PathBuf,
+        #[arg(long, default_value = "reports/local-study/evidence/bundle.json")]
+        bundle: PathBuf,
+        #[arg(long, default_value = "offline_bundle/base")]
+        base: PathBuf,
+        #[arg(long, default_value = "offline_bundle/students/bitnet-2b-4t")]
+        bitnet_base: PathBuf,
+        #[arg(long, default_value = "reports/local-study/study/round-001")]
+        output: PathBuf,
+        #[arg(long)]
+        maximum_parallel_jobs: Option<usize>,
+        #[arg(long)]
+        offline: bool,
+        #[arg(long)]
+        fresh: bool,
+        #[command(flatten)]
+        execution: ExecutionArguments,
+    },
+    /// Resume a bounded set of real native training subprocesses.
+    StudyRun {
+        #[arg(long, default_value = "reports/local-study/study/round-001")]
+        study: PathBuf,
+        #[arg(long, default_value = "quick", value_parser = ["quick", "full"])]
+        profile: String,
+        #[arg(long)]
+        output: Option<PathBuf>,
+        #[arg(long, value_delimiter = ',')]
+        selected_arms: Vec<String>,
+        #[arg(long)]
+        selection_evidence: Option<PathBuf>,
+        #[arg(long, default_value_t = 1800)]
+        maximum_run_seconds: u64,
+        #[arg(long)]
+        offline: bool,
+        #[arg(long)]
+        fresh: bool,
+    },
+    /// Rank verified development outcomes and freeze full-fidelity seed groups.
+    StudySelect {
+        #[arg(long, default_value = "reports/local-study/study/round-001")]
+        study: PathBuf,
+        #[arg(long, default_value_t = 2)]
+        top_groups: usize,
+    },
+    /// Measure a real local student baseline or adapter on train/development.
+    StudyEvaluate {
+        #[arg(long)]
+        base: Option<PathBuf>,
+        #[arg(long)]
+        checkpoint: Option<PathBuf>,
+        #[arg(long, default_value = "qwen", value_parser = ["qwen", "bitnet"])]
+        student: String,
+        /// Explicit native BitNet engine receipt for a new evaluation protocol.
+        #[arg(long)]
+        bitnet_engine_manifest: Option<PathBuf>,
+        /// Explicit exported GGUF path; existing exports are never replaced silently.
+        #[arg(long)]
+        bitnet_gguf: Option<PathBuf>,
+        /// Exact checkpoint/backend numerical report to attach after evaluation.
+        #[arg(long)]
+        bitnet_parity_report: Option<PathBuf>,
+        #[arg(long, default_value = "reports/local-study/evaluation")]
+        output: PathBuf,
+        #[arg(long, default_value = "development", value_parser = ["train", "development"])]
+        split: String,
+        #[arg(long)]
+        offline: bool,
+        #[arg(long)]
+        fresh: bool,
+        #[command(flatten)]
+        execution: ExecutionArguments,
+    },
+    /// Internal immutable-request boundary used by the study scheduler.
+    #[command(hide = true)]
+    DistillationArmWorker {
+        #[arg(long)]
+        request: PathBuf,
+        #[arg(long)]
+        output: PathBuf,
+    },
+    #[command(hide = true)]
+    StudyEvaluateWorker {
+        #[arg(long)]
+        request: PathBuf,
+        #[arg(long)]
+        training_artifact: PathBuf,
+        #[arg(long)]
+        output: PathBuf,
+    },
     /// Measure this host; no provider key values are read into the report.
     Preflight,
     /// Materialise and validate all 96 source-disjoint contracts and private cases.
@@ -146,8 +456,12 @@ enum Command {
         config: PathBuf,
         #[arg(long, default_value = "checkpoints/candidate")]
         output: PathBuf,
-        #[arg(long)]
+        /// Accepted for compatibility; validated partial training resumes by default.
+        #[arg(long, hide = true, conflicts_with = "fresh")]
         resume: bool,
+        /// Begin a fresh checkpoint in a new directory, preserving previous evidence.
+        #[arg(long)]
+        fresh: bool,
     },
     /// Generate with the real pinned base and optional validated trained adapter.
     Infer {
@@ -300,18 +614,609 @@ async fn main() {
         .with_env_filter(tracing_subscriber::EnvFilter::from_default_env())
         .with_writer(std::io::stderr)
         .init();
-    let cli = Cli::parse();
+    let mut cli = Cli::parse();
+    if let Err(error) = prepare_fresh_command(&mut cli.command).await {
+        let path = PathBuf::from("reports").join(format!(
+            "fresh-preparation-failure-{}.json",
+            uuid::Uuid::new_v4()
+        ));
+        let _ = artefact::write_json(
+            &path,
+            &serde_json::json!({"status":"FAILURE","error":format!("{error:#}"),"previous_run_preserved":true}),
+        );
+        eprintln!(
+            "FAILURE preparing fresh output: {error:#}; report={}",
+            path.display()
+        );
+        std::process::exit(1);
+    }
+    let failure_path = match &cli.command {
+        Command::Explore { output, .. }
+        | Command::SelectTeachers { output, .. }
+        | Command::CollectTeacherEvidence { output, .. }
+        | Command::CollectTeacherContent { output, .. }
+        | Command::CollectStudentRollouts { output, .. }
+        | Command::StudyPlan { output, .. }
+        | Command::StudyEvaluate { output, .. }
+        | Command::DistillationArmWorker { output, .. }
+        | Command::StudyEvaluateWorker { output, .. }
+        | Command::Train { output, .. }
+        | Command::Evaluate { output, .. } => output.join("last-failure.json"),
+        Command::StudyRun {
+            study,
+            profile,
+            output,
+            ..
+        } => output
+            .clone()
+            .unwrap_or_else(|| study.join(profile))
+            .join("last-failure.json"),
+        Command::StudySelect { study, .. } => study.join("selection-failure.json"),
+        _ => PathBuf::from("reports/last-failure.json"),
+    };
     if let Err(error) = execute(cli.command).await {
         let failure = serde_json::json!({"status":"FAILURE","error":format!("{error:#}"),"observed_unix_ms":lec_distil::ledger::unix_millis(),"promotion":"incumbent_retained"});
-        let _ = artefact::write_json(Path::new("reports/last-failure.json"), &failure);
+        let _ = artefact::write_json(&failure_path, &failure);
         eprintln!("FAILURE: {error:#}");
         println!("{failure}");
         std::process::exit(1);
     }
 }
 
+/// Resolve an explicit new output before selecting the failure-report path.
+/// Otherwise a failed fresh invocation would overwrite the original run's
+/// last-failure file even though all of its numerical evidence was preserved.
+async fn prepare_fresh_command(command: &mut Command) -> Result<()> {
+    match command {
+        Command::Explore { output, fresh, .. }
+        | Command::SelectTeachers { output, fresh, .. }
+        | Command::CollectTeacherContent { output, fresh, .. }
+        | Command::CollectStudentRollouts { output, fresh, .. }
+        | Command::StudyPlan { output, fresh, .. }
+        | Command::StudyEvaluate { output, fresh, .. }
+        | Command::Train { output, fresh, .. }
+            if *fresh =>
+        {
+            *output = fresh_run_output(output).await?;
+            *fresh = false;
+        }
+        Command::StudyRun {
+            study,
+            profile,
+            output,
+            fresh,
+            ..
+        } if *fresh => {
+            let requested = output.clone().unwrap_or_else(|| study.join(profile));
+            *output = Some(fresh_run_output(&requested).await?);
+            *fresh = false;
+        }
+        _ => {}
+    }
+    Ok(())
+}
+
 async fn execute(command: Command) -> Result<()> {
     match command {
+        Command::Explore {
+            output,
+            search_output,
+            maximum_run_seconds,
+            maximum_parallel_jobs,
+            content_maximum_tasks,
+            top_groups,
+            offline,
+            fresh,
+        } => {
+            let output = if fresh {
+                fresh_run_output(&output).await?
+            } else {
+                output
+            };
+            let report = lec_distil::explore::run(lec_distil::explore::ExploreOptions {
+                output,
+                search_output,
+                maximum_run_seconds,
+                maximum_parallel_jobs,
+                content_maximum_tasks,
+                top_groups,
+                offline,
+                ..Default::default()
+            })
+            .await?;
+            print(&report)?;
+            ensure!(
+                report["success"] == true,
+                "local exploration remains incomplete or below its frozen teacher-quality target; progress retained"
+            );
+        }
+        Command::Hardware => {
+            print(&tokio::task::spawn_blocking(platform::detect).await??)?;
+        }
+        Command::SelectTeachers {
+            config,
+            output,
+            offline,
+            fresh,
+        } => {
+            let output = if fresh {
+                fresh_run_output(&output).await?
+            } else {
+                output
+            };
+            let report =
+                lec_distil::teacher_search::run_with_options(&config, &output, offline).await?;
+            print(&report)?;
+            ensure!(
+                report["qualified_target_met"] == true,
+                "teacher selection has not met its declared quality target; retained best available model and saved progress"
+            );
+        }
+        Command::CollectTeacherEvidence {
+            registry,
+            output,
+            comparison,
+            models,
+            max_tokens,
+            offline,
+            execution,
+        } => {
+            eprintln!(
+                "local teacher collection: {} — cached local weights only; no provider HTTP calls",
+                if offline {
+                    "explicit offline mode"
+                } else {
+                    "local execution"
+                }
+            );
+            let roster = comparative::Registry::load(&registry)?;
+            let teacher = roster
+                .models
+                .iter()
+                .find(|m| models.is_empty() || models.contains(&m.id))
+                .context("no selected teacher in registry")?;
+            let previous_plan = comparison
+                .first()
+                .map(|p| p.join("plan.json"))
+                .unwrap_or_else(|| output.join("collection/plan.json"));
+            let runtime = if let Some(saved) = execution.options_from_plan(&previous_plan)? {
+                saved
+            } else {
+                execution.options_for_model(&teacher.directory)?
+            };
+            let bundle = lec_distil::teacher_evidence::collect(
+                lec_distil::teacher_evidence::CollectOptions {
+                    registry,
+                    comparisons: comparison,
+                    output,
+                    runtime,
+                    max_tokens,
+                    seed: 1729,
+                    models,
+                },
+            )
+            .await?;
+            print(
+                &serde_json::json!({"evidence_kind":bundle.evidence_kind,"teachers":bundle.teachers.len(),
+                "samples":bundle.samples.len(),"preferences":bundle.preferences.len(),"production_eligible":false}),
+            )?;
+        }
+        Command::CollectTeacherContent {
+            bundle,
+            output,
+            fresh,
+            content,
+            maximum_tasks,
+            max_tokens,
+            offline,
+            execution,
+        } => {
+            use lec_distil::teacher_evidence::{self, ContentKind};
+            let output = if fresh {
+                fresh_run_output(&output).await?
+            } else {
+                output
+            };
+            eprintln!(
+                "teacher content collection: cached local weights only; explicit offline={offline}"
+            );
+            let input = bundle.clone();
+            let verified =
+                tokio::task::spawn_blocking(move || teacher_evidence::load_verified(&input))
+                    .await??;
+            let teacher = verified
+                .teachers
+                .first()
+                .context("evidence has no teacher")?;
+            let runtime = if let Some(saved) =
+                execution.options_from_plan(&output.join("content-policy.json"))?
+            {
+                saved
+            } else {
+                execution.options_for_model(&teacher.model.directory)?
+            };
+            let content = content
+                .iter()
+                .map(|c| match c.as_str() {
+                    "process" => Ok(ContentKind::Process),
+                    "context" => Ok(ContentKind::Context),
+                    "tool_trajectory" => Ok(ContentKind::ToolTrajectory),
+                    _ => bail!("unsupported content collector {c}"),
+                })
+                .collect::<Result<Vec<_>>>()?;
+            let content_output = output.clone();
+            let _result =
+                teacher_evidence::collect_content(teacher_evidence::ContentCollectOptions {
+                    bundle,
+                    output,
+                    content,
+                    runtime,
+                    max_tokens,
+                    seed: 1729,
+                    maximum_tasks,
+                })
+                .await?;
+            let report: serde_json::Value = serde_json::from_slice(&std::fs::read(
+                content_output.join("content-report.json"),
+            )?)?;
+            print(&report)?;
+            ensure!(
+                report["healthy_complete"] == true,
+                "teacher content collection is incomplete or failed; original observations and valid partial evidence were retained"
+            );
+        }
+        Command::CollectStudentRollouts {
+            bundle,
+            output,
+            fresh,
+            student_base,
+            student_checkpoint,
+            reuse_student_attempts_from,
+            student_kind,
+            mode,
+            teachers,
+            maximum_tasks,
+            max_tokens,
+            seed,
+            student_device,
+            student_gpu,
+            offline,
+            execution,
+        } => {
+            use lec_distil::{
+                distillation::DistillationStudent,
+                teacher_evidence::{self, RolloutMode},
+            };
+            let output = if fresh {
+                fresh_run_output(&output).await?
+            } else {
+                output
+            };
+            eprintln!(
+                "student rollout collection: cached local weights only; explicit offline={offline}; frozen-student batch then offline updates"
+            );
+            let kind = match student_kind.as_str() {
+                "conventional_qwen_lora" => DistillationStudent::ConventionalQwenLora,
+                "ternary_bitnet" => DistillationStudent::TernaryBitnet,
+                _ => bail!("unknown rollout student kind"),
+            };
+            let mode = match mode.as_str() {
+                "on_policy" => RolloutMode::OnPolicy,
+                "self_distillation" => RolloutMode::SelfDistillation,
+                _ => bail!("unknown rollout mode"),
+            };
+            let input = bundle.clone();
+            let verified =
+                tokio::task::spawn_blocking(move || teacher_evidence::load_verified(&input))
+                    .await??;
+            let policy = output.join("rollout-policy.json");
+            let saved = if policy.exists() {
+                Some(serde_json::from_slice::<serde_json::Value>(
+                    &std::fs::read(policy)?,
+                )?)
+            } else {
+                None
+            };
+            let student_runtime = if let Some(saved) = &saved {
+                let runtime: model::RuntimeOptions =
+                    serde_json::from_value(saved["student_runtime"].clone())?;
+                if let Some(device) = student_device.as_deref() {
+                    ensure!(
+                        (device == "cpu" && runtime.device == model::ExecutionDevice::Cpu)
+                            || (device == "cuda"
+                                && runtime.device
+                                    == model::ExecutionDevice::Cuda {
+                                        ordinal: student_gpu
+                                    }),
+                        "requested rollout student device differs from frozen policy"
+                    );
+                }
+                runtime
+            } else {
+                model::RuntimeOptions {
+                    device: if student_device.as_deref() == Some("cuda") {
+                        model::ExecutionDevice::Cuda {
+                            ordinal: student_gpu,
+                        }
+                    } else {
+                        model::ExecutionDevice::Cpu
+                    },
+                    dtype: model::InferenceDtype::F32,
+                }
+            };
+            let teacher_runtime = if let Some(saved) = saved {
+                execution
+                    .frozen_options(serde_json::from_value(saved["teacher_runtime"].clone())?)?
+            } else if mode == RolloutMode::SelfDistillation
+                && kind == DistillationStudent::TernaryBitnet
+            {
+                execution.frozen_options(model::RuntimeOptions::default())?
+            } else {
+                let directory = if mode == RolloutMode::SelfDistillation {
+                    student_base.as_path()
+                } else {
+                    verified
+                        .teachers
+                        .iter()
+                        .find(|t| teachers.contains(&t.id))
+                        .context("no named correction teacher in verified evidence")?
+                        .model
+                        .directory
+                        .as_path()
+                };
+                execution.options_for_model(directory)?
+            };
+            let rollout_output = output.clone();
+            let _result =
+                teacher_evidence::collect_rollouts(teacher_evidence::RolloutCollectOptions {
+                    bundle,
+                    output,
+                    student_base,
+                    student_checkpoint,
+                    student_kind: kind,
+                    mode,
+                    teacher_ids: teachers,
+                    teacher_runtime,
+                    student_runtime,
+                    max_tokens,
+                    seed,
+                    maximum_tasks,
+                    reuse_student_attempts_from,
+                })
+                .await?;
+            let report: serde_json::Value = serde_json::from_slice(&std::fs::read(
+                rollout_output.join("rollout-report.json"),
+            )?)?;
+            print(&report)?;
+            ensure!(
+                report["healthy_complete"] == true,
+                "student rollout collection is incomplete or failed; original observations and valid partial evidence were retained"
+            );
+        }
+        Command::StudyPlan {
+            config,
+            bundle,
+            base,
+            bitnet_base,
+            output,
+            maximum_parallel_jobs,
+            offline,
+            fresh,
+            execution,
+        } => {
+            let output = if fresh {
+                fresh_run_output(&output).await?
+            } else {
+                output
+            };
+            eprintln!("study planning: cached verified evidence only; explicit offline={offline}");
+            let input = bundle.clone();
+            let verified = tokio::task::spawn_blocking(move || {
+                lec_distil::teacher_evidence::load_verified(&input)
+            })
+            .await??;
+            let teacher = verified
+                .teachers
+                .first()
+                .context("evidence has no teacher")?;
+            let runtime = if output.join("plan.json").is_file() {
+                execution.frozen_options(
+                    lec_distil::experiments::load_plan(&output.join("plan.json"))?
+                        .inputs
+                        .teacher_runtime,
+                )?
+            } else {
+                execution.options_for_model(&teacher.model.directory)?
+            };
+            let plan = tokio::task::spawn_blocking(move || {
+                lec_distil::study::create_plan(lec_distil::study::PlanOptions {
+                    config,
+                    evidence_bundle: bundle,
+                    base,
+                    bitnet_base,
+                    output,
+                    maximum_parallel_jobs,
+                    teacher_runtime: runtime,
+                })
+            })
+            .await??;
+            print(
+                &serde_json::json!({"catalogue_arms":plan.arms.len(),"applicable_arms":plan.arms.iter().filter(|a|a.applicable).count(),
+                "quick_selected":plan.quick_arms,"quick_coverage_gaps":plan.quick_coverage_gaps,
+                "held_out_used":false,"production_eligible":false}),
+            )?;
+        }
+        Command::StudyEvaluate {
+            base,
+            checkpoint,
+            student,
+            bitnet_engine_manifest,
+            bitnet_gguf,
+            bitnet_parity_report,
+            output,
+            split,
+            offline,
+            fresh,
+            execution,
+        } => {
+            let bitnet_backend = if bitnet_engine_manifest.is_some()
+                || bitnet_gguf.is_some()
+                || bitnet_parity_report.is_some()
+            {
+                ensure!(
+                    student == "bitnet",
+                    "BitNet backend flags require --student bitnet"
+                );
+                Some(lec_distil::bitnet::BitNetBackendOptions {
+                    engine_manifest: bitnet_engine_manifest,
+                    gguf: bitnet_gguf,
+                    parity_report: bitnet_parity_report,
+                })
+            } else {
+                None
+            };
+            let architecture = if student == "bitnet" {
+                lec_distil::experiments::StudentArchitecture::TernaryBitnet
+            } else {
+                lec_distil::experiments::StudentArchitecture::ConventionalQwenLora
+            };
+            let base = base.unwrap_or_else(|| {
+                PathBuf::from(if student == "bitnet" {
+                    "offline_bundle/students/bitnet-2b-4t"
+                } else {
+                    "offline_bundle/base"
+                })
+            });
+            let output = if fresh {
+                fresh_run_output(&output).await?
+            } else {
+                output
+            };
+            let saved_runtime = execution.options_from_plan(&output.join("plan.json"))?;
+            let runtime = if let Some(saved) = saved_runtime {
+                saved
+            } else if student == "bitnet" {
+                execution.frozen_options(model::RuntimeOptions::default())?
+            } else {
+                execution.options_for_model(&base)?
+            };
+            let hardware = tokio::task::spawn_blocking(platform::detect).await??;
+            let cpu_threads = std::env::var("LEC_STUDY_CPU_THREADS")
+                .ok()
+                .map(|value| value.parse::<usize>())
+                .transpose()
+                .context("invalid assigned evaluation CPU thread count")?
+                .unwrap_or(hardware.available_cpu_threads);
+            ensure!(
+                cpu_threads > 0 && cpu_threads <= hardware.available_cpu_threads,
+                "assigned evaluation CPU threads exceed available affinity/cgroup capacity"
+            );
+            let report =
+                lec_distil::study::evaluate_checkpoint(lec_distil::study::CheckpointEvalOptions {
+                    base,
+                    checkpoint,
+                    architecture,
+                    runtime,
+                    output,
+                    split: if split == "train" {
+                        lec_distil::study_evaluate::StudySplit::Train
+                    } else {
+                        lec_distil::study_evaluate::StudySplit::Development
+                    },
+                    cpu_threads,
+                    offline,
+                    bitnet_backend,
+                })
+                .await?;
+            print(&report)?;
+            ensure!(
+                report["healthy_complete"] == true,
+                "local checkpoint evaluation has generation/infrastructure errors; observations retained"
+            );
+        }
+        Command::StudyRun {
+            study,
+            profile,
+            output,
+            mut selected_arms,
+            mut selection_evidence,
+            maximum_run_seconds,
+            offline,
+            fresh,
+        } => {
+            let output = output.unwrap_or_else(|| study.join(&profile));
+            let output = if fresh {
+                fresh_run_output(&output).await?
+            } else {
+                output
+            };
+            let root = std::env::current_dir()?;
+            if profile == "full" && selected_arms.is_empty() {
+                let path = selection_evidence.get_or_insert_with(|| study.join("selection.json"));
+                let selection: serde_json::Value = serde_json::from_slice(&std::fs::read(path)?)?;
+                selected_arms = serde_json::from_value(selection["selected_arms"].clone())?;
+            }
+            let selection_evidence = selection_evidence
+                .map(|path| artefact::Artefact::capture(&root, path))
+                .transpose()?;
+            let pinned = tokio::task::spawn_blocking(move || {
+                lec_distil::engine::pin_executable(
+                    &std::env::current_exe()?,
+                    Path::new("state/engines"),
+                )
+            })
+            .await??;
+            let report = lec_distil::experiments::run(lec_distil::experiments::RunOptions {
+                plan: study.join("plan.json"),
+                output,
+                fidelity: if profile == "quick" {
+                    lec_distil::experiments::Fidelity::Quick
+                } else {
+                    lec_distil::experiments::Fidelity::Full
+                },
+                selected_arms,
+                selection_evidence,
+                worker_executable: pinned.path,
+                worker_arguments: vec!["distillation-arm-worker".into()],
+                offline,
+                maximum_run_seconds,
+            })
+            .await?;
+            print(&report)?;
+            ensure!(
+                report["selected_profile_succeeded"] == true,
+                "study contains failed or budget-stopped work; progress and reports retained"
+            );
+        }
+        Command::DistillationArmWorker { request, output } => {
+            print(&lec_distil::study::run_worker(request, output).await?)?;
+        }
+        Command::StudyEvaluateWorker {
+            request,
+            training_artifact,
+            output,
+        } => {
+            print(&lec_distil::study::evaluate_worker(request, training_artifact, output).await?)?;
+        }
+        Command::StudySelect { study, top_groups } => {
+            let report = tokio::task::spawn_blocking(move || {
+                lec_distil::study::select(
+                    &study.join("plan.json"),
+                    &study.join("quick"),
+                    &study.join("selection.json"),
+                    top_groups,
+                )
+            })
+            .await??;
+            print(&report)?;
+            ensure!(
+                report["selected_arms"]
+                    .as_array()
+                    .is_some_and(|arms| !arms.is_empty())
+                    && report["selection_available"] != false,
+                "no validated development group is available for selection; descriptive observations and exclusion reasons were retained"
+            );
+        }
         Command::Preflight => {
             let p = tokio::task::spawn_blocking(preflight::inspect).await??;
             artefact::write_json(Path::new("reports/preflight.json"), &p)?;
@@ -358,6 +1263,27 @@ async fn execute(command: Command) -> Result<()> {
             seed,
             execution,
         } => {
+            let roster = comparative::Registry::load(&config)?;
+            let selected = roster
+                .models
+                .iter()
+                .filter(|model| models.is_empty() || models.contains(&model.id))
+                .collect::<Vec<_>>();
+            ensure!(!selected.is_empty(), "no models selected");
+            let mut runtime_options = execution.options_from_plan(&output.join("plan.json"))?;
+            if runtime_options.is_none() {
+                for model in selected {
+                    let options = execution.options_for_model(&model.directory)?;
+                    if let Some(current) = &runtime_options {
+                        ensure!(
+                            *current == options,
+                            "models require different hardware/precision; compare them in separate groups or use select-teachers"
+                        );
+                    } else {
+                        runtime_options = Some(options);
+                    }
+                }
+            }
             let split = if split == "train" {
                 comparative::ComparisonSplit::Train
             } else {
@@ -367,7 +1293,7 @@ async fn execute(command: Command) -> Result<()> {
                 registry: config,
                 output,
                 split,
-                runtime: execution.options(true),
+                runtime: runtime_options.context("missing selected runtime")?,
                 max_tokens,
                 seed,
                 models,
@@ -420,11 +1346,17 @@ async fn execute(command: Command) -> Result<()> {
             base,
             config,
             output,
-            resume,
+            resume: _,
+            fresh,
         } => {
+            let output = if fresh {
+                fresh_run_output(&output).await?
+            } else {
+                output
+            };
             let cfg = train::TrainConfig::load(&config)?;
             let report = tokio::task::spawn_blocking(move || {
-                train::run(&dataset, &heldout_index(), &base, cfg, &output, resume)
+                train::run(&dataset, &heldout_index(), &base, cfg, &output, !fresh)
             })
             .await??;
             print(&report)?;
@@ -441,7 +1373,7 @@ async fn execute(command: Command) -> Result<()> {
                 !comparative || checkpoint.is_none(),
                 "comparative models cannot use assessment adapters"
             );
-            let options = execution.options(false);
+            let options = execution.options_for_model(&base)?;
             let generated = tokio::task::spawn_blocking(move || {
                 let mut m = if comparative {
                     model::ModelRuntime::load_comparative_with_options(&base, options)?
@@ -529,7 +1461,7 @@ async fn execute(command: Command) -> Result<()> {
                 !comparative || checkpoint.is_none(),
                 "comparative models cannot use assessment adapters"
             );
-            let options = execution.options(false);
+            let options = execution.options_for_model(&base)?;
             if comparative {
                 serve::run_comparative(base, serve::ServeConfig::load(&config)?, options).await?;
             } else {
@@ -620,6 +1552,19 @@ async fn execute(command: Command) -> Result<()> {
         }
     }
     Ok(())
+}
+
+async fn fresh_run_output(output: &Path) -> Result<PathBuf> {
+    let path = output.to_path_buf();
+    let fresh =
+        tokio::task::spawn_blocking(move || lec_distil::engine::prepare_fresh_output(&path))
+            .await??;
+    eprintln!(
+        "explicit fresh run: previous evidence retained at {}; new output is {}",
+        output.display(),
+        fresh.display()
+    );
+    Ok(fresh)
 }
 
 async fn collect(
@@ -890,6 +1835,48 @@ async fn gate_command(incumbent: PathBuf, candidate: PathBuf) -> Result<()> {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[tokio::test]
+    async fn fresh_collectors_and_evaluations_preserve_original_failure_evidence() -> Result<()> {
+        for name in [
+            "collect-teacher-content",
+            "collect-student-rollouts",
+            "study-evaluate",
+        ] {
+            let root = tempfile::tempdir()?;
+            let original = root.path().join("original");
+            std::fs::create_dir_all(&original)?;
+            std::fs::write(
+                original.join("last-failure.json"),
+                b"original failed observation",
+            )?;
+            let mut cli = Cli::try_parse_from([
+                "lec-distil",
+                name,
+                "--output",
+                original.to_str().context("fixture path")?,
+                "--fresh",
+            ])?;
+            prepare_fresh_command(&mut cli.command).await?;
+            let path = match &cli.command {
+                Command::CollectTeacherContent { output, fresh, .. }
+                | Command::CollectStudentRollouts { output, fresh, .. }
+                | Command::StudyEvaluate { output, fresh, .. } => {
+                    ensure!(!fresh, "fresh command would create another directory");
+                    output.clone()
+                }
+                _ => anyhow::bail!("unexpected test command"),
+            };
+            ensure!(path != original && path.parent() == original.parent());
+            artefact::atomic_write(&path.join("last-failure.json"), b"new failed observation")?;
+            ensure!(
+                std::fs::read(original.join("last-failure.json"))?
+                    == b"original failed observation"
+            );
+            prepare_fresh_command(&mut cli.command).await?;
+            ensure!(std::fs::read_dir(root.path())?.count() == 2);
+        }
+        Ok(())
+    }
     #[test]
     fn decimal_spend_is_exact_and_rejects_overflow() {
         assert_eq!(usd_nanos("20.000000001").unwrap(), 20_000_000_001);

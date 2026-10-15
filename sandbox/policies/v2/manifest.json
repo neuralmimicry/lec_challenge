@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "policy_version": 2,
+  "default_x86_64_controller2_sha256": "a476342070dbeab34857f25dcd6e4321d0b2cc9017db49a30c7904c1ad750e44",
+  "purpose": "Immutable native Linux x86_64/AArch64 policy and reproducible image build inputs; ARM hardware remains unverified until native QA passes",
+  "files": {
+    "audit.rs": "d601721fc567297c61a12402575ed67063b0829a93b8eb0c602d0846c05221ff",
+    "Cargo.lock": "16ed3e7e022847b26d2295f0c93bfc3e3344df9654b4ca34a4bf89c00bb0990b",
+    "Cargo.toml": "8b819ba61ae109099896355cd0c62b77fd85d7a69d8fb6d77c55db1509e86e1e",
+    "Containerfile": "5a63f198d0faaa0c56a391a749c95ac7988ef9fa5b3edc73c7c192092cde790d",
+    "probe.rs": "4d29e398fa4b2e83b6e7cd3cd0749d78144dc2ab11fb254c721bbed34053acfd",
+    "ptrace.rs": "c33256d73701d2426eb2548a22a5e4b470bcacaac632002b7e4451e16729689c",
+    "seccomp.json": "8fe6e13c348e70bf05a4da8136b21bb50a9c441a866986a0e6f27f017d93fa6d",
+    "syscalls.rs": "e0fb8f309602fa165d258af8f337e316464009963b25773442cbf3c5b75a14a4"
+  }
+}

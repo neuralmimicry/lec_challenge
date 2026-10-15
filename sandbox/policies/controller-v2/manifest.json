@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "controller_version": 2,
+  "default_x86_64_policy1_sha256": "4b2556745b303526f354ded7f2c473b77f6da0c99a77f0a493c7272a8d800aac",
+  "default_x86_64_policy2_sha256": "a476342070dbeab34857f25dcd6e4321d0b2cc9017db49a30c7904c1ad750e44",
+  "purpose": "Immutable host controller, runtime coordination and durable recovery verifier; behavioural changes require a new controller version",
+  "files": {
+    "controller.rs": "7001229174938df7c721cc13070ebd4eac9b28bf5cbd4d5b3c5aec49ddf37d5b",
+    "control.rs": "09fd3c3c08d0dd09bfcf3d2a751956bf767229380aad130e622a9dce4637920d",
+    "owned.rs": "75e9c269ce59adaf41a9701faeb676b03258d6786ae00b81d217de5c838408c0",
+    "recovery.rs": "73aba2ca3135e380cf4931dffc36b46047a7b7c52f8104c4f0bf987d4723048e",
+    "runtime_lease.rs": "65c92f28260c405d827c576dab6c53b08ce6d6ef6f60e5d29339545a2ef0a09e"
+  }
+}

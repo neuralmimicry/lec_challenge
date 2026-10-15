@@ -1,0 +1,33 @@
+diff --git a/ggml/src/ggml-cpu/quants.c b/ggml/src/ggml-cpu/quants.c
+index 603f51c..14534d0 100644
+--- a/ggml/src/ggml-cpu/quants.c
++++ b/ggml/src/ggml-cpu/quants.c
+@@ -1313,13 +1313,13 @@ void quantize_row_i8_s(const float * x, void * y, int64_t n, float* act_scales,
+     for (int i = 0; i < n; i++) {
+         amax = MAX(amax, fabsf(x[i]));
+     }
+-    float s = (amax > 0.0f) ? 127.0f / amax : 0.0f;
++    float s = 127.0f / MAX(amax, 1e-5f);
+     act_scales[0] = s;
+ 
+     int32_t sum = 0;
+     int8_t * dst = (int8_t *)y;
+     for (int i = 0; i < n; i++) {
+-        int v = (int)roundf(x[i] * s);
++        int v = (int)nearbyintf(x[i] * s);
+         if (v >  127) v =  127;
+         if (v < -128) v = -128;
+         dst[i] = (int8_t)v;
+diff --git a/src/models/bitnet.cpp b/src/models/bitnet.cpp
+index 985c8d6..ec5dc3a 100644
+--- a/src/models/bitnet.cpp
++++ b/src/models/bitnet.cpp
+@@ -130,7 +130,7 @@ llama_model_bitnet::graph::graph(const llama_model & model, const llm_graph_para
+                 model.layers[il].ffn_gate, NULL, model.layers[il].ffn_gate_s,
+                 NULL,                      NULL, NULL,
+                 NULL,
+-                LLM_FFN_SILU, LLM_FFN_PAR, il);
++                LLM_FFN_RELU_SQR, LLM_FFN_PAR, il);
+         cb(cur, "ffn_sub_out", il);
+ 
+         cur = build_norm(cur,

@@ -62,10 +62,30 @@ ranking. Allocations are snapshots after generation, rather than peak VRAM.
 
 ## Local teacher commands
 
-The short `run-gpu.sh` launcher performs the Rust compatibility preparation and
-selects the verified build/runtime environment above. It never reads a stored
-credential. `config/comparative-models.toml` records exact model commits and
-directories; `docs/hub.md` explains authenticated downloads and restart.
+The short `run-gpu.sh` launcher delegates hardware discovery, compatible toolkit
+selection and executable pinning to Rust. It honours process affinity and
+cgroup CPU/RAM ceilings, checks measured VRAM and queries the native CUDA driver
+when `nvidia-smi` is absent, including Linux ARM64. It selects a toolkit supported
+by the installed driver and GPU architecture. An explicit CUDA request cannot
+silently fall back to CPU. Automatic CPU decisions include their reason. AMD
+ROCm and Apple Metal execution are not currently implemented; such hosts use
+the explicit CPU path. These are capability statements, not ARM64 hardware QA.
+
+`config/comparative-models.toml` records the initial dense models. The adaptive
+search records additional immutable registries under each trial. The three
+weaker dense alternatives have now been pruned through the owned-cache policy;
+their historical commands below require exact rehydration. A retained Qwen 7B
+teacher can instead be started with:
+
+```sh
+./run.sh serve --comparative --device cuda --dtype f32 \
+  --base offline_bundle/comparative/qwen-coder-7b-q4_k_m \
+  --config config/serving-teacher.toml
+```
+
+The launcher never reads a stored credential. See `docs/hub.md` for authenticated
+downloads, exact range recovery and offline operation. The following commands
+document the earlier dense-model smoke checks:
 
 ```sh
 ./run-gpu.sh serve --comparative --device cuda --dtype f16 \
@@ -86,13 +106,45 @@ The teacher endpoint binds only to localhost:8081 and exposes `/health`,
 teacher. Local model developers remain distinct from the assessment's three
 independent API businesses.
 
+After building, a transient user service can keep the teacher running beyond the
+terminal session. It needs no Hugging Face credential once the files are local:
+
+```sh
+systemd-run --user --unit=lec-comparative-teacher --collect \
+  --property=WorkingDirectory="$PWD" \
+  --property=Restart=on-failure --property=RestartSec=5s \
+  --setenv=LD_LIBRARY_PATH=/usr/local/cuda-12.9/lib64 \
+  --setenv=RAYON_NUM_THREADS=4 \
+  "$PWD/target/cuda/release/lec-distil" serve \
+  --comparative --device cuda --dtype f16 \
+  --base offline_bundle/comparative/qwen-coder-1_5b \
+  --config config/serving-teacher.toml
+
+systemctl --user status lec-comparative-teacher
+lec_teacher_pid=$(systemctl --user show --property=MainPID --value lec-comparative-teacher)
+
+# This Rust client checks actual output and the supervisor's driver PID.
+cargo run --locked --offline --example check_teacher_endpoint -- \
+  --process-id "$lec_teacher_pid" --output reports/comparative/active-teacher
+
+systemctl --user stop lec-comparative-teacher
+```
+
+The native `systemd-run`/`systemctl` utilities operate the host process supervisor;
+all model and verification logic remains Rust. Stop the service before a new
+comparison or before hosting DeepSeek/SmolLM2. To switch teachers, rerun the
+service command with the relevant registered model directory, and pass the
+matching `--model` ID to `check_teacher_endpoint`. Select a fresh evidence output
+directory for each verification. A transient service is not an installation that
+starts automatically after reboot.
+
 ## Comparative evidence boundaries
 
 `compare-models` defaults to all 16 development tasks and a fixed decoding seed;
 it has no held-out option. The roster, model assets, contracts, decoding settings,
 engine binary and sandbox policy are frozen before generation. Raw generations
 are published before grading, and verified saved work is reused after a crash.
-At most two CPU graders overlap one GPU generator. Every candidate runs in a
+CPU/RAM limits bound the graders that overlap one GPU generator. Every candidate runs in a
 fresh isolated container with host-owned oracles and trusted audit evidence.
 Incomplete, empty and errored generations remain failures in the planned
 denominator. Missing coverage and generation/infrastructure errors return
@@ -104,6 +156,19 @@ development comparisons do not establish learning, general superiority or a
 shipping decision. They do not automatically become assessment training rows.
 Output-derived DeepSeek students must retain its inherited licence and use
 obligations; the ordinary Apache-only label would be insufficient.
+
+Derive a reusable resource table from completed comparison groups with the
+native Rust example below. It verifies linked raw/grader artifacts and original
+summary counts, and retains per-task inference timings/token counts. Zero remote
+inference charges are separate from unmeasured electricity, depreciation,
+downloads and labour; cost per point of learning is N/A without a training gain.
+
+```sh
+cargo run --locked --offline --example comparative_resources -- \
+  reports/comparative/resources \
+  reports/comparative/coding-development \
+  reports/comparative/control-development
+```
 
 The existing delivery ZIP/tar.gz describe the earlier CPU assessment snapshot.
 New GPU source and comparative assets require a newly packaged and verified

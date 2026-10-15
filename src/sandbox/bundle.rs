@@ -4,10 +4,17 @@ use super::*;
 #[derive(Deserialize)]
 struct ImageManifest {
     schema_version: u32,
+    #[serde(default = "legacy_policy_version")]
+    policy_version: u32,
+    #[serde(default = "legacy_image_architecture")]
+    architecture: String,
     archive: String,
     bytes: u64,
     sha256: String,
     image_id: String,
+}
+fn legacy_image_architecture() -> String {
+    "x86_64".into()
 }
 
 /// Restore only the archived image whose complete bytes match the manifest.
@@ -21,6 +28,16 @@ pub async fn restore_image_bundle(directory: &Path, cfg: &SandboxConfig) -> Resu
     ensure!(
         manifest.schema_version == 1 && manifest.image_id.trim_start_matches("sha256:").len() == 64,
         "invalid OCI bundle manifest"
+    );
+    ensure!(
+        manifest.policy_version == cfg.policy_version
+            && manifest.architecture
+                == if cfg.policy_version == 1 {
+                    "x86_64"
+                } else {
+                    &cfg.architecture
+                },
+        "OCI bundle policy/architecture differs from the configured sandbox"
     );
     ensure!(
         cfg.expected_image_id.is_empty()
@@ -50,6 +67,7 @@ pub async fn restore_image_bundle(directory: &Path, cfg: &SandboxConfig) -> Resu
     let hash =
         tokio::task::spawn_blocking(move || crate::artefact::file_hash(&hash_path)).await??;
     ensure!(hash == manifest.sha256, "OCI archive checksum mismatch");
+    let _runtime_lease = runtime_lease::exclusive(&cfg.runtime).await?;
     tracing::info!(archive=%archive.display(),bytes=manifest.bytes,"loading verified offline OCI image");
     let output = timeout(
         Duration::from_secs(300),
@@ -109,6 +127,8 @@ mod tests {
         fs::write(directory.path().join("manifest.json"),serde_json::to_vec(&json!({"schema_version":1,"archive":"image.tar","bytes":bytes,"sha256":"0".repeat(64),"image_id":"1".repeat(64)})).unwrap()).unwrap();
         let cfg = SandboxConfig {
             runtime: "/this/runtime/must/not/be/invoked".into(),
+            policy_version: 1,
+            architecture: String::new(),
             ..Default::default()
         };
         let error = restore_image_bundle(directory.path(), &cfg)
@@ -121,10 +141,31 @@ mod tests {
     async fn archive_paths_cannot_leave_the_bundle() {
         let directory = tempfile::tempdir().unwrap();
         fs::write(directory.path().join("manifest.json"),serde_json::to_vec(&json!({"schema_version":1,"archive":"../image.tar","bytes":0,"sha256":"0".repeat(64),"image_id":"1".repeat(64)})).unwrap()).unwrap();
-        let error = restore_image_bundle(directory.path(), &SandboxConfig::default())
+        let config = SandboxConfig {
+            policy_version: 1,
+            architecture: String::new(),
+            ..Default::default()
+        };
+        let error = restore_image_bundle(directory.path(), &config)
             .await
             .unwrap_err()
             .to_string();
         assert!(error.contains("path escapes"), "{error}");
+    }
+    #[tokio::test]
+    async fn legacy_archive_is_rejected_before_loading_under_portable_arm_policy() {
+        let directory = tempfile::tempdir().unwrap();
+        fs::write(directory.path().join("manifest.json"), serde_json::to_vec(&json!({"schema_version":1,"archive":"image.tar","bytes":0,"sha256":"0".repeat(64),"image_id":"1".repeat(64)})).unwrap()).unwrap();
+        let config = SandboxConfig {
+            policy_version: 2,
+            architecture: "aarch64".into(),
+            runtime: "/this/runtime/must/not/be/invoked".into(),
+            ..Default::default()
+        };
+        let error = restore_image_bundle(directory.path(), &config)
+            .await
+            .unwrap_err()
+            .to_string();
+        assert!(error.contains("policy/architecture"), "{error}");
     }
 }

@@ -77,14 +77,16 @@ fn main() -> Result<()> {
     )?;
     let nvcc = toolkit.join("bin/nvcc");
     let include_flag = format!("-I{}", destination.join("include").display());
+    let capability = std::env::var("CUDA_COMPUTE_CAP").unwrap_or_else(|_| "75".into());
+    ensure!(
+        !capability.is_empty() && capability.bytes().all(|byte| byte.is_ascii_digit()),
+        "invalid CUDA compute capability"
+    );
+    let compiler = std::env::var_os("NVCC_CCBIN").unwrap_or_else(|| "g++".into());
     let compiled = Command::new(&nvcc)
-        .args([
-            "--ptx",
-            "--gpu-architecture=sm_75",
-            "-std=c++17",
-            "-ccbin",
-            "/usr/bin/g++-14",
-        ])
+        .args(["--ptx", "-std=c++17", "-ccbin"])
+        .arg(compiler)
+        .arg(format!("--gpu-architecture=sm_{capability}"))
         .arg(&include_flag)
         .arg(&qa)
         .arg("-o")

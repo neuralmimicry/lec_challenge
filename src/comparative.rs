@@ -32,8 +32,31 @@ pub struct RegistryModel {
     pub role: String,
     pub licence: String,
     pub developer_id: String,
+    #[serde(default, skip_serializing_if = "WeightFormat::is_safetensors")]
+    pub weight_format: WeightFormat,
 }
-#[derive(Deserialize)]
+
+#[derive(Clone, Copy, Debug, Default, Deserialize, Serialize, PartialEq, Eq)]
+#[serde(rename_all = "snake_case")]
+pub enum WeightFormat {
+    #[default]
+    Safetensors,
+    Gguf,
+}
+
+impl WeightFormat {
+    fn is_safetensors(&self) -> bool {
+        *self == Self::Safetensors
+    }
+
+    pub fn manifest_name(self) -> &'static str {
+        match self {
+            Self::Safetensors => "assets.json",
+            Self::Gguf => "gguf-assets.json",
+        }
+    }
+}
+#[derive(Deserialize, Serialize)]
 pub struct Registry {
     pub schema_version: u32,
     pub models: Vec<RegistryModel>,
@@ -78,6 +101,17 @@ pub enum ComparisonSplit {
     Train,
     Development,
 }
+
+#[derive(Clone, Copy, Debug, Default, Serialize, Deserialize, PartialEq, Eq)]
+#[serde(rename_all = "snake_case")]
+enum ComparisonPack {
+    #[default]
+    Original,
+    Qualification,
+}
+fn is_original_pack(pack: &ComparisonPack) -> bool {
+    *pack == ComparisonPack::Original
+}
 impl ComparisonSplit {
     fn corpus_split(self) -> Split {
         match self {
@@ -111,16 +145,41 @@ struct Plan {
     models: Vec<FrozenModel>,
     tasks: Vec<Task>,
     split: ComparisonSplit,
+    #[serde(default, skip_serializing_if = "is_original_pack")]
+    pack: ComparisonPack,
     runtime: serde_json::Value,
     max_tokens: usize,
     seed: u64,
     temperature: f64,
     top_p: f64,
+    #[serde(
+        default = "default_generation_timeout",
+        skip_serializing_if = "is_default_generation_timeout"
+    )]
+    generation_timeout_seconds: u64,
+    #[serde(
+        default = "default_grader_concurrency",
+        skip_serializing_if = "is_default_grader_concurrency"
+    )]
+    maximum_concurrent_graders: usize,
     sandbox: SandboxConfig,
     sandbox_preflight: Artefact,
     sandbox_policy_sha256: String,
     engine_binary_sha256: String,
     promotable: bool,
+}
+
+fn default_generation_timeout() -> u64 {
+    120
+}
+fn is_default_generation_timeout(value: &u64) -> bool {
+    *value == 120
+}
+fn default_grader_concurrency() -> usize {
+    2
+}
+fn is_default_grader_concurrency(value: &usize) -> bool {
+    *value == 2
 }
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
@@ -173,7 +232,7 @@ fn request(task: &Task, plan: &Plan) -> GenerationRequest {
         seed: plan.seed,
         temperature: plan.temperature,
         top_p: plan.top_p,
-        timeout_seconds: 120,
+        timeout_seconds: plan.generation_timeout_seconds,
     }
 }
 
@@ -248,14 +307,14 @@ fn verify_observation(
 }
 
 /// The original single-file base keeps its established identity. Other models
-/// bind all safetensors shards, including their file names, into one identity.
+/// bind all weight shards, including their file names, into one identity.
 pub fn comparative_checkpoint_id(assets: &model::AssetManifest) -> Result<String> {
     let shards = assets
         .files
         .iter()
-        .filter(|(name, _)| name.ends_with(".safetensors"))
+        .filter(|(name, _)| name.ends_with(".safetensors") || name.ends_with(".gguf"))
         .collect::<BTreeMap<_, _>>();
-    ensure!(!shards.is_empty(), "model has no safetensors weights");
+    ensure!(!shards.is_empty(), "model has no supported weight files");
     if shards.len() == 1 {
         return Ok((*shards
             .values()
@@ -274,6 +333,11 @@ fn validate_plan(plan: &Plan) -> Result<()> {
     ensure!(
         !plan.models.is_empty() && !plan.tasks.is_empty(),
         "empty comparative denominator"
+    );
+    ensure!(
+        (1..=1800).contains(&plan.generation_timeout_seconds)
+            && (1..=256).contains(&plan.maximum_concurrent_graders),
+        "invalid resource limits"
     );
     let tasks = plan.tasks.iter().map(|t| &t.id).collect::<BTreeSet<_>>();
     let models = plan
@@ -413,12 +477,67 @@ fn summary(plan: &Plan, observations: &[Observation]) -> Result<serde_json::Valu
     for task in &plan.tasks {
         sources.insert(task.source_id.clone());
     }
-    Ok(
-        serde_json::json!({"schema_version":1,"evidence_kind":"actual_local_exploratory_comparative_generations","split":plan.split,"models":models,"source_count":sources.len(),"planned_observations":plan.models.len()*plan.tasks.len(),"observed_observations":observations.len(),"coverage_complete":observations.len()==plan.models.len()*plan.tasks.len(),"promotable":false,"limitations":["Development/training comparison only: no sealed held-out tasks were evaluated.","These are open-weight models hosted locally, not three independent real provider businesses.","One decoding seed and a small, jointly authored corpus give descriptive results, not proof of learning or general model superiority.","Every missing, failed or truncated generation remains a failure in the planned denominator.","GPU memory snapshots are observations, not continuous peak-memory measurements; energy and cash costs are unmeasured."]}),
-    )
+    let mut value = serde_json::json!({"schema_version":1,"evidence_kind":"actual_local_exploratory_comparative_generations","split":plan.split,"models":models,"source_count":sources.len(),"planned_observations":plan.models.len()*plan.tasks.len(),"observed_observations":observations.len(),"coverage_complete":observations.len()==plan.models.len()*plan.tasks.len(),"promotable":false,"limitations":["Development/training comparison only: no sealed held-out tasks were evaluated.","These are open-weight models hosted locally, not three independent real provider businesses.","One decoding seed and a small, jointly authored corpus give descriptive results, not proof of learning or general model superiority.","Every missing, failed or truncated generation remains a failure in the planned denominator.","GPU memory snapshots are observations, not continuous peak-memory measurements; energy and cash costs are unmeasured."]});
+    if plan.pack == ComparisonPack::Qualification {
+        value["pack"] = serde_json::json!("qualification");
+    }
+    Ok(value)
 }
 
-pub async fn run(mut options: CompareOptions) -> Result<serde_json::Value> {
+/// Revalidate completed observations after unused model weights are pruned.
+/// Tensor manifests, original output, task identities and trusted grader/audit
+/// artifacts remain mandatory; an aggregate score alone is never accepted.
+pub fn verify_completed_comparison(directory: &Path) -> Result<serde_json::Value> {
+    let root = std::env::current_dir()?.canonicalize()?;
+    let directory = directory.canonicalize()?;
+    ensure!(
+        directory.starts_with(&root),
+        "comparison is outside the workspace"
+    );
+    let plan_path = directory.join("plan.json");
+    let plan: Plan = serde_json::from_slice(&fs::read(&plan_path)?)?;
+    validate_plan(&plan)?;
+    plan.registry.verify(&root)?;
+    plan.sandbox_preflight.verify(&root)?;
+    let plan_hash = artefact::file_hash(&plan_path)?;
+    let mut observations = Vec::new();
+    for frozen in &plan.models {
+        frozen.assets.verify(&root)?;
+        for task in &plan.tasks {
+            let observation: Observation = serde_json::from_slice(&fs::read(
+                directory
+                    .join(&frozen.model.id)
+                    .join(format!("{}.json", task.id)),
+            )?)?;
+            verify_observation(&observation, frozen, task, &plan, &plan_hash, &root)?;
+            observations.push(observation);
+        }
+    }
+    let computed = summary(&plan, &observations)?;
+    let recorded: serde_json::Value =
+        serde_json::from_slice(&fs::read(directory.join("report.json"))?)?;
+    ensure!(
+        computed["coverage_complete"] == true && computed == recorded,
+        "completed comparative report differs from its complete source evidence"
+    );
+    Ok(computed)
+}
+
+pub async fn run(options: CompareOptions) -> Result<serde_json::Value> {
+    run_pack(options, ComparisonPack::Original).await
+}
+
+/// A fixed second development pack verifies teacher selection without opening
+/// the assessment's sealed held-out sources or accepting arbitrary test tasks.
+pub async fn run_qualification(options: CompareOptions) -> Result<serde_json::Value> {
+    ensure!(
+        options.split == ComparisonSplit::Development,
+        "qualification requires development split"
+    );
+    run_pack(options, ComparisonPack::Qualification).await
+}
+
+async fn run_pack(mut options: CompareOptions, pack: ComparisonPack) -> Result<serde_json::Value> {
     ensure!(
         (1..=1024).contains(&options.max_tokens),
         "invalid comparative output cap"
@@ -454,6 +573,12 @@ pub async fn run(mut options: CompareOptions) -> Result<serde_json::Value> {
                 .all(|id| selected.iter().any(|m| &m.id == id)),
         "unknown or empty comparative model selection"
     );
+    let plan_path = options.output.join("plan.json");
+    let previous_plan = if plan_path.exists() {
+        Some(serde_json::from_slice::<Plan>(&fs::read(&plan_path)?)?)
+    } else {
+        None
+    };
     let mut config = SandboxConfig {
         report_dir: options.output.join("sandbox"),
         ..Default::default()
@@ -474,9 +599,31 @@ pub async fn run(mut options: CompareOptions) -> Result<serde_json::Value> {
     for entry in selected {
         let directory = entry.directory.clone();
         let baseline = entry.role == "student_baseline";
+        let format = entry.weight_format;
+        let previous_manifest = previous_plan
+            .as_ref()
+            .and_then(|plan| {
+                plan.models
+                    .iter()
+                    .find(|frozen| frozen.model.id == entry.id)
+            })
+            .map(|frozen| frozen.assets.clone());
+        let evidence_root = root.clone();
         let assets = tokio::task::spawn_blocking(move || {
+            if let Some(manifest) = previous_manifest {
+                // Cached inference is bound to its original tensor manifest.
+                // Regrading that output does not require unused tensors to
+                // remain resident or downloaded. Any new inference still goes
+                // through the loader's complete asset verification below.
+                return serde_json::from_slice::<model::AssetManifest>(&fs::read(
+                    manifest.verify(&evidence_root)?,
+                )?)
+                .context("read original comparative tensor manifest");
+            }
             if baseline {
                 model::validate_assets(&directory)
+            } else if format == WeightFormat::Gguf {
+                Ok(crate::hub::validate_gguf_assets(&directory)?.assets)
             } else {
                 crate::hub::validate_downloaded_assets(&directory)
             }
@@ -487,28 +634,49 @@ pub async fn run(mut options: CompareOptions) -> Result<serde_json::Value> {
             "registry differs from downloaded model provenance"
         );
         frozen_models.push(FrozenModel {
-            assets: Artefact::capture(&root, entry.directory.join("assets.json"))?,
+            assets: Artefact::capture(&root, entry.directory.join(format.manifest_name()))?,
             model: entry,
         });
     }
-    let plan_path = options.output.join("plan.json");
     let sandbox_policy_sha256 = sandbox::policy_sha256(&config)?;
+    let hardware = tokio::task::spawn_blocking(crate::platform::detect).await??;
+    let grader_capacity = if matches!(options.runtime.device, model::ExecutionDevice::Cpu) {
+        1
+    } else {
+        hardware
+            .available_cpu_threads
+            .saturating_sub(1)
+            .clamp(1, 256)
+            .min((hardware.usable_ram_bytes / (768 * 1024 * 1024)).max(1) as usize)
+            .min(16)
+    };
     let mut plan = Plan {
         schema_version: 1,
         evidence_kind: "preregistered_exploratory_local_comparison".into(),
         frozen_unix_ms: crate::ledger::unix_millis(),
         registry: Artefact::capture(&root, options.registry)?,
         models: frozen_models,
-        tasks: tasks::corpus()
-            .into_iter()
-            .filter(|t| t.split == options.split.corpus_split())
-            .collect(),
+        tasks: match pack {
+            ComparisonPack::Original => tasks::corpus(),
+            ComparisonPack::Qualification => crate::teacher_search::qualification::corpus(),
+        }
+        .into_iter()
+        .filter(|t| t.split == options.split.corpus_split())
+        .collect(),
         split: options.split,
+        pack,
         runtime: serde_json::to_value(&options.runtime)?,
         max_tokens: options.max_tokens,
         seed: options.seed,
         temperature: 0.2,
         top_p: 0.95,
+        generation_timeout_seconds: if matches!(options.runtime.device, model::ExecutionDevice::Cpu)
+        {
+            1800
+        } else {
+            120
+        },
+        maximum_concurrent_graders: grader_capacity,
         sandbox: config,
         sandbox_preflight: Artefact::capture(
             &root,
@@ -524,6 +692,9 @@ pub async fn run(mut options: CompareOptions) -> Result<serde_json::Value> {
     if plan_path.exists() {
         let existing: Plan = serde_json::from_slice(&fs::read(&plan_path)?)?;
         plan.frozen_unix_ms = existing.frozen_unix_ms;
+        // Resumption retains the original declared worker ceiling. A machine
+        // with less currently available memory may run fewer workers below it.
+        plan.maximum_concurrent_graders = existing.maximum_concurrent_graders;
         ensure!(
             serde_json::to_value(&existing)? == serde_json::to_value(&plan)?,
             "comparative plan is immutable; changed inputs require a new output directory"
@@ -533,6 +704,11 @@ pub async fn run(mut options: CompareOptions) -> Result<serde_json::Value> {
         artefact::write_json(&plan_path, &plan)?;
     }
     let plan_hash = artefact::file_hash(&plan_path)?;
+    let actual_grader_capacity = grader_capacity.min(plan.maximum_concurrent_graders);
+    eprintln!(
+        "compare: {} available CPU threads; {} concurrent isolated graders; generation deadline {}s",
+        hardware.available_cpu_threads, actual_grader_capacity, plan.generation_timeout_seconds
+    );
     let mut observations = Vec::new();
     let execution_path = options.output.join("execution.json");
     let mut execution: Vec<serde_json::Value> = if execution_path.exists() {
@@ -569,6 +745,7 @@ pub async fn run(mut options: CompareOptions) -> Result<serde_json::Value> {
             let before = gpu_observation().await;
             let model_dir = frozen.model.directory.clone();
             let baseline = frozen.model.role == "student_baseline";
+            let format = frozen.model.weight_format;
             let runtime_options = options.runtime.clone();
             eprintln!(
                 "compare: loading {} on requested device",
@@ -577,6 +754,8 @@ pub async fn run(mut options: CompareOptions) -> Result<serde_json::Value> {
             let loaded = tokio::task::spawn_blocking(move || {
                 if baseline {
                     ModelRuntime::load_with_options(&model_dir, None, runtime_options)
+                } else if format == WeightFormat::Gguf {
+                    ModelRuntime::load_quantised_with_options(&model_dir, runtime_options)
                 } else {
                     ModelRuntime::load_comparative_with_options(&model_dir, runtime_options)
                 }
@@ -596,7 +775,7 @@ pub async fn run(mut options: CompareOptions) -> Result<serde_json::Value> {
         }
         let mut grades = JoinSet::new();
         for (task, raw_path, cached) in pending {
-            if grades.len() >= 2 {
+            if grades.len() >= actual_grader_capacity {
                 observations.push(
                     grades
                         .join_next()
@@ -622,11 +801,22 @@ pub async fn run(mut options: CompareOptions) -> Result<serde_json::Value> {
                         .take()
                         .context("model loading produced no runtime or error")?;
                     let generation_request = request(&task, &plan);
-                    let generated = tokio::task::spawn_blocking(move || {
+                    let mut worker_task = tokio::task::spawn_blocking(move || {
                         let result = worker.generate(generation_request);
                         (worker, result)
-                    })
-                    .await?;
+                    });
+                    let started = std::time::Instant::now();
+                    let period = std::time::Duration::from_secs(15);
+                    let mut heartbeat =
+                        tokio::time::interval_at(tokio::time::Instant::now() + period, period);
+                    heartbeat.set_missed_tick_behavior(tokio::time::MissedTickBehavior::Skip);
+                    let generated = loop {
+                        tokio::select! {
+                            completed=&mut worker_task => break completed?,
+                            _=heartbeat.tick() => eprintln!("compare: generating model={} task={} elapsed={:.0}s deadline={}s",
+                                frozen.model.id,task.id,started.elapsed().as_secs_f64(),plan.generation_timeout_seconds),
+                        }
+                    };
                     runtime = Some(generated.0);
                     generated.1
                 };

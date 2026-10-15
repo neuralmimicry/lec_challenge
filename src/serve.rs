@@ -83,6 +83,8 @@ struct ServiceState {
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Health {
+    #[serde(default)]
+    pub process_id: u32,
     pub healthy: bool,
     pub checkpoint_id: String,
     pub model_id: String,
@@ -263,11 +265,18 @@ async fn run_inner(
                     timeout_seconds: 1800,
                 })?;
                 let health = Health {
+                    process_id: std::process::id(),
                     healthy: true,
                     checkpoint_id: model.checkpoint_id.clone(),
                     model_id: model.assets.model_id.clone(),
                     base_revision: model.assets.revision.clone(),
-                    tokenizer_sha256: model.assets.files["tokenizer.json"].clone(),
+                    tokenizer_sha256: model
+                        .assets
+                        .files
+                        .get("tokenizer.json")
+                        .or_else(|| model.assets.files.get("source/tokenizer.json"))
+                        .context("validated model is missing its original tokeniser hash")?
+                        .clone(),
                     checksum_validated: true,
                     inference_smoke_output: smoke.completion,
                     smoke_elapsed_ms: smoke.elapsed_ms,

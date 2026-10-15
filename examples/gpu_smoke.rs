@@ -2,7 +2,7 @@
 use anyhow::{Context, Result, ensure};
 use lec_distil::{
     artefact,
-    model::{GenerationRequest, ModelRuntime, RuntimeOptions},
+    model::{ExecutionDevice, GenerationRequest, InferenceDtype, ModelRuntime, RuntimeOptions},
 };
 use serde_json::json;
 use std::{
@@ -26,7 +26,9 @@ fn main() -> Result<()> {
         .first()
         .map(PathBuf::from)
         .unwrap_or_else(|| "offline_bundle/base".into());
-    let comparative = arguments.iter().any(|value| value == "--comparative");
+    let quantised =
+        arguments.iter().any(|value| value == "--gguf") || base.join("gguf-assets.json").is_file();
+    let comparative = quantised || arguments.iter().any(|value| value == "--comparative");
     let cpu_baseline = arguments.iter().any(|value| value == "--cpu-baseline");
     let output = PathBuf::from(format!(
         "reports/comparative/gpu-smoke/{}.json",
@@ -37,7 +39,16 @@ fn main() -> Result<()> {
         "--format=csv,noheader",
     ])?;
     let loaded = Instant::now();
-    let options = RuntimeOptions::cuda(0);
+    let options = if quantised {
+        // Native GGUF matrix kernels retain compressed weights and require
+        // float32 activations. This is a distinct, explicit runtime contract.
+        RuntimeOptions {
+            device: ExecutionDevice::Cuda { ordinal: 0 },
+            dtype: InferenceDtype::F32,
+        }
+    } else {
+        RuntimeOptions::cuda(0)
+    };
     let mut runtime = if comparative {
         ModelRuntime::load_comparative_with_options(&base, options)?
     } else {
@@ -110,7 +121,7 @@ fn main() -> Result<()> {
         "--format=csv,noheader",
     ])?;
     let report = json!({
-        "evidence_kind":"actual_original_weights_native_rust_cuda_inference_qa",
+        "evidence_kind":if quantised {"actual_publisher_verified_quantised_weights_native_rust_cuda_inference_qa"} else {"actual_original_weights_native_rust_cuda_inference_qa"},
         "assessment_training_or_heldout_evidence":false,
         "base_directory":base,
         "execution":runtime.execution_metadata(),

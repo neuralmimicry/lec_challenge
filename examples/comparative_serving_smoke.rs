@@ -4,7 +4,7 @@ use anyhow::{Context, Result, ensure};
 use clap::Parser;
 use lec_distil::{
     artefact,
-    comparative::Registry,
+    comparative::{Registry, WeightFormat},
     model::{Generation, GenerationRequest},
     serve::{Health, ServeConfig},
 };
@@ -76,8 +76,13 @@ async fn main() -> Result<()> {
         std::fs::write(&config_path, toml::to_string(&config)?)?;
         let log_path = arguments.output.join(format!("{}.log", entry.id));
         let mut command = Command::new(&binary);
+        let dtype = if entry.weight_format == WeightFormat::Gguf {
+            "f32"
+        } else {
+            "f16"
+        };
         command
-            .args(["serve", "--device", "cuda", "--dtype", "f16", "--base"])
+            .args(["serve", "--device", "cuda", "--dtype", dtype, "--base"])
             .arg(&entry.directory)
             .arg("--config")
             .arg(&config_path);
@@ -120,7 +125,7 @@ async fn main() -> Result<()> {
         );
         ensure!(
             health.execution["cuda_active"] == true
-                && health.execution["actual_dtype"] == "F16"
+                && health.execution["actual_dtype"] == if dtype == "f32" { "F32" } else { "F16" }
                 && health.execution["cpu_fallback"] == false,
             "endpoint did not prove actual CUDA/F16 execution"
         );

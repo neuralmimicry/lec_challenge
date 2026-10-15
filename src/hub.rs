@@ -17,12 +17,22 @@ use std::{
     io::{Read, Write},
     path::{Component, Path, PathBuf},
     sync::Arc,
-    time::{Duration, SystemTime, UNIX_EPOCH},
+    time::{Duration, Instant, SystemTime, UNIX_EPOCH},
 };
 use tokio::io::AsyncWriteExt;
 use zeroize::Zeroizing;
 
 use crate::model::AssetManifest;
+
+mod gguf;
+mod historical;
+mod ranges;
+pub use gguf::{
+    HubGgufDownloadOptions, HubGgufProvenance, HubGgufSource, HubGgufSourceAssets, download_gguf,
+    is_intentionally_pruned_gguf, validate_gguf_assets,
+};
+pub(crate) use gguf::{PrunedWeight, PrunedWeightsProof};
+pub use historical::{validate_downloaded_asset_metadata, validate_gguf_asset_metadata};
 
 const MAX_METADATA_BYTES: usize = 32 * 1024 * 1024;
 const MAX_TOKEN_BYTES: usize = 8 * 1024;
@@ -31,6 +41,28 @@ const MAX_TOTAL_BYTES: u64 = 64 * 1024 * 1024 * 1024;
 const PROVENANCE_FILE: &str = "hub-provenance.json";
 const PLAN_FILE: &str = "hub-plan.json";
 const AUTHENTICATION_POLICY: &str = "Optional bearer applied to initial HTTPS huggingface.co request only; all redirects strip authentication; no token persisted";
+
+/// Sanitised classification for switching a search into its cached-only mode.
+#[derive(Debug, thiserror::Error)]
+pub enum HubRequestFailure {
+    #[error("Hub connectivity failed during {stage} (URL and credentials redacted)")]
+    Connectivity { stage: &'static str },
+    #[error("Hub HTTP {status} (URL and credentials redacted)")]
+    Http { status: u16 },
+}
+
+/// Permanent model/authentication errors such as 404/401 are never offline signals.
+pub fn is_connectivity_error(error: &anyhow::Error) -> bool {
+    error
+        .chain()
+        .any(|cause| match cause.downcast_ref::<HubRequestFailure>() {
+            Some(HubRequestFailure::Connectivity { .. }) => true,
+            Some(HubRequestFailure::Http { status }) => {
+                matches!(*status, 408 | 425 | 429 | 500..=599)
+            }
+            None => false,
+        })
+}
 
 #[derive(Clone, Debug)]
 pub struct HubDownloadOptions {
@@ -441,9 +473,37 @@ fn canonical_file_url(model_id: &str, commit: &str, filename: &str) -> String {
 /// Reqwest errors may contain signed URLs, so none are attached to public errors.
 async fn request_with_redirects(
     client: &Client,
-    mut url: Url,
+    url: Url,
     bearer: Option<&Bearer>,
     range_start: Option<u64>,
+    test_http: bool,
+) -> Result<Response> {
+    request_with_range(
+        client,
+        url,
+        bearer,
+        range_start.map(|start| HttpRange {
+            start,
+            end: None,
+            if_range: None,
+        }),
+        test_http,
+    )
+    .await
+}
+
+#[derive(Clone)]
+struct HttpRange {
+    start: u64,
+    end: Option<u64>,
+    if_range: Option<String>,
+}
+
+async fn request_with_range(
+    client: &Client,
+    mut url: Url,
+    bearer: Option<&Bearer>,
+    range: Option<HttpRange>,
     test_http: bool,
 ) -> Result<Response> {
     for redirect in 0..=8 {
@@ -467,13 +527,32 @@ async fn request_with_redirects(
             );
             request = request.header(header::AUTHORIZATION, bearer.0.clone());
         }
-        if let Some(start) = range_start {
-            request = request.header(header::RANGE, format!("bytes={start}-"));
+        if let Some(range) = &range {
+            request = request.header(
+                header::RANGE,
+                format!(
+                    "bytes={}-{}",
+                    range.start,
+                    range.end.map(|end| end.to_string()).unwrap_or_default()
+                ),
+            );
+            if let Some(etag) = &range.if_range {
+                request = request.header(header::IF_RANGE, etag);
+            }
         }
-        let response = request
-            .send()
-            .await
-            .map_err(|_| anyhow::anyhow!("Hub request transport failed (URL redacted)"))?;
+        let pending = request.send();
+        tokio::pin!(pending);
+        let mut heartbeat = tokio::time::interval_at(
+            tokio::time::Instant::now() + Duration::from_secs(15),
+            Duration::from_secs(15),
+        );
+        heartbeat.set_missed_tick_behavior(tokio::time::MissedTickBehavior::Skip);
+        let response = loop {
+            tokio::select! {
+                response = &mut pending => break response.map_err(|_| HubRequestFailure::Connectivity { stage:"response headers" })?,
+                _ = heartbeat.tick() => eprintln!("Hub waiting for response headers; transfer progress resumes when the server responds"),
+            }
+        };
         if response.status().is_redirection() {
             ensure!(redirect < 8, "Hub redirect limit exceeded");
             let location = response
@@ -503,7 +582,9 @@ async fn bounded_body(mut response: Response, maximum: usize) -> Result<Vec<u8>>
     while let Some(chunk) = response
         .chunk()
         .await
-        .map_err(|_| anyhow::anyhow!("Hub metadata stream failed (URL redacted)"))?
+        .map_err(|_| HubRequestFailure::Connectivity {
+            stage: "metadata stream",
+        })?
     {
         ensure!(
             chunk.len() <= maximum.saturating_sub(bytes.len()),
@@ -522,13 +603,32 @@ async fn metadata(
 ) -> Result<(ApiModel, Vec<u8>)> {
     let url =
         format!("https://huggingface.co/api/models/{model_id}/revision/{revision}?blobs=true");
-    let response = request_with_redirects(client, Url::parse(&url)?, bearer, None, false).await?;
-    ensure!(
-        response.status().is_success(),
-        "Hub metadata HTTP {} (credentials and URL redacted)",
-        response.status().as_u16()
-    );
-    let bytes = bounded_body(response, MAX_METADATA_BYTES).await?;
+    let mut bytes = None;
+    for attempt in 0..3 {
+        let result = async {
+            let response =
+                request_with_redirects(client, Url::parse(&url)?, bearer, None, false).await?;
+            if !response.status().is_success() {
+                return Err(HubRequestFailure::Http {
+                    status: response.status().as_u16(),
+                }
+                .into());
+            }
+            bounded_body(response, MAX_METADATA_BYTES).await
+        }
+        .await;
+        match result {
+            Ok(body) => {
+                bytes = Some(body);
+                break;
+            }
+            Err(error) if attempt < 2 && is_connectivity_error(&error) => {
+                tokio::time::sleep(Duration::from_secs(1 << attempt)).await
+            }
+            Err(error) => return Err(error).context("Hub metadata bounded acquisition failed"),
+        }
+    }
+    let bytes = bytes.context("Hub metadata acquisition produced no body")?;
     let value: ApiModel = serde_json::from_slice(&bytes).context("invalid Hub model metadata")?;
     Ok((value, bytes))
 }
@@ -627,7 +727,58 @@ impl NoFollowOptions for OpenOptions {
     }
 }
 
+struct FileProgress<'a> {
+    filename: &'a str,
+    stage: &'a str,
+    total: u64,
+    initial: u64,
+    started: Instant,
+}
+
+impl<'a> FileProgress<'a> {
+    fn new(filename: &'a str, stage: &'a str, total: u64, initial: u64) -> Self {
+        Self {
+            filename,
+            stage,
+            total,
+            initial,
+            started: Instant::now(),
+        }
+    }
+
+    fn report(&self, processed: u64) {
+        let present = self.initial.saturating_add(processed).min(self.total);
+        let speed = processed as f64 / self.started.elapsed().as_secs_f64().max(0.001);
+        let eta = if speed > 0. {
+            let seconds = ((self.total - present) as f64 / speed).ceil() as u64;
+            format!(
+                "{:02}:{:02}:{:02}",
+                seconds / 3600,
+                (seconds / 60) % 60,
+                seconds % 60
+            )
+        } else {
+            "unknown".into()
+        };
+        eprintln!(
+            "Hub {} {}: {present}/{} bytes, {:.2} MiB/s, ETA {eta} (publisher checksum pending)",
+            self.stage,
+            self.filename,
+            self.total,
+            speed / (1024. * 1024.)
+        );
+    }
+}
+
 fn verify_file(path: &Path, planned: &PlannedFile) -> Result<String> {
+    verify_file_tracked(path, planned, None)
+}
+
+fn verify_file_tracked(
+    path: &Path,
+    planned: &PlannedFile,
+    progress: Option<Arc<std::sync::atomic::AtomicU64>>,
+) -> Result<String> {
     ensure_safe_path(path)?;
     let mut file = OpenOptions::new()
         .read(true)
@@ -639,21 +790,50 @@ fn verify_file(path: &Path, planned: &PlannedFile) -> Result<String> {
         planned.filename
     );
     let mut sha256 = Sha256::new();
-    let mut git = Sha1::new();
-    git.update(format!("blob {}\0", planned.bytes).as_bytes());
+    // Large LFS weights need only their publisher SHA-256; avoid an unnecessary
+    // second multi-gigabyte digest. Ordinary Git files still verify both hashes.
+    let mut git = if matches!(
+        planned.publisher_identity,
+        PublisherIdentity::GitBlobSha1(_)
+    ) {
+        let mut hash = Sha1::new();
+        hash.update(format!("blob {}\0", planned.bytes).as_bytes());
+        Some(hash)
+    } else {
+        None
+    };
     let mut buffer = vec![0_u8; 1024 * 1024];
+    let meter = FileProgress::new(&planned.filename, "hashing", planned.bytes, 0);
+    let large = planned.bytes >= 64 * 1024 * 1024;
+    let mut last_report = Instant::now();
+    let mut processed = 0_u64;
+    if large && progress.is_none() {
+        meter.report(0);
+    }
     loop {
         let n = file.read(&mut buffer)?;
         if n == 0 {
             break;
         }
         sha256.update(&buffer[..n]);
-        git.update(&buffer[..n]);
+        if let Some(hash) = &mut git {
+            hash.update(&buffer[..n]);
+        }
+        processed += n as u64;
+        if let Some(progress) = &progress {
+            progress.store(processed, std::sync::atomic::Ordering::Relaxed);
+        }
+        if large && progress.is_none() && last_report.elapsed() >= Duration::from_secs(15) {
+            meter.report(processed);
+            last_report = Instant::now();
+        }
     }
     let sha256 = hex::encode(sha256.finalize());
     let identity_matches = match &planned.publisher_identity {
         PublisherIdentity::LfsSha256(expected) => expected == &sha256,
-        PublisherIdentity::GitBlobSha1(expected) => expected == &hex::encode(git.finalize()),
+        PublisherIdentity::GitBlobSha1(expected) => {
+            expected == &hex::encode(git.context("Git identity verifier missing")?.finalize())
+        }
     };
     ensure!(
         identity_matches,
@@ -664,7 +844,28 @@ fn verify_file(path: &Path, planned: &PlannedFile) -> Result<String> {
 }
 
 async fn verify_file_async(path: PathBuf, planned: PlannedFile) -> Result<String> {
-    tokio::task::spawn_blocking(move || verify_file(&path, &planned)).await?
+    let progress = Arc::new(std::sync::atomic::AtomicU64::new(0));
+    let worker_progress = progress.clone();
+    let worker_plan = planned.clone();
+    let mut worker = tokio::task::spawn_blocking(move || {
+        verify_file_tracked(&path, &worker_plan, Some(worker_progress))
+    });
+    let meter = FileProgress::new(&planned.filename, "hashing", planned.bytes, 0);
+    let large = planned.bytes >= 64 * 1024 * 1024;
+    if large {
+        meter.report(0);
+    }
+    let mut heartbeat = tokio::time::interval_at(
+        tokio::time::Instant::now() + Duration::from_secs(15),
+        Duration::from_secs(15),
+    );
+    heartbeat.set_missed_tick_behavior(tokio::time::MissedTickBehavior::Skip);
+    loop {
+        tokio::select! {
+            result = &mut worker => return result?,
+            _ = heartbeat.tick(), if large => meter.report(progress.load(std::sync::atomic::Ordering::Relaxed)),
+        }
+    }
 }
 
 fn validate_content_range(value: &str, start: u64, total: u64) -> Result<()> {
@@ -703,6 +904,7 @@ async fn download_file(
     let canonical_url = canonical_file_url(model_id, commit, &planned.filename);
     if final_path.exists() {
         let sha256 = verify_file_async(final_path, planned.clone()).await?;
+        ranges::cleanup(destination, &planned)?;
         return Ok(HubAsset {
             filename: planned.filename,
             bytes: planned.bytes,
@@ -731,6 +933,23 @@ async fn download_file(
         Ok::<_, anyhow::Error>(())
     })
     .await??;
+    if planned.bytes >= 64 * 1024 * 1024
+        && tokio::fs::metadata(&partial)
+            .await
+            .map(|m| m.len() < planned.bytes)
+            .unwrap_or(true)
+    {
+        ranges::download(ranges::RangeDownload {
+            client,
+            bearer,
+            destination,
+            url: &canonical_url,
+            partial: &partial,
+            planned: &planned,
+            test_http: false,
+        })
+        .await?;
+    }
     let mut completed = false;
     for attempt in 0..3 {
         let offset = match tokio::fs::metadata(&partial).await {
@@ -790,6 +1009,7 @@ async fn download_file(
     };
     tokio::fs::rename(&partial, &final_path).await?;
     tokio::fs::remove_file(&state_path).await?;
+    ranges::cleanup(destination, &planned)?;
     let sync_dir = destination.to_owned();
     tokio::task::spawn_blocking(move || File::open(sync_dir)?.sync_all()).await??;
     eprintln!(
@@ -822,11 +1042,12 @@ async fn write_asset_response(
             .to_str()?;
         validate_content_range(range, offset, total)?;
     } else {
-        ensure!(
-            response.status() == StatusCode::OK,
-            "asset HTTP {} (credentials and URL redacted)",
-            response.status().as_u16()
-        );
+        if response.status() != StatusCode::OK {
+            return Err(HubRequestFailure::Http {
+                status: response.status().as_u16(),
+            }
+            .into());
+        }
     }
     let expected_remaining = total - if append { offset } else { 0 };
     if let Some(length) = response.content_length() {
@@ -845,6 +1066,13 @@ async fn write_asset_response(
     options.custom_flags(libc::O_NOFOLLOW);
     let mut file = options.open(partial).await?;
     let mut received = 0_u64;
+    let meter = FileProgress::new(
+        filename,
+        "receiving",
+        total,
+        if append { offset } else { 0 },
+    );
+    meter.report(0);
     let mut heartbeat = tokio::time::interval_at(
         tokio::time::Instant::now() + Duration::from_secs(15),
         Duration::from_secs(15),
@@ -853,7 +1081,7 @@ async fn write_asset_response(
     loop {
         tokio::select! {
             chunk = response.chunk() => {
-                let chunk = chunk.map_err(|_| anyhow::anyhow!("asset stream interrupted (URL redacted)"))?;
+                let chunk = chunk.map_err(|_| HubRequestFailure::Connectivity { stage:"asset stream" })?;
                 let Some(chunk) = chunk else { break; };
                 received = received.checked_add(chunk.len() as u64).context("asset byte counter overflow")?;
                 ensure!(received <= expected_remaining, "asset stream exceeds pinned size");
@@ -861,18 +1089,42 @@ async fn write_asset_response(
             }
             _ = heartbeat.tick() => {
                 // Partial bytes have passed size bounds, but no complete hash yet.
-                let present = (if append { offset } else { 0 }) + received;
-                eprintln!("Hub transfer {filename}: received {present}/{total} bytes (publisher checksum pending)");
+                meter.report(received);
             }
         }
     }
     file.sync_all().await?;
     ensure!(received == expected_remaining, "asset stream incomplete");
+    meter.report(received);
     Ok(())
 }
 
 /// Explicit online operation. Normal model loading calls only the offline validator.
 pub async fn download_model(options: HubDownloadOptions) -> Result<HubProvenance> {
+    download_model_for(options, false).await
+}
+
+/// Retrieve the official packed BitNet student as data only. Its published
+/// `auto_map` is retained but never imported or executed by this Rust build.
+/// The assessment model loader and its stricter validator remain unchanged.
+pub async fn download_bitnet_student(options: HubDownloadOptions) -> Result<HubProvenance> {
+    ensure!(
+        options.model_id == "microsoft/bitnet-b1.58-2B-4T"
+            && options.revision == "04c3b9ad9361b824064a1f25ea60a8be9599b127",
+        "BitNet student acquisition requires the reviewed official immutable pin"
+    );
+    ensure!(
+        options.destination.starts_with("offline_bundle/students")
+            && options
+                .destination
+                .components()
+                .all(|c| matches!(c, Component::Normal(_))),
+        "BitNet student must remain under the protected student asset root"
+    );
+    download_model_for(options, true).await
+}
+
+async fn download_model_for(options: HubDownloadOptions, bitnet: bool) -> Result<HubProvenance> {
     validate_model_id(&options.model_id)?;
     validate_ref(&options.revision)?;
     ensure!(
@@ -993,7 +1245,7 @@ pub async fn download_model(options: HubDownloadOptions) -> Result<HubProvenance
     tokio::task::spawn_blocking(move || {
         // Validate repository data before the final assets.json publication.
         validate_weight_index(&dir, &manifest)?;
-        validate_config(&dir)?;
+        validate_config_for(&dir, bitnet)?;
         // Original bytes make the metadata digest independent of JSON formatting.
         atomic_publish(&dir.join("hub-metadata.json"), &metadata_bytes)?;
         atomic_publish(
@@ -1004,7 +1256,7 @@ pub async fn download_model(options: HubDownloadOptions) -> Result<HubProvenance
             &dir.join("assets.json"),
             &serde_json::to_vec_pretty(&manifest)?,
         )?;
-        validate_downloaded_assets(&dir)
+        validate_downloaded_assets_for(&dir, bitnet)
     })
     .await??;
     Ok(provenance)
@@ -1012,6 +1264,34 @@ pub async fn download_model(options: HubDownloadOptions) -> Result<HubProvenance
 
 /// Verify comparator assets offline, without changing the assessment base pin.
 pub fn validate_downloaded_assets(base_dir: &Path) -> Result<AssetManifest> {
+    validate_downloaded_assets_for(base_dir, false)
+}
+
+/// Validate packed official BitNet data without permitting it into Qwen loaders.
+pub fn validate_bitnet_student_assets(base_dir: &Path) -> Result<AssetManifest> {
+    let manifest = validate_downloaded_assets_for(base_dir, true)?;
+    ensure!(
+        manifest.model_id == "microsoft/bitnet-b1.58-2B-4T"
+            && manifest.revision == "04c3b9ad9361b824064a1f25ea60a8be9599b127"
+            && manifest
+                .files
+                .get("model.safetensors")
+                .is_some_and(|hash| hash
+                    == "8143ae115ed6babe5e5ada8fb8c5b769d8f417802b2db042ad98b4f7ed73975b"),
+        "BitNet student differs from the reviewed official tensor identity"
+    );
+    Ok(manifest)
+}
+
+fn validate_downloaded_assets_for(base_dir: &Path, bitnet: bool) -> Result<AssetManifest> {
+    validate_downloaded_assets_with_policy(base_dir, bitnet, false)
+}
+
+fn validate_downloaded_assets_with_policy(
+    base_dir: &Path,
+    bitnet: bool,
+    historical: bool,
+) -> Result<AssetManifest> {
     ensure_safe_path(base_dir)?;
     for name in [
         "assets.json",
@@ -1096,20 +1376,50 @@ pub fn validate_downloaded_assets(base_dir: &Path) -> Result<AssetManifest> {
                 && asset.canonical_url == canonical_file_url(&plan.model_id, &plan.revision, name),
             "Hub publisher identity changed"
         );
-        let sha256 = verify_file(&base_dir.join(name), planned)?;
+        let sha256 = if historical && name.ends_with(".safetensors") {
+            historical::verify_weight_metadata(base_dir, "assets.json", planned, &asset.sha256)?;
+            asset.sha256.clone()
+        } else {
+            verify_file(&base_dir.join(name), planned)?
+        };
         ensure!(
             manifest.files.get(name) == Some(&sha256) && asset.sha256 == sha256,
             "Hub asset SHA-256 manifest mismatch: {name}"
         );
     }
     validate_weight_index(base_dir, &manifest)?;
-    validate_config(base_dir)?;
+    validate_config_for(base_dir, bitnet)?;
     Ok(manifest)
 }
 
 fn validate_config(base_dir: &Path) -> Result<()> {
+    validate_config_for(base_dir, false)
+}
+
+fn validate_config_for(base_dir: &Path, bitnet: bool) -> Result<()> {
     let config: serde_json::Value =
         serde_json::from_slice(&fs::read(base_dir.join("config.json"))?)?;
+    if bitnet {
+        ensure!(
+            config["model_type"] == "bitnet"
+                && config["architectures"] == serde_json::json!(["BitNetForCausalLM"])
+                && config["auto_map"]
+                    == serde_json::json!({"AutoConfig":"configuration_bitnet.BitNetConfig","AutoModelForCausalLM":"modeling_bitnet.BitNetForCausalLM"})
+                && config["custom_pipelines"].is_null()
+                && config["hidden_size"] == 2560
+                && config["num_hidden_layers"] == 30
+                && config["num_attention_heads"] == 20
+                && config["num_key_value_heads"] == 5
+                && config["intermediate_size"] == 6912
+                && config["vocab_size"] == 128256
+                && config["hidden_act"] == "relu2"
+                && config["tie_word_embeddings"] == true
+                && config["quantization_config"]
+                    == serde_json::json!({"quant_method":"bitnet","linear_class":"autobitlinear","quantization_mode":"offline"}),
+            "unsupported or modified official BitNet architecture data"
+        );
+        return Ok(());
+    }
     ensure!(
         config.get("auto_map").is_none() && config.get("custom_pipelines").is_none(),
         "remote executable model code is unsupported"
@@ -1347,7 +1657,16 @@ mod tests {
                 "model.safetensors",
             ]
             .into_iter()
-            .map(|name| file_metadata(contents, name))
+            .map(|name| {
+                let mut file = file_metadata(contents, name);
+                if name.ends_with(".safetensors") {
+                    file.lfs = Some(ApiLfs {
+                        sha256: hex::encode(Sha256::digest(contents)),
+                        size: contents.len() as u64,
+                    });
+                }
+                file
+            })
             .collect(),
         };
         let metadata_bytes = serde_json::to_vec(&metadata)?;
@@ -1397,6 +1716,24 @@ mod tests {
         fs::write(dir.join(PROVENANCE_FILE), serde_json::to_vec(&provenance)?)?;
         fs::write(dir.join("hub-metadata.json"), metadata_bytes)?;
         fs::write(dir.join(PLAN_FILE), serde_json::to_vec(&plan)?)?;
+        Ok(())
+    }
+
+    #[test]
+    fn historical_metadata_is_bound_but_never_authorises_changed_weights() -> Result<()> {
+        let dir = tempfile::tempdir()?;
+        fixture_bundle(dir.path())?;
+        validate_downloaded_asset_metadata(dir.path())?;
+        // Same-size damage is intentionally outside historical proof. A new
+        // model load must still catch it through the unchanged full validator.
+        fs::write(dir.path().join("model.safetensors"), b"[]")?;
+        validate_downloaded_asset_metadata(dir.path())?;
+        assert!(validate_downloaded_assets(dir.path()).is_err());
+        fs::write(dir.path().join("tokenizer.json"), b"[]")?;
+        assert!(validate_downloaded_asset_metadata(dir.path()).is_err());
+        fixture_bundle(dir.path())?;
+        fs::remove_file(dir.path().join("model.safetensors"))?;
+        assert!(validate_downloaded_asset_metadata(dir.path()).is_err());
         Ok(())
     }
 
@@ -1652,6 +1989,49 @@ mod tests {
         // SAFETY: this is the distinct new pipe write descriptor.
         let _write = unsafe { OwnedFd::from_raw_fd(descriptors[1]) };
         assert!(TerminalEchoGuard::new(read.as_raw_fd())?.original.is_none());
+        Ok(())
+    }
+
+    #[test]
+    fn cached_only_signal_keeps_permanent_http_and_corruption_distinct() {
+        for status in [408, 425, 429, 500, 502, 503, 504] {
+            let error = anyhow::Error::new(HubRequestFailure::Http { status })
+                .context("bounded retries exhausted");
+            assert!(is_connectivity_error(&error));
+            assert!(format!("{error:#}").contains(&status.to_string()));
+        }
+        for status in [400, 401, 403, 404, 410, 422] {
+            assert!(!is_connectivity_error(
+                &HubRequestFailure::Http { status }.into()
+            ));
+        }
+        assert!(is_connectivity_error(
+            &HubRequestFailure::Connectivity {
+                stage: "response headers"
+            }
+            .into()
+        ));
+        assert!(!is_connectivity_error(&anyhow::anyhow!(
+            "publisher checksum mismatch"
+        )));
+    }
+
+    #[test]
+    fn official_bitnet_metadata_exception_never_widens_the_assessment_loader() -> Result<()> {
+        let directory = tempfile::tempdir()?;
+        let mut config = serde_json::json!({"model_type":"bitnet","architectures":["BitNetForCausalLM"],"auto_map":{"AutoConfig":"configuration_bitnet.BitNetConfig","AutoModelForCausalLM":"modeling_bitnet.BitNetForCausalLM"},"hidden_size":2560,"num_hidden_layers":30,"num_attention_heads":20,"num_key_value_heads":5,"intermediate_size":6912,"vocab_size":128256,"hidden_act":"relu2","tie_word_embeddings":true,"quantization_config":{"quant_method":"bitnet","linear_class":"autobitlinear","quantization_mode":"offline"}});
+        fs::write(
+            directory.path().join("config.json"),
+            serde_json::to_vec(&config)?,
+        )?;
+        assert!(validate_config(directory.path()).is_err());
+        validate_config_for(directory.path(), true)?;
+        config["auto_map"]["AutoConfig"] = serde_json::json!("unreviewed.RemoteCode");
+        fs::write(
+            directory.path().join("config.json"),
+            serde_json::to_vec(&config)?,
+        )?;
+        assert!(validate_config_for(directory.path(), true).is_err());
         Ok(())
     }
 }

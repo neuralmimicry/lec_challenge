@@ -1,0 +1,6 @@
+# Keep Docker's context identical to Podman's explicitly scoped context.
+**
+!sandbox/
+!sandbox/**
+sandbox/**/target/
+sandbox/**/target/**

@@ -1,0 +1,33 @@
+{
+  "model_id": "Qwen/Qwen2.5-Coder-14B-Instruct",
+  "revision": "aedcc2d42b622764e023cf882b6652e646b95671",
+  "source_url": "https://huggingface.co/Qwen/Qwen2.5-Coder-14B-Instruct/resolve/aedcc2d42b622764e023cf882b6652e646b95671/config.json",
+  "retrieval_kind": "Public pinned original source configuration; no credentials or model weights",
+  "config": {
+    "architectures": [
+      "Qwen2ForCausalLM"
+    ],
+    "attention_dropout": 0,
+    "bos_token_id": 151643,
+    "eos_token_id": 151645,
+    "hidden_act": "silu",
+    "hidden_size": 5120,
+    "initializer_range": 0.02,
+    "intermediate_size": 13824,
+    "max_position_embeddings": 32768,
+    "max_window_layers": 48,
+    "model_type": "qwen2",
+    "num_attention_heads": 40,
+    "num_hidden_layers": 48,
+    "num_key_value_heads": 8,
+    "rms_norm_eps": 0.000001,
+    "rope_theta": 1000000,
+    "sliding_window": 131072,
+    "tie_word_embeddings": false,
+    "torch_dtype": "bfloat16",
+    "transformers_version": "4.43.1",
+    "use_cache": true,
+    "use_sliding_window": false,
+    "vocab_size": 152064
+  }
+}

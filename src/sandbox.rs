@@ -17,10 +17,37 @@ use tokio::{
 };
 mod bundle;
 mod control;
+mod owned;
+#[cfg(test)]
+#[allow(dead_code)]
+#[path = "../sandbox/ptrace_v2.rs"]
+mod ptrace_v2;
+mod recovery;
+mod runtime_lease;
+#[cfg(test)]
+#[allow(dead_code)]
+#[path = "../sandbox/syscalls_v2.rs"]
+mod syscalls_v2;
 pub use bundle::restore_image_bundle;
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct SandboxConfig {
+    /// Absent in historical reports; V1 always retains its original identity.
+    #[serde(
+        default = "legacy_policy_version",
+        skip_serializing_if = "is_legacy_policy"
+    )]
+    pub policy_version: u32,
+    /// Historical reports omit this field. Current host supervision adds an
+    /// independent runtime ceiling and ownership-bound crash recovery.
+    #[serde(
+        default = "legacy_policy_version",
+        skip_serializing_if = "is_legacy_policy"
+    )]
+    pub controller_version: u32,
+    /// Explicit ABI binding for portable V2; omitted from original V1 reports.
+    #[serde(default, skip_serializing_if = "String::is_empty")]
+    pub architecture: String,
     pub runtime: String,
     pub image: String,
     pub expected_image_id: String,
@@ -33,14 +60,43 @@ pub struct SandboxConfig {
 impl Default for SandboxConfig {
     fn default() -> Self {
         Self {
+            policy_version: if cfg!(target_arch = "aarch64") { 2 } else { 1 },
+            controller_version: 2,
+            architecture: if cfg!(target_arch = "aarch64") {
+                "aarch64".into()
+            } else {
+                String::new()
+            },
             runtime: "podman".into(),
-            image: "localhost/lec-rust-sandbox:1".into(),
+            image: if cfg!(target_arch = "aarch64") {
+                "localhost/lec-rust-sandbox:2-aarch64"
+            } else {
+                "localhost/lec-rust-sandbox:1"
+            }
+            .into(),
             expected_image_id: String::new(),
             wall_timeout_secs: 20,
             memory_mb: 512,
             pids_limit: 64,
             cpu_limit: 1.0,
             report_dir: "reports/sandbox".into(),
+        }
+    }
+}
+fn legacy_policy_version() -> u32 {
+    1
+}
+fn is_legacy_policy(version: &u32) -> bool {
+    *version == 1
+}
+impl SandboxConfig {
+    /// Opt into the separately identified native Linux x86-64/AArch64 policy.
+    pub fn portable() -> Self {
+        Self {
+            policy_version: 2,
+            architecture: std::env::consts::ARCH.into(),
+            image: format!("localhost/lec-rust-sandbox:2-{}", std::env::consts::ARCH),
+            ..Self::default()
         }
     }
 }
@@ -102,6 +158,8 @@ pub struct PreflightReport {
 #[derive(Debug, Serialize, Deserialize)]
 struct AuditOutput {
     schema_version: u32,
+    #[serde(default)]
+    architecture: String,
     trace_complete: bool,
     compile_ok: bool,
     candidate_exit: Option<i32>,
@@ -117,9 +175,13 @@ struct AuditOutput {
     stderr_truncated: bool,
 }
 
-fn seccomp_path() -> Result<PathBuf> {
+fn seccomp_path(cfg: &SandboxConfig) -> Result<PathBuf> {
     std::env::current_dir()?
-        .join("sandbox/seccomp.json")
+        .join(if cfg.policy_version == 1 {
+            "sandbox/policies/v1/seccomp.json"
+        } else {
+            "sandbox/policies/v2/seccomp.json"
+        })
         .canonicalize()
         .context("bundled seccomp policy missing")
 }
@@ -135,14 +197,68 @@ pub fn policy_sha256(cfg: &SandboxConfig) -> Result<String> {
             && cfg.cpu_limit <= 4.0,
         "invalid sandbox resource policy"
     );
-    Ok(tasks::hash(serde_json::to_vec(
-        &json!({"version":1,"runtime":cfg.runtime,"wall_timeout_secs":cfg.wall_timeout_secs,"memory_mb":cfg.memory_mb,"pids_limit":cfg.pids_limit,"cpu_limit":cfg.cpu_limit,"nonroot":65532,"root_readonly":true,"network":"none","caps":"none","no_new_privileges":true,"private_pid":true,"tmpfs_mb":128,"seccomp_sha256":tasks::hash(fs::read(seccomp_path()?)?),"supervisor_sha256":tasks::hash(include_bytes!("../sandbox/audit.rs")),"controller_sha256":tasks::hash(include_bytes!("sandbox.rs")),"cgroup_control_sha256":tasks::hash(include_bytes!("sandbox/control.rs")),"wrapper":"json-lines-v1"}),
-    )?))
+    ensure!(
+        matches!(cfg.policy_version, 1 | 2),
+        "unsupported sandbox policy version"
+    );
+    ensure!(
+        matches!(cfg.controller_version, 1 | 2),
+        "unsupported sandbox host controller version"
+    );
+    if cfg.policy_version == 2 {
+        ensure!(
+            matches!(cfg.architecture.as_str(), "x86_64" | "aarch64"),
+            "unsupported portable sandbox architecture"
+        );
+        return Ok(tasks::hash(serde_json::to_vec(&json!({
+            "version":2,"controller_version":cfg.controller_version,"architecture":cfg.architecture,"runtime":cfg.runtime,
+            "wall_timeout_secs":cfg.wall_timeout_secs,"memory_mb":cfg.memory_mb,
+            "pids_limit":cfg.pids_limit,"cpu_limit":cfg.cpu_limit,"nonroot":65532,
+            "root_readonly":true,"network":"none","caps":"none","no_new_privileges":true,
+            "private_pid":true,"tmpfs_mb":128,"wrapper":"json-lines-v1",
+            "seccomp_sha256":tasks::hash(fs::read(seccomp_path(cfg)?)?),
+            "supervisor_sha256":tasks::hash(include_bytes!("../sandbox/policies/v2/audit.rs")),
+            "syscall_abi_sha256":tasks::hash(include_bytes!("../sandbox/policies/v2/syscalls.rs")),
+            "ptrace_sha256":tasks::hash(include_bytes!("../sandbox/policies/v2/ptrace.rs")),
+            "containerfile_sha256":tasks::hash(include_bytes!("../sandbox/policies/v2/Containerfile")),
+            "probe_sha256":tasks::hash(include_bytes!("../sandbox/policies/v2/probe.rs")),
+            "dependency_manifest_sha256":tasks::hash(include_bytes!("../sandbox/policies/v2/Cargo.toml")),
+            "dependency_lock_sha256":tasks::hash(include_bytes!("../sandbox/policies/v2/Cargo.lock")),
+            "controller_sha256":tasks::hash(include_bytes!("../sandbox/policies/controller-v2/controller.rs")),
+            "cgroup_control_sha256":tasks::hash(include_bytes!("../sandbox/policies/controller-v2/control.rs")),
+            "runtime_lease_sha256":tasks::hash(include_bytes!("../sandbox/policies/controller-v2/runtime_lease.rs")),
+            "owned_operation_sha256":tasks::hash(include_bytes!("../sandbox/policies/controller-v2/owned.rs")),
+            "ownership_recovery_sha256":tasks::hash(include_bytes!("../sandbox/policies/controller-v2/recovery.rs"))
+        }))?));
+    }
+    ensure!(
+        cfg.architecture.is_empty(),
+        "legacy sandbox architecture field must be absent"
+    );
+    let mut policy = json!({"version":1,"runtime":cfg.runtime,"wall_timeout_secs":cfg.wall_timeout_secs,"memory_mb":cfg.memory_mb,"pids_limit":cfg.pids_limit,"cpu_limit":cfg.cpu_limit,"nonroot":65532,"root_readonly":true,"network":"none","caps":"none","no_new_privileges":true,"private_pid":true,"tmpfs_mb":128,"seccomp_sha256":tasks::hash(fs::read(seccomp_path(cfg)?)?),"supervisor_sha256":tasks::hash(include_bytes!("../sandbox/policies/v1/audit.rs")),"controller_sha256":tasks::hash(include_bytes!("../sandbox/policies/v1/controller.rs")),"cgroup_control_sha256":tasks::hash(include_bytes!("../sandbox/policies/v1/control.rs")),"wrapper":"json-lines-v1"});
+    if cfg.controller_version == 2 {
+        policy["controller_version"] = json!(2);
+        policy["controller_sha256"] = json!(tasks::hash(include_bytes!(
+            "../sandbox/policies/controller-v2/controller.rs"
+        )));
+        policy["runtime_lease_sha256"] = json!(tasks::hash(include_bytes!(
+            "../sandbox/policies/controller-v2/runtime_lease.rs"
+        )));
+        policy["owned_operation_sha256"] = json!(tasks::hash(include_bytes!(
+            "../sandbox/policies/controller-v2/owned.rs"
+        )));
+        policy["ownership_recovery_sha256"] = json!(tasks::hash(include_bytes!(
+            "../sandbox/policies/controller-v2/recovery.rs"
+        )));
+        policy["independent_runtime_wall_seconds"] = json!(cfg.wall_timeout_secs);
+    }
+    Ok(tasks::hash(serde_json::to_vec(&policy)?))
 }
 pub async fn policy_evidence(cfg: &SandboxConfig) -> Result<(String, String)> {
     let output = timeout(
         Duration::from_secs(15),
         Command::new(&cfg.runtime)
+            .kill_on_drop(true)
             .args(["image", "inspect", "--format", "{{.Id}}", &cfg.image])
             .output(),
     )
@@ -158,28 +274,129 @@ pub async fn policy_evidence(cfg: &SandboxConfig) -> Result<(String, String)> {
     Ok((policy_sha256(cfg)?, image_id))
 }
 pub async fn build_image(root: &Path, runtime: &str) -> Result<String> {
-    let status = Command::new(runtime)
+    let cfg = SandboxConfig {
+        runtime: runtime.into(),
+        ..Default::default()
+    };
+    build_image_for(root, &cfg).await
+}
+pub async fn build_image_for(root: &Path, cfg: &SandboxConfig) -> Result<String> {
+    validate_execution_platform(cfg)?;
+    let _runtime_lease = runtime_lease::exclusive(&cfg.runtime).await?;
+    if cfg.policy_version == 1 {
+        ensure!(
+            fs::read(root.join("sandbox/audit.rs"))?
+                == include_bytes!("../sandbox/policies/v1/audit.rs"),
+            "legacy image source changed; build portable V2 rather than relabelling it V1"
+        );
+    } else {
+        validate_portable_build_sources(root)?;
+    }
+    // This fixed public image needs no registry credential. Podman otherwise
+    // consults unrelated host login state even for an anonymous public pull.
+    let anonymous_auth = tempfile::NamedTempFile::new()?;
+    fs::write(anonymous_auth.path(), b"{}")?;
+    let status = Command::new(&cfg.runtime)
+        .kill_on_drop(true)
+        .env("REGISTRY_AUTH_FILE", anonymous_auth.path())
         .args([
             "build",
             "--pull=missing",
             "-f",
-            "sandbox/Containerfile",
+            if cfg.policy_version == 1 {
+                "sandbox/Containerfile"
+            } else {
+                "sandbox/Containerfile.v2"
+            },
             "-t",
-            "localhost/lec-rust-sandbox:1",
+            &cfg.image,
             ".",
         ])
         .current_dir(root)
         .status()
         .await?;
     ensure!(status.success(), "explicit online sandbox bootstrap failed");
-    let cfg = SandboxConfig {
-        runtime: runtime.into(),
-        ..Default::default()
-    };
-    Ok(policy_evidence(&cfg).await?.1)
+    Ok(policy_evidence(cfg).await?.1)
+}
+
+/// Building a new image must use the exact reviewed policy source bytes. Old
+/// reports verify against immutable snapshots even after a later policy exists.
+fn validate_portable_build_sources(root: &Path) -> Result<()> {
+    for (path, expected) in [
+        (
+            "sandbox/audit_v2.rs",
+            include_bytes!("../sandbox/policies/v2/audit.rs").as_slice(),
+        ),
+        (
+            "sandbox/syscalls_v2.rs",
+            include_bytes!("../sandbox/policies/v2/syscalls.rs").as_slice(),
+        ),
+        (
+            "sandbox/ptrace_v2.rs",
+            include_bytes!("../sandbox/policies/v2/ptrace.rs").as_slice(),
+        ),
+        (
+            "sandbox/Containerfile.v2",
+            include_bytes!("../sandbox/policies/v2/Containerfile").as_slice(),
+        ),
+        (
+            "sandbox/probe.rs",
+            include_bytes!("../sandbox/policies/v2/probe.rs").as_slice(),
+        ),
+        (
+            "sandbox/deps/Cargo.toml",
+            include_bytes!("../sandbox/policies/v2/Cargo.toml").as_slice(),
+        ),
+        (
+            "sandbox/deps/Cargo.lock",
+            include_bytes!("../sandbox/policies/v2/Cargo.lock").as_slice(),
+        ),
+        (
+            "sandbox/seccomp_v2.json",
+            include_bytes!("../sandbox/policies/v2/seccomp.json").as_slice(),
+        ),
+    ] {
+        ensure!(
+            fs::read(root.join(path))? == expected,
+            "portable image source {path} changed; introduce a new policy version"
+        );
+    }
+    Ok(())
+}
+fn validate_execution_platform(cfg: &SandboxConfig) -> Result<()> {
+    ensure!(
+        cfg.controller_version == 2,
+        "historical sandbox controller is verification-only; execute a fresh protocol with current host supervision"
+    );
+    ensure!(
+        cfg!(target_os = "linux"),
+        "trusted syscall decoder requires native Linux"
+    );
+    match cfg.policy_version {
+        1 => ensure!(
+            cfg!(target_arch = "x86_64"),
+            "legacy V1 syscall decoder supports Linux x86_64 only; use portable V2"
+        ),
+        2 => ensure!(
+            cfg.architecture == std::env::consts::ARCH
+                && matches!(cfg.architecture.as_str(), "x86_64" | "aarch64"),
+            "portable V2 requires the configured native Linux ABI"
+        ),
+        _ => bail!("unsupported sandbox policy version"),
+    }
+    Ok(())
+}
+fn audit_identity_matches(audit: &AuditOutput, cfg: &SandboxConfig) -> bool {
+    audit.schema_version == cfg.policy_version
+        && if cfg.policy_version == 1 {
+            audit.architecture.is_empty()
+        } else {
+            audit.architecture == cfg.architecture
+        }
 }
 fn base_command(cfg: &SandboxConfig, name: &str) -> Result<Command> {
-    let seccomp = seccomp_path()?;
+    validate_execution_platform(cfg)?;
+    let seccomp = seccomp_path(cfg)?;
     let mut c = Command::new(&cfg.runtime);
     c.args([
         "run",
@@ -214,6 +431,8 @@ fn base_command(cfg: &SandboxConfig, name: &str) -> Result<Command> {
         "private",
         "--cgroupns",
         "private",
+        "--timeout",
+        &cfg.wall_timeout_secs.to_string(),
     ]);
     c.kill_on_drop(true);
     Ok(c)
@@ -232,6 +451,7 @@ async fn stop_container(cfg: &SandboxConfig, name: &str) -> StopEvidence {
             timeout(
                 Duration::from_secs(5),
                 Command::new(&cfg.runtime)
+                    .kill_on_drop(true)
                     .args(["kill", "--signal", "KILL", name])
                     .output(),
             )
@@ -244,12 +464,18 @@ async fn stop_container(cfg: &SandboxConfig, name: &str) -> StopEvidence {
     let cleanup_start = Instant::now();
     let _ = timeout(
         Duration::from_secs(30),
-        Command::new(&cfg.runtime).args(["rm", "-f", name]).output(),
+        Command::new(&cfg.runtime)
+            .kill_on_drop(true)
+            .args(["rm", "-f", name])
+            .output(),
     )
     .await;
     let inspected = timeout(
         Duration::from_secs(10),
-        Command::new(&cfg.runtime).args(["inspect", name]).output(),
+        Command::new(&cfg.runtime)
+            .kill_on_drop(true)
+            .args(["inspect", name])
+            .output(),
     )
     .await;
     let container_removed = matches!(inspected,Ok(Ok(ref output))if !output.status.success());
@@ -275,24 +501,39 @@ fn image_reference(cfg: &SandboxConfig) -> &str {
 async fn probe(cfg: &SandboxConfig, mode: &str, seconds: u64) -> Result<std::process::Output> {
     let name = format!("lec-probe-{}", uuid::Uuid::new_v4());
     let mut command = base_command(cfg, &name)?;
+    let mut ownership = plan_owned_run(cfg, &name).await?;
+    add_ownership_labels(&mut command, &ownership);
     command.args([
         "--entrypoint",
         "/usr/local/bin/lec-probe",
         image_reference(cfg),
         mode,
     ]);
-    match timeout(Duration::from_secs(seconds), command.output()).await {
-        Ok(o) => Ok(o?),
+    let result = match timeout(Duration::from_secs(seconds), command.output()).await {
+        Ok(output) => output.context("trusted probe runtime failed"),
         Err(_) => {
             stop_container(cfg, &name).await;
-            bail!("host deadline terminated probe {mode}");
+            Err(anyhow::anyhow!("host deadline terminated probe {mode}"))
         }
+    };
+    ownership.finish().await?;
+    result
+}
+async fn plan_owned_run(cfg: &SandboxConfig, name: &str) -> Result<recovery::OwnedRun> {
+    let (cfg, name) = (cfg.clone(), name.to_owned());
+    tokio::task::spawn_blocking(move || recovery::plan(&cfg, &name)).await?
+}
+fn add_ownership_labels(command: &mut Command, ownership: &recovery::OwnedRun) {
+    for (key, value) in ownership.labels() {
+        command.args(["--label", &format!("{key}={value}")]);
     }
 }
 
 async fn timeout_probe(cfg: &SandboxConfig) -> Result<TimeoutEvidence> {
     let name = format!("lec-deadline-{}", uuid::Uuid::new_v4());
     let mut command = base_command(cfg, &name)?;
+    let mut ownership = plan_owned_run(cfg, &name).await?;
+    add_ownership_labels(&mut command, &ownership);
     command
         .args([
             "--entrypoint",
@@ -302,22 +543,31 @@ async fn timeout_probe(cfg: &SandboxConfig) -> Result<TimeoutEvidence> {
         ])
         .stdout(std::process::Stdio::piped())
         .stderr(std::process::Stdio::piped());
+    let result = timeout_probe_execution(cfg, &name, command).await;
+    ownership.finish().await?;
+    result
+}
+async fn timeout_probe_execution(
+    cfg: &SandboxConfig,
+    name: &str,
+    mut command: Command,
+) -> Result<TimeoutEvidence> {
     let mut child = command.spawn()?;
     let output = child.stdout.take().context("timeout stdout missing")?;
     let mut reader = BufReader::new(output);
     let mut marker = String::new();
     let started = timeout(Duration::from_secs(20), reader.read_line(&mut marker)).await;
     if !matches!(started,Ok(Ok(n)) if n>0) || marker.trim() != "trusted_timeout_probe_started" {
-        stop_container(cfg, &name).await;
+        stop_container(cfg, name).await;
         bail!("timeout probe did not demonstrably start");
     }
     let wait_start = Instant::now();
     if timeout(Duration::from_secs(1), child.wait()).await.is_ok() {
-        stop_container(cfg, &name).await;
+        stop_container(cfg, name).await;
         bail!("timeout probe ended before the host deadline");
     }
     let wait_elapsed_ms = wait_start.elapsed().as_millis() as u64;
-    let stopped = stop_container(cfg, &name).await;
+    let stopped = stop_container(cfg, name).await;
     ensure!(
         stopped.kill_acknowledged && stopped.kill_request_ms <= 5000 && stopped.container_removed,
         "deadline kill/removal was not acknowledged within its bounded control latency"
@@ -325,10 +575,15 @@ async fn timeout_probe(cfg: &SandboxConfig) -> Result<TimeoutEvidence> {
     // Native rootless runtimes can finish their --rm bookkeeping just after
     // the kill command. Reap the launcher before asserting container removal.
     let _ = timeout(Duration::from_secs(10), child.wait()).await;
-    let status = Command::new(&cfg.runtime)
-        .args(["inspect", &name])
-        .output()
-        .await?;
+    let status = timeout(
+        Duration::from_secs(10),
+        Command::new(&cfg.runtime)
+            .kill_on_drop(true)
+            .args(["inspect", name])
+            .output(),
+    )
+    .await
+    .context("post-cleanup container inspection deadline exceeded")??;
     ensure!(!status.status.success(), "timed-out container still exists");
     Ok(TimeoutEvidence {
         deadline_ms: 1000,
@@ -342,10 +597,17 @@ async fn timeout_probe(cfg: &SandboxConfig) -> Result<TimeoutEvidence> {
 }
 
 pub async fn preflight(cfg: &SandboxConfig) -> Result<PreflightReport> {
+    validate_execution_platform(cfg)?;
+    let runtime_lease = runtime_lease::exclusive(&cfg.runtime).await?;
     ensure!(
-        cfg!(target_arch = "x86_64") && cfg!(target_os = "linux"),
-        "trusted syscall decoder currently supports Linux x86_64 only"
+        runtime_lease.supports_independent_wall_timeout(),
+        "independent container ceiling currently requires native Podman"
     );
+    let config = cfg.clone();
+    owned::run(runtime_lease, async move { preflight_inner(&config).await }).await
+}
+async fn preflight_inner(cfg: &SandboxConfig) -> Result<PreflightReport> {
+    recovery::recover(cfg).await?;
     let (policy, image) = policy_evidence(cfg).await?;
     let mut frozen = cfg.clone();
     frozen.expected_image_id = image.clone();
@@ -415,7 +677,7 @@ pub async fn preflight(cfg: &SandboxConfig) -> Result<PreflightReport> {
     let mut verified = cfg.clone();
     verified.expected_image_id = image.clone();
     let task = tasks::corpus().remove(0);
-    let report=grade(&task,"pub fn solve(input: serde_json::Value) -> serde_json::Value { serde_json::json!(input.as_array().unwrap().iter().map(|x|x.as_i64().unwrap()).sum::<i64>()) }",&verified).await?;
+    let report=grade_inner(&task,"pub fn solve(input: serde_json::Value) -> serde_json::Value { serde_json::json!(input.as_array().unwrap().iter().map(|x|x.as_i64().unwrap()).sum::<i64>()) }",&verified).await?;
     ensure!(
         report.passed && report.trace_complete,
         "trusted audit/reference execution failed: {:?}",
@@ -431,6 +693,33 @@ pub async fn preflight(cfg: &SandboxConfig) -> Result<PreflightReport> {
 }
 
 pub async fn grade(task: &Task, code: &str, cfg: &SandboxConfig) -> Result<SandboxReport> {
+    validate_execution_platform(cfg)?;
+    let runtime_lease = runtime_lease::shared(&cfg.runtime).await?;
+    ensure!(
+        runtime_lease.supports_independent_wall_timeout(),
+        "independent container ceiling currently requires native Podman"
+    );
+    let (task, code, config) = (task.clone(), code.to_owned(), cfg.clone());
+    owned::run(runtime_lease, async move {
+        recovery::recover(&config).await?;
+        grade_inner(&task, &code, &config).await
+    })
+    .await
+}
+async fn grade_inner(task: &Task, code: &str, cfg: &SandboxConfig) -> Result<SandboxReport> {
+    let mut ownership = None;
+    let result = grade_execution(task, code, cfg, &mut ownership).await;
+    if let Some(ownership) = &mut ownership {
+        ownership.finish().await?;
+    }
+    result
+}
+async fn grade_execution(
+    task: &Task,
+    code: &str,
+    cfg: &SandboxConfig,
+    ownership: &mut Option<recovery::OwnedRun>,
+) -> Result<SandboxReport> {
     let start = Instant::now();
     let (policy, image) = policy_evidence(cfg).await?;
     ensure!(
@@ -491,6 +780,11 @@ pub async fn grade(task: &Task, code: &str, cfg: &SandboxConfig) -> Result<Sandb
         )?;
         let name = format!("lec-{run_id}");
         let mut command = base_command(cfg, &name)?;
+        *ownership = Some(plan_owned_run(cfg, &name).await?);
+        add_ownership_labels(
+            &mut command,
+            ownership.as_ref().context("owned run plan absent")?,
+        );
         command.args([
             "--volume",
             &format!("{}:/candidate:ro", source.path().display()),
@@ -565,7 +859,7 @@ pub async fn grade(task: &Task, code: &str, cfg: &SandboxConfig) -> Result<Sandb
                         Ok(audit) => {
                             report.trace_complete = audit.trace_complete
                                 && audit.compile_ok
-                                && audit.schema_version == 1
+                                && audit_identity_matches(&audit, cfg)
                                 && audit.syscalls_observed > 0;
                             report.stdout_sha256 = tasks::hash(audit.output.as_bytes());
                             report.audit_events = audit.events;
@@ -676,7 +970,7 @@ pub fn verify_report(
     ensure!(
         report.trace_complete
             == (audit.trace_complete && audit.compile_ok && audit.syscalls_observed > 0)
-            && audit.schema_version == 1,
+            && audit_identity_matches(&audit, cfg),
         "trace completeness mismatch"
     );
     ensure!(
@@ -787,6 +1081,70 @@ pub async fn drill_security(cfg: &SandboxConfig) -> Result<Value> {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn current_controller_and_portable_image_match_the_frozen_verifiers() -> Result<()> {
+        // A behavioural edit must introduce a new controller version rather
+        // than silently invalidating every already accepted report.
+        assert_eq!(
+            include_bytes!("sandbox.rs").as_slice(),
+            include_bytes!("../sandbox/policies/controller-v2/controller.rs").as_slice()
+        );
+        assert_eq!(
+            include_bytes!("sandbox/control.rs").as_slice(),
+            include_bytes!("../sandbox/policies/controller-v2/control.rs").as_slice()
+        );
+        assert_eq!(
+            include_bytes!("sandbox/runtime_lease.rs").as_slice(),
+            include_bytes!("../sandbox/policies/controller-v2/runtime_lease.rs").as_slice()
+        );
+        assert_eq!(
+            include_bytes!("sandbox/owned.rs").as_slice(),
+            include_bytes!("../sandbox/policies/controller-v2/owned.rs").as_slice()
+        );
+        assert_eq!(
+            include_bytes!("sandbox/recovery.rs").as_slice(),
+            include_bytes!("../sandbox/policies/controller-v2/recovery.rs").as_slice()
+        );
+        validate_portable_build_sources(Path::new("."))
+    }
+    #[test]
+    fn frozen_v1_hash_and_serialised_configuration_are_preserved() -> Result<()> {
+        let config = SandboxConfig {
+            policy_version: 1,
+            controller_version: 1,
+            architecture: String::new(),
+            ..Default::default()
+        };
+        assert_eq!(
+            policy_sha256(&config)?,
+            "0bf995b5f69865792503015f6af52b457c861b679877956e939c2137ddb4a562"
+        );
+        let serialised = serde_json::to_value(&config)?;
+        assert!(serialised.get("policy_version").is_none());
+        assert!(serialised.get("controller_version").is_none());
+        assert!(serialised.get("architecture").is_none());
+        let restored: SandboxConfig = serde_json::from_value(serialised)?;
+        assert_eq!(restored.policy_version, 1);
+        assert_eq!(restored.controller_version, 1);
+        assert!(restored.architecture.is_empty());
+        Ok(())
+    }
+    #[test]
+    fn portable_policy_binds_abi_and_cannot_impersonate_legacy_policy() -> Result<()> {
+        let mut config = SandboxConfig::portable();
+        let native = policy_sha256(&config)?;
+        config.architecture = if config.architecture == "aarch64" {
+            "x86_64"
+        } else {
+            "aarch64"
+        }
+        .into();
+        assert_ne!(native, policy_sha256(&config)?);
+        assert!(validate_execution_platform(&config).is_err());
+        config.policy_version = 1;
+        assert!(policy_sha256(&config).is_err());
+        Ok(())
+    }
     #[test]
     fn freeze_covers_resources_not_output_directory() {
         let a = SandboxConfig::default();

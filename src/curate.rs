@@ -169,6 +169,33 @@ fn check_origin(
     }
     Ok(())
 }
+
+/// Reuse the assessment's source/specification defence for local experiments.
+/// This reads sealed specifications only, never their answers or observations.
+pub fn validate_train_origin(task: &crate::tasks::Task) -> Result<()> {
+    ensure!(
+        task.split == Split::Train,
+        "local adaptation accepts training sources only"
+    );
+    let heldout = tasks::corpus()
+        .into_iter()
+        .filter(|t| t.split == Split::HeldOut)
+        .map(|t| HeldoutEntry {
+            task_id: t.id,
+            source_id: t.source_id,
+            lineage_id: t.lineage_id,
+            specification: t.specification,
+            specification_sha256: t.specification_sha256,
+        })
+        .collect::<Vec<_>>();
+    check_origin(
+        &task.id,
+        &task.source_id,
+        &task.lineage_id,
+        &task.specification,
+        &heldout,
+    )
+}
 struct VerifiedEvidence {
     sandbox: Vec<u8>,
     provider: Vec<u8>,
