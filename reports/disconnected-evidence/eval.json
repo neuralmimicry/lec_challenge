@@ -1,0 +1,21 @@
+{
+  "decision": "INVALID_EVALUATION",
+  "reason": "Full round unavailable or failed: upstream real recordings, rights-cleared dataset, assets or sandbox enforcement unavailable",
+  "effect": null,
+  "incumbent_rate": null,
+  "candidate_rate": null,
+  "t_interval": null,
+  "source_bootstrap_interval": null,
+  "source_effects": {},
+  "sources": 0,
+  "tasks": 0,
+  "observations": 0,
+  "practical_margin": 0.02,
+  "evidence_kind": "invalid_or_missing_evidence",
+  "limitations": [
+    "Eight locally authored source groups give fragile interval coverage; shared authorship may create dependence between groups.",
+    "A confidence interval containing zero is insufficient evidence of improvement, and does not prove equality.",
+    "Public-algorithm familiarity and pretraining contamination cannot be ruled out by novel local wording.",
+    "A NO SHIP result retains the incumbent; train gains cannot rescue a held-out regression."
+  ]
+}

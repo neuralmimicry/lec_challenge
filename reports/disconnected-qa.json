@@ -1,0 +1,52 @@
+{
+  "archive_sha256": "4af3129f8bf999cfd115066720e413e15ba55b1bec1caf2465ca0ad061052fb1",
+  "binary_sha256": "68e3b86b6dfadd0a5f3ff697e2375f88edb667f6fa398134f91a39f6d2062f94",
+  "elapsed_seconds": 88.546217127,
+  "empty_application_cache": true,
+  "evidence": [
+    {
+      "bytes": 8872,
+      "path": "reports/disconnected-evidence/preflight.json",
+      "sha256": "07ab4c8e4e43167189acc4d2f4656bb4e13d81ffbdb113be2613519ead5f96e3"
+    },
+    {
+      "bytes": 218,
+      "path": "reports/disconnected-evidence/namespace-isolation.json",
+      "sha256": "583c758532e17b9c9c0a8ffdffa4b86a9bc5addc79a4e2c0bb96532cf739a9aa"
+    },
+    {
+      "bytes": 3528,
+      "path": "reports/disconnected-evidence/demo.json",
+      "sha256": "4b5841ecc330664511160d1faafde3c9fa7e7872b84a659530b598bc886e9c23"
+    },
+    {
+      "bytes": 26281,
+      "path": "reports/disconnected-evidence/drill.json",
+      "sha256": "f6ee5ea6bc8ae319b8c8efbb71ce7407172585f78328d893f35fc852112791e8"
+    },
+    {
+      "bytes": 938,
+      "path": "reports/disconnected-evidence/eval.json",
+      "sha256": "d963c161dd9457cb717c43c691fede36efda3b21f9e955e91a02b78166a2debe"
+    },
+    {
+      "bytes": 10631,
+      "path": "reports/disconnected-evidence/cost-summary.json",
+      "sha256": "0037b3222239079646827e4f345848328544cb96b5f7df3814e04ee35ea9be4d"
+    }
+  ],
+  "evidence_kind": "actual_fresh_archive_network_namespace_execution",
+  "exit_code": 1,
+  "fresh_application_state": true,
+  "full_assessment_complete": false,
+  "incoming_asset_inventory_verified_before_execution": true,
+  "ipv4_routes_absent": true,
+  "limitation": "A correctly failing incomplete assessment is local offline QA only, never a completed provider-trained rehearsal.",
+  "network_namespace": "net:[4026533575]",
+  "provider_credentials_absent": true,
+  "quality_assurance_passed": true,
+  "runtime_connection": "Host Podman service through an existing Unix socket; candidate containers retain no-network policy. Runtime image cache was preloaded, not cleared.",
+  "schema_version": 1,
+  "source_commit": "a1c0ae76ac0c2cf91f179a4b965d6c1cbeb56049",
+  "verified_input_asset_inventory_sha256": "7f6d4bdcba4f4a20e7e0eb509b57c2107b0d06563517426834b009ba0b2c59b0"
+}

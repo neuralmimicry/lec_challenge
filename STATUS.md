@@ -14,6 +14,7 @@ The design was frozen before assessment code in commit `74eba150f766a0d93c2a8ad1
 - The final local demo passed four required drills: grader gaming, escape attempts, planted held-out data through the actual trainer entry point and a budget stop before dispatch. All separate transport/statistical/infrastructure QA assertions passed. Five provider/checkpoint-dependent required drills remain incomplete.
 - Formatting, strict all-target Clippy, standard tests, the original-tokeniser asset test and three real container integration tests passed. Exact commands, counts and captured output are retained in `reports/verification.json` and its linked logs.
 - A captioned 120-second evidence video presents real reports with input hashes and discloses unfinished assessment work.
+- Fresh-archive offline QA passed in 88.55 seconds: all bundled inputs verified before execution, original checkout hidden, no provider keys or outbound routes, fresh application state/cache, real base endpoint and four independent required drills. All invariant assertions passed. The assessment retained exit `1` / `INCOMPLETE`. The host runtime image cache was preloaded; this does not establish a complete provider-trained rehearsal. Evidence is in `reports/disconnected-qa.json` and `reports/disconnected-evidence/`.
 
 ## External evidence still unavailable
 

@@ -1,0 +1,6 @@
+{
+  "loopback_enabled_for_local_endpoint": true,
+  "network_and_mount_namespaces": "unshare -Urnm",
+  "original_workspace": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge",
+  "original_workspace_hidden": true
+}

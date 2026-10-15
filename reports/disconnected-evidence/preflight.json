@@ -1,0 +1,62 @@
+{
+  "observed_unix_ms": 1792059933810,
+  "architecture": "x86_64",
+  "logical_cpus": 16,
+  "memory_total_kib": 63347804,
+  "memory_available_kib": 45396912,
+  "cgroup_controllers": [
+    "cpuset",
+    "cpu",
+    "io",
+    "memory",
+    "hugetlb",
+    "pids",
+    "rdma",
+    "misc",
+    "dmem"
+  ],
+  "network_namespace": "net:[4026533575]",
+  "ipv4_route_table": "Iface\tDestination\tGateway \tFlags\tRefCnt\tUse\tMetric\tMask\t\tMTU\tWindow\tIRTT                                                       \n",
+  "commands": {
+    "cargo": {
+      "success": true,
+      "output": "cargo 1.98.1 (797e8a9bc 2026-08-05)\n"
+    },
+    "df": {
+      "success": true,
+      "output": "Filesystem     1024-blocks    Used Available Capacity Mounted on\ntmpfs             31673904 1721524  29952380       6% /tmp\n"
+    },
+    "docker": {
+      "success": true,
+      "output": "Client:\n Version:           29.1.3\n API version:       1.52\n Go version:        go1.24.13\n Git commit:        29.1.3-0ubuntu4.1\n Built:             Wed Apr 29 16:40:20 2026\n OS/Arch:           linux/amd64\n Context:           default\n\nServer: linux/amd64/ubuntu-26.04\n Podman Engine:\n  Version:          5.5.1\n  APIVersion:       5.5.1\n  Arch:             amd64\n  BuildTime:        2025-08-07T11:04:41+01:00\n  Experimental:     false\n  GitCommit:        850db76dd78a0641eddb9ee19ee6f60d2c59bcfa\n  GoVersion:        go1.24.4\n  KernelVersion:    7.0.0-38-generic\n  MinAPIVersion:    4.0.0\n  Os:               linux\n Conmon:\n  Version:          conmon version 2.1.12, commit: e8896631295ccb0bfdda4284f1751be19b483264\n  Package:          Unknown\n OCI Runtime (crun):\n  Version:          crun version 1.18.2\ncommit: 00ab38af875ddd0d1a8226addda52e1de18339b5\nrundir: /run/user/1000/crun\nspec: 1.0.0\n+SYSTEMD +SELINUX +APPARMOR +CAP +SECCOMP +EBPF +CRIU +YAJL\n  Package:          Unknown\n Engine:\n  Version:          5.5.1\n  API version:      1.41 (minimum version 1.24)\n  Go version:       \n  Git commit:       \n  Built:            \n  OS/Arch:          linux/amd64\n  Experimental:     \n"
+    },
+    "nvidia-smi": {
+      "success": true,
+      "output": "NVIDIA GeForce RTX 2080, 8192 MiB, 595.91.07\n"
+    },
+    "podman": {
+      "success": true,
+      "output": "{\n  \"host\": {\n    \"arch\": \"amd64\",\n    \"buildahVersion\": \"1.40.1\",\n    \"cgroupManager\": \"cgroupfs\",\n    \"cgroupVersion\": \"v2\",\n    \"cgroupControllers\": [\n      \"cpu\",\n      \"memory\",\n      \"pids\"\n    ],\n    \"conmon\": {\n      \"package\": \"Unknown\",\n      \"path\": \"/usr/local/libexec/podman/conmon\",\n      \"version\": \"conmon version 2.1.12, commit: e8896631295ccb0bfdda4284f1751be19b483264\"\n    },\n    \"cpus\": 16,\n    \"cpuUtilization\": {\n      \"userPercent\": 9.18,\n      \"systemPercent\": 0.88,\n      \"idlePercent\": 89.94\n    },\n    \"databaseBackend\": \"sqlite\",\n    \"distribution\": {\n      \"distribution\": \"ubuntu\",\n      \"version\": \"26.04\",\n      \"codename\": \"resolute\"\n    },\n    \"eventLogger\": \"journald\",\n    \"freeLocks\": 2046,\n    \"hostname\": \"cortex\",\n    \"idMappings\": {\n      \"gidmap\": [\n        {\n          \"container_id\": 0,\n          \"host_id\": 1000,\n          \"size\": 1\n        },\n        {\n          \"container_id\": 1,\n          \"host_id\": 100000,\n          \"size\": 65536\n        }\n      ],\n      \"uidmap\": [\n        {\n          \"container_id\": 0,\n          \"host_id\": 1000,\n          \"size\": 1\n        },\n        {\n          \"container_id\": 1,\n          \"host_id\": 100000,\n          \"size\": 65536\n        }\n      ]\n    },\n    \"kernel\": \"7.0.0-38-generic\",\n    \"logDriver\": \"journald\",\n    \"memFree\": 1483313152,\n    \"memTotal\": 64868151296,\n    \"networkBackend\": \"netavark\",\n    \"networkBackendInfo\": {\n      \"backend\": \"netavark\",\n      \"version\": \"netavark 1.15.2\",\n      \"package\": \"Unknown\",\n      \"path\": \"/usr/local/bin/netavark\",\n      \"dns\": {\n        \"version\": \"aardvark-dns 1.15.0\",\n        \"package\": \"Unknown\",\n        \"path\": \"/usr/local/bin/aardvark-dns\"\n      }\n    },\n    \"ociRuntime\": {\n      \"name\": \"crun\",\n      \"package\": \"Unknown\",\n      \"path\": \"/usr/local/bin/crun\",\n      \"version\": \"crun version 1.18.2\\ncommit: 00ab38af875ddd0d1a8226addda52e1de18339b5\\nrundir: /run/user/1000/crun\\nspec: 1.0.0\\n+SYSTEMD +SELINUX +APPARMOR +CAP +SECCOMP +EBPF +CRIU +YAJL\"\n    },\n    \"os\": \"linux\",\n    \"remoteSocket\": {\n      \"path\": \"unix:///run/user/1000/podman/podman.sock\",\n      \"exists\": true\n    },\n    \"rootlessNetworkCmd\": \"pasta\",\n    \"serviceIsRemote\": true,\n    \"security\": {\n      \"apparmorEnabled\": false,\n      \"capabilities\": \"CAP_CHOWN,CAP_DAC_OVERRIDE,CAP_FOWNER,CAP_FSETID,CAP_KILL,CAP_NET_BIND_SERVICE,CAP_SETFCAP,CAP_SETGID,CAP_SETPCAP,CAP_SETUID,CAP_SYS_CHROOT\",\n      \"rootless\": true,\n      \"seccompEnabled\": true,\n      \"seccompProfilePath\": \"/usr/share/containers/seccomp.json\",\n      \"selinuxEnabled\": false\n    },\n    \"slirp4netns\": {\n      \"executable\": \"/usr/bin/slirp4netns\",\n      \"package\": \"slirp4netns: /usr/bin/slirp4netns\",\n      \"version\": \"slirp4netns version 1.1.8\\ncommit: unknown\\nlibslirp: 4.3.1-git\\nSLIRP_CONFIG_VERSION_MAX: 3\\nlibseccomp: 2.5.3\"\n    },\n    \"pasta\": {\n      \"executable\": \"/usr/bin/pasta\",\n      \"package\": \"passt: /usr/bin/pasta\",\n      \"version\": \"pasta 0.0~git20260120.386b5f5-1\\nCopyright Red Hat\\nGNU General Public License, version 2 or later\\n  \\u003chttps://www.gnu.org/licenses/old-licenses/gpl-2.0.html\\u003e\\nThis is free software: you are free to change and redistribute it.\\nThere is NO WARRANTY, to the extent permitted by law.\\n\"\n    },\n    \"swapFree\": 0,\n    \"swapTotal\": 0,\n    \"uptime\": \"22h 20m 26.00s (Approximately 0.92 days)\",\n    \"variant\": \"\",\n    \"linkmode\": \"dynamic\"\n  },\n  \"store\": {\n    \"configFile\": \"/home/pbisaacs/.config/containers/storage.conf\",\n    \"containerStore\": {\n      \"number\": 1,\n      \"paused\": 0,\n      \"running\": 0,\n      \"stopped\": 1\n    },\n    \"graphDriverName\": \"overlay\",\n    \"graphOptions\": {\n      \n    },\n    \"graphRoot\": \"/home/pbisaacs/.local/share/containers/storage\",\n    \"graphRootAllocated\": 2851326844928,\n    \"graphRootUsed\": 2352578097152,\n    \"graphStatus\": {\n      \"Backing Filesystem\": \"extfs\",\n      \"Native Overlay Diff\": \"false\",\n      \"Supports d_type\": \"true\",\n      \"Supports shifting\": \"true\",\n      \"Supports volatile\": \"true\",\n      \"Using metacopy\": \"false\"\n    },\n    \"imageCopyTmpDir\": \"/var/tmp\",\n    \"imageStore\": {\n      \"number\": 342\n    },\n    \"runRoot\": \"/run/user/1000/containers\",\n    \"volumePath\": \"/home/pbisaacs/.local/share/containers/storage/volumes\",\n    \"transientStore\": false\n  },\n  \"registries\": {\n    \"search\": [\n  \"localhost\",\n  \"docker.io\"\n]\n  },\n  \"plugins\": {\n    \"volume\": [\n      \"local\"\n    ],\n    \"network\": [\n      \"bridge\",\n      \"macvlan\",\n      \"ipvlan\"\n    ],\n    \"log\": [\n      \"k8s-file\",\n      \"none\",\n      \"passthrough\",\n      \"journald\"\n    ],\n    \"authorization\": null\n  },\n  \"version\": {\n    \"APIVersion\": \"5.5.1\",\n    \"Version\": \"5.5.1\",\n    \"GoVersion\": \"go1.24.4\",\n    \"GitCommit\": \"850db76dd78a0641eddb9ee19ee6f60d2c59bcfa\",\n    \"BuiltTime\": \"Thu Aug  7 11:04:41 2025\",\n    \"Built\": 1754561081,\n    \"OsArch\": \"linux/amd64\",\n    \"Os\": \"linux\"\n  },\n  \"Client\": {\n    \"APIVersion\": \"5.5.1\",\n    \"Version\": \"5.5.1\",\n    \"GoVersion\": \"go1.24.4\",\n    \"GitCommit\": \"850db76dd78a0641eddb9ee19ee6f60d2c59bcfa\",\n    \"BuiltTime\": \"Thu Aug  7 11:04:41 2025\",\n    \"Built\": 1754561081,\n    \"OsArch\": \"linux/amd64\",\n    \"Os\": \"linux\"\n  }\n}\n"
+    },
+    "rustc": {
+      "success": true,
+      "output": "rustc 1.98.1 (48a229cea 2026-09-01)\n"
+    },
+    "uname": {
+      "success": true,
+      "output": "Linux cortex 7.0.0-38-generic #38-Ubuntu SMP PREEMPT_DYNAMIC Fri Sep  4 09:10:14 UTC 2026 x86_64 GNU/Linux\n"
+    }
+  },
+  "credential_presence": {
+    "DEEPSEEK_API_KEY": false,
+    "MISTRAL_API_KEY": false,
+    "TOGETHER_API_KEY": false
+  },
+  "assessment_ready": false,
+  "blockers": [
+    "Sandbox resource controls and trusted syscall tracing require direct probes; host inventory alone cannot pass them.",
+    "Three approved provider rights/model/price decisions and an explicit live spending cap are required.",
+    "At least one required provider credential is absent; values are never included in this report.",
+    "No complete valid real recording index is present."
+  ]
+}

@@ -1,0 +1,208 @@
+{
+  "evidence_kind": "verified_attempt_accruals_with_explicit_cash_and_compute_evidence",
+  "acquisition": {
+    "attempts": 0,
+    "historical": {
+      "lower_nanos": 0,
+      "upper_nanos": 0
+    },
+    "new_api": {
+      "lower_nanos": 0,
+      "upper_nanos": 0
+    },
+    "input_tokens": 0,
+    "cached_input_tokens": 0,
+    "output_tokens": 0,
+    "reasoning_tokens": 0,
+    "uncertain_attempts": 0,
+    "missing_usage_attempts": 0
+  },
+  "per_task": {},
+  "per_model": {},
+  "per_round": {},
+  "real_businesses": 0,
+  "non_real_or_unverified_response_attempts": 0,
+  "acquisition_round_complete": false,
+  "acquisition_completion": {
+    "complete": false,
+    "plan_sha256": null,
+    "planned_samples": 0,
+    "verified_samples": 0,
+    "real_businesses": 0,
+    "all_successes_acquired_in_selected_round": false,
+    "reasons": [
+      "No immutable complete plan was declared before acquisition; observed attempts cannot establish the round's intended denominator."
+    ]
+  },
+  "compute_observations": {
+    "base_inference_qa": {
+      "measurement": {
+        "checkpoint_id": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+        "complete": true,
+        "completion": "```rust\nfn add(a: i64, b: i64) -> i64 {\n    a + b\n}\n```",
+        "elapsed_ms": 7244,
+        "finish_reason": "stop",
+        "input_tokens": 58,
+        "output_tokens": 29
+      },
+      "path": "reports/base-inference-smoke.json",
+      "sha256": "ca7d6970c58df80a8af293ba2716874aec94e9f7833746d55e3869beb0da7b37"
+    },
+    "local_serving_qa": {
+      "measurement": {
+        "bounded_queue_rejected": true,
+        "deadline_enforced": true,
+        "elapsed_seconds": 17.303929598,
+        "evaluation_generation": {
+          "checkpoint_id": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+          "complete": true,
+          "completion": "```rust\nfn add(a: i64, b: i64) -> i64 {\n    a + b\n}\n```",
+          "elapsed_ms": 4446,
+          "finish_reason": "stop",
+          "input_tokens": 58,
+          "output_tokens": 29
+        },
+        "evaluation_routing": {
+          "canary_percent": 0,
+          "candidate": {
+            "checkpoint_id": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+            "url": "http://127.0.0.1:46371/"
+          },
+          "gate_report_sha256": null,
+          "generation": 1,
+          "incumbent": {
+            "checkpoint_id": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+            "url": "http://127.0.0.1:46371/"
+          },
+          "rollback_reason": "evaluation-only staging; production incumbent retained",
+          "schema_version": 1
+        },
+        "evidence_kind": "actual_pinned_base_endpoint_qa_not_trained_candidate_canary",
+        "excessive_output_status": 400,
+        "generation": {
+          "checkpoint_id": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+          "complete": true,
+          "completion": "```rust\nfn add(a: i64, b: i64) -> i64 {\n    a + b\n}\n```",
+          "elapsed_ms": 4560,
+          "finish_reason": "stop",
+          "input_tokens": 58,
+          "output_tokens": 29
+        },
+        "health": {
+          "base_revision": "ea3f2471cf1b1f0db85067f1ef93848e38e88c25",
+          "checkpoint_id": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+          "checksum_validated": true,
+          "healthy": true,
+          "immutable": true,
+          "inference_smoke_output": "Certainly",
+          "model_id": "Qwen/Qwen2.5-Coder-0.5B-Instruct",
+          "production_eligible": true,
+          "smoke_elapsed_ms": 294,
+          "tokenizer_sha256": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539"
+        },
+        "initial_routing": {
+          "canary_percent": 0,
+          "candidate": null,
+          "gate_report_sha256": null,
+          "generation": 0,
+          "incumbent": {
+            "checkpoint_id": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+            "url": "http://127.0.0.1:46371/"
+          },
+          "rollback_reason": null,
+          "schema_version": 1
+        },
+        "limitations": [
+          "The evaluation endpoint intentionally aliases the same immutable base tensor; no trained candidate or quality gain is claimed.",
+          "No SHIP gate or 5% candidate canary was exercised because rights-cleared provider training/evaluation artifacts are absent.",
+          "Inference cancellation is cooperative at token boundaries; a matrix multiplication already executing is not pre-empted.",
+          "Generated Rust output was not executed outside the required sandbox."
+        ],
+        "oversized_body_status": 413,
+        "pressure_status_counts": {
+          "503": 10,
+          "504": 2
+        },
+        "rollback_routing": {
+          "canary_percent": 0,
+          "candidate": {
+            "checkpoint_id": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+            "url": "http://127.0.0.1:46371/"
+          },
+          "gate_report_sha256": null,
+          "generation": 2,
+          "incumbent": {
+            "checkpoint_id": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+            "url": "http://127.0.0.1:46371/"
+          },
+          "rollback_reason": "controlled local base evaluation-alias rollback",
+          "schema_version": 1
+        }
+      },
+      "path": "reports/serving-smoke.json",
+      "sha256": "244c6659ea8f00dfe9a86a517ef80a67da18f7c3206f3d8bc9834779e126dd73"
+    },
+    "native_gradient_512_process_resource_qa": {
+      "cash_price": "unmeasured_owned_workstation",
+      "evidence_kind": "measured_process_resources_for_synthetic_tensor_qa_not_a_learning_round",
+      "format": "usr_bin_time_text",
+      "measurement_text": "\tCommand being timed: \"target/release/examples/cpu_gradient_smoke offline_bundle/base 512\"\n\tUser time (seconds): 51.79\n\tSystem time (seconds): 11.32\n\tPercent of CPU this job got: 226%\n\tElapsed (wall clock) time (h:mm:ss or m:ss): 0:27.89\n\tAverage shared text size (kbytes): 0\n\tAverage unshared data size (kbytes): 0\n\tAverage stack size (kbytes): 0\n\tAverage total size (kbytes): 0\n\tMaximum resident set size (kbytes): 7967212\n\tAverage resident set size (kbytes): 0\n\tMajor (requiring I/O) page faults: 0\n\tMinor (reclaiming a frame) page faults: 4421154\n\tVoluntary context switches: 88992\n\tInvoluntary context switches: 612771\n\tSwaps: 0\n\tFile system inputs: 0\n\tFile system outputs: 8\n\tSocket messages sent: 0\n\tSocket messages received: 0\n\tSignals delivered: 0\n\tPage size (bytes): 4096\n\tExit status: 0\n",
+      "path": "reports/native-gradient-512-time.txt",
+      "sha256": "37eb852b7d675ba1f418f05ade169f4ebb168ee09dfe2d339ae636ae03abf6d3"
+    },
+    "native_gradient_512_token_qa": {
+      "measurement": {
+        "adapter_safetensors_roundtrip": true,
+        "adapter_variables": 96,
+        "base_sha256": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+        "changed_parameter_l2": 0.08843086791030623,
+        "elapsed_seconds": 20.917603649,
+        "evidence_kind": "synthetic_tensor_invariant_only_not_assessment_training",
+        "frozen_base_sentinel_unchanged": true,
+        "gradient_norm": 7.3273732424027695,
+        "loss": 10.041236877441406,
+        "sequence_tokens": 512,
+        "supervised_tokens": 256,
+        "trainable_parameters": 540672
+      },
+      "path": "reports/native-gradient-512.json",
+      "sha256": "b5594ab09567296eea2732a06206f894bf160a75407a63f33686e728ec158f79"
+    },
+    "native_gradient_qa": {
+      "measurement": {
+        "adapter_safetensors_roundtrip": true,
+        "adapter_variables": 96,
+        "base_sha256": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+        "changed_parameter_l2": 0.08830761219423873,
+        "elapsed_seconds": 4.172731037,
+        "evidence_kind": "synthetic_tensor_invariant_only_not_assessment_training",
+        "frozen_base_sentinel_unchanged": true,
+        "gradient_norm": 7.316696562585226,
+        "loss": 9.763630867004396,
+        "sequence_tokens": 64,
+        "supervised_tokens": 32,
+        "trainable_parameters": 540672
+      },
+      "path": "reports/native-gradient-smoke.json",
+      "sha256": "84cebba25a620c45e7bdab02c29c9da937d0f2f322bb62bada523b0d19fe81fe"
+    }
+  },
+  "api_cash_reconciled": false,
+  "attributed_api_cash_nanos": null,
+  "attributed_api_credit_nanos": null,
+  "attributed_api_discount_nanos": null,
+  "round_total_usd": null,
+  "descriptive_cost_per_percentage_point": null,
+  "proven_cost_per_point": null,
+  "break_even_verified_tasks": null,
+  "explanation": [
+    "Historical token-price accruals and replay's zero new API accruals are separate integer-nanodollar intervals. A price schedule multiplied by real usage is not an invoice cash payment after credits/discounts.",
+    "Real business counts require checksum-verified real-provider response envelopes and recomputed canonical request identities; fixture/local-refusal rows do not establish provider acquisition.",
+    "Round completeness requires the immutable full plan declared before the first attempt and exactly one real durable completion for every planned task/sample. Failed HTTP retries remain in costs without invalidating an otherwise completed plan; UNKNOWN, unplanned work and missing completions block it.",
+    "Token totals contain known usage only. Missing-usage attempts are counted explicitly; zero known tokens is not a claim that unresolved calls used no tokens.",
+    "A cash total additionally requires per-attempt api-settlements.json invoice/credit/discount evidence and checksum-linked compute-charges.json metering for training/evaluation/grading/storage/serving. No tariff, free credit or electricity allocation is invented.",
+    "Round total attributes the selected round's historical acquisition cash plus its declared measured compute cash. Replay's new provider spend remains zero; historical acquisition is not charged again. Cached acquisitions from another round need an explicit allocation before a new complete cash round is claimed.",
+    "Compute smoke wall times are labelled observations, not summed CPU core-hours or machine rental duration. Some workloads ran concurrently.",
+    "Cost per point divides a complete attributable round cash total by 100 times verified rate gain. Nonpositive gain is N/A; inconclusive positive gain is descriptive only. Break-even/amortised success costs need a SHIP quality comparison and measured comparable marginal costs."
+  ]
+}
