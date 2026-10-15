@@ -1,0 +1,38 @@
+{
+  "model_id": "qwen-general-7b-q4_k_m",
+  "task_id": "money.split",
+  "source_id": "private-money-v1",
+  "specification_sha256": "639498c83f5e053773149696cb44aea438f77b20c7b0e571d728085fde4db87b",
+  "seed": 1729,
+  "plan_sha256": "5ea1fd3ea34bc3537ea9513d3a82a398810ee14d3f19e29fa9ba2f53b988c382",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input [cents,n] has nonnegative cents and n>=1. Split into n integer shares differing by at most one, with larger shares first. The number of shares is at most 64.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[10,3],\"expected\":[4,3,3]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::{Value, from_str};\nuse std::convert::TryInto;\n\npub fn solve(input: Value) -> Value {\n    let (cents, n) = match input.as_array() {\n        Some(v) => (v[0].as_i64().unwrap(), v[1].as_i64().unwrap()),\n        None => return Value::Null,\n    };\n\n    if n <= 0 {\n        return Value::Null;\n    }\n\n    let mut shares = vec![0; n as usize];\n    let mut remainder = cents;\n\n    for i in 0..n {\n        let share = remainder / n;\n        remainder -= share;\n        shares[i as usize] = share;\n    }\n\n    for i in 0..n {\n        if remainder > 0 {\n            shares[i as usize] += 1;\n            remainder -= 1;\n        }\n    }\n\n    Value::Array(shares.into_iter().map(|s| s.into()).collect())\n}\n```",
+    "checkpoint_id": "65b8fcd92af6b4fefa935c625d1ac27ea29dcb6ee14589c55a8f115ceaaa1423",
+    "finish_reason": "stop",
+    "input_tokens": 247,
+    "output_tokens": 206,
+    "elapsed_ms": 6576,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/comparative/search/round-001/trials/qwen-general-7b-q4_k_m/comparison/qwen-general-7b-q4_k_m/money.split.generation.json",
+    "sha256": "25a501e460c00884282759c774821b60888c9b9de2b2b8a5f2253d6f8a7ccd99",
+    "bytes": 4574
+  },
+  "sandbox_report": {
+    "path": "reports/comparative/search/round-001/trials/qwen-general-7b-q4_k_m/comparison/sandbox/6a16445d-9c9a-40e2-905c-025a37cf703a.json",
+    "sha256": "655125e12ebc35aa6c59874ca1d49bec08df823bc2dc1f3927aafa0cc096e0d0",
+    "bytes": 1437
+  },
+  "grading_error": null,
+  "success": false
+}

@@ -1,0 +1,33 @@
+{
+  "run_id": "7b7da18b-a483-435d-a2b8-be0849c18c07",
+  "task_id": "money.format",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error[E0382]: use of partially moved value: `input`\n  --> /candidate/main.rs:15:17\n   |\n 5 |         Value::Number(num) => {\n   |                       --- value partially moved here\n...\n15 |                 input\n   |                 ^^^^^ value used here after partial move\n   |\n   = note: partial move occurs because value has type `serde_json::Number`, which does not implement the `Copy` trait\nhelp: borrow this binding in the pattern to avoid moving the value\n   |\n 5 |         Value::Number(ref num) => {\n   |                       +++\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0382`.\n"
+  ],
+  "cases_total": 6,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "0bf995b5f69865792503015f6af52b457c861b679877956e939c2137ddb4a562",
+  "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "839632d5f4c8b859ad36c84671c373059c975acaa70d2421501e522d5ec93ac7",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:1",
+    "expected_image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/comparative/search/round-001/trials/qwen-coder-7b-q6_k/comparison/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/comparative/search/round-001/trials/qwen-coder-7b-q6_k/comparison/sandbox/7b7da18b-a483-435d-a2b8-be0849c18c07.audit.json",
+  "audit_sha256": "14910c37efc113df38cc75efe8728677418135debc79c405232698abec757512",
+  "failure": "compilation failed: error[E0382]: use of partially moved value: `input`\n  --> /candidate/main.rs:15:17\n   |\n 5 |         Value::Number(num) => {\n   |                       --- value partially moved here\n...\n15 |                 input\n   |                 ^^^^^ value used here after partial move\n   |\n   = note: partial move occurs because value has type `serde_json::Number`, which does not implement the `Copy` trait\nhelp: borrow this binding in the pattern to avoid moving the value\n   |\n 5 |         Value::Number(ref num) => {\n   |                       +++\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0382`.\n",
+  "duration_ms": 4293,
+  "timeout_evidence": null
+}

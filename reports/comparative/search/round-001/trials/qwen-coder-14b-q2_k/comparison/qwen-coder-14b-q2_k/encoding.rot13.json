@@ -1,0 +1,38 @@
+{
+  "model_id": "qwen-coder-14b-q2_k",
+  "task_id": "encoding.rot13",
+  "source_id": "private-encoding-v1",
+  "specification_sha256": "56794b6c25031b0931d378f8f3955bc2d10c4ef04da0be851795e2ca9a832cfa",
+  "seed": 1729,
+  "plan_sha256": "99ee6a68451a373b48630fc9ac091cce38cae0b49e65c2535c6e5c7da10098cf",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an ASCII string. Apply ROT13 to upper/lowercase letters and preserve other characters.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":\"Hello, Z!\",\"expected\":\"Uryyb, M!\"}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 1800
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\nfn rot13(c: char) -> char {\n    match c {\n        'a'..='z' => ((c as u8 - b'a') + 13) % 26 + b'a' as char,\n        'A'..='Z' => ((c as u8 - b'A') + 13) % 26 + b'A' as char,\n        _ => c,\n    }\n}\n\nfn transform_string(s: &str) -> String {\n    s.chars().map(rot13).collect()\n}\n\nfn transform_value(value: &Value) -> Value {\n    match value {\n        Value::String(s) => Value::String(transform_string(s)),\n        Value::Array(arr) => Value::Array(arr.iter().map(transform_value).collect()),\n        Value::Object(obj) => Value::Object(\n            obj.iter()\n                .map(|(k, v)| (k.clone(), transform_value(v)))\n                .collect(),\n        ),\n        _ => value.clone(),\n    }\n}\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    transform_value(&input)\n}\n```",
+    "checkpoint_id": "4542a8bb0c0ae6fb3dafeb305c61a8d6b2f894e96bb667d60cda105a1f313176",
+    "finish_reason": "stop",
+    "input_tokens": 227,
+    "output_tokens": 242,
+    "elapsed_ms": 680135,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/comparative/search/round-001/trials/qwen-coder-14b-q2_k/comparison/qwen-coder-14b-q2_k/encoding.rot13.generation.json",
+    "sha256": "2cc35ccdc2feee4233d3b12af962de70a97be1057b8298887940f9d8cf2c78f5",
+    "bytes": 4609
+  },
+  "sandbox_report": {
+    "path": "reports/comparative/search/round-001/trials/qwen-coder-14b-q2_k/comparison/sandbox/6e63fa20-8eeb-440b-aa9b-9129cfd54ba1.json",
+    "sha256": "96e248726f2b11610b9091b8bba977b5b23c242adfc55f2c7c0dc54d45ca6976",
+    "bytes": 6257
+  },
+  "grading_error": null,
+  "success": false
+}

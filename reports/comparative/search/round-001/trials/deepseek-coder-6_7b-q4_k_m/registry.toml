@@ -1,0 +1,12 @@
+schema_version = 1
+
+[[models]]
+id = "deepseek-coder-6_7b-q4_k_m"
+model_id = "TheBloke/deepseek-coder-6.7B-instruct-GGUF"
+revision = "9e221e6b41cb1bf1c5d8f9718e81e3dc781f7557"
+directory = "offline_bundle/comparative/deepseek-coder-6_7b-q4_k_m"
+architecture = "llama"
+role = "coding_teacher"
+licence = "DeepSeek-Model-Licence-1.0"
+developer_id = "deepseek"
+weight_format = "gguf"

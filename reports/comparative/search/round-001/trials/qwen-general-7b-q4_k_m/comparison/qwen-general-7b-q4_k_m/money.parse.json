@@ -1,0 +1,38 @@
+{
+  "model_id": "qwen-general-7b-q4_k_m",
+  "task_id": "money.parse",
+  "source_id": "private-money-v1",
+  "specification_sha256": "d2e4ee5432fb3996c6eaa9004d032f82e2ebfcb2f8df8fd10fd99bfbced5ddef",
+  "seed": 1729,
+  "plan_sha256": "5ea1fd3ea34bc3537ea9513d3a82a398810ee14d3f19e29fa9ba2f53b988c382",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an ASCII decimal monetary string. Accept optional leading minus, one or more digits, and optional dot followed by exactly two digits. Return signed cents, or null for invalid syntax; magnitudes <=1000000 pounds.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":\"-12.30\",\"expected\":-1230}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::{Value, from_str};\nuse std::str::FromStr;\n\npub fn solve(input: Value) -> Value {\n    if let Some(s) = input.as_str() {\n        if let Ok(amount) = parse_amount(s) {\n            return Value::Number(amount.into());\n        }\n    }\n    Value::Null\n}\n\nfn parse_amount(s: &str) -> Result<i64, ()> {\n    let trimmed = s.trim();\n    if trimmed.is_empty() {\n        return Err(());\n    }\n\n    let parts: Vec<&str> = trimmed.split('.').collect();\n    if parts.len() > 2 {\n        return Err(());\n    }\n\n    let (integer_part, decimal_part) = match parts.len() {\n        1 => (parts[0], \"\"),\n        2 => parts,\n        _ => return Err(()),\n    };\n\n    let integer_part = integer_part.trim_start_matches('-');\n    let integer_value = i64::from_str(integer_part).map_err(|_| ())?;\n\n    let decimal_part = decimal_part.trim_start_matches('0');\n    let decimal_value = if decimal_part.is_empty() {\n        0\n    } else {\n        i64::from_str(decimal_part).map_err(|_| ())? * 100\n    };\n\n    if integer_value > 1000000 || decimal_value > 99 {\n        return Err(());\n    }\n\n    Ok(integer_value * 100 - decimal_value)\n}\n```",
+    "checkpoint_id": "65b8fcd92af6b4fefa935c625d1ac27ea29dcb6ee14589c55a8f115ceaaa1423",
+    "finish_reason": "stop",
+    "input_tokens": 255,
+    "output_tokens": 313,
+    "elapsed_ms": 10460,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/comparative/search/round-001/trials/qwen-general-7b-q4_k_m/comparison/qwen-general-7b-q4_k_m/money.parse.generation.json",
+    "sha256": "9c723c5223318549d8b454c3535fc0149f179d031bf7aab777ef4094283d1d4f",
+    "bytes": 5067
+  },
+  "sandbox_report": {
+    "path": "reports/comparative/search/round-001/trials/qwen-general-7b-q4_k_m/comparison/sandbox/0c202fa5-a5e7-4c2b-bae7-e9b6741ad2ee.json",
+    "sha256": "f0b376be01c9a8d45d06f1fce647aad65db8f2e0c5a280baa68ac1656b536d45",
+    "bytes": 3378
+  },
+  "grading_error": null,
+  "success": false
+}

@@ -1,0 +1,34 @@
+{
+  "model_id": "magicoder-s-ds-6_7b-q4_k_m",
+  "task_id": "tables.last_by_key",
+  "source_id": "private-tables-v1",
+  "specification_sha256": "60d2667ffa0dcdb540f2de2f41533a9d0b6c027ee25be4adb993cda6f67122f7",
+  "seed": 1729,
+  "plan_sha256": "59b97ad46315290358d430232a1a8bef1378263e4af34948b263d560d57b5506",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an array of [key,value] integer rows. Keep the last value per key and return [key,value] rows sorted by key.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[[2,9],[1,4],[2,3]],\"expected\":[[1,4],[2,3]]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "Here is a Rust code snippet that takes a JSON array of key-value pairs, where the key is a string, and the value is an integer.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "checkpoint_id": "4b340a9d033091627273fa0f95a4d43b5fe95500c714f9d2f683fbe266c9bc52",
+    "finish_reason": "length",
+    "input_tokens": 280,
+    "output_tokens": 512,
+    "elapsed_ms": 84185,
+    "complete": false
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/comparative/search/round-001/trials/magicoder-s-ds-6_7b-q4_k_m/comparison/magicoder-s-ds-6_7b-q4_k_m/tables.last_by_key.generation.json",
+    "sha256": "bd87bef03df06c069454acf22331b4b166c7bf12dff1beb23edbd2648c81454f",
+    "bytes": 4897
+  },
+  "sandbox_report": null,
+  "grading_error": null,
+  "success": false
+}

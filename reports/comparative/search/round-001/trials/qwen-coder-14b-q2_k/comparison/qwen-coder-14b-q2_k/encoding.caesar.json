@@ -1,0 +1,38 @@
+{
+  "model_id": "qwen-coder-14b-q2_k",
+  "task_id": "encoding.caesar",
+  "source_id": "private-encoding-v1",
+  "specification_sha256": "6d5a2e4829f195b5e54e08b45300ecba1a3b178763b2ee6e7a9c90c50c633efa",
+  "seed": 1729,
+  "plan_sha256": "99ee6a68451a373b48630fc9ac091cce38cae0b49e65c2535c6e5c7da10098cf",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input {text,shift} has ASCII text and integer shift. Rotate lowercase a..z only modulo 26; preserve all other characters.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":{\"shift\":3,\"text\":\"xyz A!\"},\"expected\":\"abc A!\"}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 1800
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let shift = input[\"shift\"].as_i64().expect(\"shift must be an integer\");\n    let text = input[\"text\"].as_str().expect(\"text must be a string\");\n\n    let mut result = String::new();\n    for c in text.chars() {\n        if c.is_ascii_lowercase() {\n            let rotated = ((c as u8 - b'a') + shift as u8) % 26 + b'a';\n            result.push(rotated as char);\n        } else {\n            result.push(c);\n        }\n    }\n\n    serde_json::Value::String(result)\n}\n```",
+    "checkpoint_id": "4542a8bb0c0ae6fb3dafeb305c61a8d6b2f894e96bb667d60cda105a1f313176",
+    "finish_reason": "stop",
+    "input_tokens": 237,
+    "output_tokens": 149,
+    "elapsed_ms": 509959,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/comparative/search/round-001/trials/qwen-coder-14b-q2_k/comparison/qwen-coder-14b-q2_k/encoding.caesar.generation.json",
+    "sha256": "e620b8c7b7bcb9db60a35695e525ca3252ead1770cb636a9b525724d6c6270e1",
+    "bytes": 4385
+  },
+  "sandbox_report": {
+    "path": "reports/comparative/search/round-001/trials/qwen-coder-14b-q2_k/comparison/sandbox/4fac403f-6bc3-4425-a03a-2425691a0296.json",
+    "sha256": "ceb3d57d4defa8068a4c6673fc0d9726ab92fb5ebc792da61673da3f9c627a7f",
+    "bytes": 1435
+  },
+  "grading_error": null,
+  "success": false
+}

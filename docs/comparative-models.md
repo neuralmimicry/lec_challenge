@@ -122,6 +122,26 @@ Public document and metadata retrieval used the installed `curl --disable` HTTP 
 
 ## Bounded teacher replacement and retention
 
+The original six-candidate search has now finished with
+`declared_roster_exhausted_shortfall`; it qualified **zero** models. The retained
+healthy fallback is Qwen Coder 7B Q4 at **7/16**. General Qwen 7B Q4 scored
+**5/16** and the Qwen Coder 7B Q6 repeat scored **6/16**, both without generation
+or infrastructure errors. The Q6 repeat does not create a distinct teacher.
+Qwen Coder 14B Q2 retained **6/16 with three errors**; Magicoder retained 16
+length-limited incomplete generations. DeepSeek 6.7B stopped in sandbox memory
+preflight. Those incomplete observations cannot establish a quality ranking.
+The historical engine's errored-trial status strings remain in the original
+[report](../reports/comparative/search/round-001/report.json); newer code labels
+such trials inconclusive rather than healthy below-threshold results.
+
+Automatic owned pruning removed **20,140,487,248 logical weight bytes** in total:
+the three original weak dense alternatives, general Qwen 7B Q4 and the Qwen
+Coder 7B Q6 repeat. Original manifests, licences, deletion authority and measured
+outputs remain. The selected fallback, assessment base and incomplete trials
+are protected. The reported 25,209,217,184 reserved asset bytes measure a budget
+allocation, not actual network traffic, cash charges or peak disk use. Fresh
+follow-up comparisons use new explicit protocols and preserve these outcomes.
+
 The original 2/16 incumbent is the **Qwen 1.5B teacher**, while the student baseline
 scored 0/16. The replacement protocol in
 [config/teacher-search.toml](../config/teacher-search.toml) visits at most six

@@ -1,0 +1,38 @@
+{
+  "model_id": "qwen-general-7b-q4_k_m",
+  "task_id": "dispatch.round_robin",
+  "source_id": "private-dispatch-v1",
+  "specification_sha256": "e445e145f0405de8c854262451687ad1958cdfd2793c0f20d7b13efdf5c0a5fa",
+  "seed": 1729,
+  "plan_sha256": "5ea1fd3ea34bc3537ea9513d3a82a398810ee14d3f19e29fa9ba2f53b988c382",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input {jobs,quantum} has nonnegative integer work amounts and positive quantum. Cycle job indices, giving up to quantum work each turn; return indices in order of completion, initially zero-work jobs first in index order.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":{\"jobs\":[3,1,2],\"quantum\":2},\"expected\":[1,2,0]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::{Value, from_str};\n\npub fn solve(input: Value) -> Value {\n    let jobs: Vec<i64> = input[\"jobs\"].as_array().unwrap().iter().map(|v| v.as_i64().unwrap()).collect();\n    let quantum: i64 = input[\"quantum\"].as_i64().unwrap();\n\n    let mut remaining_work: Vec<(usize, i64)> = (0..jobs.len()).map(|i| (i, jobs[i])).collect();\n    remaining_work.sort_by_key(|&(_, work)| work);\n\n    let mut result: Vec<usize> = Vec::new();\n    while !remaining_work.is_empty() {\n        let mut turn_work: Vec<(usize, i64)> = Vec::new();\n        for (index, work) in remaining_work.iter().take(quantum as usize).map(|&(i, w)| (i, w)) {\n            if work > 0 {\n                turn_work.push((index, work - 1));\n            }\n        }\n        result.extend(turn_work.iter().map(|&(i, _)| i));\n        remaining_work = turn_work.into_iter().chain(remaining_work.into_iter().skip(quantum as usize)).collect();\n    }\n\n    Value::Array(result.into_iter().map(|i| Value::Number(i.into())).collect())\n}\n```",
+    "checkpoint_id": "65b8fcd92af6b4fefa935c625d1ac27ea29dcb6ee14589c55a8f115ceaaa1423",
+    "finish_reason": "stop",
+    "input_tokens": 259,
+    "output_tokens": 284,
+    "elapsed_ms": 9442,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/comparative/search/round-001/trials/qwen-general-7b-q4_k_m/comparison/qwen-general-7b-q4_k_m/dispatch.round_robin.generation.json",
+    "sha256": "81f443b7f1d0e5c48cff41d822b41aefae6caeb295bc495323ed594a3c58708a",
+    "bytes": 4952
+  },
+  "sandbox_report": {
+    "path": "reports/comparative/search/round-001/trials/qwen-general-7b-q4_k_m/comparison/sandbox/092bfb6f-657b-4455-84cf-6343728a8d37.json",
+    "sha256": "a07b80f60716b718d8bc5ee5ed4fd414656e6ad3b377f61286d8067146a05c30",
+    "bytes": 1447
+  },
+  "grading_error": null,
+  "success": false
+}

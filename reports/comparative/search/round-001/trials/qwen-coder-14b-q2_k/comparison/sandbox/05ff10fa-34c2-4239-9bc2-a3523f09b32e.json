@@ -1,0 +1,33 @@
+{
+  "run_id": "05ff10fa-34c2-4239-9bc2-a3523f09b32e",
+  "task_id": "tables.inner_join",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error: cannot find macro `json` in this scope\n  --> /candidate/main.rs:41:29\n   |\n41 |                 result.push(json!([key, l_value, r_value]));\n   |                             ^^^^\n\nerror: cannot find macro `json` in this scope\n  --> /candidate/main.rs:53:5\n   |\n53 |     json!(result)\n   |     ^^^^\n\nwarning: unused import: `serde_json::Value`\n --> /candidate/main.rs:1:5\n  |\n1 | use serde_json::Value;\n  |     ^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0599]: no method named `and_then` found for reference `&[(i64, i64)]` in the current scope\n  --> /candidate/main.rs:39:61\n   |\n39 |         if let Some(&(l_key, l_value)) = left_iter.as_ref().and_then(|iter| iter.find(|&&(k, _)| k == key)) {\n   |                                                             ^^^^^^^^ method not found in `&[(i64, i64)]`\n\nerror[E0599]: no method named `and_then` found for reference `&[(i64, i64)]` in the current scope\n  --> /candidate/main.rs:40:66\n   |\n40 |             if let Some(&(r_key, r_value)) = right_iter.as_ref().and_then(|iter| iter.find(|&&(k, _)| k == key)) {\n   |                                                                  ^^^^^^^^ method not found in `&[(i64, i64)]`\n\nerror: aborting due to 4 previous errors; 1 warning emitted\n\nFor more information about this error, try `rustc --explain E0599`.\n"
+  ],
+  "cases_total": 5,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "0bf995b5f69865792503015f6af52b457c861b679877956e939c2137ddb4a562",
+  "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "fd0047681103cba46a261ef4560e96457fabd91daca954703fc39fab7552f5ec",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:1",
+    "expected_image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/comparative/search/round-001/trials/qwen-coder-14b-q2_k/comparison/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/comparative/search/round-001/trials/qwen-coder-14b-q2_k/comparison/sandbox/05ff10fa-34c2-4239-9bc2-a3523f09b32e.audit.json",
+  "audit_sha256": "a379981da84fb25945758aaff0af6c5860b6a177de9625b4ddbba0e818f7a15f",
+  "failure": "compilation failed: error: cannot find macro `json` in this scope\n  --> /candidate/main.rs:41:29\n   |\n41 |                 result.push(json!([key, l_value, r_value]));\n   |                             ^^^^\n\nerror: cannot find macro `json` in this scope\n  --> /candidate/main.rs:53:5\n   |\n53 |     json!(result)\n   |     ^^^^\n\nwarning: unused import: `serde_json::Value`\n --> /candidate/main.rs:1:5\n  |\n1 | use serde_json::Value;\n  |     ^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0599]: no method named `and_then` found for reference `&[(i64, i64)]` in the current scope\n  --> /candidate/main.rs:39:61\n   |\n39 |         if let Some(&(l_key, l_value)) = left_iter.as_ref().and_then(|iter| iter.find(|&&(k, _)| k == key)) {\n   |                                                             ^^^^^^^^ method not found in `&[(i64, i64)]`\n\nerror[E0599]: no method named `and_then` found for reference `&[(i64, i64)]` in the current scope\n  --> /candidate/main.rs:40:66\n   |\n40 |             if let Some(&(r_key, r_value)) = right_iter.as_ref().and_then(|iter| iter.find(|&&(k, _)| k == key)) {\n   |                                                                  ^^^^^^^^ method not found in `&[(i64, i64)]`\n\nerror: aborting due to 4 previous errors; 1 warning emitted\n\nFor more information about this error, try `rustc --explain E0599`.\n",
+  "duration_ms": 6573,
+  "timeout_evidence": null
+}

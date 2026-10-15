@@ -1,0 +1,173 @@
+[
+  {
+    "actual_execution": {
+      "actual_device": "Cuda { gpu_id: 0 }",
+      "actual_dtype": "F32",
+      "asset_lifetime_shared_lease": true,
+      "available_cpu_threads": 16,
+      "candle_cpu_threads": 16,
+      "checkpoint_id": "4b340a9d033091627273fa0f95a4d43b5fe95500c714f9d2f683fbe266c9bc52",
+      "context_cap": 1024,
+      "cpu_fallback": false,
+      "cuda_active": true,
+      "cuda_feature_compiled": true,
+      "engine": "native_rust_candle",
+      "model_id": "TheBloke/Magicoder-S-DS-6.7B-GGUF",
+      "quantisation": {
+        "all_weights_dequantised": false,
+        "embedding_precision": "F16",
+        "format": "gguf",
+        "hybrid_cpu_offload": false,
+        "kv_precision": "F32",
+        "matrix_backend": "native_candle_QMatMul",
+        "memory_estimate": {
+          "activation_workspace_bytes": 168820736,
+          "assumptions": "Full quantised weights on the selected device; embedding expanded to GPU float16 or CPU float32; float32 activations/KV/attention; no hybrid offload. Driver/allocator/workspace behaviour may require additional headroom.",
+          "attention_score_bytes": 134217728,
+          "conservative_total_bytes": 5992343424,
+          "context_tokens": 1024,
+          "dense_embedding_bytes": 264241152,
+          "kv_cache_bytes": 1073741824,
+          "quantised_file_bytes": 4082886528,
+          "runtime_reserve_bytes": 268435456
+        },
+        "original_source_model_id": "ise-uiuc/Magicoder-S-DS-6.7B",
+        "original_source_revision": "b3ed7cb1578a3643ceaf2ebf996a3d8e85f75d8f",
+        "quantised_publisher_model_id": "TheBloke/Magicoder-S-DS-6.7B-GGUF",
+        "quantised_publisher_revision": "d41a33f9393ebc06c6beb44b1ded091b6d19496c",
+        "tensor_types": {
+          "F32": 65,
+          "Q4K": 193,
+          "Q6K": 33
+        },
+        "weight_sha256": "4b340a9d033091627273fa0f95a4d43b5fe95500c714f9d2f683fbe266c9bc52"
+      },
+      "requested": {
+        "device": {
+          "cuda": {
+            "ordinal": 0
+          }
+        },
+        "dtype": "f32"
+      },
+      "revision": "d41a33f9393ebc06c6beb44b1ded091b6d19496c",
+      "weight_format": "gguf"
+    },
+    "after_loading": {
+      "compute_processes": {
+        "csv": "672179, state/engines/949b28471a3b47255ab102ead671a6a3e719dc1303844c1c66e0d69682d1dc99/lec-distil, 4236\n",
+        "observed_unix_ms": 1792081141149
+      },
+      "gpu": {
+        "csv": "0, NVIDIA GeForce RTX 2080, 595.91.07, 8192, 4412, 28\n",
+        "observed_unix_ms": 1792081141125
+      }
+    },
+    "before_loading": {
+      "compute_processes": {
+        "csv": "672179, state/engines/949b28471a3b47255ab102ead671a6a3e719dc1303844c1c66e0d69682d1dc99/lec-distil, 130\n",
+        "observed_unix_ms": 1792081109205
+      },
+      "gpu": {
+        "csv": "0, NVIDIA GeForce RTX 2080, 595.91.07, 8192, 306, 29\n",
+        "observed_unix_ms": 1792081109174
+      }
+    },
+    "event": "model_loading",
+    "loading_error": null,
+    "model": "magicoder-s-ds-6_7b-q4_k_m",
+    "plan_sha256": "59b97ad46315290358d430232a1a8bef1378263e4af34948b263d560d57b5506",
+    "requested_runtime": {
+      "device": {
+        "cuda": {
+          "ordinal": 0
+        }
+      },
+      "dtype": "f32"
+    }
+  },
+  {
+    "actual_execution": {
+      "actual_device": "Cuda { gpu_id: 0 }",
+      "actual_dtype": "F32",
+      "asset_lifetime_shared_lease": true,
+      "available_cpu_threads": 16,
+      "candle_cpu_threads": 16,
+      "checkpoint_id": "4b340a9d033091627273fa0f95a4d43b5fe95500c714f9d2f683fbe266c9bc52",
+      "context_cap": 1024,
+      "cpu_fallback": false,
+      "cuda_active": true,
+      "cuda_feature_compiled": true,
+      "engine": "native_rust_candle",
+      "model_id": "TheBloke/Magicoder-S-DS-6.7B-GGUF",
+      "quantisation": {
+        "all_weights_dequantised": false,
+        "embedding_precision": "F16",
+        "format": "gguf",
+        "hybrid_cpu_offload": false,
+        "kv_precision": "F32",
+        "matrix_backend": "native_candle_QMatMul",
+        "memory_estimate": {
+          "activation_workspace_bytes": 168820736,
+          "assumptions": "Full quantised weights on the selected device; embedding expanded to GPU float16 or CPU float32; float32 activations/KV/attention; no hybrid offload. Driver/allocator/workspace behaviour may require additional headroom.",
+          "attention_score_bytes": 134217728,
+          "conservative_total_bytes": 5992343424,
+          "context_tokens": 1024,
+          "dense_embedding_bytes": 264241152,
+          "kv_cache_bytes": 1073741824,
+          "quantised_file_bytes": 4082886528,
+          "runtime_reserve_bytes": 268435456
+        },
+        "original_source_model_id": "ise-uiuc/Magicoder-S-DS-6.7B",
+        "original_source_revision": "b3ed7cb1578a3643ceaf2ebf996a3d8e85f75d8f",
+        "quantised_publisher_model_id": "TheBloke/Magicoder-S-DS-6.7B-GGUF",
+        "quantised_publisher_revision": "d41a33f9393ebc06c6beb44b1ded091b6d19496c",
+        "tensor_types": {
+          "F32": 65,
+          "Q4K": 193,
+          "Q6K": 33
+        },
+        "weight_sha256": "4b340a9d033091627273fa0f95a4d43b5fe95500c714f9d2f683fbe266c9bc52"
+      },
+      "requested": {
+        "device": {
+          "cuda": {
+            "ordinal": 0
+          }
+        },
+        "dtype": "f32"
+      },
+      "revision": "d41a33f9393ebc06c6beb44b1ded091b6d19496c",
+      "weight_format": "gguf"
+    },
+    "after_generation": {
+      "compute_processes": {
+        "csv": "672179, state/engines/949b28471a3b47255ab102ead671a6a3e719dc1303844c1c66e0d69682d1dc99/lec-distil, 5612\n",
+        "observed_unix_ms": 1792082250287
+      },
+      "gpu": {
+        "csv": "0, NVIDIA GeForce RTX 2080, 595.91.07, 8192, 5775, 8\n",
+        "observed_unix_ms": 1792082250147
+      }
+    },
+    "event": "model_generation_complete",
+    "model": "magicoder-s-ds-6_7b-q4_k_m",
+    "plan_sha256": "59b97ad46315290358d430232a1a8bef1378263e4af34948b263d560d57b5506"
+  },
+  {
+    "after_release": {
+      "compute_processes": {
+        "csv": "672179, state/engines/949b28471a3b47255ab102ead671a6a3e719dc1303844c1c66e0d69682d1dc99/lec-distil, 130\n",
+        "observed_unix_ms": 1792082251505
+      },
+      "gpu": {
+        "csv": "0, NVIDIA GeForce RTX 2080, 595.91.07, 8192, 294, 7\n",
+        "observed_unix_ms": 1792082251371
+      }
+    },
+    "event": "model_released",
+    "model": "magicoder-s-ds-6_7b-q4_k_m",
+    "plan_sha256": "59b97ad46315290358d430232a1a8bef1378263e4af34948b263d560d57b5506",
+    "synchronized_before_release": true
+  }
+]

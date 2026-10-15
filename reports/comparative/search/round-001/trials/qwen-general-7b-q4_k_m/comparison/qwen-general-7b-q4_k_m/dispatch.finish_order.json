@@ -1,0 +1,38 @@
+{
+  "model_id": "qwen-general-7b-q4_k_m",
+  "task_id": "dispatch.finish_order",
+  "source_id": "private-dispatch-v1",
+  "specification_sha256": "bd65bbcd2943471a0fa07872b15464820b0d1c4b37db971d13f3b63850727773",
+  "seed": 1729,
+  "plan_sha256": "5ea1fd3ea34bc3537ea9513d3a82a398810ee14d3f19e29fa9ba2f53b988c382",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an array of [arrival,duration], nonnegative integers. A single server processes input order, starting each job at max(previous finish,arrival). Return finish times.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[[0,3],[1,2],[8,1]],\"expected\":[3,5,9]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::{Value, from_str};\nuse std::cmp;\n\npub fn solve(input: Value) -> Value {\n    let jobs: Vec<Vec<i64>> = input.as_array().unwrap().iter().map(|v| v.as_array().unwrap().to_vec()).collect();\n\n    let mut finish_times = vec![0; jobs.len()];\n\n    for i in 0..jobs.len() {\n        let (arrival, duration) = (jobs[i][0], jobs[i][1]);\n        finish_times[i] = cmp::max(arrival, finish_times[i - 1] + if i > 0 { jobs[i - 1][1] } else { 0 }) + duration;\n    }\n\n    Value::Array(finish_times.into_iter().map(Value::from).collect())\n}\n```",
+    "checkpoint_id": "65b8fcd92af6b4fefa935c625d1ac27ea29dcb6ee14589c55a8f115ceaaa1423",
+    "finish_reason": "stop",
+    "input_tokens": 250,
+    "output_tokens": 169,
+    "elapsed_ms": 5327,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/comparative/search/round-001/trials/qwen-general-7b-q4_k_m/comparison/qwen-general-7b-q4_k_m/dispatch.finish_order.generation.json",
+    "sha256": "e5774dd4f745e76d19c65c4f56d1da6921bd300c7f9dadfd102ba6899cb83d62",
+    "bytes": 4425
+  },
+  "sandbox_report": {
+    "path": "reports/comparative/search/round-001/trials/qwen-general-7b-q4_k_m/comparison/sandbox/0cb27634-2e03-4ab4-9e08-c2fb7af43ef9.json",
+    "sha256": "c3c2339d71723cbbb2f99e74bf8df53f63d91f4bded5f5cd070170ab1e4bc704",
+    "bytes": 5253
+  },
+  "grading_error": null,
+  "success": false
+}

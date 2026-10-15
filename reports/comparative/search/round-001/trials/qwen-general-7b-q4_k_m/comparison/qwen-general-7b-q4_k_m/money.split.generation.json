@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "evidence_kind": "actual_local_model_generation",
+  "recorded_unix_ms": 1792095901045,
+  "model_id": "qwen-general-7b-q4_k_m",
+  "task_id": "money.split",
+  "source_id": "private-money-v1",
+  "specification_sha256": "639498c83f5e053773149696cb44aea438f77b20c7b0e571d728085fde4db87b",
+  "seed": 1729,
+  "plan_sha256": "5ea1fd3ea34bc3537ea9513d3a82a398810ee14d3f19e29fa9ba2f53b988c382",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input [cents,n] has nonnegative cents and n>=1. Split into n integer shares differing by at most one, with larger shares first. The number of shares is at most 64.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[10,3],\"expected\":[4,3,3]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::{Value, from_str};\nuse std::convert::TryInto;\n\npub fn solve(input: Value) -> Value {\n    let (cents, n) = match input.as_array() {\n        Some(v) => (v[0].as_i64().unwrap(), v[1].as_i64().unwrap()),\n        None => return Value::Null,\n    };\n\n    if n <= 0 {\n        return Value::Null;\n    }\n\n    let mut shares = vec![0; n as usize];\n    let mut remainder = cents;\n\n    for i in 0..n {\n        let share = remainder / n;\n        remainder -= share;\n        shares[i as usize] = share;\n    }\n\n    for i in 0..n {\n        if remainder > 0 {\n            shares[i as usize] += 1;\n            remainder -= 1;\n        }\n    }\n\n    Value::Array(shares.into_iter().map(|s| s.into()).collect())\n}\n```",
+    "checkpoint_id": "65b8fcd92af6b4fefa935c625d1ac27ea29dcb6ee14589c55a8f115ceaaa1423",
+    "finish_reason": "stop",
+    "input_tokens": 247,
+    "output_tokens": 206,
+    "elapsed_ms": 6576,
+    "complete": true
+  },
+  "generation_error": null,
+  "execution": {
+    "actual_device": "Cuda { gpu_id: 0 }",
+    "actual_dtype": "F32",
+    "asset_lifetime_shared_lease": true,
+    "available_cpu_threads": 16,
+    "candle_cpu_threads": 16,
+    "checkpoint_id": "65b8fcd92af6b4fefa935c625d1ac27ea29dcb6ee14589c55a8f115ceaaa1423",
+    "context_cap": 1024,
+    "cpu_fallback": false,
+    "cuda_active": true,
+    "cuda_feature_compiled": true,
+    "engine": "native_rust_candle",
+    "model_id": "bartowski/Qwen2.5-7B-Instruct-GGUF",
+    "quantisation": {
+      "all_weights_dequantised": false,
+      "embedding_precision": "F16",
+      "format": "gguf",
+      "hybrid_cpu_offload": false,
+      "kv_precision": "F32",
+      "matrix_backend": "native_candle_QMatMul",
+      "memory_estimate": {
+        "activation_workspace_bytes": 262144000,
+        "assumptions": "Full quantised weights on the selected device; embedding expanded to GPU float16 or CPU float32; float32 activations/KV/attention; no hybrid offload. Driver/allocator/workspace behaviour may require additional headroom.",
+        "attention_score_bytes": 117440512,
+        "conservative_total_bytes": 6538529472,
+        "context_tokens": 1024,
+        "dense_embedding_bytes": 1089994752,
+        "kv_cache_bytes": 117440512,
+        "quantised_file_bytes": 4683074240,
+        "runtime_reserve_bytes": 268435456
+      },
+      "original_source_model_id": "Qwen/Qwen2.5-7B-Instruct",
+      "original_source_revision": "a09a35458c702b33eeacc393d103063234e8bc28",
+      "quantised_publisher_model_id": "bartowski/Qwen2.5-7B-Instruct-GGUF",
+      "quantised_publisher_revision": "8911e8a47f92bac19d6f5c64a2e2095bd2f7d031",
+      "tensor_types": {
+        "F32": 141,
+        "Q4K": 169,
+        "Q6K": 29
+      },
+      "weight_sha256": "65b8fcd92af6b4fefa935c625d1ac27ea29dcb6ee14589c55a8f115ceaaa1423"
+    },
+    "requested": {
+      "device": {
+        "cuda": {
+          "ordinal": 0
+        }
+      },
+      "dtype": "f32"
+    },
+    "revision": "8911e8a47f92bac19d6f5c64a2e2095bd2f7d031",
+    "weight_format": "gguf"
+  }
+}

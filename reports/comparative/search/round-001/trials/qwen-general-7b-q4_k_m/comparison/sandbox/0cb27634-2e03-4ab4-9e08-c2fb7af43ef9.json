@@ -1,0 +1,33 @@
+{
+  "run_id": "0cb27634-2e03-4ab4-9e08-c2fb7af43ef9",
+  "task_id": "dispatch.finish_order",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: warning: unused import: `from_str`\n --> /candidate/main.rs:1:25\n  |\n1 | use serde_json::{Value, from_str};\n  |                         ^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0277]: a value of type `Vec<Vec<i64>>` cannot be built from an iterator over elements of type `Vec<Value>`\n --> /candidate/main.rs:5:104\n  |\n5 |     let jobs: Vec<Vec<i64>> = input.as_array().unwrap().iter().map(|v| v.as_array().unwrap().to_vec()).collect();\n  |                                                                                                        ^^^^^^^ value of type `Vec<Vec<i64>>` cannot be built from `std::iter::Iterator<Item=Vec<Value>>`\n  |\nhelp: the trait `FromIterator<Vec<Value>>` is not implemented for `Vec<Vec<i64>>`\n      but trait `FromIterator<Vec<i64>>` is implemented for it\n --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/alloc/src/vec/mod.rs:3993:0\n  = help: for that trait implementation, expected `i64`, found `Value`\nnote: the method call chain might not have had the expected associated types\n --> /candidate/main.rs:5:64\n  |\n5 |     let jobs: Vec<Vec<i64>> = input.as_array().unwrap().iter().map(|v| v.as_array().unwrap().to_vec()).collect();\n  |                               -----                     ------ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ `Iterator::Item` changed to `Vec<Value>` here\n  |                               |                         |\n  |                               |                         `Iterator::Item` is `&Value` here\n  |                               this expression has type `Value`\nnote: required by a bound in `collect`\n --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/iter/traits/iterator.rs:2073:4\n\nerror: aborting due to 1 previous error; 1 warning emitted\n\nFor more information about this error, try `rustc --explain E0277`.\n"
+  ],
+  "cases_total": 5,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "0bf995b5f69865792503015f6af52b457c861b679877956e939c2137ddb4a562",
+  "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "9ae75e208c1285b7bd281a329d1e52f57d2b15ecfc2faeb703d51becf7b5e9a5",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:1",
+    "expected_image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/comparative/search/round-001/trials/qwen-general-7b-q4_k_m/comparison/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/comparative/search/round-001/trials/qwen-general-7b-q4_k_m/comparison/sandbox/0cb27634-2e03-4ab4-9e08-c2fb7af43ef9.audit.json",
+  "audit_sha256": "27b8d28f846aef1a991bd72f2d7823ad1271dfcb3c38f7c0cc8003135bb15901",
+  "failure": "compilation failed: warning: unused import: `from_str`\n --> /candidate/main.rs:1:25\n  |\n1 | use serde_json::{Value, from_str};\n  |                         ^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0277]: a value of type `Vec<Vec<i64>>` cannot be built from an iterator over elements of type `Vec<Value>`\n --> /candidate/main.rs:5:104\n  |\n5 |     let jobs: Vec<Vec<i64>> = input.as_array().unwrap().iter().map(|v| v.as_array().unwrap().to_vec()).collect();\n  |                                                                                                        ^^^^^^^ value of type `Vec<Vec<i64>>` cannot be built from `std::iter::Iterator<Item=Vec<Value>>`\n  |\nhelp: the trait `FromIterator<Vec<Value>>` is not implemented for `Vec<Vec<i64>>`\n      but trait `FromIterator<Vec<i64>>` is implemented for it\n --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/alloc/src/vec/mod.rs:3993:0\n  = help: for that trait implementation, expected `i64`, found `Value`\nnote: the method call chain might not have had the expected associated types\n --> /candidate/main.rs:5:64\n  |\n5 |     let jobs: Vec<Vec<i64>> = input.as_array().unwrap().iter().map(|v| v.as_array().unwrap().to_vec()).collect();\n  |                               -----                     ------ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ `Iterator::Item` changed to `Vec<Value>` here\n  |                               |                         |\n  |                               |                         `Iterator::Item` is `&Value` here\n  |                               this expression has type `Value`\nnote: required by a bound in `collect`\n --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/iter/traits/iterator.rs:2073:4\n\nerror: aborting due to 1 previous error; 1 warning emitted\n\nFor more information about this error, try `rustc --explain E0277`.\n",
+  "duration_ms": 13789,
+  "timeout_evidence": null
+}

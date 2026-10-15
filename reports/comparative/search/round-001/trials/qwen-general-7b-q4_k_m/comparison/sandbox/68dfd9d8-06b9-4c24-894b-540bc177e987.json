@@ -1,0 +1,33 @@
+{
+  "run_id": "68dfd9d8-06b9-4c24-894b-540bc177e987",
+  "task_id": "tables.inner_join",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: warning: unused import: `from_str`\n --> /candidate/main.rs:1:25\n  |\n1 | use serde_json::{Value, from_str};\n  |                         ^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0277]: the trait bound `Vec<(i64, i64)>: Extend<i64>` is not satisfied\n  --> /candidate/main.rs:16:10\n   |\n16 |         .unzip();\n   |          ^^^^^ the trait `Extend<i64>` is not implemented for `Vec<(i64, i64)>`\n   |\nhelp: `Vec<T, A>` implements trait `Extend<A>`\n  --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/alloc/src/vec/mod.rs:4061:0\n   |\n   = note: `Extend<T>`\n  ::: /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/alloc/src/vec/mod.rs:4296:0\n   |\n   = note: `Extend<&T>`\nnote: required by a bound in `unzip`\n  --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/iter/traits/iterator.rs:3476:4\n\nerror: aborting due to 1 previous error; 1 warning emitted\n\nFor more information about this error, try `rustc --explain E0277`.\n"
+  ],
+  "cases_total": 5,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "0bf995b5f69865792503015f6af52b457c861b679877956e939c2137ddb4a562",
+  "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "043bc51259f71e5614231e40a2b39b6707edf046b438d4d8555f454aa9958a36",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:1",
+    "expected_image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/comparative/search/round-001/trials/qwen-general-7b-q4_k_m/comparison/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/comparative/search/round-001/trials/qwen-general-7b-q4_k_m/comparison/sandbox/68dfd9d8-06b9-4c24-894b-540bc177e987.audit.json",
+  "audit_sha256": "2bc254688c4d2b153b4a088841d878c0ddcee2128e952a05ff6be4cb784b2cc0",
+  "failure": "compilation failed: warning: unused import: `from_str`\n --> /candidate/main.rs:1:25\n  |\n1 | use serde_json::{Value, from_str};\n  |                         ^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0277]: the trait bound `Vec<(i64, i64)>: Extend<i64>` is not satisfied\n  --> /candidate/main.rs:16:10\n   |\n16 |         .unzip();\n   |          ^^^^^ the trait `Extend<i64>` is not implemented for `Vec<(i64, i64)>`\n   |\nhelp: `Vec<T, A>` implements trait `Extend<A>`\n  --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/alloc/src/vec/mod.rs:4061:0\n   |\n   = note: `Extend<T>`\n  ::: /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/alloc/src/vec/mod.rs:4296:0\n   |\n   = note: `Extend<&T>`\nnote: required by a bound in `unzip`\n  --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/iter/traits/iterator.rs:3476:4\n\nerror: aborting due to 1 previous error; 1 warning emitted\n\nFor more information about this error, try `rustc --explain E0277`.\n",
+  "duration_ms": 8860,
+  "timeout_evidence": null
+}

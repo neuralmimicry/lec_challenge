@@ -1,0 +1,38 @@
+{
+  "model_id": "qwen-coder-7b-q6_k",
+  "task_id": "dispatch.finish_order",
+  "source_id": "private-dispatch-v1",
+  "specification_sha256": "bd65bbcd2943471a0fa07872b15464820b0d1c4b37db971d13f3b63850727773",
+  "seed": 1729,
+  "plan_sha256": "ff3f2ff3060310ced3db7039640f4c7b07c7601f2b1911d1867f6d49e01fddfd",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an array of [arrival,duration], nonnegative integers. A single server processes input order, starting each job at max(previous finish,arrival). Return finish times.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[[0,3],[1,2],[8,1]],\"expected\":[3,5,9]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 1800
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::{Value, json};\n\npub fn solve(input: Value) -> Value {\n    let jobs: Vec<(i64, i64)> = input.as_array().unwrap().iter()\n        .map(|v| (v[0].as_i64().unwrap(), v[1].as_i64().unwrap()))\n        .collect();\n    \n    let mut finish_times = vec![0; jobs.len()];\n    let mut current_time = 0;\n    \n    for (i, (arrival, duration)) in jobs.iter().enumerate() {\n        current_time = current_time.max(*arrival) + *duration;\n        finish_times[i] = current_time;\n    }\n    \n    Value::Array(finish_times.into_iter().map(|t| Value::from(t)).collect())\n}\n```",
+    "checkpoint_id": "46291ddea1bfb608fe63d9a1907eea6918bda87a7626593edc4bf97c5fd73f9d",
+    "finish_reason": "stop",
+    "input_tokens": 250,
+    "output_tokens": 167,
+    "elapsed_ms": 251499,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/comparative/search/round-001/trials/qwen-coder-7b-q6_k/comparison/qwen-coder-7b-q6_k/dispatch.finish_order.generation.json",
+    "sha256": "d9cfa4e2fec3a83277100e7620c290b60a958d014ef4a80c71f377739ddd8d67",
+    "bytes": 4372
+  },
+  "sandbox_report": {
+    "path": "reports/comparative/search/round-001/trials/qwen-coder-7b-q6_k/comparison/sandbox/31ea07e5-8ef5-41ec-85c0-2b4cde6f5b32.json",
+    "sha256": "4899070aa67838c0d20ff6c068a9ca8310899ef5b731ce6fccad0f76188d8773",
+    "bytes": 1371
+  },
+  "grading_error": null,
+  "success": true
+}

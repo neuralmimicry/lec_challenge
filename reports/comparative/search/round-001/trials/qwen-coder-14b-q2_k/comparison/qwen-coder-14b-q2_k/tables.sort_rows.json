@@ -1,0 +1,38 @@
+{
+  "model_id": "qwen-coder-14b-q2_k",
+  "task_id": "tables.sort_rows",
+  "source_id": "private-tables-v1",
+  "specification_sha256": "df1fea127338d7c1399d9b922559c0782ff3fec80cb89b6d508a51249e019c1c",
+  "seed": 1729,
+  "plan_sha256": "99ee6a68451a373b48630fc9ac091cce38cae0b49e65c2535c6e5c7da10098cf",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an array of [key,value] integer rows. Sort ascending by key and then value; keep duplicates.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[[2,9],[1,4],[2,3]],\"expected\":[[1,4],[2,3],[2,9]]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 1800
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let mut array = input.as_array().unwrap().to_vec();\n    array.sort_by(|a, b| {\n        let key_a = a[0].as_i64().unwrap();\n        let key_b = b[0].as_i64().unwrap();\n        key_a.cmp(&key_b).then_with(|| a[1].as_i64().unwrap().cmp(&b[1].as_i64().unwrap()))\n    });\n    Value::Array(array)\n}\n```",
+    "checkpoint_id": "4542a8bb0c0ae6fb3dafeb305c61a8d6b2f894e96bb667d60cda105a1f313176",
+    "finish_reason": "stop",
+    "input_tokens": 245,
+    "output_tokens": 127,
+    "elapsed_ms": 507325,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/comparative/search/round-001/trials/qwen-coder-14b-q2_k/comparison/qwen-coder-14b-q2_k/tables.sort_rows.generation.json",
+    "sha256": "459ebaa40c2b3df848ccb1590455d07682605df8a1c59e0ad80f1839411deb9a",
+    "bytes": 4177
+  },
+  "sandbox_report": {
+    "path": "reports/comparative/search/round-001/trials/qwen-coder-14b-q2_k/comparison/sandbox/e3326d7e-21c6-4184-925f-4c995302b414.json",
+    "sha256": "6611ffa716906f2fdf10ce196140ad31533d674aa6768618053a3317452d6dfb",
+    "bytes": 1368
+  },
+  "grading_error": null,
+  "success": true
+}

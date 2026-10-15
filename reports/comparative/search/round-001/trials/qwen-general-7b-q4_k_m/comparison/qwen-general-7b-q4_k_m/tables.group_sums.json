@@ -1,0 +1,38 @@
+{
+  "model_id": "qwen-general-7b-q4_k_m",
+  "task_id": "tables.group_sums",
+  "source_id": "private-tables-v1",
+  "specification_sha256": "783b75a94404c8e383623a9281b851d2ccf76f4a4e9832001b8703de0bf64172",
+  "seed": 1729,
+  "plan_sha256": "5ea1fd3ea34bc3537ea9513d3a82a398810ee14d3f19e29fa9ba2f53b988c382",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an array of [key,value] integer rows. Sum values per key and return rows sorted by key.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[[2,9],[1,4],[2,3]],\"expected\":[[1,4],[2,12]]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::{Value, from_str};\nuse std::collections::BTreeMap;\n\npub fn solve(input: Value) -> Value {\n    let map: BTreeMap<i64, i64> = input.as_array()\n        .unwrap()\n        .iter()\n        .map(|pair| {\n            let pair = pair.as_array().unwrap();\n            (pair[0].as_i64().unwrap(), pair[1].as_i64().unwrap())\n        })\n        .fold(BTreeMap::new(), |mut acc, (key, value)| {\n            *acc.entry(key).or_insert(0) += value;\n            acc\n        });\n\n    Value::Array(map.into_iter().map(|(key, value)| {\n        Value::Array(vec![Value::Number(key.into()), Value::Number(value.into())])\n    }).collect())\n}\n```",
+    "checkpoint_id": "65b8fcd92af6b4fefa935c625d1ac27ea29dcb6ee14589c55a8f115ceaaa1423",
+    "finish_reason": "stop",
+    "input_tokens": 242,
+    "output_tokens": 181,
+    "elapsed_ms": 14431,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/comparative/search/round-001/trials/qwen-general-7b-q4_k_m/comparison/qwen-general-7b-q4_k_m/tables.group_sums.generation.json",
+    "sha256": "5cedcd9aae7218da583c21120646576e0919e8c1f50a09117fed0d5f629a0a90",
+    "bytes": 4451
+  },
+  "sandbox_report": {
+    "path": "reports/comparative/search/round-001/trials/qwen-general-7b-q4_k_m/comparison/sandbox/cb9ce9fd-e4ee-4705-b0cf-e2005a73a3ef.json",
+    "sha256": "a8c1b594e73719b047e7bf250ec4b55aee7642a8b79bbffef4a8bdc7513f977b",
+    "bytes": 1376
+  },
+  "grading_error": null,
+  "success": true
+}

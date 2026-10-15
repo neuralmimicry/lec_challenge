@@ -1,0 +1,38 @@
+{
+  "model_id": "qwen-general-7b-q4_k_m",
+  "task_id": "encoding.caesar",
+  "source_id": "private-encoding-v1",
+  "specification_sha256": "6d5a2e4829f195b5e54e08b45300ecba1a3b178763b2ee6e7a9c90c50c633efa",
+  "seed": 1729,
+  "plan_sha256": "5ea1fd3ea34bc3537ea9513d3a82a398810ee14d3f19e29fa9ba2f53b988c382",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input {text,shift} has ASCII text and integer shift. Rotate lowercase a..z only modulo 26; preserve all other characters.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":{\"shift\":3,\"text\":\"xyz A!\"},\"expected\":\"abc A!\"}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::{Value, from_str};\n\npub fn solve(input: Value) -> Value {\n    let input_map = input.as_object().unwrap();\n    let shift = input_map[\"shift\"].as_i64().unwrap();\n    let text = input_map[\"text\"].as_str().unwrap();\n\n    let result = text.chars().map(|c| {\n        if c.is_ascii_lowercase() {\n            let base = 'a' as i64;\n            let offset = (c as i64 - base + shift) % 26;\n            (base + offset) as u8 as char\n        } else {\n            c\n        }\n    }).collect::<String>();\n\n    Value::String(result)\n}\n```",
+    "checkpoint_id": "65b8fcd92af6b4fefa935c625d1ac27ea29dcb6ee14589c55a8f115ceaaa1423",
+    "finish_reason": "stop",
+    "input_tokens": 237,
+    "output_tokens": 150,
+    "elapsed_ms": 5618,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/comparative/search/round-001/trials/qwen-general-7b-q4_k_m/comparison/qwen-general-7b-q4_k_m/encoding.caesar.generation.json",
+    "sha256": "51abfeb1ac45a5d2d05dc2bed54b03978a88e5d59521db7eac520507570c6fa6",
+    "bytes": 4391
+  },
+  "sandbox_report": {
+    "path": "reports/comparative/search/round-001/trials/qwen-general-7b-q4_k_m/comparison/sandbox/d71644df-d70d-4a8b-b11f-5302225d9bcd.json",
+    "sha256": "66cd57d4ca95d3c102dded03c961d583b2bbe60b191e528ef097c0ab1a29e4a2",
+    "bytes": 1441
+  },
+  "grading_error": null,
+  "success": false
+}

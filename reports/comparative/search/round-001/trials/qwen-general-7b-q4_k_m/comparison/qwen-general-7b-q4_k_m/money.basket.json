@@ -1,0 +1,38 @@
+{
+  "model_id": "qwen-general-7b-q4_k_m",
+  "task_id": "money.basket",
+  "source_id": "private-money-v1",
+  "specification_sha256": "87f50e8f3a163aaec0042d723e8da46a44c49d75746e0fbba18ebe04ceba4a08",
+  "seed": 1729,
+  "plan_sha256": "5ea1fd3ea34bc3537ea9513d3a82a398810ee14d3f19e29fa9ba2f53b988c382",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an array of [unit_price_cents,quantity], both nonnegative integers. Return total cents without tax.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[[120,2],[99,3]],\"expected\":537}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::{Value, from_str};\n\npub fn solve(input: Value) -> Value {\n    let items: Vec<_> = input.as_array().unwrap().iter().map(|item| {\n        let price_quantity: Vec<i64> = item.as_array().unwrap().iter().map(|n| n.as_i64().unwrap()).collect();\n        price_quantity[0] * price_quantity[1]\n    }).collect();\n\n    Value::Number((items.iter().sum::<i64>()).into())\n}\n```",
+    "checkpoint_id": "65b8fcd92af6b4fefa935c625d1ac27ea29dcb6ee14589c55a8f115ceaaa1423",
+    "finish_reason": "stop",
+    "input_tokens": 235,
+    "output_tokens": 111,
+    "elapsed_ms": 3576,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/comparative/search/round-001/trials/qwen-general-7b-q4_k_m/comparison/qwen-general-7b-q4_k_m/money.basket.generation.json",
+    "sha256": "872dea30cbcf635a02fd8d5f172f0119c712162a5815b20316dea7ec207ddb3d",
+    "bytes": 4174
+  },
+  "sandbox_report": {
+    "path": "reports/comparative/search/round-001/trials/qwen-general-7b-q4_k_m/comparison/sandbox/9c43fe39-3cc6-4755-a2e4-e3f4079a258f.json",
+    "sha256": "6d6e7aed9a539f072830ca89e5415ccd5929f028cf0198878bc27ffe1c8e8ea5",
+    "bytes": 1370
+  },
+  "grading_error": null,
+  "success": true
+}

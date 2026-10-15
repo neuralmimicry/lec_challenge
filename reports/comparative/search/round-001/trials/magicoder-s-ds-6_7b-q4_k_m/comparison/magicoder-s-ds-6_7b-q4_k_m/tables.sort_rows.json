@@ -1,0 +1,34 @@
+{
+  "model_id": "magicoder-s-ds-6_7b-q4_k_m",
+  "task_id": "tables.sort_rows",
+  "source_id": "private-tables-v1",
+  "specification_sha256": "df1fea127338d7c1399d9b922559c0782ff3fec80cb89b6d508a51249e019c1c",
+  "seed": 1729,
+  "plan_sha256": "59b97ad46315290358d430232a1a8bef1378263e4af34948b263d560d57b5506",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an array of [key,value] integer rows. Sort ascending by key and then value; keep duplicates.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[[2,9],[1,4],[2,3]],\"expected\":[[1,4],[2,3],[2,9]]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "Here is a Rust function that takes a JSON array of key-value pairs as a string and returns a JSON object.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWrite a function that takes a JSON object and returns a JSON object.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThe function to return a JSON object\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "checkpoint_id": "4b340a9d033091627273fa0f95a4d43b5fe95500c714f9d2f683fbe266c9bc52",
+    "finish_reason": "timeout",
+    "input_tokens": 280,
+    "output_tokens": 375,
+    "elapsed_ms": 120082,
+    "complete": false
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/comparative/search/round-001/trials/magicoder-s-ds-6_7b-q4_k_m/comparison/magicoder-s-ds-6_7b-q4_k_m/tables.sort_rows.generation.json",
+    "sha256": "b78cae6a92007ff0a452aeaaaddf278435d16e0c2da257c6f5d6eab8de9a1ed5",
+    "bytes": 4671
+  },
+  "sandbox_report": null,
+  "grading_error": null,
+  "success": false
+}

@@ -1,0 +1,33 @@
+{
+  "run_id": "6e63fa20-8eeb-440b-aa9b-9129cfd54ba1",
+  "task_id": "encoding.rot13",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error[E0277]: cannot add `char` to `u8`\n --> /candidate/main.rs:5:51\n  |\n5 |         'a'..='z' => ((c as u8 - b'a') + 13) % 26 + b'a' as char,\n  |                                                   ^ no implementation for `u8 + char`\n  |\n  = help: the trait `Add<char>` is not implemented for `u8`\nhelp: the following other types implement trait `Add<Rhs>`\n --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/ops/arith.rs:98:8\n  |\n  = note: `u8` implements `Add`\n ::: /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/ops/arith.rs:113:0\n  |\n  = note: in this macro invocation\n --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/internal_macros.rs:22:8\n  |\n  = note: `&u8` implements `Add<u8>`\n ::: /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/internal_macros.rs:33:8\n  |\n  = note: `u8` implements `Add<&u8>`\n ::: /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/internal_macros.rs:44:8\n  |\n  = note: `&u8` implements `Add`\n  = note: this error originates in the macro `add_impl` (in Nightly builds, run with -Z macro-backtrace for more info)\n\nerror[E0277]: cannot add `char` to `u8`\n --> /candidate/main.rs:6:51\n  |\n6 |         'A'..='Z' => ((c as u8 - b'A') + 13) % 26 + b'A' as char,\n  |                                                   ^ no implementation for `u8 + char`\n  |\n  = help: the trait `Add<char>` is not implemented for `u8`\nhelp: the following other types implement trait `Add<Rhs>`\n --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/ops/arith.rs:98:8\n  |\n  = note: `u8` implements `Add`\n ::: /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/ops/arith.rs:113:0\n  |\n  = note: in this macro invocation\n --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/internal_macros.rs:22:8\n  |\n  = note: `&u8` implements `Add<u8>`\n ::: /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/internal_macros.rs:33:8\n  |\n  = note: `u8` implements `Add<&u8>`\n ::: /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/internal_macros.rs:44:8\n  |\n  = note: `&u8` implements `Add`\n  = note: this error originates in the macro `add_impl` (in Nightly builds, run with -Z macro-backtrace for more info)\n\nerror: aborting due to 2 previous errors\n\nFor more information about this error, try `rustc --explain E0277`.\n"
+  ],
+  "cases_total": 5,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "0bf995b5f69865792503015f6af52b457c861b679877956e939c2137ddb4a562",
+  "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "d6ee8b3c44212c4cb4b814d91896b7e293a6b0e1ca39d0a217c2025afc4ca84e",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:1",
+    "expected_image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/comparative/search/round-001/trials/qwen-coder-14b-q2_k/comparison/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/comparative/search/round-001/trials/qwen-coder-14b-q2_k/comparison/sandbox/6e63fa20-8eeb-440b-aa9b-9129cfd54ba1.audit.json",
+  "audit_sha256": "e348e107e169b463f43dad759b2e766beb2e9877f97ade2f692268add5c9d506",
+  "failure": "compilation failed: error[E0277]: cannot add `char` to `u8`\n --> /candidate/main.rs:5:51\n  |\n5 |         'a'..='z' => ((c as u8 - b'a') + 13) % 26 + b'a' as char,\n  |                                                   ^ no implementation for `u8 + char`\n  |\n  = help: the trait `Add<char>` is not implemented for `u8`\nhelp: the following other types implement trait `Add<Rhs>`\n --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/ops/arith.rs:98:8\n  |\n  = note: `u8` implements `Add`\n ::: /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/ops/arith.rs:113:0\n  |\n  = note: in this macro invocation\n --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/internal_macros.rs:22:8\n  |\n  = note: `&u8` implements `Add<u8>`\n ::: /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/internal_macros.rs:33:8\n  |\n  = note: `u8` implements `Add<&u8>`\n ::: /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/internal_macros.rs:44:8\n  |\n  = note: `&u8` implements `Add`\n  = note: this error originates in the macro `add_impl` (in Nightly builds, run with -Z macro-backtrace for more info)\n\nerror[E0277]: cannot add `char` to `u8`\n --> /candidate/main.rs:6:51\n  |\n6 |         'A'..='Z' => ((c as u8 - b'A') + 13) % 26 + b'A' as char,\n  |                                                   ^ no implementation for `u8 + char`\n  |\n  = help: the trait `Add<char>` is not implemented for `u8`\nhelp: the following other types implement trait `Add<Rhs>`\n --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/ops/arith.rs:98:8\n  |\n  = note: `u8` implements `Add`\n ::: /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/ops/arith.rs:113:0\n  |\n  = note: in this macro invocation\n --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/internal_macros.rs:22:8\n  |\n  = note: `&u8` implements `Add<u8>`\n ::: /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/internal_macros.rs:33:8\n  |\n  = note: `u8` implements `Add<&u8>`\n ::: /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/internal_macros.rs:44:8\n  |\n  = note: `&u8` implements `Add`\n  = note: this error originates in the macro `add_impl` (in Nightly builds, run with -Z macro-backtrace for more info)\n\nerror: aborting due to 2 previous errors\n\nFor more information about this error, try `rustc --explain E0277`.\n",
+  "duration_ms": 8110,
+  "timeout_evidence": null
+}

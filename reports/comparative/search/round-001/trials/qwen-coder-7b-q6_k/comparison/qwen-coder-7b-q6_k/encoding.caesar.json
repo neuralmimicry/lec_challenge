@@ -1,0 +1,38 @@
+{
+  "model_id": "qwen-coder-7b-q6_k",
+  "task_id": "encoding.caesar",
+  "source_id": "private-encoding-v1",
+  "specification_sha256": "6d5a2e4829f195b5e54e08b45300ecba1a3b178763b2ee6e7a9c90c50c633efa",
+  "seed": 1729,
+  "plan_sha256": "ff3f2ff3060310ced3db7039640f4c7b07c7601f2b1911d1867f6d49e01fddfd",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input {text,shift} has ASCII text and integer shift. Rotate lowercase a..z only modulo 26; preserve all other characters.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":{\"shift\":3,\"text\":\"xyz A!\"},\"expected\":\"abc A!\"}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 1800
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::{Value, json};\n\npub fn solve(input: Value) -> Value {\n    if let Value::Object(map) = input {\n        if let Some(Value::Number(shift)) = map.get(\"shift\") {\n            if let Some(Value::String(text)) = map.get(\"text\") {\n                let shift = shift.as_i64().unwrap();\n                let result = text.chars().map(|c| {\n                    if c.is_ascii_lowercase() {\n                        let base = 'a' as u8;\n                        let rotated = ((c as u8 - base + shift as u8) % 26) + base;\n                        rotated as char\n                    } else {\n                        c\n                    }\n                }).collect::<String>();\n                return Value::String(result);\n            }\n        }\n    }\n    Value::Null\n}\n```",
+    "checkpoint_id": "46291ddea1bfb608fe63d9a1907eea6918bda87a7626593edc4bf97c5fd73f9d",
+    "finish_reason": "stop",
+    "input_tokens": 237,
+    "output_tokens": 172,
+    "elapsed_ms": 247576,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/comparative/search/round-001/trials/qwen-coder-7b-q6_k/comparison/qwen-coder-7b-q6_k/encoding.caesar.generation.json",
+    "sha256": "45e95085a484cc0c92f58df5ef8ea2b1cc8d97874e433b3cc43ebc68d5a9b394",
+    "bytes": 4547
+  },
+  "sandbox_report": {
+    "path": "reports/comparative/search/round-001/trials/qwen-coder-7b-q6_k/comparison/sandbox/6dd31c88-8e09-4896-a2b5-13d2fd05bd63.json",
+    "sha256": "8770c50ce6765a3532d1b913972e2885a6e1ab7c808b862274480bb68c886c50",
+    "bytes": 1433
+  },
+  "grading_error": null,
+  "success": false
+}

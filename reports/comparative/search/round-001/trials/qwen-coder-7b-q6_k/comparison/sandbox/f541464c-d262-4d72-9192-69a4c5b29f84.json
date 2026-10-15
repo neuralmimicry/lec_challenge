@@ -1,0 +1,33 @@
+{
+  "run_id": "f541464c-d262-4d72-9192-69a4c5b29f84",
+  "task_id": "tables.last_by_key",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: warning: unused import: `Map`\n --> /candidate/main.rs:1:25\n  |\n1 | use serde_json::{Value, Map};\n  |                         ^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0308]: mismatched types\n   --> /candidate/main.rs:18:57\n    |\n 18 |             result.push(Value::Array(vec![Value::Number(key), Value::Number(value)]));\n    |                                           ------------- ^^^ expected `Number`, found `i64`\n    |                                           |\n    |                                           arguments to this enum variant are incorrect\n    |\nnote: tuple variant defined here\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:142:5\n    |\n142 |     Number(Number),\n    |     ^^^^^^\nhelp: call `Into::into` on this expression to convert `i64` into `serde_json::Number`\n    |\n 18 |             result.push(Value::Array(vec![Value::Number(key.into()), Value::Number(value)]));\n    |                                                            +++++++\n\nerror[E0308]: mismatched types\n   --> /candidate/main.rs:18:77\n    |\n 18 |             result.push(Value::Array(vec![Value::Number(key), Value::Number(value)]));\n    |                                                               ------------- ^^^^^ expected `Number`, found `i64`\n    |                                                               |\n    |                                                               arguments to this enum variant are incorrect\n    |\nnote: tuple variant defined here\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:142:5\n    |\n142 |     Number(Number),\n    |     ^^^^^^\nhelp: call `Into::into` on this expression to convert `i64` into `serde_json::Number`\n    |\n 18 |             result.push(Value::Array(vec![Value::Number(key), Value::Number(value.into())]));\n    |                                                                                  +++++++\n\nerror: aborting due to 2 previous errors; 1 warning emitted\n\nFor more information about this error, try `rustc --explain E0308`.\n"
+  ],
+  "cases_total": 5,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "0bf995b5f69865792503015f6af52b457c861b679877956e939c2137ddb4a562",
+  "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "d011a73a961794b4b7b12fd335cbfc1e61c275788887bdf8099ca99153c0c7de",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:1",
+    "expected_image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/comparative/search/round-001/trials/qwen-coder-7b-q6_k/comparison/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/comparative/search/round-001/trials/qwen-coder-7b-q6_k/comparison/sandbox/f541464c-d262-4d72-9192-69a4c5b29f84.audit.json",
+  "audit_sha256": "181a7332ab1e567738307baa222cb6de1c9eefb93a5dc87e865d560a35700bd4",
+  "failure": "compilation failed: warning: unused import: `Map`\n --> /candidate/main.rs:1:25\n  |\n1 | use serde_json::{Value, Map};\n  |                         ^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0308]: mismatched types\n   --> /candidate/main.rs:18:57\n    |\n 18 |             result.push(Value::Array(vec![Value::Number(key), Value::Number(value)]));\n    |                                           ------------- ^^^ expected `Number`, found `i64`\n    |                                           |\n    |                                           arguments to this enum variant are incorrect\n    |\nnote: tuple variant defined here\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:142:5\n    |\n142 |     Number(Number),\n    |     ^^^^^^\nhelp: call `Into::into` on this expression to convert `i64` into `serde_json::Number`\n    |\n 18 |             result.push(Value::Array(vec![Value::Number(key.into()), Value::Number(value)]));\n    |                                                            +++++++\n\nerror[E0308]: mismatched types\n   --> /candidate/main.rs:18:77\n    |\n 18 |             result.push(Value::Array(vec![Value::Number(key), Value::Number(value)]));\n    |                                                               ------------- ^^^^^ expected `Number`, found `i64`\n    |                                                               |\n    |                                                               arguments to this enum variant are incorrect\n    |\nnote: tuple variant defined here\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:142:5\n    |\n142 |     Number(Number),\n    |     ^^^^^^\nhelp: call `Into::into` on this expression to convert `i64` into `serde_json::Number`\n    |\n 18 |             result.push(Value::Array(vec![Value::Number(key), Value::Number(value.into())]));\n    |                                                                                  +++++++\n\nerror: aborting due to 2 previous errors; 1 warning emitted\n\nFor more information about this error, try `rustc --explain E0308`.\n",
+  "duration_ms": 9216,
+  "timeout_evidence": null
+}

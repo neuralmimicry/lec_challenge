@@ -1,0 +1,38 @@
+{
+  "model_id": "qwen-coder-14b-q2_k",
+  "task_id": "tables.last_by_key",
+  "source_id": "private-tables-v1",
+  "specification_sha256": "60d2667ffa0dcdb540f2de2f41533a9d0b6c027ee25be4adb993cda6f67122f7",
+  "seed": 1729,
+  "plan_sha256": "99ee6a68451a373b48630fc9ac091cce38cae0b49e65c2535c6e5c7da10098cf",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an array of [key,value] integer rows. Keep the last value per key and return [key,value] rows sorted by key.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[[2,9],[1,4],[2,3]],\"expected\":[[1,4],[2,3]]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 1800
+  },
+  "generation": {
+    "completion": "```rust\nuse std::collections::HashMap;\nuse serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let mut map = HashMap::new();\n\n    if let Some(array) = input.as_array() {\n        for item in array {\n            if let Some(pair) = item.as_array() {\n                if let Some(key) = pair.get(0).and_then(|v| v.as_i64()) {\n                    if let Some(value) = pair.get(1).and_then(|v| v.as_i64()) {\n                        map.insert(key, value);\n                    }\n                }\n            }\n        }\n    }\n\n    let mut result = map.into_iter().collect::<Vec<_>>();\n    result.sort_by_key(|&(key, _)| key);\n\n    let mut sorted_array = Vec::with_capacity(result.len());\n    for (key, value) in result {\n        sorted_array.push(Value::Array(vec![Value::Number(key.into()), Value::Number(value.into())]));\n    }\n\n    Value::Array(sorted_array)\n}\n```",
+    "checkpoint_id": "4542a8bb0c0ae6fb3dafeb305c61a8d6b2f894e96bb667d60cda105a1f313176",
+    "finish_reason": "stop",
+    "input_tokens": 247,
+    "output_tokens": 219,
+    "elapsed_ms": 465018,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/comparative/search/round-001/trials/qwen-coder-14b-q2_k/comparison/qwen-coder-14b-q2_k/tables.last_by_key.generation.json",
+    "sha256": "2fce053739d055f235d7c3dc256ccb10538325ac980238fecb549ab6e1116673",
+    "bytes": 4707
+  },
+  "sandbox_report": {
+    "path": "reports/comparative/search/round-001/trials/qwen-coder-14b-q2_k/comparison/sandbox/76a981ed-b4bc-4bda-9fdb-8812c4fa2f17.json",
+    "sha256": "e27a4a8872978f50cada631e0867f3c82b4c16449eecd1aace9ed8c05059f77d",
+    "bytes": 1370
+  },
+  "grading_error": null,
+  "success": true
+}

@@ -1,0 +1,38 @@
+{
+  "model_id": "qwen-coder-7b-q6_k",
+  "task_id": "money.basket",
+  "source_id": "private-money-v1",
+  "specification_sha256": "87f50e8f3a163aaec0042d723e8da46a44c49d75746e0fbba18ebe04ceba4a08",
+  "seed": 1729,
+  "plan_sha256": "ff3f2ff3060310ced3db7039640f4c7b07c7601f2b1911d1867f6d49e01fddfd",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an array of [unit_price_cents,quantity], both nonnegative integers. Return total cents without tax.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[[120,2],[99,3]],\"expected\":537}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 1800
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    if let Value::Array(items) = input {\n        let mut total = 0;\n        for item in items {\n            if let Value::Array(sub_items) = item {\n                if let [Value::Number(unit_price_cents), Value::Number(quantity)] = sub_items.as_slice() {\n                    if let (Some(unit_price_cents), Some(quantity)) = (unit_price_cents.as_i64(), quantity.as_i64()) {\n                        total += unit_price_cents * quantity;\n                    }\n                }\n            }\n        }\n        Value::Number(serde_json::Number::from(total))\n    } else {\n        Value::Null\n    }\n}\n```",
+    "checkpoint_id": "46291ddea1bfb608fe63d9a1907eea6918bda87a7626593edc4bf97c5fd73f9d",
+    "finish_reason": "stop",
+    "input_tokens": 235,
+    "output_tokens": 155,
+    "elapsed_ms": 236345,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/comparative/search/round-001/trials/qwen-coder-7b-q6_k/comparison/qwen-coder-7b-q6_k/money.basket.generation.json",
+    "sha256": "710d725898db8c707505fb10ea16a33fc621dcea528f672f535465075d4b7ca7",
+    "bytes": 4383
+  },
+  "sandbox_report": {
+    "path": "reports/comparative/search/round-001/trials/qwen-coder-7b-q6_k/comparison/sandbox/eea3f456-51c4-4dc1-9b32-1c4faff13cf2.json",
+    "sha256": "bb756d77de6f8ba0ce4816137e47c21921f4a83713891db7c61b2f1157755518",
+    "bytes": 1363
+  },
+  "grading_error": null,
+  "success": true
+}

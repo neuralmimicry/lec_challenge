@@ -1,0 +1,38 @@
+{
+  "model_id": "qwen-coder-14b-q2_k",
+  "task_id": "tables.inner_join",
+  "source_id": "private-tables-v1",
+  "specification_sha256": "369ef237ff250179b0b3e3c7af051af8aebc0329b6494d33af5f436c827ac699",
+  "seed": 1729,
+  "plan_sha256": "99ee6a68451a373b48630fc9ac091cce38cae0b49e65c2535c6e5c7da10098cf",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input [left,right] has arrays of [key,value] integer rows, each side with unique keys. Return [key,left_value,right_value] for common keys in ascending key order.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[[[2,9],[1,4]],[[2,3],[3,8]]],\"expected\":[[2,9,3]]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 1800
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let arr = input.as_array().unwrap();\n    let left: Vec<(i64, i64)> = arr[0]\n        .as_array()\n        .unwrap()\n        .iter()\n        .map(|pair| {\n            let pair_arr = pair.as_array().unwrap();\n            (pair_arr[0].as_i64().unwrap(), pair_arr[1].as_i64().unwrap())\n        })\n        .collect();\n    let right: Vec<(i64, i64)> = arr[1]\n        .as_array()\n        .unwrap()\n        .iter()\n        .map(|pair| {\n            let pair_arr = pair.as_array().unwrap();\n            (pair_arr[0].as_i64().unwrap(), pair_arr[1].as_i64().unwrap())\n        })\n        .collect();\n\n    let mut result = Vec::new();\n    let mut left_iter = left.iter();\n    let mut right_iter = right.iter();\n\n    let mut left_key = left_iter.next().map(|&(k, _)| k);\n    let mut right_key = right_iter.next().map(|&(k, _)| k);\n\n    while left_key.is_some() || right_key.is_some() {\n        let key = match (left_key, right_key) {\n            (Some(lk), Some(rk)) => if lk < rk { lk } else { rk },\n            (Some(lk), None) => lk,\n            (None, Some(rk)) => rk,\n            (None, None) => unreachable!(),\n        };\n\n        if let Some(&(l_key, l_value)) = left_iter.as_ref().and_then(|iter| iter.find(|&&(k, _)| k == key)) {\n            if let Some(&(r_key, r_value)) = right_iter.as_ref().and_then(|iter| iter.find(|&&(k, _)| k == key)) {\n                result.push(json!([key, l_value, r_value]));\n            }\n        }\n\n        if left_key == Some(key) {\n            left_key = left_iter.next().map(|&(k, _)| k);\n        }\n        if right_key == Some(key) {\n            right_key = right_iter.next().map(|&(k, _)| k);\n        }\n    }\n\n    json!(result)\n}\n```",
+    "checkpoint_id": "4542a8bb0c0ae6fb3dafeb305c61a8d6b2f894e96bb667d60cda105a1f313176",
+    "finish_reason": "stop",
+    "input_tokens": 259,
+    "output_tokens": 500,
+    "elapsed_ms": 805397,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/comparative/search/round-001/trials/qwen-coder-14b-q2_k/comparison/qwen-coder-14b-q2_k/tables.inner_join.generation.json",
+    "sha256": "cede8d6fbc9d3f85b93cd3f9efdd2073e602bbbbde6c65c3b2bbcdf2e8279db0",
+    "bytes": 5649
+  },
+  "sandbox_report": {
+    "path": "reports/comparative/search/round-001/trials/qwen-coder-14b-q2_k/comparison/sandbox/05ff10fa-34c2-4239-9bc2-a3523f09b32e.json",
+    "sha256": "49e1ba32b604ba23300b5a3e003e80333ae536ba93fb4536c89f1cdd6a372583",
+    "bytes": 4242
+  },
+  "grading_error": null,
+  "success": false
+}

@@ -1,0 +1,38 @@
+{
+  "model_id": "qwen-general-7b-q4_k_m",
+  "task_id": "tables.inner_join",
+  "source_id": "private-tables-v1",
+  "specification_sha256": "369ef237ff250179b0b3e3c7af051af8aebc0329b6494d33af5f436c827ac699",
+  "seed": 1729,
+  "plan_sha256": "5ea1fd3ea34bc3537ea9513d3a82a398810ee14d3f19e29fa9ba2f53b988c382",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input [left,right] has arrays of [key,value] integer rows, each side with unique keys. Return [key,left_value,right_value] for common keys in ascending key order.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[[[2,9],[1,4]],[[2,3],[3,8]]],\"expected\":[[2,9,3]]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::{Value, from_str};\n\npub fn solve(input: Value) -> Value {\n    let (left, right): (Vec<(i64, i64)>, Vec<(i64, i64)>) = input.as_array()\n        .expect(\"Input must be an array\")\n        .chunks(2)\n        .map(|chunk| {\n            let key = chunk[0].as_array().expect(\"Key must be an array\")[0]\n                .as_i64()\n                .expect(\"Key must be an integer\");\n            let value = chunk[0].as_array().expect(\"Key must be an array\")[1]\n                .as_i64()\n                .expect(\"Value must be an integer\");\n            (key, value)\n        })\n        .unzip();\n\n    let mut result = Vec::new();\n    let mut left_iter = left.into_iter().peekable();\n    let mut right_iter = right.into_iter().peekable();\n\n    while left_iter.peek().is_some() || right_iter.peek().is_some() {\n        let (left_key, left_value) = left_iter.next().unwrap_or((0, 0));\n        let (right_key, right_value) = right_iter.next().unwrap_or((0, 0));\n\n        if left_key < right_key {\n            if let Some(&(_, right_value)) = right_iter.peek() {\n                right_iter.next();\n                result.push((left_key, left_value, right_value));\n            } else {\n                result.push((left_key, left_value, 0));\n            }\n        } else if left_key > right_key {\n            if let Some(&(_, left_value)) = left_iter.peek() {\n                left_iter.next();\n                result.push((right_key, 0, right_value));\n            } else {\n                result.push((right_key, 0, right_value));\n            }\n        } else {\n            result.push((left_key, left_value, right_value));\n        }\n    }\n\n    Value::Array(result.into_iter().map(|(k, l, r)| Value::Array(vec![Value::Number(k.into()), Value::Number(l.into()), Value::Number(r.into())])).collect())\n}\n```",
+    "checkpoint_id": "65b8fcd92af6b4fefa935c625d1ac27ea29dcb6ee14589c55a8f115ceaaa1423",
+    "finish_reason": "stop",
+    "input_tokens": 259,
+    "output_tokens": 454,
+    "elapsed_ms": 35353,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/comparative/search/round-001/trials/qwen-general-7b-q4_k_m/comparison/qwen-general-7b-q4_k_m/tables.inner_join.generation.json",
+    "sha256": "2256a4d55284c5228e81e944dd9f31a715c9a636ff147b33a279861a8fc0c3e6",
+    "bytes": 5722
+  },
+  "sandbox_report": {
+    "path": "reports/comparative/search/round-001/trials/qwen-general-7b-q4_k_m/comparison/sandbox/68dfd9d8-06b9-4c24-894b-540bc177e987.json",
+    "sha256": "86b6be932f081d279b307f6c7736af1b96354f28458e775fae0de137cf38dae9",
+    "bytes": 3490
+  },
+  "grading_error": null,
+  "success": false
+}

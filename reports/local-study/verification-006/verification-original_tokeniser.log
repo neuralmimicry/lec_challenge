@@ -1,0 +1,20 @@
+
+running 1 test
+test train::tests::original_tokenizer_masks_prompt_and_preserves_assistant_eos ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 245 filtered out; finished in 2.67s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 10 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 3 filtered out; finished in 0.00s
+
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.50s
+     Running unittests src/lib.rs (target/debug/deps/lec_distil-5c552d14ca9c7a48)
+     Running unittests src/main.rs (target/debug/deps/lec_distil-ad696f1c669ef8f3)
+     Running tests/sandbox_contract.rs (target/debug/deps/sandbox_contract-83ad793f7f4f36a7)

@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "evidence_kind": "actual_local_model_generation",
+  "recorded_unix_ms": 1792098767455,
+  "model_id": "qwen-coder-7b-q6_k",
+  "task_id": "money.basket",
+  "source_id": "private-money-v1",
+  "specification_sha256": "87f50e8f3a163aaec0042d723e8da46a44c49d75746e0fbba18ebe04ceba4a08",
+  "seed": 1729,
+  "plan_sha256": "ff3f2ff3060310ced3db7039640f4c7b07c7601f2b1911d1867f6d49e01fddfd",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an array of [unit_price_cents,quantity], both nonnegative integers. Return total cents without tax.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[[120,2],[99,3]],\"expected\":537}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 1800
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    if let Value::Array(items) = input {\n        let mut total = 0;\n        for item in items {\n            if let Value::Array(sub_items) = item {\n                if let [Value::Number(unit_price_cents), Value::Number(quantity)] = sub_items.as_slice() {\n                    if let (Some(unit_price_cents), Some(quantity)) = (unit_price_cents.as_i64(), quantity.as_i64()) {\n                        total += unit_price_cents * quantity;\n                    }\n                }\n            }\n        }\n        Value::Number(serde_json::Number::from(total))\n    } else {\n        Value::Null\n    }\n}\n```",
+    "checkpoint_id": "46291ddea1bfb608fe63d9a1907eea6918bda87a7626593edc4bf97c5fd73f9d",
+    "finish_reason": "stop",
+    "input_tokens": 235,
+    "output_tokens": 155,
+    "elapsed_ms": 236345,
+    "complete": true
+  },
+  "generation_error": null,
+  "execution": {
+    "actual_device": "Cpu",
+    "actual_dtype": "F32",
+    "asset_lifetime_shared_lease": true,
+    "available_cpu_threads": 16,
+    "candle_cpu_threads": 16,
+    "checkpoint_id": "46291ddea1bfb608fe63d9a1907eea6918bda87a7626593edc4bf97c5fd73f9d",
+    "context_cap": 1024,
+    "cpu_fallback": false,
+    "cuda_active": false,
+    "cuda_feature_compiled": true,
+    "engine": "native_rust_candle",
+    "model_id": "Qwen/Qwen2.5-Coder-7B-Instruct-GGUF",
+    "quantisation": {
+      "all_weights_dequantised": false,
+      "embedding_precision": "F32",
+      "format": "gguf",
+      "hybrid_cpu_offload": false,
+      "kv_precision": "F32",
+      "matrix_backend": "native_candle_QMatMul",
+      "memory_estimate": {
+        "activation_workspace_bytes": 262144000,
+        "assumptions": "Full quantised weights on the selected device; embedding expanded to GPU float16 or CPU float32; float32 activations/KV/attention; no hybrid offload. Driver/allocator/workspace behaviour may require additional headroom.",
+        "attention_score_bytes": 117440512,
+        "conservative_total_bytes": 8998322176,
+        "context_tokens": 1024,
+        "dense_embedding_bytes": 2179989504,
+        "kv_cache_bytes": 117440512,
+        "quantised_file_bytes": 6254198784,
+        "runtime_reserve_bytes": 67108864
+      },
+      "original_source_model_id": "Qwen/Qwen2.5-Coder-7B-Instruct",
+      "original_source_revision": "c03e6d358207e414f1eca0bb1891e29f1db0e242",
+      "quantised_publisher_model_id": "Qwen/Qwen2.5-Coder-7B-Instruct-GGUF",
+      "quantised_publisher_revision": "13fb94bfda8c8cf22497dc57b78f391a9acb426a",
+      "tensor_types": {
+        "F32": 141,
+        "Q6K": 198
+      },
+      "weight_sha256": "46291ddea1bfb608fe63d9a1907eea6918bda87a7626593edc4bf97c5fd73f9d"
+    },
+    "requested": {
+      "device": "cpu",
+      "dtype": "f32"
+    },
+    "revision": "13fb94bfda8c8cf22497dc57b78f391a9acb426a",
+    "weight_format": "gguf"
+  }
+}

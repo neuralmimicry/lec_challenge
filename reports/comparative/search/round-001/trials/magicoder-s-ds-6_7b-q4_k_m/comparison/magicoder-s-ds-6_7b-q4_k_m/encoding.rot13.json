@@ -1,0 +1,34 @@
+{
+  "model_id": "magicoder-s-ds-6_7b-q4_k_m",
+  "task_id": "encoding.rot13",
+  "source_id": "private-encoding-v1",
+  "specification_sha256": "56794b6c25031b0931d378f8f3955bc2d10c4ef04da0be851795e2ca9a832cfa",
+  "seed": 1729,
+  "plan_sha256": "59b97ad46315290358d430232a1a8bef1378263e4af34948b263d560d57b5506",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an ASCII string. Apply ROT13 to upper/lowercase letters and preserve other characters.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":\"Hello, Z!\",\"expected\":\"Uryyb, M!\"}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "Here is a Rust code snippet that takes a JSON string as input and returns a JSON object.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHere is a Rust code snippet of the JSON object, and return it as a JSON object.\n\n\n\n\n\nHere is a Rust code snippet of the JSON object.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHere is a function to parse a JSON object.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHere is a JSON\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "checkpoint_id": "4b340a9d033091627273fa0f95a4d43b5fe95500c714f9d2f683fbe266c9bc52",
+    "finish_reason": "length",
+    "input_tokens": 259,
+    "output_tokens": 512,
+    "elapsed_ms": 98557,
+    "complete": false
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/comparative/search/round-001/trials/magicoder-s-ds-6_7b-q4_k_m/comparison/magicoder-s-ds-6_7b-q4_k_m/encoding.rot13.generation.json",
+    "sha256": "cc9f79b072966a841648d25d222ffbca723a8fe92a7ac496bf2930fe3266c2d3",
+    "bytes": 4934
+  },
+  "sandbox_report": null,
+  "grading_error": null,
+  "success": false
+}

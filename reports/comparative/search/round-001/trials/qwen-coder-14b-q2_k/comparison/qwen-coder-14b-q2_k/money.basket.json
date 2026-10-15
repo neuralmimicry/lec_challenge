@@ -1,0 +1,34 @@
+{
+  "model_id": "qwen-coder-14b-q2_k",
+  "task_id": "money.basket",
+  "source_id": "private-money-v1",
+  "specification_sha256": "87f50e8f3a163aaec0042d723e8da46a44c49d75746e0fbba18ebe04ceba4a08",
+  "seed": 1729,
+  "plan_sha256": "99ee6a68451a373b48630fc9ac091cce38cae0b49e65c2535c6e5c7da10098cf",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an array of [unit_price_cents,quantity], both nonnegative integers. Return total cents without tax.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[[120,2],[99,3]],\"expected\":537}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 1800
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let array = input.as_array().expect(\"Input must be an array\");\n    let mut total_cents = 0;\n\n    for item in array {\n        let item_array = item.as_array().expect(\"Each item must be an array\");\n        let unit_price_cents = item_array[0].as_i64().expect(\"Unit price must be an integer\");\n        let quantity = item_array[1].as_i64().expect(\"Quantity must be an integer\");\n\n        total_cents += unit_price_cents * quantity;\n    }\n\n    Value::Number(serde_json::Number::from(total_cents))\n}\n```",
+    "checkpoint_id": "4542a8bb0c0ae6fb3dafeb305c61a8d6b2f894e96bb667d60cda105a1f313176",
+    "finish_reason": "stop",
+    "input_tokens": 235,
+    "output_tokens": 154,
+    "elapsed_ms": 846744,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/comparative/search/round-001/trials/qwen-coder-14b-q2_k/comparison/qwen-coder-14b-q2_k/money.basket.generation.json",
+    "sha256": "48d9f1cc6971741472170c61a91d440cd375be6a3c9f06ce0e5e1a7eb006d66a",
+    "bytes": 4375
+  },
+  "sandbox_report": null,
+  "grading_error": "trusted grading evidence rejected: trusted audit artifact missing: No such file or directory (os error 2)",
+  "success": false
+}

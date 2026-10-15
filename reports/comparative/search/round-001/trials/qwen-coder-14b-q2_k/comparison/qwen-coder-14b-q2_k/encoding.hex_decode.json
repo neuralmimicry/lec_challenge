@@ -1,0 +1,34 @@
+{
+  "model_id": "qwen-coder-14b-q2_k",
+  "task_id": "encoding.hex_decode",
+  "source_id": "private-encoding-v1",
+  "specification_sha256": "535cec08e7ca750ff6426c55df5e10382b5d98dd2b972889c664a544c49c2a87",
+  "seed": 1729,
+  "plan_sha256": "99ee6a68451a373b48630fc9ac091cce38cae0b49e65c2535c6e5c7da10098cf",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an ASCII string. Decode even-length hexadecimal accepting upper/lowercase; return byte array, or null for invalid digits or odd length. The returned array may contain up to 128 items.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":\"00aF\",\"expected\":[0,175]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 1800
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    match input {\n        Value::String(hex_str) => {\n            if hex_str.len() % 2 != 0 {\n                return serde_json::Value::Null;\n            }\n\n            let mut bytes = Vec::with_capacity(hex_str.len() / 2);\n            let mut chars = hex_str.chars().peekable();\n\n            while let Some(c1) = chars.next() {\n                let c2 = chars.next().unwrap_or(' ');\n\n                let byte = match (c1.to_ascii_lowercase(), c2.to_ascii_lowercase()) {\n                    ('0'..='9', '0'..='9') => {\n                        let num1 = c1 as u8 - b'0';\n                        let num2 = c2 as u8 - b'0';\n                        num1 * 16 + num2\n                    }\n                    ('a'..='f', '0'..='9') => {\n                        let num1 = c1 as u8 - b'a' + 10;\n                        let num2 = c2 as u8 - b'0';\n                        num1 * 16 + num2\n                    }\n                    ('0'..='9', 'a'..='f') => {\n                        let num1 = c1 as u8 - b'0';\n                        let num2 = c2 as u8 - b'a' + 10;\n                        num1 * 16 + num2\n                    }\n                    ('a'..='f', 'a'..='f') => {\n                        let num1 = c1 as u8 - b'a' + 10;\n                        let num2 = c2 as u8 - b'a' + 10;\n                        num1 * 16 + num2\n                    }\n                    _ => return serde_json::Value::Null,\n                };\n\n                bytes.push(byte);\n            }\n\n            serde_json::Value::Array(bytes.into_iter().map(serde_json::Value::from).collect())\n        }\n        _ => serde_json::Value::Null,\n    }\n}\n```",
+    "checkpoint_id": "4542a8bb0c0ae6fb3dafeb305c61a8d6b2f894e96bb667d60cda105a1f313176",
+    "finish_reason": "stop",
+    "input_tokens": 248,
+    "output_tokens": 448,
+    "elapsed_ms": 1044413,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/comparative/search/round-001/trials/qwen-coder-14b-q2_k/comparison/qwen-coder-14b-q2_k/encoding.hex_decode.generation.json",
+    "sha256": "b0da4f54ac5c91d4f07cf14892445391b59db2ce808b9c9533614e6404874d1b",
+    "bytes": 5617
+  },
+  "sandbox_report": null,
+  "grading_error": "trusted grading evidence rejected: trusted audit artifact missing: No such file or directory (os error 2)",
+  "success": false
+}

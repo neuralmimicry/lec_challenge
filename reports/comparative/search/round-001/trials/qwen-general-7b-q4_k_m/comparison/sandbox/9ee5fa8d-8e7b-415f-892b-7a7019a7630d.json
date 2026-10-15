@@ -1,0 +1,33 @@
+{
+  "run_id": "9ee5fa8d-8e7b-415f-892b-7a7019a7630d",
+  "task_id": "encoding.hex_decode",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error[E0425]: cannot find value `null` in this scope\n  --> /candidate/main.rs:21:15\n   |\n21 |     to_value(&null).unwrap()\n   |               ^^^^ not found in this scope\n   |\nhelp: consider importing this function\n   |\n 1 + use std::ptr::null;\n   |\n\nwarning: unused import: `from_str`\n --> /candidate/main.rs:1:25\n  |\n1 | use serde_json::{Value, from_str, to_value};\n  |                         ^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nwarning: unused import: `std::str::FromStr`\n --> /candidate/main.rs:2:5\n  |\n2 | use std::str::FromStr;\n  |     ^^^^^^^^^^^^^^^^^\n\nerror: aborting due to 1 previous error; 2 warnings emitted\n\nFor more information about this error, try `rustc --explain E0425`.\n"
+  ],
+  "cases_total": 7,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "0bf995b5f69865792503015f6af52b457c861b679877956e939c2137ddb4a562",
+  "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "87b984fc8ec6c20cd1dcaa01d83f42dd005ccd426cd267f19913f3511181fed1",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:1",
+    "expected_image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/comparative/search/round-001/trials/qwen-general-7b-q4_k_m/comparison/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/comparative/search/round-001/trials/qwen-general-7b-q4_k_m/comparison/sandbox/9ee5fa8d-8e7b-415f-892b-7a7019a7630d.audit.json",
+  "audit_sha256": "acddbde68112a8413773b7c8c1745f9bd08319e2334d6c459d2ca236ae875a0a",
+  "failure": "compilation failed: error[E0425]: cannot find value `null` in this scope\n  --> /candidate/main.rs:21:15\n   |\n21 |     to_value(&null).unwrap()\n   |               ^^^^ not found in this scope\n   |\nhelp: consider importing this function\n   |\n 1 + use std::ptr::null;\n   |\n\nwarning: unused import: `from_str`\n --> /candidate/main.rs:1:25\n  |\n1 | use serde_json::{Value, from_str, to_value};\n  |                         ^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nwarning: unused import: `std::str::FromStr`\n --> /candidate/main.rs:2:5\n  |\n2 | use std::str::FromStr;\n  |     ^^^^^^^^^^^^^^^^^\n\nerror: aborting due to 1 previous error; 2 warnings emitted\n\nFor more information about this error, try `rustc --explain E0425`.\n",
+  "duration_ms": 6996,
+  "timeout_evidence": null
+}

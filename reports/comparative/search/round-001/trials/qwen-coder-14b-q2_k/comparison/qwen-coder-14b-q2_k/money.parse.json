@@ -1,0 +1,38 @@
+{
+  "model_id": "qwen-coder-14b-q2_k",
+  "task_id": "money.parse",
+  "source_id": "private-money-v1",
+  "specification_sha256": "d2e4ee5432fb3996c6eaa9004d032f82e2ebfcb2f8df8fd10fd99bfbced5ddef",
+  "seed": 1729,
+  "plan_sha256": "99ee6a68451a373b48630fc9ac091cce38cae0b49e65c2535c6e5c7da10098cf",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an ASCII decimal monetary string. Accept optional leading minus, one or more digits, and optional dot followed by exactly two digits. Return signed cents, or null for invalid syntax; magnitudes <=1000000 pounds.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":\"-12.30\",\"expected\":-1230}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 1800
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    if let Value::String(s) = input {\n        if let Ok(amount) = parse_amount(s) {\n            return Value::Number(amount);\n        }\n    }\n    Value::Null\n}\n\nfn parse_amount(s: String) -> Result<i64, ()> {\n    let mut chars = s.chars().peekable();\n    let negative = chars.peek() == Some(&'-');\n    if negative {\n        chars.next(); // consume the '-'\n    }\n\n    let mut whole_part = 0;\n    let mut decimal_part = 0;\n    let mut decimal = false;\n\n    for c in chars {\n        if c == '.' {\n            if decimal {\n                return Err(());\n            }\n            decimal = true;\n        } else if c.is_digit(10) {\n            if decimal {\n                decimal_part = decimal_part * 10 + c.to_digit(10).unwrap() as i64;\n            } else {\n                whole_part = whole_part * 10 + c.to_digit(10).unwrap() as i64;\n            }\n        } else {\n            return Err(());\n        }\n    }\n\n    if decimal && decimal_part != 0 {\n        if whole_part > 1000000 || whole_part == 1000000 && decimal_part > 0 {\n            return Err(());\n        }\n        Ok(if negative {\n            -(whole_part * 100 + decimal_part)\n        } else {\n            whole_part * 100 + decimal_part\n        })\n    } else if whole_part > 1000000 {\n        Err(())\n    } else {\n        Ok(if negative {\n            -whole_part * 100\n        } else {\n            whole_part * 100\n        })\n    }\n}\n```",
+    "checkpoint_id": "4542a8bb0c0ae6fb3dafeb305c61a8d6b2f894e96bb667d60cda105a1f313176",
+    "finish_reason": "stop",
+    "input_tokens": 255,
+    "output_tokens": 399,
+    "elapsed_ms": 983196,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/comparative/search/round-001/trials/qwen-coder-14b-q2_k/comparison/qwen-coder-14b-q2_k/money.parse.generation.json",
+    "sha256": "90f29bbae877d37b5998e58624767119e5638f0e65c5f87d02c118a0ed21e3e0",
+    "bytes": 5415
+  },
+  "sandbox_report": {
+    "path": "reports/comparative/search/round-001/trials/qwen-coder-14b-q2_k/comparison/sandbox/32414c68-e3fa-48c8-9f0f-85eea682dfd9.json",
+    "sha256": "ff8c2a3bba4b0b0648ef5c2d3b9c9f5f509079595df78babacf47a9b9071aa07",
+    "bytes": 3054
+  },
+  "grading_error": null,
+  "success": false
+}

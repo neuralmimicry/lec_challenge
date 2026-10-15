@@ -1,0 +1,38 @@
+{
+  "model_id": "qwen-coder-7b-q4_k_m",
+  "task_id": "tables.last_by_key",
+  "source_id": "private-tables-v1",
+  "specification_sha256": "60d2667ffa0dcdb540f2de2f41533a9d0b6c027ee25be4adb993cda6f67122f7",
+  "seed": 1729,
+  "plan_sha256": "200759192521afac59cea45865938541e0b82a51fec381b932583cea1b983683",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an array of [key,value] integer rows. Keep the last value per key and return [key,value] rows sorted by key.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[[2,9],[1,4],[2,3]],\"expected\":[[1,4],[2,3]]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::{Value, Map};\nuse std::collections::BTreeMap;\n\npub fn solve(input: Value) -> Value {\n    let mut map = BTreeMap::new();\n    if let Value::Array(arr) = input {\n        for item in arr {\n            if let Value::Array(row) = item {\n                if let (Some(key), Some(value)) = (row.get(0), row.get(1)) {\n                    if let (Value::Number(k), Value::Number(v)) = (key, value) {\n                        map.insert(k.as_i64().unwrap(), v.as_i64().unwrap());\n                    }\n                }\n            }\n        }\n    }\n    let mut result = Vec::new();\n    for (key, value) in map {\n        result.push(Value::Array(vec![Value::Number(key.into()), Value::Number(value.into())]));\n    }\n    Value::Array(result)\n}\n```",
+    "checkpoint_id": "509287f78cb4d4cf6b3843734733b914b2c158e43e22a7f4bf5e963800894d3c",
+    "finish_reason": "stop",
+    "input_tokens": 247,
+    "output_tokens": 192,
+    "elapsed_ms": 26265,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/comparative/search/round-001/trials/qwen-coder-7b-q4_k_m/comparison/qwen-coder-7b-q4_k_m/tables.last_by_key.generation.json",
+    "sha256": "2bac952990adc078887c9c670e35d00edf576df6f00c0c1926f309b743f08ef2",
+    "bytes": 4592
+  },
+  "sandbox_report": {
+    "path": "reports/comparative/search/round-001/trials/qwen-coder-7b-q4_k_m/comparison/sandbox/62fd5c5b-0f6f-4a8f-9592-9518b200da23.json",
+    "sha256": "c4afa5f53dc8bc478db9c1fe0f390f7a9c9c9b45128e7fe191cf394e60e258a4",
+    "bytes": 1373
+  },
+  "grading_error": null,
+  "success": true
+}

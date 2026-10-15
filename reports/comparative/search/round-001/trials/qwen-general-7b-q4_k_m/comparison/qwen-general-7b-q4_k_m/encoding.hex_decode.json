@@ -1,0 +1,38 @@
+{
+  "model_id": "qwen-general-7b-q4_k_m",
+  "task_id": "encoding.hex_decode",
+  "source_id": "private-encoding-v1",
+  "specification_sha256": "535cec08e7ca750ff6426c55df5e10382b5d98dd2b972889c664a544c49c2a87",
+  "seed": 1729,
+  "plan_sha256": "5ea1fd3ea34bc3537ea9513d3a82a398810ee14d3f19e29fa9ba2f53b988c382",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an ASCII string. Decode even-length hexadecimal accepting upper/lowercase; return byte array, or null for invalid digits or odd length. The returned array may contain up to 128 items.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":\"00aF\",\"expected\":[0,175]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::{Value, from_str, to_value};\nuse std::str::FromStr;\n\npub fn solve(input: Value) -> Value {\n    if let Some(hex_str) = input.as_str() {\n        if hex_str.len() % 2 == 0 {\n            let bytes = hex_str\n                .chars()\n                .collect::<Vec<_>>()\n                .chunks(2)\n                .map(|chunk| {\n                    let byte = u8::from_str_radix(&chunk.iter().collect::<String>(), 16);\n                    byte.ok().unwrap_or(0)\n                })\n                .collect::<Vec<_>>();\n            if bytes.len() <= 128 {\n                return to_value(bytes).unwrap();\n            }\n        }\n    }\n    to_value(&null).unwrap()\n}\n```",
+    "checkpoint_id": "65b8fcd92af6b4fefa935c625d1ac27ea29dcb6ee14589c55a8f115ceaaa1423",
+    "finish_reason": "stop",
+    "input_tokens": 248,
+    "output_tokens": 167,
+    "elapsed_ms": 6638,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/comparative/search/round-001/trials/qwen-general-7b-q4_k_m/comparison/qwen-general-7b-q4_k_m/encoding.hex_decode.generation.json",
+    "sha256": "1bd4987c8adbb52c01e577adc6f115d1d4498942389ea89ee4e61569ebda9150",
+    "bytes": 4575
+  },
+  "sandbox_report": {
+    "path": "reports/comparative/search/round-001/trials/qwen-general-7b-q4_k_m/comparison/sandbox/9ee5fa8d-8e7b-415f-892b-7a7019a7630d.json",
+    "sha256": "f1a5da6687123b123671ae3e45b0c0ac173894588bd31062fbcce5242d26decd",
+    "bytes": 2976
+  },
+  "grading_error": null,
+  "success": false
+}

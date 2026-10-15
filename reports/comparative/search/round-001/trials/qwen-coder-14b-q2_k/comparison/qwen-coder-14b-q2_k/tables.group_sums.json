@@ -1,0 +1,38 @@
+{
+  "model_id": "qwen-coder-14b-q2_k",
+  "task_id": "tables.group_sums",
+  "source_id": "private-tables-v1",
+  "specification_sha256": "783b75a94404c8e383623a9281b851d2ccf76f4a4e9832001b8703de0bf64172",
+  "seed": 1729,
+  "plan_sha256": "99ee6a68451a373b48630fc9ac091cce38cae0b49e65c2535c6e5c7da10098cf",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an array of [key,value] integer rows. Sum values per key and return rows sorted by key.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[[2,9],[1,4],[2,3]],\"expected\":[[1,4],[2,12]]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 1800
+  },
+  "generation": {
+    "completion": "```rust\nuse std::collections::HashMap;\nuse serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let mut map: HashMap<i64, i64> = HashMap::new();\n\n    if let Some(array) = input.as_array() {\n        for item in array {\n            if let Some(row) = item.as_array() {\n                if let Some(key) = row.get(0).and_then(|v| v.as_i64()) {\n                    if let Some(value) = row.get(1).and_then(|v| v.as_i64()) {\n                        *map.entry(key).or_insert(0) += value;\n                    }\n                }\n            }\n        }\n    }\n\n    let mut result: Vec<Vec<i64>> = map.into_iter()\n        .map(|(key, value)| vec![key, value])\n        .collect();\n\n    result.sort_by(|a, b| a[0].cmp(&b[0]));\n\n    serde_json::Value::Array(result.into_iter().map(|v| serde_json::Value::Array(vec![\n        serde_json::Value::Number(serde_json::Number::from(v[0])),\n        serde_json::Value::Number(serde_json::Number::from(v[1])),\n    ])).collect())\n}\n```",
+    "checkpoint_id": "4542a8bb0c0ae6fb3dafeb305c61a8d6b2f894e96bb667d60cda105a1f313176",
+    "finish_reason": "stop",
+    "input_tokens": 242,
+    "output_tokens": 273,
+    "elapsed_ms": 518763,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/comparative/search/round-001/trials/qwen-coder-14b-q2_k/comparison/qwen-coder-14b-q2_k/tables.group_sums.generation.json",
+    "sha256": "dad8f016bdda6b6d2d07cf141caa7174918178a105e38839aa89ae76e5999d6d",
+    "bytes": 4787
+  },
+  "sandbox_report": {
+    "path": "reports/comparative/search/round-001/trials/qwen-coder-14b-q2_k/comparison/sandbox/5c3cdd42-69f6-45c4-960d-b9a734f7ece5.json",
+    "sha256": "dfeb5629833ffe79c20b9e6cc6873027b8f422b225f94ff30150f25e8f16be6e",
+    "bytes": 1369
+  },
+  "grading_error": null,
+  "success": true
+}

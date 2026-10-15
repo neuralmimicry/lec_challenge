@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "evidence_kind": "actual_local_model_generation",
+  "recorded_unix_ms": 1792082060391,
+  "model_id": "magicoder-s-ds-6_7b-q4_k_m",
+  "task_id": "tables.last_by_key",
+  "source_id": "private-tables-v1",
+  "specification_sha256": "60d2667ffa0dcdb540f2de2f41533a9d0b6c027ee25be4adb993cda6f67122f7",
+  "seed": 1729,
+  "plan_sha256": "59b97ad46315290358d430232a1a8bef1378263e4af34948b263d560d57b5506",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an array of [key,value] integer rows. Keep the last value per key and return [key,value] rows sorted by key.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[[2,9],[1,4],[2,3]],\"expected\":[[1,4],[2,3]]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "Here is a Rust code snippet that takes a JSON array of key-value pairs, where the key is a string, and the value is an integer.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "checkpoint_id": "4b340a9d033091627273fa0f95a4d43b5fe95500c714f9d2f683fbe266c9bc52",
+    "finish_reason": "length",
+    "input_tokens": 280,
+    "output_tokens": 512,
+    "elapsed_ms": 84185,
+    "complete": false
+  },
+  "generation_error": null,
+  "execution": {
+    "actual_device": "Cuda { gpu_id: 0 }",
+    "actual_dtype": "F32",
+    "asset_lifetime_shared_lease": true,
+    "available_cpu_threads": 16,
+    "candle_cpu_threads": 16,
+    "checkpoint_id": "4b340a9d033091627273fa0f95a4d43b5fe95500c714f9d2f683fbe266c9bc52",
+    "context_cap": 1024,
+    "cpu_fallback": false,
+    "cuda_active": true,
+    "cuda_feature_compiled": true,
+    "engine": "native_rust_candle",
+    "model_id": "TheBloke/Magicoder-S-DS-6.7B-GGUF",
+    "quantisation": {
+      "all_weights_dequantised": false,
+      "embedding_precision": "F16",
+      "format": "gguf",
+      "hybrid_cpu_offload": false,
+      "kv_precision": "F32",
+      "matrix_backend": "native_candle_QMatMul",
+      "memory_estimate": {
+        "activation_workspace_bytes": 168820736,
+        "assumptions": "Full quantised weights on the selected device; embedding expanded to GPU float16 or CPU float32; float32 activations/KV/attention; no hybrid offload. Driver/allocator/workspace behaviour may require additional headroom.",
+        "attention_score_bytes": 134217728,
+        "conservative_total_bytes": 5992343424,
+        "context_tokens": 1024,
+        "dense_embedding_bytes": 264241152,
+        "kv_cache_bytes": 1073741824,
+        "quantised_file_bytes": 4082886528,
+        "runtime_reserve_bytes": 268435456
+      },
+      "original_source_model_id": "ise-uiuc/Magicoder-S-DS-6.7B",
+      "original_source_revision": "b3ed7cb1578a3643ceaf2ebf996a3d8e85f75d8f",
+      "quantised_publisher_model_id": "TheBloke/Magicoder-S-DS-6.7B-GGUF",
+      "quantised_publisher_revision": "d41a33f9393ebc06c6beb44b1ded091b6d19496c",
+      "tensor_types": {
+        "F32": 65,
+        "Q4K": 193,
+        "Q6K": 33
+      },
+      "weight_sha256": "4b340a9d033091627273fa0f95a4d43b5fe95500c714f9d2f683fbe266c9bc52"
+    },
+    "requested": {
+      "device": {
+        "cuda": {
+          "ordinal": 0
+        }
+      },
+      "dtype": "f32"
+    },
+    "revision": "d41a33f9393ebc06c6beb44b1ded091b6d19496c",
+    "weight_format": "gguf"
+  }
+}

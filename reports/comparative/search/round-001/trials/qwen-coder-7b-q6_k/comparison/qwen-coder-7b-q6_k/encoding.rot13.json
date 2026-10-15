@@ -1,0 +1,38 @@
+{
+  "model_id": "qwen-coder-7b-q6_k",
+  "task_id": "encoding.rot13",
+  "source_id": "private-encoding-v1",
+  "specification_sha256": "56794b6c25031b0931d378f8f3955bc2d10c4ef04da0be851795e2ca9a832cfa",
+  "seed": 1729,
+  "plan_sha256": "ff3f2ff3060310ced3db7039640f4c7b07c7601f2b1911d1867f6d49e01fddfd",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an ASCII string. Apply ROT13 to upper/lowercase letters and preserve other characters.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":\"Hello, Z!\",\"expected\":\"Uryyb, M!\"}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 1800
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::{Value, Error as JsonError};\nuse std::str::FromStr;\n\nfn rot13(c: char) -> char {\n    if c.is_ascii_alphabetic() {\n        let base = if c.is_ascii_lowercase() { 'a' } else { 'A' } as u8;\n        let offset = c as u8 - base;\n        let new_offset = (offset + 13) % 26;\n        (base + new_offset) as char\n    } else {\n        c\n    }\n}\n\nfn solve(input: Value) -> Result<Value, JsonError> {\n    match input {\n        Value::String(s) => {\n            let rotated: String = s.chars().map(rot13).collect();\n            Ok(Value::String(rotated))\n        }\n        Value::Array(arr) => {\n            let rotated: Vec<Value> = arr.into_iter().map(solve).collect::<Result<Vec<Value>, JsonError>>()?;\n            Ok(Value::Array(rotated))\n        }\n        Value::Object(obj) => {\n            let rotated: serde_json::Map<String, Value> = obj.into_iter()\n                .map(|(k, v)| (k, solve(v)))\n                .collect::<Result<serde_json::Map<String, Value>, JsonError>>()?;\n            Ok(Value::Object(rotated))\n        }\n        _ => Ok(input),\n    }\n}\n```",
+    "checkpoint_id": "46291ddea1bfb608fe63d9a1907eea6918bda87a7626593edc4bf97c5fd73f9d",
+    "finish_reason": "stop",
+    "input_tokens": 227,
+    "output_tokens": 290,
+    "elapsed_ms": 322731,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/comparative/search/round-001/trials/qwen-coder-7b-q6_k/comparison/qwen-coder-7b-q6_k/encoding.rot13.generation.json",
+    "sha256": "12f5b76dbb622d1890cec4022bb5d4be124e0d9a1da1f070e1717ae8bb5a1f80",
+    "bytes": 4810
+  },
+  "sandbox_report": {
+    "path": "reports/comparative/search/round-001/trials/qwen-coder-7b-q6_k/comparison/sandbox/f1650c34-74f8-46e2-a654-fa5af2d4e63b.json",
+    "sha256": "fce376ebcdec6e8a4a7c2b8232b75be843f9608ddb23cbe49f8cf5bb7c1a8b66",
+    "bytes": 9383
+  },
+  "grading_error": null,
+  "success": false
+}

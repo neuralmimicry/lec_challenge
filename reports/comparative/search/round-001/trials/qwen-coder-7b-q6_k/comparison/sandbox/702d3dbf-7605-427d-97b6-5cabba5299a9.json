@@ -1,0 +1,33 @@
+{
+  "run_id": "702d3dbf-7605-427d-97b6-5cabba5299a9",
+  "task_id": "money.parse",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: warning: unused import: `Error`\n --> /candidate/main.rs:1:25\n  |\n1 | use serde_json::{Value, Error};\n  |                         ^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0277]: the trait bound `serde_json::Number: From<f64>` is not satisfied\n --> /candidate/main.rs:7:60\n  |\n7 |                 return Value::Number((num * 100.0).round().into());\n  |                                                            ^^^^ the trait `From<f64>` is not implemented for `serde_json::Number`\n  |\n  = help: `serde_json::Number` implements trait `From<T>`:\n            From<de::ParserNumber>\n            From<i16>\n            From<i32>\n            From<i64>\n            From<i8>\n            From<isize>\n            From<u16>\n            From<u32>\n          and 3 others\n  = note: required for `f64` to implement `Into<serde_json::Number>`\n\nerror: aborting due to 1 previous error; 1 warning emitted\n\nFor more information about this error, try `rustc --explain E0277`.\n"
+  ],
+  "cases_total": 9,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "0bf995b5f69865792503015f6af52b457c861b679877956e939c2137ddb4a562",
+  "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "ffb8bc3d32898fa85914d6be21c7b58d4d08df5aa2d500aa74973c23a35951a4",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:1",
+    "expected_image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/comparative/search/round-001/trials/qwen-coder-7b-q6_k/comparison/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/comparative/search/round-001/trials/qwen-coder-7b-q6_k/comparison/sandbox/702d3dbf-7605-427d-97b6-5cabba5299a9.audit.json",
+  "audit_sha256": "9f5041be3201dc4ebc0f797c7991b6684fa6a8b93c56979a080d7e0b2eba556a",
+  "failure": "compilation failed: warning: unused import: `Error`\n --> /candidate/main.rs:1:25\n  |\n1 | use serde_json::{Value, Error};\n  |                         ^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0277]: the trait bound `serde_json::Number: From<f64>` is not satisfied\n --> /candidate/main.rs:7:60\n  |\n7 |                 return Value::Number((num * 100.0).round().into());\n  |                                                            ^^^^ the trait `From<f64>` is not implemented for `serde_json::Number`\n  |\n  = help: `serde_json::Number` implements trait `From<T>`:\n            From<de::ParserNumber>\n            From<i16>\n            From<i32>\n            From<i64>\n            From<i8>\n            From<isize>\n            From<u16>\n            From<u32>\n          and 3 others\n  = note: required for `f64` to implement `Into<serde_json::Number>`\n\nerror: aborting due to 1 previous error; 1 warning emitted\n\nFor more information about this error, try `rustc --explain E0277`.\n",
+  "duration_ms": 7874,
+  "timeout_evidence": null
+}

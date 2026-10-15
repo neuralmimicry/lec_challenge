@@ -1,0 +1,38 @@
+{
+  "model_id": "qwen-coder-7b-q6_k",
+  "task_id": "tables.inner_join",
+  "source_id": "private-tables-v1",
+  "specification_sha256": "369ef237ff250179b0b3e3c7af051af8aebc0329b6494d33af5f436c827ac699",
+  "seed": 1729,
+  "plan_sha256": "ff3f2ff3060310ced3db7039640f4c7b07c7601f2b1911d1867f6d49e01fddfd",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input [left,right] has arrays of [key,value] integer rows, each side with unique keys. Return [key,left_value,right_value] for common keys in ascending key order.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[[[2,9],[1,4]],[[2,3],[3,8]]],\"expected\":[[2,9,3]]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 1800
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::{Value, json};\n\npub fn solve(input: Value) -> Value {\n    let arr = input.as_array().unwrap();\n    let left = &arr[0].as_array().unwrap();\n    let right = &arr[1].as_array().unwrap();\n    \n    let mut result = Vec::new();\n    let mut left_iter = left.iter().peekable();\n    let mut right_iter = right.iter().peekable();\n    \n    while let (Some(left_item), Some(right_item)) = (left_iter.peek(), right_iter.peek()) {\n        let left_key = left_item[0].as_i64().unwrap();\n        let right_key = right_item[0].as_i64().unwrap();\n        \n        if left_key < right_key {\n            left_iter.next();\n        } else if left_key > right_key {\n            right_iter.next();\n        } else {\n            result.push(json!([left_key, left_item[1].clone(), right_item[1].clone()]));\n            left_iter.next();\n            right_iter.next();\n        }\n    }\n    \n    json!(result)\n}\n```",
+    "checkpoint_id": "46291ddea1bfb608fe63d9a1907eea6918bda87a7626593edc4bf97c5fd73f9d",
+    "finish_reason": "stop",
+    "input_tokens": 259,
+    "output_tokens": 230,
+    "elapsed_ms": 298491,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/comparative/search/round-001/trials/qwen-coder-7b-q6_k/comparison/qwen-coder-7b-q6_k/tables.inner_join.generation.json",
+    "sha256": "6c314beea9887a6668c11b6075388c580bec26a318d4d0977d6b093e81abec02",
+    "bytes": 4711
+  },
+  "sandbox_report": {
+    "path": "reports/comparative/search/round-001/trials/qwen-coder-7b-q6_k/comparison/sandbox/4b99c60c-ea17-4116-85c7-576cb6b3a1bc.json",
+    "sha256": "09888d0eaae81a788d68d522e385f3c38d00043bbf7dfd5c9b52e102956c0812",
+    "bytes": 1435
+  },
+  "grading_error": null,
+  "success": false
+}

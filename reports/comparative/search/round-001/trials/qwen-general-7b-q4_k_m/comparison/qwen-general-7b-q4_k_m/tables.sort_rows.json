@@ -1,0 +1,38 @@
+{
+  "model_id": "qwen-general-7b-q4_k_m",
+  "task_id": "tables.sort_rows",
+  "source_id": "private-tables-v1",
+  "specification_sha256": "df1fea127338d7c1399d9b922559c0782ff3fec80cb89b6d508a51249e019c1c",
+  "seed": 1729,
+  "plan_sha256": "5ea1fd3ea34bc3537ea9513d3a82a398810ee14d3f19e29fa9ba2f53b988c382",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an array of [key,value] integer rows. Sort ascending by key and then value; keep duplicates.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[[2,9],[1,4],[2,3]],\"expected\":[[1,4],[2,3],[2,9]]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::{Value, from_str};\nuse std::cmp::Ordering;\n\npub fn solve(input: Value) -> Value {\n    let mut pairs: Vec<(i64, i64)> = input.as_array()\n        .unwrap()\n        .iter()\n        .map(|v| {\n            let pair: Vec<i64> = v.as_array()\n                .unwrap()\n                .iter()\n                .map(|n| n.as_i64().unwrap())\n                .collect();\n            (pair[0], pair[1])\n        })\n        .collect();\n\n    pairs.sort_unstable_by(|a, b| {\n        match a.0.cmp(&b.0) {\n            Ordering::Equal => a.1.cmp(&b.1),\n            other => other,\n        }\n    });\n\n    Value::Array(pairs.into_iter().map(|(k, v)| Value::Array(vec![Value::Number(k.into()), Value::Number(v.into())])).collect())\n}\n```",
+    "checkpoint_id": "65b8fcd92af6b4fefa935c625d1ac27ea29dcb6ee14589c55a8f115ceaaa1423",
+    "finish_reason": "stop",
+    "input_tokens": 245,
+    "output_tokens": 208,
+    "elapsed_ms": 12204,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/comparative/search/round-001/trials/qwen-general-7b-q4_k_m/comparison/qwen-general-7b-q4_k_m/tables.sort_rows.generation.json",
+    "sha256": "cfdf7cb4e41bf65c01528b8e9f2efd4b422f5abcce29ae8753505cab536af393",
+    "bytes": 4560
+  },
+  "sandbox_report": {
+    "path": "reports/comparative/search/round-001/trials/qwen-general-7b-q4_k_m/comparison/sandbox/a29c876c-1054-4f6b-b121-1248ff8d4596.json",
+    "sha256": "fb6295868d5925c839a4a22f71f25f3cb2aaf900be16ef5147e4b5945bd78491",
+    "bytes": 1375
+  },
+  "grading_error": null,
+  "success": true
+}

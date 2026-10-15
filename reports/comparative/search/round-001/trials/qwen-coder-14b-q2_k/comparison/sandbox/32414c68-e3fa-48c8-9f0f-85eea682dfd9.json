@@ -1,0 +1,33 @@
+{
+  "run_id": "32414c68-e3fa-48c8-9f0f-85eea682dfd9",
+  "task_id": "money.parse",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error[E0308]: mismatched types\n   --> /candidate/main.rs:6:34\n    |\n  6 |             return Value::Number(amount);\n    |                    ------------- ^^^^^^ expected `Number`, found `i64`\n    |                    |\n    |                    arguments to this enum variant are incorrect\n    |\nnote: tuple variant defined here\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:142:5\n    |\n142 |     Number(Number),\n    |     ^^^^^^\nhelp: call `Into::into` on this expression to convert `i64` into `serde_json::Number`\n    |\n  6 |             return Value::Number(amount.into());\n    |                                        +++++++\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0308`.\n"
+  ],
+  "cases_total": 9,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "0bf995b5f69865792503015f6af52b457c861b679877956e939c2137ddb4a562",
+  "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "fdf9ba1b0cedc8c154b3e3722887693a65d6899faea89b2e56722c86d7e6b93f",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:1",
+    "expected_image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/comparative/search/round-001/trials/qwen-coder-14b-q2_k/comparison/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/comparative/search/round-001/trials/qwen-coder-14b-q2_k/comparison/sandbox/32414c68-e3fa-48c8-9f0f-85eea682dfd9.audit.json",
+  "audit_sha256": "2a061b3c9f75372d36598a6ef6a3122a5c76f4b9b24f02d1dbd8426e92a1ddb2",
+  "failure": "compilation failed: error[E0308]: mismatched types\n   --> /candidate/main.rs:6:34\n    |\n  6 |             return Value::Number(amount);\n    |                    ------------- ^^^^^^ expected `Number`, found `i64`\n    |                    |\n    |                    arguments to this enum variant are incorrect\n    |\nnote: tuple variant defined here\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:142:5\n    |\n142 |     Number(Number),\n    |     ^^^^^^\nhelp: call `Into::into` on this expression to convert `i64` into `serde_json::Number`\n    |\n  6 |             return Value::Number(amount.into());\n    |                                        +++++++\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0308`.\n",
+  "duration_ms": 4374,
+  "timeout_evidence": null
+}

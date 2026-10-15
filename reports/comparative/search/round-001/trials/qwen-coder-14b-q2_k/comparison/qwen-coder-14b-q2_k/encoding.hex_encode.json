@@ -1,0 +1,38 @@
+{
+  "model_id": "qwen-coder-14b-q2_k",
+  "task_id": "encoding.hex_encode",
+  "source_id": "private-encoding-v1",
+  "specification_sha256": "dc43dce8ef138a6d990fb8d5450f3fed524046e2e019c18509d025f22b594956",
+  "seed": 1729,
+  "plan_sha256": "99ee6a68451a373b48630fc9ac091cce38cae0b49e65c2535c6e5c7da10098cf",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an array of bytes (integers 0..255). Return concatenated two-digit lowercase hexadecimal.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[0,15,255],\"expected\":\"000fff\"}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 1800
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let bytes: Vec<u8> = input.as_array().unwrap().iter().map(|v| v.as_u64().unwrap() as u8).collect();\n    let hex_string: String = bytes.iter().map(|b| format!(\"{:02x}\", b)).collect();\n    Value::String(hex_string)\n}\n```",
+    "checkpoint_id": "4542a8bb0c0ae6fb3dafeb305c61a8d6b2f894e96bb667d60cda105a1f313176",
+    "finish_reason": "stop",
+    "input_tokens": 232,
+    "output_tokens": 94,
+    "elapsed_ms": 418304,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/comparative/search/round-001/trials/qwen-coder-14b-q2_k/comparison/qwen-coder-14b-q2_k/encoding.hex_encode.generation.json",
+    "sha256": "84fe77f4db2470cd22d63f440e99a239413755f5c776d39d02f165878abc5d71",
+    "bytes": 4080
+  },
+  "sandbox_report": {
+    "path": "reports/comparative/search/round-001/trials/qwen-coder-14b-q2_k/comparison/sandbox/2b4be577-af98-4ff3-ad5a-fb7b86bf0117.json",
+    "sha256": "fe66e54dba9f783ab7d79865d6937f918080bed90cf0d2a0b3afad0c16d46082",
+    "bytes": 1371
+  },
+  "grading_error": null,
+  "success": true
+}

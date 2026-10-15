@@ -1,0 +1,38 @@
+{
+  "model_id": "qwen-coder-7b-q4_k_m",
+  "task_id": "encoding.rot13",
+  "source_id": "private-encoding-v1",
+  "specification_sha256": "56794b6c25031b0931d378f8f3955bc2d10c4ef04da0be851795e2ca9a832cfa",
+  "seed": 1729,
+  "plan_sha256": "200759192521afac59cea45865938541e0b82a51fec381b932583cea1b983683",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an ASCII string. Apply ROT13 to upper/lowercase letters and preserve other characters.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":\"Hello, Z!\",\"expected\":\"Uryyb, M!\"}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::{Value, Error as JsonError};\n\npub fn solve(input: Value) -> Result<Value, JsonError> {\n    match input {\n        Value::String(s) => Ok(Value::String(apply_rot13(s))),\n        Value::Array(arr) => Ok(Value::Array(arr.into_iter().map(apply_rot13).collect())),\n        _ => Ok(input),\n    }\n}\n\nfn apply_rot13(s: String) -> String {\n    s.chars()\n        .map(|c| {\n            if c.is_ascii_alphabetic() {\n                let base = if c.is_ascii_lowercase() { 'a' } else { 'A' } as u8;\n                let offset = c as u8 - base;\n                let new_offset = (offset + 13) % 26;\n                (base + new_offset) as char\n            } else {\n                c\n            }\n        })\n        .collect()\n}\n```",
+    "checkpoint_id": "509287f78cb4d4cf6b3843734733b914b2c158e43e22a7f4bf5e963800894d3c",
+    "finish_reason": "stop",
+    "input_tokens": 227,
+    "output_tokens": 197,
+    "elapsed_ms": 29684,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/comparative/search/round-001/trials/qwen-coder-7b-q4_k_m/comparison/qwen-coder-7b-q4_k_m/encoding.rot13.generation.json",
+    "sha256": "71e922614f25af435048a7b75ae452b53611dc3ba9b88e5f45539fead7f5f412",
+    "bytes": 4546
+  },
+  "sandbox_report": {
+    "path": "reports/comparative/search/round-001/trials/qwen-coder-7b-q4_k_m/comparison/sandbox/5f51cf2b-cb00-4719-8e83-4fe3c66f040a.json",
+    "sha256": "eca5a0713dac89d5161cfba79ab5da128a5b5350d10b944eece480bf6b432333",
+    "bytes": 9743
+  },
+  "grading_error": null,
+  "success": false
+}

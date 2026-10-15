@@ -1,0 +1,165 @@
+[
+  {
+    "actual_execution": {
+      "actual_device": "Cpu",
+      "actual_dtype": "F32",
+      "asset_lifetime_shared_lease": true,
+      "available_cpu_threads": 16,
+      "candle_cpu_threads": 16,
+      "checkpoint_id": "4542a8bb0c0ae6fb3dafeb305c61a8d6b2f894e96bb667d60cda105a1f313176",
+      "context_cap": 1024,
+      "cpu_fallback": false,
+      "cuda_active": false,
+      "cuda_feature_compiled": true,
+      "engine": "native_rust_candle",
+      "model_id": "Qwen/Qwen2.5-Coder-14B-Instruct-GGUF",
+      "quantisation": {
+        "all_weights_dequantised": false,
+        "embedding_precision": "F32",
+        "format": "gguf",
+        "hybrid_cpu_offload": false,
+        "kv_precision": "F32",
+        "matrix_backend": "native_candle_QMatMul",
+        "memory_estimate": {
+          "activation_workspace_bytes": 211812352,
+          "assumptions": "Full quantised weights on the selected device; embedding expanded to GPU float16 or CPU float32; float32 activations/KV/attention; no hybrid offload. Driver/allocator/workspace behaviour may require additional headroom.",
+          "attention_score_bytes": 167772160,
+          "conservative_total_bytes": 9734114688,
+          "context_tokens": 1024,
+          "dense_embedding_bytes": 3114270720,
+          "kv_cache_bytes": 402653184,
+          "quantised_file_bytes": 5770497408,
+          "runtime_reserve_bytes": 67108864
+        },
+        "original_source_model_id": "Qwen/Qwen2.5-Coder-14B-Instruct",
+        "original_source_revision": "aedcc2d42b622764e023cf882b6652e646b95671",
+        "quantised_publisher_model_id": "Qwen/Qwen2.5-Coder-14B-Instruct-GGUF",
+        "quantised_publisher_revision": "d0a692ef765eefbf2fabb130b3cb2e8917e3d225",
+        "tensor_types": {
+          "F32": 241,
+          "Q2K": 193,
+          "Q3K": 96,
+          "Q4K": 48,
+          "Q6K": 1
+        },
+        "weight_sha256": "4542a8bb0c0ae6fb3dafeb305c61a8d6b2f894e96bb667d60cda105a1f313176"
+      },
+      "requested": {
+        "device": "cpu",
+        "dtype": "f32"
+      },
+      "revision": "d0a692ef765eefbf2fabb130b3cb2e8917e3d225",
+      "weight_format": "gguf"
+    },
+    "after_loading": {
+      "compute_processes": {
+        "csv": "672179, state/engines/949b28471a3b47255ab102ead671a6a3e719dc1303844c1c66e0d69682d1dc99/lec-distil, 130\n",
+        "observed_unix_ms": 1792083928406
+      },
+      "gpu": {
+        "csv": "0, NVIDIA GeForce RTX 2080, 595.91.07, 8192, 293, 17\n",
+        "observed_unix_ms": 1792083928379
+      }
+    },
+    "before_loading": {
+      "compute_processes": {
+        "csv": "672179, state/engines/949b28471a3b47255ab102ead671a6a3e719dc1303844c1c66e0d69682d1dc99/lec-distil, 130\n",
+        "observed_unix_ms": 1792083882142
+      },
+      "gpu": {
+        "csv": "0, NVIDIA GeForce RTX 2080, 595.91.07, 8192, 294, 30\n",
+        "observed_unix_ms": 1792083882114
+      }
+    },
+    "event": "model_loading",
+    "loading_error": null,
+    "model": "qwen-coder-14b-q2_k",
+    "plan_sha256": "99ee6a68451a373b48630fc9ac091cce38cae0b49e65c2535c6e5c7da10098cf",
+    "requested_runtime": {
+      "device": "cpu",
+      "dtype": "f32"
+    }
+  },
+  {
+    "actual_execution": {
+      "actual_device": "Cpu",
+      "actual_dtype": "F32",
+      "asset_lifetime_shared_lease": true,
+      "available_cpu_threads": 16,
+      "candle_cpu_threads": 16,
+      "checkpoint_id": "4542a8bb0c0ae6fb3dafeb305c61a8d6b2f894e96bb667d60cda105a1f313176",
+      "context_cap": 1024,
+      "cpu_fallback": false,
+      "cuda_active": false,
+      "cuda_feature_compiled": true,
+      "engine": "native_rust_candle",
+      "model_id": "Qwen/Qwen2.5-Coder-14B-Instruct-GGUF",
+      "quantisation": {
+        "all_weights_dequantised": false,
+        "embedding_precision": "F32",
+        "format": "gguf",
+        "hybrid_cpu_offload": false,
+        "kv_precision": "F32",
+        "matrix_backend": "native_candle_QMatMul",
+        "memory_estimate": {
+          "activation_workspace_bytes": 211812352,
+          "assumptions": "Full quantised weights on the selected device; embedding expanded to GPU float16 or CPU float32; float32 activations/KV/attention; no hybrid offload. Driver/allocator/workspace behaviour may require additional headroom.",
+          "attention_score_bytes": 167772160,
+          "conservative_total_bytes": 9734114688,
+          "context_tokens": 1024,
+          "dense_embedding_bytes": 3114270720,
+          "kv_cache_bytes": 402653184,
+          "quantised_file_bytes": 5770497408,
+          "runtime_reserve_bytes": 67108864
+        },
+        "original_source_model_id": "Qwen/Qwen2.5-Coder-14B-Instruct",
+        "original_source_revision": "aedcc2d42b622764e023cf882b6652e646b95671",
+        "quantised_publisher_model_id": "Qwen/Qwen2.5-Coder-14B-Instruct-GGUF",
+        "quantised_publisher_revision": "d0a692ef765eefbf2fabb130b3cb2e8917e3d225",
+        "tensor_types": {
+          "F32": 241,
+          "Q2K": 193,
+          "Q3K": 96,
+          "Q4K": 48,
+          "Q6K": 1
+        },
+        "weight_sha256": "4542a8bb0c0ae6fb3dafeb305c61a8d6b2f894e96bb667d60cda105a1f313176"
+      },
+      "requested": {
+        "device": "cpu",
+        "dtype": "f32"
+      },
+      "revision": "d0a692ef765eefbf2fabb130b3cb2e8917e3d225",
+      "weight_format": "gguf"
+    },
+    "after_generation": {
+      "compute_processes": {
+        "csv": "672179, state/engines/949b28471a3b47255ab102ead671a6a3e719dc1303844c1c66e0d69682d1dc99/lec-distil, 130\n",
+        "observed_unix_ms": 1792094679349
+      },
+      "gpu": {
+        "csv": "0, NVIDIA GeForce RTX 2080, 595.91.07, 8192, 274, 0\n",
+        "observed_unix_ms": 1792094679327
+      }
+    },
+    "event": "model_generation_complete",
+    "model": "qwen-coder-14b-q2_k",
+    "plan_sha256": "99ee6a68451a373b48630fc9ac091cce38cae0b49e65c2535c6e5c7da10098cf"
+  },
+  {
+    "after_release": {
+      "compute_processes": {
+        "csv": "672179, state/engines/949b28471a3b47255ab102ead671a6a3e719dc1303844c1c66e0d69682d1dc99/lec-distil, 130\n",
+        "observed_unix_ms": 1792094680041
+      },
+      "gpu": {
+        "csv": "0, NVIDIA GeForce RTX 2080, 595.91.07, 8192, 274, 0\n",
+        "observed_unix_ms": 1792094680017
+      }
+    },
+    "event": "model_released",
+    "model": "qwen-coder-14b-q2_k",
+    "plan_sha256": "99ee6a68451a373b48630fc9ac091cce38cae0b49e65c2535c6e5c7da10098cf",
+    "synchronized_before_release": true
+  }
+]

@@ -1,0 +1,38 @@
+{
+  "model_id": "qwen-general-7b-q4_k_m",
+  "task_id": "dispatch.priority",
+  "source_id": "private-dispatch-v1",
+  "specification_sha256": "fe12d97428801ef000ddf3a459ad82ad8f7812a5fb888ab3e6b35444d33a7856",
+  "seed": 1729,
+  "plan_sha256": "5ea1fd3ea34bc3537ea9513d3a82a398810ee14d3f19e29fa9ba2f53b988c382",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an array of [priority,id] integer pairs with unique ids. Return ids sorted by decreasing priority, with increasing id on ties.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[[2,7],[3,8],[2,1]],\"expected\":[8,1,7]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::{Value, from_str};\nuse std::cmp::Ordering;\n\npub fn solve(input: Value) -> Value {\n    let pairs: Vec<(i64, i64)> = input.as_array()\n        .unwrap()\n        .iter()\n        .map(|v| {\n            let pair: Vec<i64> = v.as_array()\n                .unwrap()\n                .iter()\n                .map(|n| n.as_i64().unwrap())\n                .collect();\n            (pair[0], pair[1])\n        })\n        .collect();\n\n    let mut sorted_pairs = pairs.clone();\n    sorted_pairs.sort_by(|a, b| {\n        match b.0.cmp(&a.0) {\n            Ordering::Equal => a.1.cmp(&b.1),\n            other => other,\n        }\n    });\n\n    Value::Array(sorted_pairs.into_iter().map(|(_, id)| id).collect())\n}\n```",
+    "checkpoint_id": "65b8fcd92af6b4fefa935c625d1ac27ea29dcb6ee14589c55a8f115ceaaa1423",
+    "finish_reason": "stop",
+    "input_tokens": 243,
+    "output_tokens": 197,
+    "elapsed_ms": 6556,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/comparative/search/round-001/trials/qwen-general-7b-q4_k_m/comparison/qwen-general-7b-q4_k_m/dispatch.priority.generation.json",
+    "sha256": "6f26206bba011c612c777fccbaf6661fa76e769fd753c9c5b2c8dbaa17c3c30b",
+    "bytes": 4563
+  },
+  "sandbox_report": {
+    "path": "reports/comparative/search/round-001/trials/qwen-general-7b-q4_k_m/comparison/sandbox/3c6a651e-87da-46cd-a01a-5092a3ab0fda.json",
+    "sha256": "5ecd77c464aea39538f9b4df5d3f7a9ff455c2042ef25e390ba406187a2fa649",
+    "bytes": 5734
+  },
+  "grading_error": null,
+  "success": false
+}

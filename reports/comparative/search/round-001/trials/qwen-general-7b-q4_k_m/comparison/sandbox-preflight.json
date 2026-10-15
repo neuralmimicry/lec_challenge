@@ -1,0 +1,34 @@
+{
+  "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+  "policy_sha256": "0bf995b5f69865792503015f6af52b457c861b679877956e939c2137ddb4a562",
+  "runtime": "podman",
+  "controls": {
+    "effective": {
+      "cpu_max": "100000 100000",
+      "memory_max": "536870912",
+      "network_none": true,
+      "pids_max": "64",
+      "root_write_denied": true,
+      "root_write_errno": 30,
+      "swap_max": "0",
+      "uid_status": "Uid:\t65532\t65532\t65532\t65532"
+    },
+    "host_timeout_asserted": true,
+    "memory_pressure_exit": 137,
+    "pids": {
+      "children_created": 63,
+      "creation_denied": true
+    },
+    "reference_run_id": "c0e8937a-533f-46ed-8aa3-a9a1aaf0f50c",
+    "timeout_evidence": {
+      "cleanup_ms": 4804,
+      "container_removed": true,
+      "deadline_ms": 1000,
+      "kill_acknowledged": true,
+      "kill_method": "cgroup_v2_kill",
+      "kill_request_ms": 42,
+      "wait_elapsed_ms": 1000
+    }
+  },
+  "probes_passed": true
+}

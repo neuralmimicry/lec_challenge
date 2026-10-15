@@ -1,0 +1,38 @@
+{
+  "model_id": "qwen-coder-7b-q4_k_m",
+  "task_id": "dispatch.round_robin",
+  "source_id": "private-dispatch-v1",
+  "specification_sha256": "e445e145f0405de8c854262451687ad1958cdfd2793c0f20d7b13efdf5c0a5fa",
+  "seed": 1729,
+  "plan_sha256": "200759192521afac59cea45865938541e0b82a51fec381b932583cea1b983683",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input {jobs,quantum} has nonnegative integer work amounts and positive quantum. Cycle job indices, giving up to quantum work each turn; return indices in order of completion, initially zero-work jobs first in index order.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":{\"jobs\":[3,1,2],\"quantum\":2},\"expected\":[1,2,0]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::{Value, json};\n\npub fn solve(input: Value) -> Value {\n    let jobs = input[\"jobs\"].as_array().unwrap();\n    let quantum = input[\"quantum\"].as_i64().unwrap();\n    let mut jobs = jobs.iter().enumerate().map(|(i, &work)| (i, work as i64)).collect::<Vec<_>>();\n    let mut result = Vec::new();\n    let mut time = 0;\n\n    while !jobs.is_empty() {\n        for i in 0..jobs.len() {\n            let (job_index, work) = &mut jobs[i];\n            if *work > 0 {\n                if *work <= quantum {\n                    result.push(*job_index);\n                    *work = 0;\n                } else {\n                    *work -= quantum;\n                }\n            }\n        }\n        time += quantum;\n    }\n\n    json!(result)\n}\n```",
+    "checkpoint_id": "509287f78cb4d4cf6b3843734733b914b2c158e43e22a7f4bf5e963800894d3c",
+    "finish_reason": "stop",
+    "input_tokens": 259,
+    "output_tokens": 191,
+    "elapsed_ms": 14636,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/comparative/search/round-001/trials/qwen-coder-7b-q4_k_m/comparison/qwen-coder-7b-q4_k_m/dispatch.round_robin.generation.json",
+    "sha256": "1ca4e05b39dd9d40722a590303292c7b6c60890e0934bdeb9fef31677f5aa029",
+    "bytes": 4708
+  },
+  "sandbox_report": {
+    "path": "reports/comparative/search/round-001/trials/qwen-coder-7b-q4_k_m/comparison/sandbox/725d5003-f3e4-4e7a-bd17-b91d45cf210e.json",
+    "sha256": "ae4957bfd3f5adb5792bf31f3c77f96e4c5c394aeb73ab80d56a047db7af2b94",
+    "bytes": 2651
+  },
+  "grading_error": null,
+  "success": false
+}

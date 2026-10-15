@@ -1,0 +1,33 @@
+{
+  "run_id": "3c6a651e-87da-46cd-a01a-5092a3ab0fda",
+  "task_id": "dispatch.priority",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: warning: unused import: `from_str`\n --> /candidate/main.rs:1:25\n  |\n1 | use serde_json::{Value, from_str};\n  |                         ^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0277]: a value of type `Vec<Value>` cannot be built from an iterator over elements of type `i64`\n  --> /candidate/main.rs:26:61\n   |\n26 |     Value::Array(sorted_pairs.into_iter().map(|(_, id)| id).collect())\n   |                                                             ^^^^^^^ value of type `Vec<Value>` cannot be built from `std::iter::Iterator<Item=i64>`\n   |\nhelp: the trait `FromIterator<i64>` is not implemented for `Vec<Value>`\n      but trait `FromIterator<Value>` is implemented for it\n  --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/alloc/src/vec/mod.rs:3993:0\n   = help: for that trait implementation, expected `Value`, found `i64`\nnote: the method call chain might not have had the expected associated types\n  --> /candidate/main.rs:26:43\n   |\n 5 |       let pairs: Vec<(i64, i64)> = input.as_array()\n   |                                    ----- this expression has type `Value`\n 6 |           .unwrap()\n 7 |           .iter()\n   |            ------ `Iterator::Item` is `&Value` here\n 8 |           .map(|v| {\n   |  __________-\n 9 | |             let pair: Vec<i64> = v.as_array()\n10 | |                 .unwrap()\n11 | |                 .iter()\n...  |\n14 | |             (pair[0], pair[1])\n15 | |         })\n   | |__________- `Iterator::Item` changed to `(i64, i64)` here\n...\n26 |       Value::Array(sorted_pairs.into_iter().map(|(_, id)| id).collect())\n   |                                 ----------- ^^^^^^^^^^^^^^^^^ `Iterator::Item` changed to `i64` here\n   |                                 |\n   |                                 `Iterator::Item` is `(i64, i64)` here\nnote: required by a bound in `collect`\n  --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/iter/traits/iterator.rs:2073:4\n\nerror: aborting due to 1 previous error; 1 warning emitted\n\nFor more information about this error, try `rustc --explain E0277`.\n"
+  ],
+  "cases_total": 5,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "0bf995b5f69865792503015f6af52b457c861b679877956e939c2137ddb4a562",
+  "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "97cc6b664708434ba5ebb09eeb3166d7eff16702004cc838ac94d51994592237",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:1",
+    "expected_image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/comparative/search/round-001/trials/qwen-general-7b-q4_k_m/comparison/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/comparative/search/round-001/trials/qwen-general-7b-q4_k_m/comparison/sandbox/3c6a651e-87da-46cd-a01a-5092a3ab0fda.audit.json",
+  "audit_sha256": "be78d2db3cef5ad506daa222c852ef549d946643cea84a4320d2b80d6003943b",
+  "failure": "compilation failed: warning: unused import: `from_str`\n --> /candidate/main.rs:1:25\n  |\n1 | use serde_json::{Value, from_str};\n  |                         ^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0277]: a value of type `Vec<Value>` cannot be built from an iterator over elements of type `i64`\n  --> /candidate/main.rs:26:61\n   |\n26 |     Value::Array(sorted_pairs.into_iter().map(|(_, id)| id).collect())\n   |                                                             ^^^^^^^ value of type `Vec<Value>` cannot be built from `std::iter::Iterator<Item=i64>`\n   |\nhelp: the trait `FromIterator<i64>` is not implemented for `Vec<Value>`\n      but trait `FromIterator<Value>` is implemented for it\n  --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/alloc/src/vec/mod.rs:3993:0\n   = help: for that trait implementation, expected `Value`, found `i64`\nnote: the method call chain might not have had the expected associated types\n  --> /candidate/main.rs:26:43\n   |\n 5 |       let pairs: Vec<(i64, i64)> = input.as_array()\n   |                                    ----- this expression has type `Value`\n 6 |           .unwrap()\n 7 |           .iter()\n   |            ------ `Iterator::Item` is `&Value` here\n 8 |           .map(|v| {\n   |  __________-\n 9 | |             let pair: Vec<i64> = v.as_array()\n10 | |                 .unwrap()\n11 | |                 .iter()\n...  |\n14 | |             (pair[0], pair[1])\n15 | |         })\n   | |__________- `Iterator::Item` changed to `(i64, i64)` here\n...\n26 |       Value::Array(sorted_pairs.into_iter().map(|(_, id)| id).collect())\n   |                                 ----------- ^^^^^^^^^^^^^^^^^ `Iterator::Item` changed to `i64` here\n   |                                 |\n   |                                 `Iterator::Item` is `(i64, i64)` here\nnote: required by a bound in `collect`\n  --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/iter/traits/iterator.rs:2073:4\n\nerror: aborting due to 1 previous error; 1 warning emitted\n\nFor more information about this error, try `rustc --explain E0277`.\n",
+  "duration_ms": 7700,
+  "timeout_evidence": null
+}
