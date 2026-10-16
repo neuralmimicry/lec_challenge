@@ -6,7 +6,7 @@ if [[ $# -eq 0 ]]; then
   set -- explore
 fi
 case "${1:-}" in
-  explore|select-teachers|hardware|compare-models|train|infer|serve|study-plan|study-run|study-select|study-evaluate|distillation-arm-worker|collect-teacher-evidence|collect-teacher-content|collect-student-rollouts|evaluate)
+  explore|select-teachers|hardware|compare-models|train|infer|serve|study-plan|study-run|study-select|study-evaluate|study-regrade|distillation-arm-worker|collect-teacher-evidence|collect-teacher-content|collect-student-rollouts|evaluate)
     printf '%s\n' 'Preparing native hardware detection; download, cache and selection progress will follow.' >&2
     exec ./run-gpu.sh "$@"
     ;;

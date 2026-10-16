@@ -65,7 +65,10 @@ pub(super) fn teacher(root: &Path, frozen: &FrozenTeacher) -> Result<TeacherEvid
         "original student tokeniser checksum mismatch"
     );
     let aligned = tokeniser_sha256 == student_tokeniser_sha256;
-    let native_trace = matches!(frozen.model.architecture.as_str(), "qwen2" | "llama");
+    let native_trace = matches!(
+        frozen.model.architecture.as_str(),
+        "qwen2" | "qwen3" | "llama"
+    );
     let capabilities = EvidenceCapabilities {
         complete_sequences: SignalAvailability::absent(
             true,

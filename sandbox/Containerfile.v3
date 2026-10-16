@@ -1,0 +1,13 @@
+# Policy V3 reuses an explicitly verified, locally cached immutable sandbox.
+# The build receipt retains its inherited upstream OCI/toolchain provenance.
+# No registry pull, package installation, Cargo invocation or network is needed.
+ARG LEC_SANDBOX_BASE
+FROM ${LEC_SANDBOX_BASE}
+USER 0:0
+WORKDIR /build
+COPY sandbox/audit_v3.rs /build/audit.rs
+COPY sandbox/ptrace_v2.rs sandbox/syscalls_v2.rs /build/
+RUN rustc --edition=2024 -O -L dependency=/opt/deps --extern serde_json=$(cat /opt/deps/serde_json.path) /build/audit.rs -o /usr/local/bin/lec-audit && rm -rf /build
+USER 65532:65532
+WORKDIR /tmp
+ENTRYPOINT ["/usr/local/bin/lec-audit"]

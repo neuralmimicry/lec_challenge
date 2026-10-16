@@ -54,5 +54,19 @@ The supervisor kills and reaps its own process group on deadline/error, and
 Linux parent-death handling protects the model child if the diagnostic dies.
 Container ceilings and durable sandbox recovery remain separate enforced
 controls. Failed attempts retain a JSON report, the interruption snapshot when
-available, child stdout/stderr and any partial evaluation evidence. No successful
-execution of this new diagnostic is claimed until an actual report exists.
+available, child stdout/stderr and any partial evaluation evidence.
+
+The first actual completed check is retained in
+[`round-001/report.json`](../reports/local-study/study-evaluation-resume-qa/round-001/report.json).
+It used the immutable CUDA/SIMD application `f5d2f2f520f0c7a69186163c33bd28207c37414fb3cdae0499c169957a846944`
+and recovery diagnostic `5e13e69cfdd0be797091b01a676e384d1edd231018e159332db729dad02755af`,
+with four CPU threads, explicit CUDA/F32 and the original composed adapter
+`b71e448fd3e298f226aa6ba121d89ee8551e3b9e86374d5330269d7c97207511`.
+The supervisor actually delivered SIGKILL after a verified compilation-failure
+verdict, then resumed the same executable. Every committed cache artefact
+remained unchanged. The resumed evaluator and separate verifier both exited
+zero, and all 16 development observations completed with no infrastructure or
+generation errors. The QA passed; the checkpoint's coding score remained
+**0/16**. This establishes interruption recovery, without a learning or
+promotion claim. Original stdout/stderr, interruption snapshot, frozen plan
+and independent verification remain alongside the report.

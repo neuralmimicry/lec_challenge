@@ -4,7 +4,9 @@ This is measured diagnostic evidence from the original base model, original
 synthetic prompt zero and the first two native layers. It does not establish
 coding quality, learning, assessment promotion or numerical qualification.
 The failed schema-2 end-to-end errors and unchanged 0.10 criterion remain
-authoritative. No numerical kernel or production source was changed.
+authoritative. The first diagnostic changed no production source. A later,
+separately tested RMS correction is described below; its bounded results do not
+replace the end-to-end comparison.
 
 ## Retained execution
 
@@ -108,3 +110,38 @@ or tolerance change follows from the present bounded probe.
 These prototype artefacts live in excluded local state; they need deliberate
 packaging if included with a submission. This account records their actual
 findings and limits without replacing the original numerical evidence.
+
+## Producer-bound follow-up and integrated RMS correction
+
+The separate `alias-v2/round-001` capture retains completed producer outputs
+before consumers can overwrite them. Its independent oracle report is
+`state/diagnostics/bitnet-layer-probe/alias-v2/round-001-oracle-attempt-001/report.json`,
+SHA-256 `4bfce9ccaf27a1f47613b142068ad8b80b40d29a1d38f605a2114cda36e01d2a`.
+The oracle verifies 38 producer/constant edges, original norm weights and
+quantisation scales, and 58 overlapping captured outputs. No post-operation
+fallback supplies any of the eight RMS inputs. One actual weighted
+quantisation-code disagreement occurs at layer one's feed-forward norm.
+This resolves the measured operand aliases; it does not identify the first
+natural full-model divergence.
+
+The integrated [Rust RMS operation](../../src/bitnet/native_rms.rs) follows the
+observed native reduction: F32 products, sequential F64 accumulation, then
+native F32 mean, reciprocal and product. It implements the complete first-order
+vector-Jacobian product, including affine-weight gradients and non-contiguous
+inputs. The implementation explicitly supports CPU/F32, matching the BitNet
+training protocol; unsupported execution requests fail clearly.
+
+`state/diagnostics/bitnet-rms-prototype/integrated-cuts-attempt-001/report.json`
+records the actual production operation on all eight producer-bound inputs.
+All eight RMS outputs and all eight affine-weighted outputs match bit for bit:
+**817,152 F32 values**, with no full model allocated. Separate finite-difference,
+structural and gradient tests passed. The comparison binds the production
+source, diagnostic executable and original capture/oracle hashes. These are
+bounded arithmetic and derivative checks, rather than a coding evaluation.
+
+The four normalisation sites in each block and the final model norm now use
+this operation, and the parity implementation fingerprint includes its exact source. Native
+integer-dot/postscale versus floating projection differences remain. A new
+immutable executable must therefore run the original full-vocabulary protocol
+again, at the unchanged **0.10** tolerance, before any numerical-equivalence or
+validated-ranking claim. All earlier failures remain intact.

@@ -104,6 +104,10 @@ pub fn numerical_parity_implementation() -> BTreeMap<String, String> {
         ("Cargo.lock", include_bytes!("../../Cargo.lock").as_slice()),
         ("src/bitnet.rs", include_bytes!("../bitnet.rs").as_slice()),
         (
+            "src/bitnet/native_rms.rs",
+            include_bytes!("../bitnet/native_rms.rs").as_slice(),
+        ),
+        (
             "src/bitnet/codec.rs",
             include_bytes!("../bitnet/codec.rs").as_slice(),
         ),
@@ -173,6 +177,14 @@ fn read_json<T: serde::de::DeserializeOwned>(file: &Artefact, root: &Path) -> Re
 }
 
 fn validate_plan(plan: &NumericalParityPlan, root: &Path) -> Result<usize> {
+    validate_plan_with_storage(plan, root, true)
+}
+
+fn validate_plan_with_storage(
+    plan: &NumericalParityPlan,
+    root: &Path,
+    materialise_adapter: bool,
+) -> Result<usize> {
     ensure!(
         plan.schema_version == 2
             && plan.evidence_kind == "frozen_original_bitnet_rust_i2s_numerical_parity"
@@ -210,12 +222,17 @@ fn validate_plan(plan: &NumericalParityPlan, root: &Path) -> Result<usize> {
             "numerical parity baseline includes an adapter manifest"
         );
     } else {
-        let manifest = crate::distillation::checkpoint::validate_checkpoint(
-            checkpoint_manifest
-                .parent()
-                .context("numerical parity adapter directory absent")?,
-            &assets,
-        )?;
+        let directory = checkpoint_manifest
+            .parent()
+            .context("numerical parity adapter directory absent")?;
+        let manifest = if materialise_adapter {
+            crate::distillation::checkpoint::validate_checkpoint(directory, &assets)?
+        } else {
+            // The regrader already checks the complete tensor header, extents
+            // and file checksum. Reconstructing retained probes needs metadata,
+            // rather than allocating model or adapter tensor storage again.
+            crate::distillation::checkpoint::validate_checkpoint_metadata(directory, &assets)?
+        };
         ensure!(
             manifest.adapter_sha256 == checkpoint.checkpoint_id
                 && manifest.spec.student_kind
@@ -321,6 +338,14 @@ fn validate_plan(plan: &NumericalParityPlan, root: &Path) -> Result<usize> {
 }
 
 fn reconstruct(report: &NumericalParityReport, root: &Path) -> Result<serde_json::Value> {
+    reconstruct_with_storage(report, root, true)
+}
+
+fn reconstruct_with_storage(
+    report: &NumericalParityReport,
+    root: &Path,
+    materialise_adapter: bool,
+) -> Result<serde_json::Value> {
     ensure!(
         report.schema_version == 2
             && report.evidence_kind == "actual_original_bitnet_rust_i2s_numerical_parity"
@@ -329,7 +354,11 @@ fn reconstruct(report: &NumericalParityReport, root: &Path) -> Result<serde_json
         "numerical parity requires a complete schema-2 report"
     );
     let plan: NumericalParityPlan = read_json(&report.plan, root)?;
-    let vocabulary = validate_plan(&plan, root)?;
+    let vocabulary = if materialise_adapter {
+        validate_plan(&plan, root)?
+    } else {
+        validate_plan_with_storage(&plan, root, false)?
+    };
     probes::execution(report, &plan)?;
     ensure!(
         report.observations.len() == NUMERICAL_PARITY_PROMPTS.len(),
@@ -427,6 +456,21 @@ pub fn attach_numerical_equivalence(
 /// Missing, failed and stale numerical receipts exclude a BitNet score from
 /// ranking without erasing its observed descriptive task outcomes.
 pub fn verify_numerical_equivalence(evaluation_dir: &Path) -> Result<NumericalEquivalence> {
+    verify_equivalence_with_storage(evaluation_dir, true)
+}
+
+/// Derived grading has already rehashed and checked tensor metadata. Retained
+/// numerical probes are reconstructed without loading model/adapter tensors.
+pub(super) fn verify_numerical_equivalence_metadata(
+    evaluation_dir: &Path,
+) -> Result<NumericalEquivalence> {
+    verify_equivalence_with_storage(evaluation_dir, false)
+}
+
+fn verify_equivalence_with_storage(
+    evaluation_dir: &Path,
+    materialise_adapter: bool,
+) -> Result<NumericalEquivalence> {
     let root = std::env::current_dir()?.canonicalize()?;
     let evaluation: Plan = serde_json::from_slice(&fs::read(evaluation_dir.join("plan.json"))?)?;
     let required = evaluation.checkpoint.architecture == StudentArchitecture::TernaryBitnet;
@@ -478,7 +522,7 @@ pub fn verify_numerical_equivalence(evaluation_dir: &Path) -> Result<NumericalEq
             "numerical equivalence inference/KV protocol differs from evaluation"
         );
         backend::execution(&loaded, &evaluation, &root)?;
-        reconstruct(&report, &root)
+        reconstruct_with_storage(&report, &root, materialise_adapter)
     })();
     match verification {
         Ok(reconstructed) => {

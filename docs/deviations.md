@@ -42,3 +42,22 @@ evidence and are not executed by this Rust implementation. Whitespace checks
 exclude these exact source copies because normalising them would invalidate
 their recorded hashes or change a patch's context; authored project sources
 retain the ordinary checks.
+
+## 16 October 2026 — explicit sandbox timer origins
+
+Original controller-V2 observations exposed a real lifecycle defect: an attached
+runtime-client deadline mixed startup, execution and removal, sometimes losing
+otherwise completed audit output. Verification 007 also failed its strict
+acknowledged-kill assertion. Keeping a native 20-second timer from container
+start while starting another 20-second timer after setup cannot guarantee the
+declared candidate allowance. The failures and original policies remain intact.
+
+Policy/controller V3 therefore adds a trusted Rust PID 1 watchdog armed at EOF
+before compilation, cached exact cgroup kill/event descriptors, independently
+persisted bounded output and separate lifecycle budgets. Its outer native
+startup/crash ceiling becomes 80 seconds; candidate execution remains capped
+at 20 seconds, with independent namespace termination if the host disappears.
+These are distinct timers, not a retrospective relaxation of previous results.
+Actual V3 enforcement requires fresh container and crash QA. The original
+generation artefacts are regradable under a separately frozen new policy,
+without replacing model outputs or changing their original inference identity.

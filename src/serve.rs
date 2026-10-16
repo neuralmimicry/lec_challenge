@@ -204,7 +204,7 @@ pub async fn run_with_options(
     config: ServeConfig,
     options: RuntimeOptions,
 ) -> Result<()> {
-    run_inner(base_dir, checkpoint, config, options, false).await
+    run_inner(base_dir, checkpoint, config, options, Purpose::Assessment).await
 }
 
 /// Comparative teachers are evaluation-only; they cannot authorise production
@@ -214,7 +214,32 @@ pub async fn run_comparative(
     config: ServeConfig,
     options: RuntimeOptions,
 ) -> Result<()> {
-    run_inner(base_dir, None, config, options, true).await
+    run_inner(base_dir, None, config, options, Purpose::Comparative).await
+}
+
+/// Serve a provenance-verified exploratory adapter on the same bounded local
+/// endpoint. Its health can never authorise production routing or promotion.
+pub async fn run_local_study(
+    base_dir: PathBuf,
+    checkpoint: PathBuf,
+    config: ServeConfig,
+    options: RuntimeOptions,
+) -> Result<()> {
+    run_inner(
+        base_dir,
+        Some(checkpoint),
+        config,
+        options,
+        Purpose::LocalStudy,
+    )
+    .await
+}
+
+#[derive(Clone, Copy, PartialEq, Eq)]
+enum Purpose {
+    Assessment,
+    Comparative,
+    LocalStudy,
 }
 
 fn assessment_execution_eligible(checkpoint_present: bool, options: &RuntimeOptions) -> bool {
@@ -226,7 +251,7 @@ async fn run_inner(
     checkpoint: Option<PathBuf>,
     config: ServeConfig,
     options: RuntimeOptions,
-    comparative: bool,
+    purpose: Purpose,
 ) -> Result<()> {
     let addr = config.validate()?;
     let (tx, mut rx) = mpsc::channel::<Job>(config.queue_capacity);
@@ -239,12 +264,22 @@ async fn run_inner(
                 // Tensor identity alone cannot authorise another precision/device.
                 let execution_eligible =
                     assessment_execution_eligible(checkpoint.is_some(), &options);
-                let mut model = if comparative {
-                    ModelRuntime::load_comparative_with_options(&base_dir, options)?
-                } else {
-                    ModelRuntime::load_with_options(&base_dir, checkpoint.as_deref(), options)?
+                let mut model = match purpose {
+                    Purpose::Comparative => {
+                        ModelRuntime::load_comparative_with_options(&base_dir, options)?
+                    }
+                    Purpose::Assessment => {
+                        ModelRuntime::load_with_options(&base_dir, checkpoint.as_deref(), options)?
+                    }
+                    Purpose::LocalStudy => crate::distillation::load_runtime(
+                        &base_dir,
+                        checkpoint
+                            .as_deref()
+                            .context("local study requires its real checkpoint")?,
+                        options,
+                    )?,
                 };
-                let production_eligible = !comparative
+                let production_eligible = purpose == Purpose::Assessment
                     && execution_eligible
                     && match &checkpoint {
                         None => true,
@@ -264,6 +299,10 @@ async fn run_inner(
                     top_p: 1.,
                     timeout_seconds: 1800,
                 })?;
+                ensure!(
+                    !smoke.completion.trim().is_empty() && smoke.output_tokens > 0,
+                    "inference health probe returned no output"
+                );
                 let health = Health {
                     process_id: std::process::id(),
                     healthy: true,

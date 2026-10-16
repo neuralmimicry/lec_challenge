@@ -192,6 +192,7 @@ fn output_directory(arguments: &[OsString]) -> Option<PathBuf> {
         "select-teachers" => "reports/comparative/search/round-001",
         "compare-models" => "reports/comparative/development",
         "study-evaluate" => "reports/local-study/evaluation",
+        "study-regrade" => "reports/local-study/regraded",
         "explore" => "reports/local-study/explore/round-001",
         "collect-student-rollouts" => "reports/local-study/student-rollouts",
         "collect-teacher-content" => "reports/local-study/content",
@@ -253,6 +254,7 @@ fn prepare_fresh_arguments(arguments: &mut Vec<OsString>) -> Result<Option<PathB
                     | "study-plan"
                     | "study-run"
                     | "study-evaluate"
+                    | "study-regrade"
                     | "train"
             )),
         "this command does not support --fresh"
@@ -396,6 +398,7 @@ fn resume_engine_at(
         Some("select-teachers") => ("freeze.json", "/engine_binary_sha256"),
         Some("compare-models") => ("plan.json", "/engine_binary_sha256"),
         Some("study-evaluate") => ("plan.json", "/engine/sha256"),
+        Some("study-regrade") => ("batch-plan.json", "/grading/engine/sha256"),
         Some("study-run") => ("state.json", "/engine/sha256"),
         Some("explore") => ("protocol.json", "/stage_engine/sha256"),
         Some("collect-student-rollouts") => ("rollout-policy.json", "/engine_sha256"),
@@ -565,7 +568,8 @@ fn main() -> Result<()> {
         return Ok(());
     }
     let offline = arguments.iter().any(|argument| argument == "--offline");
-    let cpu_only = std::env::var("LEC_DEVICE").is_ok_and(|value| value == "cpu")
+    let cpu_only = arguments[0] == "study-regrade"
+        || std::env::var("LEC_DEVICE").is_ok_and(|value| value == "cpu")
         || arguments.iter().any(|argument| argument == "--device=cpu")
         || arguments
             .windows(2)
@@ -957,6 +961,40 @@ mod tests {
         .unwrap();
         assert_eq!(resumed.sha256, original.sha256);
         assert_eq!(fs::read(output.join("plan.json")).unwrap(), before);
+    }
+
+    #[test]
+    fn regrade_resume_uses_its_grading_engine_and_preserves_generation_engine() {
+        let directory = tempfile::tempdir().unwrap();
+        let generation = pinned(
+            directory.path(),
+            b"labelled original generation engine fixture",
+        );
+        let grading = pinned(
+            directory.path(),
+            b"labelled independently frozen grading engine fixture",
+        );
+        let later = pinned(directory.path(), b"labelled later launcher fixture");
+        let output = directory.path().join("regraded");
+        let protocol = serde_json::json!({"grading":{"engine":{"sha256":grading.sha256}},"originals":[{"generation_plan":{"engine":{"sha256":generation.sha256}}}]});
+        artefact::write_json(&output.join("batch-plan.json"), &protocol).unwrap();
+        artefact::write_json(&output.join("launch-engine.json"), &later).unwrap();
+        let before = fs::read(output.join("batch-plan.json")).unwrap();
+        let recovered = resume_engine_at(
+            &arguments("study-regrade", &output),
+            &directory.path().join("engines"),
+        )
+        .unwrap()
+        .unwrap();
+        assert_eq!(recovered.sha256, grading.sha256);
+        assert_ne!(recovered.sha256, generation.sha256);
+        assert_eq!(fs::read(output.join("batch-plan.json")).unwrap(), before);
+        let default = vec![OsString::from("study-regrade")];
+        assert_eq!(
+            output_directory(&default),
+            Some(PathBuf::from("reports/local-study/regraded"))
+        );
+        assert!(include_str!("../run.sh").contains("|study-regrade|"));
     }
 
     #[test]

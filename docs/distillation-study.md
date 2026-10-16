@@ -18,7 +18,7 @@ The operator graph separates questions that are often conflated:
 | Training signal | Sequence SFT; full-vocabulary temperature KL; hidden features; attention/token relations | Verified teacher run or native tensor capture, aligned teacher/student positions and assistant-only target masks |
 | Content | Process/plan; tool trajectory; contextual supervision; preferred/rejected answers with DPO | Actual recorded material and trusted outcomes; a solution is not relabelled as a reasoning trace |
 | Data policy | Offline; on-policy | Fixed recorded examples, or genuine current-checkpoint student rollouts with linked teacher feedback |
-| Organisation | Single/multiple teachers; ordered progressive assistants; self-distillation | Exact teacher identities/order, real intermediate adapters, or a frozen student-generated teacher source |
+| Organisation | Single/multiple teachers; ordered teacher curricula; self-distillation | Exact teacher identities/order, real intermediate adapters, or a frozen student-generated teacher source |
 | Student | Conventional Qwen 0.5B LoRA; conditional ternary BitNet | Actual trainable weights, export and successful reload for that architecture |
 
 All nonempty subsets of configured signal operators and every subset of content
@@ -45,11 +45,19 @@ logit/soft-target distillation belongs to the soft-token signal. Feature matchin
 and relational/attention transfer are separate signals. Process supervision,
 tool-use traces, contextual transfer and preference optimisation concern content
 and objectives that can be composed with signals. Offline/on-policy, ensembles,
-progressive assistants and self-distillation organise data or stages. Listing an
+ordered curricula and self-distillation organise data or stages. Listing an
 alias twice would not create an additional implemented family. Reverse KL,
 Jensen–Shannon objectives, reinforcement learning, specialist compression and
 other algorithms are outside this explicitly configured grid until separately
 implemented, tested and preregistered.
+
+The historical `progressive` configuration field means ordered teacher stages
+for one fixed student architecture. Each stage continues a real adapter, but
+the next teacher remains its original model. This implements a curriculum. A
+teacher-assistant architecture bridge would instead train an intermediate
+model and use that adapted model to teach a smaller student; that separate
+topology has not been implemented or measured. Curriculum coverage cannot be
+reported as evidence of that bridge.
 
 The fixed conventional student is the pinned
 `Qwen/Qwen2.5-Coder-0.5B-Instruct`. KL requires verified complete vocabulary and
@@ -186,3 +194,28 @@ separate infrastructure diagnosis from retained files. Invalid comparisons are
 written explicitly and return a nonzero exit; no inference or containers run.
 The actual standalone build's compiler, original rlibs and pinned executable
 are recorded in `state/diagnostics/study-comparison/build/receipt.json`.
+
+## Serving an exploratory student
+
+The local service accepts a separately validated exploratory checkpoint:
+
+```sh
+./run.sh serve --local-study --device cpu --dtype f32 \
+  --base offline_bundle/base \
+  --checkpoint reports/local-study/native-full-sft-seed1729 \
+  --config config/serving-teacher.toml
+```
+
+The original base, adapter, manifest and complete training evidence are checked
+before loading. Health includes the actual checkpoint, device and precision;
+startup requires a finite, nonempty numerical probe. Inference uses the bounded
+worker and request queue. This mode always reports `production_eligible=false`,
+and production routing rejects it even if its tensor identity matches a useful
+research result. It does not convert a development comparison into a promotion.
+
+`examples/study_serving_smoke.rs` accepts `--engine`, `--checkpoint`, `--base`
+and a fresh `--output`. It checks the real HTTP identity, saves a complete
+generation, grades a deliberately selected training example in a fresh
+container and proves production routing rejects the endpoint. Its report is
+operational QA, not an unbiased coding score. An empty response, HTTP error,
+failed execution or incomplete audit returns failure with retained evidence.

@@ -1,0 +1,51 @@
+# Fresh follow-up after the first six-candidate catalogue was exhausted.
+# Original round-001 settings and outcomes remain unchanged. The new engine
+# must pass Qwen3/legacy-RoPE QA before this explicit protocol is dispatched.
+schema_version = 1
+target_models = 2
+minimum_pass_rate = 0.80
+maximum_iterations = 2
+maximum_download_bytes = 8589934592
+minimum_free_disk_bytes = 8589934592
+device = "auto"
+gpu_ordinal = 0
+context_tokens = 1024
+max_new_tokens = 512
+seed = 1729
+managed_roots = ["offline_bundle/comparative"]
+# The actual 7B training source remains needed for matched method studies.
+keep_models = ["qwen-coder-7b-q4_k_m"]
+initial_registry = "reports/comparative/search/round-001/trials/qwen-coder-7b-q4_k_m/registry.toml"
+initial_comparisons = ["reports/comparative/search/round-001/trials/qwen-coder-7b-q4_k_m/comparison"]
+
+[[candidates]]
+id = "deepseek-coder-6_7b-q4_k_m"
+model_id = "TheBloke/deepseek-coder-6.7B-instruct-GGUF"
+revision = "9e221e6b41cb1bf1c5d8f9718e81e3dc781f7557"
+source_model_id = "deepseek-ai/deepseek-coder-6.7b-instruct"
+source_revision = "e5d64addd26a6a1db0f9b863abf6ee3141936807"
+filename = "deepseek-coder-6.7b-instruct.Q4_K_M.gguf"
+sha256 = "92da6238854f2fa902d8b2ad79d548536af1d3ab06821f323bd5bbcea2013276"
+bytes = 4083015904
+directory = "offline_bundle/comparative/deepseek-coder-6_7b-q4_k_m"
+architecture = "llama"
+licence = "DeepSeek-Model-Licence-1.0"
+developer_id = "deepseek"
+dense_embedding_bytes = 528482304
+kv_bytes_per_token = 1048576
+
+[[candidates]]
+id = "qwen3-4b-instruct-2507-q4_k_m"
+model_id = "bartowski/Qwen_Qwen3-4B-Instruct-2507-GGUF"
+revision = "ae44f08e1392f39c0e474af10c3ff8355c8b6688"
+source_model_id = "Qwen/Qwen3-4B-Instruct-2507"
+source_revision = "cdbee75f17c01a7cc42f958dc650907174af0554"
+filename = "Qwen_Qwen3-4B-Instruct-2507-Q4_K_M.gguf"
+sha256 = "2fde00ce69dd4899c70d020845e2638353015bba0fdf161b3eb965f2bca4464e"
+bytes = 2497280736
+directory = "offline_bundle/comparative/qwen3-4b-instruct-2507-q4_k_m"
+architecture = "qwen3"
+licence = "Apache-2.0"
+developer_id = "alibaba-qwen"
+dense_embedding_bytes = 1555824640
+kv_bytes_per_token = 294912

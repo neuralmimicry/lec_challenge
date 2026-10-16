@@ -58,6 +58,42 @@ impl OwnedRun {
     pub fn labels(&self) -> Vec<(String, String)> {
         self.record.labels()
     }
+    pub fn verify_inspection(&self, inspected: &Value) -> Result<String> {
+        verified_id(&self.record, inspected)
+    }
+    pub fn nonce(&self) -> &str {
+        &self.record.nonce
+    }
+    pub fn scope(&self) -> &str {
+        &self.record.scope
+    }
+    pub async fn bind_container(&mut self, id: &str) -> Result<()> {
+        let id = image_id(id)?.to_owned();
+        ensure!(
+            self.record
+                .verified_container_id
+                .as_ref()
+                .is_none_or(|old| old == &id),
+            "owned immutable container ID changed"
+        );
+        self.record.verified_container_id = Some(id);
+        let path = self.path.clone();
+        let record = self.record.clone();
+        tokio::task::spawn_blocking(move || publish(&path, &record)).await??;
+        Ok(())
+    }
+    pub async fn finish_verified_absence(&mut self) -> Result<()> {
+        ensure!(
+            self.record.controller_version == 3 && self.record.verified_container_id.is_some(),
+            "verified version-three absence lacks bound container identity"
+        );
+        self.record.completed_unix_ms = Some(crate::ledger::unix_millis());
+        self.record.completion_reason = Some("controller_three_verified_exact_id_removal".into());
+        let path = self.path.clone();
+        let record = self.record.clone();
+        tokio::task::spawn_blocking(move || publish(&path, &record)).await??;
+        Ok(())
+    }
 
     /// The controller retains its runtime lease until verified cleanup and this
     /// durable acknowledgement finish, even if the requesting future is dropped.
@@ -193,8 +229,15 @@ fn image_id(value: &str) -> Result<&str> {
 /// Publish before spawning a runtime client. A crash between publication and
 /// creation leaves a harmless pending record, recovered as an absent container.
 pub(super) fn plan(cfg: &SandboxConfig, name: &str) -> Result<OwnedRun> {
+    plan_with_nonce(cfg, name, None)
+}
+pub(super) fn plan_with_nonce(
+    cfg: &SandboxConfig,
+    name: &str,
+    nonce: Option<&str>,
+) -> Result<OwnedRun> {
     ensure!(
-        cfg.controller_version == 2,
+        matches!(cfg.controller_version, 2 | 3),
         "durable sandbox execution requires controller version two"
     );
     ensure!(
@@ -212,8 +255,10 @@ pub(super) fn plan(cfg: &SandboxConfig, name: &str) -> Result<OwnedRun> {
     let (_, owner_start_ticks) = process_start(&fs::read_to_string("/proc/self/stat")?)?;
     let record = Record {
         schema_version: 1,
-        controller_version: 2,
-        nonce: uuid::Uuid::new_v4().to_string(),
+        controller_version: cfg.controller_version,
+        nonce: nonce
+            .map(str::to_owned)
+            .unwrap_or_else(|| uuid::Uuid::new_v4().to_string()),
         scope,
         workspace,
         uid: uid(),
@@ -234,7 +279,7 @@ pub(super) fn plan(cfg: &SandboxConfig, name: &str) -> Result<OwnedRun> {
 
 async fn inspect(cfg: &SandboxConfig, target: &str) -> Result<Option<Value>> {
     let output = timeout(
-        Duration::from_secs(10),
+        Duration::from_secs(if cfg.controller_version == 3 { 30 } else { 10 }),
         Command::new(&cfg.runtime)
             .args(["inspect", target])
             .kill_on_drop(true)
@@ -357,7 +402,7 @@ pub(super) async fn recover(cfg: &SandboxConfig) -> Result<()> {
             let record: Record = serde_json::from_slice(&fs::read(&load_path)?)?;
             ensure!(
                 record.schema_version == 1
-                    && record.controller_version == 2
+                    && matches!(record.controller_version, 2 | 3)
                     && record.scope == expected_scope
                     && record.workspace == expected_workspace
                     && record.uid == uid()

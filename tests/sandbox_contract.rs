@@ -6,12 +6,21 @@ use lec_distil::{
     tasks,
 };
 use serde_json::json;
-use std::{fs, path::Path};
+use std::{
+    fs,
+    path::{Path, PathBuf},
+};
+
+fn qa_directory() -> PathBuf {
+    std::env::var_os("LEC_SANDBOX_QA_OUTPUT")
+        .map(PathBuf::from)
+        .unwrap_or_else(|| PathBuf::from("reports/sandbox-qa"))
+}
 
 async fn configuration() -> Result<SandboxConfig> {
     let mut config = SandboxConfig::default();
     config.expected_image_id = sandbox::policy_evidence(&config).await?.1;
-    config.report_dir = "reports/sandbox-qa/runs".into();
+    config.report_dir = qa_directory().join("runs");
     Ok(config)
 }
 
@@ -25,9 +34,10 @@ async fn offline_oci_archive_round_trip() -> Result<()> {
         sandbox::policy_evidence(&configuration).await?.1 == loaded,
         "loaded immutable identity mismatch"
     );
-    fs::create_dir_all("reports/sandbox-qa")?;
+    let output = qa_directory();
+    fs::create_dir_all(&output)?;
     fs::write(
-        "reports/sandbox-qa/oci-round-trip.json",
+        output.join("oci-round-trip.json"),
         serde_json::to_vec_pretty(
             &json!({"passed":true,"evidence_kind":"actual_hash_verified_offline_oci_load","image_id":loaded,"archive":"offline_bundle/images/lec-rust-sandbox.tar","network_downloads":0}),
         )?,
@@ -82,9 +92,10 @@ async fn real_reference_candidates_across_all_splits_and_evidence_tampering() ->
         );
         reports.push(report);
     }
-    fs::create_dir_all("reports/sandbox-qa")?;
+    let output = qa_directory();
+    fs::create_dir_all(&output)?;
     fs::write(
-        "reports/sandbox-qa/references.json",
+        output.join("references.json"),
         serde_json::to_vec_pretty(
             &json!({"evidence_kind":"actual_reference_candidate_execution","passed":true,"reports":reports,"tampering_rejected":["aggregate_score","candidate_code","immutable_image"]}),
         )?,
@@ -163,9 +174,10 @@ async fn real_output_deadline_and_alias_defences() -> Result<()> {
         "bounded SIGKILL/removal was not observed"
     );
     reports.push(report);
-    fs::create_dir_all(Path::new("reports/sandbox-qa"))?;
+    let output = qa_directory();
+    fs::create_dir_all(&output)?;
     fs::write(
-        "reports/sandbox-qa/adversarial.json",
+        output.join("adversarial.json"),
         serde_json::to_vec_pretty(
             &json!({"evidence_kind":"actual_adversarial_candidate_execution","passed":true,"reports":reports}),
         )?,

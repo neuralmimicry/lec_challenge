@@ -73,7 +73,19 @@ impl ExecutionArguments {
     }
 
     fn options_for_model(&self, base: &Path) -> Result<model::RuntimeOptions> {
+        self.options_for_model_with_context(base, None)
+    }
+
+    fn options_for_model_with_context(
+        &self,
+        base: &Path,
+        context_tokens: Option<usize>,
+    ) -> Result<model::RuntimeOptions> {
         let quantised = base.join("gguf-assets.json").is_file();
+        ensure!(
+            quantised || context_tokens.is_none(),
+            "explicit teacher context requires an original GGUF model"
+        );
         let config_path = base.join(if quantised {
             "source/config.json"
         } else {
@@ -103,22 +115,7 @@ impl ExecutionArguments {
                 .context("weight size overflow")?;
         }
         let (gpu_bytes, cpu_bytes) = if quantised {
-            (
-                model::estimate_quantised_memory(
-                    &cfg,
-                    bytes,
-                    1024.min(cfg.max_position_embeddings),
-                    true,
-                )?
-                .conservative_total_bytes,
-                model::estimate_quantised_memory(
-                    &cfg,
-                    bytes,
-                    1024.min(cfg.max_position_embeddings),
-                    false,
-                )?
-                .conservative_total_bytes,
-            )
+            quantised_residency(&cfg, bytes, context_tokens)?
         } else {
             (
                 bytes
@@ -164,10 +161,35 @@ impl ExecutionArguments {
         Ok(options)
     }
 }
+
+/// Select the runtime using the same requested context that will be loaded.
+/// Otherwise a larger context may appear to fit CUDA and fail after selection,
+/// even when automatic execution could have used sufficient available RAM.
+fn quantised_residency(
+    cfg: &model::QwenConfig,
+    weight_bytes: u64,
+    context_tokens: Option<usize>,
+) -> Result<(u64, u64)> {
+    let context = context_tokens.unwrap_or(1024.min(cfg.max_position_embeddings));
+    ensure!(
+        (1..=4096).contains(&context) && context <= cfg.max_position_embeddings,
+        "requested teacher context exceeds the native or source limit"
+    );
+    Ok((
+        model::estimate_quantised_memory(cfg, weight_bytes, context, true)?
+            .conservative_total_bytes,
+        model::estimate_quantised_memory(cfg, weight_bytes, context, false)?
+            .conservative_total_bytes,
+    ))
+}
 #[derive(Subcommand)]
 enum Command {
     /// Resume adaptive teacher selection and bounded local distillation studies.
     Explore {
+        #[arg(long, default_value = "config/teacher-search.toml")]
+        search_config: PathBuf,
+        #[arg(long, default_value = "config/distillation-study.toml")]
+        study_config: PathBuf,
         #[arg(long, default_value = "reports/local-study/explore/round-001")]
         output: PathBuf,
         #[arg(long, default_value = "reports/comparative/search/round-001")]
@@ -235,6 +257,9 @@ enum Command {
         maximum_tasks: usize,
         #[arg(long, default_value_t = 768)]
         max_tokens: usize,
+        /// Explicit total context for an original GGUF teacher; omission retains its existing cap.
+        #[arg(long)]
+        context_tokens: Option<usize>,
         #[arg(long)]
         offline: bool,
         #[command(flatten)]
@@ -270,6 +295,9 @@ enum Command {
         maximum_tasks: usize,
         #[arg(long, default_value_t = 512)]
         max_tokens: usize,
+        /// Explicit correction-teacher context; the student runtime remains unchanged.
+        #[arg(long)]
+        teacher_context_tokens: Option<usize>,
         #[arg(long, default_value_t = 1729)]
         seed: u64,
         #[arg(long,value_parser=["cpu","cuda"])]
@@ -355,6 +383,37 @@ enum Command {
         fresh: bool,
         #[command(flatten)]
         execution: ExecutionArguments,
+    },
+    /// Regrade every saved train/development output under an explicit new host policy.
+    StudyRegrade {
+        /// Complete original evaluation directories; no task filtering or regeneration.
+        #[arg(long)]
+        original: Vec<PathBuf>,
+        #[arg(long, default_value = "reports/local-study/regraded")]
+        output: PathBuf,
+        #[arg(long, default_value_t = 192)]
+        expected_generations: usize,
+        #[arg(long, default_value_t = 4)]
+        maximum_concurrent_graders: usize,
+        /// Reconstruct the completed batch without launching any container.
+        #[arg(long)]
+        verify_only: bool,
+        #[arg(long)]
+        offline: bool,
+        #[arg(long)]
+        fresh: bool,
+    },
+    /// Independently verify a completed original or derived local evaluation.
+    StudyVerify {
+        #[arg(long)]
+        evaluation: PathBuf,
+    },
+    /// Descriptively compare complete local evaluations; never authorise ship.
+    StudyCompare {
+        #[arg(long)]
+        baseline: PathBuf,
+        #[arg(long, required = true)]
+        candidate: Vec<PathBuf>,
     },
     /// Internal immutable-request boundary used by the study scheduler.
     #[command(hide = true)]
@@ -513,6 +572,9 @@ enum Command {
         config: PathBuf,
         #[arg(long)]
         comparative: bool,
+        /// Serve a verified local-study adapter on an evaluation-only endpoint.
+        #[arg(long, conflicts_with = "comparative", requires = "checkpoint")]
+        local_study: bool,
         #[command(flatten)]
         execution: ExecutionArguments,
     },
@@ -642,6 +704,11 @@ async fn main() {
         | Command::StudyEvaluateWorker { output, .. }
         | Command::Train { output, .. }
         | Command::Evaluate { output, .. } => output.join("last-failure.json"),
+        Command::StudyRegrade { .. }
+        | Command::StudyVerify { .. }
+        | Command::StudyCompare { .. } => {
+            PathBuf::from("reports").join(format!("regrade-failure-{}.json", uuid::Uuid::new_v4()))
+        }
         Command::StudyRun {
             study,
             profile,
@@ -674,6 +741,7 @@ async fn prepare_fresh_command(command: &mut Command) -> Result<()> {
         | Command::CollectStudentRollouts { output, fresh, .. }
         | Command::StudyPlan { output, fresh, .. }
         | Command::StudyEvaluate { output, fresh, .. }
+        | Command::StudyRegrade { output, fresh, .. }
         | Command::Train { output, fresh, .. }
             if *fresh =>
         {
@@ -699,6 +767,8 @@ async fn prepare_fresh_command(command: &mut Command) -> Result<()> {
 async fn execute(command: Command) -> Result<()> {
     match command {
         Command::Explore {
+            search_config,
+            study_config,
             output,
             search_output,
             maximum_run_seconds,
@@ -714,6 +784,8 @@ async fn execute(command: Command) -> Result<()> {
                 output
             };
             let report = lec_distil::explore::run(lec_distil::explore::ExploreOptions {
+                search_config,
+                study_config,
                 output,
                 search_output,
                 maximum_run_seconds,
@@ -808,6 +880,7 @@ async fn execute(command: Command) -> Result<()> {
             content,
             maximum_tasks,
             max_tokens,
+            context_tokens,
             offline,
             execution,
         } => {
@@ -833,7 +906,8 @@ async fn execute(command: Command) -> Result<()> {
             {
                 saved
             } else {
-                execution.options_for_model(&teacher.model.directory)?
+                execution
+                    .options_for_model_with_context(&teacher.model.directory, context_tokens)?
             };
             let content = content
                 .iter()
@@ -852,6 +926,7 @@ async fn execute(command: Command) -> Result<()> {
                     content,
                     runtime,
                     max_tokens,
+                    context_tokens,
                     seed: 1729,
                     maximum_tasks,
                 })
@@ -877,6 +952,7 @@ async fn execute(command: Command) -> Result<()> {
             teachers,
             maximum_tasks,
             max_tokens,
+            teacher_context_tokens,
             seed,
             student_device,
             student_gpu,
@@ -964,7 +1040,7 @@ async fn execute(command: Command) -> Result<()> {
                         .directory
                         .as_path()
                 };
-                execution.options_for_model(directory)?
+                execution.options_for_model_with_context(directory, teacher_context_tokens)?
             };
             let rollout_output = output.clone();
             let _result =
@@ -977,6 +1053,7 @@ async fn execute(command: Command) -> Result<()> {
                     mode,
                     teacher_ids: teachers,
                     teacher_runtime,
+                    teacher_context_tokens,
                     student_runtime,
                     max_tokens,
                     seed,
@@ -1045,6 +1122,80 @@ async fn execute(command: Command) -> Result<()> {
                 "quick_selected":plan.quick_arms,"quick_coverage_gaps":plan.quick_coverage_gaps,
                 "held_out_used":false,"production_eligible":false}),
             )?;
+        }
+        Command::StudyRegrade {
+            original,
+            output,
+            expected_generations,
+            maximum_concurrent_graders,
+            verify_only,
+            offline,
+            fresh,
+        } => {
+            let output = if fresh {
+                fresh_run_output(&output).await?
+            } else {
+                output
+            };
+            eprintln!(
+                "study-regrade: immutable local generations only; no model loading or regeneration; offline={offline}"
+            );
+            let report = if verify_only {
+                tokio::task::spawn_blocking(move || {
+                    lec_distil::study_evaluate::regrade::verify_batch(&output)
+                })
+                .await??
+            } else {
+                lec_distil::study_evaluate::regrade::run_batch(
+                    lec_distil::study_evaluate::regrade::RegradeBatchOptions {
+                        originals: original,
+                        output,
+                        expected_generations,
+                        maximum_concurrent_graders,
+                        sandbox: lec_distil::sandbox::SandboxConfig {
+                            controller_version: 3,
+                            ..Default::default()
+                        },
+                    },
+                )
+                .await?
+            };
+            print(&report)?;
+            ensure!(
+                report["healthy_complete"] == true,
+                "derived regrading retains original generation or new infrastructure failures; complete evidence preserved"
+            );
+        }
+        Command::StudyVerify { evaluation } => {
+            let report = tokio::task::spawn_blocking(move || {
+                lec_distil::study_evaluate::verify_completed(&evaluation)
+            })
+            .await??;
+            print(&report)?;
+            ensure!(
+                report["healthy_complete"] == true,
+                "verified evaluation retains generation or infrastructure failures; original evidence preserved"
+            );
+        }
+        Command::StudyCompare {
+            baseline,
+            candidate,
+        } => {
+            let comparisons = tokio::task::spawn_blocking(move || {
+                lec_distil::study_evaluate::compare_many(&baseline, &candidate)
+            })
+            .await??;
+            let valid = !comparisons.is_empty()
+                && comparisons
+                    .iter()
+                    .all(|row| row["quality_comparison_valid"] == true);
+            print(
+                &serde_json::json!({"schema_version":1,"evidence_kind":"independently_verified_descriptive_study_comparisons","status":if valid {"descriptive_comparison_complete"}else{"invalid_quality_comparison"},"all_quality_comparisons_valid":valid,"comparisons":comparisons,"inference_performed":false,"containers_started":false,"held_out_used":false,"production_eligible":false}),
+            )?;
+            ensure!(
+                valid,
+                "quality comparison is invalid; printed descriptive observations cannot establish improvement"
+            );
         }
         Command::StudyEvaluate {
             base,
@@ -1455,6 +1606,7 @@ async fn execute(command: Command) -> Result<()> {
             checkpoint,
             config,
             comparative,
+            local_study,
             execution,
         } => {
             ensure!(
@@ -1464,6 +1616,14 @@ async fn execute(command: Command) -> Result<()> {
             let options = execution.options_for_model(&base)?;
             if comparative {
                 serve::run_comparative(base, serve::ServeConfig::load(&config)?, options).await?;
+            } else if local_study {
+                serve::run_local_study(
+                    base,
+                    checkpoint.context("local-study checkpoint absent")?,
+                    serve::ServeConfig::load(&config)?,
+                    options,
+                )
+                .await?;
             } else {
                 serve::run_with_options(
                     base,
@@ -1835,12 +1995,201 @@ async fn gate_command(incumbent: PathBuf, candidate: PathBuf) -> Result<()> {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn expanded_context_uses_ram_when_only_the_default_context_fits_vram() -> Result<()> {
+        let cfg: model::QwenConfig = serde_json::from_str(include_str!(
+            "../docs/comparative-models/replacements/qwen-coder-7b-base/config.json"
+        ))?;
+        // Synthetic weight size/capacity isolates the dispatch boundary; this
+        // does not claim an allocation or execution on either architecture.
+        let (small_gpu, small_cpu) = quantised_residency(&cfg, 4 << 30, None)?;
+        let (large_gpu, large_cpu) = quantised_residency(&cfg, 4 << 30, Some(1536))?;
+        ensure!(large_gpu > small_gpu && large_cpu > small_cpu);
+        let guarded_midpoint = small_gpu + (large_gpu - small_gpu) / 2;
+        let free_gpu = (guarded_midpoint + (128 << 20)) * 10 / 9;
+        for architecture in ["x86_64", "aarch64"] {
+            let hardware = platform::HardwareProfile {
+                architecture: architecture.into(),
+                operating_system: "linux".into(),
+                available_cpu_threads: 16,
+                host_available_ram_bytes: 32 << 30,
+                available_ram_bytes: 32 << 30,
+                usable_ram_bytes: 28 << 30,
+                memory_constraint: "labelled boundary fixture".into(),
+                gpus: vec![platform::GpuProfile {
+                    backend: "cuda".into(),
+                    ordinal: 0,
+                    name: "labelled capacity fixture".into(),
+                    total_memory_bytes: free_gpu + (1 << 30),
+                    free_memory_bytes: free_gpu,
+                    compute_capability: None,
+                }],
+                cuda_backend_compiled: true,
+                gpu_probe_note: "synthetic dispatch QA only".into(),
+            };
+            ensure!(matches!(
+                platform::select_runtime(&hardware, "auto", 0, true, small_gpu, small_cpu)?
+                    .options
+                    .device,
+                model::ExecutionDevice::Cuda { ordinal: 0 }
+            ));
+            let expanded =
+                platform::select_runtime(&hardware, "auto", 0, true, large_gpu, large_cpu)?;
+            ensure!(matches!(
+                expanded.options.device,
+                model::ExecutionDevice::Cpu
+            ));
+            ensure!(expanded.reason.contains("VRAM"));
+            ensure!(
+                platform::select_runtime(&hardware, "cuda", 0, true, large_gpu, large_cpu).is_err()
+            );
+        }
+        Ok(())
+    }
+
+    #[test]
+    fn requested_context_cannot_be_cropped_to_make_a_model_fit() -> Result<()> {
+        let mut cfg: model::QwenConfig = serde_json::from_str(include_str!(
+            "../docs/comparative-models/replacements/qwen-coder-7b-base/config.json"
+        ))?;
+        for invalid in [0, 4097, usize::MAX] {
+            ensure!(quantised_residency(&cfg, 4 << 30, Some(invalid)).is_err());
+        }
+        cfg.max_position_embeddings = 1024;
+        ensure!(quantised_residency(&cfg, 4 << 30, Some(1536)).is_err());
+        ensure!(quantised_residency(&cfg, 4 << 30, None).is_ok());
+        Ok(())
+    }
+
+    #[test]
+    fn local_study_serving_requires_a_checkpoint_and_cannot_mix_teacher_mode() -> Result<()> {
+        ensure!(Cli::try_parse_from(["lec-distil", "serve", "--local-study"]).is_err());
+        ensure!(
+            Cli::try_parse_from([
+                "lec-distil",
+                "serve",
+                "--local-study",
+                "--comparative",
+                "--checkpoint",
+                "saved/adapter"
+            ])
+            .is_err()
+        );
+        let cli = Cli::try_parse_from([
+            "lec-distil",
+            "serve",
+            "--local-study",
+            "--checkpoint",
+            "saved/adapter",
+        ])?;
+        ensure!(matches!(
+            cli.command,
+            Command::Serve {
+                local_study: true,
+                comparative: false,
+                checkpoint: Some(_),
+                ..
+            }
+        ));
+        Ok(())
+    }
+    #[test]
+    fn regrade_cli_retains_full_cohort_and_has_no_generation_controls() -> Result<()> {
+        let cli = Cli::try_parse_from([
+            "lec-distil",
+            "study-regrade",
+            "--original",
+            "saved/base-development",
+            "--original",
+            "saved/base-train",
+            "--offline",
+        ])?;
+        match cli.command {
+            Command::StudyRegrade {
+                original,
+                expected_generations,
+                maximum_concurrent_graders,
+                verify_only,
+                offline,
+                ..
+            } => {
+                ensure!(
+                    original
+                        == vec![
+                            PathBuf::from("saved/base-development"),
+                            PathBuf::from("saved/base-train")
+                        ]
+                );
+                ensure!(
+                    expected_generations == 192
+                        && maximum_concurrent_graders == 4
+                        && !verify_only
+                        && offline
+                );
+            }
+            _ => bail!("unexpected regrade command"),
+        }
+        for flag in [
+            "--task",
+            "--seed",
+            "--max-tokens",
+            "--checkpoint",
+            "--device",
+        ] {
+            ensure!(Cli::try_parse_from(["lec-distil", "study-regrade", flag, "1"]).is_err());
+        }
+        ensure!(matches!(
+            Cli::try_parse_from(["lec-distil", "study-regrade", "--verify-only", "--offline"])?
+                .command,
+            Command::StudyRegrade {
+                verify_only: true,
+                offline: true,
+                ..
+            }
+        ));
+        Ok(())
+    }
+    #[test]
+    fn study_inspection_cli_is_read_only_and_requires_complete_paths() -> Result<()> {
+        ensure!(matches!(
+            Cli::try_parse_from([
+                "lec-distil",
+                "study-verify",
+                "--evaluation",
+                "saved/derived"
+            ])?
+            .command,
+            Command::StudyVerify { .. }
+        ));
+        let compared = Cli::try_parse_from([
+            "lec-distil",
+            "study-compare",
+            "--baseline",
+            "saved/base",
+            "--candidate",
+            "saved/sft",
+            "--candidate",
+            "saved/composed",
+        ])?;
+        ensure!(
+            matches!(compared.command,Command::StudyCompare {candidate,..} if candidate.len()==2)
+        );
+        ensure!(
+            Cli::try_parse_from(["lec-distil", "study-compare", "--baseline", "saved/base"])
+                .is_err()
+        );
+        for command in ["study-verify", "study-compare"] {
+            ensure!(Cli::try_parse_from(["lec-distil", command, "--device", "cuda"]).is_err());
+        }
+        Ok(())
+    }
     #[tokio::test]
     async fn fresh_collectors_and_evaluations_preserve_original_failure_evidence() -> Result<()> {
         for name in [
             "collect-teacher-content",
             "collect-student-rollouts",
             "study-evaluate",
+            "study-regrade",
         ] {
             let root = tempfile::tempdir()?;
             let original = root.path().join("original");
@@ -1860,7 +2209,8 @@ mod tests {
             let path = match &cli.command {
                 Command::CollectTeacherContent { output, fresh, .. }
                 | Command::CollectStudentRollouts { output, fresh, .. }
-                | Command::StudyEvaluate { output, fresh, .. } => {
+                | Command::StudyEvaluate { output, fresh, .. }
+                | Command::StudyRegrade { output, fresh, .. } => {
                     ensure!(!fresh, "fresh command would create another directory");
                     output.clone()
                 }
@@ -1874,6 +2224,72 @@ mod tests {
             );
             prepare_fresh_command(&mut cli.command).await?;
             ensure!(std::fs::read_dir(root.path())?.count() == 2);
+        }
+        Ok(())
+    }
+    #[test]
+    fn explicit_teacher_context_and_explore_configuration_keep_legacy_defaults() -> Result<()> {
+        for (command, flag) in [
+            ("collect-teacher-content", "--context-tokens"),
+            ("collect-student-rollouts", "--teacher-context-tokens"),
+        ] {
+            let legacy = Cli::try_parse_from(["lec-distil", command])?;
+            match legacy.command {
+                Command::CollectTeacherContent { context_tokens, .. } => {
+                    ensure!(context_tokens.is_none())
+                }
+                Command::CollectStudentRollouts {
+                    teacher_context_tokens,
+                    ..
+                } => ensure!(teacher_context_tokens.is_none()),
+                _ => bail!("unexpected collector command"),
+            }
+            let explicit = Cli::try_parse_from(["lec-distil", command, flag, "2048"])?;
+            match explicit.command {
+                Command::CollectTeacherContent { context_tokens, .. } => {
+                    ensure!(context_tokens == Some(2048))
+                }
+                Command::CollectStudentRollouts {
+                    teacher_context_tokens,
+                    ..
+                } => ensure!(teacher_context_tokens == Some(2048)),
+                _ => bail!("unexpected collector command"),
+            }
+        }
+        let legacy = Cli::try_parse_from(["lec-distil", "explore"])?;
+        if let Command::Explore {
+            search_config,
+            study_config,
+            ..
+        } = legacy.command
+        {
+            let defaults = lec_distil::explore::ExploreOptions::default();
+            ensure!(
+                search_config == defaults.search_config && study_config == defaults.study_config
+            );
+        } else {
+            bail!("unexpected exploration command");
+        }
+        let explicit = Cli::try_parse_from([
+            "lec-distil",
+            "explore",
+            "--search-config",
+            "config/new-search.toml",
+            "--study-config",
+            "config/new-study.toml",
+        ])?;
+        if let Command::Explore {
+            search_config,
+            study_config,
+            ..
+        } = explicit.command
+        {
+            ensure!(
+                search_config == Path::new("config/new-search.toml")
+                    && study_config == Path::new("config/new-study.toml")
+            );
+        } else {
+            bail!("unexpected exploration command");
         }
         Ok(())
     }

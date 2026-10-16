@@ -18,6 +18,14 @@ differentiable training graph and keeps the weights/cache in float16 on CUDA.
 
 Existing assessment checkpoint evidence fixes CPU float32. A trained assessment adapter served with any other device or precision remains evaluation-only, even if its tensor hash matches a CPU-gated checkpoint. Comparative teachers also remain evaluation-only. Device or precision changes require matching quality evidence before production eligibility.
 
+For original GGUF content/correction teachers, an explicitly expanded context
+also changes the memory estimate used for automatic CPU/GPU selection. A
+1,024-token estimate must not authorise a 1,536-token allocation. Automatic
+selection may use available CPU RAM when that larger context cannot fit VRAM;
+explicit CUDA fails instead. Requested limits are never silently cropped, and
+resumed experiments retain their frozen runtime. Metadata selection remains a
+guard rather than an atomic reservation against other host applications.
+
 ## This workstation's compatibility preparation
 
 The observed GPU is an RTX 2080, compute capability 7.5, with 8 GiB VRAM and driver 595.91.07. CUDA 12.9 and 13.3 are installed. The driver rejected CUDA 13.3's PTX 9.3 as unsupported. CUDA 12.9 emits compatible PTX 8.8, but its original headers conflict with glibc 2.43's non-throwing `sinpi`, `cospi` and `rsqrt` declarations.

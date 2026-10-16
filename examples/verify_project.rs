@@ -19,7 +19,7 @@ fn main() -> Result<()> {
     fs::create_dir_all(&report_directory)?;
     let original_sources = source_inputs::capture()?;
     let verifier_sha256 = artefact::file_hash(&std::env::current_exe()?)?;
-    let checks: [(&str, &[&str]); 8] = [
+    let checks: [(&str, &[&str]); 9] = [
         ("format", &["fmt", "--all", "--", "--check"]),
         (
             "clippy",
@@ -65,6 +65,16 @@ fn main() -> Result<()> {
             ],
         ),
         (
+            "training_seed_audit",
+            &[
+                "test",
+                "--locked",
+                "--offline",
+                "--example",
+                "training_seed_audit",
+            ],
+        ),
+        (
             "original_tokeniser",
             &[
                 "test",
@@ -96,10 +106,16 @@ fn main() -> Result<()> {
     for (name, args) in checks {
         eprintln!("verification: START {name}");
         let start = Instant::now();
-        let output = Command::new("cargo")
-            .args(args)
-            .output()
-            .with_context(|| format!("start {name}"))?;
+        let mut command = Command::new("cargo");
+        command.args(args);
+        let environment = if name == "real_container_qa" {
+            let directory = report_directory.join("sandbox-qa");
+            command.env("LEC_SANDBOX_QA_OUTPUT", &directory);
+            json!({"LEC_SANDBOX_QA_OUTPUT": directory})
+        } else {
+            json!({})
+        };
+        let output = command.output().with_context(|| format!("start {name}"))?;
         let mut log = output.stdout;
         log.extend_from_slice(&output.stderr);
         let path = report_directory.join(format!("verification-{name}.log"));
@@ -111,7 +127,7 @@ fn main() -> Result<()> {
             if success { "PASSED" } else { "FAILED" },
             start.elapsed().as_secs_f64()
         );
-        steps.push(json!({"name":name,"command":args,"success":success,"exit_code":output.status.code(),"elapsed_seconds":start.elapsed().as_secs_f64(),"evidence":artefact::Artefact::capture(&root,path)?}));
+        steps.push(json!({"name":name,"command":args,"environment":environment,"success":success,"exit_code":output.status.code(),"elapsed_seconds":start.elapsed().as_secs_f64(),"evidence":artefact::Artefact::capture(&root,path)?}));
     }
     let skill_names = ["rust-distillation-evidence", "rust-distillation-study"];
     for name in skill_names {

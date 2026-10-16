@@ -19,6 +19,7 @@ mod backend;
 pub mod codec;
 pub mod cpp;
 pub mod export;
+mod native_rms;
 pub mod parity_run;
 pub mod qa;
 mod quant;
@@ -491,7 +492,7 @@ impl BitNetStudent {
         let mut selected_hidden = None;
         let mut selected_attention = None;
         for (index, layer) in self.layers.iter().enumerate() {
-            let n = layer.norm1.forward(&x)?;
+            let n = native_rms::weighted(&x, layer.norm1.weight(), self.cfg.rms_norm_eps)?;
             let q = layer
                 .q
                 .forward(&n)?
@@ -528,19 +529,26 @@ impl BitNetStudent {
                 seq,
                 self.cfg.hidden_size,
             ))?;
-            x = (&x
-                + layer
-                    .o
-                    .forward(&layer.attention_norm.forward(&attention)?)?)?;
-            let n = layer.norm2.forward(&x)?;
+            let attention = native_rms::weighted(
+                &attention,
+                layer.attention_norm.weight(),
+                self.cfg.rms_norm_eps,
+            )?;
+            x = (&x + layer.o.forward(&attention)?)?;
+            let n = native_rms::weighted(&x, layer.norm2.weight(), self.cfg.rms_norm_eps)?;
             let gate = layer.gate.forward(&n)?.relu()?.sqr()?;
             let ff = (gate * layer.up.forward(&n)?)?;
-            x = (&x + layer.down.forward(&layer.ffn_norm.forward(&ff)?)?)?;
+            let ff = native_rms::weighted(&ff, layer.ffn_norm.weight(), self.cfg.rms_norm_eps)?;
+            x = (&x + layer.down.forward(&ff)?)?;
             if capture == Some(index) {
                 selected_hidden = Some(x.squeeze(0)?);
             }
         }
-        Ok((self.norm.forward(&x)?, selected_hidden, selected_attention))
+        Ok((
+            native_rms::weighted(&x, self.norm.weight(), self.cfg.rms_norm_eps)?,
+            selected_hidden,
+            selected_attention,
+        ))
     }
     pub fn logits(&self, hidden: &Tensor) -> Result<Tensor> {
         let mut shape = hidden.dims().to_vec();

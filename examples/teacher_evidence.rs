@@ -37,6 +37,8 @@ enum Command {
         maximum_tasks: usize,
         #[arg(long, default_value_t = 512)]
         max_tokens: usize,
+        #[arg(long)]
+        teacher_context_tokens: Option<usize>,
         #[arg(long, default_value_t = 1729)]
         seed: u64,
     },
@@ -76,6 +78,8 @@ enum Command {
         maximum_tasks: usize,
         #[arg(long, default_value_t = 768)]
         max_tokens: usize,
+        #[arg(long)]
+        context_tokens: Option<usize>,
         #[arg(long, default_value_t = 1729)]
         seed: u64,
         #[arg(long)]
@@ -98,6 +102,7 @@ async fn main() -> Result<()> {
             teacher,
             maximum_tasks,
             max_tokens,
+            teacher_context_tokens,
             seed,
         } => {
             teacher_evidence::collect_rollouts(RolloutCollectOptions {
@@ -117,6 +122,7 @@ async fn main() -> Result<()> {
                 },
                 teacher_ids: teacher,
                 teacher_runtime: RuntimeOptions::default(),
+                teacher_context_tokens,
                 student_runtime: RuntimeOptions::default(),
                 max_tokens,
                 seed,
@@ -155,6 +161,7 @@ async fn main() -> Result<()> {
             content,
             maximum_tasks,
             max_tokens,
+            context_tokens,
             seed,
             cuda,
             dtype,
@@ -175,6 +182,7 @@ async fn main() -> Result<()> {
                 content,
                 maximum_tasks,
                 max_tokens,
+                context_tokens,
                 seed,
                 runtime: runtime(cuda, &dtype),
             })

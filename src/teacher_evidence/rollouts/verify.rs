@@ -315,6 +315,12 @@ pub(crate) fn append_verified(
             &fp.runtime,
             fp.request.max_new_tokens,
         )?;
+        validate_context_observation(
+            fp.context_tokens,
+            feedback.execution.as_ref(),
+            feedback.generation.as_ref(),
+            fp.request.max_new_tokens,
+        )?;
         let classified = recovery::classify_grade(
             Grade {
                 report: record.feedback_grade.clone(),

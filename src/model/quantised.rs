@@ -39,7 +39,7 @@ pub fn estimate_quantised_memory(
     let kv = bytes(
         2 * cfg.num_hidden_layers as u128
             * cfg.num_key_value_heads as u128
-            * (cfg.hidden_size / cfg.num_attention_heads) as u128
+            * cfg.head_dimension() as u128
             * context_tokens as u128
             * 4,
     )?;
@@ -107,6 +107,15 @@ fn validate_metadata(
             "GGUF/source dimension differs: {suffix}"
         );
     }
+    for suffix in ["attention.key_length", "attention.value_length"] {
+        let key = format!("{architecture}.{suffix}");
+        if cfg.model_type == "qwen3" || content.metadata.contains_key(&key) {
+            ensure!(
+                metadata_usize(content, &key)? == cfg.head_dimension(),
+                "GGUF/source explicit attention head width differs: {suffix}"
+            );
+        }
+    }
     let epsilon = content
         .metadata
         .get(&format!("{architecture}.attention.layer_norm_rms_epsilon"))
@@ -126,12 +135,27 @@ fn validate_metadata(
         (theta - cfg.rope_theta).abs() <= cfg.rope_theta * 1e-6,
         "GGUF/source rotary base differs"
     );
-    let factor = content
+    let modern_factor = content
         .metadata
         .get(&format!("{architecture}.rope.scaling.factor"))
         .map(|value| value.to_f32())
-        .transpose()?
-        .unwrap_or(1.) as f64;
+        .transpose()?;
+    // Older GGUF publishers used scale_linear for this same linear factor.
+    // It is not a reciprocal or a default: both keys must agree if present,
+    // and the resulting factor still has to match the independently pinned HF
+    // configuration. Conflicting or unsupported semantics fail closed.
+    let legacy_factor = content
+        .metadata
+        .get(&format!("{architecture}.rope.scale_linear"))
+        .map(|value| value.to_f32())
+        .transpose()?;
+    if let (Some(modern), Some(legacy)) = (modern_factor, legacy_factor) {
+        ensure!(
+            modern.is_finite() && legacy.is_finite() && (modern - legacy).abs() < 1e-6,
+            "conflicting modern/legacy GGUF rotary scaling factors"
+        );
+    }
+    let factor = modern_factor.or(legacy_factor).unwrap_or(1.) as f64;
     ensure!(
         (factor
             - cfg
@@ -159,7 +183,7 @@ fn validate_metadata(
         .get(&format!("{architecture}.rope.dimension_count"))
     {
         ensure!(
-            dimension.to_u32()? as usize == cfg.hidden_size / cfg.num_attention_heads,
+            dimension.to_u32()? as usize == cfg.head_dimension(),
             "partial GGUF rotary dimensions are unsupported"
         );
     }
@@ -297,7 +321,8 @@ impl QwenModel {
     ) -> Result<Self> {
         validate_metadata(content, &cfg, context_tokens)?;
         let bias = cfg.attention_bias.unwrap_or(cfg.model_type == "qwen2");
-        let head_dim = cfg.hidden_size / cfg.num_attention_heads;
+        let head_dim = cfg.head_dimension();
+        let q_dimension = head_dim * cfg.num_attention_heads;
         let kv_dimension = head_dim * cfg.num_key_value_heads;
         shape(
             content,
@@ -349,13 +374,25 @@ impl QwenModel {
         let mut layers = Vec::with_capacity(cfg.num_hidden_layers);
         for index in 0..cfg.num_hidden_layers {
             let p = format!("blk.{index}");
+            if cfg.model_type == "qwen3" {
+                ensure!(
+                    ["attn_q", "attn_k", "attn_v", "attn_output"]
+                        .iter()
+                        .all(|name| {
+                            !content
+                                .tensor_infos
+                                .contains_key(&format!("{p}.{name}.bias"))
+                        }),
+                    "Qwen3 GGUF contains unexpected attention projection bias"
+                );
+            }
             layers.push(Layer {
                 q: Projection {
                     base: linear(
                         content,
                         reader,
                         &format!("{p}.attn_q"),
-                        cfg.hidden_size,
+                        q_dimension,
                         cfg.hidden_size,
                         bias,
                         device,
@@ -388,7 +425,7 @@ impl QwenModel {
                     reader,
                     &format!("{p}.attn_output"),
                     cfg.hidden_size,
-                    cfg.hidden_size,
+                    q_dimension,
                     cfg.model_type == "llama" && bias,
                     device,
                 )?,
@@ -439,6 +476,34 @@ impl QwenModel {
                     )?,
                     cfg.rms_norm_eps,
                 ),
+                q_norm: if cfg.model_type == "qwen3" {
+                    Some(LayerNorm::rms_norm(
+                        small_tensor(
+                            content,
+                            reader,
+                            &format!("{p}.attn_q_norm.weight"),
+                            &[head_dim],
+                            device,
+                        )?,
+                        cfg.rms_norm_eps,
+                    ))
+                } else {
+                    None
+                },
+                k_norm: if cfg.model_type == "qwen3" {
+                    Some(LayerNorm::rms_norm(
+                        small_tensor(
+                            content,
+                            reader,
+                            &format!("{p}.attn_k_norm.weight"),
+                            &[head_dim],
+                            device,
+                        )?,
+                        cfg.rms_norm_eps,
+                    ))
+                } else {
+                    None
+                },
                 kv: None,
             });
         }
@@ -515,6 +580,7 @@ mod tests {
             num_hidden_layers: 1,
             num_attention_heads: 4,
             num_key_value_heads: 2,
+            head_dim: None,
             max_position_embeddings: 32,
             rope_theta: 10000.,
             rms_norm_eps: 1e-6,
@@ -524,63 +590,154 @@ mod tests {
     }
 
     fn fixture() -> Cursor<Vec<u8>> {
+        fixture_for(&configuration())
+    }
+
+    fn fixture_for(cfg: &QwenConfig) -> Cursor<Vec<u8>> {
         let mut tensors = BTreeMap::<String, QTensor>::new();
         let mut state = StableRng::new(47);
+        let head_dim = cfg.head_dimension();
+        let q_dimension = head_dim * cfg.num_attention_heads;
+        let kv_dimension = head_dim * cfg.num_key_value_heads;
         for (name, out, input) in [
-            ("token_embd.weight", 64, 32),
-            ("blk.0.attn_q.weight", 32, 32),
-            ("blk.0.attn_k.weight", 16, 32),
-            ("blk.0.attn_v.weight", 16, 32),
-            ("blk.0.attn_output.weight", 32, 32),
-            ("blk.0.ffn_gate.weight", 64, 32),
-            ("blk.0.ffn_up.weight", 64, 32),
-            ("blk.0.ffn_down.weight", 32, 64),
+            ("token_embd.weight", cfg.vocab_size, cfg.hidden_size),
+            ("blk.0.attn_q.weight", q_dimension, cfg.hidden_size),
+            ("blk.0.attn_k.weight", kv_dimension, cfg.hidden_size),
+            ("blk.0.attn_v.weight", kv_dimension, cfg.hidden_size),
+            ("blk.0.attn_output.weight", cfg.hidden_size, q_dimension),
+            (
+                "blk.0.ffn_gate.weight",
+                cfg.intermediate_size,
+                cfg.hidden_size,
+            ),
+            (
+                "blk.0.ffn_up.weight",
+                cfg.intermediate_size,
+                cfg.hidden_size,
+            ),
+            (
+                "blk.0.ffn_down.weight",
+                cfg.hidden_size,
+                cfg.intermediate_size,
+            ),
         ] {
             let values = (0..out * input)
                 .map(|_| ((state.uniform() * 2. - 1.) * 0.05) as f32)
                 .collect::<Vec<_>>();
             let tensor = Tensor::from_vec(values, (out, input), &Device::Cpu).unwrap();
+            // Keep the embedding quantised in both fixtures. Qwen3's strict
+            // layout comparison uses F32 projection tensors so native Q4×Q8
+            // activation rounding is not mistaken for an architecture error.
+            let dtype = if cfg.model_type == "qwen3" && name != "token_embd.weight" {
+                GgmlDType::F32
+            } else {
+                GgmlDType::Q4_0
+            };
+            tensors.insert(name.into(), QTensor::quantize(&tensor, dtype).unwrap());
+        }
+        if cfg.model_type == "qwen3" {
+            // The source ties embedding and output values, while GGUF may
+            // encode their equal matrices with different storage precisions.
+            // Copy the exact dequantised embedding into an F32 output matrix
+            // so this strict test does not introduce Q4 activation rounding
+            // through its final vocabulary projection either.
+            let tied = tensors["token_embd.weight"]
+                .dequantize(&Device::Cpu)
+                .unwrap();
             tensors.insert(
-                name.into(),
-                QTensor::quantize(&tensor, GgmlDType::Q4_0).unwrap(),
+                "output.weight".into(),
+                QTensor::quantize(&tied, GgmlDType::F32).unwrap(),
             );
         }
-        for (name, size, one) in [
-            ("output_norm.weight", 32, true),
-            ("blk.0.attn_norm.weight", 32, true),
-            ("blk.0.ffn_norm.weight", 32, true),
-            ("blk.0.attn_q.bias", 32, false),
-            ("blk.0.attn_k.bias", 16, false),
-            ("blk.0.attn_v.bias", 16, false),
-        ] {
-            let tensor =
-                Tensor::from_vec(vec![if one { 1_f32 } else { 0. }; size], size, &Device::Cpu)
-                    .unwrap();
+        let mut small = vec![
+            ("output_norm.weight", cfg.hidden_size, true),
+            ("blk.0.attn_norm.weight", cfg.hidden_size, true),
+            ("blk.0.ffn_norm.weight", cfg.hidden_size, true),
+        ];
+        if cfg.model_type == "qwen3" {
+            small.extend([
+                ("blk.0.attn_q_norm.weight", head_dim, true),
+                ("blk.0.attn_k_norm.weight", head_dim, true),
+            ]);
+        } else {
+            small.extend([
+                ("blk.0.attn_q.bias", q_dimension, false),
+                ("blk.0.attn_k.bias", kv_dimension, false),
+                ("blk.0.attn_v.bias", kv_dimension, false),
+            ]);
+        }
+        for (name, size, one) in small {
+            let values = (0..size)
+                .map(|i| {
+                    if !one {
+                        0.
+                    } else if name.contains("q_norm") || name.contains("k_norm") {
+                        0.8 + i as f32 * 0.03
+                    } else {
+                        1.
+                    }
+                })
+                .collect::<Vec<f32>>();
+            let tensor = Tensor::from_vec(values, size, &Device::Cpu).unwrap();
             tensors.insert(
                 name.into(),
                 QTensor::quantize(&tensor, GgmlDType::F32).unwrap(),
             );
         }
-        let metadata = [
+        let architecture = cfg.model_type.as_str();
+        let mut metadata = vec![
             (
-                "general.architecture",
-                gguf_file::Value::String("qwen2".into()),
+                "general.architecture".into(),
+                gguf_file::Value::String(architecture.into()),
             ),
-            ("qwen2.embedding_length", gguf_file::Value::U32(32)),
-            ("qwen2.block_count", gguf_file::Value::U32(1)),
-            ("qwen2.feed_forward_length", gguf_file::Value::U32(64)),
-            ("qwen2.attention.head_count", gguf_file::Value::U32(4)),
-            ("qwen2.attention.head_count_kv", gguf_file::Value::U32(2)),
-            ("qwen2.context_length", gguf_file::Value::U32(32)),
             (
-                "qwen2.attention.layer_norm_rms_epsilon",
-                gguf_file::Value::F32(1e-6),
+                format!("{architecture}.embedding_length"),
+                gguf_file::Value::U32(cfg.hidden_size as u32),
             ),
-            ("qwen2.rope.freq_base", gguf_file::Value::F32(10000.)),
+            (
+                format!("{architecture}.block_count"),
+                gguf_file::Value::U32(cfg.num_hidden_layers as u32),
+            ),
+            (
+                format!("{architecture}.feed_forward_length"),
+                gguf_file::Value::U32(cfg.intermediate_size as u32),
+            ),
+            (
+                format!("{architecture}.attention.head_count"),
+                gguf_file::Value::U32(cfg.num_attention_heads as u32),
+            ),
+            (
+                format!("{architecture}.attention.head_count_kv"),
+                gguf_file::Value::U32(cfg.num_key_value_heads as u32),
+            ),
+            (
+                format!("{architecture}.context_length"),
+                gguf_file::Value::U32(cfg.max_position_embeddings as u32),
+            ),
+            (
+                format!("{architecture}.attention.layer_norm_rms_epsilon"),
+                gguf_file::Value::F32(cfg.rms_norm_eps as f32),
+            ),
+            (
+                format!("{architecture}.rope.freq_base"),
+                gguf_file::Value::F32(cfg.rope_theta as f32),
+            ),
         ];
+        if architecture == "qwen3" {
+            metadata.extend([
+                (
+                    format!("{architecture}.attention.key_length"),
+                    gguf_file::Value::U32(head_dim as u32),
+                ),
+                (
+                    format!("{architecture}.attention.value_length"),
+                    gguf_file::Value::U32(head_dim as u32),
+                ),
+            ]);
+        }
         let metadata = metadata
             .iter()
-            .map(|(key, value)| (*key, value))
+            .map(|(key, value)| (key.as_str(), value))
             .collect::<Vec<_>>();
         let tensors = tensors
             .iter()
@@ -590,6 +747,139 @@ mod tests {
         gguf_file::write(&mut bytes, &metadata, &tensors).unwrap();
         bytes.set_position(0);
         bytes
+    }
+
+    #[test]
+    fn legacy_linear_rope_factor_must_match_source_and_any_modern_key() {
+        let mut cfg = configuration();
+        cfg.rope_scaling = Some(RopeScaling {
+            scaling_type: "linear".into(),
+            factor: 4.,
+        });
+        let mut bytes = fixture();
+        let mut content = gguf_file::Content::read(&mut bytes).unwrap();
+        assert!(validate_metadata(&content, &cfg, 32).is_err());
+        content
+            .metadata
+            .insert("qwen2.rope.scale_linear".into(), gguf_file::Value::F32(4.));
+        validate_metadata(&content, &cfg, 32).unwrap();
+        content.metadata.insert(
+            "qwen2.rope.scaling.factor".into(),
+            gguf_file::Value::F32(4.),
+        );
+        validate_metadata(&content, &cfg, 32).unwrap();
+        content.metadata.insert(
+            "qwen2.rope.scaling.factor".into(),
+            gguf_file::Value::F32(2.),
+        );
+        assert!(validate_metadata(&content, &cfg, 32).is_err());
+        content.metadata.remove("qwen2.rope.scaling.factor");
+        content.metadata.insert(
+            "qwen2.rope.scale_linear".into(),
+            gguf_file::Value::F32(f32::NAN),
+        );
+        assert!(validate_metadata(&content, &cfg, 32).is_err());
+        content
+            .metadata
+            .insert("qwen2.rope.scale_linear".into(), gguf_file::Value::F32(4.));
+        content.metadata.insert(
+            "qwen2.rope.scaling.type".into(),
+            gguf_file::Value::String("yarn".into()),
+        );
+        assert!(validate_metadata(&content, &cfg, 32).is_err());
+    }
+
+    #[test]
+    fn qwen3_gguf_f32_projections_match_dense_layout_with_expanded_heads() {
+        let mut cfg = configuration();
+        cfg.model_type = "qwen3".into();
+        cfg.attention_bias = Some(false);
+        cfg.head_dim = Some(16);
+        let mut bytes = fixture_for(&cfg);
+        let length = bytes.get_ref().len() as u64;
+        let content = gguf_file::Content::read(&mut bytes).unwrap();
+        let mut weights = HashMap::new();
+        for (native, dense) in [
+            ("token_embd", "model.embed_tokens"),
+            ("output_norm", "model.norm"),
+            ("blk.0.attn_q", "model.layers.0.self_attn.q_proj"),
+            ("blk.0.attn_k", "model.layers.0.self_attn.k_proj"),
+            ("blk.0.attn_v", "model.layers.0.self_attn.v_proj"),
+            ("blk.0.attn_output", "model.layers.0.self_attn.o_proj"),
+            ("blk.0.attn_q_norm", "model.layers.0.self_attn.q_norm"),
+            ("blk.0.attn_k_norm", "model.layers.0.self_attn.k_norm"),
+            ("blk.0.attn_norm", "model.layers.0.input_layernorm"),
+            ("blk.0.ffn_norm", "model.layers.0.post_attention_layernorm"),
+            ("blk.0.ffn_gate", "model.layers.0.mlp.gate_proj"),
+            ("blk.0.ffn_up", "model.layers.0.mlp.up_proj"),
+            ("blk.0.ffn_down", "model.layers.0.mlp.down_proj"),
+        ] {
+            weights.insert(
+                format!("{dense}.weight"),
+                content
+                    .tensor(&mut bytes, &format!("{native}.weight"), &Device::Cpu)
+                    .unwrap()
+                    .dequantize(&Device::Cpu)
+                    .unwrap(),
+            );
+        }
+        let mut dense =
+            QwenModel::from_weights(cfg.clone(), weights, None, 0, None, false).unwrap();
+        let mut quantised =
+            QwenModel::from_gguf(cfg.clone(), &content, &mut bytes, &Device::Cpu, length, 32)
+                .unwrap();
+        let input = Tensor::from_slice(&[1_u32, 9, 2, 5], (1, 4), &Device::Cpu).unwrap();
+        let a_hidden = dense.hidden(&input, 0, false).unwrap();
+        let b_hidden = quantised.hidden(&input, 0, false).unwrap();
+        let a = dense
+            .logits(&a_hidden)
+            .unwrap()
+            .flatten_all()
+            .unwrap()
+            .to_vec1::<f32>()
+            .unwrap();
+        let b = quantised
+            .logits(&b_hidden)
+            .unwrap()
+            .flatten_all()
+            .unwrap()
+            .to_vec1::<f32>()
+            .unwrap();
+        let error = a
+            .iter()
+            .zip(&b)
+            .map(|(a, b)| (a - b).abs())
+            .fold(0_f32, f32::max);
+        assert!(error < 2e-5, "Qwen3 dense/GGUF layouts differ: {error}");
+        let memory = estimate_quantised_memory(&cfg, length, 32, true).unwrap();
+        assert_eq!(memory.kv_cache_bytes, 2 * 2 * 16 * 32 * 4);
+    }
+
+    #[test]
+    fn qwen3_gguf_rejects_missing_norms_and_mismatched_explicit_head_widths() {
+        let mut cfg = configuration();
+        cfg.model_type = "qwen3".into();
+        cfg.attention_bias = Some(false);
+        cfg.head_dim = Some(16);
+        for suffix in ["attention.key_length", "attention.value_length"] {
+            let mut bytes = fixture_for(&cfg);
+            let mut content = gguf_file::Content::read(&mut bytes).unwrap();
+            let key = format!("qwen3.{suffix}");
+            content.metadata.remove(&key);
+            assert!(validate_metadata(&content, &cfg, 32).is_err());
+            content.metadata.insert(key, gguf_file::Value::U32(8));
+            assert!(validate_metadata(&content, &cfg, 32).is_err());
+        }
+        for name in ["blk.0.attn_q_norm.weight", "blk.0.attn_k_norm.weight"] {
+            let mut bytes = fixture_for(&cfg);
+            let length = bytes.get_ref().len() as u64;
+            let mut content = gguf_file::Content::read(&mut bytes).unwrap();
+            content.tensor_infos.remove(name);
+            assert!(
+                QwenModel::from_gguf(cfg.clone(), &content, &mut bytes, &Device::Cpu, length, 32)
+                    .is_err()
+            );
+        }
     }
 
     #[test]

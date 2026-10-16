@@ -179,6 +179,7 @@ mod tests {
             failure: Some("synthetic unit fixture; no candidate executed".into()),
             duration_ms: 1,
             timeout_evidence: None,
+            lifecycle_evidence: None,
         };
         let report_path = relative.join("failed-report.json");
         artefact::write_json(&report_path, &report).unwrap();

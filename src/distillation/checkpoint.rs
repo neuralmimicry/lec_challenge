@@ -117,6 +117,23 @@ pub fn validate_checkpoint(
     path: &Path,
     assets: &AssetManifest,
 ) -> Result<ExperimentalCheckpointManifest> {
+    validate_checkpoint_inner(path, assets, true)
+}
+
+/// Metadata imports retain the complete provenance/optimiser checks without
+/// allocating tensor storage. The caller independently validates tensor headers.
+pub(crate) fn validate_checkpoint_metadata(
+    path: &Path,
+    assets: &AssetManifest,
+) -> Result<ExperimentalCheckpointManifest> {
+    validate_checkpoint_inner(path, assets, false)
+}
+
+fn validate_checkpoint_inner(
+    path: &Path,
+    assets: &AssetManifest,
+    materialise_tensor: bool,
+) -> Result<ExperimentalCheckpointManifest> {
     let m: ExperimentalCheckpointManifest =
         serde_json::from_slice(&fs::read(path.join("manifest.json"))?)?;
     ensure!(
@@ -396,7 +413,9 @@ pub fn validate_checkpoint(
             "frozen DPO references lack complete finite common-prompt coverage"
         );
     }
-    let _ = candle_core::safetensors::load(path.join("adapter.safetensors"), &Device::Cpu)?;
+    if materialise_tensor {
+        let _ = candle_core::safetensors::load(path.join("adapter.safetensors"), &Device::Cpu)?;
+    }
     Ok(m)
 }
 

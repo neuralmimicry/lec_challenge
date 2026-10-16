@@ -12,6 +12,8 @@ pub struct ContentCollectOptions {
     pub output: PathBuf,
     pub content: Vec<ContentKind>,
     pub runtime: RuntimeOptions,
+    /// Omission retains the historical teacher runtime's context limit.
+    pub context_tokens: Option<usize>,
     pub max_tokens: usize,
     pub seed: u64,
     pub maximum_tasks: usize,
@@ -24,6 +26,8 @@ struct ContentPlan {
     content: ContentKind,
     request: GenerationRequest,
     runtime: RuntimeOptions,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    context_tokens: Option<usize>,
     teacher_assets: Artefact,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     teacher_checkpoint: Option<Artefact>,
@@ -182,7 +186,8 @@ async fn collect_content_inner(options: ContentCollectOptions) -> Result<Evidenc
         "content output must remain under reports or data"
     );
     ensure!(
-        (1..=48).contains(&options.maximum_tasks) && (1..=1024).contains(&options.max_tokens),
+        (1..=48).contains(&options.maximum_tasks) && (1..=1024).contains(&options.max_tokens)
+            && options.context_tokens.is_none_or(|context| (1..=4096).contains(&context) && options.max_tokens < context),
         "invalid bounded content collection"
     );
     ensure!(
@@ -213,6 +218,9 @@ async fn collect_content_inner(options: ContentCollectOptions) -> Result<Evidenc
     );
     let policy_path = options.output.join("content-policy.json");
     let mut policy = serde_json::json!({"schema_version":1,"input":capture(&root,&input_path)?,"content":options.content,"runtime":options.runtime,"max_tokens":options.max_tokens,"seed":options.seed,"maximum_tasks":options.maximum_tasks,"teachers":bundle.teachers.iter().map(|t|&t.id).collect::<Vec<_>>()});
+    if let Some(context_tokens) = options.context_tokens {
+        policy["context_tokens"] = context_tokens.into();
+    }
     // New protocols bind their executable before any variant is generated.
     // Historical policy bytes retain their original serialised shape; their
     // individual generation plans already bind the original engine identity.
@@ -289,6 +297,7 @@ async fn collect_content_inner(options: ContentCollectOptions) -> Result<Evidenc
                         timeout_seconds: 120,
                     },
                     runtime: options.runtime.clone(),
+                    context_tokens: options.context_tokens,
                     teacher_assets: teacher.assets.clone(),
                     teacher_checkpoint: teacher.adapter_checkpoint.clone(),
                     supporting_sample_ids,
@@ -330,10 +339,20 @@ async fn collect_content_inner(options: ContentCollectOptions) -> Result<Evidenc
                     let teacher_spec = teacher.clone();
                     let runtime = options.runtime.clone();
                     let request = plan.request.clone();
+                    let context_tokens = plan.context_tokens;
                     let result = tokio::task::spawn_blocking(move || {
+                        rollouts::validate_teacher_request(
+                            &teacher_spec,
+                            context_tokens,
+                            &request,
+                        )?;
                         let mut model = match loaded {
                             Some(model) => model,
-                            None => RecordedModel::teacher(&teacher_spec, runtime)?,
+                            None => RecordedModel::teacher_with_context(
+                                &teacher_spec,
+                                runtime,
+                                context_tokens,
+                            )?,
                         };
                         let execution = model.execution_metadata();
                         let result = model.generate(request);
@@ -587,6 +606,12 @@ pub(super) fn append_verified(
         "content sandbox differs from preflight"
     );
     let mut success = false;
+    rollouts::validate_context_observation(
+        plan.context_tokens,
+        raw.execution.as_ref(),
+        raw.generation.as_ref(),
+        plan.request.max_new_tokens,
+    )?;
     if let Some(generation) = &raw.generation {
         ensure!(
             raw.generation_error.is_none(),
@@ -759,6 +784,50 @@ mod report_tests {
     use super::*;
 
     #[test]
+    fn content_context_is_explicit_and_legacy_plan_bytes_are_unchanged() -> Result<()> {
+        let file = Artefact {
+            path: "labelled/unused".into(),
+            sha256: "a".repeat(64),
+            bytes: 0,
+        };
+        let mut plan = ContentPlan {
+            schema_version: 1,
+            task_id: "synthetic".into(),
+            teacher_id: "synthetic".into(),
+            content: ContentKind::Process,
+            request: GenerationRequest {
+                prompt: "synthetic prompt".into(),
+                max_new_tokens: 768,
+                seed: 1729,
+                temperature: 0.2,
+                top_p: 0.95,
+                timeout_seconds: 120,
+            },
+            runtime: RuntimeOptions::default(),
+            context_tokens: None,
+            teacher_assets: file.clone(),
+            teacher_checkpoint: None,
+            supporting_sample_ids: vec![],
+            feedback_candidate: None,
+            feedback_summary: None,
+            sandbox: SandboxConfig::default(),
+            preflight: file,
+            engine_binary_sha256: "b".repeat(64),
+        };
+        let legacy = serde_json::to_vec(&plan)?;
+        ensure!(serde_json::to_value(&plan)?.get("context_tokens").is_none());
+        let restored: ContentPlan = serde_json::from_slice(&legacy)?;
+        ensure!(serde_json::to_vec(&restored)? == legacy);
+        plan.context_tokens = Some(2048);
+        ensure!(serde_json::to_value(&plan)?["context_tokens"] == 2048);
+        ensure!(
+            !json_equal(&restored, &plan)?,
+            "explicit cap must change immutable plan identity"
+        );
+        Ok(())
+    }
+
+    #[test]
     fn inherited_positive_cannot_hide_an_empty_or_generation_failed_batch() -> Result<()> {
         fs::create_dir_all("reports")?;
         let temporary = tempfile::tempdir_in("reports")?;
@@ -811,6 +880,7 @@ mod report_tests {
             output: output.clone(),
             content: vec![ContentKind::Process],
             runtime: RuntimeOptions::default(),
+            context_tokens: None,
             max_tokens: 16,
             seed: 1729,
             maximum_tasks: 1,

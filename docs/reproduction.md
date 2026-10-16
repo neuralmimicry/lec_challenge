@@ -59,4 +59,17 @@ Extract into a fresh directory, clear the application state/cache, unset provide
 
 `cargo run --locked --offline --release --example disconnected_qa -- deliverables/lec-distil-delivery.tar.gz` extracts a delivery and verifies its complete runtime inventory before executing the bundled binary. Changed, missing, extra or symlinked assets fail this check. It starts a private user/network/mount namespace, enables only its isolated loopback, hides the original checkout and unsets provider credentials. It reaches the existing local Podman service through a Unix socket so the runtime remains available without outward network routes. The runtime image cache is preloaded rather than cleared. A fresh empty application state/cache is used. The helper preserves the observed nonzero assessment exit when real evidence is missing and labels that result local offline QA. A completed rehearsal can certify a later package only when its source commit, binary and complete runtime inventory still match.
 
+New package inventories also bind `offline_bundle/students/` and
+`offline_bundle/distillation-traces/`: changing a ternary base or cached teacher
+target must invalidate pre-execution verification just as changing the
+assessment base does. Existing archives certify their own original inventory.
+The exploratory extension's checkpoints and saved optimiser steps currently
+live under `reports/local-study/`; their original executables and native BitNet
+engine dependencies additionally live in excluded `state/engines/`. A delivery
+must deliberately preserve and verify that execution closure before claiming
+portable study resumption. The original CPU archive does not provide it. No
+archive can promise fresh inference from a deliberately pruned model while
+disconnected; retained cached observations remain available, and rehydration
+requires an explicit online invocation.
+
 An inventory or a successful individual smoke is not proof of the complete fresh-machine run. The final report must retain any missing phase and nonzero exit. No full disconnected provider-trained rehearsal is claimed while recordings and adapters are absent. `./run.sh package` creates checksum-indexed ZIP and tar.gz deliveries, including the binary, original notices, base and saved image. Its manifest remains incomplete until a checksum-bound successful full rehearsal exists.

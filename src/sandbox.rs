@@ -18,12 +18,19 @@ use tokio::{
 mod bundle;
 mod control;
 mod owned;
+mod prepared;
 #[cfg(test)]
 #[allow(dead_code)]
 #[path = "../sandbox/ptrace_v2.rs"]
 mod ptrace_v2;
 mod recovery;
 mod runtime_lease;
+mod stream;
+mod v3;
+pub use prepared::{
+    PreparedGrade, execute_prepared, prepare_grade, verify_prepared, verify_prepared_report,
+};
+pub use v3::LifecycleEvidence;
 #[cfg(test)]
 #[allow(dead_code)]
 #[path = "../sandbox/syscalls_v2.rs"]
@@ -60,20 +67,11 @@ pub struct SandboxConfig {
 impl Default for SandboxConfig {
     fn default() -> Self {
         Self {
-            policy_version: if cfg!(target_arch = "aarch64") { 2 } else { 1 },
-            controller_version: 2,
-            architecture: if cfg!(target_arch = "aarch64") {
-                "aarch64".into()
-            } else {
-                String::new()
-            },
+            policy_version: 3,
+            controller_version: 3,
+            architecture: std::env::consts::ARCH.into(),
             runtime: "podman".into(),
-            image: if cfg!(target_arch = "aarch64") {
-                "localhost/lec-rust-sandbox:2-aarch64"
-            } else {
-                "localhost/lec-rust-sandbox:1"
-            }
-            .into(),
+            image: format!("localhost/lec-rust-sandbox:3-{}", std::env::consts::ARCH),
             expected_image_id: String::new(),
             wall_timeout_secs: 20,
             memory_mb: 512,
@@ -90,12 +88,12 @@ fn is_legacy_policy(version: &u32) -> bool {
     *version == 1
 }
 impl SandboxConfig {
-    /// Opt into the separately identified native Linux x86-64/AArch64 policy.
+    /// Select the current native Linux x86-64/AArch64 security policy.
     pub fn portable() -> Self {
         Self {
-            policy_version: 2,
+            policy_version: 3,
             architecture: std::env::consts::ARCH.into(),
-            image: format!("localhost/lec-rust-sandbox:2-{}", std::env::consts::ARCH),
+            image: format!("localhost/lec-rust-sandbox:3-{}", std::env::consts::ARCH),
             ..Self::default()
         }
     }
@@ -129,6 +127,8 @@ pub struct SandboxReport {
     pub failure: Option<String>,
     pub duration_ms: u64,
     pub timeout_evidence: Option<TimeoutEvidence>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub lifecycle_evidence: Option<LifecycleEvidence>,
 }
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct TimeoutEvidence {
@@ -139,6 +139,8 @@ pub struct TimeoutEvidence {
     pub cleanup_ms: u64,
     pub container_removed: bool,
     pub kill_method: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub kernel_proof: Option<LifecycleEvidence>,
 }
 struct StopEvidence {
     kill_request_ms: u64,
@@ -179,6 +181,8 @@ fn seccomp_path(cfg: &SandboxConfig) -> Result<PathBuf> {
     std::env::current_dir()?
         .join(if cfg.policy_version == 1 {
             "sandbox/policies/v1/seccomp.json"
+        } else if cfg.policy_version == 3 {
+            "sandbox/policies/v3/seccomp.json"
         } else {
             "sandbox/policies/v2/seccomp.json"
         })
@@ -198,13 +202,28 @@ pub fn policy_sha256(cfg: &SandboxConfig) -> Result<String> {
         "invalid sandbox resource policy"
     );
     ensure!(
-        matches!(cfg.policy_version, 1 | 2),
+        matches!(cfg.policy_version, 1..=3),
         "unsupported sandbox policy version"
     );
     ensure!(
-        matches!(cfg.controller_version, 1 | 2),
+        matches!(cfg.controller_version, 1..=3),
         "unsupported sandbox host controller version"
     );
+    if cfg.controller_version == 3 {
+        ensure!(
+            cfg.wall_timeout_secs <= 20,
+            "host controller three cannot exceed the trusted20s candidate watchdog"
+        );
+        let mut historical = cfg.clone();
+        historical.controller_version = 2;
+        if historical.policy_version == 3 {
+            historical.policy_version = 2;
+        }
+        return Ok(tasks::hash(serde_json::to_vec(
+            &json!({"candidate_policy_sha256":policy_sha256(&historical)?,
+            "host_controller":v3::policy_sources()}),
+        )?));
+    }
     if cfg.policy_version == 2 {
         ensure!(
             matches!(cfg.architecture.as_str(), "x86_64" | "aarch64"),
@@ -256,7 +275,11 @@ pub fn policy_sha256(cfg: &SandboxConfig) -> Result<String> {
 }
 pub async fn policy_evidence(cfg: &SandboxConfig) -> Result<(String, String)> {
     let output = timeout(
-        Duration::from_secs(15),
+        Duration::from_secs(if cfg.controller_version == 3 {
+            v3::METADATA_SECS
+        } else {
+            15
+        }),
         Command::new(&cfg.runtime)
             .kill_on_drop(true)
             .args(["image", "inspect", "--format", "{{.Id}}", &cfg.image])
@@ -283,6 +306,9 @@ pub async fn build_image(root: &Path, runtime: &str) -> Result<String> {
 pub async fn build_image_for(root: &Path, cfg: &SandboxConfig) -> Result<String> {
     validate_execution_platform(cfg)?;
     let _runtime_lease = runtime_lease::exclusive(&cfg.runtime).await?;
+    if cfg.policy_version == 3 {
+        return v3::build_cached_image(root, cfg).await;
+    }
     if cfg.policy_version == 1 {
         ensure!(
             fs::read(root.join("sandbox/audit.rs"))?
@@ -365,8 +391,12 @@ fn validate_portable_build_sources(root: &Path) -> Result<()> {
 }
 fn validate_execution_platform(cfg: &SandboxConfig) -> Result<()> {
     ensure!(
-        cfg.controller_version == 2,
+        cfg.controller_version == 3,
         "historical sandbox controller is verification-only; execute a fresh protocol with current host supervision"
+    );
+    ensure!(
+        cfg.policy_version == 3 && cfg.wall_timeout_secs <= 20,
+        "new execution requires policy three and a candidate ceiling no greater than20s"
     );
     ensure!(
         cfg!(target_os = "linux"),
@@ -377,7 +407,7 @@ fn validate_execution_platform(cfg: &SandboxConfig) -> Result<()> {
             cfg!(target_arch = "x86_64"),
             "legacy V1 syscall decoder supports Linux x86_64 only; use portable V2"
         ),
-        2 => ensure!(
+        2 | 3 => ensure!(
             cfg.architecture == std::env::consts::ARCH
                 && matches!(cfg.architecture.as_str(), "x86_64" | "aarch64"),
             "portable V2 requires the configured native Linux ABI"
@@ -395,13 +425,26 @@ fn audit_identity_matches(audit: &AuditOutput, cfg: &SandboxConfig) -> bool {
         }
 }
 fn base_command(cfg: &SandboxConfig, name: &str) -> Result<Command> {
+    base_command_kind(cfg, name, false)
+}
+fn base_command_kind(cfg: &SandboxConfig, name: &str, create: bool) -> Result<Command> {
+    base_command_operation(cfg, name, create, !create)
+}
+fn base_command_operation(
+    cfg: &SandboxConfig,
+    name: &str,
+    create: bool,
+    remove: bool,
+) -> Result<Command> {
     validate_execution_platform(cfg)?;
     let seccomp = seccomp_path(cfg)?;
     let mut c = Command::new(&cfg.runtime);
+    c.arg(if create { "create" } else { "run" });
+    if remove {
+        c.arg("--rm");
+    }
     c.args([
-        "run",
         "--pull=never",
-        "--rm",
         "--name",
         name,
         "--read-only",
@@ -432,7 +475,12 @@ fn base_command(cfg: &SandboxConfig, name: &str) -> Result<Command> {
         "--cgroupns",
         "private",
         "--timeout",
-        &cfg.wall_timeout_secs.to_string(),
+        &(if cfg.policy_version == 3 {
+            80
+        } else {
+            cfg.wall_timeout_secs
+        })
+        .to_string(),
     ]);
     c.kill_on_drop(true);
     Ok(c)
@@ -531,7 +579,7 @@ fn add_ownership_labels(command: &mut Command, ownership: &recovery::OwnedRun) {
 
 async fn timeout_probe(cfg: &SandboxConfig) -> Result<TimeoutEvidence> {
     let name = format!("lec-deadline-{}", uuid::Uuid::new_v4());
-    let mut command = base_command(cfg, &name)?;
+    let mut command = base_command_operation(cfg, &name, false, false)?;
     let mut ownership = plan_owned_run(cfg, &name).await?;
     add_ownership_labels(&mut command, &ownership);
     command
@@ -543,7 +591,11 @@ async fn timeout_probe(cfg: &SandboxConfig) -> Result<TimeoutEvidence> {
         ])
         .stdout(std::process::Stdio::piped())
         .stderr(std::process::Stdio::piped());
-    let result = timeout_probe_execution(cfg, &name, command).await;
+    let result = if cfg.controller_version == 3 {
+        v3::cached_timeout_probe(cfg, &name, command, &mut ownership).await
+    } else {
+        timeout_probe_execution(cfg, &name, command).await
+    };
     ownership.finish().await?;
     result
 }
@@ -593,6 +645,7 @@ async fn timeout_probe_execution(
         cleanup_ms: stopped.cleanup_ms,
         container_removed: stopped.container_removed,
         kill_method: stopped.kill_method,
+        kernel_proof: None,
     })
 }
 
@@ -693,6 +746,18 @@ async fn preflight_inner(cfg: &SandboxConfig) -> Result<PreflightReport> {
 }
 
 pub async fn grade(task: &Task, code: &str, cfg: &SandboxConfig) -> Result<SandboxReport> {
+    if cfg.controller_version == 3 {
+        let task = task.clone();
+        let code = code.to_owned();
+        let cfg = cfg.clone();
+        let prepared = tokio::task::spawn_blocking(move || {
+            let attempt = uuid::Uuid::new_v4().to_string();
+            let receipt = cfg.report_dir.join(format!("{attempt}.prepared.json"));
+            prepare_grade(&task, &code, &cfg, &attempt, &receipt)
+        })
+        .await??;
+        return execute_prepared(&prepared).await;
+    }
     validate_execution_platform(cfg)?;
     let runtime_lease = runtime_lease::shared(&cfg.runtime).await?;
     ensure!(
@@ -707,8 +772,16 @@ pub async fn grade(task: &Task, code: &str, cfg: &SandboxConfig) -> Result<Sandb
     .await
 }
 async fn grade_inner(task: &Task, code: &str, cfg: &SandboxConfig) -> Result<SandboxReport> {
+    grade_identified(task, code, cfg, None).await
+}
+async fn grade_identified(
+    task: &Task,
+    code: &str,
+    cfg: &SandboxConfig,
+    identity: Option<(&str, &str)>,
+) -> Result<SandboxReport> {
     let mut ownership = None;
-    let result = grade_execution(task, code, cfg, &mut ownership).await;
+    let result = grade_execution(task, code, cfg, &mut ownership, identity).await;
     if let Some(ownership) = &mut ownership {
         ownership.finish().await?;
     }
@@ -719,6 +792,7 @@ async fn grade_execution(
     code: &str,
     cfg: &SandboxConfig,
     ownership: &mut Option<recovery::OwnedRun>,
+    identity: Option<(&str, &str)>,
 ) -> Result<SandboxReport> {
     let start = Instant::now();
     let (policy, image) = policy_evidence(cfg).await?;
@@ -737,7 +811,9 @@ async fn grade_execution(
         })
         .collect();
     cases.extend(tasks::private_cases(task)?);
-    let run_id = uuid::Uuid::new_v4().to_string();
+    let run_id = identity
+        .map(|(id, _)| id.to_owned())
+        .unwrap_or_else(|| uuid::Uuid::new_v4().to_string());
     fs::create_dir_all(&cfg.report_dir)?;
     let audit_path = cfg.report_dir.join(format!("{run_id}.audit.json"));
     let mut report = SandboxReport {
@@ -761,6 +837,7 @@ async fn grade_execution(
         failure: None,
         duration_ms: 0,
         timeout_evidence: None,
+        lifecycle_evidence: None,
     };
     if code.trim().is_empty() || code.len() > 131072 {
         report.failure = Some("empty or oversized candidate source".into());
@@ -779,135 +856,191 @@ async fn grade_execution(
             fs::Permissions::from_mode(0o644),
         )?;
         let name = format!("lec-{run_id}");
-        let mut command = base_command(cfg, &name)?;
-        *ownership = Some(plan_owned_run(cfg, &name).await?);
-        add_ownership_labels(
-            &mut command,
-            ownership.as_ref().context("owned run plan absent")?,
-        );
-        command.args([
-            "--volume",
-            &format!("{}:/candidate:ro", source.path().display()),
-            "-i",
-            image_reference(cfg),
-            "/candidate/main.rs",
-        ]);
-        command
-            .stdin(std::process::Stdio::piped())
-            .stdout(std::process::Stdio::piped())
-            .stderr(std::process::Stdio::piped());
-        let mut child = command.spawn().context("sandbox runtime failed to start")?;
-        let mut input = child.stdin.take().context("container stdin missing")?;
-        let mut bytes = vec![];
-        for case in &cases {
-            serde_json::to_writer(&mut bytes, &case.input)?;
-            bytes.push(b'\n');
-        }
-        ensure!(bytes.len() <= 131072, "case input cap exceeded");
-        let writer = tokio::spawn(async move {
-            input.write_all(&bytes).await?;
-            drop(input);
-            Ok::<_, std::io::Error>(())
-        });
-        let wait_start = Instant::now();
-        let output = timeout(
-            Duration::from_secs(cfg.wall_timeout_secs),
-            child.wait_with_output(),
-        )
-        .await;
-        match output {
-            Err(_) => {
-                let wait_elapsed_ms = wait_start.elapsed().as_millis() as u64;
-                let stopped = stop_container(cfg, &name).await;
-                report.timeout_evidence = Some(TimeoutEvidence {
-                    deadline_ms: cfg.wall_timeout_secs * 1000,
-                    wait_elapsed_ms,
-                    kill_request_ms: stopped.kill_request_ms,
-                    kill_acknowledged: stopped.kill_acknowledged,
-                    cleanup_ms: stopped.cleanup_ms,
-                    container_removed: stopped.container_removed,
-                    kill_method: stopped.kill_method,
-                });
-                report.failure = Some(if stopped.kill_acknowledged && stopped.container_removed {
-                    "host wall-clock deadline exceeded; SIGKILL acknowledged and container removed"
+        if cfg.controller_version == 3 {
+            let owned_cfg = cfg.clone();
+            let owned_name = name.clone();
+            let nonce = identity.map(|(_, nonce)| nonce.to_owned());
+            *ownership = Some(
+                tokio::task::spawn_blocking(move || {
+                    recovery::plan_with_nonce(&owned_cfg, &owned_name, nonce.as_deref())
+                })
+                .await??,
+            );
+            let mut input = vec![];
+            for case in &cases {
+                serde_json::to_writer(&mut input, &case.input)?;
+                input.push(b'\n');
+            }
+            let execution = v3::execute(
+                cfg,
+                &name,
+                &source.path().join("main.rs"),
+                input,
+                ownership.as_mut().context("owned execution absent")?,
+                &audit_path,
+                &report.code_sha256,
+            )
+            .await?;
+            report.lifecycle_evidence = Some(execution.evidence);
+            report.audit_sha256 = fs::read(&audit_path).map(tasks::hash).unwrap_or_default();
+            if let Some(timing) = execution.timeout {
+                report.timeout_evidence = Some(timing);
+                let timing = report
+                    .timeout_evidence
+                    .as_mut()
+                    .context("timeout timing missing")?;
+                timing.kernel_proof = report.lifecycle_evidence.clone();
+                report.failure=Some(if timing.kill_acknowledged {
+                    "candidate wall-clock deadline exceeded; exact cached cgroup SIGKILL and empty group observed; owned container removed"
+                }else{"candidate wall-clock deadline exceeded; trusted PID1 watchdog exited124; namespace termination and owned removal observed"}.into());
+            } else if let Some(output) = execution.output {
+                apply_audit_output(&mut report, cfg, &cases, &output)?;
+            } else {
+                report.failure = Some(
+                    execution
+                        .failure
+                        .unwrap_or_else(|| "controller three infrastructure failure".into()),
+                );
+            }
+        } else {
+            let mut command = base_command(cfg, &name)?;
+            *ownership = Some(plan_owned_run(cfg, &name).await?);
+            add_ownership_labels(
+                &mut command,
+                ownership.as_ref().context("owned run plan absent")?,
+            );
+            command.args([
+                "--volume",
+                &format!("{}:/candidate:ro", source.path().display()),
+                "-i",
+                image_reference(cfg),
+                "/candidate/main.rs",
+            ]);
+            command
+                .stdin(std::process::Stdio::piped())
+                .stdout(std::process::Stdio::piped())
+                .stderr(std::process::Stdio::piped());
+            let mut child = command.spawn().context("sandbox runtime failed to start")?;
+            let mut input = child.stdin.take().context("container stdin missing")?;
+            let mut bytes = vec![];
+            for case in &cases {
+                serde_json::to_writer(&mut bytes, &case.input)?;
+                bytes.push(b'\n');
+            }
+            ensure!(bytes.len() <= 131072, "case input cap exceeded");
+            let writer = tokio::spawn(async move {
+                input.write_all(&bytes).await?;
+                drop(input);
+                Ok::<_, std::io::Error>(())
+            });
+            let wait_start = Instant::now();
+            let output = timeout(
+                Duration::from_secs(cfg.wall_timeout_secs),
+                child.wait_with_output(),
+            )
+            .await;
+            match output {
+                Err(_) => {
+                    let wait_elapsed_ms = wait_start.elapsed().as_millis() as u64;
+                    let stopped = stop_container(cfg, &name).await;
+                    report.timeout_evidence = Some(TimeoutEvidence {
+                        deadline_ms: cfg.wall_timeout_secs * 1000,
+                        wait_elapsed_ms,
+                        kill_request_ms: stopped.kill_request_ms,
+                        kill_acknowledged: stopped.kill_acknowledged,
+                        cleanup_ms: stopped.cleanup_ms,
+                        container_removed: stopped.container_removed,
+                        kill_method: stopped.kill_method,
+                        kernel_proof: None,
+                    });
+                    report.failure = Some(
+                        if stopped.kill_acknowledged && stopped.container_removed {
+                            "host wall-clock deadline exceeded; SIGKILL acknowledged and container removed"
                         .into()
-                } else {
-                    "host wall-clock deadline exceeded; cleanup/kill evidence incomplete".into()
-                });
-            }
-            Ok(Err(e)) => {
-                stop_container(cfg, &name).await;
-                report.failure = Some(format!("container I/O failed: {e}"));
-            }
-            Ok(Ok(output)) => {
-                fs::write(&audit_path, &output.stdout)?;
-                report.audit_sha256 = tasks::hash(&output.stdout);
-                if !output.status.success() {
-                    report.failure = Some(format!(
-                        "sandbox/supervisor exit {:?}: {}",
-                        output.status.code(),
-                        String::from_utf8_lossy(&output.stderr)
-                            .chars()
-                            .take(2048)
-                            .collect::<String>()
-                    ));
-                } else {
-                    match serde_json::from_slice::<AuditOutput>(&output.stdout) {
-                        Err(e) => {
-                            report.failure = Some(format!("trusted audit result malformed: {e}"))
-                        }
-                        Ok(audit) => {
-                            report.trace_complete = audit.trace_complete
-                                && audit.compile_ok
-                                && audit_identity_matches(&audit, cfg)
-                                && audit.syscalls_observed > 0;
-                            report.stdout_sha256 = tasks::hash(audit.output.as_bytes());
-                            report.audit_events = audit.events;
-                            for event in &report.audit_events {
-                                report.quarantine_reasons.push(format!(
-                                    "prohibited {} attempt: syscall {} target {}",
-                                    event.category, event.syscall, event.target
-                                ));
-                            }
-                            if !audit.compile_ok {
+                        } else {
+                            "host wall-clock deadline exceeded; cleanup/kill evidence incomplete"
+                                .into()
+                        },
+                    );
+                }
+                Ok(Err(e)) => {
+                    stop_container(cfg, &name).await;
+                    report.failure = Some(format!("container I/O failed: {e}"));
+                }
+                Ok(Ok(output)) => {
+                    fs::write(&audit_path, &output.stdout)?;
+                    report.audit_sha256 = tasks::hash(&output.stdout);
+                    if !output.status.success() {
+                        report.failure = Some(format!(
+                            "sandbox/supervisor exit {:?}: {}",
+                            output.status.code(),
+                            String::from_utf8_lossy(&output.stderr)
+                                .chars()
+                                .take(2048)
+                                .collect::<String>()
+                        ));
+                    } else {
+                        match serde_json::from_slice::<AuditOutput>(&output.stdout) {
+                            Err(e) => {
                                 report.failure =
-                                    Some(format!("compilation failed: {}", audit.stderr));
-                            } else if !report.trace_complete {
-                                report.failure = Some("incomplete trusted syscall trace".into());
-                            } else if audit.output_truncated || audit.stderr_truncated {
-                                report.failure = Some("candidate output cap exceeded".into());
-                            } else if audit.candidate_exit != Some(0) {
-                                report.failure = Some(format!(
-                                    "candidate exit {:?}: {}",
-                                    audit.candidate_exit,
-                                    audit.stderr.chars().take(1024).collect::<String>()
-                                ));
-                            } else {
-                                let lines: Vec<_> = audit.output.lines().collect();
-                                if lines.len() != cases.len() {
+                                    Some(format!("trusted audit result malformed: {e}"))
+                            }
+                            Ok(audit) => {
+                                report.trace_complete = audit.trace_complete
+                                    && audit.compile_ok
+                                    && audit_identity_matches(&audit, cfg)
+                                    && audit.syscalls_observed > 0;
+                                report.stdout_sha256 = tasks::hash(audit.output.as_bytes());
+                                report.audit_events = audit.events;
+                                for event in &report.audit_events {
+                                    report.quarantine_reasons.push(format!(
+                                        "prohibited {} attempt: syscall {} target {}",
+                                        event.category, event.syscall, event.target
+                                    ));
+                                }
+                                if !audit.compile_ok {
+                                    report.failure =
+                                        Some(format!("compilation failed: {}", audit.stderr));
+                                } else if !report.trace_complete {
+                                    report.failure =
+                                        Some("incomplete trusted syscall trace".into());
+                                } else if audit.output_truncated || audit.stderr_truncated {
+                                    report.failure = Some("candidate output cap exceeded".into());
+                                } else if audit.candidate_exit != Some(0) {
                                     report.failure = Some(format!(
-                                        "expected {} responses, observed {}",
-                                        cases.len(),
-                                        lines.len()
+                                        "candidate exit {:?}: {}",
+                                        audit.candidate_exit,
+                                        audit.stderr.chars().take(1024).collect::<String>()
                                     ));
                                 } else {
-                                    for (i, (line, case)) in lines.iter().zip(&cases).enumerate() {
-                                        match serde_json::from_str::<Value>(line) {
-                                            Ok(value) if value == case.expected => {
-                                                report.cases_passed += 1
-                                            }
-                                            Ok(_) => {
-                                                if report.failure.is_none() {
-                                                    report.failure = Some(format!(
-                                                        "host oracle mismatch at case {i}"
-                                                    ));
+                                    let lines: Vec<_> = audit.output.lines().collect();
+                                    if lines.len() != cases.len() {
+                                        report.failure = Some(format!(
+                                            "expected {} responses, observed {}",
+                                            cases.len(),
+                                            lines.len()
+                                        ));
+                                    } else {
+                                        for (i, (line, case)) in
+                                            lines.iter().zip(&cases).enumerate()
+                                        {
+                                            match serde_json::from_str::<Value>(line) {
+                                                Ok(value) if value == case.expected => {
+                                                    report.cases_passed += 1
                                                 }
-                                            }
-                                            Err(e) => {
-                                                if report.failure.is_none() {
-                                                    report.failure = Some(format!(
-                                                        "invalid JSON at case {i}: {e}"
-                                                    ));
+                                                Ok(_) => {
+                                                    if report.failure.is_none() {
+                                                        report.failure = Some(format!(
+                                                            "host oracle mismatch at case {i}"
+                                                        ));
+                                                    }
+                                                }
+                                                Err(e) => {
+                                                    if report.failure.is_none() {
+                                                        report.failure = Some(format!(
+                                                            "invalid JSON at case {i}: {e}"
+                                                        ));
+                                                    }
                                                 }
                                             }
                                         }
@@ -918,8 +1051,8 @@ async fn grade_execution(
                     }
                 }
             }
+            writer.abort();
         }
-        writer.abort();
     }
     if report.failure.is_some() {
         report
@@ -932,11 +1065,92 @@ async fn grade_execution(
         && report.trace_complete
         && report.cases_passed == report.cases_total;
     report.duration_ms = start.elapsed().as_millis() as u64;
-    fs::write(
-        cfg.report_dir.join(format!("{run_id}.json")),
-        serde_json::to_vec_pretty(&report)?,
-    )?;
+    if cfg.controller_version == 3 {
+        stream::publish_new(
+            &cfg.report_dir.join(format!("{run_id}.json")),
+            &serde_json::to_vec_pretty(&report)?,
+        )
+        .await?;
+    } else {
+        fs::write(
+            cfg.report_dir.join(format!("{run_id}.json")),
+            serde_json::to_vec_pretty(&report)?,
+        )?;
+    }
     Ok(report)
+}
+
+fn apply_audit_output(
+    report: &mut SandboxReport,
+    cfg: &SandboxConfig,
+    cases: &[tasks::Case],
+    output: &std::process::Output,
+) -> Result<()> {
+    if !output.status.success() {
+        report.failure = Some(format!(
+            "trusted supervisor exited {:?}",
+            output.status.code()
+        ));
+        return Ok(());
+    }
+    let audit: AuditOutput = match serde_json::from_slice(&output.stdout) {
+        Ok(audit) => audit,
+        Err(error) => {
+            report.failure = Some(format!("trusted audit result malformed: {error}"));
+            return Ok(());
+        }
+    };
+    report.trace_complete = audit.trace_complete
+        && audit.compile_ok
+        && audit_identity_matches(&audit, cfg)
+        && audit.syscalls_observed > 0;
+    report.stdout_sha256 = tasks::hash(audit.output.as_bytes());
+    report.audit_events = audit.events;
+    for event in &report.audit_events {
+        report.quarantine_reasons.push(format!(
+            "prohibited {} attempt: syscall {} target {}",
+            event.category, event.syscall, event.target
+        ));
+    }
+    if !audit.compile_ok {
+        report.failure = Some(format!("compilation failed: {}", audit.stderr));
+    } else if !report.trace_complete {
+        report.failure = Some("incomplete trusted syscall trace".into());
+    } else if audit.output_truncated || audit.stderr_truncated {
+        report.failure = Some("candidate output cap exceeded".into());
+    } else if audit.candidate_exit != Some(0) {
+        report.failure = Some(format!(
+            "candidate exit {:?}: {}",
+            audit.candidate_exit,
+            audit.stderr.chars().take(1024).collect::<String>()
+        ));
+    } else {
+        let lines = audit.output.lines().collect::<Vec<_>>();
+        if lines.len() != cases.len() {
+            report.failure = Some(format!(
+                "expected {} responses, observed {}",
+                cases.len(),
+                lines.len()
+            ));
+        } else {
+            for (index, (line, case)) in lines.iter().zip(cases).enumerate() {
+                match serde_json::from_str::<Value>(line) {
+                    Ok(value) if value == case.expected => report.cases_passed += 1,
+                    Ok(_) => {
+                        report
+                            .failure
+                            .get_or_insert(format!("host oracle mismatch at case {index}"));
+                    }
+                    Err(error) => {
+                        report
+                            .failure
+                            .get_or_insert(format!("invalid JSON at case {index}: {error}"));
+                    }
+                }
+            }
+        }
+    }
+    Ok(())
 }
 
 pub fn verify_report(
@@ -961,6 +1175,9 @@ pub fn verify_report(
         report.cases_total == task.public_examples.len() + tasks::private_cases(task)?.len(),
         "required case denominator mismatch"
     );
+    if cfg.controller_version == 3 && v3::verify(report, cfg)? {
+        return Ok(());
+    }
     let audit_bytes = fs::read(&report.audit_path).context("trusted audit artifact missing")?;
     ensure!(
         tasks::hash(&audit_bytes) == report.audit_sha256,
@@ -1087,24 +1304,68 @@ mod tests {
         // than silently invalidating every already accepted report.
         assert_eq!(
             include_bytes!("sandbox.rs").as_slice(),
-            include_bytes!("../sandbox/policies/controller-v2/controller.rs").as_slice()
+            include_bytes!("../sandbox/policies/controller-v3/controller.rs").as_slice()
         );
         assert_eq!(
             include_bytes!("sandbox/control.rs").as_slice(),
-            include_bytes!("../sandbox/policies/controller-v2/control.rs").as_slice()
+            include_bytes!("../sandbox/policies/controller-v3/control.rs").as_slice()
         );
         assert_eq!(
             include_bytes!("sandbox/runtime_lease.rs").as_slice(),
-            include_bytes!("../sandbox/policies/controller-v2/runtime_lease.rs").as_slice()
+            include_bytes!("../sandbox/policies/controller-v3/runtime_lease.rs").as_slice()
         );
         assert_eq!(
             include_bytes!("sandbox/owned.rs").as_slice(),
-            include_bytes!("../sandbox/policies/controller-v2/owned.rs").as_slice()
+            include_bytes!("../sandbox/policies/controller-v3/owned.rs").as_slice()
         );
         assert_eq!(
             include_bytes!("sandbox/recovery.rs").as_slice(),
-            include_bytes!("../sandbox/policies/controller-v2/recovery.rs").as_slice()
+            include_bytes!("../sandbox/policies/controller-v3/recovery.rs").as_slice()
         );
+        for (name, live, frozen) in [
+            (
+                "lifecycle",
+                include_bytes!("sandbox/v3.rs").as_slice(),
+                include_bytes!("../sandbox/policies/controller-v3/v3.rs").as_slice(),
+            ),
+            (
+                "native operations",
+                include_bytes!("sandbox/v3/native.rs").as_slice(),
+                include_bytes!("../sandbox/policies/controller-v3/v3/native.rs").as_slice(),
+            ),
+            (
+                "deadline guard",
+                include_bytes!("sandbox/v3/guard.rs").as_slice(),
+                include_bytes!("../sandbox/policies/controller-v3/v3/guard.rs").as_slice(),
+            ),
+            (
+                "preflight probe",
+                include_bytes!("sandbox/v3/probe.rs").as_slice(),
+                include_bytes!("../sandbox/policies/controller-v3/v3/probe.rs").as_slice(),
+            ),
+            (
+                "verification",
+                include_bytes!("sandbox/v3/verification.rs").as_slice(),
+                include_bytes!("../sandbox/policies/controller-v3/v3/verification.rs").as_slice(),
+            ),
+            (
+                "cached build",
+                include_bytes!("sandbox/v3/build.rs").as_slice(),
+                include_bytes!("../sandbox/policies/controller-v3/v3/build.rs").as_slice(),
+            ),
+            (
+                "prepared attempts",
+                include_bytes!("sandbox/prepared.rs").as_slice(),
+                include_bytes!("../sandbox/policies/controller-v3/prepared.rs").as_slice(),
+            ),
+            (
+                "durable streams",
+                include_bytes!("sandbox/stream.rs").as_slice(),
+                include_bytes!("../sandbox/policies/controller-v3/stream.rs").as_slice(),
+            ),
+        ] {
+            assert_eq!(live, frozen, "frozen controller-three {name} changed");
+        }
         validate_portable_build_sources(Path::new("."))
     }
     #[test]
@@ -1178,6 +1439,7 @@ mod tests {
             failure: None,
             duration_ms: 0,
             timeout_evidence: None,
+            lifecycle_evidence: None,
         };
         assert!(verify_report(&report, &SandboxConfig::default(), &t, "fn solve(){}").is_err());
     }

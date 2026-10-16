@@ -19,11 +19,40 @@ mod backend;
 mod compare;
 mod evidence;
 pub mod parity;
+pub mod regrade;
 mod run;
 pub use compare::{compare_completed, compare_many};
-pub use evidence::verify_completed;
 pub use parity::{NumericalEquivalence, verify_numerical_equivalence};
 pub use run::run;
+
+#[derive(Clone, Debug, Serialize, Deserialize, PartialEq, Eq)]
+struct GradingIdentity {
+    kind: String,
+    engine_sha256: String,
+    controller_version: u32,
+    policy_sha256: String,
+    image_id: String,
+    extractor_sha256: Option<String>,
+}
+
+#[derive(Clone)]
+struct VerifiedEvaluation {
+    generation_plan: Plan,
+    execution: serde_json::Value,
+    grading: GradingIdentity,
+    report: serde_json::Value,
+    numerical: NumericalEquivalence,
+}
+
+/// Verify original observations or an explicitly derived regrading wrapper.
+pub fn verify_completed(output: &Path) -> Result<serde_json::Value> {
+    let value: serde_json::Value = serde_json::from_slice(&fs::read(output.join("plan.json"))?)?;
+    if value["evidence_kind"] == regrade::PLAN_KIND {
+        Ok(regrade::verify_view(output)?.report)
+    } else {
+        evidence::verify_original(output)
+    }
+}
 
 #[derive(Clone, Copy, Debug, Serialize, Deserialize, PartialEq, Eq)]
 #[serde(rename_all = "snake_case")]

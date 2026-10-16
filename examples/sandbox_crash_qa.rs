@@ -25,9 +25,8 @@ struct Arguments {
     worker: Option<PathBuf>,
     #[arg(long, default_value = "reports/sandbox-crash-qa/round-001")]
     output: PathBuf,
-    /// The declared ceiling covers container startup and execution; Podman's
-    /// attached client may also retain its pipes during removal bookkeeping.
-    #[arg(long, default_value_t = 20, value_parser = clap::value_parser!(u64).range(1..=60))]
+    /// Candidate time from EOF; the independent PID 1 watchdog is fixed at20s.
+    #[arg(long, default_value_t = 20, value_parser = clap::value_parser!(u64).range(20..=20))]
     wall_timeout_secs: u64,
 }
 struct OwnedWorker(Child);
@@ -183,6 +182,7 @@ async fn exercise(
         &output.join("before-kill.json"),
         &json!({"holder_pid":pid,"journal_path":journal_path,"journal":journal,"container":container,"processes":top}),
     )?;
+    let mut kernel = kernel::ObservedCgroup::open(&container, &id).await?;
     let killed_at = Instant::now();
     // SAFETY: the retained child handle, actual pending journal and live child
     // check establish this PID belongs to the controlled QA holder we spawned.
@@ -196,16 +196,58 @@ async fn exercise(
         status.signal() == Some(libc::SIGKILL),
         "holder was not terminated by SIGKILL"
     );
-    // No recovery command runs during this phase. The runtime's own timeout
-    // must remove the untrusted workload despite abrupt host process death.
-    while inspect(cfg, &id).await?.is_some() {
+    // No recovery or host kill runs here. V3 deliberately retains the stopped
+    // container for inspection; process-tree death and object removal differ.
+    while !kernel.empty().await? {
         ensure!(
-            killed_at.elapsed() < Duration::from_secs(cfg.wall_timeout_secs + 12),
-            "container survived the independent runtime ceiling"
+            killed_at.elapsed() < Duration::from_secs(32),
+            "candidate cgroup survived the independent EOF watchdog"
         );
         sleep(Duration::from_millis(200)).await;
     }
     let ceiling_seconds = killed_at.elapsed().as_secs_f64();
+    let terminal = inspect(cfg, &id)
+        .await?
+        .context("owned stopped container disappeared before recovery")?;
+    ensure!(
+        terminal["Id"] == id
+            && terminal["Config"]["Labels"]["org.lec.sandbox.nonce"] == journal["nonce"]
+            && terminal["Config"]["Timeout"] == 80
+            && terminal["State"]["Running"] == false
+            && terminal["State"]["Pid"] == 0
+            && terminal["State"]["ExitCode"] == 124
+            && terminal["State"]["OOMKilled"] == false,
+        "independent PID1 watchdog termination was not observed"
+    );
+    let logs = runtime(cfg, &["logs", &id]).await?;
+    ensure!(
+        logs.status.success() && logs.stdout.len() + logs.stderr.len() <= 1 << 20,
+        "trusted watchdog log retrieval failed or exceeded its bound"
+    );
+    let mut lines = String::from_utf8(logs.stdout.clone())?;
+    lines.push_str(&String::from_utf8(logs.stderr.clone())?);
+    let deadlines = lines
+        .lines()
+        .filter_map(|line| serde_json::from_str::<Value>(line).ok())
+        .filter(|value| value["schema_version"] == 3 && value["deadline_exceeded"] == true)
+        .collect::<Vec<_>>();
+    ensure!(
+        deadlines.len() == 1
+            && deadlines[0]["started_at_eof"] == true
+            && deadlines[0]["deadline_ms"] == 20000
+            && deadlines[0]["deadline_elapsed_ms"]
+                .as_u64()
+                .is_some_and(|n| n >= 20000),
+        "missing complete trusted independent-watchdog envelope"
+    );
+    artefact::write_json(
+        &output.join("independent-death.json"),
+        &json!({"evidence_kind":"actual_namespace_pid1_watchdog_and_kernel_empty_group_before_recovery",
+            "container":terminal,"kernel":kernel.binding,"kernel_events":kernel.last_events,
+            "seconds_from_sigkill_to_kernel_empty":ceiling_seconds,"watchdog":deadlines[0]}),
+    )?;
+    artefact::atomic_write(&output.join("independent-watchdog.stdout"), &logs.stdout)?;
+    artefact::atomic_write(&output.join("independent-watchdog.stderr"), &logs.stderr)?;
     let still_pending: Value = serde_json::from_slice(&fs::read(&journal_path)?)?;
     ensure!(
         still_pending["completed_unix_ms"].is_null(),
@@ -227,6 +269,10 @@ async fn exercise(
             && recovered["completion_reason"] == "recovered_after_original_owner_died",
         "subsequent dispatch did not durably acknowledge the dead holder's ownership journal"
     );
+    ensure!(
+        inspect(cfg, &id).await?.is_none(),
+        "recovery did not remove the exact stopped container"
+    );
     let sentinel = inspect(cfg, sentinel_id)
         .await?
         .context("unrelated sentinel was removed")?;
@@ -236,15 +282,19 @@ async fn exercise(
         "unrelated sentinel did not survive recovery unchanged"
     );
     Ok(
-        json!({"schema_version":1,"evidence_kind":"actual_orchestrator_sigkill_sandbox_ceiling_and_owned_recovery_qa",
+        json!({"schema_version":2,"evidence_kind":"actual_orchestrator_sigkill_sandbox_ceiling_and_owned_recovery_qa",
         "passed":true,"holder_pid":pid,"holder_exit_signal":status.signal(),"actual_infinite_candidate_observed":true,
-        "runtime_hard_ceiling_seconds":cfg.wall_timeout_secs,"seconds_from_sigkill_to_absence":ceiling_seconds,
+        "candidate_watchdog_seconds":20,"outer_startup_crash_seconds":80,"seconds_from_sigkill_to_kernel_empty":ceiling_seconds,
+        "stopped_container_retained_before_recovery":true,"exact_container_removed_by_recovery":true,
         "runtime_ceiling_observed_before_recovery":true,"recovered_journal_path":journal_path,"recovered_journal":recovered,
         "post_crash_reference_run_id":grade.run_id,"post_crash_reference_passed":grade.passed,"unrelated_sentinel_survived":true,
         "unrelated_sentinel_id":sentinel_id,"example_executable_sha256":artefact::file_hash(&executable)?,
         "limitation":"Actual local sandbox crash/ceiling/recovery only; no provider recordings, paid-call recovery, model quality, held-out result or assessment drill completion is claimed."}),
     )
 }
+
+#[path = "sandbox_crash_qa/kernel.rs"]
+mod kernel;
 
 async fn run_parent(args: Arguments) -> Result<()> {
     ensure!(

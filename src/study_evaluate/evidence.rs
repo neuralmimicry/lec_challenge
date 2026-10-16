@@ -50,7 +50,7 @@ pub(super) fn checkpoint(identity: &Checkpoint, root: &Path) -> Result<()> {
     Ok(())
 }
 
-pub(super) fn plan(plan: &Plan, root: &Path) -> Result<()> {
+pub(super) fn plan_structure(plan: &Plan, root: &Path) -> Result<()> {
     let expected = tasks::corpus()
         .into_iter()
         .filter(|t| t.split == plan.split.corpus_split())
@@ -73,7 +73,6 @@ pub(super) fn plan(plan: &Plan, root: &Path) -> Result<()> {
             && sandbox::policy_sha256(&plan.sandbox)? == plan.sandbox_policy_sha256,
         "study evaluation plan changed task denominator, inference or sandbox protocol"
     );
-    checkpoint(&plan.checkpoint, root)?;
     plan.engine.verify(root)?;
     backend::verify(plan, root)?;
     let probe: serde_json::Value =
@@ -85,6 +84,11 @@ pub(super) fn plan(plan: &Plan, root: &Path) -> Result<()> {
         "study evaluation lacks its effective sandbox controls"
     );
     Ok(())
+}
+
+pub(super) fn plan(plan: &Plan, root: &Path) -> Result<()> {
+    plan_structure(plan, root)?;
+    checkpoint(&plan.checkpoint, root)
 }
 
 pub(super) fn raw(record: &RawGeneration, task: &Task, plan: &Plan, plan_sha: &str) -> Result<()> {
@@ -242,7 +246,7 @@ pub(super) fn summary(
     )
 }
 
-pub fn verify_completed(output: &Path) -> Result<serde_json::Value> {
+pub(super) fn verify_original(output: &Path) -> Result<serde_json::Value> {
     let root = std::env::current_dir()?.canonicalize()?;
     let output = output.canonicalize()?;
     ensure!(

@@ -218,7 +218,7 @@ impl SearchConfig {
                     && pin(&candidate.sha256, 64)
                     && candidate.bytes > 0
                     && candidate.bytes <= 32 << 30
-                    && matches!(candidate.architecture.as_str(), "qwen2" | "llama")
+                    && matches!(candidate.architecture.as_str(), "qwen2" | "qwen3" | "llama")
                     && candidate.filename.ends_with(".gguf")
                     && !candidate.filename.contains('/')
                     && !candidate.filename.contains("..")

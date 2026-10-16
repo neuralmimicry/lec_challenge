@@ -119,4 +119,29 @@ mod tests {
         assert!(a.verify(dir.path()).is_err());
         assert!(Artefact::capture(dir.path(), "../outside").is_err());
     }
+
+    #[test]
+    fn persisted_task_rates_retain_exact_bits_for_independent_reconstruction() {
+        // The default JSON parser rounded the actual 11/48 score down by one
+        // ULP. A strict verifier must keep exact equality and fix parsing,
+        // rather than accepting an arbitrary numerical tolerance for reports.
+        for denominator in 1..=192 {
+            for numerator in 0..=denominator {
+                let expected = numerator as f64 / denominator as f64;
+                let bytes = serde_json::to_vec(&serde_json::json!({
+                    "passed": numerator,
+                    "planned": denominator,
+                    "pass_rate": expected,
+                }))
+                .unwrap();
+                let read: serde_json::Value = serde_json::from_slice(&bytes).unwrap();
+                assert_eq!(
+                    expected.to_bits(),
+                    read["pass_rate"].as_f64().unwrap().to_bits(),
+                    "persisted rate changed for {numerator}/{denominator}"
+                );
+                assert_eq!(serde_json::to_vec(&read).unwrap(), bytes);
+            }
+        }
+    }
 }

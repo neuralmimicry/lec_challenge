@@ -10,9 +10,11 @@ use std::{
 
 // Reports and application state are deliberately outside this immutable input
 // set: rehearsal creates new reports/state, and the manifest cannot hash itself.
-const ASSET_ROOTS: [&str; 14] = [
+const ASSET_ROOTS: [&str; 16] = [
     "offline_bundle/base",
     "offline_bundle/comparative",
+    "offline_bundle/students",
+    "offline_bundle/distillation-traces",
     "offline_bundle/images",
     "offline_bundle/bin",
     "offline_bundle/notices",
@@ -367,6 +369,31 @@ mod tests {
         assert!(verify_extracted_assets(root.path(), &manifest).is_err());
         manifest.assets[0].path = "../outside".into();
         assert!(asset_inventory_sha256(&manifest.assets).is_err());
+    }
+
+    #[test]
+    fn student_weights_and_teacher_targets_are_verified_before_bundled_execution() {
+        let root = tempfile::tempdir().unwrap();
+        let student = root
+            .path()
+            .join("offline_bundle/students/ternary/model.safetensors");
+        let target = root
+            .path()
+            .join("offline_bundle/distillation-traces/teacher/targets.safetensors");
+        for path in [&student, &target] {
+            fs::create_dir_all(path.parent().unwrap()).unwrap();
+            fs::write(path, b"unit fixture tensors").unwrap();
+        }
+        let manifest = fixture_manifest(root.path());
+        verify_extracted_assets(root.path(), &manifest).unwrap();
+        // Either new tensor family can change the actual training computation.
+        // Archive verification must reject it before executing the launcher.
+        for path in [&student, &target] {
+            fs::write(path, b"unit changed tensors").unwrap();
+            assert!(verify_extracted_assets(root.path(), &manifest).is_err());
+            fs::write(path, b"unit fixture tensors").unwrap();
+        }
+        verify_extracted_assets(root.path(), &manifest).unwrap();
     }
 
     #[test]

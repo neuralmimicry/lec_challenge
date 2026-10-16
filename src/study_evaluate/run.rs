@@ -138,8 +138,7 @@ where
         if options.output.join("report.json").exists() {
             let directory = options.output.clone();
             let report =
-                tokio::task::spawn_blocking(move || evidence::verify_completed(&directory))
-                    .await??;
+                tokio::task::spawn_blocking(move || super::verify_completed(&directory)).await??;
             eprintln!(
                 "study-evaluate: reused complete independently verified evaluation; no model/container started"
             );

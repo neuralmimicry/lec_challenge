@@ -142,8 +142,29 @@ rounds at three and 48 steps changed no effective trits. The separate
 [64-step round](reports/local-study/native-bitnet-64-result.md) changed 230,999
 effective trits and passed independent reload; native numerical comparisons still
 fail their fixed tolerance. These claims remain separate from coding quality.
-The [latest completed verification](reports/local-study/verification-006/verification.json)
+The [previous verification](reports/local-study/verification-006/verification.json)
 passed all eight software checks and 254 ordinary tests while retaining the
 optional dependency-notice gap.
+
+Both new full-context rounds have now completed 48 updates and independent
+reloads; the [measured round report](reports/local-study/native-full-round-result.md)
+keeps that evidence separate from coding quality. Their original matched
+development comparisons are invalid because of grading infrastructure failures.
+All 192 original train/development observations are saved: training scores are
+base **0/48**, SFT **11/48** and combined losses **6/48**, with errors retained;
+all development scores are **0/16**. Both second-seed rounds have
+also completed 48 updates, separate reloads and independent provenance audits. None of these facts establishes
+generalisation or promotion.
+The [latest verification](reports/local-study/verification-009/verification.json)
+passed all nine software checks, 293 ordinary tests and all three real container
+tests. The separately versioned V3 controller also passed actual portable and
+orchestrator-crash QA; earlier failed deadline reports remain unchanged.
+The [Qwen3 follow-up](docs/qwen3.md) adds a publisher-verified alternative and
+native architecture support; the fresh pinned engine is now executing its trial.
+
+The [original-assessment audit](docs/assessment-audit.md) maps every design/build
+requirement, all nine drills and each submission item to code, observed evidence
+and the remaining closure work. The real-provider, assessment-control,
+held-out-evaluation, complete-cost and refreshed-delivery gaps remain explicit.
 
 Comparisons use train/development tasks and preserve the sealed held-out set. Original-model scores measure no learning and cannot authorise promotion. DeepSeek output-trained derivatives inherit its licence/use obligations. The earlier delivery archives remain the verified CPU snapshot; rebuild and verify a new package to include this extension. The [full dependency inventory](docs/dependency-notices.md) reports one evidenced upstream notice gap in the optional CUDA build tool, separately from passing software checks.

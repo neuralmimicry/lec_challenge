@@ -1,4 +1,4 @@
-//! Native, CPU-capable Qwen2 inference and differentiable rank-limited adaptation.
+//! Native Qwen2/Qwen3 and Llama inference with differentiable adaptation.
 //!
 //! The architecture follows Qwen2 (Apache-2.0). Unlike the optimised inference
 //! kernels, the tensor RoPE, RMS normalisation and softmax paths retain gradients.
@@ -23,6 +23,8 @@ use tokenizers::Tokenizer;
 
 mod asset_lease;
 mod quantised;
+#[cfg(test)]
+mod qwen3_tests;
 use asset_lease::AssetLease;
 pub use quantised::{QuantisedMemoryEstimate, estimate_quantised_memory};
 
@@ -271,6 +273,10 @@ pub struct QwenConfig {
     pub num_hidden_layers: usize,
     pub num_attention_heads: usize,
     pub num_key_value_heads: usize,
+    /// Qwen3 may project to more attention channels than its residual width.
+    /// Omission preserves historical Qwen2/Llama configuration fingerprints.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub head_dim: Option<usize>,
     pub max_position_embeddings: usize,
     pub rope_theta: f64,
     pub rms_norm_eps: f64,
@@ -288,9 +294,14 @@ fn silu_activation() -> String {
 }
 
 impl QwenConfig {
+    pub fn head_dimension(&self) -> usize {
+        self.head_dim
+            .unwrap_or_else(|| self.hidden_size / self.num_attention_heads.max(1))
+    }
+
     pub fn validate(&self) -> Result<()> {
         ensure!(
-            matches!(self.model_type.as_str(), "qwen2" | "llama"),
+            matches!(self.model_type.as_str(), "qwen2" | "qwen3" | "llama"),
             "unsupported model architecture"
         );
         ensure!(
@@ -306,15 +317,29 @@ impl QwenConfig {
             "model dimensions are empty or outside native runtime bounds"
         );
         ensure!(
-            self.num_attention_heads > 0
+            (1..=256).contains(&self.num_attention_heads)
                 && self.num_key_value_heads > 0
-                && self.hidden_size.is_multiple_of(self.num_attention_heads)
                 && self
                     .num_attention_heads
                     .is_multiple_of(self.num_key_value_heads)
-                && (self.hidden_size / self.num_attention_heads).is_multiple_of(2),
+                && (2..=512).contains(&self.head_dimension())
+                && self.head_dimension().is_multiple_of(2),
             "invalid attention or rotary head dimensions"
         );
+        if self.model_type == "qwen3" {
+            ensure!(
+                self.head_dim.is_some()
+                    && self.attention_bias == Some(false)
+                    && self.num_attention_heads * self.head_dimension() <= 16384,
+                "Qwen3 requires explicit bounded head_dim and bias-free projections"
+            );
+        } else {
+            ensure!(
+                self.hidden_size.is_multiple_of(self.num_attention_heads)
+                    && self.head_dimension() == self.hidden_size / self.num_attention_heads,
+                "legacy attention head width differs from residual dimensions"
+            );
+        }
         ensure!(
             self.rope_theta.is_finite()
                 && self.rope_theta > 0.
@@ -524,6 +549,13 @@ impl Projection {
     }
 }
 
+fn apply_head_norm(input: &Tensor, norm: &Option<LayerNorm>) -> candle_core::Result<Tensor> {
+    match norm {
+        Some(norm) => norm.forward(&input.contiguous()?),
+        None => Ok(input.clone()),
+    }
+}
+
 struct Layer {
     q: Projection,
     k: LinearBackend,
@@ -534,6 +566,8 @@ struct Layer {
     down: LinearBackend,
     norm1: LayerNorm,
     norm2: LayerNorm,
+    q_norm: Option<LayerNorm>,
+    k_norm: Option<LayerNorm>,
     kv: Option<(Tensor, Tensor)>,
 }
 
@@ -595,19 +629,6 @@ impl QwenModel {
             !cfg.use_sliding_window,
             "sliding-window attention is not supported by this pinned architecture"
         );
-        ensure!(
-            cfg.num_attention_heads > 0
-                && cfg.num_key_value_heads > 0
-                && cfg.hidden_size.is_multiple_of(cfg.num_attention_heads)
-                && cfg
-                    .num_attention_heads
-                    .is_multiple_of(cfg.num_key_value_heads),
-            "invalid Qwen head dimensions"
-        );
-        ensure!(
-            matches!(cfg.model_type.as_str(), "qwen2" | "llama"),
-            "unsupported architecture; only verified Qwen2 and common Llama are supported"
-        );
         let bias = cfg.attention_bias.unwrap_or(cfg.model_type == "qwen2");
         let embed = constant(&weights, "model.embed_tokens.weight")?;
         let dev = embed.device().clone();
@@ -641,14 +662,16 @@ impl QwenModel {
         if !cfg.tie_word_embeddings {
             expect("lm_head.weight", &[cfg.vocab_size, cfg.hidden_size])?;
         }
-        let kv_dimension = cfg.hidden_size / cfg.num_attention_heads * cfg.num_key_value_heads;
+        let head_dim = cfg.head_dimension();
+        let q_dimension = head_dim * cfg.num_attention_heads;
+        let kv_dimension = head_dim * cfg.num_key_value_heads;
         for index in 0..cfg.num_hidden_layers {
             let prefix = format!("model.layers.{index}");
             for (name, out, input) in [
-                ("self_attn.q_proj", cfg.hidden_size, cfg.hidden_size),
+                ("self_attn.q_proj", q_dimension, cfg.hidden_size),
                 ("self_attn.k_proj", kv_dimension, cfg.hidden_size),
                 ("self_attn.v_proj", kv_dimension, cfg.hidden_size),
-                ("self_attn.o_proj", cfg.hidden_size, cfg.hidden_size),
+                ("self_attn.o_proj", cfg.hidden_size, q_dimension),
                 ("mlp.gate_proj", cfg.intermediate_size, cfg.hidden_size),
                 ("mlp.up_proj", cfg.intermediate_size, cfg.hidden_size),
                 ("mlp.down_proj", cfg.hidden_size, cfg.intermediate_size),
@@ -658,9 +681,20 @@ impl QwenModel {
             for name in ["input_layernorm", "post_attention_layernorm"] {
                 expect(&format!("{prefix}.{name}.weight"), &[cfg.hidden_size])?;
             }
+            if cfg.model_type == "qwen3" {
+                for name in ["q_norm", "k_norm"] {
+                    expect(&format!("{prefix}.self_attn.{name}.weight"), &[head_dim])?;
+                }
+                ensure!(
+                    ["q_proj", "k_proj", "v_proj", "o_proj"].iter().all(|name| {
+                        !weights.contains_key(&format!("{prefix}.self_attn.{name}.bias"))
+                    }),
+                    "Qwen3 projection bias is inconsistent with the verified architecture"
+                );
+            }
             if bias {
                 for (name, size) in [
-                    ("q_proj", cfg.hidden_size),
+                    ("q_proj", q_dimension),
                     ("k_proj", kv_dimension),
                     ("v_proj", kv_dimension),
                 ] {
@@ -763,6 +797,22 @@ impl QwenModel {
                     constant(&weights, &format!("{p}.post_attention_layernorm.weight"))?,
                     cfg.rms_norm_eps,
                 ),
+                q_norm: if cfg.model_type == "qwen3" {
+                    Some(LayerNorm::rms_norm(
+                        constant(&weights, &format!("{p}.self_attn.q_norm.weight"))?,
+                        cfg.rms_norm_eps,
+                    ))
+                } else {
+                    None
+                },
+                k_norm: if cfg.model_type == "qwen3" {
+                    Some(LayerNorm::rms_norm(
+                        constant(&weights, &format!("{p}.self_attn.k_norm.weight"))?,
+                        cfg.rms_norm_eps,
+                    ))
+                } else {
+                    None
+                },
                 kv: None,
             });
         }
@@ -782,7 +832,7 @@ impl QwenModel {
             constant(&weights, "lm_head.weight")?
         };
         let norm = LayerNorm::rms_norm(constant(&weights, "model.norm.weight")?, cfg.rms_norm_eps);
-        let dim = cfg.hidden_size / cfg.num_attention_heads;
+        let dim = head_dim;
         ensure!(dim.is_multiple_of(2), "rotary head dimension must be even");
         let rope_scale = match &cfg.rope_scaling {
             None => 1.,
@@ -882,7 +932,7 @@ impl QwenModel {
         );
         let heads = self.cfg.num_attention_heads;
         let kv_heads = self.cfg.num_key_value_heads;
-        let head_dim = self.cfg.hidden_size / heads;
+        let head_dim = self.cfg.head_dimension();
         let cos = self.cos.narrow(0, offset, seq)?;
         let sin = self.sin.narrow(0, offset, seq)?;
         let mask = if seq > 1 {
@@ -922,6 +972,10 @@ impl QwenModel {
                 .forward(&norm)?
                 .reshape((batch, seq, kv_heads, head_dim))?
                 .transpose(1, 2)?;
+            // Qwen3 normalises each projected head before the rotary transform;
+            // the per-channel learned scale is shared across heads.
+            let q = apply_head_norm(&q, &layer.q_norm)?;
+            let k = apply_head_norm(&k, &layer.k_norm)?;
             let v = layer
                 .v
                 .forward(&norm)?
@@ -967,7 +1021,7 @@ impl QwenModel {
                 .to_dtype(self.dtype)?
                 .matmul(&v)?
                 .transpose(1, 2)?
-                .reshape((batch, seq, self.cfg.hidden_size))?;
+                .reshape((batch, seq, heads * head_dim))?;
             x = (&x + layer.o.forward(&attention)?)?;
             let norm = layer.norm2.forward(&x)?;
             let ff =
@@ -1861,6 +1915,7 @@ mod tests {
             num_hidden_layers: 2,
             num_attention_heads: 4,
             num_key_value_heads: 2,
+            head_dim: None,
             max_position_embeddings: 64,
             rope_theta: 10000.,
             rms_norm_eps: 1e-6,

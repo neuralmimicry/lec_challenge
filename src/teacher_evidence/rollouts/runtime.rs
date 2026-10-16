@@ -3,6 +3,9 @@ use super::*;
 use crate::{bitnet::BitNetRuntime, distillation::DistillationStudent, model::ModelTrace};
 use candle_core::{Device, Tensor};
 
+mod context;
+pub(crate) use context::{validate_context_observation, validate_teacher_request};
+
 pub(crate) enum RecordedModel {
     Qwen(ModelRuntime),
     BitNet(BitNetRuntime),
@@ -78,6 +81,23 @@ impl RecordedModel {
         Ok(Self::Qwen(ModelRuntime::load_comparative_with_options(
             &teacher.model.directory,
             options,
+        )?))
+    }
+    /// Explicit context is a new protocol for an original GGUF teacher only.
+    /// Omission retains the exact historical loader, including its 1,024 cap.
+    pub fn teacher_with_context(
+        teacher: &TeacherEvidence,
+        options: RuntimeOptions,
+        context_tokens: Option<usize>,
+    ) -> Result<Self> {
+        let Some(context_tokens) = context_tokens else {
+            return Self::teacher(teacher, options);
+        };
+        context::preflight(teacher, &options, context_tokens)?;
+        Ok(Self::Qwen(ModelRuntime::load_quantised_with_context(
+            &teacher.model.directory,
+            options,
+            context_tokens,
         )?))
     }
     pub fn generate(&mut self, request: GenerationRequest) -> Result<Generation> {

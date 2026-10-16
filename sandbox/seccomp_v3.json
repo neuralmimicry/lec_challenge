@@ -1,0 +1,27 @@
+{
+  "defaultAction": "SCMP_ACT_ERRNO",
+  "defaultErrnoRet": 1,
+  "archMap": [
+    {"architecture": "SCMP_ARCH_X86_64", "subArchitectures": []},
+    {"architecture": "SCMP_ARCH_AARCH64", "subArchitectures": []}
+  ],
+  "syscalls": [{
+    "action": "SCMP_ACT_ALLOW",
+    "names": [
+      "read", "write", "readv", "writev", "pread64", "pwrite64", "open", "openat", "openat2", "close", "close_range",
+      "stat", "fstat", "lstat", "newfstatat", "statx", "lseek", "mmap", "mprotect", "munmap", "mremap", "madvise", "brk",
+      "rt_sigaction", "rt_sigprocmask", "rt_sigreturn", "rt_sigsuspend", "sigaltstack", "ioctl", "access", "faccessat", "faccessat2",
+      "pipe", "pipe2", "select", "pselect6", "poll", "ppoll", "dup", "dup2", "dup3", "fcntl", "flock", "fsync", "fdatasync",
+      "getcwd", "chdir", "fchdir", "rename", "renameat", "renameat2", "mkdir", "mkdirat", "rmdir", "unlink", "unlinkat",
+      "readlink", "readlinkat", "chmod", "fchmod", "fchmodat", "umask", "getdents", "getdents64",
+      "getpid", "getppid", "gettid", "getuid", "geteuid", "getgid", "getegid", "getresuid", "getresgid", "getgroups", "uname", "sysinfo",
+      "getrlimit", "setrlimit", "prlimit64", "getrusage", "times", "time", "gettimeofday", "clock_gettime", "clock_getres", "nanosleep", "clock_nanosleep",
+      "sched_yield", "sched_getaffinity", "sched_setaffinity", "sched_getparam", "sched_getscheduler", "futex", "futex_waitv", "set_robust_list",
+      "get_robust_list", "rseq", "set_tid_address", "arch_prctl", "prctl", "clone", "clone3", "fork", "vfork", "execve", "execveat",
+      "wait4", "waitid", "exit", "exit_group", "kill", "tgkill", "tkill", "ptrace", "getrandom", "memfd_create", "ftruncate", "truncate",
+      "sendfile", "copy_file_range", "splice", "tee", "vmsplice", "fallocate", "utimensat", "utime", "utimes", "futimesat",
+      "socketpair", "recvfrom", "sendto", "recvmsg", "sendmsg", "getsockopt", "setsockopt", "shutdown",
+      "eventfd", "eventfd2", "epoll_create", "epoll_create1", "epoll_ctl", "epoll_wait", "epoll_pwait", "epoll_pwait2", "restart_syscall", "capget", "personality", "getcpu"
+    ]
+  }]
+}

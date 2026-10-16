@@ -20,6 +20,20 @@ fn legacy_image_architecture() -> String {
 /// Restore only the archived image whose complete bytes match the manifest.
 /// This function never pulls an image or builds/downloads a dependency.
 pub async fn restore_image_bundle(directory: &Path, cfg: &SandboxConfig) -> Result<String> {
+    let selected = directory.join(format!(
+        "policy-{}/{}",
+        cfg.policy_version,
+        if cfg.policy_version == 1 {
+            "x86_64"
+        } else {
+            &cfg.architecture
+        }
+    ));
+    let directory = if selected.join("manifest.json").try_exists()? {
+        selected.as_path()
+    } else {
+        directory
+    };
     let manifest: ImageManifest = serde_json::from_slice(
         &tokio::fs::read(directory.join("manifest.json"))
             .await
@@ -84,6 +98,7 @@ pub async fn restore_image_bundle(directory: &Path, cfg: &SandboxConfig) -> Resu
         String::from_utf8_lossy(&output.stderr)
     );
     let identity = Command::new(&cfg.runtime)
+        .kill_on_drop(true)
         .args([
             "image",
             "inspect",
@@ -91,8 +106,10 @@ pub async fn restore_image_bundle(directory: &Path, cfg: &SandboxConfig) -> Resu
             "{{.Id}}",
             &manifest.image_id,
         ])
-        .output()
-        .await?;
+        .output();
+    let identity = timeout(Duration::from_secs(30), identity)
+        .await
+        .context("loaded image inspection exceeded metadata deadline")??;
     ensure!(
         identity.status.success()
             && String::from_utf8_lossy(&identity.stdout)

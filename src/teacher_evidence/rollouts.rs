@@ -11,6 +11,7 @@ mod recovery;
 mod runtime;
 mod verify;
 pub(crate) use runtime::RecordedModel;
+pub(super) use runtime::{validate_context_observation, validate_teacher_request};
 pub(super) use verify::append_verified;
 
 #[derive(Clone, Copy, Debug, Serialize, Deserialize, PartialEq, Eq)]
@@ -29,6 +30,8 @@ pub struct RolloutCollectOptions {
     pub mode: RolloutMode,
     pub teacher_ids: Vec<String>,
     pub teacher_runtime: RuntimeOptions,
+    /// An explicit context applies only to the original GGUF correction teacher.
+    pub teacher_context_tokens: Option<usize>,
     pub student_runtime: RuntimeOptions,
     pub max_tokens: usize,
     pub seed: u64,
@@ -177,6 +180,8 @@ struct FeedbackPlan {
     teacher_assets: Artefact,
     teacher_checkpoint: Option<Artefact>,
     runtime: RuntimeOptions,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    context_tokens: Option<usize>,
     request: GenerationRequest,
     supporting_sample_ids: Vec<String>,
 }
@@ -374,6 +379,7 @@ async fn generate(
     plan: &Artefact,
     request: GenerationRequest,
     mut loaded: Option<RecordedModel>,
+    teacher_context: Option<(TeacherEvidence, usize)>,
     load: impl FnOnce() -> Result<RecordedModel> + Send + 'static,
 ) -> Result<(Raw, Option<RecordedModel>)> {
     if saved.exists() {
@@ -385,6 +391,9 @@ async fn generate(
         return Ok((raw, loaded));
     }
     let result = tokio::task::spawn_blocking(move || {
+        if let Some((teacher, context_tokens)) = &teacher_context {
+            validate_teacher_request(teacher, Some(*context_tokens), &request)?;
+        }
         let mut model = match loaded.take() {
             Some(m) => m,
             None => load()?,
@@ -463,6 +472,10 @@ async fn grade(
 /// This is an on-policy collection round followed by offline optimiser updates;
 /// it never claims that a teacher is queried at every optimisation step.
 pub async fn collect_rollouts(options: RolloutCollectOptions) -> Result<EvidenceBundle> {
+    ensure!(
+        options.teacher_context_tokens.is_none() || options.mode == RolloutMode::OnPolicy,
+        "explicit teacher context is supported for original GGUF on-policy correction teachers only"
+    );
     for path in [&options.bundle, &options.output, &options.student_base] {
         relative(path)?;
     }
@@ -479,7 +492,8 @@ pub async fn collect_rollouts(options: RolloutCollectOptions) -> Result<Evidence
     ensure!(
         (options.output.starts_with("reports") || options.output.starts_with("data"))
             && (1..=48).contains(&options.maximum_tasks)
-            && (1..=1024).contains(&options.max_tokens),
+            && (1..=1024).contains(&options.max_tokens)
+            && options.teacher_context_tokens.is_none_or(|context| (1..=4096).contains(&context) && options.max_tokens < context),
         "invalid bounded rollout collection policy"
     );
     let input = options.bundle.clone();
@@ -517,7 +531,10 @@ pub async fn collect_rollouts(options: RolloutCollectOptions) -> Result<Evidence
         options.bundle.clone()
     };
     let input = capture(&root, &input_file)?;
-    let policy = serde_json::json!({"schema_version":1,"input":input,"student_assets":student_assets,"student_checkpoint":checkpoint,"student_kind":kind,"mode":options.mode,"teacher_ids":options.teacher_ids,"student_runtime":options.student_runtime,"teacher_runtime":options.teacher_runtime,"maximum_tasks":options.maximum_tasks,"max_tokens":options.max_tokens,"seed":options.seed,"engine_sha256":artefact::file_hash(&std::env::current_exe()?)?,"reused_student_policy":options.reuse_student_attempts_from.as_ref().map(|p|capture(&root,&p.join("rollout-policy.json"))).transpose()?});
+    let mut policy = serde_json::json!({"schema_version":1,"input":input,"student_assets":student_assets,"student_checkpoint":checkpoint,"student_kind":kind,"mode":options.mode,"teacher_ids":options.teacher_ids,"student_runtime":options.student_runtime,"teacher_runtime":options.teacher_runtime,"maximum_tasks":options.maximum_tasks,"max_tokens":options.max_tokens,"seed":options.seed,"engine_sha256":artefact::file_hash(&std::env::current_exe()?)?,"reused_student_policy":options.reuse_student_attempts_from.as_ref().map(|p|capture(&root,&p.join("rollout-policy.json"))).transpose()?});
+    if let Some(context_tokens) = options.teacher_context_tokens {
+        policy["teacher_context_tokens"] = context_tokens.into();
+    }
     let policy_path = options.output.join("rollout-policy.json");
     if policy_path.exists() {
         ensure!(
@@ -624,6 +641,7 @@ pub async fn collect_rollouts(options: RolloutCollectOptions) -> Result<Evidence
                 &plan_artifact,
                 plan.student_request.clone(),
                 student,
+                None,
                 move || RecordedModel::student_optional(&base, cp.as_deref(), kind, runtime),
             )
             .await?
@@ -787,6 +805,7 @@ pub async fn collect_rollouts(options: RolloutCollectOptions) -> Result<Evidence
                         teacher_assets: teacher.assets.clone(),
                         teacher_checkpoint: teacher.adapter_checkpoint.clone(),
                         runtime: options.teacher_runtime.clone(),
+                        context_tokens: options.teacher_context_tokens,
                         request: GenerationRequest {
                             prompt: text,
                             max_new_tokens: options.max_tokens,
@@ -812,12 +831,16 @@ pub async fn collect_rollouts(options: RolloutCollectOptions) -> Result<Evidence
                     let fp_artifact = capture(&root, &fp_path)?;
                     let model = teacher.clone();
                     let runtime = options.teacher_runtime.clone();
+                    let context_tokens = options.teacher_context_tokens;
                     let (feedback, next) = generate(
                         &record_dir.join("feedback-raw.json"),
                         &fp_artifact,
                         fp.request.clone(),
                         loaded,
-                        move || RecordedModel::teacher(&model, runtime),
+                        context_tokens.map(|context| (teacher.clone(), context)),
+                        move || {
+                            RecordedModel::teacher_with_context(&model, runtime, context_tokens)
+                        },
                     )
                     .await?;
                     loaded = next;
@@ -884,4 +907,48 @@ pub async fn collect_rollouts(options: RolloutCollectOptions) -> Result<Evidence
     report["student_checkpoint_sha256"] = serde_json::json!(identity);
     artefact::write_json(&options.output.join("rollout-report.json"), &report)?;
     Ok(bundle)
+}
+
+#[cfg(test)]
+mod context_tests {
+    use super::*;
+
+    #[test]
+    fn correction_context_omission_preserves_legacy_feedback_plan_bytes() -> Result<()> {
+        let file = Artefact {
+            path: "labelled/unused".into(),
+            sha256: "a".repeat(64),
+            bytes: 0,
+        };
+        let mut plan = FeedbackPlan {
+            schema_version: 1,
+            initial_plan: file.clone(),
+            student_raw: file.clone(),
+            student_grade: file.clone(),
+            teacher_id: "synthetic".into(),
+            teacher_assets: file,
+            teacher_checkpoint: None,
+            runtime: RuntimeOptions::default(),
+            context_tokens: None,
+            request: GenerationRequest {
+                prompt: "synthetic feedback".into(),
+                max_new_tokens: 768,
+                seed: 1729,
+                temperature: 0.2,
+                top_p: 0.95,
+                timeout_seconds: 120,
+            },
+            supporting_sample_ids: vec![],
+        };
+        let legacy = serde_json::to_vec(&plan)?;
+        ensure!(serde_json::to_value(&plan)?.get("context_tokens").is_none());
+        let restored: FeedbackPlan = serde_json::from_slice(&legacy)?;
+        ensure!(serde_json::to_vec(&restored)? == legacy);
+        plan.context_tokens = Some(2048);
+        ensure!(
+            !json_equal(&plan, &restored)?,
+            "correction cap must change the frozen request"
+        );
+        Ok(())
+    }
 }

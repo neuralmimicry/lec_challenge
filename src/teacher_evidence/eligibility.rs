@@ -195,6 +195,7 @@ mod tests {
             failure: Some("host oracle mismatch at case 0".into()),
             duration_ms: 1,
             timeout_evidence: None,
+            lifecycle_evidence: None,
         };
         let audit = AuditFacts {
             trace_complete: true,
