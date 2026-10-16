@@ -1,0 +1,30 @@
+   Compiling ring v0.17.14
+   Compiling rustls v0.23.46
+   Compiling rustls-webpki v0.103.15
+   Compiling tokio-rustls v0.26.6
+   Compiling hyper-rustls v0.27.10
+   Compiling reqwest v0.12.28
+   Compiling lec-distil v0.1.0 (/home/pbisaacs/Developer/neuralmimicry/lec_challenge)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 3m 57s
+     Running unittests src/main.rs (target/debug/deps/lec_distil-513a8a77e7fb1460)
+
+running 16 tests
+test cli_demo::tests::retraining_nondeterminism_preserves_original_freeze_and_blocks_access ... ok
+test tests::expanded_context_uses_ram_when_only_the_default_context_fits_vram ... ok
+test cli_demo::checkpoint_paths::tests::bundled_manifests_never_shortcut_fresh_full_training ... ok
+test cli_demo::tests::cached_evaluation_requires_same_tensors_and_consistent_freeze ... ok
+test tests::decimal_spend_is_exact_and_rejects_overflow ... ok
+test cli_demo::checkpoint_paths::tests::dataset_or_configuration_change_gets_separate_optimiser_state ... ok
+test tests::requested_context_cannot_be_cropped_to_make_a_model_fit ... ok
+test cli_demo::tests::evaluation_freeze_reuses_exact_plan_and_rejects_posthoc_change ... ok
+test cli_demo::checkpoint_paths::tests::published_replay_uses_included_paths_and_blocks_tensor_changes ... ok
+test cli_demo::checkpoint_paths::tests::ownership_marker_and_symlinked_outputs_fail_closed ... ok
+test cli_demo::checkpoint_paths::tests::restart_reuses_only_its_own_allocation_and_cleared_state_trains_again ... ok
+test tests::study_inspection_cli_is_read_only_and_requires_complete_paths ... ok
+test tests::local_study_serving_requires_a_checkpoint_and_cannot_mix_teacher_mode ... ok
+test tests::fresh_collectors_and_evaluations_preserve_original_failure_evidence ... ok
+test tests::explicit_teacher_context_and_explore_configuration_keep_legacy_defaults ... ok
+test tests::regrade_cli_retains_full_cohort_and_has_no_generation_controls ... ok
+
+test result: ok. 16 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.06s
+
