@@ -1,0 +1,29 @@
+{
+  "coverage_complete": true,
+  "evidence_kind": "actual_local_exploratory_comparative_generations",
+  "limitations": [
+    "Development/training comparison only: no sealed held-out tasks were evaluated.",
+    "These are open-weight models hosted locally, not three independent real provider businesses.",
+    "One decoding seed and a small, jointly authored corpus give descriptive results, not proof of learning or general model superiority.",
+    "Every missing, failed or truncated generation remains a failure in the planned denominator.",
+    "GPU memory snapshots are observations, not continuous peak-memory measurements; energy and cash costs are unmeasured."
+  ],
+  "models": [
+    {
+      "id": "qwen-coder-7b-q4_k_m",
+      "infrastructure_or_generation_errors": 6,
+      "model_id": "Qwen/Qwen2.5-Coder-7B-Instruct-GGUF",
+      "observed": 48,
+      "pass_rate": 0.375,
+      "passed": 18,
+      "planned": 48,
+      "role": "coding_teacher"
+    }
+  ],
+  "observed_observations": 48,
+  "planned_observations": 48,
+  "promotable": false,
+  "schema_version": 1,
+  "source_count": 12,
+  "split": "train"
+}

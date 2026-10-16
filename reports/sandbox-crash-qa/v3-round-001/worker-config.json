@@ -1,0 +1,13 @@
+{
+  "policy_version": 3,
+  "controller_version": 3,
+  "architecture": "x86_64",
+  "runtime": "podman",
+  "image": "localhost/lec-rust-sandbox:3-x86_64",
+  "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "wall_timeout_secs": 20,
+  "memory_mb": 512,
+  "pids_limit": 64,
+  "cpu_limit": 1.0,
+  "report_dir": "reports/sandbox-crash-qa/v3-round-001/runs"
+}

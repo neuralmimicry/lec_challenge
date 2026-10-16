@@ -1,0 +1,38 @@
+{
+  "model_id": "qwen-coder-7b-q4_k_m",
+  "task_id": "intervals.peak",
+  "source_id": "private-intervals-v1",
+  "specification_sha256": "6a4bee6bde7ad865746a6f57eb08aa191e04fcfce46110b214e05250fd470453",
+  "seed": 1729,
+  "plan_sha256": "f87637f90e8a1f80bb2ac95cc92d992944ce9d8fea1129a0fdacc535c177e509",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an array of integer half-open intervals, start<end. Return maximum simultaneous overlap; an end at t does not overlap a start at t.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[[1,3],[2,4],[3,5]],\"expected\":2}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let intervals: Vec<(i64, i64)> = input.as_array().unwrap()\n        .iter()\n        .map(|v| (v[0].as_i64().unwrap(), v[1].as_i64().unwrap()))\n        .collect();\n\n    let mut events: Vec<(i64, i32)> = intervals.iter()\n        .flat_map(|&(start, end)| vec![(start, 1), (end, -1)])\n        .collect();\n\n    events.sort();\n\n    let mut max_overlap = 0;\n    let mut current_overlap = 0;\n\n    for (_, event) in events {\n        current_overlap += event;\n        max_overlap = max_overlap.max(current_overlap);\n    }\n\n    Value::from(max_overlap)\n}\n```",
+    "checkpoint_id": "509287f78cb4d4cf6b3843734733b914b2c158e43e22a7f4bf5e963800894d3c",
+    "finish_reason": "stop",
+    "input_tokens": 241,
+    "output_tokens": 181,
+    "elapsed_ms": 29665,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/intervals.peak.generation.json",
+    "sha256": "32bd9858cddc772409654bc7aed2fadd6d58e25088966e50400430a1d612ae2a",
+    "bytes": 4468
+  },
+  "sandbox_report": {
+    "path": "reports/local-study/qwen7b-train/sandbox/c2898744-b7ce-4456-9960-5ead96aa0096.json",
+    "sha256": "1a5670a2307df085ed6fdddbe65d2085b05e1558a26c6db3e7e82f20fc4600a4",
+    "bytes": 1283
+  },
+  "grading_error": null,
+  "success": true
+}

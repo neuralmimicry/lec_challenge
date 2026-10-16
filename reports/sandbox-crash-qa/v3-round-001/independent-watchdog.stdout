@@ -1,0 +1,1 @@
+{"architecture":"x86_64","candidate_exit":null,"compile_ok":false,"deadline_elapsed_ms":               20000,"deadline_exceeded":true,"deadline_ms":20000,"deadline_started_unix_ms":1792133158740,"events":[],"failure":"trusted EOF-armed candidate deadline exceeded","output":"","schema_version":3,"started_at_eof":true,"stderr":"","trace_complete":false}

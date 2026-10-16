@@ -1,0 +1,33 @@
+{
+  "run_id": "552747ee-f6bc-4bfa-9563-0dc5fb3f6077",
+  "task_id": "search.anagram",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error[E0308]: mismatched types\n  --> /candidate/main.rs:15:5\n   |\n 3 | pub fn solve(input: Value) -> Value {\n   |                               ----- expected `Value` because of return type\n...\n15 |     count_a == count_b\n   |     ^^^^^^^^^^^^^^^^^^ expected `Value`, found `bool`\n   |\nhelp: try wrapping the expression in `serde_json::Value::Bool`\n   |\n15 |     serde_json::Value::Bool(count_a == count_b)\n   |     ++++++++++++++++++++++++                  +\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0308`.\n"
+  ],
+  "cases_total": 6,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "0bf995b5f69865792503015f6af52b457c861b679877956e939c2137ddb4a562",
+  "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "4408d3406f2fb7fedb70e6cf25cafca29640e0994281276aec4c71a778374a86",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:1",
+    "expected_image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/qwen7b-train/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/qwen7b-train/sandbox/552747ee-f6bc-4bfa-9563-0dc5fb3f6077.audit.json",
+  "audit_sha256": "d7a0a4c7cba51197b228df9c012b88eb7c57e1514dd4484f67314b8d8ba7a60d",
+  "failure": "compilation failed: error[E0308]: mismatched types\n  --> /candidate/main.rs:15:5\n   |\n 3 | pub fn solve(input: Value) -> Value {\n   |                               ----- expected `Value` because of return type\n...\n15 |     count_a == count_b\n   |     ^^^^^^^^^^^^^^^^^^ expected `Value`, found `bool`\n   |\nhelp: try wrapping the expression in `serde_json::Value::Bool`\n   |\n15 |     serde_json::Value::Bool(count_a == count_b)\n   |     ++++++++++++++++++++++++                  +\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0308`.\n",
+  "duration_ms": 4824,
+  "timeout_evidence": null
+}

@@ -1,0 +1,38 @@
+{
+  "model_id": "qwen-coder-7b-q4_k_m",
+  "task_id": "intervals.merge",
+  "source_id": "private-intervals-v1",
+  "specification_sha256": "74bc4bd864f39368a4146989a6c7875a8e64f7b6ef8eaab3e2a2883c67af0c93",
+  "seed": 1729,
+  "plan_sha256": "f87637f90e8a1f80bb2ac95cc92d992944ce9d8fea1129a0fdacc535c177e509",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an array of [start,end] integer half-open intervals with start<end. Sort and merge overlapping or touching intervals; return sorted disjoint intervals.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[[3,5],[1,3],[8,9]],\"expected\":[[1,5],[8,9]]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::{Value, json};\n\npub fn solve(input: Value) -> Value {\n    let intervals: Vec<[i64; 2]> = input.as_array().unwrap()\n        .iter()\n        .map(|v| v.as_array().unwrap().iter().map(|x| x.as_i64().unwrap()).collect::<Vec<i64>>().try_into().unwrap())\n        .collect();\n    \n    let mut sorted_intervals = {\n        let mut intervals = intervals.clone();\n        intervals.sort_unstable();\n        intervals\n    };\n    \n    let mut merged_intervals = Vec::new();\n    let mut current_interval = sorted_intervals[0];\n    \n    for interval in sorted_intervals.iter().skip(1) {\n        if interval[0] <= current_interval[1] {\n            current_interval[1] = current_interval[1].max(interval[1]);\n        } else {\n            merged_intervals.push(current_interval);\n            current_interval = *interval;\n        }\n    }\n    \n    merged_intervals.push(current_interval);\n    \n    json!(merged_intervals)\n}\n```",
+    "checkpoint_id": "509287f78cb4d4cf6b3843734733b914b2c158e43e22a7f4bf5e963800894d3c",
+    "finish_reason": "stop",
+    "input_tokens": 249,
+    "output_tokens": 220,
+    "elapsed_ms": 30505,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/intervals.merge.generation.json",
+    "sha256": "b5adab3114c6916fd8c5ef2118bfa26d2a64c85746e7dd2cb633992f65445384",
+    "bytes": 4819
+  },
+  "sandbox_report": {
+    "path": "reports/local-study/qwen7b-train/sandbox/10260deb-6a1d-406b-a401-35e376753064.json",
+    "sha256": "158092a3b1b6db13ffb4038a7e484a11ffdc47a90d9eb7f11a9aebc7ba41ce3c",
+    "bytes": 1730
+  },
+  "grading_error": null,
+  "success": false
+}

@@ -1,0 +1,38 @@
+{
+  "model_id": "qwen-coder-7b-q4_k_m",
+  "task_id": "stock.mode",
+  "source_id": "private-stock-v1",
+  "specification_sha256": "18d7437798ad375b3313fa5799e1580a7e5b5dc626bea275dcc099954f281189",
+  "seed": 1729,
+  "plan_sha256": "f87637f90e8a1f80bb2ac95cc92d992944ce9d8fea1129a0fdacc535c177e509",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an array of ASCII strings. Return the most frequent string, lexicographically smallest on ties; return null if empty.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[\"b\",\"a\",\"b\"],\"expected\":\"b\"}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::{Value, Map};\nuse std::collections::HashMap;\n\npub fn solve(input: Value) -> Value {\n    if let Value::Array(arr) = input {\n        if arr.is_empty() {\n            return Value::Null;\n        }\n\n        let mut counts = HashMap::new();\n        for item in arr {\n            if let Value::String(s) = item {\n                *counts.entry(s).or_insert(0) += 1;\n            }\n        }\n\n        let mut most_frequent: Option<&String> = None;\n        let mut max_count = 0;\n\n        for (s, &count) in counts.iter() {\n            if count > max_count || (count == max_count && most_frequent.map_or(true, |mf| s < mf)) {\n                most_frequent = Some(s);\n                max_count = count;\n            }\n        }\n\n        most_frequent.map_or(Value::Null, |s| Value::String(s.clone()))\n    } else {\n        Value::Null\n    }\n}\n```",
+    "checkpoint_id": "509287f78cb4d4cf6b3843734733b914b2c158e43e22a7f4bf5e963800894d3c",
+    "finish_reason": "stop",
+    "input_tokens": 229,
+    "output_tokens": 213,
+    "elapsed_ms": 19364,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/stock.mode.generation.json",
+    "sha256": "cbd509dbfada7161d8f5d39465101e6ecb9d7a8c8517dff743f3cc5fe317ee3c",
+    "bytes": 4692
+  },
+  "sandbox_report": {
+    "path": "reports/local-study/qwen7b-train/sandbox/92c462b9-167d-4ba5-80f0-28c6dba47c9e.json",
+    "sha256": "11ea18dee86afedf624494fb6120c36b9699ead9c477593f9b240e92d79d6652",
+    "bytes": 1279
+  },
+  "grading_error": null,
+  "success": true
+}

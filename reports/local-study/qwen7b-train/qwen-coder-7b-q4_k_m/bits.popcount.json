@@ -1,0 +1,38 @@
+{
+  "model_id": "qwen-coder-7b-q4_k_m",
+  "task_id": "bits.popcount",
+  "source_id": "private-bits-v1",
+  "specification_sha256": "38bc072a09efefb50b68e96e08639755cc0d023898fb4367728e2e3ccd91979c",
+  "seed": 1729,
+  "plan_sha256": "f87637f90e8a1f80bb2ac95cc92d992944ce9d8fea1129a0fdacc535c177e509",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an integer in 0..4294967295. Return the number of set bits in its unsigned 32-bit representation.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":13,\"expected\":3}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let num = input.as_u64().unwrap();\n    let mut count = 0;\n    let mut n = num;\n    while n > 0 {\n        count += n & 1;\n        n >>= 1;\n    }\n    Value::from(count)\n}\n```",
+    "checkpoint_id": "509287f78cb4d4cf6b3843734733b914b2c158e43e22a7f4bf5e963800894d3c",
+    "finish_reason": "stop",
+    "input_tokens": 233,
+    "output_tokens": 77,
+    "elapsed_ms": 21725,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/bits.popcount.generation.json",
+    "sha256": "580efb002272a51f28c13547f99fd1b12627b078a43a0d4dcf3b7ae3212a82e9",
+    "bytes": 4023
+  },
+  "sandbox_report": {
+    "path": "reports/local-study/qwen7b-train/sandbox/98abba92-6a2f-4ff5-bd60-eebe9cacdb16.json",
+    "sha256": "ae6190771e16e1ebfd912cb118d961b61491235c3df25b7cf1ac9cad7152e28e",
+    "bytes": 1282
+  },
+  "grading_error": null,
+  "success": true
+}

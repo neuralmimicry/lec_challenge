@@ -142,6 +142,23 @@ bounded arithmetic and derivative checks, rather than a coding evaluation.
 The four normalisation sites in each block and the final model norm now use
 this operation, and the parity implementation fingerprint includes its exact source. Native
 integer-dot/postscale versus floating projection differences remain. A new
-immutable executable must therefore run the original full-vocabulary protocol
-again, at the unchanged **0.10** tolerance, before any numerical-equivalence or
-validated-ranking claim. All earlier failures remain intact.
+immutable executable has now run the original full-vocabulary protocol again,
+at the unchanged **0.10** tolerance. All earlier failures remain intact.
+
+The actual [new receipt](../../reports/comparative/bitnet/parity-native-rms-001.json)
+completed all three prompts, retained full Rust vocabulary log probabilities
+and the original native top-16 observations, and independently reconstructed
+the fixed criterion. Its maximum absolute errors are **0.4428310394**,
+**0.4030475616** and **0.1987771988**. All three top predictions agree, but all
+three prompts still fail tolerance. The command correctly exited nonzero.
+This is an observed numerical shortfall; agreeing top tokens cannot qualify a
+validated ranking. It does not establish coding improvement or a trained
+checkpoint comparison.
+
+The corrected RMS cuts therefore do not resolve the full-model mismatch.
+The next investigation remains producer-bound projection arithmetic, including
+floating reductions and the native integer-dot/postscale path. Native GEMV may
+use wrapping intermediate lanes where GEMM uses wider accumulation; a single
+unchecked scalar-integer substitute would not be a justified correction.
+Preserve this receipt, its source snapshots and both backend observations
+before introducing any separate kernel/protocol version.

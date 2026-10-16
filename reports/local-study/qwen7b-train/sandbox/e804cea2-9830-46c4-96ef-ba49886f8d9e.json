@@ -1,0 +1,33 @@
+{
+  "run_id": "e804cea2-9830-46c4-96ef-ba49886f8d9e",
+  "task_id": "search.common_prefix",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error[E0515]: cannot return value referencing function parameter `v`\n --> /candidate/main.rs:5:61\n  |\n5 |         Value::Array(arr) => arr.into_iter().filter_map(|v| v.as_str()).collect::<Vec<&str>>(),\n  |                                                             -^^^^^^^^^\n  |                                                             |\n  |                                                             returns a value referencing data owned by the current function\n  |                                                             `v` is borrowed here\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0515`.\n"
+  ],
+  "cases_total": 7,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "0bf995b5f69865792503015f6af52b457c861b679877956e939c2137ddb4a562",
+  "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "e1796893e966fb87c0fd2d37f44dd2fcd6415aea9da86adf8ce610dbcdb15cc5",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:1",
+    "expected_image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/qwen7b-train/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/qwen7b-train/sandbox/e804cea2-9830-46c4-96ef-ba49886f8d9e.audit.json",
+  "audit_sha256": "ef0d88af47522ace9bad6987e23d6c887f61b67bcb4ad06c8a42e56717549966",
+  "failure": "compilation failed: error[E0515]: cannot return value referencing function parameter `v`\n --> /candidate/main.rs:5:61\n  |\n5 |         Value::Array(arr) => arr.into_iter().filter_map(|v| v.as_str()).collect::<Vec<&str>>(),\n  |                                                             -^^^^^^^^^\n  |                                                             |\n  |                                                             returns a value referencing data owned by the current function\n  |                                                             `v` is borrowed here\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0515`.\n",
+  "duration_ms": 12372,
+  "timeout_evidence": null
+}

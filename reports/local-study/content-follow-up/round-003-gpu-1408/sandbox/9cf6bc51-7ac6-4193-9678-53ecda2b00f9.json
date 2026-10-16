@@ -1,0 +1,40 @@
+{
+  "run_id": "9cf6bc51-7ac6-4193-9678-53ecda2b00f9",
+  "task_id": "ledger.differences",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error[E0308]: mismatched types\n   --> /candidate/main.rs:21:22\n    |\n 18 |                 result.push(n2.as_i64().unwrap() - n1.as_i64().unwrap());\n    |                 ------      ------------------------------------------- this argument has type `i64`...\n    |                 |\n    |                 ... which causes `result` to have type `Vec<i64>`\n...\n 21 |         Value::Array(result)\n    |         ------------ ^^^^^^ expected `Vec<Value>`, found `Vec<i64>`\n    |         |\n    |         arguments to this enum variant are incorrect\n    |\n    = note: expected struct `Vec<Value>`\n               found struct `Vec<i64>`\nnote: tuple variant defined here\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:160:5\n    |\n160 |     Array(Vec<Value>),\n    |     ^^^^^\nhelp: call `Into::into` on this expression to convert `i64` into `Value`\n    |\n 18 |                 result.push((n2.as_i64().unwrap() - n1.as_i64().unwrap()).into());\n    |                             +                                           ++++++++\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0308`.\n"
+  ],
+  "cases_total": 14,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "62f7bef2df04853e90feef224496d17a0345e5ff0d169b95c2c61e497d7c7bf4",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/content-follow-up/round-003-gpu-1408/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/content-follow-up/round-003-gpu-1408/sandbox/9cf6bc51-7ac6-4193-9678-53ecda2b00f9.audit.json",
+  "audit_sha256": "3c2206dc11a16aa93db88d4aa171263ab971cc5cebb4b6b353f31d426a274b59",
+  "failure": "compilation failed: error[E0308]: mismatched types\n   --> /candidate/main.rs:21:22\n    |\n 18 |                 result.push(n2.as_i64().unwrap() - n1.as_i64().unwrap());\n    |                 ------      ------------------------------------------- this argument has type `i64`...\n    |                 |\n    |                 ... which causes `result` to have type `Vec<i64>`\n...\n 21 |         Value::Array(result)\n    |         ------------ ^^^^^^ expected `Vec<Value>`, found `Vec<i64>`\n    |         |\n    |         arguments to this enum variant are incorrect\n    |\n    = note: expected struct `Vec<Value>`\n               found struct `Vec<i64>`\nnote: tuple variant defined here\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:160:5\n    |\n160 |     Array(Vec<Value>),\n    |     ^^^^^\nhelp: call `Into::into` on this expression to convert `i64` into `Value`\n    |\n 18 |                 result.push((n2.as_i64().unwrap() - n1.as_i64().unwrap()).into());\n    |                             +                                           ++++++++\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0308`.\n",
+  "duration_ms": 22364,
+  "timeout_evidence": null,
+  "lifecycle_evidence": {
+    "receipt_path": "reports/local-study/content-follow-up/round-003-gpu-1408/sandbox/9cf6bc51-7ac6-4193-9678-53ecda2b00f9.lifecycle.json",
+    "receipt_sha256": "60b4eb0886c10a5e99191796a62f792b712329a338b901a861d656ca18533615"
+  }
+}

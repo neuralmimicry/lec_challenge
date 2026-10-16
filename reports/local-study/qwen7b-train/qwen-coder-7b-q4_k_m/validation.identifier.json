@@ -1,0 +1,38 @@
+{
+  "model_id": "qwen-coder-7b-q4_k_m",
+  "task_id": "validation.identifier",
+  "source_id": "private-validation-v1",
+  "specification_sha256": "73a1daad33d404320785be889b5ca7e55a71f6754e64401370bc9d4786a282b2",
+  "seed": 1729,
+  "plan_sha256": "f87637f90e8a1f80bb2ac95cc92d992944ce9d8fea1129a0fdacc535c177e509",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an ASCII string. Return whether it matches [A-Za-z_][A-Za-z0-9_]*. Do not reject language keywords.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":\"_name2\",\"expected\":true}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    match input {\n        Value::String(s) => {\n            if s.is_empty() {\n                return Value::Bool(false);\n            }\n            let mut chars = s.chars();\n            if !chars.next().unwrap_or(' ').is_alphabetic() && chars.next().unwrap_or(' ') != '_' {\n                return Value::Bool(false);\n            }\n            for c in chars {\n                if !c.is_alphanumeric() && c != '_' {\n                    return Value::Bool(false);\n                }\n            }\n            Value::Bool(true)\n        }\n        _ => Value::Bool(false),\n    }\n}\n```",
+    "checkpoint_id": "509287f78cb4d4cf6b3843734733b914b2c158e43e22a7f4bf5e963800894d3c",
+    "finish_reason": "stop",
+    "input_tokens": 231,
+    "output_tokens": 140,
+    "elapsed_ms": 27990,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/validation.identifier.generation.json",
+    "sha256": "4be3c6ce9cb5e5c75a8fdcdebdeaec33d04c7a541d9cc518178b8e00db1267ca",
+    "bytes": 4462
+  },
+  "sandbox_report": {
+    "path": "reports/local-study/qwen7b-train/sandbox/61a77236-357e-4dd4-b535-746af70fd433.json",
+    "sha256": "6bda87f65b330a531a5bbe28c30ca0217ff5959704d73656e531d4a4cab13f67",
+    "bytes": 1358
+  },
+  "grading_error": null,
+  "success": false
+}

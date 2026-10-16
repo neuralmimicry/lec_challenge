@@ -1,0 +1,40 @@
+{
+  "run_id": "ad2dd06a-8b2b-486c-8265-218273c5659c",
+  "task_id": "ledger.differences",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error[E0508]: cannot move out of type `[Value]`, a non-copy slice\n  --> /candidate/main.rs:10:62\n   |\n10 |             if let (Value::Number(n1), Value::Number(n2)) = (window[0], window[1]) {\n   |                                                              ^^^^^^^^^\n   |                                                              |\n   |                                                              cannot move out of here\n   |                                                              move occurs because `window[_]` has type `Value`, which does not implement the `Copy` trait\n   |\nhelp: consider cloning the value if the performance cost is acceptable\n   |\n10 |             if let (Value::Number(n1), Value::Number(n2)) = (window[0].clone(), window[1]) {\n   |                                                                       ++++++++\n\nerror[E0508]: cannot move out of type `[Value]`, a non-copy slice\n  --> /candidate/main.rs:10:73\n   |\n10 |             if let (Value::Number(n1), Value::Number(n2)) = (window[0], window[1]) {\n   |                                                                         ^^^^^^^^^\n   |                                                                         |\n   |                                                                         cannot move out of here\n   |                                                                         move occurs because `window[_]` has type `Value`, which does not implement the `Copy` trait\n   |\nhelp: consider cloning the value if the performance cost is acceptable\n   |\n10 |             if let (Value::Number(n1), Value::Number(n2)) = (window[0], window[1].clone()) {\n   |                                                                                  ++++++++\n\nerror: aborting due to 2 previous errors\n\nFor more information about this error, try `rustc --explain E0508`.\n"
+  ],
+  "cases_total": 14,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "8bfe115bd2a2f1a1e2b548ef4f8d4d93bcd5f02a09270e8ca4a3ceffe0d99aa6",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/content-follow-up/round-003-gpu-1408/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/content-follow-up/round-003-gpu-1408/sandbox/ad2dd06a-8b2b-486c-8265-218273c5659c.audit.json",
+  "audit_sha256": "d0e55430f9a6dee1b40e60028d6f5477c545104cd183b93af2182cd23fb05ce9",
+  "failure": "compilation failed: error[E0508]: cannot move out of type `[Value]`, a non-copy slice\n  --> /candidate/main.rs:10:62\n   |\n10 |             if let (Value::Number(n1), Value::Number(n2)) = (window[0], window[1]) {\n   |                                                              ^^^^^^^^^\n   |                                                              |\n   |                                                              cannot move out of here\n   |                                                              move occurs because `window[_]` has type `Value`, which does not implement the `Copy` trait\n   |\nhelp: consider cloning the value if the performance cost is acceptable\n   |\n10 |             if let (Value::Number(n1), Value::Number(n2)) = (window[0].clone(), window[1]) {\n   |                                                                       ++++++++\n\nerror[E0508]: cannot move out of type `[Value]`, a non-copy slice\n  --> /candidate/main.rs:10:73\n   |\n10 |             if let (Value::Number(n1), Value::Number(n2)) = (window[0], window[1]) {\n   |                                                                         ^^^^^^^^^\n   |                                                                         |\n   |                                                                         cannot move out of here\n   |                                                                         move occurs because `window[_]` has type `Value`, which does not implement the `Copy` trait\n   |\nhelp: consider cloning the value if the performance cost is acceptable\n   |\n10 |             if let (Value::Number(n1), Value::Number(n2)) = (window[0], window[1].clone()) {\n   |                                                                                  ++++++++\n\nerror: aborting due to 2 previous errors\n\nFor more information about this error, try `rustc --explain E0508`.\n",
+  "duration_ms": 25480,
+  "timeout_evidence": null,
+  "lifecycle_evidence": {
+    "receipt_path": "reports/local-study/content-follow-up/round-003-gpu-1408/sandbox/ad2dd06a-8b2b-486c-8265-218273c5659c.lifecycle.json",
+    "receipt_sha256": "35046faa3770bcd88f0efc248bf35b29d0b1f5d6c70fce05559411c675de6fc3"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "model_id": "qwen-coder-7b-q4_k_m",
+  "task_id": "validation.luhn",
+  "source_id": "private-validation-v1",
+  "specification_sha256": "f83c8dc6d973b6ee63153560e72676584f890dcf3f889813a8f95f2cfc8cea46",
+  "seed": 1729,
+  "plan_sha256": "f87637f90e8a1f80bb2ac95cc92d992944ce9d8fea1129a0fdacc535c177e509",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an ASCII string. Return true iff it contains at least two decimal digits, no other characters, and passes the Luhn checksum (rightmost digit undoubled).\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":\"79927398713\",\"expected\":true}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    if let Value::String(s) = input {\n        if s.len() < 2 {\n            return Value::Bool(false);\n        }\n        let mut digits = s.chars().filter_map(|c| c.to_digit(10));\n        let mut sum = 0;\n        let mut is_second = false;\n        while let Some(digit) = digits.next_back() {\n            if is_second {\n                sum += if digit * 2 > 9 { digit * 2 - 9 } else { digit * 2 };\n            } else {\n                sum += digit;\n            }\n            is_second = !is_second;\n        }\n        Value::Bool(sum % 10 == 0)\n    } else {\n        Value::Bool(false)\n    }\n}\n```",
+    "checkpoint_id": "509287f78cb4d4cf6b3843734733b914b2c158e43e22a7f4bf5e963800894d3c",
+    "finish_reason": "stop",
+    "input_tokens": 243,
+    "output_tokens": 177,
+    "elapsed_ms": 24895,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/validation.luhn.generation.json",
+    "sha256": "e70ffbd46da3cc927d77c7c03a93cbf32f9316f98fb93b23b1a4702b5062baab",
+    "bytes": 4532
+  },
+  "sandbox_report": {
+    "path": "reports/local-study/qwen7b-train/sandbox/87d06502-3d98-4c0b-9405-eb7960134442.json",
+    "sha256": "b93fc01521c87189b918340610616b778667802e9af05d4caa18a21bb8e30c1f",
+    "bytes": 1352
+  },
+  "grading_error": null,
+  "success": false
+}

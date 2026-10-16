@@ -1,0 +1,10 @@
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 3.68s
+     Running `target/debug/examples/teacher_evidence verify reports/local-study/content-follow-up/round-003-gpu-1408/bundle.json`
+{
+  "evidence_kind": "actual_local_teacher_training_evidence_not_provider_assessment",
+  "preferences": 0,
+  "promotable": false,
+  "samples": 25,
+  "teachers": 1,
+  "train_corpus_sha256": "037e9f5719624d6c411c8c354295697f6ef87c8d95e1771ac60696e93a487b6d"
+}

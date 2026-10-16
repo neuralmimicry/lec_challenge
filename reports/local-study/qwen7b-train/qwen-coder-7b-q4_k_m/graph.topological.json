@@ -1,0 +1,38 @@
+{
+  "model_id": "qwen-coder-7b-q4_k_m",
+  "task_id": "graph.topological",
+  "source_id": "private-graph-v1",
+  "specification_sha256": "fd0a42d470cf8c2cce84cfc209d1b6a889f5674c3e9ec35ec2f04d892b2bee63",
+  "seed": 1729,
+  "plan_sha256": "f87637f90e8a1f80bb2ac95cc92d992944ce9d8fea1129a0fdacc535c177e509",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input {n,edges} is a directed graph. Repeatedly remove the smallest currently zero-indegree node. Return that topological order, or null if cyclic. Graph vertex counts are at most 64.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":{\"edges\":[[0,1],[1,2]],\"n\":4},\"expected\":[0,1,2,3]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::{Value, Map};\nuse std::collections::{HashMap, HashSet};\n\npub fn solve(input: Value) -> Value {\n    let input_map = input.as_object().unwrap();\n    let n = input_map[\"n\"].as_u64().unwrap() as usize;\n    let edges = input_map[\"edges\"].as_array().unwrap();\n\n    let mut graph: HashMap<usize, Vec<usize>> = HashMap::new();\n    let mut in_degree: HashMap<usize, i64> = HashMap::new();\n\n    for edge in edges {\n        let edge_array = edge.as_array().unwrap();\n        let from = edge_array[0].as_u64().unwrap() as usize;\n        let to = edge_array[1].as_u64().unwrap() as usize;\n\n        graph.entry(from).or_insert_with(Vec::new).push(to);\n        *in_degree.entry(from).or_insert(0) += 1;\n        *in_degree.entry(to).or_insert(0) += 0;\n    }\n\n    let mut zero_indegree: HashSet<usize> = in_degree.iter().filter(|&(_, &deg)| deg == 0).map(|(&v, _)| v).collect();\n    let mut topological_order: Vec<usize> = Vec::new();\n\n    while !zero_indegree.is_empty() {\n        if zero_indegree.len() > 1 {\n            return Value::Null;\n        }\n\n        let node = *zero_indegree.iter().next().unwrap();\n        zero_indegree.remove(&node);\n        topological_order.push(node);\n\n        if let Some(neighbors) = graph.get(&node) {\n            for &neighbor in neighbors {\n                *in_degree.entry(neighbor).or_insert(0) -= 1;\n                if *in_degree.get(&neighbor).unwrap() == 0 {\n                    zero_indegree.insert(neighbor);\n                }\n            }\n        }\n    }\n\n    if topological_order.len() != n {\n        return Value::Null;\n    }\n\n    Value::Array(topological_order.into_iter().map(|v| Value::Number(v.into())).collect())\n}\n```",
+    "checkpoint_id": "509287f78cb4d4cf6b3843734733b914b2c158e43e22a7f4bf5e963800894d3c",
+    "finish_reason": "stop",
+    "input_tokens": 263,
+    "output_tokens": 434,
+    "elapsed_ms": 68989,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/graph.topological.generation.json",
+    "sha256": "1053486c61793a61c193b388615ab8f1c95224e57e8f3c6f55fac3a490444eee",
+    "bytes": 5621
+  },
+  "sandbox_report": {
+    "path": "reports/local-study/qwen7b-train/sandbox/c2cd08c2-1a55-4516-86de-94893b251c97.json",
+    "sha256": "1ae0068930fa8cee70d9a007cec95cb5dff50eab446499293f87c4a84a26220c",
+    "bytes": 1354
+  },
+  "grading_error": null,
+  "success": false
+}

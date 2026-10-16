@@ -1,0 +1,50 @@
+{
+  "schema_version": 3,
+  "run_id": "d083d2d5-54ba-4ddf-a4ac-54b334eff501",
+  "ownership_nonce": "7b1a60ad-41c3-4005-baaa-96afbed93970",
+  "attempt_key": "dbf05a24-f124-4406-ac6c-883a68e96eeb",
+  "receipt_path": "reports/local-study/content-follow-up/round-003-gpu-1408/sandbox/dbf05a24-f124-4406-ac6c-883a68e96eeb.prepared.json",
+  "report_path": "reports/local-study/content-follow-up/round-003-gpu-1408/sandbox/d083d2d5-54ba-4ddf-a4ac-54b334eff501.json",
+  "task": {
+    "id": "ledger.prefix",
+    "source_id": "private-ledger-v1",
+    "lineage_id": "local-contract-pack-00",
+    "split": "train",
+    "specification": "Input is an integer array. Return inclusive prefix sums; empty input returns []. Bounds: length <=64 and absolute values <=10000.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "7af477c1c32ccbe7e5f66f51ed6d9e11ee080653c6b26b7ab6756a30f5f85c99",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": [
+          2,
+          -4,
+          8
+        ],
+        "expected": [
+          2,
+          -2,
+          6
+        ]
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "use serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    match input {\n        Value::Array(arr) if arr.is_empty() => Value::Array(vec![]),\n        Value::Array(arr) => {\n            let mut prefix_sums = Vec::with_capacity(arr.len());\n            let mut current_sum = 0;\n            for item in arr {\n                if let Value::Number(num) = item {\n                    if let Some(n) = num.as_i64() {\n                        current_sum += n;\n                        prefix_sums.push(serde_json::Number::from(current_sum));\n                    }\n                }\n            }\n            Value::Array(prefix_sums)\n        },\n        _ => Value::Array(vec![]),\n    }\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/content-follow-up/round-003-gpu-1408/sandbox"
+  },
+  "code_sha256": "b5a485800d046177a814840d08ad6e6045aa9b68f4c18f6cc0c91577118726f7",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

@@ -1,0 +1,127 @@
+{
+  "schema_version": 2,
+  "evidence_kind": "actual_original_bitnet_rust_i2s_numerical_parity",
+  "plan": {
+    "path": "reports/comparative/bitnet/parity-native-rms-001.plan.json",
+    "sha256": "77211c00eba99c0c2900e132abf584bbeb45c56fb3109c06581484bc37e58b8a",
+    "bytes": 7307
+  },
+  "observations": [
+    {
+      "prompt_index": 0,
+      "native_response": {
+        "path": "reports/comparative/bitnet/parity-native-rms-001.probe-0.json",
+        "sha256": "02d2f95daad03d63adc096ef68f8d366d2aecb202e344886e7b536e8db576555",
+        "bytes": 5997
+      },
+      "rust_logprobs": {
+        "path": "reports/comparative/bitnet/parity-native-rms-001.rust-0.json",
+        "sha256": "30242e94248a34567510acb3baf720e83429e3a3c1ac27ba3cca3f6e0526c5b1",
+        "bytes": 3114552
+      }
+    },
+    {
+      "prompt_index": 1,
+      "native_response": {
+        "path": "reports/comparative/bitnet/parity-native-rms-001.probe-1.json",
+        "sha256": "3609f82d02bb6beff7854799d88d8878405fafb1180eac326c3edf9ca57188eb",
+        "bytes": 5778
+      },
+      "rust_logprobs": {
+        "path": "reports/comparative/bitnet/parity-native-rms-001.rust-1.json",
+        "sha256": "8664e0f8fd9dd81fb8722baca5afad5169ad6961cf74369f8d0f6fd85b44c891",
+        "bytes": 3139187
+      }
+    },
+    {
+      "prompt_index": 2,
+      "native_response": {
+        "path": "reports/comparative/bitnet/parity-native-rms-001.probe-2.json",
+        "sha256": "eb54c96b17c08f3f9ae9f46939a478ed7f92d00c3c5092f59ddbb9f00a37afc5",
+        "bytes": 5773
+      },
+      "rust_logprobs": {
+        "path": "reports/comparative/bitnet/parity-native-rms-001.rust-2.json",
+        "sha256": "b3d5652b5f06faf56278bd0821fcc9106c6e586e2f2cb6b10302c199333c085f",
+        "bytes": 3152493
+      }
+    }
+  ],
+  "cpp_execution": {
+    "actual_device": "Cpu",
+    "actual_dtype": "F32",
+    "architecture": "bitnet",
+    "checkpoint_id": "8143ae115ed6babe5e5ada8fb8c5b769d8f417802b2db042ad98b4f7ed73975b",
+    "context_tokens": 4096,
+    "cpu_fallback": false,
+    "cpu_mask": null,
+    "cpu_threads": 4,
+    "cuda_active": false,
+    "engine": "pinned_bitnet_cpp_supervised_by_rust",
+    "engine_manifest": {
+      "bytes": 6033,
+      "path": "state/engines/bitnet-quant-v2-build/engine-manifest.json",
+      "sha256": "2c9dc38d6feca0e394177c48a478422066ecea0c181a8f42824f7068b38b4c8b"
+    },
+    "evaluation_only": true,
+    "gguf": {
+      "bytes": 1843959008,
+      "path": "state/bitnet-exports/8143ae115ed6babe5e5ada8fb8c5b769d8f417802b2db042ad98b4f7ed73975b/4b894029ec2a78290ac948278b8231b3db21742f2e4fe13bbe0ab938295bcd2f/model.i2_s.gguf",
+      "sha256": "2e097b3dda58f8308b03c8b62cce7cb8767470aafb7400e5f169c108b86c75a7"
+    },
+    "inference_protocol": "explicit_original_tokens_cpu_f32_kv_quant_v3",
+    "inherited_affinity": "0-15",
+    "key_cache_dtype": "F32",
+    "kv_cache": true,
+    "lifetime_supervision": "persistent_native_owner_thread_linux_pdeathsig_sigkill_parent_pid_race_check",
+    "log": "reports/comparative/bitnet/engine-runs/7585d57a-bc8a-4fd2-bbc5-44fa5acb213c.log",
+    "model_id": "microsoft/bitnet-b1.58-2B-4T",
+    "native_cpu_requirements": {
+      "architecture": "x86_64",
+      "cmake_cache": {
+        "bytes": 32073,
+        "path": "state/engines/bitnet-quant-v2-build/CMakeCache.txt",
+        "sha256": "fa4c1eb024aaebe0d48052e9a4e1bfa6bbe6ae3b252498a4bc7e7d81016b933f"
+      },
+      "i2_s_block_values": 128,
+      "operating_system": "linux",
+      "required_cpu_features": [
+        "avx",
+        "avx2",
+        "bmi2",
+        "f16c",
+        "fma",
+        "sse4.2"
+      ]
+    },
+    "native_server_pid": 1189663,
+    "original_tokeniser_parity_verified": true,
+    "production_eligible": false,
+    "requested": {
+      "device": "cpu",
+      "dtype": "f32"
+    },
+    "revision": "04c3b9ad9361b824064a1f25ea60a8be9599b127",
+    "value_cache_dtype": "F32"
+  },
+  "rust_execution": {
+    "activation_forward": "symmetric_per_token_int8_ties_even_ste",
+    "actual_device": "Cpu",
+    "actual_dtype": "F32",
+    "architecture": "bitnet",
+    "checkpoint_directory": null,
+    "checkpoint_id": "8143ae115ed6babe5e5ada8fb8c5b769d8f417802b2db042ad98b4f7ed73975b",
+    "cpu_fallback": false,
+    "cuda_active": false,
+    "decoding_cache": "none_full_prefix_recomputed",
+    "engine": "native_rust_candle",
+    "evaluation_only": true,
+    "model_id": "microsoft/bitnet-b1.58-2B-4T",
+    "production_eligible": false,
+    "revision": "04c3b9ad9361b824064a1f25ea60a8be9599b127",
+    "weight_forward": "official_fixed_scale_ternary_effective_qat"
+  },
+  "comparison_completed": true,
+  "passed": false,
+  "production_eligible": false
+}

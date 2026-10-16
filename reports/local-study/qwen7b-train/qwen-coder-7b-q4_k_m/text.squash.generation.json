@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "evidence_kind": "actual_local_model_generation",
+  "recorded_unix_ms": 1792078410042,
+  "model_id": "qwen-coder-7b-q4_k_m",
+  "task_id": "text.squash",
+  "source_id": "private-text-v1",
+  "specification_sha256": "83e5780cf416c73ac8e7ff28e0058c67f666526329fda6ec2f8d8416d989f132",
+  "seed": 1729,
+  "plan_sha256": "f87637f90e8a1f80bb2ac95cc92d992944ce9d8fea1129a0fdacc535c177e509",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an ASCII string. Split on ASCII whitespace and join words with one space, removing edge whitespace.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":\"  Hi\\t THERE \\n\",\"expected\":\"Hi THERE\"}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    if let Value::String(s) = input {\n        let trimmed = s.trim();\n        let words: Vec<&str> = trimmed.split_whitespace().collect();\n        let joined: String = words.join(\" \");\n        Value::String(joined)\n    } else {\n        input\n    }\n}\n```",
+    "checkpoint_id": "509287f78cb4d4cf6b3843734733b914b2c158e43e22a7f4bf5e963800894d3c",
+    "finish_reason": "stop",
+    "input_tokens": 226,
+    "output_tokens": 80,
+    "elapsed_ms": 7190,
+    "complete": true
+  },
+  "generation_error": null,
+  "execution": {
+    "actual_device": "Cuda { gpu_id: 0 }",
+    "actual_dtype": "F32",
+    "asset_lifetime_shared_lease": true,
+    "available_cpu_threads": 16,
+    "candle_cpu_threads": 16,
+    "checkpoint_id": "509287f78cb4d4cf6b3843734733b914b2c158e43e22a7f4bf5e963800894d3c",
+    "context_cap": 1024,
+    "cpu_fallback": false,
+    "cuda_active": true,
+    "cuda_feature_compiled": true,
+    "engine": "native_rust_candle",
+    "model_id": "Qwen/Qwen2.5-Coder-7B-Instruct-GGUF",
+    "quantisation": {
+      "all_weights_dequantised": false,
+      "embedding_precision": "F16",
+      "format": "gguf",
+      "hybrid_cpu_offload": false,
+      "kv_precision": "F32",
+      "matrix_backend": "native_candle_QMatMul",
+      "memory_estimate": {
+        "activation_workspace_bytes": 262144000,
+        "assumptions": "Full quantised weights on the selected device; embedding expanded to GPU float16 or CPU float32; float32 activations/KV/attention; no hybrid offload. Driver/allocator/workspace behaviour may require additional headroom.",
+        "attention_score_bytes": 117440512,
+        "conservative_total_bytes": 6538528768,
+        "context_tokens": 1024,
+        "dense_embedding_bytes": 1089994752,
+        "kv_cache_bytes": 117440512,
+        "quantised_file_bytes": 4683073536,
+        "runtime_reserve_bytes": 268435456
+      },
+      "original_source_model_id": "Qwen/Qwen2.5-Coder-7B-Instruct",
+      "original_source_revision": "c03e6d358207e414f1eca0bb1891e29f1db0e242",
+      "quantised_publisher_model_id": "Qwen/Qwen2.5-Coder-7B-Instruct-GGUF",
+      "quantised_publisher_revision": "13fb94bfda8c8cf22497dc57b78f391a9acb426a",
+      "tensor_types": {
+        "F32": 141,
+        "Q4K": 169,
+        "Q6K": 29
+      },
+      "weight_sha256": "509287f78cb4d4cf6b3843734733b914b2c158e43e22a7f4bf5e963800894d3c"
+    },
+    "requested": {
+      "device": {
+        "cuda": {
+          "ordinal": 0
+        }
+      },
+      "dtype": "f32"
+    },
+    "revision": "13fb94bfda8c8cf22497dc57b78f391a9acb426a",
+    "weight_format": "gguf"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "evidence_kind": "actual_local_teacher_content_observation",
+  "plan": {
+    "path": "reports/local-study/content-follow-up/round-003-gpu-1408/qwen-coder-7b-q4_k_m/ledger.bounds/process/plan.json",
+    "sha256": "5a4d72fd967c4086a89f3478557a96ccb95e50467a64027226a38c67a30e3a11",
+    "bytes": 2478
+  },
+  "raw_generation": {
+    "path": "reports/local-study/content-follow-up/round-003-gpu-1408/qwen-coder-7b-q4_k_m/ledger.bounds/process/raw-generation.json",
+    "sha256": "fb1ee547c63f3c21a3c232d30c2b5ee85f3013dc36a7f253edcc3805700f83af",
+    "bytes": 3895
+  },
+  "sandbox_report": {
+    "path": "reports/local-study/content-follow-up/round-003-gpu-1408/sandbox/a57eb0bf-23cf-430a-90cf-5ec3427389b1.json",
+    "sha256": "195726cf2c1dba2837f04e1f0d1d4878b5adda70e75de27ea935c1b6b05985e9",
+    "bytes": 1683
+  },
+  "grading_error": null,
+  "success": true
+}

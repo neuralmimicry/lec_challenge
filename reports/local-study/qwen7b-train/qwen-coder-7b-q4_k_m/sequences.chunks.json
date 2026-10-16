@@ -1,0 +1,38 @@
+{
+  "model_id": "qwen-coder-7b-q4_k_m",
+  "task_id": "sequences.chunks",
+  "source_id": "private-sequences-v1",
+  "specification_sha256": "1e47109bf3196890e8ed708cbeb55bc6e99ae1b5dd259db6a3d092a156458340",
+  "seed": 1729,
+  "plan_sha256": "f87637f90e8a1f80bb2ac95cc92d992944ce9d8fea1129a0fdacc535c177e509",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input {values,size} has an integer array and positive integer size. Return consecutive chunks of at most size elements, preserving order.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":{\"size\":2,\"values\":[1,2,3,4,5]},\"expected\":[[1,2],[3,4],[5]]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::{Value, json};\n\npub fn solve(input: Value) -> Value {\n    if let Some(Value::Object(obj)) = input.as_object() {\n        if let (Some(Value::Array(values)), Some(Value::Number(size))) = (obj.get(\"values\"), obj.get(\"size\")) {\n            if let Some(size) = size.as_i64() {\n                if size > 0 && values.len() <= 64 {\n                    let mut result = Vec::new();\n                    let mut iter = values.iter();\n                    while let Some(chunk) = iter.by_ref().take(size as usize).cloned().collect::<Vec<_>>() {\n                        result.push(Value::Array(chunk));\n                    }\n                    return Value::Array(result);\n                }\n            }\n        }\n    }\n    Value::Null\n}\n```",
+    "checkpoint_id": "509287f78cb4d4cf6b3843734733b914b2c158e43e22a7f4bf5e963800894d3c",
+    "finish_reason": "stop",
+    "input_tokens": 249,
+    "output_tokens": 168,
+    "elapsed_ms": 28370,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/sequences.chunks.generation.json",
+    "sha256": "076e6689ac586359210d351032ab6bf214e67ce580f1bca949d31d5c8d30928e",
+    "bytes": 4631
+  },
+  "sandbox_report": {
+    "path": "reports/local-study/qwen7b-train/sandbox/9f3ec440-0c6f-4423-89fe-d0957d06a89b.json",
+    "sha256": "8b6529a6a80da2712e1ce1f6cd0c594cdf9b0e7ed6161e4074184e2dd40e3c10",
+    "bytes": 4074
+  },
+  "grading_error": null,
+  "success": false
+}

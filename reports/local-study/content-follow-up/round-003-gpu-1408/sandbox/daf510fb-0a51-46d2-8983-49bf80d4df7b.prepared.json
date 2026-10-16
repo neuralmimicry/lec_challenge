@@ -1,0 +1,49 @@
+{
+  "schema_version": 3,
+  "run_id": "9cf6bc51-7ac6-4193-9678-53ecda2b00f9",
+  "ownership_nonce": "96960c4e-8ccd-42d8-8f39-91bb4c51f8bc",
+  "attempt_key": "daf510fb-0a51-46d2-8983-49bf80d4df7b",
+  "receipt_path": "reports/local-study/content-follow-up/round-003-gpu-1408/sandbox/daf510fb-0a51-46d2-8983-49bf80d4df7b.prepared.json",
+  "report_path": "reports/local-study/content-follow-up/round-003-gpu-1408/sandbox/9cf6bc51-7ac6-4193-9678-53ecda2b00f9.json",
+  "task": {
+    "id": "ledger.differences",
+    "source_id": "private-ledger-v1",
+    "lineage_id": "local-contract-pack-00",
+    "split": "train",
+    "specification": "Input is an integer array. Return each next value minus the previous value; lengths zero and one return [].\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "eec532ff42b6ece09d734d71ad931af24921a3641c17c1535a05d1f72bf3b80f",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": [
+          2,
+          -4,
+          8
+        ],
+        "expected": [
+          -6,
+          12
+        ]
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "// Plan:\n// 1. Check if the input array is empty or has only one element.\n// 2. If so, return an empty array.\n// 3. Otherwise, iterate through the array, subtracting each element from the previous one.\n// 4. Collect the results into a new array and return it.\n\n// Implementation:\nuse serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    if let Value::Array(arr) = input {\n        if arr.len() <= 1 {\n            return Value::Array(vec![]);\n        }\n        let mut result = Vec::with_capacity(arr.len() - 1);\n        for window in arr.windows(2) {\n            if let (Value::Number(n1), Value::Number(n2)) = (window[0], window[1]) {\n                result.push(n2.as_i64().unwrap() - n1.as_i64().unwrap());\n            }\n        }\n        Value::Array(result)\n    } else {\n        Value::Array(vec![])\n    }\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/content-follow-up/round-003-gpu-1408/sandbox"
+  },
+  "code_sha256": "62f7bef2df04853e90feef224496d17a0345e5ff0d169b95c2c61e497d7c7bf4",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

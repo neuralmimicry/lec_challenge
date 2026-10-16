@@ -1,0 +1,38 @@
+{
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "runtime": "podman",
+  "controls": {
+    "effective": {
+      "cpu_max": "100000 100000",
+      "memory_max": "536870912",
+      "network_none": true,
+      "pids_max": "64",
+      "root_write_denied": true,
+      "root_write_errno": 30,
+      "swap_max": "0",
+      "uid_status": "Uid:\t65532\t65532\t65532\t65532"
+    },
+    "host_timeout_asserted": true,
+    "memory_pressure_exit": 137,
+    "pids": {
+      "children_created": 63,
+      "creation_denied": true
+    },
+    "reference_run_id": "30635590-83f4-4764-b0ee-702f5f49a02a",
+    "timeout_evidence": {
+      "cleanup_ms": 10786,
+      "container_removed": true,
+      "deadline_ms": 1000,
+      "kernel_proof": {
+        "receipt_path": "reports/local-study/student-serving-001/sandbox/lec-deadline-d29e6f5a-6302-43b6-872c-3be1f8ba0b58.probe-proof.json",
+        "receipt_sha256": "3df6025cba9eeae4443f74d54e1fb84f737b4216a5631bd32593166cfa909af6"
+      },
+      "kill_acknowledged": true,
+      "kill_method": "preopened_exact_owned_cgroup_v2_kill",
+      "kill_request_ms": 0,
+      "wait_elapsed_ms": 1000
+    }
+  },
+  "probes_passed": true
+}

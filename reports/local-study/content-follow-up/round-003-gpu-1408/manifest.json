@@ -1,0 +1,12 @@
+{
+  "bundle": {
+    "bytes": 209588,
+    "path": "reports/local-study/content-follow-up/round-003-gpu-1408/bundle.json",
+    "sha256": "de407f91aea95bb81ef4fbf371086e41ab5401c7043cca07cc6c0f83738848ae"
+  },
+  "preferences": 0,
+  "promotable": false,
+  "samples": 25,
+  "schema_version": 1,
+  "train_corpus_sha256": "037e9f5719624d6c411c8c354295697f6ef87c8d95e1771ac60696e93a487b6d"
+}

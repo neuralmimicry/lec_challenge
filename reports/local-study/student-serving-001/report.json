@@ -1,0 +1,81 @@
+{
+  "checkpoint": {
+    "bytes": 2173504,
+    "path": "reports/local-study/native-full-sft-seed1729/adapter.safetensors",
+    "sha256": "e2bcd135527659042304d936fa56c7240f6f96a43b9f81f2a888c38b7762a949"
+  },
+  "elapsed_seconds": 232.081989116,
+  "engine": {
+    "bytes": 46668832,
+    "path": "state/engines/b45d32ca11ccc84633ab2de0bb9d195dc38a61c78e2ef1a87c03ea90091aa301/lec-distil",
+    "sha256": "b45d32ca11ccc84633ab2de0bb9d195dc38a61c78e2ef1a87c03ea90091aa301"
+  },
+  "evidence_kind": "actual_local_study_student_http_and_selected_training_example",
+  "health": {
+    "base_revision": "ea3f2471cf1b1f0db85067f1ef93848e38e88c25",
+    "checkpoint_id": "e2bcd135527659042304d936fa56c7240f6f96a43b9f81f2a888c38b7762a949",
+    "checksum_validated": true,
+    "execution": {
+      "actual_device": "Cpu",
+      "actual_dtype": "F32",
+      "asset_lifetime_shared_lease": false,
+      "available_cpu_threads": 16,
+      "candle_cpu_threads": 4,
+      "checkpoint_id": "e2bcd135527659042304d936fa56c7240f6f96a43b9f81f2a888c38b7762a949",
+      "context_cap": 4096,
+      "cpu_fallback": false,
+      "cuda_active": false,
+      "cuda_feature_compiled": true,
+      "engine": "native_rust_candle",
+      "model_id": "Qwen/Qwen2.5-Coder-0.5B-Instruct",
+      "quantisation": null,
+      "requested": {
+        "device": "cpu",
+        "dtype": "f32"
+      },
+      "revision": "ea3f2471cf1b1f0db85067f1ef93848e38e88c25",
+      "weight_format": "safetensors"
+    },
+    "healthy": true,
+    "immutable": true,
+    "inference_smoke_output": "Certainly",
+    "model_id": "Qwen/Qwen2.5-Coder-0.5B-Instruct",
+    "process_id": 1146341,
+    "production_eligible": false,
+    "smoke_elapsed_ms": 555,
+    "tokenizer_sha256": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539"
+  },
+  "held_out_used": false,
+  "limitations": [
+    "One deliberately selected training example is an operational demonstration, not an unbiased quality estimate or learning result.",
+    "The student remains evaluation-only; no assessment promotion or production canary is authorised."
+  ],
+  "manifest": {
+    "bytes": 21029,
+    "path": "reports/local-study/native-full-sft-seed1729/manifest.json",
+    "sha256": "7644d325a57ac74a11a7aa4396a307adac1f086c006fdc388d9cf12a14a7601c"
+  },
+  "passed": true,
+  "production_eligible": false,
+  "production_routing_rejected": true,
+  "quality_evaluation": false,
+  "request": {
+    "bytes": 1020,
+    "path": "reports/local-study/student-serving-001/request.json",
+    "sha256": "49d4459848db5e5a4928e0d15da505b1fa02e17050462f91d6b1497adbd25453"
+  },
+  "response": {
+    "bytes": 686,
+    "path": "reports/local-study/student-serving-001/http-response.json",
+    "sha256": "d75ceb7990da008425ecbdfdb28e3814b1444a258b463d38fd20ffa0fdf84d3c"
+  },
+  "sandbox_report": {
+    "bytes": 1632,
+    "path": "reports/local-study/student-serving-001/sandbox/a976c52d-4a2c-41fa-92ba-10e0e81d9b87.json",
+    "sha256": "3a6e37258888fb1916368bdcfb79ed2db7225bbd6caafc5e08b3d99f786b19ac"
+  },
+  "schema_version": 1,
+  "selected_example": true,
+  "task_id": "ledger.prefix",
+  "task_split": "train"
+}

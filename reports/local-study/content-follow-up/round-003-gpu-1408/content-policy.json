@@ -1,0 +1,29 @@
+{
+  "content": [
+    "process",
+    "context",
+    "tool_trajectory"
+  ],
+  "context_tokens": 1408,
+  "engine_binary_sha256": "b45d32ca11ccc84633ab2de0bb9d195dc38a61c78e2ef1a87c03ea90091aa301",
+  "input": {
+    "bytes": 166535,
+    "path": "reports/local-study/qwen7b-evidence/bundle.json",
+    "sha256": "d6899a4dff1b7c5180c006b38f9441f916eb7bda2f59df21df1f64784e8f1417"
+  },
+  "max_tokens": 768,
+  "maximum_tasks": 4,
+  "runtime": {
+    "device": {
+      "cuda": {
+        "ordinal": 0
+      }
+    },
+    "dtype": "f32"
+  },
+  "schema_version": 1,
+  "seed": 1729,
+  "teachers": [
+    "qwen-coder-7b-q4_k_m"
+  ]
+}

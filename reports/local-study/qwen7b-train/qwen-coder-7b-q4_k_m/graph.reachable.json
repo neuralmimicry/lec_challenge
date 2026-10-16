@@ -1,0 +1,38 @@
+{
+  "model_id": "qwen-coder-7b-q4_k_m",
+  "task_id": "graph.reachable",
+  "source_id": "private-graph-v1",
+  "specification_sha256": "428a5ed65c2c135f64714d3d04da661d2e593883777823a68182b5622c480267",
+  "seed": 1729,
+  "plan_sha256": "f87637f90e8a1f80bb2ac95cc92d992944ce9d8fea1129a0fdacc535c177e509",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input {n,start,edges} describes a directed graph on 0..n-1, n>=1, edges unique [from,to]. Return all nodes reachable from start, including start, sorted ascending. Graph vertex counts are at most 64.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":{\"edges\":[[0,1],[1,2]],\"n\":4,\"start\":0},\"expected\":[0,1,2]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::{Value, json};\n\npub fn solve(input: Value) -> Value {\n    let obj = input.as_object().unwrap();\n    let n = obj[\"n\"].as_i64().unwrap();\n    let start = obj[\"start\"].as_i64().unwrap();\n    let edges = obj[\"edges\"].as_array().unwrap();\n\n    let mut graph = vec![vec![]; n as usize];\n    for edge in edges {\n        let from = edge[0].as_i64().unwrap() as usize;\n        let to = edge[1].as_i64().unwrap() as usize;\n        graph[from].push(to);\n    }\n\n    let mut visited = vec![false; n as usize];\n    let mut result = vec![];\n\n    dfs(start as usize, &graph, &mut visited, &mut result);\n\n    result.sort_unstable();\n    json!(result)\n}\n\nfn dfs(node: usize, graph: &Vec<Vec<usize>>, visited: &mut Vec<bool>, result: &mut Vec<usize>) {\n    if visited[node] {\n        return;\n    }\n    visited[node] = true;\n    result.push(node as i64);\n    for &neighbor in &graph[node] {\n        dfs(neighbor, graph, visited, result);\n    }\n}\n```",
+    "checkpoint_id": "509287f78cb4d4cf6b3843734733b914b2c158e43e22a7f4bf5e963800894d3c",
+    "finish_reason": "stop",
+    "input_tokens": 273,
+    "output_tokens": 270,
+    "elapsed_ms": 51212,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/graph.reachable.generation.json",
+    "sha256": "f946f21050f2186f742261bf54bdd058dcdba24d52cb2836fad1104f2e330521",
+    "bytes": 4904
+  },
+  "sandbox_report": {
+    "path": "reports/local-study/qwen7b-train/sandbox/6157e6fd-478b-40d4-b482-ed39857b7652.json",
+    "sha256": "5544830dc8fccdd15325b3907da81ba8c6315b9e8f52c421b9a3d6865d2f3128",
+    "bytes": 2718
+  },
+  "grading_error": null,
+  "success": false
+}

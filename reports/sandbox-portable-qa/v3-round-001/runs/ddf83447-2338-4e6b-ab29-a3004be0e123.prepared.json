@@ -1,0 +1,46 @@
+{
+  "schema_version": 3,
+  "run_id": "71ca937a-50cd-47f8-8d93-02937749a89e",
+  "ownership_nonce": "f88db174-4703-407f-b6de-b6db49165b5f",
+  "attempt_key": "ddf83447-2338-4e6b-ab29-a3004be0e123",
+  "receipt_path": "reports/sandbox-portable-qa/v3-round-001/runs/ddf83447-2338-4e6b-ab29-a3004be0e123.prepared.json",
+  "report_path": "reports/sandbox-portable-qa/v3-round-001/runs/71ca937a-50cd-47f8-8d93-02937749a89e.json",
+  "task": {
+    "id": "ledger.sum",
+    "source_id": "private-ledger-v1",
+    "lineage_id": "local-contract-pack-00",
+    "split": "train",
+    "specification": "Input is an array of integers in [-10000,10000], length <=64. Return its sum; the empty sum is zero.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "6b9709db9c4c67cb3de98c661b272deb80d2ed969fca9ce2ebdda8e2fab68c78",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": [
+          2,
+          -4,
+          8
+        ],
+        "expected": 6
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "pub fn solve(_: serde_json::Value)->serde_json::Value {serde_json::json!({\"passed\":true,\"tests\":999})}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/sandbox-portable-qa/v3-round-001/runs"
+  },
+  "code_sha256": "2ff49001e7cc54c8a91d0dfb3601a6b9bd9ca8fdb40f87c505fc4cdeb1828c2f",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

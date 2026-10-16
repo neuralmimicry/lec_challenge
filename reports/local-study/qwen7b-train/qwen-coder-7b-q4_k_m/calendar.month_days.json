@@ -1,0 +1,38 @@
+{
+  "model_id": "qwen-coder-7b-q4_k_m",
+  "task_id": "calendar.month_days",
+  "source_id": "private-calendar-v1",
+  "specification_sha256": "409720229a9d05c7b1d88cab24586a0ef3178a33950aa4ea0f81318f45e03be3",
+  "seed": 1729,
+  "plan_sha256": "f87637f90e8a1f80bb2ac95cc92d992944ce9d8fea1129a0fdacc535c177e509",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is [year,month] with year 1..9999 and month 1..12. Return Gregorian days in that month.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[2024,2],\"expected\":29}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let arr = input.as_array().unwrap();\n    let year = arr[0].as_i64().unwrap();\n    let month = arr[1].as_i64().unwrap();\n\n    let days_in_month = match month {\n        1 | 3 | 5 | 7 | 8 | 10 | 12 => 31,\n        4 | 6 | 9 | 11 => 30,\n        2 => {\n            if (year % 4 == 0 && year % 100 != 0) || year % 400 == 0 {\n                29\n            } else {\n                28\n            }\n        }\n        _ => 0,\n    };\n\n    Value::from(days_in_month)\n}\n```",
+    "checkpoint_id": "509287f78cb4d4cf6b3843734733b914b2c158e43e22a7f4bf5e963800894d3c",
+    "finish_reason": "stop",
+    "input_tokens": 236,
+    "output_tokens": 187,
+    "elapsed_ms": 42739,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/calendar.month_days.generation.json",
+    "sha256": "dd6cf8aad9bb5927dd348e169d71b45bf1866edbdcb252458b95ca740709520a",
+    "bytes": 4327
+  },
+  "sandbox_report": {
+    "path": "reports/local-study/qwen7b-train/sandbox/9f823ff9-d44d-499c-94cb-dbcb5606c456.json",
+    "sha256": "d8a43326235778bf9504f8b5c2a0688d95c0a003c51ae5dffecf5e6f4e063eaf",
+    "bytes": 1288
+  },
+  "grading_error": null,
+  "success": true
+}

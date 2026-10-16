@@ -1,0 +1,205 @@
+{
+  "schema_version": 2,
+  "evidence_kind": "frozen_original_bitnet_rust_i2s_numerical_parity",
+  "checkpoint": {
+    "checkpoint_id": "8143ae115ed6babe5e5ada8fb8c5b769d8f417802b2db042ad98b4f7ed73975b",
+    "tensor": {
+      "path": "offline_bundle/students/bitnet-2b-4t/model.safetensors",
+      "sha256": "8143ae115ed6babe5e5ada8fb8c5b769d8f417802b2db042ad98b4f7ed73975b",
+      "bytes": 1178623988
+    },
+    "manifest": {
+      "path": "offline_bundle/students/bitnet-2b-4t/assets.json",
+      "sha256": "15bd66c0b1b9528e88a3db9b4be88518410ac0ce56dc7d51c7fa651dd1e9a37a",
+      "bytes": 875
+    },
+    "base_assets": {
+      "path": "offline_bundle/students/bitnet-2b-4t/assets.json",
+      "sha256": "15bd66c0b1b9528e88a3db9b4be88518410ac0ce56dc7d51c7fa651dd1e9a37a",
+      "bytes": 875
+    },
+    "tokenizer": {
+      "path": "offline_bundle/students/bitnet-2b-4t/tokenizer.json",
+      "sha256": "e134af98b985517b4f068e3755ae90d4e9cd2d45d328325dc503f1c6b2d06cc7",
+      "bytes": 9085698
+    },
+    "architecture": "ternary_bitnet"
+  },
+  "gguf": {
+    "path": "state/bitnet-exports/8143ae115ed6babe5e5ada8fb8c5b769d8f417802b2db042ad98b4f7ed73975b/4b894029ec2a78290ac948278b8231b3db21742f2e4fe13bbe0ab938295bcd2f/model.i2_s.gguf",
+    "sha256": "2e097b3dda58f8308b03c8b62cce7cb8767470aafb7400e5f169c108b86c75a7",
+    "bytes": 1843959008
+  },
+  "export_receipt": {
+    "path": "state/bitnet-exports/8143ae115ed6babe5e5ada8fb8c5b769d8f417802b2db042ad98b4f7ed73975b/4b894029ec2a78290ac948278b8231b3db21742f2e4fe13bbe0ab938295bcd2f/model.i2_s.export.json",
+    "sha256": "b1680f88260db2391b061328ed7e151e924cce7d221145a6244cd0e3390d65c8",
+    "bytes": 1918
+  },
+  "cpp_engine_manifest": {
+    "path": "state/engines/bitnet-quant-v2-build/engine-manifest.json",
+    "sha256": "2c9dc38d6feca0e394177c48a478422066ecea0c181a8f42824f7068b38b4c8b",
+    "bytes": 6033
+  },
+  "cpp_protocol": "explicit_original_tokens_cpu_f32_kv_quant_v3",
+  "cpp_kv_dtype": "F32",
+  "diagnostic_executable": {
+    "path": "state/engines/7d8ab94fba5dd3d67014d5348484519720c98fc863dbf579541dae65190bc5ea/lec-distil",
+    "sha256": "7d8ab94fba5dd3d67014d5348484519720c98fc863dbf579541dae65190bc5ea",
+    "bytes": 19039248
+  },
+  "rust_implementation_sha256": "ec2388da03b8da8f29460cb5a0ef99ef443876a7fa7ebb74a444aa11d34bf013",
+  "implementation_sources": {
+    "Cargo.lock": {
+      "path": "reports/comparative/bitnet/parity-native-rms-001.sources/Cargo.lock",
+      "sha256": "bd62f0019341d1a6432ba9153fefdfda757ac26856dc5da297995462176742bb",
+      "bytes": 87289
+    },
+    "Cargo.toml": {
+      "path": "reports/comparative/bitnet/parity-native-rms-001.sources/Cargo.toml",
+      "sha256": "4eddaabf8ce023ab510c78b89f542a3d51c3798bdc064265d7e37fa3ff70b34c",
+      "bytes": 1750
+    },
+    "docs/bitnet/engine-quantisation-v2.patch": {
+      "path": "reports/comparative/bitnet/parity-native-rms-001.sources/docs/bitnet/engine-quantisation-v2.patch",
+      "sha256": "eebf249e1dd711ca5c3c9160ef9d41f90939cac71848a1fdaeb49889a03b84c1",
+      "bytes": 1317
+    },
+    "examples/bitnet_parity.rs": {
+      "path": "reports/comparative/bitnet/parity-native-rms-001.sources/examples/bitnet_parity.rs",
+      "sha256": "728d13368ef861da937533af04cb31fa561355c2d5f381b40769cbd04d2f2b2f",
+      "bytes": 1764
+    },
+    "src/bitnet.rs": {
+      "path": "reports/comparative/bitnet/parity-native-rms-001.sources/src/bitnet.rs",
+      "sha256": "7f59070e2d9fb5deb32f4f54038e94563cc909e19e07f3fc3bd456f2058c9cf0",
+      "bytes": 27066
+    },
+    "src/bitnet/backend.rs": {
+      "path": "reports/comparative/bitnet/parity-native-rms-001.sources/src/bitnet/backend.rs",
+      "sha256": "06eb2700c0c669f326eb14140981be20350673323bc8f42801df289c96f933f2",
+      "bytes": 21924
+    },
+    "src/bitnet/codec.rs": {
+      "path": "reports/comparative/bitnet/parity-native-rms-001.sources/src/bitnet/codec.rs",
+      "sha256": "350c88a9bf2e83d4cd0e57f87e8c3ed099772aef45ae720297c29812307625f6",
+      "bytes": 6251
+    },
+    "src/bitnet/cpp.rs": {
+      "path": "reports/comparative/bitnet/parity-native-rms-001.sources/src/bitnet/cpp.rs",
+      "sha256": "9732f53074e4a49ca3ba5625de5524519df9422a51915e58725aee27bd091f0d",
+      "bytes": 28987
+    },
+    "src/bitnet/cpp/host.rs": {
+      "path": "reports/comparative/bitnet/parity-native-rms-001.sources/src/bitnet/cpp/host.rs",
+      "sha256": "c19ce69cfba47ac12ee3e086949c05963801f84c51d8186ecfcf6cda3f1a294e",
+      "bytes": 11302
+    },
+    "src/bitnet/cpp/quantisation_v2.rs": {
+      "path": "reports/comparative/bitnet/parity-native-rms-001.sources/src/bitnet/cpp/quantisation_v2.rs",
+      "sha256": "bb5da69b23b0311bc1f169197840f64ac9d3a8a4bf0913d1c02b12f3bc6aad9b",
+      "bytes": 4252
+    },
+    "src/bitnet/export.rs": {
+      "path": "reports/comparative/bitnet/parity-native-rms-001.sources/src/bitnet/export.rs",
+      "sha256": "4b894029ec2a78290ac948278b8231b3db21742f2e4fe13bbe0ab938295bcd2f",
+      "bytes": 28153
+    },
+    "src/bitnet/native_rms.rs": {
+      "path": "reports/comparative/bitnet/parity-native-rms-001.sources/src/bitnet/native_rms.rs",
+      "sha256": "30d875dfa9fbcd008bced20a42fe12b0be8737b23360dbd057dd80958674b63d",
+      "bytes": 9470
+    },
+    "src/bitnet/parity_run.rs": {
+      "path": "reports/comparative/bitnet/parity-native-rms-001.sources/src/bitnet/parity_run.rs",
+      "sha256": "d96b9e11e839bbdd3f741db67dc5cf3cc3d68c00821adc7f7b811732cd40d03a",
+      "bytes": 15168
+    },
+    "src/bitnet/quant.rs": {
+      "path": "reports/comparative/bitnet/parity-native-rms-001.sources/src/bitnet/quant.rs",
+      "sha256": "76a5af94ffc2ebb74dad8afcc1ebc7fa55dda0816482f778e5edec6c1e750565",
+      "bytes": 4921
+    },
+    "src/bitnet/runtime.rs": {
+      "path": "reports/comparative/bitnet/parity-native-rms-001.sources/src/bitnet/runtime.rs",
+      "sha256": "e303f8ff99a8eb4f3eb8d2b093df182a1ab97d8431cc061ae7e378d44268f14f",
+      "bytes": 5907
+    },
+    "src/model.rs": {
+      "path": "reports/comparative/bitnet/parity-native-rms-001.sources/src/model.rs",
+      "sha256": "44f5b0b4c2ac4b53be625dbf1f62bf93af5d6320b09fa46b1944f29a4ceca6da",
+      "bytes": 78409
+    }
+  },
+  "prompts": [
+    {
+      "prompt": "Say hello in one short sentence.",
+      "input_ids": [
+        128000,
+        1502,
+        25,
+        25961,
+        24748,
+        304,
+        832,
+        2875,
+        11914,
+        13,
+        128009,
+        72803,
+        25,
+        220
+      ]
+    },
+    {
+      "prompt": "What is two plus three? Answer briefly.",
+      "input_ids": [
+        128000,
+        1502,
+        25,
+        3639,
+        374,
+        1403,
+        5636,
+        2380,
+        30,
+        22559,
+        27851,
+        13,
+        128009,
+        72803,
+        25,
+        220
+      ]
+    },
+    {
+      "prompt": "Complete the Rust expression: 3_i64 + 4_i64",
+      "input_ids": [
+        128000,
+        1502,
+        25,
+        19121,
+        279,
+        34889,
+        7645,
+        25,
+        220,
+        18,
+        5431,
+        1227,
+        489,
+        220,
+        19,
+        5431,
+        1227,
+        128009,
+        72803,
+        25,
+        220
+      ]
+    }
+  ],
+  "native_top_tokens": 16,
+  "maximum_absolute_log_probability_error": 0.1,
+  "require_equal_top_prediction": true,
+  "production_eligible": false
+}

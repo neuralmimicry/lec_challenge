@@ -1,0 +1,34 @@
+{
+  "model_id": "qwen-coder-7b-q4_k_m",
+  "task_id": "bits.lowest",
+  "source_id": "private-bits-v1",
+  "specification_sha256": "fadc84e2cf8af18fee19dac485bf3e7e98b5a4def6f8c3710cc748b0bb81c008",
+  "seed": 1729,
+  "plan_sha256": "f87637f90e8a1f80bb2ac95cc92d992944ce9d8fea1129a0fdacc535c177e509",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an unsigned 32-bit integer. Return the zero-based position of its lowest set bit, or -1 for zero.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":40,\"expected\":3}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let num = input.as_u64().unwrap() as i64;\n    if num == 0 {\n        return Value::from(-1);\n    }\n    let mut pos = 0;\n    let mut n = num;\n    while n & 1 == 0 {\n        n >>= 1;\n        pos += 1;\n    }\n    Value::from(pos)\n}\n```",
+    "checkpoint_id": "509287f78cb4d4cf6b3843734733b914b2c158e43e22a7f4bf5e963800894d3c",
+    "finish_reason": "stop",
+    "input_tokens": 226,
+    "output_tokens": 100,
+    "elapsed_ms": 25887,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/bits.lowest.generation.json",
+    "sha256": "3dd1d9141a63ae7b729aa8d4216aec0b84d32f10fcdb3218d3468f47454a0a0a",
+    "bytes": 4083
+  },
+  "sandbox_report": null,
+  "grading_error": "trusted grading evidence rejected: trusted audit artifact missing: No such file or directory (os error 2)",
+  "success": false
+}

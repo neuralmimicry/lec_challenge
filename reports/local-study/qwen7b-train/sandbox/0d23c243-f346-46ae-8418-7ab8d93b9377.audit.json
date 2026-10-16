@@ -1,0 +1,1 @@
+{"candidate_exit":0,"compile_ok":true,"events":[],"failure":null,"output":"[[\"a\",3],[\"b\",2],[\"c\",1],[\"a\",2]]\n[]\n[[\"a\",1]]\n[[\"a\",1],[\"b\",1],[\"a\",1],[\"b\",1]]\n[[\" \",3],[\"!\",3]]\n[[\"Z\",5]]\n","output_truncated":false,"schema_version":1,"stderr":"","stderr_truncated":false,"syscalls_observed":68,"trace_complete":true}

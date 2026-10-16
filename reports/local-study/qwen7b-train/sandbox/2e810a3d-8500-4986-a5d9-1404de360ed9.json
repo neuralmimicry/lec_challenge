@@ -1,0 +1,33 @@
+{
+  "run_id": "2e810a3d-8500-4986-a5d9-1404de360ed9",
+  "task_id": "sequences.move_zeroes",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error[E0614]: type `i64` cannot be dereferenced\n --> /candidate/main.rs:5:70\n  |\n5 |         let mut non_zeros = arr.drain(..).filter(|v| !v.is_null() && *v.as_i64().unwrap() != 0).collect::<Vec<Value>>();\n  |                                                                      ^^^^^^^^^^^^^^^^^^^^ can't be dereferenced\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0614`.\n"
+  ],
+  "cases_total": 5,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "0bf995b5f69865792503015f6af52b457c861b679877956e939c2137ddb4a562",
+  "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "65e03500c14fc5de04aa6fdcc20242bd1ef7f23bcfcbe31d031c4164c61d22af",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:1",
+    "expected_image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/qwen7b-train/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/qwen7b-train/sandbox/2e810a3d-8500-4986-a5d9-1404de360ed9.audit.json",
+  "audit_sha256": "a181e7c3cdf4c96fb8f88924c4019dff1390bc6f9709460f3458f2244e636c9c",
+  "failure": "compilation failed: error[E0614]: type `i64` cannot be dereferenced\n --> /candidate/main.rs:5:70\n  |\n5 |         let mut non_zeros = arr.drain(..).filter(|v| !v.is_null() && *v.as_i64().unwrap() != 0).collect::<Vec<Value>>();\n  |                                                                      ^^^^^^^^^^^^^^^^^^^^ can't be dereferenced\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0614`.\n",
+  "duration_ms": 15653,
+  "timeout_evidence": null
+}

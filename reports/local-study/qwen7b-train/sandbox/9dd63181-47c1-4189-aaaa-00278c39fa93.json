@@ -1,0 +1,33 @@
+{
+  "run_id": "9dd63181-47c1-4189-aaaa-00278c39fa93",
+  "task_id": "matrices.transpose",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error[E0308]: mismatched types\n  --> /candidate/main.rs:11:40\n   |\n11 |                     transposed[j][i] = val;\n   |                     ----------------   ^^^ expected integer, found `Value`\n   |                     |\n   |                     expected due to the type of this binding\n\nerror[E0308]: mismatched types\n   --> /candidate/main.rs:16:22\n    |\n 16 |         Value::Array(transposed)\n    |         ------------ ^^^^^^^^^^ expected `Vec<Value>`, found `Vec<Vec<{integer}>>`\n    |         |\n    |         arguments to this enum variant are incorrect\n    |\n    = note: expected struct `Vec<Value>`\n               found struct `Vec<Vec<{integer}>>`\nnote: tuple variant defined here\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:160:5\n    |\n160 |     Array(Vec<Value>),\n    |     ^^^^^\n\nerror: aborting due to 2 previous errors\n\nFor more information about this error, try `rustc --explain E0308`.\n"
+  ],
+  "cases_total": 5,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "0bf995b5f69865792503015f6af52b457c861b679877956e939c2137ddb4a562",
+  "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "57816038ac7dd0205f41bb004a19b3f5bb3d767185d0f5fcfd8918e456a3e8cc",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:1",
+    "expected_image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/qwen7b-train/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/qwen7b-train/sandbox/9dd63181-47c1-4189-aaaa-00278c39fa93.audit.json",
+  "audit_sha256": "0414196542e30fe26e2fd1a7b97e6e700a66434936e91d864385188dd321ddc0",
+  "failure": "compilation failed: error[E0308]: mismatched types\n  --> /candidate/main.rs:11:40\n   |\n11 |                     transposed[j][i] = val;\n   |                     ----------------   ^^^ expected integer, found `Value`\n   |                     |\n   |                     expected due to the type of this binding\n\nerror[E0308]: mismatched types\n   --> /candidate/main.rs:16:22\n    |\n 16 |         Value::Array(transposed)\n    |         ------------ ^^^^^^^^^^ expected `Vec<Value>`, found `Vec<Vec<{integer}>>`\n    |         |\n    |         arguments to this enum variant are incorrect\n    |\n    = note: expected struct `Vec<Value>`\n               found struct `Vec<Vec<{integer}>>`\nnote: tuple variant defined here\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:160:5\n    |\n160 |     Array(Vec<Value>),\n    |     ^^^^^\n\nerror: aborting due to 2 previous errors\n\nFor more information about this error, try `rustc --explain E0308`.\n",
+  "duration_ms": 8132,
+  "timeout_evidence": null
+}

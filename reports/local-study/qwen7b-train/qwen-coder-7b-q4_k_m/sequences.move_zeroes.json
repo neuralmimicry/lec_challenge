@@ -1,0 +1,38 @@
+{
+  "model_id": "qwen-coder-7b-q4_k_m",
+  "task_id": "sequences.move_zeroes",
+  "source_id": "private-sequences-v1",
+  "specification_sha256": "c0192d6be07fd2a4459e0f3353f4aece08cfb58e400e462f45e61de5ed548e13",
+  "seed": 1729,
+  "plan_sha256": "f87637f90e8a1f80bb2ac95cc92d992944ce9d8fea1129a0fdacc535c177e509",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an integer array. Move all zeros to the end, preserving the order of nonzero elements and the length.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[0,1,0,-2,3],\"expected\":[1,-2,3,0,0]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    if let Value::Array(mut arr) = input {\n        let mut non_zeros = arr.drain(..).filter(|v| !v.is_null() && *v.as_i64().unwrap() != 0).collect::<Vec<Value>>();\n        let zeros = vec![Value::Null; arr.len()];\n        non_zeros.extend(zeros);\n        Value::Array(non_zeros)\n    } else {\n        input\n    }\n}\n```",
+    "checkpoint_id": "509287f78cb4d4cf6b3843734733b914b2c158e43e22a7f4bf5e963800894d3c",
+    "finish_reason": "stop",
+    "input_tokens": 238,
+    "output_tokens": 108,
+    "elapsed_ms": 16982,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/sequences.move_zeroes.generation.json",
+    "sha256": "b8f8afa1475bcf8263a39a44761c92d88b9881ac16b4d62bf673b3c51b85c0e7",
+    "bytes": 4203
+  },
+  "sandbox_report": {
+    "path": "reports/local-study/qwen7b-train/sandbox/2e810a3d-8500-4986-a5d9-1404de360ed9.json",
+    "sha256": "9b16e9b0f870bffe32558aecad08ee61ac82d26a738c7c27a99202881cb2b2ae",
+    "bytes": 2221
+  },
+  "grading_error": null,
+  "success": false
+}

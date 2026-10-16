@@ -1,0 +1,31 @@
+{
+  "bundle": {
+    "bytes": 209588,
+    "path": "reports/local-study/content-follow-up/round-003-gpu-1408/bundle.json",
+    "sha256": "de407f91aea95bb81ef4fbf371086e41ab5401c7043cca07cc6c0f83738848ae"
+  },
+  "collection_completed": true,
+  "complete_nonempty_generations": 12,
+  "completed_current_content_records": 12,
+  "current_positive_samples": 7,
+  "current_preference_pairs": 0,
+  "evidence_kind": "current_batch_teacher_content_collection",
+  "generation_errors": 0,
+  "grading_errors": 0,
+  "healthy_complete": true,
+  "incomplete_or_empty_generations": 0,
+  "infrastructure_failures": 0,
+  "inherited_positive_samples": 18,
+  "passing_current_records": 7,
+  "policy": {
+    "bytes": 615,
+    "path": "reports/local-study/content-follow-up/round-003-gpu-1408/content-policy.json",
+    "sha256": "be7a06e3cc987001a2dbbe2892003ddcd8fc08263902cf897d1aeb1d27db5ced"
+  },
+  "production_eligible": false,
+  "requested_content_requests": 12,
+  "schema_version": 1,
+  "semantics": "Current batch includes validated resumed work from this output only. Inherited positives never establish successful new content collection; passing samples do not establish model learning.",
+  "total_positive_samples": 25,
+  "unavailable_requests": 0
+}

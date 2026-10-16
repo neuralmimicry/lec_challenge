@@ -1,0 +1,38 @@
+{
+  "model_id": "qwen-coder-7b-q4_k_m",
+  "task_id": "bits.hamming",
+  "source_id": "private-bits-v1",
+  "specification_sha256": "bc18825458e0ecd82619effc2fd97273fe6364866bea7b19ecdfdb5d23d6facf",
+  "seed": 1729,
+  "plan_sha256": "f87637f90e8a1f80bb2ac95cc92d992944ce9d8fea1129a0fdacc535c177e509",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is [a,b], unsigned 32-bit integers. Return the number of differing bit positions.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[9,3],\"expected\":2}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let arr = input.as_array().unwrap();\n    let a = arr[0].as_u64().unwrap() as i64;\n    let b = arr[1].as_u64().unwrap() as i64;\n    let xor = a ^ b;\n    let mut count = 0;\n    let mut num = xor;\n    while num != 0 {\n        count += num & 1;\n        num >>= 1;\n    }\n    Value::Number(serde_json::Number::from(count))\n}\n```",
+    "checkpoint_id": "509287f78cb4d4cf6b3843734733b914b2c158e43e22a7f4bf5e963800894d3c",
+    "finish_reason": "stop",
+    "input_tokens": 221,
+    "output_tokens": 130,
+    "elapsed_ms": 34000,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/bits.hamming.generation.json",
+    "sha256": "19172d7b4c738dac55e7dc508eeeea43bbd27a824b54d1cd20a7d257e9f03d0c",
+    "bytes": 4160
+  },
+  "sandbox_report": {
+    "path": "reports/local-study/qwen7b-train/sandbox/90f81dae-516c-477d-8fdc-68f9957385d4.json",
+    "sha256": "ef518aee0607871084fd70005086245a5ae89b965890634934a383a9cb69afc0",
+    "bytes": 1281
+  },
+  "grading_error": null,
+  "success": true
+}

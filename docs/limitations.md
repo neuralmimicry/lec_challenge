@@ -43,7 +43,8 @@ failures; it cannot replace incomplete model outputs with successful ones.
 
 BitNet numerical qualification still fails the unchanged full-vocabulary 0.10
 tolerance. The integrated RMS correction has exact bounded cut evidence and
-independent derivative checks, but still needs a fresh full-model comparison.
+independent derivative checks. Its fresh full-model comparison completed all
+three prompts with maximum errors 0.443, 0.403 and 0.199, all above tolerance.
 An agreeing top token, changed trits or a running C++ endpoint cannot substitute
 for that evidence. No validated conventional-versus-BitNet winner is claimed.
 
@@ -55,6 +56,12 @@ failed supplemental collection. The historical `progressive` flag implements
 ordered teacher stages on one student, not a teacher-assistant architecture
 bridge. A globally best combination, an exhaustive empirical search and a
 statistically established gain remain unproven.
+
+The separate 1,408-token GPU content follow-up completed all 12 train-only
+generations and grades, retained seven passing new variants and passed a
+separate-process verification of its 25-sample bundle. Five rejected variants
+remain visible. The earlier failed/context-limited and interrupted CPU rounds
+remain unchanged; passing new teaching examples are not a student-quality gain.
 
 ## Submission gaps
 

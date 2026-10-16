@@ -101,6 +101,41 @@ The fix passed 295 ordinary tests, strict all-target Clippy, formatting and
 whitespace checks; [captured logs and source hashes](../reports/local-study/context-aware-selection-001/README.md)
 retain the exact verification boundary.
 
+The subsequent V3 batch also exposed an operational limit under overlapping
+disk work. Derived `evaluation-001-development-e2bcd1355276` / `money.basket`
+retains an infrastructure failure: run
+`93c57dd9-2776-4bd7-9970-fc2cf0668a4f` had a real compiler error and a stopped
+container, but terminal inspection took 11,998 ms and acknowledged removal
+12,176 ms. The separate 30-second cleanup budget expired before verified
+absence. Its lifecycle therefore says `container_removed=false`; the strict
+verifier rejects it. These observations do not establish a candidate escape or
+an isolated throughput cause. They do establish that passing portable/crash QA
+does not guarantee a healthy large round on a busy host. Preserve the original
+failure; investigate storage isolation and bounded housekeeping before any
+separately versioned retry. Increasing a budget afterwards cannot repair this
+observation or authorise a quality claim.
+
+Another performance gap is repeated whole-weight verification across phase
+boundaries. The teacher search's acquisition, comparison planning and model
+loading each rehash the same multi-gigabyte file. Retained logs show checksum
+throughput falling under concurrent I/O; this is measured overhead, not model
+inference time. A future optimisation should reuse a bounded verification
+receipt only within a retained immutable asset lease and validated open-file
+identity, with mutation/replacement tests. Independent delivery verification
+and cold resumption must still reconstruct content hashes. Filename-only or
+unchecked persistent memoisation would weaken the evidence contract and is not
+an acceptable performance fix. This optimisation is not implemented here.
+
+The non-blocking requirement is also only partially satisfied. Model compute,
+large verification phases and database work use dedicated/blocking workers,
+but some asynchronous collection paths still call synchronous durable artefact
+writes directly, including `teacher_evidence/variants.rs` policy/raw/record
+publication. Under slow journal commits, those calls can occupy an executor
+thread. Move the remaining filesystem/hash publication units onto bounded
+blocking workers, preserving atomic-write/fsync order and crash recovery, and
+verify responsiveness with an injected slow writer. This audit does not claim
+that every filesystem operation is already non-blocking.
+
 1. The immutable four-role CUDA/SIMD build, all nine software verification
    checks, real container verification and local-student endpoint smoke have
    completed. See `reports/local-study/build-cuda-simd-002/`,
@@ -128,3 +163,18 @@ an ordered teacher curriculum, not a teacher-assistant architecture bridge.
 Method catalogue coverage, executed arms, useful generalisation, a best tested
 combination and assessment promotion are separate claims. Neither a long list
 of methods nor a genuine ternary checkpoint establishes all of them.
+
+## Later user requirements: additional gaps retained
+
+| Additional requirement | Implemented / observed | Remaining boundary |
+| --- | --- | --- |
+| Rust and specialist agents | Responsibilities are in `agents/PLAN.md`; application, numerical training, evidence and QA are Rust. | Upstream BitNet C++ inference, NVIDIA compilation and ordinary operational/media tools are documented interoperability exceptions. |
+| Hugging Face access without storing credentials | Native checksum-pinned downloader accepts ephemeral input/environment; metadata and licences are retained. | The bounded source/metadata pattern scan passed; it is not a universal secret detector. Supplied access is not a paid API budget. |
+| Local GPU teacher hosting | Actual CUDA/F32 quantised teacher evaluation and CUDA/F16 dense endpoint checks exist, including driver allocations. | Explicit GPU failure never silently becomes CPU execution. Display allocations and free VRAM can change between guard and load. |
+| Replace low scores with alternatives and retain the best | Original six-candidate search and the next two declared trials have real retained results/progress, cache checks and qualification packs. | No teacher met the declared 80% rule on both packs. Qwen3 still needs inference after its preflight failure; an exhausted finite catalogue is not a high-performing fleet. |
+| Delete stale/unused/poor weights automatically | Owned-cache pruning reclaimed 20,140,487,248 logical bytes, retaining provenance/deletion authority and protecting active leases, bases and selected checkpoints. | Uncertain or interrupted trials are protected rather than silently classified as poor. General host/Hugging Face caches and checkpoint dependencies are not indiscriminately deleted. |
+| amd64/ARM64; variable GPU, RAM and CPU | CPU affinity/cgroup discovery, explicit SIMD profiles, CUDA driver fallback and memory guards are implemented; expanded-context dispatch was fixed and tested. | Actual hardware QA is Linux amd64/NVIDIA. ARM64 execution, Apple Metal and AMD ROCm execution are not verified/implemented; unsupported accelerators currently receive an explicit CPU decision. |
+| Disconnected operation and progress | Explicit offline performs no HTTP, including metadata; missing models are reported, not fabricated. Checksum/download/ETA and worker heartbeat output exist. | Pruned weights need exact authorised online rehydration for fresh inference. Existing observations remain readable offline. Disk-bound checksum/export/housekeeping work can dominate this host's progress. |
+| Distillation types/combinations and efficient parallel trials | Genuine SFT, token KL, hidden-feature and attention operators, composed updates, content/feedback eligibility, native optimiser recovery and a bounded scheduler exist. Actual full-context SFT/composed and second-seed rounds ran. | The complete catalogue has not been empirically exhausted. Content/trajectory/on-policy capabilities need complete real evidence; teacher-assistant architecture transfer is not implemented by the historical curriculum option. No globally best combination or useful generalisation gain is established. |
+| Genuine ternary BitNet comparison | The official-base 64-step round changed 230,999 effective trits and independently reloaded; native C++ inference ran. | Fixed-tolerance numerical equivalence and matched coding-quality ranking remain unresolved. A changed ternary checkpoint is not a validated winner. |
+| Resume interrupted work | Immutable engines/plans, raw generations, prepared run identities, Adam state, launch journals and validated cache reuse are implemented and exercised. | UNKNOWN remote acceptance blocks rather than buying again. Changed protocols use new outputs; interrupted CPU content evidence remains separate from the explicit GPU follow-up. Full portable resumption needs the still-unpackaged execution closure. |

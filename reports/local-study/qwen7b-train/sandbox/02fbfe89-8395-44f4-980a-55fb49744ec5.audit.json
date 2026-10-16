@@ -1,0 +1,1 @@
+{"candidate_exit":0,"compile_ok":true,"events":[],"failure":null,"output":"\"Hi THERE\"\n\"\"\n\"\"\n\"A--B__C 123\"\n\"UPPER lower\"\n\"a b c\"\n","output_truncated":false,"schema_version":1,"stderr":"","stderr_truncated":false,"syscalls_observed":68,"trace_complete":true}

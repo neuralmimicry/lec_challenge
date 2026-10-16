@@ -1,0 +1,33 @@
+{
+  "run_id": "9f3ec440-0c6f-4423-89fe-d0957d06a89b",
+  "task_id": "sequences.chunks",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: warning: unused import: `json`\n --> /candidate/main.rs:1:25\n  |\n1 | use serde_json::{Value, json};\n  |                         ^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0308]: mismatched types\n --> /candidate/main.rs:4:17\n  |\n4 |     if let Some(Value::Object(obj)) = input.as_object() {\n  |                 ^^^^^^^^^^^^^^^^^^    ----------------- this expression has type `Option<&serde_json::Map<std::string::String, Value>>`\n  |                 |\n  |                 expected `Map<String, Value>`, found `Value`\n  |\n  = note: expected struct `serde_json::Map<std::string::String, Value>`\n               found enum `Value`\n\nerror[E0308]: mismatched types\n  --> /candidate/main.rs:10:31\n   |\n10 |                     while let Some(chunk) = iter.by_ref().take(size as usize).cloned().collect::<Vec<_>>() {\n   |                               ^^^^^^^^^^^   -------------------------------------------------------------- this expression has type `Vec<Value>`\n   |                               |\n   |                               expected `Vec<Value>`, found `Option<_>`\n   |\n   = note: expected struct `Vec<Value>`\n                found enum `Option<_>`\n\nerror: aborting due to 2 previous errors; 1 warning emitted\n\nFor more information about this error, try `rustc --explain E0308`.\n"
+  ],
+  "cases_total": 5,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "0bf995b5f69865792503015f6af52b457c861b679877956e939c2137ddb4a562",
+  "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "19da46c7652934eda95b3377d17ceb3e981e2356ca74ef01c9d6574bf6d05e54",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:1",
+    "expected_image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/qwen7b-train/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/qwen7b-train/sandbox/9f3ec440-0c6f-4423-89fe-d0957d06a89b.audit.json",
+  "audit_sha256": "f1eb7d8c894f9b2b41b7f4b10813295bbbb366cad0cf8916ffc4d6fcfaf1c99f",
+  "failure": "compilation failed: warning: unused import: `json`\n --> /candidate/main.rs:1:25\n  |\n1 | use serde_json::{Value, json};\n  |                         ^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0308]: mismatched types\n --> /candidate/main.rs:4:17\n  |\n4 |     if let Some(Value::Object(obj)) = input.as_object() {\n  |                 ^^^^^^^^^^^^^^^^^^    ----------------- this expression has type `Option<&serde_json::Map<std::string::String, Value>>`\n  |                 |\n  |                 expected `Map<String, Value>`, found `Value`\n  |\n  = note: expected struct `serde_json::Map<std::string::String, Value>`\n               found enum `Value`\n\nerror[E0308]: mismatched types\n  --> /candidate/main.rs:10:31\n   |\n10 |                     while let Some(chunk) = iter.by_ref().take(size as usize).cloned().collect::<Vec<_>>() {\n   |                               ^^^^^^^^^^^   -------------------------------------------------------------- this expression has type `Vec<Value>`\n   |                               |\n   |                               expected `Vec<Value>`, found `Option<_>`\n   |\n   = note: expected struct `Vec<Value>`\n                found enum `Option<_>`\n\nerror: aborting due to 2 previous errors; 1 warning emitted\n\nFor more information about this error, try `rustc --explain E0308`.\n",
+  "duration_ms": 11245,
+  "timeout_evidence": null
+}

@@ -1,0 +1,38 @@
+{
+  "model_id": "qwen-coder-7b-q4_k_m",
+  "task_id": "calendar.valid_date",
+  "source_id": "private-calendar-v1",
+  "specification_sha256": "35db39154de5c47238ccf076795a7b3bd468d01aa214f697b6b984477a9e6775",
+  "seed": 1729,
+  "plan_sha256": "f87637f90e8a1f80bb2ac95cc92d992944ce9d8fea1129a0fdacc535c177e509",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is [year,month,day] integers. Return whether it is a valid Gregorian date, restricted to years 1..9999.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[2023,2,29],\"expected\":false}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let arr = input.as_array().and_then(|a| a.get(0).and_then(|v| v.as_array()));\n    let [year, month, day] = match arr {\n        Some(arr) if arr.len() == 3 => [\n            arr[0].as_i64().unwrap_or(0),\n            arr[1].as_i64().unwrap_or(0),\n            arr[2].as_i64().unwrap_or(0),\n        ],\n        _ => return Value::Bool(false),\n    };\n\n    if year < 1 || year > 9999 || month < 1 || month > 12 || day < 1 {\n        return Value::Bool(false);\n    }\n\n    let is_leap_year = year % 4 == 0 && (year % 100 != 0 || year % 400 == 0);\n    let days_in_month = match month {\n        1 | 3 | 5 | 7 | 8 | 10 | 12 => 31,\n        4 | 6 | 9 | 11 => 30,\n        2 => if is_leap_year { 29 } else { 28 },\n        _ => return Value::Bool(false),\n    };\n\n    if day > days_in_month {\n        return Value::Bool(false);\n    }\n\n    Value::Bool(true)\n}\n```",
+    "checkpoint_id": "509287f78cb4d4cf6b3843734733b914b2c158e43e22a7f4bf5e963800894d3c",
+    "finish_reason": "stop",
+    "input_tokens": 238,
+    "output_tokens": 317,
+    "elapsed_ms": 69345,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/calendar.valid_date.generation.json",
+    "sha256": "9f80cc8eed0f0731e6af0fc50e9c921552add5b4138acfd5cc9796f8e6a7bf63",
+    "bytes": 4739
+  },
+  "sandbox_report": {
+    "path": "reports/local-study/qwen7b-train/sandbox/e4b9437d-be9b-4b2c-bfa4-726e93623f88.json",
+    "sha256": "bf65f0a14dcf21e59fddcbbdecfaeb00fe037ead2a57132718ff2911b122d5f2",
+    "bytes": 1356
+  },
+  "grading_error": null,
+  "success": false
+}

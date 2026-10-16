@@ -1,0 +1,38 @@
+{
+  "model_id": "qwen-coder-7b-q4_k_m",
+  "task_id": "ledger.prefix",
+  "source_id": "private-ledger-v1",
+  "specification_sha256": "7af477c1c32ccbe7e5f66f51ed6d9e11ee080653c6b26b7ab6756a30f5f85c99",
+  "seed": 1729,
+  "plan_sha256": "f87637f90e8a1f80bb2ac95cc92d992944ce9d8fea1129a0fdacc535c177e509",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an integer array. Return inclusive prefix sums; empty input returns []. Bounds: length <=64 and absolute values <=10000.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[2,-4,8],\"expected\":[2,-2,6]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    if let Value::Array(arr) = input {\n        let mut result = Vec::new();\n        let mut sum = 0;\n        for item in arr {\n            if let Value::Number(num) = item {\n                if let Some(n) = num.as_i64() {\n                    sum += n;\n                    result.push(Value::Number(serde_json::Number::from(sum)));\n                }\n            }\n        }\n        Value::Array(result)\n    } else {\n        Value::Array(vec![])\n    }\n}\n```",
+    "checkpoint_id": "509287f78cb4d4cf6b3843734733b914b2c158e43e22a7f4bf5e963800894d3c",
+    "finish_reason": "stop",
+    "input_tokens": 238,
+    "output_tokens": 125,
+    "elapsed_ms": 6265,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/ledger.prefix.generation.json",
+    "sha256": "b525f34b6fc4d10be932ac48de97fb17eae958bbd651c9e26dc78ac07152749e",
+    "bytes": 4347
+  },
+  "sandbox_report": {
+    "path": "reports/local-study/qwen7b-train/sandbox/5b55d5fd-1140-4aeb-addf-bd2ae7df19fb.json",
+    "sha256": "a57cb46f2fdd6ec000c74695b304412a568e1b7c44b6511aab1b806fcc064b3e",
+    "bytes": 1284
+  },
+  "grading_error": null,
+  "success": true
+}

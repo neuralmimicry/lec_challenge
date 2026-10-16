@@ -1,0 +1,49 @@
+{
+  "schema_version": 3,
+  "run_id": "a57eb0bf-23cf-430a-90cf-5ec3427389b1",
+  "ownership_nonce": "502d1dc2-9e9f-438e-b838-6a45ab39fbd1",
+  "attempt_key": "7e824f1b-9ce5-441c-bed6-f9d63bf4976e",
+  "receipt_path": "reports/local-study/content-follow-up/round-003-gpu-1408/sandbox/7e824f1b-9ce5-441c-bed6-f9d63bf4976e.prepared.json",
+  "report_path": "reports/local-study/content-follow-up/round-003-gpu-1408/sandbox/a57eb0bf-23cf-430a-90cf-5ec3427389b1.json",
+  "task": {
+    "id": "ledger.bounds",
+    "source_id": "private-ledger-v1",
+    "lineage_id": "local-contract-pack-00",
+    "split": "train",
+    "specification": "Input is an integer array. Return [minimum,maximum], or null for an empty array.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "911dbccd1869b8f5a7bdb03e1c96dc2a312037586316684fbfa8d9675e2e8c33",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": [
+          2,
+          -4,
+          8
+        ],
+        "expected": [
+          -4,
+          8
+        ]
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "// Plan:\n// 1. Check if the input array is empty.\n// 2. If empty, return null.\n// 3. Initialize min and max with the first element of the array.\n// 4. Iterate through the array, updating min and max as needed.\n// 5. Return the array [min, max].\n\nuse serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    // Check if the input is an array\n    if let Value::Array(arr) = input {\n        // Check if the array is empty\n        if arr.is_empty() {\n            return Value::Null;\n        }\n\n        // Initialize min and max with the first element\n        let mut min = arr[0].as_i64().unwrap();\n        let mut max = arr[0].as_i64().unwrap();\n\n        // Iterate through the array to find min and max\n        for num in arr.iter() {\n            if let Some(n) = num.as_i64() {\n                if n < min {\n                    min = n;\n                }\n                if n > max {\n                    max = n;\n                }\n            }\n        }\n\n        // Return the array [min, max]\n        Value::Array(vec![Value::Number(min.into()), Value::Number(max.into())])\n    } else {\n        // If the input is not an array, return null\n        Value::Null\n    }\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/content-follow-up/round-003-gpu-1408/sandbox"
+  },
+  "code_sha256": "51ec6ae21713380f145ce72ae50b776361254c5a01d8b67bc3892661e75f153c",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

@@ -1,0 +1,289 @@
+{
+  "completion_probabilities": [
+    {
+      "bytes": [
+        72,
+        101,
+        108,
+        108,
+        111
+      ],
+      "id": 9906,
+      "logprob": -0.003368082921952009,
+      "token": "Hello",
+      "top_logprobs": [
+        {
+          "bytes": [
+            72,
+            101,
+            108,
+            108,
+            111
+          ],
+          "id": 9906,
+          "logprob": -0.003368082921952009,
+          "token": "Hello"
+        },
+        {
+          "bytes": [
+            72,
+            105
+          ],
+          "id": 13347,
+          "logprob": -5.89198637008667,
+          "token": "Hi"
+        },
+        {
+          "bytes": [
+            71,
+            111,
+            111,
+            100
+          ],
+          "id": 15571,
+          "logprob": -7.956619739532471,
+          "token": "Good"
+        },
+        {
+          "bytes": [
+            34
+          ],
+          "id": 1,
+          "logprob": -9.130561828613281,
+          "token": "\""
+        },
+        {
+          "bytes": [
+            104,
+            101,
+            108,
+            108,
+            111
+          ],
+          "id": 15339,
+          "logprob": -10.093164443969727,
+          "token": "hello"
+        },
+        {
+          "bytes": [
+            71,
+            114,
+            101,
+            101,
+            116,
+            105,
+            110,
+            103,
+            115
+          ],
+          "id": 92886,
+          "logprob": -10.418821334838867,
+          "token": "Greetings"
+        },
+        {
+          "bytes": [
+            66,
+            111,
+            110,
+            106,
+            111,
+            117,
+            114
+          ],
+          "id": 82681,
+          "logprob": -11.004087448120117,
+          "token": "Bonjour"
+        },
+        {
+          "bytes": [
+            73
+          ],
+          "id": 40,
+          "logprob": -11.321097373962402,
+          "token": "I"
+        },
+        {
+          "bytes": [
+            72,
+            111,
+            119
+          ],
+          "id": 4438,
+          "logprob": -11.610487937927246,
+          "token": "How"
+        },
+        {
+          "bytes": [
+            78,
+            105,
+            99,
+            101
+          ],
+          "id": 46078,
+          "logprob": -11.654489517211914,
+          "token": "Nice"
+        },
+        {
+          "bytes": [
+            72,
+            101,
+            121
+          ],
+          "id": 19182,
+          "logprob": -11.699853897094727,
+          "token": "Hey"
+        },
+        {
+          "bytes": [
+            83,
+            117,
+            114,
+            101
+          ],
+          "id": 40914,
+          "logprob": -12.323426246643066,
+          "token": "Sure"
+        },
+        {
+          "bytes": [
+            84,
+            104,
+            97,
+            110,
+            107
+          ],
+          "id": 13359,
+          "logprob": -13.373861312866211,
+          "token": "Thank"
+        },
+        {
+          "bytes": [
+            87,
+            101,
+            108,
+            99,
+            111,
+            109,
+            101
+          ],
+          "id": 14262,
+          "logprob": -13.417949676513672,
+          "token": "Welcome"
+        },
+        {
+          "bytes": [
+            32,
+            72,
+            101,
+            108,
+            108,
+            111
+          ],
+          "id": 22691,
+          "logprob": -13.6336669921875,
+          "token": " Hello"
+        },
+        {
+          "bytes": [
+            79,
+            104
+          ],
+          "id": 12174,
+          "logprob": -13.958600997924805,
+          "token": "Oh"
+        }
+      ]
+    }
+  ],
+  "content": "Hello",
+  "generation_settings": {
+    "backend_sampling": false,
+    "chat_format": "Content-only",
+    "dry_allowed_length": 2,
+    "dry_base": 1.75,
+    "dry_multiplier": 0.0,
+    "dry_penalty_last_n": 4096,
+    "dry_sequence_breakers": [
+      "\n",
+      ":",
+      "\"",
+      "*"
+    ],
+    "dynatemp_exponent": 1.0,
+    "dynatemp_range": 0.0,
+    "frequency_penalty": 0.0,
+    "generation_prompt": "",
+    "grammar": "",
+    "grammar_lazy": false,
+    "grammar_triggers": [],
+    "ignore_eos": false,
+    "logit_bias": [],
+    "lora": [],
+    "max_tokens": 1,
+    "min_keep": 0,
+    "min_p": 0.05000000074505806,
+    "mirostat": 0,
+    "mirostat_eta": 0.10000000149011612,
+    "mirostat_tau": 5.0,
+    "n_discard": 0,
+    "n_keep": 0,
+    "n_predict": 1,
+    "n_probs": 16,
+    "post_sampling_probs": false,
+    "presence_penalty": 0.0,
+    "preserved_tokens": [],
+    "reasoning_format": "deepseek",
+    "reasoning_in_content": false,
+    "repeat_last_n": 64,
+    "repeat_penalty": 1.0,
+    "samplers": [
+      "penalties",
+      "dry",
+      "top_n_sigma",
+      "top_k",
+      "typ_p",
+      "top_p",
+      "min_p",
+      "xtc",
+      "temperature"
+    ],
+    "seed": 1729,
+    "speculative.types": "none",
+    "stop": [],
+    "stream": false,
+    "temperature": 0.0,
+    "timings_per_token": false,
+    "top_k": 40,
+    "top_n_sigma": -1.0,
+    "top_p": 1.0,
+    "typical_p": 1.0,
+    "xtc_probability": 0.0,
+    "xtc_threshold": 0.10000000149011612
+  },
+  "has_new_line": false,
+  "id_slot": 0,
+  "index": 0,
+  "model": "state/bitnet-exports/8143ae115ed6babe5e5ada8fb8c5b769d8f417802b2db042ad98b4f7ed73975b/4b894029ec2a78290ac948278b8231b3db21742f2e4fe13bbe0ab938295bcd2f/model.i2_s.gguf",
+  "prompt": "<|begin_of_text|>User: Say hello in one short sentence.<|eot_id|>Assistant: ",
+  "stop": true,
+  "stop_type": "limit",
+  "stopping_word": "",
+  "timings": {
+    "cache_n": 0,
+    "predicted_ms": 0.001,
+    "predicted_n": 1,
+    "predicted_per_second": 1000000.0,
+    "predicted_per_token_ms": 0.001,
+    "prompt_ms": 730.883,
+    "prompt_n": 14,
+    "prompt_per_second": 19.15491261939325,
+    "prompt_per_token_ms": 52.20592857142857
+  },
+  "tokens": [
+    9906
+  ],
+  "tokens_cached": 14,
+  "tokens_evaluated": 14,
+  "tokens_predicted": 1,
+  "truncated": false
+}

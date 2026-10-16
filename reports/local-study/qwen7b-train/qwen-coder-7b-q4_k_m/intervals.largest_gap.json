@@ -1,0 +1,38 @@
+{
+  "model_id": "qwen-coder-7b-q4_k_m",
+  "task_id": "intervals.largest_gap",
+  "source_id": "private-intervals-v1",
+  "specification_sha256": "bf3082bfad24acb44d1bfb702be7cb30601646f2a6ac723dd3831c4d3532cf49",
+  "seed": 1729,
+  "plan_sha256": "f87637f90e8a1f80bb2ac95cc92d992944ce9d8fea1129a0fdacc535c177e509",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an array of integer half-open intervals, start<end. Merge touching/overlapping intervals and return the largest internal uncovered gap, or zero with fewer than two merged intervals.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[[3,5],[1,3],[8,9]],\"expected\":3}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::{Value, json};\n\npub fn solve(input: Value) -> Value {\n    let intervals: Vec<(i64, i64)> = input.as_array().unwrap()\n        .iter()\n        .map(|v| (v[0].as_i64().unwrap(), v[1].as_i64().unwrap()))\n        .collect();\n\n    let mut merged: Vec<(i64, i64)> = Vec::new();\n    let mut sorted_intervals = intervals.clone();\n    sorted_intervals.sort_by_key(|&(start, _)| start);\n\n    for (start, end) in sorted_intervals {\n        if let Some(&(_, last_end)) = merged.last() {\n            if start <= last_end {\n                merged.last_mut().unwrap().1 = end.max(last_end);\n            } else {\n                merged.push((start, end));\n            }\n        } else {\n            merged.push((start, end));\n        }\n    }\n\n    if merged.len() < 2 {\n        return json!(0);\n    }\n\n    let mut max_gap = 0;\n    for i in 1..merged.len() {\n        max_gap = max_gap.max(merged[i].0 - merged[i - 1].1 - 1);\n    }\n\n    json!(max_gap)\n}\n```",
+    "checkpoint_id": "509287f78cb4d4cf6b3843734733b914b2c158e43e22a7f4bf5e963800894d3c",
+    "finish_reason": "stop",
+    "input_tokens": 247,
+    "output_tokens": 269,
+    "elapsed_ms": 28797,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/intervals.largest_gap.generation.json",
+    "sha256": "b41450c1a1048204e452571d58f527843ce45f50e1c98d30cbc011bef0bdf88f",
+    "bytes": 4876
+  },
+  "sandbox_report": {
+    "path": "reports/local-study/qwen7b-train/sandbox/85c73a28-483e-4d2d-b2f8-225ca87e46c1.json",
+    "sha256": "9b5ae9a1f5cb939337e28f4ab515e95eb496d098e137e46b99881e57c9dcdae0",
+    "bytes": 1358
+  },
+  "grading_error": null,
+  "success": false
+}

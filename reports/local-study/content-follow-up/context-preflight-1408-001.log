@@ -1,0 +1,127 @@
+{
+  "maximum_input_tokens": 548,
+  "memory_estimates": [
+    {
+      "actual_free_vram_bytes": 7739539456,
+      "actual_guarded_free_vram_bytes": 6831367783,
+      "all_twelve_prompts_fit_with_768_output": true,
+      "context_tokens": 1316,
+      "cpu": {
+        "activation_workspace_bytes": 336896000,
+        "assumptions": "Full quantised weights on the selected device; embedding expanded to GPU float16 or CPU float32; float32 activations/KV/attention; no hybrid offload. Driver/allocator/workspace behaviour may require additional headroom.",
+        "attention_score_bytes": 193967872,
+        "conservative_total_bytes": 7611965184,
+        "context_tokens": 1316,
+        "dense_embedding_bytes": 2179989504,
+        "kv_cache_bytes": 150929408,
+        "quantised_file_bytes": 4683073536,
+        "runtime_reserve_bytes": 67108864
+      },
+      "fits_current_gpu_guard": true,
+      "gpu": {
+        "activation_workspace_bytes": 336896000,
+        "assumptions": "Full quantised weights on the selected device; embedding expanded to GPU float16 or CPU float32; float32 activations/KV/attention; no hybrid offload. Driver/allocator/workspace behaviour may require additional headroom.",
+        "attention_score_bytes": 193967872,
+        "conservative_total_bytes": 6723297024,
+        "context_tokens": 1316,
+        "dense_embedding_bytes": 1089994752,
+        "kv_cache_bytes": 150929408,
+        "quantised_file_bytes": 4683073536,
+        "runtime_reserve_bytes": 268435456
+      },
+      "minimum_required_free_vram_bytes": 7619460835
+    },
+    {
+      "actual_free_vram_bytes": 7739539456,
+      "actual_guarded_free_vram_bytes": 6831367783,
+      "all_twelve_prompts_fit_with_768_output": true,
+      "context_tokens": 1344,
+      "cpu": {
+        "activation_workspace_bytes": 344064000,
+        "assumptions": "Full quantised weights on the selected device; embedding expanded to GPU float16 or CPU float32; float32 activations/KV/attention; no hybrid offload. Driver/allocator/workspace behaviour may require additional headroom.",
+        "attention_score_bytes": 202309632,
+        "conservative_total_bytes": 7630686208,
+        "context_tokens": 1344,
+        "dense_embedding_bytes": 2179989504,
+        "kv_cache_bytes": 154140672,
+        "quantised_file_bytes": 4683073536,
+        "runtime_reserve_bytes": 67108864
+      },
+      "fits_current_gpu_guard": true,
+      "gpu": {
+        "activation_workspace_bytes": 344064000,
+        "assumptions": "Full quantised weights on the selected device; embedding expanded to GPU float16 or CPU float32; float32 activations/KV/attention; no hybrid offload. Driver/allocator/workspace behaviour may require additional headroom.",
+        "attention_score_bytes": 202309632,
+        "conservative_total_bytes": 6742018048,
+        "context_tokens": 1344,
+        "dense_embedding_bytes": 1089994752,
+        "kv_cache_bytes": 154140672,
+        "quantised_file_bytes": 4683073536,
+        "runtime_reserve_bytes": 268435456
+      },
+      "minimum_required_free_vram_bytes": 7640261973
+    },
+    {
+      "actual_free_vram_bytes": 7739539456,
+      "actual_guarded_free_vram_bytes": 6831367783,
+      "all_twelve_prompts_fit_with_768_output": true,
+      "context_tokens": 1408,
+      "cpu": {
+        "activation_workspace_bytes": 360448000,
+        "assumptions": "Full quantised weights on the selected device; embedding expanded to GPU float16 or CPU float32; float32 activations/KV/attention; no hybrid offload. Driver/allocator/workspace behaviour may require additional headroom.",
+        "attention_score_bytes": 222035968,
+        "conservative_total_bytes": 7674136576,
+        "context_tokens": 1408,
+        "dense_embedding_bytes": 2179989504,
+        "kv_cache_bytes": 161480704,
+        "quantised_file_bytes": 4683073536,
+        "runtime_reserve_bytes": 67108864
+      },
+      "fits_current_gpu_guard": true,
+      "gpu": {
+        "activation_workspace_bytes": 360448000,
+        "assumptions": "Full quantised weights on the selected device; embedding expanded to GPU float16 or CPU float32; float32 activations/KV/attention; no hybrid offload. Driver/allocator/workspace behaviour may require additional headroom.",
+        "attention_score_bytes": 222035968,
+        "conservative_total_bytes": 6785468416,
+        "context_tokens": 1408,
+        "dense_embedding_bytes": 1089994752,
+        "kv_cache_bytes": 161480704,
+        "quantised_file_bytes": 4683073536,
+        "runtime_reserve_bytes": 268435456
+      },
+      "minimum_required_free_vram_bytes": 7688540159
+    },
+    {
+      "actual_free_vram_bytes": 7739539456,
+      "actual_guarded_free_vram_bytes": 6831367783,
+      "all_twelve_prompts_fit_with_768_output": true,
+      "context_tokens": 1536,
+      "cpu": {
+        "activation_workspace_bytes": 393216000,
+        "assumptions": "Full quantised weights on the selected device; embedding expanded to GPU float16 or CPU float32; float32 activations/KV/attention; no hybrid offload. Driver/allocator/workspace behaviour may require additional headroom.",
+        "attention_score_bytes": 264241152,
+        "conservative_total_bytes": 7763789824,
+        "context_tokens": 1536,
+        "dense_embedding_bytes": 2179989504,
+        "kv_cache_bytes": 176160768,
+        "quantised_file_bytes": 4683073536,
+        "runtime_reserve_bytes": 67108864
+      },
+      "fits_current_gpu_guard": false,
+      "gpu": {
+        "activation_workspace_bytes": 393216000,
+        "assumptions": "Full quantised weights on the selected device; embedding expanded to GPU float16 or CPU float32; float32 activations/KV/attention; no hybrid offload. Driver/allocator/workspace behaviour may require additional headroom.",
+        "attention_score_bytes": 264241152,
+        "conservative_total_bytes": 6875121664,
+        "context_tokens": 1536,
+        "dense_embedding_bytes": 1089994752,
+        "kv_cache_bytes": 176160768,
+        "quantised_file_bytes": 4683073536,
+        "runtime_reserve_bytes": 268435456
+      },
+      "minimum_required_free_vram_bytes": 7788154879
+    }
+  ],
+  "minimum_total_tokens": 1316,
+  "report": "reports/local-study/content-follow-up/context-preflight-1408-001.json"
+}

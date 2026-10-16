@@ -1,0 +1,1 @@
+{"candidate_exit":0,"compile_ok":true,"events":[],"failure":null,"output":"[\"/\",\"/a/\",\"/a/b/\",\"/a/b/c\"]\n[\"/\",\"/\"]\n[\"/\",\"/a\"]\n[\"/\",\"/a/\",\"/a/b\"]\n[\"/\",\"/one/\",\"/one/two/\",\"/one/two/three/\",\"/one/two/three/four\"]\n","output_truncated":false,"schema_version":1,"stderr":"","stderr_truncated":false,"syscalls_observed":67,"trace_complete":true}
