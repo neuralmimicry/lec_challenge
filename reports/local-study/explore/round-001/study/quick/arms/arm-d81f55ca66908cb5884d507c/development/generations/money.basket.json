@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "831af43edd980b4afc1113f5109fb40a3a5767b92cac8d269a3ec39afb72cff6",
+  "task_id": "money.basket",
+  "source_id": "private-money-v1",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an array of [unit_price_cents,quantity], both nonnegative integers. Return total cents without tax.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[[120,2],[99,3]],\"expected\":537}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let mut total_cents = 0;\n    for line in input.as_array() {\n        let (unit_price_cents, quantity) = line.as_array().unwrap();\n        total_cents += unit_price_cents * quantity;\n    }\n    serde_json::Value::Number(total_cents)\n}\n```",
+    "checkpoint_id": "a1b3dab3b462d634e40a3a4f47b48c68c8e1880040b1cf3b9201cac8bfd5b1d9",
+    "finish_reason": "stop",
+    "input_tokens": 235,
+    "output_tokens": 88,
+    "elapsed_ms": 17650,
+    "complete": true
+  },
+  "model_error": null
+}

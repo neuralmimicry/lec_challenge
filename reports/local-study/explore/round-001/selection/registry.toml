@@ -1,0 +1,12 @@
+schema_version = 1
+
+[[models]]
+id = "qwen-coder-7b-q4_k_m"
+model_id = "Qwen/Qwen2.5-Coder-7B-Instruct-GGUF"
+revision = "13fb94bfda8c8cf22497dc57b78f391a9acb426a"
+directory = "offline_bundle/comparative/qwen-coder-7b-q4_k_m"
+architecture = "qwen2"
+role = "coding_teacher"
+licence = "Apache-2.0"
+developer_id = "alibaba-qwen"
+weight_format = "gguf"

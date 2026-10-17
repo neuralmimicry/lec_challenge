@@ -1,0 +1,78 @@
+{
+  "freeze_sha256": "7eedf2641f821c7d22fc913855cd14e7c998cd9d8c4b45d03d288a804961f05e",
+  "steps": 9,
+  "adapter": {
+    "path": "reports/local-study/native-full-sft-seed2718/step-000009/adapter.safetensors",
+    "sha256": "ee8b68977275d66d3a554eaa9c605b70b3b4184b33ae7282eedca9df0717b2ac",
+    "bytes": 2173504
+  },
+  "optimizer": {
+    "path": "reports/local-study/native-full-sft-seed2718/step-000009/optimizer.safetensors",
+    "sha256": "11800537960b32336eec1f04cd235666f1a2cbb9877b1480b9f5506e0b4383a7",
+    "bytes": 4347480
+  },
+  "initial_adapter_sha256": "e60f59ab6101fd2d552556817000719e3b88115a444f7eda339a9feb9f6145bd",
+  "losses": [
+    0.297419935464859,
+    0.27472713589668274,
+    0.4715821444988251,
+    0.3566216230392456,
+    0.37128162384033203,
+    0.31949561834335327,
+    0.27441221475601196,
+    0.23911286890506744,
+    0.23700262606143951
+  ],
+  "gradient_norms": [
+    2.102586031542836,
+    1.9635471651471565,
+    3.1984380530027514,
+    1.5471712372636952,
+    2.0835880270637688,
+    1.8136807756639917,
+    1.8917849484807336,
+    2.1881143839493538,
+    1.7747119945576986
+  ],
+  "component_losses": [
+    {
+      "sequence_sft": 0.297419935464859
+    },
+    {
+      "sequence_sft": 0.27472713589668274
+    },
+    {
+      "sequence_sft": 0.4715821444988251
+    },
+    {
+      "sequence_sft": 0.3566216230392456
+    },
+    {
+      "sequence_sft": 0.37128162384033203
+    },
+    {
+      "sequence_sft": 0.31949561834335327
+    },
+    {
+      "sequence_sft": 0.27441221475601196
+    },
+    {
+      "sequence_sft": 0.23911286890506744
+    },
+    {
+      "sequence_sft": 0.23700262606143951
+    }
+  ],
+  "alignment_diagnostics": [],
+  "sample_ids": [
+    "6f54a188344a4c4834c5a9bfe0969e33003547ea371fbf2ba03a4e5fd88d6e07",
+    "5b46a85ec5f9398290c023c26ef8cb662e6e4d19da293a71b2bcee316514f6b7",
+    "d34031fab7990f9d5bb1ac0465e3173de67d17f95496ed535260f239f3c4bc90",
+    "12106a8bfb9356904186b558fd37127f1ee55e650cb57a6e843d8983be952bd0",
+    "21748f9f3a9dec33f5c19fb7179ecdada908a2b27e6486b333f8a379f57d93bb",
+    "2d22b678d0bb8aadd704350c150da710a8be0fe59dc30172accfbbb0b25f792b",
+    "e89aa62fc9a189c19a13370ba9410f99991e685167f68b4f7ce97f6a4c78f965",
+    "ff06039fd8278f904a9e03151a5b46d0452d3c207474b4da9dd4b770fe9d6d26",
+    "5dedbab9841301331ad4a8a4ef9d893e994c7abd27be5b97777071860da49a35"
+  ]
+}

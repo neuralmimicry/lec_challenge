@@ -1,0 +1,387 @@
+{
+  "schema_version": 1,
+  "evidence_kind": "read_only_original_assessment_evidence_audit",
+  "observed_unix_ms": 1792167452971,
+  "original_request_satisfied": false,
+  "requirements": [
+    {
+      "id": "tasks",
+      "criterion": "At least 40 executable source-separated tasks",
+      "status": "VERIFIED",
+      "finding": "96 executable Rust contracts; train/development/held-out source separation verified",
+      "next_action": "Repair corpus/source contracts before collecting outputs."
+    },
+    {
+      "id": "design",
+      "criterion": "Design written first, at most three pages; eight requested topics",
+      "status": "OBSERVED",
+      "finding": "Frozen design artefacts are inspected separately from executable evidence; page count, chronology and prose quality require the retained design review.",
+      "next_action": "Review docs/assessment-audit.md and the frozen design/PDF; do not rewrite the original freeze."
+    },
+    {
+      "id": "providers",
+      "criterion": "Three real independent providers with reusable recordings",
+      "status": "INCOMPLETE",
+      "finding": "0 real training-eligible provider businesses; 0 usable checksum-verified completions; three businesses required",
+      "next_action": "Supply locally configured API credentials, applicable training rights, exact models/prices and an explicit dollar ceiling; collect all three businesses."
+    },
+    {
+      "id": "curation",
+      "criterion": "Real deduplicated/decontaminated run-traceable training set",
+      "status": "INCOMPLETE",
+      "finding": "No such file or directory (os error 2)",
+      "next_action": "Curate actual eligible passing provider runs; local-teacher bundles remain separate."
+    },
+    {
+      "id": "training",
+      "criterion": "One genuine provider-derived training round and checkpoint",
+      "status": "INCOMPLETE",
+      "finding": "No such file or directory (os error 2)",
+      "next_action": "Run the real trainer on the verified provider dataset; retain optimiser, assistant-mask, changed-tensor and reload evidence."
+    },
+    {
+      "id": "gate",
+      "criterion": "Two real checkpoints, held-out decision and interval",
+      "status": "INCOMPLETE",
+      "finding": "No such file or directory (os error 2)",
+      "next_action": "Freeze one primary candidate/decoding plan; evaluate complete source-held-out pairs once. NO SHIP is an acceptable valid result."
+    },
+    {
+      "id": "detectability",
+      "criterion": "Smallest detectable effect under the actual gate",
+      "status": "OBSERVED",
+      "finding": "Power report present; evidence_kind=\"simulation_assumptions_not_measured_learning\"; development calibration remains a separate requirement",
+      "next_action": "Bind the simulation assumptions to complete development measurements and retain sensitivity/Monte Carlo uncertainty; no normal-approximation scalar substitution."
+    },
+    {
+      "id": "drill_kill_orchestrator_mid_round",
+      "criterion": "kill_orchestrator_mid_round",
+      "status": "INCOMPLETE",
+      "finding": "Recorded status=\"INCOMPLETE\", evidence_kind=missing_required_real_evidence; Original real recording replay is incomplete: three independently owned, enabled and rights-cleared providers are required; found 0. Labelled local SIGKILL/UNKNOWN/retry assertions remain in invariant_qa, without substituting for real acquisition evidence.",
+      "next_action": "Retain actual assertions and full failure denominators. Missing real controls/recordings cannot be supplied by score/transport fixtures."
+    },
+    {
+      "id": "drill_provider_error_then_rate_limit",
+      "criterion": "provider_error_then_rate_limit",
+      "status": "INCOMPLETE",
+      "finding": "Recorded status=\"INCOMPLETE\", evidence_kind=missing_required_real_evidence; Original real recording replay is incomplete: three independently owned, enabled and rights-cleared providers are required; found 0. Labelled local SIGKILL/UNKNOWN/retry assertions remain in invariant_qa, without substituting for real acquisition evidence.",
+      "next_action": "Retain actual assertions and full failure denominators. Missing real controls/recordings cannot be supplied by score/transport fixtures."
+    },
+    {
+      "id": "drill_grader_gaming",
+      "criterion": "grader_gaming",
+      "status": "OBSERVED",
+      "finding": "Recorded status=\"PASSED\", evidence_kind=executed_adversarial_candidates_with_trusted_exact_denial_assertions; historical assertion requires its original artefact chain",
+      "next_action": "Retain actual assertions and full failure denominators. Missing real controls/recordings cannot be supplied by score/transport fixtures."
+    },
+    {
+      "id": "drill_escape_attempts",
+      "criterion": "escape_attempts",
+      "status": "OBSERVED",
+      "finding": "Recorded status=\"PASSED\", evidence_kind=executed_adversarial_candidates_with_trusted_exact_denial_assertions; historical assertion requires its original artefact chain",
+      "next_action": "Retain actual assertions and full failure denominators. Missing real controls/recordings cannot be supplied by score/transport fixtures."
+    },
+    {
+      "id": "drill_planted_heldout_task",
+      "criterion": "planted_heldout_task",
+      "status": "OBSERVED",
+      "finding": "Recorded status=\"PASSED\", evidence_kind=temporary_planted_datasets_rejected_by_actual_training_entrypoint; historical assertion requires its original artefact chain",
+      "next_action": "Retain actual assertions and full failure denominators. Missing real controls/recordings cannot be supplied by score/transport fixtures."
+    },
+    {
+      "id": "drill_deliberately_worse_checkpoint",
+      "criterion": "deliberately_worse_checkpoint",
+      "status": "INCOMPLETE",
+      "finding": "Recorded status=\"INCOMPLETE\", evidence_kind=missing_required_real_evidence; missing required real artifacts: reports/incumbent-evaluation/evaluation.json, reports/degraded-control-evaluation/evaluation.json",
+      "next_action": "Retain actual assertions and full failure denominators. Missing real controls/recordings cannot be supplied by score/transport fixtures."
+    },
+    {
+      "id": "drill_train_gain_heldout_loss",
+      "criterion": "train_gain_heldout_loss",
+      "status": "INCOMPLETE",
+      "finding": "Recorded status=\"INCOMPLETE\", evidence_kind=missing_required_real_evidence; missing required real artifacts: reports/incumbent-evaluation/evaluation.json, reports/overfit-control-evaluation/evaluation.json, reports/base-train-evaluation/evaluation.json, reports/overfit-train-evaluation/evaluation.json",
+      "next_action": "Retain actual assertions and full failure denominators. Missing real controls/recordings cannot be supplied by score/transport fixtures."
+    },
+    {
+      "id": "drill_seed_only_checkpoints",
+      "criterion": "seed_only_checkpoints",
+      "status": "INCOMPLETE",
+      "finding": "Recorded status=\"INCOMPLETE\", evidence_kind=missing_required_real_evidence; missing required real artifacts: reports/candidate-evaluation/evaluation.json, reports/seed-control-evaluation/evaluation.json",
+      "next_action": "Retain actual assertions and full failure denominators. Missing real controls/recordings cannot be supplied by score/transport fixtures."
+    },
+    {
+      "id": "drill_round_budget_exceeded",
+      "criterion": "round_budget_exceeded",
+      "status": "OBSERVED",
+      "finding": "Recorded status=\"PASSED\", evidence_kind=deterministic_budget_fault_through_production_reservation_and_no_dispatch_assertions; historical assertion requires its original artefact chain",
+      "next_action": "Retain actual assertions and full failure denominators. Missing real controls/recordings cannot be supplied by score/transport fixtures."
+    },
+    {
+      "id": "costs",
+      "criterion": "Real cost per task, model, round and improvement point",
+      "status": "INCOMPLETE",
+      "finding": "Real businesses=0, acquisition complete=false, total USD=null, proven cost/point=null; nonpositive/inconclusive gains must remain N/A or descriptive",
+      "next_action": "Reconstruct ledger-derived task/model costs, cash/credit settlements and measured compute. Never invent a price, gain or scalar cost per point."
+    },
+    {
+      "id": "serving",
+      "criterion": "Adapted checkpoint served locally; canary/rollback evidence",
+      "status": "INCOMPLETE",
+      "finding": "missing reports/candidate-endpoint.json: No such file or directory (os error 2)",
+      "next_action": "Serve the actual assessment adapter and retain matching health/generation identity and rollback evidence."
+    },
+    {
+      "id": "offline_command",
+      "criterion": "One clean-machine command replays the real loop offline",
+      "status": "INCOMPLETE",
+      "finding": "Latest recorded assessment demo status: \"INCOMPLETE\"",
+      "next_action": "Complete upstream recordings/training/evaluation/drills, package exact dependencies and run the disconnected extracted archive."
+    },
+    {
+      "id": "disconnected_delivery",
+      "criterion": "Fresh credential-free delivery rehearsal",
+      "status": "INCOMPLETE",
+      "finding": "Local QA passed=true; full assessment complete=false. A correctly failing rehearsal is not a complete assessment.",
+      "next_action": "Rebuild and independently verify the final exact archive; old inventories/binaries cannot certify current changes."
+    },
+    {
+      "id": "video",
+      "criterion": "Repository/zip, README/design/reports and video up to five minutes",
+      "status": "OBSERVED",
+      "finding": "Video duration=120 seconds; checksum verified=true; final snapshot currency remains unverified",
+      "next_action": "Refresh delivery/video after final evidence stabilises. Do not publish or send without explicit instructions."
+    }
+  ],
+  "inputs": [
+    {
+      "path": "reports/cost-summary.json",
+      "sha256": "0037b3222239079646827e4f345848328544cb96b5f7df3814e04ee35ea9be4d",
+      "bytes": 10631
+    },
+    {
+      "path": "reports/demo.json",
+      "sha256": "bc45f7b7eadeebbf834c0c0ae6f4afe59204e45391f07173dc921a65fc36873a",
+      "bytes": 3528
+    },
+    {
+      "path": "reports/disconnected-qa.json",
+      "sha256": "102bf4a4a7e8dc8a128d2866dbfb27af1102d7492f42e1ec18d75aa09ef18938",
+      "bytes": 2217
+    },
+    {
+      "path": "reports/drill.json",
+      "sha256": "07621f07febc74b400de3148ae6ef451a84383e8e4391584b5366f1b8ca18767",
+      "bytes": 27317
+    },
+    {
+      "path": "reports/evidence-walkthrough-manifest.json",
+      "sha256": "fbdc3a8154f3b424df357b68846c2c3f8ffbc55ffa2677874d5b100f893fe71d",
+      "bytes": 5543
+    },
+    {
+      "path": "reports/local-study/explore/round-001/cohorts/76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c/attempts/rollout-evidence/a80767d8-07ce-46a2-9cc2-f6c1c9ed5218/result.json",
+      "sha256": "b4330a4e8ac976cd384ab48c8ee84d96290e3c56fd0204c3eb87401f42d21801",
+      "bytes": 1149
+    },
+    {
+      "path": "reports/local-study/explore/round-001/cohorts/76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c/state.json",
+      "sha256": "fc9d3edac943e2077d6d478c8e5f53c3eb8679cac37ba6ff5d4ff09c13f399e6",
+      "bytes": 1254
+    },
+    {
+      "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/attempts/rollout-evidence/2d745bcc-e6d1-4094-af90-57a564d594a9/result.json",
+      "sha256": "f9eedeed15c092fbb4b5b07567e1b70949ac9cc78db106aaee04e323ace39749",
+      "bytes": 1147
+    },
+    {
+      "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/state.json",
+      "sha256": "af54ec171ccf07121347db09bc8ead620c7a4abaa6aae93c1b1eb146a96f386a",
+      "bytes": 3126
+    },
+    {
+      "path": "reports/local-study/explore/round-001/report.json",
+      "sha256": "054bbb9982e62803693f965721d82da906bd4f195406cd173c33fa0108dce501",
+      "bytes": 88906
+    },
+    {
+      "path": "reports/power.json",
+      "sha256": "3711652a5b5bc6b29a20e1dcca048eee36876c57771606c83bd4235afdb56ef5",
+      "bytes": 14925
+    }
+  ],
+  "exploration": {
+    "held_out_used": false,
+    "interpretation": "Development observations only. One pass versus zero in sixteen development tasks is not a significant held-out gain. Stage report verification is not successful generation/training.",
+    "original_three_provider_assessment_satisfied": false,
+    "reported_development_comparisons": [
+      {
+        "arm_id": "arm-00886e19edc356c899a5d992",
+        "assessment_promotion": false,
+        "baseline_passed": 0,
+        "candidate_passed": 0,
+        "held_out_used": false,
+        "planned_tasks": 16,
+        "profile": "quick",
+        "reported_difference_percentage_points": 0.0,
+        "reported_quality_comparison_valid": true,
+        "seed": 1729
+      },
+      {
+        "arm_id": "arm-10219d27497b8da52d90f257",
+        "assessment_promotion": false,
+        "baseline_passed": 0,
+        "candidate_passed": 0,
+        "held_out_used": false,
+        "planned_tasks": 16,
+        "profile": "quick",
+        "reported_difference_percentage_points": 0.0,
+        "reported_quality_comparison_valid": true,
+        "seed": 2718
+      },
+      {
+        "arm_id": "arm-00886e19edc356c899a5d992",
+        "assessment_promotion": false,
+        "baseline_passed": 0,
+        "candidate_passed": 1,
+        "held_out_used": false,
+        "planned_tasks": 16,
+        "profile": "full",
+        "reported_difference_percentage_points": 6.25,
+        "reported_quality_comparison_valid": true,
+        "seed": 1729
+      },
+      {
+        "arm_id": "arm-10219d27497b8da52d90f257",
+        "assessment_promotion": false,
+        "baseline_passed": 0,
+        "candidate_passed": 0,
+        "held_out_used": false,
+        "planned_tasks": 16,
+        "profile": "full",
+        "reported_difference_percentage_points": 0.0,
+        "reported_quality_comparison_valid": true,
+        "seed": 2718
+      },
+      {
+        "arm_id": "arm-d81f55ca66908cb5884d507c",
+        "assessment_promotion": false,
+        "baseline_passed": 0,
+        "candidate_passed": 0,
+        "held_out_used": false,
+        "planned_tasks": 16,
+        "profile": "full",
+        "reported_difference_percentage_points": 0.0,
+        "reported_quality_comparison_valid": true,
+        "seed": 1729
+      }
+    ],
+    "stages": [
+      {
+        "healthy": true,
+        "name": "baseline-conventional_qwen_lora",
+        "status": "verified_complete"
+      },
+      {
+        "healthy": false,
+        "name": "baseline-ternary_bitnet",
+        "status": "verified_complete"
+      },
+      {
+        "healthy": false,
+        "name": "cohort-76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c",
+        "status": "bounded_evidence_gaps"
+      },
+      {
+        "healthy": false,
+        "name": "cohort-catalogue",
+        "status": "verified_complete"
+      },
+      {
+        "healthy": false,
+        "name": "cohort-df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26",
+        "status": "bounded_evidence_gaps"
+      },
+      {
+        "healthy": false,
+        "name": "content-evidence",
+        "status": "bounded_evidence_gaps"
+      },
+      {
+        "healthy": null,
+        "name": "development-selection",
+        "status": "verified_complete"
+      },
+      {
+        "healthy": null,
+        "name": "full-baseline-comparisons",
+        "status": "verified_complete"
+      },
+      {
+        "healthy": null,
+        "name": "full-study",
+        "status": "bounded_incomplete"
+      },
+      {
+        "healthy": true,
+        "name": "offline-family",
+        "status": "verified_complete"
+      },
+      {
+        "healthy": null,
+        "name": "quick-baseline-comparisons",
+        "status": "verified_complete"
+      },
+      {
+        "healthy": null,
+        "name": "quick-study",
+        "status": "bounded_incomplete"
+      },
+      {
+        "healthy": null,
+        "name": "study-plan",
+        "status": "verified_complete"
+      },
+      {
+        "healthy": null,
+        "name": "teacher-search",
+        "status": "verified_complete"
+      },
+      {
+        "healthy": false,
+        "name": "training-evidence",
+        "status": "verified_complete"
+      }
+    ],
+    "status": "completed_with_teacher_target_shortfall",
+    "success": false,
+    "verified_failed_child_attempts": [
+      {
+        "attempt": {
+          "bytes": 1149,
+          "path": "reports/local-study/explore/round-001/cohorts/76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c/attempts/rollout-evidence/a80767d8-07ce-46a2-9cc2-f6c1c9ed5218/result.json",
+          "sha256": "b4330a4e8ac976cd384ab48c8ee84d96290e3c56fd0204c3eb87401f42d21801"
+        },
+        "cohort": "cohort-76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c",
+        "exit_code": 1,
+        "reason": "required report /home/pbisaacs/Developer/neuralmimicry/lec_challenge/reports/local-study/explore/round-001/cohorts/76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c/rollouts/rollout-report.json is absent; process_success=false; exit_code=1; child failure: host deadline terminated probe pids; attempt=reports/local-study/explore/round-001/cohorts/76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c/attempts/rollout-evidence/a80767d8-07ce-46a2-9cc2-f6c1c9ed5218/result.json; stderr=reports/local-study/explore/round-001/cohorts/76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c/attempts/rollout-evidence/a80767d8-07ce-46a2-9cc2-f6c1c9ed5218/stderr.log",
+        "recorded_process_success": false
+      },
+      {
+        "attempt": {
+          "bytes": 1147,
+          "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/attempts/rollout-evidence/2d745bcc-e6d1-4094-af90-57a564d594a9/result.json",
+          "sha256": "f9eedeed15c092fbb4b5b07567e1b70949ac9cc78db106aaee04e323ace39749"
+        },
+        "cohort": "cohort-df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26",
+        "exit_code": 1,
+        "reason": "Failed child supplied a report; inspect its current-batch failure counts.",
+        "recorded_process_success": false
+      }
+    ]
+  },
+  "limitations": [
+    "Observed historical reports are not a fresh execution certificate; unverified observations remain distinct from reconstructed proof.",
+    "Local teacher checkpoints, development gains and API protocol fixtures cannot replace three independent real provider businesses or sealed assessment evidence.",
+    "No paid calls, model/cache pruning, candidate execution, training, held-out generation or publication occurs in this audit."
+  ]
+}

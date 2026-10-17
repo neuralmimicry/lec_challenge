@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "b04a4729bb3b68f65c9d18df57142e7901ebed367d528f3d0262f6cb2be3a6f6",
+  "task_id": "dispatch.round_robin",
+  "source_id": "private-dispatch-v1",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input {jobs,quantum} has nonnegative integer work amounts and positive quantum. Cycle job indices, giving up to quantum work each turn; return indices in order of completion, initially zero-work jobs first in index order.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":{\"jobs\":[3,1,2],\"quantum\":2},\"expected\":[1,2,0]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let jobs = input.as_array().unwrap();\n    let mut indices = Vec::new();\n    let mut quantum = input.as_integer().unwrap();\n\n    for (index, job) in jobs.iter().enumerate() {\n        if job.is_u64() {\n            indices.push(index as i64);\n        } else {\n            panic!(\"Invalid job type\");\n        }\n    }\n\n    while quantum > 0 {\n        let mut next_indices = Vec::new();\n        for &index in &indices {\n            if quantum > 0 {\n                quantum -= 1;\n                next_indices.push(index);\n            }\n        }\n        indices = next_indices;\n    }\n\n    indices.sort_unstable();\n    serde_json::Value::Array(indices)\n}\n```",
+    "checkpoint_id": "b71e448fd3e298f226aa6ba121d89ee8551e3b9e86374d5330269d7c97207511",
+    "finish_reason": "stop",
+    "input_tokens": 259,
+    "output_tokens": 175,
+    "elapsed_ms": 7135,
+    "complete": true
+  },
+  "model_error": null
+}

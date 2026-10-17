@@ -1,0 +1,93 @@
+{
+  "config_path": "state/api-providers.local.toml",
+  "providers": [
+    {
+      "id": "openai",
+      "api": "openai_responses",
+      "enabled": true,
+      "model": "gpt-6.1-sol",
+      "model_revision": "provider alias gpt-6.1-sol; reviewed 2026-10-16; may change",
+      "api_key_environment": "OPENAI_API_KEY",
+      "credential_present": false,
+      "configuration_error": null,
+      "locally_ready_for_live_request": false,
+      "readiness_blockers": [
+        "export a valid OPENAI_API_KEY in the same shell"
+      ],
+      "training_eligible": false,
+      "network_contacted": false
+    },
+    {
+      "id": "gemini",
+      "api": "gemini_generate_content",
+      "enabled": false,
+      "model": "UNRESOLVED_GEMINI_MODEL",
+      "model_revision": "UNRESOLVED_MODEL_REVISION_POLICY",
+      "api_key_environment": "GEMINI_API_KEY",
+      "credential_present": false,
+      "configuration_error": "model ID or revision policy is unresolved",
+      "locally_ready_for_live_request": false,
+      "readiness_blockers": [
+        "provider is disabled; enable only after reviewing model, prices and limits",
+        "model ID or revision policy is unresolved",
+        "missing reviewed price snapshot",
+        "export a valid GEMINI_API_KEY in the same shell"
+      ],
+      "training_eligible": false,
+      "network_contacted": false
+    },
+    {
+      "id": "vertex",
+      "api": "vertex_generate_content",
+      "enabled": false,
+      "model": "UNRESOLVED_GEMINI_MODEL",
+      "model_revision": "UNRESOLVED_MODEL_REVISION_POLICY",
+      "api_key_environment": "GOOGLE_CLOUD_ACCESS_TOKEN",
+      "credential_present": false,
+      "configuration_error": "model ID or revision policy is unresolved",
+      "locally_ready_for_live_request": false,
+      "readiness_blockers": [
+        "provider is disabled; enable only after reviewing model, prices and limits",
+        "model ID or revision policy is unresolved",
+        "missing reviewed price snapshot",
+        "export a valid GOOGLE_CLOUD_ACCESS_TOKEN in the same shell"
+      ],
+      "training_eligible": false,
+      "network_contacted": false
+    },
+    {
+      "id": "claude",
+      "api": "anthropic_messages",
+      "enabled": false,
+      "model": "UNRESOLVED_CLAUDE_MODEL",
+      "model_revision": "UNRESOLVED_MODEL_REVISION_POLICY",
+      "api_key_environment": "ANTHROPIC_API_KEY",
+      "credential_present": false,
+      "configuration_error": "model ID or revision policy is unresolved",
+      "locally_ready_for_live_request": false,
+      "readiness_blockers": [
+        "provider is disabled; enable only after reviewing model, prices and limits",
+        "model ID or revision policy is unresolved",
+        "missing reviewed price snapshot",
+        "export a valid ANTHROPIC_API_KEY in the same shell"
+      ],
+      "training_eligible": false,
+      "network_contacted": false
+    }
+  ],
+  "budgets": {
+    "round_nanos": 250000000,
+    "task_nanos": 250000000,
+    "provider_nanos": 250000000,
+    "model_nanos": 250000000,
+    "tokens": {
+      "round": 20000,
+      "task": 20000,
+      "provider": 20000,
+      "model": 20000
+    }
+  },
+  "configuration_error": null,
+  "locally_ready_for_live_request": false,
+  "network_contacted": false
+}

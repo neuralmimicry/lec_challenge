@@ -1,0 +1,40 @@
+{
+  "run_id": "a32f286f-50dc-4cb4-ad9d-1adc41012903",
+  "task_id": "text.squash",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: warning: unused import: `serde_json::Value`\n --> /candidate/main.rs:1:5\n  |\n1 | use serde_json::Value;\n  |     ^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0599]: no method named `split_whitespace` found for enum `Option<T>` in the current scope\n --> /candidate/main.rs:4:36\n  |\n4 |     let mut lines = input.as_str().split_whitespace().collect::<Vec<&str>>();\n  |                                    ^^^^^^^^^^^^^^^^ method not found in `Option<&str>`\n  |\nnote: the method `split_whitespace` exists on the type `&str`\n --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/str/mod.rs:1211:4\nhelp: consider using `Option::expect` to unwrap the `&str` value, panicking if the value is an `Option::None`\n  |\n4 |     let mut lines = input.as_str().expect(\"REASON\").split_whitespace().collect::<Vec<&str>>();\n  |                                   +++++++++++++++++\n\nerror: aborting due to 1 previous error; 1 warning emitted\n\nFor more information about this error, try `rustc --explain E0599`.\n"
+  ],
+  "cases_total": 6,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "a66fcaa6978e62eba716c5d279f4e1284be81fce927a4bc75832f214c22868e6",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/explore/round-001/cohorts/76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c/rollouts/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/explore/round-001/cohorts/76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c/rollouts/sandbox/a32f286f-50dc-4cb4-ad9d-1adc41012903.audit.json",
+  "audit_sha256": "8869a26fb6d6c26d3e0048e5037f9b4f0368b7d6037764218be89e4a22cbf530",
+  "failure": "compilation failed: warning: unused import: `serde_json::Value`\n --> /candidate/main.rs:1:5\n  |\n1 | use serde_json::Value;\n  |     ^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0599]: no method named `split_whitespace` found for enum `Option<T>` in the current scope\n --> /candidate/main.rs:4:36\n  |\n4 |     let mut lines = input.as_str().split_whitespace().collect::<Vec<&str>>();\n  |                                    ^^^^^^^^^^^^^^^^ method not found in `Option<&str>`\n  |\nnote: the method `split_whitespace` exists on the type `&str`\n --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/str/mod.rs:1211:4\nhelp: consider using `Option::expect` to unwrap the `&str` value, panicking if the value is an `Option::None`\n  |\n4 |     let mut lines = input.as_str().expect(\"REASON\").split_whitespace().collect::<Vec<&str>>();\n  |                                   +++++++++++++++++\n\nerror: aborting due to 1 previous error; 1 warning emitted\n\nFor more information about this error, try `rustc --explain E0599`.\n",
+  "duration_ms": 12362,
+  "timeout_evidence": null,
+  "lifecycle_evidence": {
+    "receipt_path": "reports/local-study/explore/round-001/cohorts/76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c/rollouts/sandbox/a32f286f-50dc-4cb4-ad9d-1adc41012903.lifecycle.json",
+    "receipt_sha256": "fd88b93aeb8560dc22d4bbe1309852bb41fcfcc7fdf0bd89879d5ce4b71b19e7"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "error": "host deadline terminated probe pids",
+  "observed_unix_ms": 1792083403762,
+  "promotion": "incumbent_retained",
+  "status": "FAILURE"
+}

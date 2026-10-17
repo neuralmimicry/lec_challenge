@@ -1,0 +1,32 @@
+{
+  "checkpoint_sha256": "a7bd00bfe048d1d31dfe402558017c8e3c5e73eee1f8bab6720673e832cc19dd",
+  "engine_sha256": "af675af8e54beb9ddc672d13bb860aec4175d7071b43fe9345af8c4ba9bbf182",
+  "evidence_kind": "actual_fresh_process_checkpoint_reload",
+  "execution": {
+    "activation_forward": "symmetric_per_token_int8_ties_even_ste",
+    "actual_device": "Cpu",
+    "actual_dtype": "F32",
+    "architecture": "bitnet",
+    "checkpoint_directory": "reports/local-study/native-bitnet-64-operator",
+    "checkpoint_id": "a7bd00bfe048d1d31dfe402558017c8e3c5e73eee1f8bab6720673e832cc19dd",
+    "cpu_fallback": false,
+    "cuda_active": false,
+    "decoding_cache": "none_full_prefix_recomputed",
+    "engine": "native_rust_candle",
+    "evaluation_only": true,
+    "model_id": "microsoft/bitnet-b1.58-2B-4T",
+    "production_eligible": false,
+    "revision": "04c3b9ad9361b824064a1f25ea60a8be9599b127",
+    "weight_forward": "official_fixed_scale_ternary_effective_qat"
+  },
+  "finite_logits": 256512,
+  "limitation": "Two synthetic token IDs test reload and numerical finiteness only; this is not a task quality observation.",
+  "process_id": 881820,
+  "production_eligible": false,
+  "request": {
+    "bytes": 900,
+    "path": "reports/local-study/native-bitnet-64-request.json",
+    "sha256": "a4093766e1175da8b441e8c134bc73435e3e3d94782fba2f3d7d211f1ef6e087"
+  },
+  "schema_version": 1
+}

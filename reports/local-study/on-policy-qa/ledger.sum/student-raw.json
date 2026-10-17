@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "evidence_kind": "actual_checkpoint_bound_rollout_generation",
+  "plan": {
+    "path": "reports/local-study/on-policy-qa/ledger.sum/student-plan.json",
+    "sha256": "9b3e257afd531cafca08e7192b614471a23629736587fbaca710d2b8b821a6eb",
+    "bytes": 3644
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let sum = input.as_array().iter().map(|&x| x as i64).sum();\n    serde_json::Value::Number(sum)\n}\n```",
+    "checkpoint_id": "b8b51c10874c1609e36c1b15ab8f0c0709d645f397d1979f7e17b4aea472ba5a",
+    "finish_reason": "stop",
+    "input_tokens": 237,
+    "output_tokens": 59,
+    "elapsed_ms": 17713,
+    "complete": true
+  },
+  "generation_error": null,
+  "execution": {
+    "actual_device": "Cpu",
+    "actual_dtype": "F32",
+    "asset_lifetime_shared_lease": false,
+    "available_cpu_threads": 16,
+    "candle_cpu_threads": 4,
+    "checkpoint_id": "b8b51c10874c1609e36c1b15ab8f0c0709d645f397d1979f7e17b4aea472ba5a",
+    "context_cap": 4096,
+    "cpu_fallback": false,
+    "cuda_active": false,
+    "cuda_feature_compiled": true,
+    "engine": "native_rust_candle",
+    "model_id": "Qwen/Qwen2.5-Coder-0.5B-Instruct",
+    "quantisation": null,
+    "requested": {
+      "device": "cpu",
+      "dtype": "f32"
+    },
+    "revision": "ea3f2471cf1b1f0db85067f1ef93848e38e88c25",
+    "weight_format": "safetensors"
+  }
+}

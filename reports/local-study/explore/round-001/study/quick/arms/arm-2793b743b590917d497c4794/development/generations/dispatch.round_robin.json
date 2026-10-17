@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "e021c55682a0d62791d7ee4afaba8210b0bb9babc7aab489b93402d8dae639dd",
+  "task_id": "dispatch.round_robin",
+  "source_id": "private-dispatch-v1",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input {jobs,quantum} has nonnegative integer work amounts and positive quantum. Cycle job indices, giving up to quantum work each turn; return indices in order of completion, initially zero-work jobs first in index order.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":{\"jobs\":[3,1,2],\"quantum\":2},\"expected\":[1,2,0]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let jobs = input.as_array().unwrap();\n    let mut indices = Vec::new();\n    let mut quantum = input.as_integer().unwrap();\n\n    for (index, job) in jobs.iter().enumerate() {\n        if job.is_u64() {\n            indices.push(index as i64);\n        } else {\n            panic!(\"Invalid job type\");\n        }\n    }\n\n    if quantum <= 0 {\n        panic!(\"Quantum must be positive\");\n    }\n\n    indices.sort_unstable_by(|a, b| {\n        if a == b {\n            indices[a as usize] - indices[b as usize]\n        } else {\n            indices[a as usize].cmp(&indices[b as usize])\n        }\n    });\n\n    indices.into_iter().map(|index| index as i64).collect()\n}\n```",
+    "checkpoint_id": "ae6e22bf858359186e261fd41d5c180cb020bf79d29fccc2dbb611ea12dc4870",
+    "finish_reason": "stop",
+    "input_tokens": 259,
+    "output_tokens": 190,
+    "elapsed_ms": 31088,
+    "complete": true
+  },
+  "model_error": null
+}

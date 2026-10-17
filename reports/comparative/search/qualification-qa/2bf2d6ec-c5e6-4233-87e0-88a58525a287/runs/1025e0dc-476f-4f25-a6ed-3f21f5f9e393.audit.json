@@ -1,0 +1,1 @@
+{"candidate_exit":0,"compile_ok":true,"events":[],"failure":null,"output":"[[1,3],[4,5]]\n[]\n[]\n[[0,1],[2,4]]\n[[0,2]]\n","output_truncated":false,"schema_version":1,"stderr":"","stderr_truncated":false,"syscalls_observed":67,"trace_complete":true}

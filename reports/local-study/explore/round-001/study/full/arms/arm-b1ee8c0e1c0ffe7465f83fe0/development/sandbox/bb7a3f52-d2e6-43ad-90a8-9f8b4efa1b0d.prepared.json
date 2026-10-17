@@ -1,0 +1,51 @@
+{
+  "schema_version": 3,
+  "run_id": "e9f451da-e08a-41f0-8c2a-b1681f671dd5",
+  "ownership_nonce": "5fada50a-942b-4007-b921-f5d41f9ee2db",
+  "attempt_key": "bb7a3f52-d2e6-43ad-90a8-9f8b4efa1b0d",
+  "receipt_path": "reports/local-study/explore/round-001/study/full/arms/arm-b1ee8c0e1c0ffe7465f83fe0/development/sandbox/bb7a3f52-d2e6-43ad-90a8-9f8b4efa1b0d.prepared.json",
+  "report_path": "reports/local-study/explore/round-001/study/full/arms/arm-b1ee8c0e1c0ffe7465f83fe0/development/sandbox/e9f451da-e08a-41f0-8c2a-b1681f671dd5.json",
+  "task": {
+    "id": "money.basket",
+    "source_id": "private-money-v1",
+    "lineage_id": "local-contract-pack-12",
+    "split": "development",
+    "specification": "Input is an array of [unit_price_cents,quantity], both nonnegative integers. Return total cents without tax.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "87f50e8f3a163aaec0042d723e8da46a44c49d75746e0fbba18ebe04ceba4a08",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": [
+          [
+            120,
+            2
+          ],
+          [
+            99,
+            3
+          ]
+        ],
+        "expected": 537
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "use serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let input = input.as_array().unwrap();\n    let units = input[0].as_i64().unwrap();\n    let quantity = input[1].as_i64().unwrap();\n    let total_cents = units * 100 + quantity\n    let result = Value::from(total_cents);\n    result\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/explore/round-001/study/full/arms/arm-b1ee8c0e1c0ffe7465f83fe0/development/sandbox"
+  },
+  "code_sha256": "b3bd7ca1879bbf8ab5cc6b5c7b8d9d21405d68b1be3d0bafb0bee5e7168d4316",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

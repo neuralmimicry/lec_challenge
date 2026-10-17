@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "evidence_kind": "actual_local_teacher_content_observation",
+  "plan": {
+    "path": "reports/local-study/explore/round-001/content-v1/qwen-coder-7b-q4_k_m/paths.normalise/process/plan.json",
+    "sha256": "a236e0319f9b251adfcfe935d820ff9e14bb1e562451c5420333a3e94b3b2e0f",
+    "bytes": 2590
+  },
+  "raw_generation": {
+    "path": "reports/local-study/explore/round-001/content-v1/qwen-coder-7b-q4_k_m/paths.normalise/process/raw-generation.json",
+    "sha256": "42303aafd105c7010f06e004fcc88f587ad2f874054458618cec8788468e8134",
+    "bytes": 2467
+  },
+  "sandbox_report": null,
+  "grading_error": null,
+  "success": false
+}

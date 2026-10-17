@@ -1,0 +1,40 @@
+{
+  "run_id": "84c6b71b-5abc-4d6a-b82f-441657497181",
+  "task_id": "encoding.rot13",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error[E0308]: mismatched types\n   --> /candidate/main.rs:34:39\n    |\n 34 |             serde_json::Value::Object(result_object)\n    |             ------------------------- ^^^^^^^^^^^^^ expected `Map<String, Value>`, found `HashMap<String, Value>`\n    |             |\n    |             arguments to this enum variant are incorrect\n    |\n    = note: expected struct `serde_json::Map<std::string::String, Value>`\n               found struct `HashMap<std::string::String, Value>`\nnote: tuple variant defined here\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:175:5\n    |\n175 |     Object(Map<String, Value>),\n    |     ^^^^^^\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0308`.\n"
+  ],
+  "cases_total": 5,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "d6cf3bb08e90bfba46fd0ab11c7dff58557c7f04cacbde00b2fb53d4b4813384",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison/sandbox/84c6b71b-5abc-4d6a-b82f-441657497181.audit.json",
+  "audit_sha256": "392037b8eb4b79a72f7f0a0b18abb6aa1f7c83093701d7bcd4a150dd0b2ebb06",
+  "failure": "compilation failed: error[E0308]: mismatched types\n   --> /candidate/main.rs:34:39\n    |\n 34 |             serde_json::Value::Object(result_object)\n    |             ------------------------- ^^^^^^^^^^^^^ expected `Map<String, Value>`, found `HashMap<String, Value>`\n    |             |\n    |             arguments to this enum variant are incorrect\n    |\n    = note: expected struct `serde_json::Map<std::string::String, Value>`\n               found struct `HashMap<std::string::String, Value>`\nnote: tuple variant defined here\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:175:5\n    |\n175 |     Object(Map<String, Value>),\n    |     ^^^^^^\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0308`.\n",
+  "duration_ms": 32352,
+  "timeout_evidence": null,
+  "lifecycle_evidence": {
+    "receipt_path": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison/sandbox/84c6b71b-5abc-4d6a-b82f-441657497181.lifecycle.json",
+    "receipt_sha256": "8cd1cc7a089e05aa031c9d39270c44c47f589008843f173891437e02f52217ba"
+  }
+}

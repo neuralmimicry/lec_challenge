@@ -1,0 +1,28 @@
+STEP 1/9: FROM 08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873
+STEP 2/9: USER 0:0
+--> Using cache d72b190a492d95379181bef5a00a795ba56aa7fea37f13773baa3a9f1bae194d
+--> d72b190a492d
+STEP 3/9: WORKDIR /build
+--> Using cache 1b8bf70e8dde85f9d31866950a1d63b540b5d6bca3c48fd797176cc39f975b28
+--> 1b8bf70e8dde
+STEP 4/9: COPY sandbox/audit_v3.rs /build/audit.rs
+--> Using cache b6cdf01123b1f0e0ccb2a9d29b00edef6d0066f48b03bc3fe367a30abfdbff52
+--> b6cdf01123b1
+STEP 5/9: COPY sandbox/ptrace_v2.rs sandbox/syscalls_v2.rs /build/
+--> Using cache ee7e92752e837cc7293e29a2606f425ba31ba16feebf4adf412300e29e85e54b
+--> ee7e92752e83
+STEP 6/9: RUN rustc --edition=2024 -O -L dependency=/opt/deps --extern serde_json=$(cat /opt/deps/serde_json.path) /build/audit.rs -o /usr/local/bin/lec-audit && rm -rf /build
+--> Using cache c1439ffb192b9df0ad7260383e11aeb9fe67e24a39b7b36b5f4ed73132e25214
+--> c1439ffb192b
+STEP 7/9: USER 65532:65532
+--> Using cache 3d498022968ed8fc7b00ac0e6b88ac071a2aa96c76ee7ac84320f370efcfdbca
+--> 3d498022968e
+STEP 8/9: WORKDIR /tmp
+--> Using cache 55c320ca6733539030397f6c44b5de2a3c66c15a01b93e1f585ecfb7fcb33579
+--> 55c320ca6733
+STEP 9/9: ENTRYPOINT ["/usr/local/bin/lec-audit"]
+--> Using cache f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939
+COMMIT localhost/lec-rust-sandbox:3-x86_64
+--> f86951873ef3
+Successfully tagged localhost/lec-rust-sandbox:3-x86_64
+f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939

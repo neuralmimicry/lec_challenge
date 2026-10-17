@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "a52d044d05dc99f9af1879cdb69e7d80c4abc41b317440255f0ff27069084831",
+  "task_id": "graph.distance",
+  "source_id": "private-graph-v1",
+  "success": false,
+  "raw_generation": {
+    "path": "reports/local-study/native-full-quality-001/composed-train/generations/graph.distance.json",
+    "sha256": "4336abd3c3d097db61aa07a8d2a0ec478bd2380aff24a5a5bcce6b69ad3f7a85",
+    "bytes": 2275
+  },
+  "sandbox_report": {
+    "path": "reports/local-study/native-full-quality-001/composed-train/sandbox/37b83c73-0fe2-4ea8-afdb-a81903e05503.json",
+    "sha256": "18e0d4459486699ab865db9fd73cea522eeb90c6c9b95854cb1e422a7e8ec0a2",
+    "bytes": 2979
+  },
+  "grading_error": null
+}

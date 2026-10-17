@@ -1,0 +1,40 @@
+{
+  "run_id": "cc26e9ad-6a86-42aa-8295-d683438b60c4",
+  "task_id": "dispatch.finish_order",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error[E0308]: mismatched types\n --> /candidate/main.rs:9:9\n  |\n9 |     for (arrival, duration) in input {\n  |         ^^^^^^^^^^^^^^^^^^^    ----- this is an iterator with items of type `&Value`\n  |         |\n  |         expected `Value`, found `(_, _)`\n  |\n  = note: expected enum `Value`\n            found tuple `(_, _)`\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0308`.\n"
+  ],
+  "cases_total": 5,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "d3db5840f14b354f38ff30a78d9e0a500b964f2be921bd00bf664cffe5356bb1",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/explore/round-001/study/full/arms/arm-00886e19edc356c899a5d992/development/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/explore/round-001/study/full/arms/arm-00886e19edc356c899a5d992/development/sandbox/cc26e9ad-6a86-42aa-8295-d683438b60c4.audit.json",
+  "audit_sha256": "21995ec6332d3823064279488aadf744f499def10530b52641be94fb00b9cd3f",
+  "failure": "compilation failed: error[E0308]: mismatched types\n --> /candidate/main.rs:9:9\n  |\n9 |     for (arrival, duration) in input {\n  |         ^^^^^^^^^^^^^^^^^^^    ----- this is an iterator with items of type `&Value`\n  |         |\n  |         expected `Value`, found `(_, _)`\n  |\n  = note: expected enum `Value`\n            found tuple `(_, _)`\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0308`.\n",
+  "duration_ms": 12575,
+  "timeout_evidence": null,
+  "lifecycle_evidence": {
+    "receipt_path": "reports/local-study/explore/round-001/study/full/arms/arm-00886e19edc356c899a5d992/development/sandbox/cc26e9ad-6a86-42aa-8295-d683438b60c4.lifecycle.json",
+    "receipt_sha256": "07bd8de0f388dd2f81245335c782084aeb6553382ed0168e0efb9bc8f2e43571"
+  }
+}

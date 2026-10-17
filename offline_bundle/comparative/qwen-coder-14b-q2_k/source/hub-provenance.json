@@ -1,0 +1,384 @@
+{
+  "schema_version": 1,
+  "model_id": "Qwen/Qwen2.5-Coder-14B-Instruct",
+  "requested_revision": "aedcc2d42b622764e023cf882b6652e646b95671",
+  "revision": "aedcc2d42b622764e023cf882b6652e646b95671",
+  "licence": "apache-2.0",
+  "licence_files": [
+    "LICENSE"
+  ],
+  "licence_evidence": "Original pinned repository licence document(s) and model-card metadata retained",
+  "recorded_unix_seconds": 1792082266,
+  "metadata_url": "https://huggingface.co/api/models/Qwen/Qwen2.5-Coder-14B-Instruct/revision/aedcc2d42b622764e023cf882b6652e646b95671?blobs=true",
+  "metadata_sha256": "4e7397e6777d56d99225376e28347b54c879350d3a668141559e150b56558f4a",
+  "metadata": {
+    "_id": "672b1f9a250205b317ab81e5",
+    "author": "Qwen",
+    "cardData": {
+      "base_model": [
+        "Qwen/Qwen2.5-Coder-14B"
+      ],
+      "language": [
+        "en"
+      ],
+      "library_name": "transformers",
+      "license": "apache-2.0",
+      "license_link": "https://huggingface.co/Qwen/Qwen2.5-Coder-14B-Instruct/blob/main/LICENSE",
+      "pipeline_tag": "text-generation",
+      "tags": [
+        "code",
+        "codeqwen",
+        "chat",
+        "qwen",
+        "qwen-coder"
+      ]
+    },
+    "config": {
+      "architectures": [
+        "Qwen2ForCausalLM"
+      ],
+      "model_type": "qwen2",
+      "tokenizer_config": {
+        "bos_token": null,
+        "chat_template": "{%- if tools %}\n    {{- '<|im_start|>system\\n' }}\n    {%- if messages[0]['role'] == 'system' %}\n        {{- messages[0]['content'] }}\n    {%- else %}\n        {{- 'You are Qwen, created by Alibaba Cloud. You are a helpful assistant.' }}\n    {%- endif %}\n    {{- \"\\n\\n# Tools\\n\\nYou may call one or more functions to assist with the user query.\\n\\nYou are provided with function signatures within <tools></tools> XML tags:\\n<tools>\" }}\n    {%- for tool in tools %}\n        {{- \"\\n\" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{- \"\\n</tools>\\n\\nFor each function call, return a json object with function name and arguments within <tool_call></tool_call> XML tags:\\n<tool_call>\\n{\\\"name\\\": <function-name>, \\\"arguments\\\": <args-json-object>}\\n</tool_call><|im_end|>\\n\" }}\n{%- else %}\n    {%- if messages[0]['role'] == 'system' %}\n        {{- '<|im_start|>system\\n' + messages[0]['content'] + '<|im_end|>\\n' }}\n    {%- else %}\n        {{- '<|im_start|>system\\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\\n' }}\n    {%- endif %}\n{%- endif %}\n{%- for message in messages %}\n    {%- if (message.role == \"user\") or (message.role == \"system\" and not loop.first) or (message.role == \"assistant\" and not message.tool_calls) %}\n        {{- '<|im_start|>' + message.role + '\\n' + message.content + '<|im_end|>' + '\\n' }}\n    {%- elif message.role == \"assistant\" %}\n        {{- '<|im_start|>' + message.role }}\n        {%- if message.content %}\n            {{- '\\n' + message.content }}\n        {%- endif %}\n        {%- for tool_call in message.tool_calls %}\n            {%- if tool_call.function is defined %}\n                {%- set tool_call = tool_call.function %}\n            {%- endif %}\n            {{- '\\n<tool_call>\\n{\"name\": \"' }}\n            {{- tool_call.name }}\n            {{- '\", \"arguments\": ' }}\n            {{- tool_call.arguments | tojson }}\n            {{- '}\\n</tool_call>' }}\n        {%- endfor %}\n        {{- '<|im_end|>\\n' }}\n    {%- elif message.role == \"tool\" %}\n        {%- if (loop.index0 == 0) or (messages[loop.index0 - 1].role != \"tool\") %}\n            {{- '<|im_start|>user' }}\n        {%- endif %}\n        {{- '\\n<tool_response>\\n' }}\n        {{- message.content }}\n        {{- '\\n</tool_response>' }}\n        {%- if loop.last or (messages[loop.index0 + 1].role != \"tool\") %}\n            {{- '<|im_end|>\\n' }}\n        {%- endif %}\n    {%- endif %}\n{%- endfor %}\n{%- if add_generation_prompt %}\n    {{- '<|im_start|>assistant\\n' }}\n{%- endif %}\n",
+        "eos_token": "<|im_end|>",
+        "pad_token": "<|endoftext|>",
+        "unk_token": null
+      }
+    },
+    "createdAt": "2024-11-06T07:49:46.000Z",
+    "disabled": false,
+    "downloads": 1753201,
+    "gated": false,
+    "id": "Qwen/Qwen2.5-Coder-14B-Instruct",
+    "lastModified": "2025-01-12T02:02:59.000Z",
+    "library_name": "transformers",
+    "likes": 201,
+    "model-index": null,
+    "modelId": "Qwen/Qwen2.5-Coder-14B-Instruct",
+    "pipeline_tag": "text-generation",
+    "private": false,
+    "safetensors": {
+      "parameters": {
+        "BF16": 14770033664
+      },
+      "total": 14770033664
+    },
+    "sha": "aedcc2d42b622764e023cf882b6652e646b95671",
+    "siblings": [
+      {
+        "blobId": "a6344aac8c09253b3b630fb776ae94478aa0275b",
+        "rfilename": ".gitattributes",
+        "size": 1519
+      },
+      {
+        "blobId": "6634c8cc3133b3848ec74b9f275acaaa1ea618ab",
+        "rfilename": "LICENSE",
+        "size": 11343
+      },
+      {
+        "blobId": "0d7fe07895cdde3f41e154ad17a8212719ceb005",
+        "rfilename": "README.md",
+        "size": 6397
+      },
+      {
+        "blobId": "a8fa5a907f7430a47d831eb28dbd69e6f6fd061d",
+        "rfilename": "config.json",
+        "size": 663
+      },
+      {
+        "blobId": "c28f9c697cbc09f047434efec57556505af31111",
+        "rfilename": "generation_config.json",
+        "size": 243
+      },
+      {
+        "blobId": "20024bfe7c83998e9aeaf98a0cd6a2ce6306c2f0",
+        "rfilename": "merges.txt",
+        "size": 1671839
+      },
+      {
+        "blobId": "ec9b13bea179a0a8e37f08df0af4c54885814a3a",
+        "lfs": {
+          "pointerSize": 135,
+          "sha256": "b14a60aa35c07e58da61cbe6c8b2819e60a043dd98001f14736045c6062e79a0",
+          "size": 4986211280
+        },
+        "rfilename": "model-00001-of-00006.safetensors",
+        "size": 4986211280
+      },
+      {
+        "blobId": "4144932b3ea94a0b9ddf815c43b5afa06772fd9e",
+        "lfs": {
+          "pointerSize": 135,
+          "sha256": "03b8de22c48a523646ac0a38aa36471529e22cdd1238ce43b44bf5014d64098a",
+          "size": 4954847344
+        },
+        "rfilename": "model-00002-of-00006.safetensors",
+        "size": 4954847344
+      },
+      {
+        "blobId": "8b584e5085b953a5dcc22c73dd6de023655ea3a5",
+        "lfs": {
+          "pointerSize": 135,
+          "sha256": "97587f9d511af15bce6295a15b10c43f504b16fcddf22db9c87356df17ffff3f",
+          "size": 4954847392
+        },
+        "rfilename": "model-00003-of-00006.safetensors",
+        "size": 4954847392
+      },
+      {
+        "blobId": "b074d0785522f2e86f2b7cb020bddda3646b7dd0",
+        "lfs": {
+          "pointerSize": 135,
+          "sha256": "ed34a72606341f8774d21661ad8ec9e59deffad8c63ceebd2f6db86f163bee7d",
+          "size": 4954847392
+        },
+        "rfilename": "model-00004-of-00006.safetensors",
+        "size": 4954847392
+      },
+      {
+        "blobId": "b245338c6e7001c2e75445215014eb1d4b442953",
+        "lfs": {
+          "pointerSize": 135,
+          "sha256": "657a6388cfe547498159dfb6507b9c1ead09a6fbab154c22942bbf963aef4208",
+          "size": 4954847392
+        },
+        "rfilename": "model-00005-of-00006.safetensors",
+        "size": 4954847392
+      },
+      {
+        "blobId": "cbae0a94f048d9836d3b50a010a5b65093e891bc",
+        "lfs": {
+          "pointerSize": 135,
+          "sha256": "3dbbc07addfc989662fd6bf88798970b278c98630f88eed5d23256fc99365dae",
+          "size": 4734533160
+        },
+        "rfilename": "model-00006-of-00006.safetensors",
+        "size": 4734533160
+      },
+      {
+        "blobId": "0e9b53532550dfddbf42730aeeb499a3bb7a707f",
+        "rfilename": "model.safetensors.index.json",
+        "size": 47472
+      },
+      {
+        "blobId": "443909a61d429dff23010e5bddd28ff530edda00",
+        "rfilename": "tokenizer.json",
+        "size": 7031645
+      },
+      {
+        "blobId": "acee076f49bf3c0298e15de0909d1da7b392f0c3",
+        "rfilename": "tokenizer_config.json",
+        "size": 7305
+      },
+      {
+        "blobId": "4783fe10ac3adce15ac8f358ef5462739852c569",
+        "rfilename": "vocab.json",
+        "size": 2776833
+      }
+    ],
+    "spaces": [
+      "fastgpu/vram-and-gpu-cost-calculator",
+      "wphoenix/Crypto_Market_Data_Agent",
+      "HPAI-BSC/TuRTLe-Leaderboard",
+      "abuelzoz33/vram-calculator",
+      "build-small-hackathon/trikona",
+      "Speedofmastery/orynxml-backend",
+      "david-clifford/00_Deploy_Practice_Agent_Basics",
+      "asifHuggingFace/webui",
+      "fagun18/fagun-browser-testing",
+      "jk200201/text2sql-live",
+      "ASDAD34/Qwen-Qwen2.5-Coder-14B-Instruct",
+      "JSenkCC/SimplifAI",
+      "paulistaunb/First_agent_template",
+      "ilmarila/First_agent_template",
+      "Edmundoogaz/First_agent_template",
+      "Magrap/First_agent_template",
+      "anuragrawal/First_agent_template",
+      "MaxTymchii/First_agent_template",
+      "shlomoc/First_agent_template",
+      "lucasnseq/First_agent_template",
+      "AliDaryabAkbarAhmadi/First_agent_template",
+      "simonsmodels/first_agents",
+      "NoraBorcsok/First_agent_template",
+      "Mykolyt/First_agent_template",
+      "Unknown504/web-ui",
+      "nickzf/Second_agent_template",
+      "jriveira/First_agent_template",
+      "superbean/First_agent_template",
+      "Speedofmastery/or",
+      "saylibhavsar/First_agent_template",
+      "simonnsanita/browseruseapiv2",
+      "Zzoochosis/Qwen-Qwen2.5-Coder-14B-Instruct",
+      "mkhatcha/CUA",
+      "talhaazfar01/web-ui-interface",
+      "talhaazfar01/web-interface",
+      "AlexandrKamyshnikov/First_agent_template",
+      "binary1ne/web-ui",
+      "asifHuggingFace/Browser_Web_UI_Automation",
+      "omi98/test",
+      "giangpt-212/Browser_Automation",
+      "rahulxsomething/First_agent_template",
+      "Speedofmastery/uhhjj",
+      "Speedofmastery/yyhh",
+      "Speedofmastery/hhhhh",
+      "Speedofmastery/yyuujhu",
+      "Speedofmastery/yyuu-complete-ai",
+      "Speedofmastery/orynxml-ai",
+      "Speedofmastery/orynxml-complete",
+      "Speedofmastery/orynxml",
+      "ruimartinscorrea/WebUISolis",
+      "sonthaiha/Multi_Agent_Model",
+      "wheattoast11/agent-zero-terminals-sdk-trainer",
+      "FeliceTomaselli/First_agent_template",
+      "JLCarvalho00/Research_and_code_agent",
+      "aroniscunt/Browser_Web_UI_Automation",
+      "Yiming-Leon/html_generator",
+      "Amogh-kal1/whipstudio",
+      "Amogh1213/whipstudio",
+      "sahojit/cifix-streamlit",
+      "sahojit/cifix-dashboard",
+      "tigerking009/Qwen-Qwen2.5-Coder-14B-Instruct",
+      "SandeepaBandaru/browser-agent",
+      "oceanicdayi/Gpu1",
+      "microhardint/aicode2610",
+      "sinamsv00/bananaAPI",
+      "joyeb/qwen2.5-model-14b",
+      "SatyaDev13/quess",
+      "Waheed786dar/codespace-omni-ai",
+      "GabrielMachad0/qwen-coder-zerogpu",
+      "yq123669/qwen3-coder-chat",
+      "kazugn/demoui",
+      "satish-h2n/open-weight-coding-agent",
+      "SANTIELGUERO/Miiacreadorweb",
+      "harsh7883/Nsmmm",
+      "adelelsayed1991/fhirsql-reasoning-sql-adapters"
+    ],
+    "tags": [
+      "transformers",
+      "safetensors",
+      "qwen2",
+      "text-generation",
+      "code",
+      "codeqwen",
+      "chat",
+      "qwen",
+      "qwen-coder",
+      "conversational",
+      "en",
+      "arxiv:2409.12186",
+      "arxiv:2309.00071",
+      "arxiv:2407.10671",
+      "base_model:Qwen/Qwen2.5-Coder-14B",
+      "base_model:finetune:Qwen/Qwen2.5-Coder-14B",
+      "license:apache-2.0",
+      "text-generation-inference",
+      "endpoints_compatible",
+      "deploy:azure",
+      "region:us"
+    ],
+    "transformersInfo": {
+      "auto_model": "AutoModelForCausalLM",
+      "pipeline_tag": "text-generation",
+      "processor": "AutoTokenizer"
+    },
+    "usedStorage": 29540133960,
+    "widgetData": [
+      {
+        "text": "Hi, what can you help me with?"
+      },
+      {
+        "text": "What is 84 * 3 / 2?"
+      },
+      {
+        "text": "Tell me an interesting fact about the universe!"
+      },
+      {
+        "text": "Explain quantum computing in simple terms."
+      }
+    ]
+  },
+  "files": {
+    "LICENSE": {
+      "filename": "LICENSE",
+      "bytes": 11343,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "6634c8cc3133b3848ec74b9f275acaaa1ea618ab"
+      },
+      "canonical_url": "https://huggingface.co/Qwen/Qwen2.5-Coder-14B-Instruct/resolve/aedcc2d42b622764e023cf882b6652e646b95671/LICENSE",
+      "sha256": "832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e"
+    },
+    "README.md": {
+      "filename": "README.md",
+      "bytes": 6397,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "0d7fe07895cdde3f41e154ad17a8212719ceb005"
+      },
+      "canonical_url": "https://huggingface.co/Qwen/Qwen2.5-Coder-14B-Instruct/resolve/aedcc2d42b622764e023cf882b6652e646b95671/README.md",
+      "sha256": "2bb69760ec931f9adbe560e95b5b9848dc35198508825547ffdc19934fc6f261"
+    },
+    "config.json": {
+      "filename": "config.json",
+      "bytes": 663,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "a8fa5a907f7430a47d831eb28dbd69e6f6fd061d"
+      },
+      "canonical_url": "https://huggingface.co/Qwen/Qwen2.5-Coder-14B-Instruct/resolve/aedcc2d42b622764e023cf882b6652e646b95671/config.json",
+      "sha256": "9051fe83840dcd3a0f7e9f5b3372fc3927419eb56983273eac2dc635a5da7eae"
+    },
+    "generation_config.json": {
+      "filename": "generation_config.json",
+      "bytes": 243,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "c28f9c697cbc09f047434efec57556505af31111"
+      },
+      "canonical_url": "https://huggingface.co/Qwen/Qwen2.5-Coder-14B-Instruct/resolve/aedcc2d42b622764e023cf882b6652e646b95671/generation_config.json",
+      "sha256": "fdaccbcb02f3e1e7914ccb0f69ebe899071ffd27cf825166d823163e156870f2"
+    },
+    "merges.txt": {
+      "filename": "merges.txt",
+      "bytes": 1671839,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "20024bfe7c83998e9aeaf98a0cd6a2ce6306c2f0"
+      },
+      "canonical_url": "https://huggingface.co/Qwen/Qwen2.5-Coder-14B-Instruct/resolve/aedcc2d42b622764e023cf882b6652e646b95671/merges.txt",
+      "sha256": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3"
+    },
+    "tokenizer.json": {
+      "filename": "tokenizer.json",
+      "bytes": 7031645,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "443909a61d429dff23010e5bddd28ff530edda00"
+      },
+      "canonical_url": "https://huggingface.co/Qwen/Qwen2.5-Coder-14B-Instruct/resolve/aedcc2d42b622764e023cf882b6652e646b95671/tokenizer.json",
+      "sha256": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539"
+    },
+    "tokenizer_config.json": {
+      "filename": "tokenizer_config.json",
+      "bytes": 7305,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "acee076f49bf3c0298e15de0909d1da7b392f0c3"
+      },
+      "canonical_url": "https://huggingface.co/Qwen/Qwen2.5-Coder-14B-Instruct/resolve/aedcc2d42b622764e023cf882b6652e646b95671/tokenizer_config.json",
+      "sha256": "959e7f1d9a1b7641a6d6ce05ca97b75c7894fcb66cbe5a040406458fb1128ee4"
+    },
+    "vocab.json": {
+      "filename": "vocab.json",
+      "bytes": 2776833,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "4783fe10ac3adce15ac8f358ef5462739852c569"
+      },
+      "canonical_url": "https://huggingface.co/Qwen/Qwen2.5-Coder-14B-Instruct/resolve/aedcc2d42b622764e023cf882b6652e646b95671/vocab.json",
+      "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+    }
+  },
+  "authentication_policy": "Optional bearer applied to initial HTTPS huggingface.co request only; all redirects strip authentication; no token persisted"
+}

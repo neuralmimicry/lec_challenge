@@ -1,0 +1,49 @@
+{
+  "schema_version": 3,
+  "run_id": "459507d1-dd1f-4f18-a9f9-4a3e8686ad01",
+  "ownership_nonce": "275d5cb3-a108-405f-8772-4124375f9112",
+  "attempt_key": "10d65681a5cfba3db4c6fd6595ca586522293d4e0f3910321a7e5413c868d371",
+  "receipt_path": "reports/local-study/regraded-v3-001/evaluation-002-development-2217a994f8b7/prepared/money.split.json",
+  "report_path": "reports/local-study/regraded-v3-001/evaluation-002-development-2217a994f8b7/sandbox/459507d1-dd1f-4f18-a9f9-4a3e8686ad01.json",
+  "task": {
+    "id": "money.split",
+    "source_id": "private-money-v1",
+    "lineage_id": "local-contract-pack-12",
+    "split": "development",
+    "specification": "Input [cents,n] has nonnegative cents and n>=1. Split into n integer shares differing by at most one, with larger shares first. The number of shares is at most 64.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "639498c83f5e053773149696cb44aea438f77b20c7b0e571d728085fde4db87b",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": [
+          10,
+          3
+        ],
+        "expected": [
+          4,
+          3,
+          3
+        ]
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "use serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let cents = input.as_i64().unwrap();\n    let n = input.as_i64().unwrap();\n    let mut shares = Vec::new();\n\n    for _ in 0..n {\n        let share = cents / 64;\n        shares.push(share);\n        cents %= 64;\n    }\n\n    Value::Array(shares.into_iter().map(|s| Value::Number(s.into())).collect())\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/regraded-v3-001/evaluation-002-development-2217a994f8b7/sandbox"
+  },
+  "code_sha256": "8e4475665fe19a451e727d9dcc970fa5c8154ac37071ff2719418cecd5ab3ca8",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

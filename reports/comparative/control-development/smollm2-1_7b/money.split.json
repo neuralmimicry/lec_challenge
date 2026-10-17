@@ -1,0 +1,38 @@
+{
+  "model_id": "smollm2-1_7b",
+  "task_id": "money.split",
+  "source_id": "private-money-v1",
+  "specification_sha256": "639498c83f5e053773149696cb44aea438f77b20c7b0e571d728085fde4db87b",
+  "seed": 1729,
+  "plan_sha256": "b2e46b0f4ac46ecbb1b6568e9669ef5157b8a6343802f749cfac8ae999e29d88",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input [cents,n] has nonnegative cents and n>=1. Split into n integer shares differing by at most one, with larger shares first. The number of shares is at most 64.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[10,3],\"expected\":[4,3,3]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::json;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let (cents, n) = match input {\n        json::Number(n) => (n as i64, 0),\n        json::String(s) => {\n            let mut i = 0;\n            let mut n = 0;\n            while i < s.len() {\n                let c = s.chars().nth(i).unwrap();\n                let n = n * 10 + c.to_digit(10).unwrap() as i64;\n                i += 1;\n            }\n            (n, 0)\n        }\n        _ => unreachable!(),\n    };\n\n    let mut shares = vec![0; n as usize];\n    let mut i = 0;\n    while i < shares.len() {\n        shares[i] = (cents / (n as i64 - i)).max(1);\n        cents %= (n as i64 - i);\n        i += 1;\n    }\n\n    shares.sort_unstable();\n    shares.dedup();\n\n    let mut result = json!({});\n    for i in 0..n {\n        result = json!({\n            \"share\": shares[i],\n            \"remainder\": cents,\n            \"remaining\": n - i,\n        })\n        .merge(result);\n    }\n\n    result\n}\n```",
+    "checkpoint_id": "f55217be716b6a997b97b9d8d7eb6fad02e00858f5010ec24f64603c3a98a0e8",
+    "finish_reason": "stop",
+    "input_tokens": 271,
+    "output_tokens": 323,
+    "elapsed_ms": 17464,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/comparative/control-development/smollm2-1_7b/money.split.generation.json",
+    "sha256": "329b34b3b8259f9982264367573db6ce1a8c9c8fe27993709a3f358f16eb6675",
+    "bytes": 3370
+  },
+  "sandbox_report": {
+    "path": "reports/comparative/control-development/sandbox/1cb0bac6-9a27-4415-af16-2968cd95925a.json",
+    "sha256": "c353c8583f4c7e4b54157ce076775129c1f5af9ceacee406c559a8ce696a52fd",
+    "bytes": 9756
+  },
+  "grading_error": null,
+  "success": false
+}

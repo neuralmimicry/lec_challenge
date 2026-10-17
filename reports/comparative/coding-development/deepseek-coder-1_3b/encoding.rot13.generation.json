@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "evidence_kind": "actual_local_model_generation",
+  "recorded_unix_ms": 1792072866462,
+  "model_id": "deepseek-coder-1_3b",
+  "task_id": "encoding.rot13",
+  "source_id": "private-encoding-v1",
+  "specification_sha256": "56794b6c25031b0931d378f8f3955bc2d10c4ef04da0be851795e2ca9a832cfa",
+  "seed": 1729,
+  "plan_sha256": "9aefcaf935435b296c63229638aad5a22a416ae171eda011a6812dd745667ea8",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an ASCII string. Apply ROT13 to upper/lowercase letters and preserve other characters.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":\"Hello, Z!\",\"expected\":\"Uryyb, M!\"}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "Here is the Rust code that applies ROT13 to upper/lowercase letters and preserves other characters.\n\n```rust\nuse serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    match input {\n        Value::String(s) => {\n            let mut result = String::new();\n            for c in s.chars() {\n                if c.is_ascii_uppercase() {\n                    result.push((c as u8 + 13) as char);\n                } else if c.is_ascii_lowercase() {\n                    result.push((c as u8 - 13) as char);\n                } else {\n                    result.push(c);\n                }\n            }\n            Value::String(result)\n        },\n        _ => input,\n    }\n}\n```\n\nThis function will convert all uppercase letters to lowercase letters and vice versa. It will leave other characters as they are. The function will return the input value unchanged if it is not a string.\n",
+    "checkpoint_id": "4ff570bf9a558d23c5cb4171bad00daf663be8282150cdb5769e0f6975b0007a",
+    "finish_reason": "stop",
+    "input_tokens": 296,
+    "output_tokens": 243,
+    "elapsed_ms": 15856,
+    "complete": true
+  },
+  "generation_error": null,
+  "execution": {
+    "actual_device": "Cuda { gpu_id: 0 }",
+    "actual_dtype": "F16",
+    "checkpoint_id": "4ff570bf9a558d23c5cb4171bad00daf663be8282150cdb5769e0f6975b0007a",
+    "context_cap": 2048,
+    "cpu_fallback": false,
+    "cuda_active": true,
+    "cuda_feature_compiled": true,
+    "engine": "native_rust_candle",
+    "model_id": "deepseek-ai/deepseek-coder-1.3b-instruct",
+    "requested": {
+      "device": {
+        "cuda": {
+          "ordinal": 0
+        }
+      },
+      "dtype": "f16"
+    },
+    "revision": "e063262dac8366fc1f28a4da0ff3c50ea66259ca"
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "accepted_complete_samples": 17,
+  "accepted_source_groups": [
+    "private-bits-v1",
+    "private-calendar-v1",
+    "private-graph-v1",
+    "private-intervals-v1",
+    "private-ledger-v1",
+    "private-matrices-v1",
+    "private-paths-v1",
+    "private-search-v1",
+    "private-stock-v1",
+    "private-text-v1",
+    "private-validation-v1"
+  ],
+  "diagnostic_executable": {
+    "bytes": 4789216,
+    "path": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/state/diagnostics/full-round-selection/verify",
+    "sha256": "910adbdd23b3e11a2f65af09c369e73e9111e9d763e862c8f7ef7305523387f2"
+  },
+  "diagnostic_source": {
+    "bytes": 6960,
+    "path": "state/diagnostics/full-round-selection/verify.rs",
+    "sha256": "fb2e2f533fde52243e2bb085fab8e9f63cbd5b874f2205dc99c793a0fd6ba433"
+  },
+  "engine_sha256": "5db09c632f6ffccc636bdfec2f693af102bf5327ce7510bc593ebe7089c9c126",
+  "evidence_kind": "independent_read_only_actual_full_worker_selection_comparison",
+  "excluded_overlength_samples": {
+    "a8205f0759f126c3bd851691f7b45cbd3b043c2ba4b2bdf4f534398fe11795b5": "distillation sequence exceeds its frozen token cap"
+  },
+  "left_eligibility": {
+    "bytes": 19828,
+    "path": "reports/local-study/native-full-sft-eligibility.json",
+    "sha256": "89a1681496eab90217cdd9bd50cf47498375f78e5734a7f044b04be2a45f8945"
+  },
+  "left_freeze": {
+    "bytes": 351838,
+    "path": "reports/local-study/native-full-sft-seed1729/freeze.json",
+    "sha256": "26a469a3b6d9311d9df716a60f60a1dab9c13f581607b60f94678b441a908842"
+  },
+  "left_launch": {
+    "bytes": 697,
+    "path": "reports/local-study/native-full-sft-seed1729/helper-launch.json",
+    "sha256": "1091bbafbb95286318554a35e0f48b363867b03e1dcd224a06c3338615a3b28d"
+  },
+  "limitation": "Checks exact realised data, masks, order and declared launch identity. Independent worker/eligibility verification supplies original rights/run evidence; this comparison establishes neither completed optimisation nor coding quality.",
+  "model_allocated": false,
+  "passed": true,
+  "planned_updates": 48,
+  "process_id": 949480,
+  "production_eligible": false,
+  "quality_evaluation": false,
+  "right_eligibility": {
+    "bytes": 19839,
+    "path": "reports/local-study/native-full-composed-eligibility.json",
+    "sha256": "ab045e3c25e1298d43c5140cb9186a3e27d026a46c8ac00b54e5f2a629152e6e"
+  },
+  "right_freeze": {
+    "bytes": 352070,
+    "path": "reports/local-study/native-full-composed-seed1729/freeze.json",
+    "sha256": "d94bbb7d0ba3ce2c0920ebd3f0b3987accafef74f2fa79fd13ff098f1b66a613"
+  },
+  "right_launch": {
+    "bytes": 697,
+    "path": "reports/local-study/native-full-composed-seed1729/helper-launch.json",
+    "sha256": "1091bbafbb95286318554a35e0f48b363867b03e1dcd224a06c3338615a3b28d"
+  },
+  "schema_version": 1,
+  "selection_sha256": "8090729b420b520fe2707be87e9d41dbc7b09e7f6f6ad9c3d9baf61bb0f28b00",
+  "training_completion_claimed": false
+}

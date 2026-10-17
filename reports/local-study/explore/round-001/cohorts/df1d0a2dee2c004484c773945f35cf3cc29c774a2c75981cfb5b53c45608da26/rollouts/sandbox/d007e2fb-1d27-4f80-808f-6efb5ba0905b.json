@@ -1,0 +1,40 @@
+{
+  "run_id": "d007e2fb-1d27-4f80-808f-6efb5ba0905b",
+  "task_id": "ledger.prefix",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: warning: unused import: `serde_json::Value`\n --> /candidate/main.rs:1:5\n  |\n1 | use serde_json::Value;\n  |     ^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0599]: no method named `as_i64` found for struct `Vec<Value>` in the current scope\n --> /candidate/main.rs:8:34\n  |\n8 |         if let Some(num) = value.as_i64() {\n  |                                  ^^^^^^ method not found in `Vec<Value>`\n\nerror[E0308]: mismatched types\n  --> /candidate/main.rs:14:5\n   |\n 3 | pub fn solve(input: serde_json::Value) -> serde_json::Value {\n   |                                           ----------------- expected `Value` because of return type\n...\n14 |     prefix_sums\n   |     ^^^^^^^^^^^ expected `Value`, found `Vec<{integer}>`\n   |\n   = note: expected enum `Value`\n            found struct `Vec<{integer}>`\n\nerror: aborting due to 2 previous errors; 1 warning emitted\n\nSome errors have detailed explanations: E0308, E0599.\nFor more information about an error, try `rustc --explain E0308`.\n"
+  ],
+  "cases_total": 14,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "c9de0784fa9e2c947ad6f6fbcf9ed1aab9b8d7b85a0722db37e08b95f76a510f",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox/d007e2fb-1d27-4f80-808f-6efb5ba0905b.audit.json",
+  "audit_sha256": "9ac0d5c3b2042934474e4986d8f1f7579e549e4ae47dde97f55cf12de17857cc",
+  "failure": "compilation failed: warning: unused import: `serde_json::Value`\n --> /candidate/main.rs:1:5\n  |\n1 | use serde_json::Value;\n  |     ^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0599]: no method named `as_i64` found for struct `Vec<Value>` in the current scope\n --> /candidate/main.rs:8:34\n  |\n8 |         if let Some(num) = value.as_i64() {\n  |                                  ^^^^^^ method not found in `Vec<Value>`\n\nerror[E0308]: mismatched types\n  --> /candidate/main.rs:14:5\n   |\n 3 | pub fn solve(input: serde_json::Value) -> serde_json::Value {\n   |                                           ----------------- expected `Value` because of return type\n...\n14 |     prefix_sums\n   |     ^^^^^^^^^^^ expected `Value`, found `Vec<{integer}>`\n   |\n   = note: expected enum `Value`\n            found struct `Vec<{integer}>`\n\nerror: aborting due to 2 previous errors; 1 warning emitted\n\nSome errors have detailed explanations: E0308, E0599.\nFor more information about an error, try `rustc --explain E0308`.\n",
+  "duration_ms": 12339,
+  "timeout_evidence": null,
+  "lifecycle_evidence": {
+    "receipt_path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox/d007e2fb-1d27-4f80-808f-6efb5ba0905b.lifecycle.json",
+    "receipt_sha256": "f84a0342695b0658b93e1b89885f7672b1896cacf8bbd49761860ed55b55d3be"
+  }
+}

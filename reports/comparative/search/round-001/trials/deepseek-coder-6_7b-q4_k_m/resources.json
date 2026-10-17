@@ -25,30 +25,34 @@
   "profile": {
     "architecture": "x86_64",
     "available_cpu_threads": 16,
-    "available_ram_bytes": 33015308288,
+    "available_ram_bytes": 54761619456,
     "cuda_backend_compiled": true,
     "gpu_probe_note": "NVIDIA driver reported memory availability",
     "gpus": [
       {
         "backend": "cuda",
         "compute_capability": "7.5",
-        "free_memory_bytes": 1882193920,
+        "free_memory_bytes": 8025800704,
         "name": "NVIDIA GeForce RTX 2080",
         "ordinal": 0,
         "total_memory_bytes": 8589934592
       }
     ],
-    "host_available_ram_bytes": 33015308288,
+    "host_available_ram_bytes": 54761619456,
     "memory_constraint": "Linux MemAvailable",
     "operating_system": "linux",
-    "usable_ram_bytes": 29445342004
+    "usable_ram_bytes": 49017022055
   },
   "reserved_context_tokens": 1024,
   "selection": {
     "options": {
-      "device": "cpu",
+      "device": {
+        "cuda": {
+          "ordinal": 0
+        }
+      },
       "dtype": "f32"
     },
-    "reason": "Automatic CPU selected: no compiled, available CUDA device has sufficient free VRAM; 16 threads and 29445342004 guarded RAM bytes available"
+    "reason": "CUDA GPU NVIDIA GeForce RTX 2080 selected: estimated resident 5992472800 bytes fits guarded free VRAM 7089002906 bytes"
   }
 }

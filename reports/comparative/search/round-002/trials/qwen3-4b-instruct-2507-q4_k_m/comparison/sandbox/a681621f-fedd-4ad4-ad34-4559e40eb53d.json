@@ -1,0 +1,40 @@
+{
+  "run_id": "a681621f-fedd-4ad4-ad34-4559e40eb53d",
+  "task_id": "tables.last_by_key",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error: expected one of `!`, `(`, `...`, `..=`, `..`, `::`, `=`, `{`, or `|`, found `rows`\n --> /candidate/main.rs:6:25\n  |\n6 |     if let Value::Array rows = input {\n  |                         ^^^^ expected one of 9 possible tokens\n\nerror: aborting due to 1 previous error\n\n"
+  ],
+  "cases_total": 5,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "01ae2d9b05c015bfb4a09165bba0e2abdb71824eb937c78b16bf24e53171b749",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison/sandbox/a681621f-fedd-4ad4-ad34-4559e40eb53d.audit.json",
+  "audit_sha256": "0b7a2e341056253aff799a3de19104b6e9d751062a8a3a2e73848efa799850ac",
+  "failure": "compilation failed: error: expected one of `!`, `(`, `...`, `..=`, `..`, `::`, `=`, `{`, or `|`, found `rows`\n --> /candidate/main.rs:6:25\n  |\n6 |     if let Value::Array rows = input {\n  |                         ^^^^ expected one of 9 possible tokens\n\nerror: aborting due to 1 previous error\n\n",
+  "duration_ms": 22314,
+  "timeout_evidence": null,
+  "lifecycle_evidence": {
+    "receipt_path": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison/sandbox/a681621f-fedd-4ad4-ad34-4559e40eb53d.lifecycle.json",
+    "receipt_sha256": "b94d723a594fa3423ed9ae07ad9d8b8ec3874902e6a7d39cdb5d43cf01569649"
+  }
+}

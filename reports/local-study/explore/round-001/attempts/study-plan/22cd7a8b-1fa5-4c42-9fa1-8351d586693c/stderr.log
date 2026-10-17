@@ -1,0 +1,3 @@
+study planning: cached verified evidence only; explicit offline=false
+execution: CUDA GPU NVIDIA GeForce RTX 2080 selected: estimated resident 6538528768 bytes fits guarded free VRAM 7101271245 bytes; available CPU threads=16, usable RAM=48962297447 bytes
+Hub hashing model.safetensors: 0/1178623988 bytes, 0.00 MiB/s, ETA unknown (publisher checksum pending)

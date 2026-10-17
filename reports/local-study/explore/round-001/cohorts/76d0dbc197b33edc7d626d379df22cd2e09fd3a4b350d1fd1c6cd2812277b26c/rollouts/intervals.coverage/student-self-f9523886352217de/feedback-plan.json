@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "initial_plan": {
+    "path": "reports/local-study/explore/round-001/cohorts/76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c/rollouts/intervals.coverage/student-plan.json",
+    "sha256": "321680bacffd08187ad69aaf54c8b27fe4d464464889efe972607e69b5313718",
+    "bytes": 5307
+  },
+  "student_raw": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/intervals.coverage/student-raw.json",
+    "sha256": "6b0664d0d36a50c45f95f7b128cfa38c1e53fd33bc387fe902b8a26f065434ab",
+    "bytes": 1714
+  },
+  "student_grade": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox/448ac87e-cb60-4caf-97d9-b02b7c2c5d84.json",
+    "sha256": "1a08e3e4a27340499905baa2ee138da3fd9292a14fa36a52b8596205b7182703",
+    "bytes": 3616
+  },
+  "teacher_id": "student-self-f9523886352217de",
+  "teacher_assets": {
+    "path": "offline_bundle/base/assets.json",
+    "sha256": "54304e7f41519a4196674cba5e86593802f852b2b47882d6c19706f85f303ad4",
+    "bytes": 788
+  },
+  "teacher_checkpoint": null,
+  "runtime": {
+    "device": {
+      "cuda": {
+        "ordinal": 0
+      }
+    },
+    "dtype": "f32"
+  },
+  "request": {
+    "prompt": "Verified different training contract: Input is an array of integer half-open intervals, start<end. Return maximum simultaneous overlap; an end at t does not overlap a start at t.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nVerified solution:\n```rust\nuse serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let intervals: Vec<(i64, i64)> = input.as_array().unwrap()\n        .iter()\n        .map(|v| (v[0].as_i64().unwrap(), v[1].as_i64().unwrap()))\n        .collect();\n\n    let mut events: Vec<(i64, i32)> = intervals.iter()\n        .flat_map(|&(start, end)| vec![(start, 1), (end, -1)])\n        .collect();\n\n    events.sort();\n\n    let mut max_overlap = 0;\n    let mut current_overlap = 0;\n\n    for (_, event) in events {\n        current_overlap += event;\n        max_overlap = max_overlap.max(current_overlap);\n    }\n\n    Value::from(max_overlap)\n}\n```\nNew task:\nWrite Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an array of integer half-open intervals [start,end], start<end. Return total length of their union.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[[3,5],[1,3],[8,9]],\"expected\":5}]\nActual frozen student candidate:\n```rust\nuse serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let mut total_length = 0;\n    for interval in input.as_array() {\n        let start = interval[0].as_i64().unwrap();\n        let end = interval[1].as_i64().unwrap();\n        total_length += (end - start) as i64;\n    }\n    serde_json::Value::Number(total_length as f64)\n}\n```\nActual trusted tool feedback:\n{\"bounded_diagnostic_untrusted_data\":\"compilation failed: warning: unused import: `serde_json::Value`\\n --> /candidate/main.rs:1:5\\n  |\\n1 | use serde_json::Value;\\n  |     ^^^^^^^^^^^^^^^^^\\n  |\\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\\n\\nerror[E0308]: mismatched types\\n   --> /candidate/main.rs:10:31\\n    |\\n 10 |     serde_json::Value::Number(total_length as f64)\\n    |     ------------------------- ^^^^^^^^^^^^^^^^^^^ expected `Number`, found `f64`\\n    |     |\\n    |     arguments to this enum variant are incorrect\\n    |\\nnote: tuple variant defined here\\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:142:5\\n    |\\n142 |     Number(Number),\\n    |     ^^^^^^\\n\\nerror: aborting due to 1 previous error; 1 warning emitted\\n\\nFor more information about this error, try `rustc --explain E0308`.\\n\",\"cases_passed\":0,\"cases_total\":6,\"content_role\":\"compilation_feedback_only\",\"original_failure_is_not_a_success\":true,\"passed\":false,\"private_inputs_or_expected_outputs_exposed\":false,\"quarantined\":true,\"run_id\":\"448ac87e-cb60-4caf-97d9-b02b7c2c5d84\",\"student_generation_complete\":true,\"tool\":\"trusted_container_grader\",\"trace_complete\":false}\nCritique and revise the candidate. Put any short explanation in Rust // comments and return complete compilable Rust source only. Do not invent tool results.",
+    "max_new_tokens": 768,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "supporting_sample_ids": [
+    "9a709fd0afa880d7d61490074636b6a836aa05da5d9a338a46aa8aca31efdce4"
+  ]
+}

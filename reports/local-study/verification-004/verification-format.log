@@ -1,0 +1,12 @@
+Diff in /home/pbisaacs/Developer/neuralmimicry/lec_challenge/src/main.rs:1063:
+                 || bitnet_gguf.is_some()
+                 || bitnet_parity_report.is_some()
+             {
+-                ensure!(student == "bitnet", "BitNet backend flags require --student bitnet");
++                ensure!(
++                    student == "bitnet",
++                    "BitNet backend flags require --student bitnet"
++                );
+                 Some(lec_distil::bitnet::BitNetBackendOptions {
+                     engine_manifest: bitnet_engine_manifest,
+                     gguf: bitnet_gguf,

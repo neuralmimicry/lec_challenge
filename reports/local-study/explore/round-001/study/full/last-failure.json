@@ -1,0 +1,6 @@
+{
+  "error": "study contains failed or budget-stopped work; progress and reports retained",
+  "observed_unix_ms": 1792182884344,
+  "promotion": "incumbent_retained",
+  "status": "FAILURE"
+}

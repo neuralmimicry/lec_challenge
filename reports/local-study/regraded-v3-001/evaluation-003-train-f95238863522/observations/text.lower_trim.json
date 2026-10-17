@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "regrade_plan_sha256": "a0446d7d7140381e80efb5b83f144abfcbe58892dba6fc50ccbc9ec31002cc3a",
+  "task_id": "text.lower_trim",
+  "source_id": "private-text-v1",
+  "original_plan": {
+    "path": "reports/local-study/native-full-quality-001/base-train/plan.json",
+    "sha256": "55c6614d90fbff0e580fd8fbfa9e06ce99715d8d0c78320e0fe70605545cc489",
+    "bytes": 63584
+  },
+  "original_raw": {
+    "path": "reports/local-study/native-full-quality-001/base-train/generations/text.lower_trim.json",
+    "sha256": "fdf02c5ad4abe5e7ad7ce5c5a7ba930be57b9843f4376189e661de0d50b37328",
+    "bytes": 4209
+  },
+  "outcome": {
+    "kind": "original_generation_failure"
+  },
+  "success": false
+}

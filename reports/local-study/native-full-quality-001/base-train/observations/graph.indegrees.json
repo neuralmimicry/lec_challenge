@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "55c6614d90fbff0e580fd8fbfa9e06ce99715d8d0c78320e0fe70605545cc489",
+  "task_id": "graph.indegrees",
+  "source_id": "private-graph-v1",
+  "success": false,
+  "raw_generation": {
+    "path": "reports/local-study/native-full-quality-001/base-train/generations/graph.indegrees.json",
+    "sha256": "d2881a14c85d2213f04290ffb570cfff7954fbd5be9256ca10685dceabb5de6b",
+    "bytes": 2091
+  },
+  "sandbox_report": {
+    "path": "reports/local-study/native-full-quality-001/base-train/sandbox/6fd0c170-b7fe-4a0a-b15e-ce259f71301e.json",
+    "sha256": "ba0a35cb9519f3403bf7a2bcfad98dfd5e6af4a669e0d225930393d397d27da0",
+    "bytes": 9342
+  },
+  "grading_error": null
+}

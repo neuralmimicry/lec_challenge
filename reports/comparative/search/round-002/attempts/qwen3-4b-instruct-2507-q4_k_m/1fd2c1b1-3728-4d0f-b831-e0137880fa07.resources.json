@@ -1,0 +1,58 @@
+{
+  "cpu_estimate": {
+    "activation_workspace_bytes": 140509184,
+    "assumptions": "Full quantised weights on the selected device; embedding expanded to GPU float16 or CPU float32; float32 activations/KV/attention; no hybrid offload. Driver/allocator/workspace behaviour may require additional headroom.",
+    "attention_score_bytes": 134217728,
+    "conservative_total_bytes": 4696931040,
+    "context_tokens": 1024,
+    "dense_embedding_bytes": 1555824640,
+    "kv_cache_bytes": 301989888,
+    "quantised_file_bytes": 2497280736,
+    "runtime_reserve_bytes": 67108864
+  },
+  "gpu_estimate": {
+    "activation_workspace_bytes": 140509184,
+    "assumptions": "Full quantised weights on the selected device; embedding expanded to GPU float16 or CPU float32; float32 activations/KV/attention; no hybrid offload. Driver/allocator/workspace behaviour may require additional headroom.",
+    "attention_score_bytes": 134217728,
+    "conservative_total_bytes": 4120345312,
+    "context_tokens": 1024,
+    "dense_embedding_bytes": 777912320,
+    "kv_cache_bytes": 301989888,
+    "quantised_file_bytes": 2497280736,
+    "runtime_reserve_bytes": 268435456
+  },
+  "maximum_actual_context_tokens": 750,
+  "profile": {
+    "architecture": "x86_64",
+    "available_cpu_threads": 16,
+    "available_ram_bytes": 39807574016,
+    "cuda_backend_compiled": true,
+    "gpu_probe_note": "NVIDIA driver reported memory availability",
+    "gpus": [
+      {
+        "backend": "cuda",
+        "compute_capability": "7.5",
+        "free_memory_bytes": 7600078848,
+        "name": "NVIDIA GeForce RTX 2080",
+        "ordinal": 0,
+        "total_memory_bytes": 8589934592
+      }
+    ],
+    "host_available_ram_bytes": 39807574016,
+    "memory_constraint": "Linux MemAvailable",
+    "operating_system": "linux",
+    "usable_ram_bytes": 35558381159
+  },
+  "reserved_context_tokens": 1024,
+  "selection": {
+    "options": {
+      "device": {
+        "cuda": {
+          "ordinal": 0
+        }
+      },
+      "dtype": "f32"
+    },
+    "reason": "CUDA GPU NVIDIA GeForce RTX 2080 selected: estimated resident 4120345312 bytes fits guarded free VRAM 6705853236 bytes"
+  }
+}

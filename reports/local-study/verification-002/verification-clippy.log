@@ -1,0 +1,43 @@
+    Blocking waiting for file lock on package cache
+   Compiling ring v0.17.14
+   Compiling rustls v0.23.46
+    Checking rustls-webpki v0.103.15
+    Checking tokio-rustls v0.26.6
+    Checking hyper-rustls v0.27.10
+    Checking reqwest v0.12.28
+    Checking lec-distil v0.1.0 (/home/pbisaacs/Developer/neuralmimicry/lec_challenge)
+error: items after a test module
+   --> src/teacher_search/workflow.rs:19:1
+    |
+ 19 |   mod result_status_tests {
+    |   ^^^^^^^^^^^^^^^^^^^^^^^
+...
+ 38 |   async fn prune_scored(output: &Path, state: &mut State, config: &SearchConfig) -> Result<()> {
+    |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+ 87 |   fn free_disk_bytes(path: &Path) -> Result<u64> {
+    |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+102 |   async fn import_initial(output: &Path, state: &mut State, config: &SearchConfig) -> Result<()> {
+    |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+204 |   fn verify_candidate(proof: &hub::HubGgufProvenance, candidate: &Candidate) -> Result<()> {
+    |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+218 |   async fn cached_candidate(candidate: &Candidate) -> Result<bool> {
+    |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+236 | / pub(super) async fn run(
+237 | |     config_path: &Path,
+238 | |     output: &Path,
+239 | |     offline: bool,
+240 | | ) -> Result<serde_json::Value> {
+    | |______________________________^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.98.0/index.html#items_after_test_module
+    = note: `-D clippy::items-after-test-module` implied by `-D warnings`
+    = help: to override `-D warnings` add `#[allow(clippy::items_after_test_module)]`
+    = help: move the items to before the test module was defined
+
+error: could not compile `lec-distil` (lib test) due to 1 previous error
+warning: build failed, waiting for other jobs to finish...

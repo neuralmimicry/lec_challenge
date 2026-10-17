@@ -1,0 +1,17 @@
+{
+  "canonical_request_sha256": "b4d5730c5932fe004594e90bfd9b2201646d472881875bfd0d9c17cfbcdd26c3",
+  "common_launch": {
+    "bytes": 697,
+    "path": "reports/local-study/native-full-sft-seed2718/helper-launch.json",
+    "sha256": "e102e969612fce721bb85d36101179600be001f7a72dffcffeffa051a7d11a4e"
+  },
+  "evidence_kind": "immutable_native_distillation_helper_phase_launch",
+  "phase": "verify",
+  "production_eligible": false,
+  "request": {
+    "bytes": 903,
+    "path": "reports/local-study/native-full-sft-seed2718-request.json",
+    "sha256": "e81c75dfab9211b63eb97196ab7e6853884311db69f8c8bc97e14cc9ec4076f2"
+  },
+  "schema_version": 1
+}

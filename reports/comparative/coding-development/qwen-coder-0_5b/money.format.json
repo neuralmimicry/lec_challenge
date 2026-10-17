@@ -1,0 +1,38 @@
+{
+  "model_id": "qwen-coder-0_5b",
+  "task_id": "money.format",
+  "source_id": "private-money-v1",
+  "specification_sha256": "9213c0114b6d1a6399d5db8ec1a7dcf0f9087c2d65b589e583ee9b1cba646aa9",
+  "seed": 1729,
+  "plan_sha256": "9aefcaf935435b296c63229638aad5a22a416ae171eda011a6812dd745667ea8",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is signed cents, magnitude <=100000000. Return pounds with optional minus and exactly two fractional digits.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":-1230,\"expected\":\"-12.30\"}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let cents = input.as_i64().unwrap();\n    let pounds = cents / 100000000.0;\n    let rounded_pounds = pounds.round();\n    let rounded_pounds_str = format!(\"{:.2}\", rounded_pounds);\n    serde_json::Value::String(rounded_pounds_str)\n}\n```",
+    "checkpoint_id": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+    "finish_reason": "stop",
+    "input_tokens": 235,
+    "output_tokens": 96,
+    "elapsed_ms": 3409,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/comparative/coding-development/qwen-coder-0_5b/money.format.generation.json",
+    "sha256": "9ad573011068cb03330f5a76bd3c086011b2fff94299dc0ea50cbafb143374a6",
+    "bytes": 2634
+  },
+  "sandbox_report": {
+    "path": "reports/comparative/coding-development/sandbox/b5f22d07-30f3-4f00-be52-0171e1c320db.json",
+    "sha256": "91f547bc69ee0e9ccfaf302b9d39e65a02e89298f0d0755f6eb8d4c556b07562",
+    "bytes": 4301
+  },
+  "grading_error": null,
+  "success": false
+}

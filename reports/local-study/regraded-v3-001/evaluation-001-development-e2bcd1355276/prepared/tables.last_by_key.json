@@ -1,0 +1,64 @@
+{
+  "schema_version": 3,
+  "run_id": "9a2b3d30-c87d-42a1-8c20-fb50d788b367",
+  "ownership_nonce": "68e3dd1f-a52b-4b78-a4be-d64b80691db1",
+  "attempt_key": "5bc77c9eeac04567819ecf9b25e4917a03f28ffb0f6f97a378b761c3b3e5e6c9",
+  "receipt_path": "reports/local-study/regraded-v3-001/evaluation-001-development-e2bcd1355276/prepared/tables.last_by_key.json",
+  "report_path": "reports/local-study/regraded-v3-001/evaluation-001-development-e2bcd1355276/sandbox/9a2b3d30-c87d-42a1-8c20-fb50d788b367.json",
+  "task": {
+    "id": "tables.last_by_key",
+    "source_id": "private-tables-v1",
+    "lineage_id": "local-contract-pack-15",
+    "split": "development",
+    "specification": "Input is an array of [key,value] integer rows. Keep the last value per key and return [key,value] rows sorted by key.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "60d2667ffa0dcdb540f2de2f41533a9d0b6c027ee25be4adb993cda6f67122f7",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": [
+          [
+            2,
+            9
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "expected": [
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "use serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let data = input.as_array().unwrap();\n    let mut result = Vec::new();\n    let mut last_key = String::new();\n    let mut last_value = i64::MIN;\n\n    for item in data {\n        let key = item.as_array().unwrap().get(0).unwrap().as_i64().unwrap();\n        let value = item.as_array().unwrap().get(1).unwrap().as_i64().unwrap();\n\n        if key == last_key {\n            last_value = value;\n        } else {\n            result.push(Value::Array(vec![Value::String(last_key), Value::Number(last_value as f64)]));\n            last_key = key.to_string();\n            last_value = value;\n        }\n    }\n\n    result.push(Value::Array(vec![Value::String(last_key), Value::Number(last_value as f64)]));\n    Value::Array(result)\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/regraded-v3-001/evaluation-001-development-e2bcd1355276/sandbox"
+  },
+  "code_sha256": "a0fd648d88c10da94917537755196b34563148f89e5da710202a1f8068e52fcb",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

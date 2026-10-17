@@ -162,3 +162,37 @@ use wrapping intermediate lanes where GEMM uses wider accumulation; a single
 unchecked scalar-integer substitute would not be a justified correction.
 Preserve this receipt, its source snapshots and both backend observations
 before introducing any separate kernel/protocol version.
+
+## Bounded projection prototype — 16 October 2026
+
+The separate Rust prototype under
+`state/diagnostics/bitnet-projection-prototype/round-001/` matches all fourteen
+producer-bound cuts, fourteen token rows and eight selected output rows:
+**1,568 F32 values**, bit for bit. Direct calls to the pinned native GEMV/GEMM
+symbols match their respective wrapping/wide prototype modes. None of these
+retained natural inputs wraps an i16 lane. Selected-row floating matmul differs
+in every case, with a maximum absolute error of **0.0001220703125** at node 37.
+
+A labelled synthetic extreme-array intervention confirms a real dispatch
+distinction: K=4096 all-one inputs/weights give native GEMV
+**−4160.50390625**, but GEMM **4096.0**. Each exactly matches its corresponding
+prototype arithmetic. This is a synthetic kernel observation, not a natural
+model result. Four focused tests passed, including nonzero finite first-order
+surrogate gradients reaching both low-rank factors. The bounded diagnostic took
+12.16 seconds and 25,016 KiB peak RSS, with no full model, GPU or optimiser.
+
+`FINDINGS.md` in that directory gives every cut's error. The full report SHA-256
+is `30c4f22ba9293f747d904634a7a9f559c0240ca328a000aa1ae0356f029edaa7`;
+`build-attempt-001/receipt.json` in the parent records the frozen sources,
+compiler/dependencies, executable, test/run commands and retained warnings.
+The executable SHA-256 is
+`9f1da1c0ef73af2c9037a620eb2297af267991a9e484518b0a7d5d87ebd9c28d`.
+
+The prototype deliberately accepts at most sixteen token rows, exactly eight
+outputs and K≤6912. Changing projection geometry changes native dispatch;
+these cuts neither locate the first natural whole-model divergence nor prove
+its contribution to final log probabilities. Production integration needs
+reviewed dispatch semantics, tiling/performance work, a new immutable executable
+and the complete original parity protocol. No production projection was
+changed. The failed full-model **0.10** receipt above remains authoritative;
+these excluded diagnostic files also need deliberate packaging for delivery.

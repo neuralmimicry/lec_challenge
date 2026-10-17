@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "0805ba5b12c7f6a3f7a46cf71c1c8db0aa8542d736a3dcd82b56da5f168b46c4",
+  "task_id": "tables.inner_join",
+  "source_id": "private-tables-v1",
+  "success": false,
+  "raw_generation": {
+    "path": "reports/local-study/native-full-quality-001/sft-development/generations/tables.inner_join.json",
+    "sha256": "264e60263c7d54bdf4980d2a4e1f3c59b607f78161bcd7351d38080847760047",
+    "bytes": 2299
+  },
+  "sandbox_report": null,
+  "grading_error": "trusted grade rejected: trusted audit artifact missing: No such file or directory (os error 2)"
+}

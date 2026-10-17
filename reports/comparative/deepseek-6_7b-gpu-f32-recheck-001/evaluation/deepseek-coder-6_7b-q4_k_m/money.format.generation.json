@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "evidence_kind": "actual_local_model_generation",
+  "recorded_unix_ms": 1792103327602,
+  "model_id": "deepseek-coder-6_7b-q4_k_m",
+  "task_id": "money.format",
+  "source_id": "private-money-v1",
+  "specification_sha256": "9213c0114b6d1a6399d5db8ec1a7dcf0f9087c2d65b589e583ee9b1cba646aa9",
+  "seed": 1729,
+  "plan_sha256": "c0eb6b9a6ac62bd4f1c35803db2f748b8cdf1ac7607088924c2c80518e92289b",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is signed cents, magnitude <=100000000. Return pounds with optional minus and exactly two fractional digits.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":-1230,\"expected\":\"-12.30\"}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": null,
+  "generation_error": "model loading failed: GGUF/source rotary scaling differs",
+  "execution": null
+}

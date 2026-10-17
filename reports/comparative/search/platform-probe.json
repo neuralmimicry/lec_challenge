@@ -1,0 +1,35 @@
+{
+  "compatible_installed_toolkits": [
+    {
+      "compatible_host_compiler": "g++-14",
+      "major": 12,
+      "minor": 9,
+      "root": "/usr/local/cuda-12.9"
+    }
+  ],
+  "driver_cuda_ceiling": [
+    13,
+    2
+  ],
+  "hardware": {
+    "architecture": "x86_64",
+    "available_cpu_threads": 16,
+    "available_ram_bytes": 38428020736,
+    "cuda_backend_compiled": false,
+    "gpu_probe_note": "NVIDIA driver reported memory availability",
+    "gpus": [
+      {
+        "backend": "cuda",
+        "compute_capability": "7.5",
+        "free_memory_bytes": 7875854336,
+        "name": "NVIDIA GeForce RTX 2080",
+        "ordinal": 0,
+        "total_memory_bytes": 8589934592
+      }
+    ],
+    "host_available_ram_bytes": 38428020736,
+    "memory_constraint": "Linux MemAvailable",
+    "operating_system": "linux",
+    "usable_ram_bytes": 34316783207
+  }
+}

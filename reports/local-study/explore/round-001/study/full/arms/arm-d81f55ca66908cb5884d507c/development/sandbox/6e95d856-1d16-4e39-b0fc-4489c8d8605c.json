@@ -1,0 +1,40 @@
+{
+  "run_id": "6e95d856-1d16-4e39-b0fc-4489c8d8605c",
+  "task_id": "encoding.hex_decode",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error: unknown start of token: `\n --> /candidate/main.rs:1:1\n  |\n1 | ```rust\n  | ^^^\n  |\n  = note: character appears 2 more times\nhelp: Unicode character '`' (Grave Accent) looks like ''' (Single Quote), but it is not\n  |\n1 - ```rust\n1 + '''rust\n  |\n\nerror: unknown start of token: `\n  --> /candidate/main.rs:23:1\n   |\n23 | ```\n   | ^^^\n   |\n   = note: character appears 2 more times\nhelp: Unicode character '`' (Grave Accent) looks like ''' (Single Quote), but it is not\n   |\n23 - ```\n23 + '''\n   |\n\nerror: unknown start of token: `\n  --> /candidate/main.rs:25:35\n   |\n25 | This Rust code defines a function `solve` that takes a JSON input and returns a vector of u64 integers. It iterates over each charac...\n   |                                   ^\n   |\nhelp: Unicode character '`' (Grave Accent) looks like ''' (Single Quote), but it is not\n   |\n25 - This Rust code defines a function `solve` that takes a JSON input and returns a vector of u64 integers. It iterates over each character in the input string, checks if it is an ASCII hexadecimal digit, and if so, converts it to a u64 and appends it to the result vector. The function handles invalid characters and odd length hexadecimal strings by returning null for those.\n25 + This Rust code defines a function 'solve` that takes a JSON input and returns a vector of u64 integers. It iterates over each character in the input string, checks if it is an ASCII hexadecimal digit, and if so, converts it to a u64 and appends it to the result vector. The function handles invalid characters and odd length hexadecimal strings by returning null for those.\n   |\n\nerror: unknown start of token: `\n  --> /candidate/main.rs:25:41\n   |\n25 | This Rust code defines a function `solve` that takes a JSON input and returns a vector of u64 integers. It iterates over each charac...\n   |                                         ^\n   |\nhelp: Unicode character '`' (Grave Accent) looks like ''' (Single Quote), but it is not\n   |\n25 - This Rust code defines a function `solve` that takes a JSON input and returns a vector of u64 integers. It iterates over each character in the input string, checks if it is an ASCII hexadecimal digit, and if so, converts it to a u64 and appends it to the result vector. The function handles invalid characters and odd length hexadecimal strings by returning null for those.\n25 + This Rust code defines a function `solve' that takes a JSON input and returns a vector of u64 integers. It iterates over each character in the input string, checks if it is an ASCII hexadecimal digit, and if so, converts it to a u64 and appends it to the result vector. The function handles invalid characters and odd length hexadecimal strings by returning null for those.\n   |\n\nerror: expected one of `!` or `::`, found keyword `use`\n --> /candidate/main.rs:2:1\n  |\n1 | ```rust\n  |        - expected one of `!` or `::`\n2 | use serde_json::Value;\n  | ^^^ unexpected token\n\nerror: aborting due to 5 previous errors\n\n"
+  ],
+  "cases_total": 7,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "0c4c5043f9c20982a01b98b8cdb83e44b3fbc79d1b5db83f8b484995733bf3e9",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/explore/round-001/study/full/arms/arm-d81f55ca66908cb5884d507c/development/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/explore/round-001/study/full/arms/arm-d81f55ca66908cb5884d507c/development/sandbox/6e95d856-1d16-4e39-b0fc-4489c8d8605c.audit.json",
+  "audit_sha256": "c74cea02c5f283160af9348c23cef143d8e96fd9cbca9ada23336761bec190ae",
+  "failure": "compilation failed: error: unknown start of token: `\n --> /candidate/main.rs:1:1\n  |\n1 | ```rust\n  | ^^^\n  |\n  = note: character appears 2 more times\nhelp: Unicode character '`' (Grave Accent) looks like ''' (Single Quote), but it is not\n  |\n1 - ```rust\n1 + '''rust\n  |\n\nerror: unknown start of token: `\n  --> /candidate/main.rs:23:1\n   |\n23 | ```\n   | ^^^\n   |\n   = note: character appears 2 more times\nhelp: Unicode character '`' (Grave Accent) looks like ''' (Single Quote), but it is not\n   |\n23 - ```\n23 + '''\n   |\n\nerror: unknown start of token: `\n  --> /candidate/main.rs:25:35\n   |\n25 | This Rust code defines a function `solve` that takes a JSON input and returns a vector of u64 integers. It iterates over each charac...\n   |                                   ^\n   |\nhelp: Unicode character '`' (Grave Accent) looks like ''' (Single Quote), but it is not\n   |\n25 - This Rust code defines a function `solve` that takes a JSON input and returns a vector of u64 integers. It iterates over each character in the input string, checks if it is an ASCII hexadecimal digit, and if so, converts it to a u64 and appends it to the result vector. The function handles invalid characters and odd length hexadecimal strings by returning null for those.\n25 + This Rust code defines a function 'solve` that takes a JSON input and returns a vector of u64 integers. It iterates over each character in the input string, checks if it is an ASCII hexadecimal digit, and if so, converts it to a u64 and appends it to the result vector. The function handles invalid characters and odd length hexadecimal strings by returning null for those.\n   |\n\nerror: unknown start of token: `\n  --> /candidate/main.rs:25:41\n   |\n25 | This Rust code defines a function `solve` that takes a JSON input and returns a vector of u64 integers. It iterates over each charac...\n   |                                         ^\n   |\nhelp: Unicode character '`' (Grave Accent) looks like ''' (Single Quote), but it is not\n   |\n25 - This Rust code defines a function `solve` that takes a JSON input and returns a vector of u64 integers. It iterates over each character in the input string, checks if it is an ASCII hexadecimal digit, and if so, converts it to a u64 and appends it to the result vector. The function handles invalid characters and odd length hexadecimal strings by returning null for those.\n25 + This Rust code defines a function `solve' that takes a JSON input and returns a vector of u64 integers. It iterates over each character in the input string, checks if it is an ASCII hexadecimal digit, and if so, converts it to a u64 and appends it to the result vector. The function handles invalid characters and odd length hexadecimal strings by returning null for those.\n   |\n\nerror: expected one of `!` or `::`, found keyword `use`\n --> /candidate/main.rs:2:1\n  |\n1 | ```rust\n  |        - expected one of `!` or `::`\n2 | use serde_json::Value;\n  | ^^^ unexpected token\n\nerror: aborting due to 5 previous errors\n\n",
+  "duration_ms": 16769,
+  "timeout_evidence": null,
+  "lifecycle_evidence": {
+    "receipt_path": "reports/local-study/explore/round-001/study/full/arms/arm-d81f55ca66908cb5884d507c/development/sandbox/6e95d856-1d16-4e39-b0fc-4489c8d8605c.lifecycle.json",
+    "receipt_sha256": "abab1a6f22435b286b8b18a4e37a637a1cd79c8217256e6226d4c6f724dbb03f"
+  }
+}

@@ -5,7 +5,7 @@
 //! another response or replace the original price/permission evidence.
 
 use super::*;
-use crate::fleet::{Recording, TokenUsage, canonical_json, extract_usage, parse_response};
+use crate::fleet::{Recording, TokenUsage, canonical_json, extract_usage, parse_recording};
 use std::collections::HashMap;
 
 struct Pending {
@@ -296,13 +296,23 @@ fn validate(record: &Recording, attempt: &Pending) -> Result<Settlement> {
                 usage.input_tokens <= input_bound && usage.output_tokens <= output_bound,
                 "recorded usage exceeds reserved token bounds"
             );
+            ensure!(
+                !matches!(
+                    record.api,
+                    crate::fleet::ProviderApi::GeminiGenerateContent
+                        | crate::fleet::ProviderApi::VertexGenerateContent
+                ) || usage.reasoning_tokens == 0,
+                "unexpected Gemini thinking needs reconciliation"
+            );
             Some(usage)
         }
         Err(_) => {
             let body: Option<serde_json::Value> =
                 serde_json::from_str(&record.response.raw_body).ok();
             ensure!(
-                !body.as_ref().is_some_and(|b| b.get("usage").is_some()),
+                !body
+                    .as_ref()
+                    .is_some_and(|b| b.get("usage").is_some() || b.get("usageMetadata").is_some()),
                 "recorded usage is malformed or inconsistent"
             );
             None
@@ -315,7 +325,7 @@ fn validate(record: &Recording, attempt: &Pending) -> Result<Settlement> {
         upper <= attempt.reserved_nanos,
         "recorded cost exceeds reservation"
     );
-    let parsed = parse_response(&record.response);
+    let parsed = parse_recording(record);
     Ok(Settlement {
         success: parsed.is_ok(),
         lower,

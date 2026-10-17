@@ -1,0 +1,72 @@
+{
+  "freeze_sha256": "d92f6ff828ab12e448f10edddb8af875b1689272635488b168b27268ab3470d0",
+  "steps": 8,
+  "adapter": {
+    "path": "reports/local-study/native-bitnet-48-operator/step-000008/adapter.safetensors",
+    "sha256": "bd4d81ac72e52769dac599da6547c1a7872ffa1297c113eb04df1ff5c33e955b",
+    "bytes": 2009448
+  },
+  "optimizer": {
+    "path": "reports/local-study/native-bitnet-48-operator/step-000008/optimizer.safetensors",
+    "sha256": "489f77a8a4a215c20f642a775fd7b17fa92ee0e66888d276299e255e36fcdd14",
+    "bytes": 4019504
+  },
+  "initial_adapter_sha256": "a83ebffa8cd35331a61b484d9a2b7c3ceeb9ed160ba58110e7ee9a1fc8c7a19a",
+  "losses": [
+    3.0413382053375244,
+    3.340406656265259,
+    3.119142532348633,
+    3.2258100509643555,
+    3.2173948287963867,
+    3.4550015926361084,
+    2.9885201454162598,
+    3.3659682273864746
+  ],
+  "gradient_norms": [
+    0.006901837382305186,
+    0.03614816544677258,
+    0.07881699563430297,
+    0.15015985689021694,
+    0.18475643175817047,
+    0.27123881908792113,
+    0.33048876894497276,
+    0.41091157625595287
+  ],
+  "component_losses": [
+    {
+      "sequence_sft": 3.0413382053375244
+    },
+    {
+      "sequence_sft": 3.340406656265259
+    },
+    {
+      "sequence_sft": 3.119142532348633
+    },
+    {
+      "sequence_sft": 3.2258100509643555
+    },
+    {
+      "sequence_sft": 3.2173948287963867
+    },
+    {
+      "sequence_sft": 3.4550015926361084
+    },
+    {
+      "sequence_sft": 2.9885201454162598
+    },
+    {
+      "sequence_sft": 3.3659682273864746
+    }
+  ],
+  "alignment_diagnostics": [],
+  "sample_ids": [
+    "9a709fd0afa880d7d61490074636b6a836aa05da5d9a338a46aa8aca31efdce4",
+    "d34031fab7990f9d5bb1ac0465e3173de67d17f95496ed535260f239f3c4bc90",
+    "21748f9f3a9dec33f5c19fb7179ecdada908a2b27e6486b333f8a379f57d93bb",
+    "5dedbab9841301331ad4a8a4ef9d893e994c7abd27be5b97777071860da49a35",
+    "9f34cf373961913a3cf1067f1f2a71e0bef8368e1557d10e998cc099a00fab71",
+    "be57ee99f53e14a44a210dee5a0a227fbee04ea80f1c914f14447c3db087cded",
+    "f23b74be49ae4fb9f5a42d58f33244ef0c157aa0e4afe342a565baa7e7493c91",
+    "e89aa62fc9a189c19a13370ba9410f99991e685167f68b4f7ce97f6a4c78f965"
+  ]
+}

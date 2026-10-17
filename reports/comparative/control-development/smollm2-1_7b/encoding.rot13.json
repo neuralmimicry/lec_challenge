@@ -1,0 +1,38 @@
+{
+  "model_id": "smollm2-1_7b",
+  "task_id": "encoding.rot13",
+  "source_id": "private-encoding-v1",
+  "specification_sha256": "56794b6c25031b0931d378f8f3955bc2d10c4ef04da0be851795e2ca9a832cfa",
+  "seed": 1729,
+  "plan_sha256": "b2e46b0f4ac46ecbb1b6568e9669ef5157b8a6343802f749cfac8ae999e29d88",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an ASCII string. Apply ROT13 to upper/lowercase letters and preserve other characters.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":\"Hello, Z!\",\"expected\":\"Uryyb, M!\"}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::json;\n\nfn solve(input: serde_json::Value) -> serde_json::Value {\n    let input_str = input.as_str().unwrap();\n    let mut result = json!({});\n\n    for c in input_str.chars() {\n        let c_str = c.to_string();\n        let c_num = c_str.parse::<i64>().unwrap();\n        let c_rot13 = (c_num + 13) % 26 + 65;\n        let c_char = char::from_u32(c_rot13).unwrap();\n\n        result = json!({\n            \"0\": c_char\n        });\n    }\n\n    result\n}\n```",
+    "checkpoint_id": "f55217be716b6a997b97b9d8d7eb6fad02e00858f5010ec24f64603c3a98a0e8",
+    "finish_reason": "stop",
+    "input_tokens": 248,
+    "output_tokens": 174,
+    "elapsed_ms": 10920,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/comparative/control-development/smollm2-1_7b/encoding.rot13.generation.json",
+    "sha256": "6101e5f9faa6ddf41b05403e3aaed6ec6490d0527edb2bec75e30007c6f10fba",
+    "bytes": 2783
+  },
+  "sandbox_report": {
+    "path": "reports/comparative/control-development/sandbox/34aeeff4-2b7d-4f08-96ef-0dec37bd87a4.json",
+    "sha256": "189a78e83889c7cb45603c455d49a3248003231cac95f9fcca8feec474e376b4",
+    "bytes": 2957
+  },
+  "grading_error": null,
+  "success": false
+}

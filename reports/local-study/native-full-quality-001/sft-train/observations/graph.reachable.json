@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "a5b39d544c85b76111246b8fda40c638ce104251a1c56368277fef8fe4033eb6",
+  "task_id": "graph.reachable",
+  "source_id": "private-graph-v1",
+  "success": false,
+  "raw_generation": {
+    "path": "reports/local-study/native-full-quality-001/sft-train/generations/graph.reachable.json",
+    "sha256": "882ba2e15ebaae91587026e8cb6c23a02f79a0bf7e3c74e853a09d3d416c1d96",
+    "bytes": 2352
+  },
+  "sandbox_report": {
+    "path": "reports/local-study/native-full-quality-001/sft-train/sandbox/b03d2e6b-c9b9-49f3-8f4a-9e01c8fa1504.json",
+    "sha256": "902748f5227e7bdee10c5c36907f7039f0a6280892df0a8a00bc3b181fee613f",
+    "bytes": 5851
+  },
+  "grading_error": null
+}

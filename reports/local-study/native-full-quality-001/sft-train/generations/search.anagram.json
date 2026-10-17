@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "a5b39d544c85b76111246b8fda40c638ce104251a1c56368277fef8fe4033eb6",
+  "task_id": "search.anagram",
+  "source_id": "private-search-v1",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is [a,b], two ASCII strings. Ignore ASCII whitespace and letter case, keep punctuation; return whether their remaining character multisets agree.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[\"Dormitory\",\"Dirty room\"],\"expected\":true}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let (a, b) = input.as_array().unwrap();\n    let a_str = a[0].as_str().unwrap();\n    let b_str = b[0].as_str().unwrap();\n    let mut a_chars = a_str.chars().collect::<Vec<char>>();\n    let mut b_chars = b_str.chars().collect::<Vec<char>>();\n    a_chars.sort_unstable();\n    b_chars.sort_unstable();\n    a_chars.dedup();\n    b_chars.dedup();\n    a_chars == b_chars\n}\n```",
+    "checkpoint_id": "e2bcd135527659042304d936fa56c7240f6f96a43b9f81f2a888c38b7762a949",
+    "finish_reason": "stop",
+    "input_tokens": 232,
+    "output_tokens": 128,
+    "elapsed_ms": 5879,
+    "complete": true
+  },
+  "model_error": null
+}

@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
   "complete": false,
-  "observed_unix_ms": 1792059333259,
+  "observed_unix_ms": 1792184407347,
   "cases": [
     {
       "name": "kill_orchestrator_mid_round",
@@ -34,7 +34,7 @@
             "failure": "expected 14 responses, observed 0",
             "passed": false,
             "quarantined": true,
-            "run_id": "ddb181aa-105f-4492-9d16-8bd52d15648d"
+            "run_id": "41092fc6-7257-4644-ae67-f1c76159a1b1"
           },
           {
             "attack": "fake_success",
@@ -43,7 +43,7 @@
             "failure": "host oracle mismatch at case 0",
             "passed": false,
             "quarantined": true,
-            "run_id": "952fe803-19f5-4c02-a7ae-11e8a837721e"
+            "run_id": "96eb4598-f7be-46d2-81ae-76a85d502716"
           },
           {
             "attack": "public_hardcode",
@@ -52,7 +52,7 @@
             "failure": "host oracle mismatch at case 1",
             "passed": false,
             "quarantined": true,
-            "run_id": "4c04e962-099b-40b9-bc2d-6961b4f3e451"
+            "run_id": "db9cd79f-41f6-4b8b-aae1-b28e762f1bf8"
           }
         ]
       }
@@ -403,8 +403,8 @@
         ],
         "evidence_kind": "executed_adversarial_rust_candidate",
         "passed": true,
-        "run_id": "75b4c933-a7d9-461c-89ef-5ebba3b33412",
-        "trace_sha256": "02475a705c450f8aad727f3af5f5e725519f93f955b2faf01e85def4e2f191a3"
+        "run_id": "642e8a86-1afa-44d2-80cb-8e9925670426",
+        "trace_sha256": "30c85d77ff10c84b3fa90fafbcb3235ba88e4c54bd61446a1fb191526d3da8c6"
       }
     },
     {
@@ -417,21 +417,21 @@
         "observations": [
           {
             "checkpoint_directory_created": false,
-            "dataset": "reports/drill-work/428ca7c0-1535-4b5d-8787-57bc7da3cd8b/contamination/exact_heldout_origin",
+            "dataset": "reports/drill-work/eefaa23d-8447-4e30-8346-dccda078e668/contamination/exact_heldout_origin",
             "error": "held-out lineage contamination: geometry.box",
             "rejected_by": "actual_train_entrypoint_before_model_or_optimiser",
             "variant": "exact_heldout_origin"
           },
           {
             "checkpoint_directory_created": false,
-            "dataset": "reports/drill-work/428ca7c0-1535-4b5d-8787-57bc7da3cd8b/contamination/reworded_retained_lineage",
+            "dataset": "reports/drill-work/eefaa23d-8447-4e30-8346-dccda078e668/contamination/reworded_retained_lineage",
             "error": "held-out lineage contamination: geometry.box",
             "rejected_by": "actual_train_entrypoint_before_model_or_optimiser",
             "variant": "reworded_retained_lineage"
           },
           {
             "checkpoint_directory_created": false,
-            "dataset": "reports/drill-work/428ca7c0-1535-4b5d-8787-57bc7da3cd8b/contamination/near_specification_hidden_metadata",
+            "dataset": "reports/drill-work/eefaa23d-8447-4e30-8346-dccda078e668/contamination/near_specification_hidden_metadata",
             "error": "held-out exact/near specification match: geometry.box (review required)",
             "rejected_by": "actual_train_entrypoint_before_model_or_optimiser",
             "variant": "near_specification_hidden_metadata"
@@ -486,7 +486,7 @@
             "kind": "budget_stop",
             "request_key": "c784bf8858eb6d09bba207ea53ea18303d49e1848f12d6a137c9e8224fab13ad",
             "round_id": "fixture-round",
-            "timestamp_ms": 1792059273404
+            "timestamp_ms": 1792184297355
           }
         ],
         "transport_calls": 0
@@ -497,7 +497,7 @@
     "all_assertions_passed": true,
     "evidence_rule": "Fixtures and tensor QA do not establish provider-trained checkpoint performance.",
     "fleet": {
-      "artifact_directory": "reports/drill-work/428ca7c0-1535-4b5d-8787-57bc7da3cd8b/fleet-fixtures/fleet-fixtures-f4a37baf-34d7-4baa-a071-9bd391c14926",
+      "artifact_directory": "reports/drill-work/eefaa23d-8447-4e30-8346-dccda078e668/fleet-fixtures/fleet-fixtures-5971eeaa-d84d-40d9-a421-33f696ebe681",
       "assessment_real_recording_drill_complete": false,
       "budget_stop": {
         "passed": true,
@@ -508,7 +508,7 @@
             "kind": "budget_stop",
             "request_key": "c784bf8858eb6d09bba207ea53ea18303d49e1848f12d6a137c9e8224fab13ad",
             "round_id": "fixture-round",
-            "timestamp_ms": 1792059273404
+            "timestamp_ms": 1792184297355
           }
         ],
         "transport_calls": 0
@@ -516,8 +516,8 @@
       "error_then_rate_limit": {
         "attempts": [
           {
-            "artifact_sha256": "c159495a6f8e2b9a962cd9a556d0aff924c402287c6acc7e59dae6a7a1e2048f",
-            "attempt_id": "6c51357a-8f50-4785-853d-2f958842df61",
+            "artifact_sha256": "98b0c4eaf99a4b584647a7001b42ac2321fa70e71d3c770ea362c2884674eb78",
+            "attempt_id": "a7a50bee-6bbd-4cca-b65f-fd648dda4126",
             "business_id": "fixture-a-fixture-business",
             "cached_input_tokens": null,
             "historical_lower_nanos": 0,
@@ -533,13 +533,15 @@
             "reasoning_tokens": null,
             "replayed": true,
             "request_key": "c784bf8858eb6d09bba207ea53ea18303d49e1848f12d6a137c9e8224fab13ad",
+            "reserved_tokens": 1412,
             "round_id": "fixture-round",
             "state": "failed",
-            "task_id": "labelled-fixture-task"
+            "task_id": "labelled-fixture-task",
+            "token_upper_bound": 1412
           },
           {
-            "artifact_sha256": "4d4c719902204a79da2f026ee3348e4c861bc4c68be0eefeb1fbe215221c12b4",
-            "attempt_id": "f780bdab-08d4-4ec0-94e6-c5036bf6ec01",
+            "artifact_sha256": "899fcbb36e8fa1bbadd928970c1850c3a877aef58be4882af6b0f0dbbf91df51",
+            "attempt_id": "d29a2963-43ea-49e7-8879-039a6d6c4f23",
             "business_id": "fixture-a-fixture-business",
             "cached_input_tokens": null,
             "historical_lower_nanos": 0,
@@ -555,13 +557,15 @@
             "reasoning_tokens": null,
             "replayed": true,
             "request_key": "c784bf8858eb6d09bba207ea53ea18303d49e1848f12d6a137c9e8224fab13ad",
+            "reserved_tokens": 1412,
             "round_id": "fixture-round",
             "state": "failed",
-            "task_id": "labelled-fixture-task"
+            "task_id": "labelled-fixture-task",
+            "token_upper_bound": 1412
           },
           {
-            "artifact_sha256": "4267f53b4a5ab8da7d7cc4b5287c2b57457fb96a87f5a981b9ce4a9bb6651332",
-            "attempt_id": "b4136522-d728-480f-86b1-4d7fb648a469",
+            "artifact_sha256": "25e0bb073cc8a4ec34f2deb2e57c168731bc18b75db96a99f8ee39420c2e3b46",
+            "attempt_id": "098cfb5d-486b-41ff-88f2-488b0d085708",
             "business_id": "fixture-b-fixture-business",
             "cached_input_tokens": 0,
             "historical_lower_nanos": 70000,
@@ -577,9 +581,11 @@
             "reasoning_tokens": 0,
             "replayed": true,
             "request_key": "7336814a8908ef95da957326beac03a7b39ab12e01b39f820550e83c0365bac7",
+            "reserved_tokens": 1412,
             "round_id": "fixture-round",
             "state": "completed",
-            "task_id": "labelled-fixture-task"
+            "task_id": "labelled-fixture-task",
+            "token_upper_bound": 55
           }
         ],
         "completed_provider": "fixture-b",
@@ -608,6 +614,7 @@
       "evidence_kind": "synthetic_decision_fixtures_not_checkpoint_evaluation",
       "null": {
         "candidate_rate": 1.0,
+        "confidence_level": 0.95,
         "decision": "NO_SHIP_INCONCLUSIVE",
         "effect": 0.0,
         "evidence_kind": "synthetic_decision_fixture",
@@ -644,6 +651,7 @@
       },
       "train_gain_heldout_loss": {
         "candidate_rate": 0.0,
+        "confidence_level": 0.95,
         "decision": "NO_SHIP_REGRESSION",
         "effect": -1.0,
         "evidence_kind": "synthetic_heldout_loss_fixture_train_gain_is_irrelevant",
@@ -680,6 +688,7 @@
       },
       "worse": {
         "candidate_rate": 0.0,
+        "confidence_level": 0.95,
         "decision": "NO_SHIP_REGRESSION",
         "effect": -1.0,
         "evidence_kind": "synthetic_decision_fixture",
@@ -722,13 +731,13 @@
       "exit_code": 1,
       "failure": {
         "error": "deliberately injected unhandled infrastructure failure",
-        "observed_unix_ms": 1792059332988,
+        "observed_unix_ms": 1792184406942,
         "promotion": "incumbent_retained",
         "status": "FAILURE"
       },
-      "failure_report": "reports/drill-work/428ca7c0-1535-4b5d-8787-57bc7da3cd8b/infrastructure/reports/last-failure.json",
+      "failure_report": "reports/drill-work/eefaa23d-8447-4e30-8346-dccda078e668/infrastructure/reports/last-failure.json",
       "isolated_routing_unchanged": true,
-      "stdout": "{\"error\":\"deliberately injected unhandled infrastructure failure\",\"observed_unix_ms\":1792059332988,\"promotion\":\"incumbent_retained\",\"status\":\"FAILURE\"}\n"
+      "stdout": "{\"error\":\"deliberately injected unhandled infrastructure failure\",\"observed_unix_ms\":1792184406942,\"promotion\":\"incumbent_retained\",\"status\":\"FAILURE\"}\n"
     }
   }
 }

@@ -1,0 +1,33 @@
+{
+  "run_id": "95517f8e-4d0a-446d-9ca8-d5d17a5e88f8",
+  "task_id": "encoding.caesar",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error[E0308]: mismatched types\n  --> /candidate/main.rs:11:46\n   |\n11 |         let shifted_ascii_val = (ascii_val + shift) % 26;\n   |                                              ^^^^^ expected `u32`, found `i64`\n\nerror[E0277]: cannot add `i64` to `u32`\n  --> /candidate/main.rs:11:44\n   |\n11 |         let shifted_ascii_val = (ascii_val + shift) % 26;\n   |                                            ^ no implementation for `u32 + i64`\n   |\n   = help: the trait `Add<i64>` is not implemented for `u32`\nhelp: the following other types implement trait `Add<Rhs>`\n  --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/ops/arith.rs:98:8\n   |\n   = note: `u32` implements `Add`\n  ::: /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/ops/arith.rs:113:0\n   |\n   = note: in this macro invocation\n  --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/internal_macros.rs:22:8\n   |\n   = note: `&u32` implements `Add<u32>`\n  ::: /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/internal_macros.rs:33:8\n   |\n   = note: `u32` implements `Add<&u32>`\n  ::: /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/internal_macros.rs:44:8\n   |\n   = note: `&u32` implements `Add`\n   = note: this error originates in the macro `add_impl` (in Nightly builds, run with -Z macro-backtrace for more info)\n\nerror[E0604]: only `u8` can be cast as `char`, not `u32`\n  --> /candidate/main.rs:13:28\n   |\n13 |         let shifted_char = (shifted_ascii_val - 97 + 26) as char;\n   |                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ invalid cast\n   |\nhelp: consider using `char::from_u32` instead\n   |\n13 -         let shifted_char = (shifted_ascii_val - 97 + 26) as char;\n13 +         let shifted_char = char::from_u32((shifted_ascii_val - 97 + 26));\n   |\n\nerror: aborting due to 3 previous errors\n\nSome errors have detailed explanations: E0277, E0308, E0604.\nFor more information about an error, try `rustc --explain E0277`.\n"
+  ],
+  "cases_total": 5,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "0bf995b5f69865792503015f6af52b457c861b679877956e939c2137ddb4a562",
+  "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+  "oracle_sha256": "a734f6d465714cbebb072790fedff161d2fc28cbb257b3d04cee0feaf8b5b5fe",
+  "code_sha256": "3395a8033ca03683ae240d959b98fb2e23e1aa55b62526dcfeb874dcc84dc151",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:1",
+    "expected_image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/comparative/control-development/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/comparative/control-development/sandbox/95517f8e-4d0a-446d-9ca8-d5d17a5e88f8.audit.json",
+  "audit_sha256": "1e857b60282f4e28ca0ac47dccf225822649588d177c5a6039ee5e790358c750",
+  "failure": "compilation failed: error[E0308]: mismatched types\n  --> /candidate/main.rs:11:46\n   |\n11 |         let shifted_ascii_val = (ascii_val + shift) % 26;\n   |                                              ^^^^^ expected `u32`, found `i64`\n\nerror[E0277]: cannot add `i64` to `u32`\n  --> /candidate/main.rs:11:44\n   |\n11 |         let shifted_ascii_val = (ascii_val + shift) % 26;\n   |                                            ^ no implementation for `u32 + i64`\n   |\n   = help: the trait `Add<i64>` is not implemented for `u32`\nhelp: the following other types implement trait `Add<Rhs>`\n  --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/ops/arith.rs:98:8\n   |\n   = note: `u32` implements `Add`\n  ::: /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/ops/arith.rs:113:0\n   |\n   = note: in this macro invocation\n  --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/internal_macros.rs:22:8\n   |\n   = note: `&u32` implements `Add<u32>`\n  ::: /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/internal_macros.rs:33:8\n   |\n   = note: `u32` implements `Add<&u32>`\n  ::: /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/internal_macros.rs:44:8\n   |\n   = note: `&u32` implements `Add`\n   = note: this error originates in the macro `add_impl` (in Nightly builds, run with -Z macro-backtrace for more info)\n\nerror[E0604]: only `u8` can be cast as `char`, not `u32`\n  --> /candidate/main.rs:13:28\n   |\n13 |         let shifted_char = (shifted_ascii_val - 97 + 26) as char;\n   |                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ invalid cast\n   |\nhelp: consider using `char::from_u32` instead\n   |\n13 -         let shifted_char = (shifted_ascii_val - 97 + 26) as char;\n13 +         let shifted_char = char::from_u32((shifted_ascii_val - 97 + 26));\n   |\n\nerror: aborting due to 3 previous errors\n\nSome errors have detailed explanations: E0277, E0308, E0604.\nFor more information about an error, try `rustc --explain E0277`.\n",
+  "duration_ms": 5591,
+  "timeout_evidence": null
+}

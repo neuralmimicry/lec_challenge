@@ -1,0 +1,64 @@
+{
+  "schema_version": 3,
+  "run_id": "c8cb3ab6-d7ac-4eb8-9587-4243b0b4f144",
+  "ownership_nonce": "33acf382-ec19-4da5-a716-00a6447f0850",
+  "attempt_key": "cfa57648-c7f2-4adc-a0da-bfb0f81cc768",
+  "receipt_path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox/cfa57648-c7f2-4adc-a0da-bfb0f81cc768.prepared.json",
+  "report_path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox/c8cb3ab6-d7ac-4eb8-9587-4243b0b4f144.json",
+  "task": {
+    "id": "intervals.merge",
+    "source_id": "private-intervals-v1",
+    "lineage_id": "local-contract-pack-03",
+    "split": "train",
+    "specification": "Input is an array of [start,end] integer half-open intervals with start<end. Sort and merge overlapping or touching intervals; return sorted disjoint intervals.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "74bc4bd864f39368a4146989a6c7875a8e64f7b6ef8eaab3e2a2883c67af0c93",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": [
+          [
+            3,
+            5
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            8,
+            9
+          ]
+        ],
+        "expected": [
+          [
+            1,
+            5
+          ],
+          [
+            8,
+            9
+          ]
+        ]
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "use serde_json::Value;\n\nfn solve(input: serde_json::Value) -> serde_json::Value {\n    let mut intervals = Vec::new();\n    for interval in input.as_array() {\n        let start = interval[0].as_i64().unwrap();\n        let end = interval[1].as_i64().unwrap();\n        intervals.push((start, end));\n    }\n\n    intervals.sort_unstable_by(|a, b| a.0.cmp(&b.0));\n\n    let mut result = Vec::new();\n    let mut current_start = None;\n    let mut current_end = None;\n\n    for interval in intervals {\n        if current_start.is_none() {\n            current_start = Some(interval.0);\n        } else if interval.0 > current_end {\n            result.push((current_start.unwrap(), current_end.unwrap()));\n            current_start = Some(interval.0);\n        }\n    }\n\n    if current_start.is_some() {\n        result.push((current_start.unwrap(), current_end.unwrap()));\n    }\n\n    serde_json::Value::from(result)\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox"
+  },
+  "code_sha256": "60064936c088a11be44aa81186bddbb3c711cdbb5fa6f3580827d21317f78e3b",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

@@ -1,0 +1,38 @@
+{
+  "model_id": "qwen3-4b-instruct-2507-q4_k_m",
+  "task_id": "money.format",
+  "source_id": "private-money-v1",
+  "specification_sha256": "9213c0114b6d1a6399d5db8ec1a7dcf0f9087c2d65b589e583ee9b1cba646aa9",
+  "seed": 1729,
+  "plan_sha256": "6d343a1ee585d9daf2a7fbaea768580a60e310abaf7186964443ef83a9a1013d",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is signed cents, magnitude <=100000000. Return pounds with optional minus and exactly two fractional digits.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":-1230,\"expected\":\"-12.30\"}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    match input {\n        serde_json::Value::Number(n) => {\n            let signed_cents: i64 = match n {\n                serde_json::Number::Signed(s) => s.as_i64().unwrap(),\n                serde_json::Number::Unsigned(u) => u.as_u64().unwrap() as i64,\n                _ => 0,\n            };\n\n            let pounds = signed_cents / 100;\n            let fractional = signed_cents % 100;\n\n            let mut result = String::new();\n            if pounds < 0 {\n                result.push('-');\n            }\n            result.push_str(&format!(\"{:}\", pounds.abs()));\n            if fractional != 0 {\n                result.push('.');\n                result.push_str(&format!(\"{:02}\", fractional));\n            } else {\n                result.push('.');\n                result.push('0');\n                result.push('0');\n            }\n\n            serde_json::Value::String(result)\n        }\n        serde_json::Value::Array(arr) => {\n            let mut result = Vec::new();\n            for item in arr {\n                result.push(solve(item));\n            }\n            serde_json::Value::Array(result)\n        }\n        serde_json::Value::Object(obj) => {\n            let mut result = std::collections::HashMap::new();\n            for (k, v) in obj {\n                result.insert(k, solve(v));\n            }\n            serde_json::Value::Object(result)\n        }\n        serde_json::Value::Null => serde_json::Value::Null,\n        serde_json::Value::Bool(b) => serde_json::Value::Bool(b),\n    }\n}\n```",
+    "checkpoint_id": "2fde00ce69dd4899c70d020845e2638353015bba0fdf161b3eb965f2bca4464e",
+    "finish_reason": "stop",
+    "input_tokens": 214,
+    "output_tokens": 352,
+    "elapsed_ms": 31659,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison/qwen3-4b-instruct-2507-q4_k_m/money.format.generation.json",
+    "sha256": "0b4e6b66a68fd6f501b4045bea62ff469d9d24369a56784b35c9c9a3e1d6df9a",
+    "bytes": 5434
+  },
+  "sandbox_report": {
+    "path": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison/sandbox/ab766e89-73c9-4f13-be67-67acc7bb7991.json",
+    "sha256": "361a9a5a03b18f86075a529a8a5c9b1724eca1141c10cfacef66e926f927efd4",
+    "bytes": 4943
+  },
+  "grading_error": null,
+  "success": false
+}

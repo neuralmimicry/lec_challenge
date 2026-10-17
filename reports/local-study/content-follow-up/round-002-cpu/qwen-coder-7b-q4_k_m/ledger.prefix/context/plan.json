@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "task_id": "ledger.prefix",
+  "teacher_id": "qwen-coder-7b-q4_k_m",
+  "content": "context",
+  "request": {
+    "prompt": "A verified example from the same training source follows. It is a different task; implement only the new contract.\nExample contract: Input is an integer array. Return [minimum,maximum], or null for an empty array.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nExample solution:\n```rust\nuse serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    match input {\n        Value::Array(arr) if arr.is_empty() => Value::Null,\n        Value::Array(arr) => {\n            let mut min_val = i64::MAX;\n            let mut max_val = i64::MIN;\n            for item in arr {\n                if let Value::Number(num) = item {\n                    if let Some(n) = num.as_i64() {\n                        if n < min_val {\n                            min_val = n;\n                        }\n                        if n > max_val {\n                            max_val = n;\n                        }\n                    }\n                }\n            }\n            Value::Array(vec![Value::Number(serde_json::Number::from(min_val)), Value::Number(serde_json::Number::from(max_val))])\n        },\n        _ => Value::Null,\n    }\n}\n```\nNew task:\nWrite Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an integer array. Return inclusive prefix sums; empty input returns []. Bounds: length <=64 and absolute values <=10000.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[2,-4,8],\"expected\":[2,-2,6]}]",
+    "max_new_tokens": 768,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "runtime": {
+    "device": "cpu",
+    "dtype": "f32"
+  },
+  "context_tokens": 1536,
+  "teacher_assets": {
+    "path": "offline_bundle/comparative/qwen-coder-7b-q4_k_m/gguf-assets.json",
+    "sha256": "606bfac02a103d208ccef73067cb6a4581e9b099e19bc9ed8e2021ebb1143114",
+    "bytes": 1206
+  },
+  "supporting_sample_ids": [
+    "6f54a188344a4c4834c5a9bfe0969e33003547ea371fbf2ba03a4e5fd88d6e07"
+  ],
+  "feedback_candidate": null,
+  "feedback_summary": null,
+  "sandbox": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/content-follow-up/round-002-cpu/sandbox"
+  },
+  "preflight": {
+    "path": "reports/local-study/content-follow-up/round-002-cpu/sandbox-preflight.json",
+    "sha256": "18f7479f59c7e1779eaab3e85391ca3eba86123908af3e983b26effe722ad1d1",
+    "bytes": 1290
+  },
+  "engine_binary_sha256": "b45d32ca11ccc84633ab2de0bb9d195dc38a61c78e2ef1a87c03ea90091aa301"
+}

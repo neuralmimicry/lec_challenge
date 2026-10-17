@@ -1,0 +1,38 @@
+{
+  "model_id": "qwen3-4b-instruct-2507-q4_k_m",
+  "task_id": "money.split",
+  "source_id": "private-money-v1",
+  "specification_sha256": "639498c83f5e053773149696cb44aea438f77b20c7b0e571d728085fde4db87b",
+  "seed": 1729,
+  "plan_sha256": "6d343a1ee585d9daf2a7fbaea768580a60e310abaf7186964443ef83a9a1013d",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input [cents,n] has nonnegative cents and n>=1. Split into n integer shares differing by at most one, with larger shares first. The number of shares is at most 64.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[10,3],\"expected\":[4,3,3]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let input_array: Vec<i64> = match input {\n        serde_json::Value::Array(arr) => arr.into_iter().map(|v| v.as_i64().unwrap()).collect(),\n        _ => panic!(\"Input must be an array\"),\n    };\n\n    let cents = input_array[0];\n    let n = input_array[1];\n\n    // Validate inputs\n    if cents < 0 || n < 1 || n > 64 {\n        panic!(\"Invalid input: cents must be nonnegative and n >= 1, n <= 64\");\n    }\n\n    // Calculate base share and remainder\n    let base = cents / n;\n    let remainder = cents % n;\n\n    // Create shares: remainder shares of (base + 1), rest of base\n    let mut shares = vec![base; n];\n    for i in 0..remainder {\n        shares[i] += 1;\n    }\n\n    // Convert back to JSON array\n    serde_json::to_value(shares).unwrap()\n}\n```",
+    "checkpoint_id": "2fde00ce69dd4899c70d020845e2638353015bba0fdf161b3eb965f2bca4464e",
+    "finish_reason": "stop",
+    "input_tokens": 226,
+    "output_tokens": 233,
+    "elapsed_ms": 29713,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison/qwen3-4b-instruct-2507-q4_k_m/money.split.generation.json",
+    "sha256": "210efa29ab6969e95337d1776e79c08103c88b6a93710ffef263cb1f3817180c",
+    "bytes": 4701
+  },
+  "sandbox_report": {
+    "path": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison/sandbox/83ef2ef0-ea38-40cb-bb87-96591f954d3b.json",
+    "sha256": "cdebf1b2f959a4b4b589d6634d4bf353c580676e68282c28927f2b1360f80c87",
+    "bytes": 4826
+  },
+  "grading_error": null,
+  "success": false
+}

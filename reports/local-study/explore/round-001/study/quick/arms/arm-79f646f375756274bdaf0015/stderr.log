@@ -1,0 +1,37 @@
+Hub hashing model.safetensors: 0/1178623988 bytes, 0.00 MiB/s, ETA unknown (publisher checksum pending)
+Hub hashing model.safetensors: 0/1178623988 bytes, 0.00 MiB/s, ETA unknown (publisher checksum pending)
+BitNet loading official packed tensors on CPU F32; no GPU fallback
+BitNet decoded official ternary layer 1/30 on CPU
+BitNet decoded official ternary layer 2/30 on CPU
+BitNet decoded official ternary layer 3/30 on CPU
+BitNet decoded official ternary layer 4/30 on CPU
+BitNet decoded official ternary layer 5/30 on CPU
+BitNet decoded official ternary layer 6/30 on CPU
+BitNet decoded official ternary layer 7/30 on CPU
+BitNet decoded official ternary layer 8/30 on CPU
+BitNet decoded official ternary layer 9/30 on CPU
+BitNet decoded official ternary layer 10/30 on CPU
+BitNet decoded official ternary layer 11/30 on CPU
+BitNet decoded official ternary layer 12/30 on CPU
+BitNet decoded official ternary layer 13/30 on CPU
+BitNet decoded official ternary layer 14/30 on CPU
+BitNet decoded official ternary layer 15/30 on CPU
+BitNet decoded official ternary layer 16/30 on CPU
+BitNet decoded official ternary layer 17/30 on CPU
+BitNet decoded official ternary layer 18/30 on CPU
+BitNet decoded official ternary layer 19/30 on CPU
+BitNet decoded official ternary layer 20/30 on CPU
+BitNet decoded official ternary layer 21/30 on CPU
+BitNet decoded official ternary layer 22/30 on CPU
+BitNet decoded official ternary layer 23/30 on CPU
+BitNet decoded official ternary layer 24/30 on CPU
+BitNet decoded official ternary layer 25/30 on CPU
+BitNet decoded official ternary layer 26/30 on CPU
+BitNet decoded official ternary layer 27/30 on CPU
+BitNet decoded official ternary layer 28/30 on CPU
+BitNet decoded official ternary layer 29/30 on CPU
+BitNet decoded official ternary layer 30/30 on CPU
+distillation: durable update 1/3 loss=2.047272 gradient_norm=0.004497
+distillation: durable update 2/3 loss=2.524166 gradient_norm=0.015108
+distillation: durable update 3/3 loss=2.326797 gradient_norm=0.041668
+FAILURE: BitNet QAT changed latent adapters but no effective ternary weights; declared update budget exhausted, progress preserved

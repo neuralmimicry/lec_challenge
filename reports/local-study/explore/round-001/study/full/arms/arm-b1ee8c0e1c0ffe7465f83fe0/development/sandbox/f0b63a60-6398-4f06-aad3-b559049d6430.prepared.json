@@ -1,0 +1,46 @@
+{
+  "schema_version": 3,
+  "run_id": "fde9d578-551d-4005-8480-e04dd36c2563",
+  "ownership_nonce": "a7877de3-1095-46de-b1a2-e1fa9625dab9",
+  "attempt_key": "f0b63a60-6398-4f06-aad3-b559049d6430",
+  "receipt_path": "reports/local-study/explore/round-001/study/full/arms/arm-b1ee8c0e1c0ffe7465f83fe0/development/sandbox/f0b63a60-6398-4f06-aad3-b559049d6430.prepared.json",
+  "report_path": "reports/local-study/explore/round-001/study/full/arms/arm-b1ee8c0e1c0ffe7465f83fe0/development/sandbox/fde9d578-551d-4005-8480-e04dd36c2563.json",
+  "task": {
+    "id": "encoding.hex_encode",
+    "source_id": "private-encoding-v1",
+    "lineage_id": "local-contract-pack-14",
+    "split": "development",
+    "specification": "Input is an array of bytes (integers 0..255). Return concatenated two-digit lowercase hexadecimal.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "dc43dce8ef138a6d990fb8d5450f3fed524046e2e019c18509d025f22b594956",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": [
+          0,
+          15,
+          255
+        ],
+        "expected": "000fff"
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "use serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let bytes = input.as_array().unwrap().iter().map(|x| x.as_i64().unwrap()).collect();\n    let mut hex = String::new();\n    for &byte in bytes {\n        hex.push(format!(\"{:x}\", byte).to_lowercase());\n    }\n    Value::String(hex)\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/explore/round-001/study/full/arms/arm-b1ee8c0e1c0ffe7465f83fe0/development/sandbox"
+  },
+  "code_sha256": "9c601f7c30c8c22e6662bbd1137c93cb6cdfe6b669cfb14706242d8b1f5a9f7a",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

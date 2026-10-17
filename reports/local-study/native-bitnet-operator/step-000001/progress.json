@@ -1,0 +1,30 @@
+{
+  "freeze_sha256": "901b52221f2440e87e25db3fe65ecec4aa632d99e70d74f381810d6fc6ab5b31",
+  "steps": 1,
+  "adapter": {
+    "path": "reports/local-study/native-bitnet-operator/step-000001/adapter.safetensors",
+    "sha256": "98a9081ec13abbfeb4c9906395687202589b5f5af078c003924755e2934c8eaa",
+    "bytes": 2009448
+  },
+  "optimizer": {
+    "path": "reports/local-study/native-bitnet-operator/step-000001/optimizer.safetensors",
+    "sha256": "7b93ccc802f68ba97199bb1341510bad237975623121eccd03e0d0ef7b1264ee",
+    "bytes": 4019504
+  },
+  "initial_adapter_sha256": "a83ebffa8cd35331a61b484d9a2b7c3ceeb9ed160ba58110e7ee9a1fc8c7a19a",
+  "losses": [
+    3.0413382053375244
+  ],
+  "gradient_norms": [
+    0.006901837382305186
+  ],
+  "component_losses": [
+    {
+      "sequence_sft": 3.0413382053375244
+    }
+  ],
+  "alignment_diagnostics": [],
+  "sample_ids": [
+    "9a709fd0afa880d7d61490074636b6a836aa05da5d9a338a46aa8aca31efdce4"
+  ]
+}

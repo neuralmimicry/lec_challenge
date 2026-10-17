@@ -2,6 +2,7 @@
 use super::evidence::{frozen_runtime, verify_plan_identity, verify_saved_trials};
 use super::selection::qualify_trial;
 use super::*;
+use std::time::Duration;
 
 fn primary_result_status(passed: u64, errors: u64, minimum_pass_rate: f64) -> &'static str {
     if errors > 0 {
@@ -16,6 +17,39 @@ fn primary_result_status(passed: u64, errors: u64, minimum_pass_rate: f64) -> &'
 }
 
 async fn prune_scored(output: &Path, state: &mut State, config: &SearchConfig) -> Result<()> {
+    prune_scored_with_probe(output, state, config, || async {
+        let Ok(client) = reqwest::Client::builder()
+            .redirect(reqwest::redirect::Policy::none())
+            .connect_timeout(Duration::from_secs(3))
+            .timeout(Duration::from_secs(5))
+            .build()
+        else {
+            return false;
+        };
+        client
+            .head("https://huggingface.co/")
+            .send()
+            .await
+            .is_ok_and(|response| response.status().is_success())
+    })
+    .await
+}
+
+pub(super) async fn prune_scored_with_probe<F, Fut>(
+    output: &Path,
+    state: &mut State,
+    config: &SearchConfig,
+    probe: F,
+) -> Result<()>
+where
+    F: Fn() -> Fut,
+    Fut: std::future::Future<Output = bool>,
+{
+    // Cached-only includes explicit offline and detected connectivity loss. Do not
+    // even construct a network client in this mode, and preserve every weight.
+    if state.cached_only {
+        return Ok(());
+    }
     let keep = retained(state, config);
     let protected = state
         .trials
@@ -41,6 +75,20 @@ async fn prune_scored(output: &Path, state: &mut State, config: &SearchConfig) -
         .map(|(i, t)| (i, t.clone()))
         .collect::<Vec<_>>();
     for (index, trial) in eligible {
+        // Recheck before each destructive operation. Cached success from an
+        // earlier download cannot establish that deleted weights remain obtainable.
+        let connected = probe().await;
+        if !connected {
+            state.cached_only = true;
+            state.connectivity_reason = Some(
+                "No confirmed Hub connectivity; all model weights and caches preserved".into(),
+            );
+            state
+                .events
+                .push(serde_json::json!({"kind":"pruning_skipped_no_connectivity"}));
+            save(output, state).await?;
+            return Ok(());
+        }
         eprintln!(
             "teacher-search: pruning scored inactive model={} (metadata/reports retained)",
             trial.id

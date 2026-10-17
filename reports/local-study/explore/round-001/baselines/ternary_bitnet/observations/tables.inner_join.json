@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "51e2a803f86359125c31f16c1d0da7fc35ac18527b51f85f956f4872bf05792e",
+  "task_id": "tables.inner_join",
+  "source_id": "private-tables-v1",
+  "success": false,
+  "raw_generation": {
+    "path": "reports/local-study/explore/round-001/baselines/ternary_bitnet/generations/tables.inner_join.json",
+    "sha256": "a1ce806e57b1706b6244a5f88e545153a3bc015d2fb613e5f1ddefcfba27d461",
+    "bytes": 1404
+  },
+  "sandbox_report": null,
+  "grading_error": null
+}

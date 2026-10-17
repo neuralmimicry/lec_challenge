@@ -1,0 +1,38 @@
+{
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "runtime": "podman",
+  "controls": {
+    "effective": {
+      "cpu_max": "100000 100000",
+      "memory_max": "536870912",
+      "network_none": true,
+      "pids_max": "64",
+      "root_write_denied": true,
+      "root_write_errno": 30,
+      "swap_max": "0",
+      "uid_status": "Uid:\t65532\t65532\t65532\t65532"
+    },
+    "host_timeout_asserted": true,
+    "memory_pressure_exit": 137,
+    "pids": {
+      "children_created": 63,
+      "creation_denied": true
+    },
+    "reference_run_id": "a09ea8d5-6e91-4b65-9435-f01508c86b67",
+    "timeout_evidence": {
+      "cleanup_ms": 9807,
+      "container_removed": true,
+      "deadline_ms": 1000,
+      "kernel_proof": {
+        "receipt_path": "reports/local-study/regraded-v3-001/sandbox/lec-deadline-90f29238-627b-4000-a80d-5a69df2e5b86.probe-proof.json",
+        "receipt_sha256": "da9bfde3ef16e06e10d1761436ea0efc5e32338b00f4d2969cca11e42d8b5732"
+      },
+      "kill_acknowledged": true,
+      "kill_method": "preopened_exact_owned_cgroup_v2_kill",
+      "kill_request_ms": 0,
+      "wait_elapsed_ms": 1000
+    }
+  },
+  "probes_passed": true
+}

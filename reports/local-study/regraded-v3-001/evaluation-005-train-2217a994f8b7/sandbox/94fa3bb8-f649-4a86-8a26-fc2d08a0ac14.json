@@ -1,0 +1,40 @@
+{
+  "run_id": "94fa3bb8-f649-4a86-8a26-fc2d08a0ac14",
+  "task_id": "ledger.sum",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error[E0283]: type annotations needed\n --> /candidate/main.rs:5:9\n  |\n5 |     let sum = numbers.iter().sum();\n  |         ^^^                  --- type must be known at this point\n  |\n  = note: the type must implement `Sum<&i64>`\n  = help: the following types implement trait `Sum<A>`:\n            `Duration` implements `Sum<&'a Duration>`\n            `Duration` implements `Sum`\n            `Option<T>` implements `Sum<Option<U>>`\n            `Result<T, E>` implements `Sum<Result<U, E>>`\n            `Saturating<u128>` implements `Sum<&'a Saturating<u128>>`\n            `Saturating<u128>` implements `Sum`\n            `Saturating<u16>` implements `Sum<&'a Saturating<u16>>`\n            `Saturating<u16>` implements `Sum`\n          and 88 others\nnote: required by a bound in `std::iter::Iterator::sum`\n --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/iter/traits/iterator.rs:3665:4\nhelp: consider giving `sum` an explicit type\n  |\n5 |     let sum: /* Type */ = numbers.iter().sum();\n  |            ++++++++++++\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0283`.\n"
+  ],
+  "cases_total": 14,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "a369673f8e1a5469d17121d1cf9a96be07e2a5e692e22f30b4dc83f369a71807",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/regraded-v3-001/evaluation-005-train-2217a994f8b7/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/regraded-v3-001/evaluation-005-train-2217a994f8b7/sandbox/94fa3bb8-f649-4a86-8a26-fc2d08a0ac14.audit.json",
+  "audit_sha256": "94fa2461241590cc996af5719f972758c9985e345057f9475510771fd7de1672",
+  "failure": "compilation failed: error[E0283]: type annotations needed\n --> /candidate/main.rs:5:9\n  |\n5 |     let sum = numbers.iter().sum();\n  |         ^^^                  --- type must be known at this point\n  |\n  = note: the type must implement `Sum<&i64>`\n  = help: the following types implement trait `Sum<A>`:\n            `Duration` implements `Sum<&'a Duration>`\n            `Duration` implements `Sum`\n            `Option<T>` implements `Sum<Option<U>>`\n            `Result<T, E>` implements `Sum<Result<U, E>>`\n            `Saturating<u128>` implements `Sum<&'a Saturating<u128>>`\n            `Saturating<u128>` implements `Sum`\n            `Saturating<u16>` implements `Sum<&'a Saturating<u16>>`\n            `Saturating<u16>` implements `Sum`\n          and 88 others\nnote: required by a bound in `std::iter::Iterator::sum`\n --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/iter/traits/iterator.rs:3665:4\nhelp: consider giving `sum` an explicit type\n  |\n5 |     let sum: /* Type */ = numbers.iter().sum();\n  |            ++++++++++++\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0283`.\n",
+  "duration_ms": 16418,
+  "timeout_evidence": null,
+  "lifecycle_evidence": {
+    "receipt_path": "reports/local-study/regraded-v3-001/evaluation-005-train-2217a994f8b7/sandbox/94fa3bb8-f649-4a86-8a26-fc2d08a0ac14.lifecycle.json",
+    "receipt_sha256": "7758b947f80543241f4bc8c42410a63f87e11afa6c8907e327f458330e4e43bf"
+  }
+}

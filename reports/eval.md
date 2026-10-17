@@ -6,7 +6,7 @@ Full round unavailable or failed: upstream real recordings, rights-cleared datas
 
 Evidence: invalid_or_missing_evidence. Incumbent: unavailable; candidate: unavailable; difference: unavailable.
 
-95% source t interval: unavailable. Source bootstrap: unavailable. Ship margin: 2.00 points.
+Source t interval (95.00%): unavailable. Source bootstrap (95.00%): unavailable. Ship margin: 2.00 points.
 
 0 sources; 0 tasks; 0 paired observations. Seeds do not increase the independent source count.
 

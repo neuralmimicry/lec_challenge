@@ -1,0 +1,34 @@
+{
+  "run_id": "48d73589-6539-48c9-80c9-bbeb830f25d0",
+  "task_id": "encoding.hex_encode",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: warning: unused import: `serde_json::Value`\n --> /candidate/main.rs:1:5\n  |\n1 | use serde_json::Value;\n  |     ^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0599]: no method named `as_bytes` found for enum `Value` in the current scope\n --> /candidate/main.rs:5:23\n  |\n5 |     for byte in input.as_bytes() {\n  |                       ^^^^^^^^ method not found in `Value`\n  |\nnote: the method `as_bytes` exists on the type `std::string::String`\n --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/alloc/src/string.rs:1461:4\n\nerror[E0308]: mismatched types\n --> /candidate/main.rs:7:25\n  |\n7 |         result.push_str(hex);\n  |                -------- ^^^ expected `&str`, found `String`\n  |                |\n  |                arguments to this method are incorrect\n  |\nnote: method defined here\n --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/alloc/src/string.rs:1104:11\nhelp: consider borrowing here\n  |\n7 |         result.push_str(&hex);\n  |                         +\n\nerror: aborting due to 2 previous errors; 1 warning emitted\n\nSome errors have detailed explanations: E0308, E0599.\nFor more information about an error, try `rustc --explain E0308`.\n"
+  ],
+  "cases_total": 5,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "4b2556745b303526f354ded7f2c473b77f6da0c99a77f0a493c7272a8d800aac",
+  "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "d9b1dd9ab70661130ddc6102a2bef3a1d52e22558d7f11b88fa2a623ac7bbdd5",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "controller_version": 2,
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:1",
+    "expected_image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/study-evaluation-resume-qa/round-001/evaluation/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/study-evaluation-resume-qa/round-001/evaluation/sandbox/48d73589-6539-48c9-80c9-bbeb830f25d0.audit.json",
+  "audit_sha256": "394f754794dbc07d37cbe829e9460d5eaf7bba2d98e1110aeeee0b0dfc463705",
+  "failure": "compilation failed: warning: unused import: `serde_json::Value`\n --> /candidate/main.rs:1:5\n  |\n1 | use serde_json::Value;\n  |     ^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0599]: no method named `as_bytes` found for enum `Value` in the current scope\n --> /candidate/main.rs:5:23\n  |\n5 |     for byte in input.as_bytes() {\n  |                       ^^^^^^^^ method not found in `Value`\n  |\nnote: the method `as_bytes` exists on the type `std::string::String`\n --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/alloc/src/string.rs:1461:4\n\nerror[E0308]: mismatched types\n --> /candidate/main.rs:7:25\n  |\n7 |         result.push_str(hex);\n  |                -------- ^^^ expected `&str`, found `String`\n  |                |\n  |                arguments to this method are incorrect\n  |\nnote: method defined here\n --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/alloc/src/string.rs:1104:11\nhelp: consider borrowing here\n  |\n7 |         result.push_str(&hex);\n  |                         +\n\nerror: aborting due to 2 previous errors; 1 warning emitted\n\nSome errors have detailed explanations: E0308, E0599.\nFor more information about an error, try `rustc --explain E0308`.\n",
+  "duration_ms": 9763,
+  "timeout_evidence": null
+}

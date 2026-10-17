@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "initial_plan": {
+    "path": "reports/local-study/explore/round-001/cohorts/76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c/rollouts/stock.mode/student-plan.json",
+    "sha256": "e435bd8575eee202d40413cee51157c9a77d28ec4673da90a5380568c9825d57",
+    "bytes": 5196
+  },
+  "student_raw": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/stock.mode/student-raw.json",
+    "sha256": "e452d59767d905f8a7d8a516ed2b5a3d09d87a542de779ea18bfa1908e9eb29a",
+    "bytes": 1862
+  },
+  "student_grade": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox/0b018396-d92a-467b-9e93-06b264df3e53.json",
+    "sha256": "64117c2324a006ac1af4b7ecf29e4f3f5741cdcedeabc7bd889509d4bf3ddf1a",
+    "bytes": 5352
+  },
+  "teacher_id": "student-self-f9523886352217de",
+  "teacher_assets": {
+    "path": "offline_bundle/base/assets.json",
+    "sha256": "54304e7f41519a4196674cba5e86593802f852b2b47882d6c19706f85f303ad4",
+    "bytes": 788
+  },
+  "teacher_checkpoint": null,
+  "runtime": {
+    "device": {
+      "cuda": {
+        "ordinal": 0
+      }
+    },
+    "dtype": "f32"
+  },
+  "request": {
+    "prompt": "Verified different training contract: Input is an array of ASCII strings. Return first occurrences only, preserving their original order.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nVerified solution:\n// Plan:\n// 1. Parse the input JSON array of strings.\n// 2. Use a HashSet to track seen strings.\n// 3. Iterate through the input array, collecting strings that haven't been seen yet.\n// 4. Convert the result back to a JSON array and return it.\n\nuse serde_json::{Value, json};\n\npub fn solve(input: Value) -> Value {\n    // Ensure the input is an array\n    let arr = input.as_array().expect(\"Input must be an array\");\n    \n    // Create a HashSet to track seen strings\n    let mut seen = std::collections::HashSet::new();\n    \n    // Collect first occurrences of strings\n    let result: Vec<Value> = arr.iter()\n        .filter_map(|item| {\n            if let Value::String(s) = item {\n                if seen.insert(s.clone()) {\n                    Some(item.clone())\n                } else {\n                    None\n                }\n            } else {\n                None\n            }\n        })\n        .collect();\n    \n    // Convert the result back to a JSON array\n    json!(result)\n}\nNew task:\nWrite Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an array of ASCII strings. Return the most frequent string, lexicographically smallest on ties; return null if empty.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[\"b\",\"a\",\"b\"],\"expected\":\"b\"}]\nActual frozen student candidate:\n```rust\nuse serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let mut counts = HashMap::new();\n    for item in input.as_array() {\n        let str_item = item.as_str().unwrap();\n        *counts.entry(str_item).or_insert(0) += 1;\n    }\n\n    let mut most_frequent = None;\n    let mut max_count = 0;\n\n    for (str_item, count) in counts {\n        if count > max_count {\n            max_count = count;\n            most_frequent = Some(str_item);\n        }\n    }\n\n    most_frequent\n}\n```\nActual trusted tool feedback:\n{\"bounded_diagnostic_untrusted_data\":\"compilation failed: error[E0433]: cannot find type `HashMap` in this scope\\n --> /candidate/main.rs:4:22\\n  |\\n4 |     let mut counts = HashMap::new();\\n  |                      ^^^^^^^ use of undeclared type `HashMap`\\n  |\\nhelp: consider importing this struct\\n  |\\n1 + use std::collections::HashMap;\\n  |\\n\\nwarning: unused import: `serde_json::Value`\\n --> /candidate/main.rs:1:5\\n  |\\n1 | use serde_json::Value;\\n  |     ^^^^^^^^^^^^^^^^^\\n  |\\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\\n\\nerror[E0599]: no method named `as_str` found for reference `&Vec<Value>` in the current scope\\n --> /candidate/main.rs:6:29\\n  |\\n6 |         let str_item = item.as_str().unwrap();\\n  |                             ^^^^^^\\n  |\\nhelp: there is a method `as_ptr` with a similar name\\n  |\\n6 -         let str_item = item.as_str().unwrap();\\n6 +         let str_item = item.as_ptr().unwrap();\\n  |\\n\\nerror[E0308]: mismatched types\\n  --> /candidate/main.rs:20:5\\n   |\\n 3 | pub fn solve(input: serde_json::Value) -> serde_json::Value {\\n   |                                           ----------------- expected `Value` because of return type\\n...\\n20 |     most_frequent\\n   |     ^^^^^^^^^^^^^ expected `Value`, found `Option<_>`\\n   |\\n   = note: expected enum `Value`\\n              found enum `Option<_>`\\nhelp: consider using `Option::expect` to unwrap the `Option<_>` value, panicking if the value is an `Option::None`\\n   |\\n20 |     most_frequent.expect(\\\"REASON\\\")\\n   |                  +++++++++++++++++\\n\\nerror: aborting due to 3 previous errors; 1 warning emitted\\n\\nSome errors have detailed explanations: E0308, E0433, E0599.\\nFor more information about an error, try `rustc --explain E0308`.\\n\",\"cases_passed\":0,\"cases_total\":6,\"content_role\":\"compilation_feedback_only\",\"original_failure_is_not_a_success\":true,\"passed\":false,\"private_inputs_or_expected_outputs_exposed\":false,\"quarantined\":true,\"run_id\":\"0b018396-d92a-467b-9e93-06b264df3e53\",\"student_generation_complete\":true,\"tool\":\"trusted_container_grader\",\"trace_complete\":false}\nCritique and revise the candidate. Put any short explanation in Rust // comments and return complete compilable Rust source only. Do not invent tool results.",
+    "max_new_tokens": 768,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "supporting_sample_ids": [
+    "6dc94731e5e95193143a54b255e77fbbd4c1827da4c9b1f9866d6e94f0b7d6f1"
+  ]
+}

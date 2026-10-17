@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "passed": false,
+  "evidence_kind": "incomplete_actual_sandbox_sigkill_qa_command",
+  "core_exercise_report": "exercise-report.json",
+  "core_exercise_passed": true,
+  "command_exit_code": 1,
+  "failure": "Final trusted sentinel removal exceeded the QA runtime client's 10-second deadline after the core SIGKILL/recovery assertions had passed.",
+  "subsequent_runtime_observation": "No crash-QA candidate or sentinel remained when inspected after command failure; this observation does not repair the failed command."
+}

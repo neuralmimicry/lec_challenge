@@ -1,0 +1,8 @@
+{
+  "launch_unix_ms": 1792156555942,
+  "owner_pid": 1387915,
+  "prepared_receipt": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox/003201a2-90ae-471d-a4ea-6352beaa2ded.prepared.json",
+  "prepared_sha256": "b907dbddf719da3b5921777e91e176896c66c2cfe52286c61f245883900c19cc",
+  "run_id": "85e0cb9f-b775-495f-a5e1-908d16de8136",
+  "schema_version": 3
+}

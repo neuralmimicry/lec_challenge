@@ -1,0 +1,11 @@
+Here is a simple Rust function that adds two numbers:
+
+
+```rust
+fn add(a: i6, b: i6) -> i6 {
+    a + b
+}
+```
+
+
+This function takes two 64-bit signed integers as input and returns

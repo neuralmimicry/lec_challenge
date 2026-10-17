@@ -1,0 +1,40 @@
+{
+  "run_id": "a8c5ce26-4bac-4696-bfae-edb62d2b1b31",
+  "task_id": "paths.basename",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: warning: unused import: `serde_json::Value`\n --> /candidate/main.rs:1:5\n  |\n1 | use serde_json::Value;\n  |     ^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0308]: mismatched types\n  --> /candidate/main.rs:12:9\n   |\n 3 | pub fn solve(input: serde_json::Value) -> serde_json::Value {\n   |                                           ----------------- expected `Value` because of return type\n...\n12 |         \"/\".to_string()\n   |         ^^^^^^^^^^^^^^^ expected `Value`, found `String`\n   |\nhelp: try wrapping the expression in `serde_json::Value::String`\n   |\n12 |         serde_json::Value::String(\"/\".to_string())\n   |         ++++++++++++++++++++++++++               +\n\nerror[E0308]: mismatched types\n  --> /candidate/main.rs:14:9\n   |\n 3 | pub fn solve(input: serde_json::Value) -> serde_json::Value {\n   |                                           ----------------- expected `Value` because of return type\n...\n14 |         last_nonempty_raw_component.to_string()\n   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `Value`, found `String`\n   |\nhelp: try wrapping the expression in `serde_json::Value::String`\n   |\n14 |         serde_json::Value::String(last_nonempty_raw_component.to_string())\n   |         ++++++++++++++++++++++++++                                       +\n\nerror: aborting due to 2 previous errors; 1 warning emitted\n\nFor more information about this error, try `rustc --explain E0308`.\n"
+  ],
+  "cases_total": 6,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "d226914add126b63c6d4c8be22867e87cc67a5c12c4bae59636a4b9411f78a20",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/regraded-v3-001/evaluation-003-train-f95238863522/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/regraded-v3-001/evaluation-003-train-f95238863522/sandbox/a8c5ce26-4bac-4696-bfae-edb62d2b1b31.audit.json",
+  "audit_sha256": "48571da3eeaf40dce70903ab15e4939f945ea0be3ffc497c8a72504e66e3a61a",
+  "failure": "compilation failed: warning: unused import: `serde_json::Value`\n --> /candidate/main.rs:1:5\n  |\n1 | use serde_json::Value;\n  |     ^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0308]: mismatched types\n  --> /candidate/main.rs:12:9\n   |\n 3 | pub fn solve(input: serde_json::Value) -> serde_json::Value {\n   |                                           ----------------- expected `Value` because of return type\n...\n12 |         \"/\".to_string()\n   |         ^^^^^^^^^^^^^^^ expected `Value`, found `String`\n   |\nhelp: try wrapping the expression in `serde_json::Value::String`\n   |\n12 |         serde_json::Value::String(\"/\".to_string())\n   |         ++++++++++++++++++++++++++               +\n\nerror[E0308]: mismatched types\n  --> /candidate/main.rs:14:9\n   |\n 3 | pub fn solve(input: serde_json::Value) -> serde_json::Value {\n   |                                           ----------------- expected `Value` because of return type\n...\n14 |         last_nonempty_raw_component.to_string()\n   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `Value`, found `String`\n   |\nhelp: try wrapping the expression in `serde_json::Value::String`\n   |\n14 |         serde_json::Value::String(last_nonempty_raw_component.to_string())\n   |         ++++++++++++++++++++++++++                                       +\n\nerror: aborting due to 2 previous errors; 1 warning emitted\n\nFor more information about this error, try `rustc --explain E0308`.\n",
+  "duration_ms": 16390,
+  "timeout_evidence": null,
+  "lifecycle_evidence": {
+    "receipt_path": "reports/local-study/regraded-v3-001/evaluation-003-train-f95238863522/sandbox/a8c5ce26-4bac-4696-bfae-edb62d2b1b31.lifecycle.json",
+    "receipt_sha256": "43f6e95f33e707cf6962bb6f69e20093e72f0fd9501950865a240813c63b2cd0"
+  }
+}

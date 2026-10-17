@@ -1,0 +1,185 @@
+{
+  "schema_version": 2,
+  "evidence_kind": "frozen_original_bitnet_rust_i2s_numerical_parity",
+  "checkpoint": {
+    "checkpoint_id": "8143ae115ed6babe5e5ada8fb8c5b769d8f417802b2db042ad98b4f7ed73975b",
+    "tensor": {
+      "path": "offline_bundle/students/bitnet-2b-4t/model.safetensors",
+      "sha256": "8143ae115ed6babe5e5ada8fb8c5b769d8f417802b2db042ad98b4f7ed73975b",
+      "bytes": 1178623988
+    },
+    "manifest": {
+      "path": "offline_bundle/students/bitnet-2b-4t/assets.json",
+      "sha256": "15bd66c0b1b9528e88a3db9b4be88518410ac0ce56dc7d51c7fa651dd1e9a37a",
+      "bytes": 875
+    },
+    "base_assets": {
+      "path": "offline_bundle/students/bitnet-2b-4t/assets.json",
+      "sha256": "15bd66c0b1b9528e88a3db9b4be88518410ac0ce56dc7d51c7fa651dd1e9a37a",
+      "bytes": 875
+    },
+    "tokenizer": {
+      "path": "offline_bundle/students/bitnet-2b-4t/tokenizer.json",
+      "sha256": "e134af98b985517b4f068e3755ae90d4e9cd2d45d328325dc503f1c6b2d06cc7",
+      "bytes": 9085698
+    },
+    "architecture": "ternary_bitnet"
+  },
+  "gguf": {
+    "path": "reports/comparative/bitnet/schema2/model.i2_s.gguf",
+    "sha256": "2e097b3dda58f8308b03c8b62cce7cb8767470aafb7400e5f169c108b86c75a7",
+    "bytes": 1843959008
+  },
+  "export_receipt": {
+    "path": "reports/comparative/bitnet/schema2/model.i2_s.export.json",
+    "sha256": "49fc3bcaf203643d6164a53171131a103fc1bc17581e19e8d80de12fc9686b0b",
+    "bytes": 1802
+  },
+  "cpp_engine_manifest": {
+    "path": "state/engines/bitnet-quant-v2-build/engine-manifest.json",
+    "sha256": "2c9dc38d6feca0e394177c48a478422066ecea0c181a8f42824f7068b38b4c8b",
+    "bytes": 6033
+  },
+  "cpp_protocol": "explicit_original_tokens_cpu_f32_kv_quant_v3",
+  "cpp_kv_dtype": "F32",
+  "diagnostic_executable": {
+    "path": "state/engines/f65b4ecbcb5917508e8431934772104a12d8047851848231cdad82976e98c72b/lec-distil",
+    "sha256": "f65b4ecbcb5917508e8431934772104a12d8047851848231cdad82976e98c72b",
+    "bytes": 15211880
+  },
+  "rust_implementation_sha256": "eb4ad8051c0a14891ec32eb91c19110d1792dfcd0b484f037835cd3aedc74a1a",
+  "implementation_sources": {
+    "Cargo.lock": {
+      "path": "reports/comparative/bitnet/parity-quant-v2.sources/Cargo.lock",
+      "sha256": "bd62f0019341d1a6432ba9153fefdfda757ac26856dc5da297995462176742bb",
+      "bytes": 87289
+    },
+    "Cargo.toml": {
+      "path": "reports/comparative/bitnet/parity-quant-v2.sources/Cargo.toml",
+      "sha256": "d9a90d8747f9bd0d9999da561e6759c86916f8ac4334a5fda97463c7e5f1767b",
+      "bytes": 1558
+    },
+    "docs/bitnet/engine-quantisation-v2.patch": {
+      "path": "reports/comparative/bitnet/parity-quant-v2.sources/docs/bitnet/engine-quantisation-v2.patch",
+      "sha256": "eebf249e1dd711ca5c3c9160ef9d41f90939cac71848a1fdaeb49889a03b84c1",
+      "bytes": 1317
+    },
+    "examples/bitnet_parity.rs": {
+      "path": "reports/comparative/bitnet/parity-quant-v2.sources/examples/bitnet_parity.rs",
+      "sha256": "50c06bf9113aa615e1d2a64b6734f064652eac518d6896dbf625c696d4232c3c",
+      "bytes": 13495
+    },
+    "src/bitnet.rs": {
+      "path": "reports/comparative/bitnet/parity-quant-v2.sources/src/bitnet.rs",
+      "sha256": "757d0a96a91023f8155f348ce7f9ca16febdf7e189df9b63761648fa2eb0805b",
+      "bytes": 26559
+    },
+    "src/bitnet/codec.rs": {
+      "path": "reports/comparative/bitnet/parity-quant-v2.sources/src/bitnet/codec.rs",
+      "sha256": "350c88a9bf2e83d4cd0e57f87e8c3ed099772aef45ae720297c29812307625f6",
+      "bytes": 6251
+    },
+    "src/bitnet/cpp.rs": {
+      "path": "reports/comparative/bitnet/parity-quant-v2.sources/src/bitnet/cpp.rs",
+      "sha256": "c0c2fa0df655f43a9df2b5c59b2aab7215bcb9d0490f1b07ee155189039c4adf",
+      "bytes": 28210
+    },
+    "src/bitnet/cpp/quantisation_v2.rs": {
+      "path": "reports/comparative/bitnet/parity-quant-v2.sources/src/bitnet/cpp/quantisation_v2.rs",
+      "sha256": "4d158ab93c5c3d8e91c48170b90106345f2014db272e24b7d1cb146c3554c9db",
+      "bytes": 3888
+    },
+    "src/bitnet/export.rs": {
+      "path": "reports/comparative/bitnet/parity-quant-v2.sources/src/bitnet/export.rs",
+      "sha256": "4b894029ec2a78290ac948278b8231b3db21742f2e4fe13bbe0ab938295bcd2f",
+      "bytes": 28153
+    },
+    "src/bitnet/quant.rs": {
+      "path": "reports/comparative/bitnet/parity-quant-v2.sources/src/bitnet/quant.rs",
+      "sha256": "76a5af94ffc2ebb74dad8afcc1ebc7fa55dda0816482f778e5edec6c1e750565",
+      "bytes": 4921
+    },
+    "src/bitnet/runtime.rs": {
+      "path": "reports/comparative/bitnet/parity-quant-v2.sources/src/bitnet/runtime.rs",
+      "sha256": "e303f8ff99a8eb4f3eb8d2b093df182a1ab97d8431cc061ae7e378d44268f14f",
+      "bytes": 5907
+    },
+    "src/model.rs": {
+      "path": "reports/comparative/bitnet/parity-quant-v2.sources/src/model.rs",
+      "sha256": "cb125e6295023db338534cb931c3164cd4f4885f8b74c78f680fa1f49676ebbf",
+      "bytes": 76111
+    }
+  },
+  "prompts": [
+    {
+      "prompt": "Say hello in one short sentence.",
+      "input_ids": [
+        128000,
+        1502,
+        25,
+        25961,
+        24748,
+        304,
+        832,
+        2875,
+        11914,
+        13,
+        128009,
+        72803,
+        25,
+        220
+      ]
+    },
+    {
+      "prompt": "What is two plus three? Answer briefly.",
+      "input_ids": [
+        128000,
+        1502,
+        25,
+        3639,
+        374,
+        1403,
+        5636,
+        2380,
+        30,
+        22559,
+        27851,
+        13,
+        128009,
+        72803,
+        25,
+        220
+      ]
+    },
+    {
+      "prompt": "Complete the Rust expression: 3_i64 + 4_i64",
+      "input_ids": [
+        128000,
+        1502,
+        25,
+        19121,
+        279,
+        34889,
+        7645,
+        25,
+        220,
+        18,
+        5431,
+        1227,
+        489,
+        220,
+        19,
+        5431,
+        1227,
+        128009,
+        72803,
+        25,
+        220
+      ]
+    }
+  ],
+  "native_top_tokens": 16,
+  "maximum_absolute_log_probability_error": 0.1,
+  "require_equal_top_prediction": true,
+  "production_eligible": false
+}

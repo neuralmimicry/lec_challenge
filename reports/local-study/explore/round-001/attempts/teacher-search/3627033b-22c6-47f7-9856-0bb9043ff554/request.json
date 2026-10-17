@@ -1,0 +1,21 @@
+{
+  "arguments": [
+    "select-teachers",
+    "--config",
+    "config/teacher-search.toml",
+    "--output",
+    "reports/comparative/search/round-001"
+  ],
+  "assigned_cpu_threads": null,
+  "engine": {
+    "bytes": 37122440,
+    "path": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/state/engines/949b28471a3b47255ab102ead671a6a3e719dc1303844c1c66e0d69682d1dc99/lec-distil",
+    "sha256": "949b28471a3b47255ab102ead671a6a3e719dc1303844c1c66e0d69682d1dc99"
+  },
+  "model_cpu_threads": null,
+  "offline": false,
+  "remaining_wall_seconds": 86394.162980857,
+  "schema_version": 1,
+  "stage": "teacher-search",
+  "started_unix_ms": 1792147751411
+}

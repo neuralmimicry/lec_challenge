@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "regrade_plan_sha256": "a0446d7d7140381e80efb5b83f144abfcbe58892dba6fc50ccbc9ec31002cc3a",
+  "task_id": "ledger.differences",
+  "source_id": "private-ledger-v1",
+  "original_plan": {
+    "path": "reports/local-study/native-full-quality-001/base-train/plan.json",
+    "sha256": "55c6614d90fbff0e580fd8fbfa9e06ce99715d8d0c78320e0fe70605545cc489",
+    "bytes": 63584
+  },
+  "original_raw": {
+    "path": "reports/local-study/native-full-quality-001/base-train/generations/ledger.differences.json",
+    "sha256": "f14af2f781060dfc0996d69ffc2ef7cbdf168c80ed7a01e1875baf5aaa731f96",
+    "bytes": 1958
+  },
+  "outcome": {
+    "kind": "graded",
+    "prepared": {
+      "path": "reports/local-study/regraded-v3-001/evaluation-003-train-f95238863522/prepared/ledger.differences.json",
+      "sha256": "55a9e59fb2aae0c9bcf1d606007101bde6cd6d109adff39a087a5a6e3e964328",
+      "bytes": 2865
+    },
+    "report": {
+      "path": "reports/local-study/regraded-v3-001/evaluation-003-train-f95238863522/sandbox/81123220-6754-4fc8-8f96-163f2bad0832.json",
+      "sha256": "d4e42cf8c5640492205e1b5880a0b97348f6b72e3fd3de8dab5ef60e624d8cb8",
+      "bytes": 3663
+    },
+    "audit": {
+      "path": "reports/local-study/regraded-v3-001/evaluation-003-train-f95238863522/sandbox/81123220-6754-4fc8-8f96-163f2bad0832.audit.json",
+      "sha256": "f6103a05a35ec53a8d47520eff4d77567277d3ee709811cb8b5ea51e7dfe443f",
+      "bytes": 1256
+    }
+  },
+  "success": false
+}

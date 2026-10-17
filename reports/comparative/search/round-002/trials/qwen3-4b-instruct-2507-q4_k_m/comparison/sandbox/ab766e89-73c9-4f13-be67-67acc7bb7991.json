@@ -1,0 +1,40 @@
+{
+  "run_id": "ab766e89-73c9-4f13-be67-67acc7bb7991",
+  "task_id": "money.format",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error[E0599]: no associated function or constant named `Signed` found for struct `serde_json::Number` in the current scope\n --> /candidate/main.rs:5:37\n  |\n5 |                 serde_json::Number::Signed(s) => s.as_i64().unwrap(),\n  |                                     ^^^^^^ associated function or constant not found in `serde_json::Number`\n\nerror[E0599]: no associated function or constant named `Unsigned` found for struct `serde_json::Number` in the current scope\n --> /candidate/main.rs:6:37\n  |\n6 |                 serde_json::Number::Unsigned(u) => u.as_u64().unwrap() as i64,\n  |                                     ^^^^^^^^ associated function or constant not found in `serde_json::Number`\n\nerror[E0308]: mismatched types\n   --> /candidate/main.rs:41:39\n    |\n 41 |             serde_json::Value::Object(result)\n    |             ------------------------- ^^^^^^ expected `Map<String, Value>`, found `HashMap<String, Value>`\n    |             |\n    |             arguments to this enum variant are incorrect\n    |\n    = note: expected struct `serde_json::Map<std::string::String, Value>`\n               found struct `HashMap<std::string::String, Value>`\nnote: tuple variant defined here\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:175:5\n    |\n175 |     Object(Map<String, Value>),\n    |     ^^^^^^\n\nerror: aborting due to 3 previous errors\n\nSome errors have detailed explanations: E0308, E0599.\nFor more information about an error, try `rustc --explain E0308`.\n"
+  ],
+  "cases_total": 6,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "f340d0145bdef38ba2baf1c75fe7b943e3ceb949fa1f787d129a4da868d2c31e",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison/sandbox/ab766e89-73c9-4f13-be67-67acc7bb7991.audit.json",
+  "audit_sha256": "444c893519bdeb0d057ee56c95f459af0b4ad8d3f147b252d36a656c1af4cede",
+  "failure": "compilation failed: error[E0599]: no associated function or constant named `Signed` found for struct `serde_json::Number` in the current scope\n --> /candidate/main.rs:5:37\n  |\n5 |                 serde_json::Number::Signed(s) => s.as_i64().unwrap(),\n  |                                     ^^^^^^ associated function or constant not found in `serde_json::Number`\n\nerror[E0599]: no associated function or constant named `Unsigned` found for struct `serde_json::Number` in the current scope\n --> /candidate/main.rs:6:37\n  |\n6 |                 serde_json::Number::Unsigned(u) => u.as_u64().unwrap() as i64,\n  |                                     ^^^^^^^^ associated function or constant not found in `serde_json::Number`\n\nerror[E0308]: mismatched types\n   --> /candidate/main.rs:41:39\n    |\n 41 |             serde_json::Value::Object(result)\n    |             ------------------------- ^^^^^^ expected `Map<String, Value>`, found `HashMap<String, Value>`\n    |             |\n    |             arguments to this enum variant are incorrect\n    |\n    = note: expected struct `serde_json::Map<std::string::String, Value>`\n               found struct `HashMap<std::string::String, Value>`\nnote: tuple variant defined here\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:175:5\n    |\n175 |     Object(Map<String, Value>),\n    |     ^^^^^^\n\nerror: aborting due to 3 previous errors\n\nSome errors have detailed explanations: E0308, E0599.\nFor more information about an error, try `rustc --explain E0308`.\n",
+  "duration_ms": 34062,
+  "timeout_evidence": null,
+  "lifecycle_evidence": {
+    "receipt_path": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison/sandbox/ab766e89-73c9-4f13-be67-67acc7bb7991.lifecycle.json",
+    "receipt_sha256": "43ea72a3238336bf6073e182bf7a85326e271d78c7e7e17314eba133b467ff13"
+  }
+}

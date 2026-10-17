@@ -1,0 +1,40 @@
+{
+  "run_id": "fcc8d150-ab30-478b-bf5f-fbb5ea6de118",
+  "task_id": "intervals.largest_gap",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "candidate exit Some(101): \nthread 'main' (35) panicked at /candidate/main.rs:15:30:\nindex out of bounds: the len is 0 but the index is 0\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n"
+  ],
+  "cases_total": 6,
+  "cases_passed": 0,
+  "trace_complete": true,
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "857c009c307661816980e15e3bd7e876558c438c8f7e34437ca25d51bf7f8e82",
+  "stdout_sha256": "7de1555df0c2700329e815b93b32c571c3ea54dc967b89e81ab73b9972b72d1d",
+  "sandbox_config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/sandbox/fcc8d150-ab30-478b-bf5f-fbb5ea6de118.audit.json",
+  "audit_sha256": "b93ff5b7c5a62a8c579b94ce0946b8483c99b5f9bda25ddae736a5451035f200",
+  "failure": "candidate exit Some(101): \nthread 'main' (35) panicked at /candidate/main.rs:15:30:\nindex out of bounds: the len is 0 but the index is 0\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n",
+  "duration_ms": 12606,
+  "timeout_evidence": null,
+  "lifecycle_evidence": {
+    "receipt_path": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/sandbox/fcc8d150-ab30-478b-bf5f-fbb5ea6de118.lifecycle.json",
+    "receipt_sha256": "6f53fb06b59fbdda99cb8d94584ca27bdc26c8fb94e4dfa6ac9ebcd92d3e6b70"
+  }
+}

@@ -1,0 +1,47 @@
+
+Loading model... 
+
+
+▄▄ ▄▄
+██ ██
+██ ██  ▀▀█▄ ███▄███▄  ▀▀█▄    ▄████ ████▄ ████▄
+██ ██ ▄█▀██ ██ ██ ██ ▄█▀██    ██    ██ ██ ██ ██
+██ ██ ▀█▄██ ██ ██ ██ ▀█▄██ ██ ▀████ ████▀ ████▀
+                                    ██    ██
+                                    ▀▀    ▀▀
+
+build      : b1-390c307
+model      : offline_bundle/comparative/magicoder-s-ds-6_7b-q4_k_m/magicoder-s-ds-6.7b.Q4_K_M.gguf
+ftype      : Q4_K - Medium
+modalities : text
+
+available commands:
+  /exit or Ctrl+C     stop or exit
+  /regen              regenerate the last response
+  /clear              clear the chat history
+  /read <file>        add a text file
+  /glob <pattern>     add text files using globbing pattern
+
+
+> <｜begin▁of▁sentence｜>You are an exceptionally intelligent coding assistant that consistently delivers accurate and reliable responses to user instructions.
+
+@@ Instruction
+Write a Rust function add(a: i64, b: i64) -> i64. Return only the complete function.
+
+@@ Response
+
+
+<｜begin▁of▁sentence｜>You are an exceptionally intelligent coding assistant that consistently delivers accurate and reliable responses to user instructions.
+
+@@ Instruction
+Write a Rust function add(a: i64, b: i64) -> i64. Return only the complete function.
+
+@@ Response
+
+
+Here is a simple Rust function that adds two numbers:
+
+
+
+
+Exiting...

@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "a52d044d05dc99f9af1879cdb69e7d80c4abc41b317440255f0ff27069084831",
+  "task_id": "calendar.leap",
+  "source_id": "private-calendar-v1",
+  "success": true,
+  "raw_generation": {
+    "path": "reports/local-study/native-full-quality-001/composed-train/generations/calendar.leap.json",
+    "sha256": "6f3e1a41ee85b1bac9b5b4fbea3b9ee131136046d9492190d6125efcd1bf161d",
+    "bytes": 1840
+  },
+  "sandbox_report": {
+    "path": "reports/local-study/native-full-quality-001/composed-train/sandbox/511ff7b5-c9bf-452d-959e-c73a926858a4.json",
+    "sha256": "ea4b613908c5a32c0ba3505baf499771d8d26902195cfb5de5adf44b4d623736",
+    "bytes": 1362
+  },
+  "grading_error": null
+}

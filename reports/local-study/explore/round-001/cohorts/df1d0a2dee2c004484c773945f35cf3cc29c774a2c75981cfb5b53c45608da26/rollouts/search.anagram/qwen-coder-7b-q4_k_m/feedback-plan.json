@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "initial_plan": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/search.anagram/student-plan.json",
+    "sha256": "7af2c6ff29127d387cfe7de0b8ac270f7bc9757ab725f90a8923a6521c70295c",
+    "bytes": 3934
+  },
+  "student_raw": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/search.anagram/student-raw.json",
+    "sha256": "bfe92ba595048bab1dab4394455f8e2852652e7c4d611f45ef5607e5cc4bd998",
+    "bytes": 1909
+  },
+  "student_grade": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox/4f565ac2-df05-48ad-944d-d5eb0f7989c5.json",
+    "sha256": "58e00696dc724a1f6082c92e637d5681f53d49b762c3e984220a588a0e86c134",
+    "bytes": 4112
+  },
+  "teacher_id": "qwen-coder-7b-q4_k_m",
+  "teacher_assets": {
+    "path": "offline_bundle/comparative/qwen-coder-7b-q4_k_m/gguf-assets.json",
+    "sha256": "606bfac02a103d208ccef73067cb6a4581e9b099e19bc9ed8e2021ebb1143114",
+    "bytes": 1206
+  },
+  "teacher_checkpoint": null,
+  "runtime": {
+    "device": {
+      "cuda": {
+        "ordinal": 0
+      }
+    },
+    "dtype": "f32"
+  },
+  "request": {
+    "prompt": "New task:\nWrite Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is [a,b], two ASCII strings. Ignore ASCII whitespace and letter case, keep punctuation; return whether their remaining character multisets agree.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[\"Dormitory\",\"Dirty room\"],\"expected\":true}]\nActual frozen student candidate:\n```rust\nuse serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let mut result = serde_json::Value::from(\"true\");\n    let mut current = String::from(input.to_string());\n\n    while let Some(token) = current.chars().next() {\n        if token.is_whitespace() || token.is_alphabetic() {\n            current.push(token);\n        } else {\n            let mut next = String::from(current);\n            next.push(token);\n            result = serde_json::Value::from(next);\n            current = next;\n        }\n    }\n\n    result\n}\n```\nActual trusted tool feedback:\n{\"bounded_diagnostic_untrusted_data\":\"compilation failed: warning: unused import: `serde_json::Value`\\n --> /candidate/main.rs:1:5\\n  |\\n1 | use serde_json::Value;\\n  |     ^^^^^^^^^^^^^^^^^\\n  |\\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\\n\\nerror[E0382]: use of moved value: `next`\\n  --> /candidate/main.rs:14:23\\n   |\\n11 |             let mut next = String::from(current);\\n   |                 -------- move occurs because `next` has type `std::string::String`, which does not implement the `Copy` trait\\n12 |             next.push(token);\\n13 |             result = serde_json::Value::from(next);\\n   |                                              ---- value moved here\\n14 |             current = next;\\n   |                       ^^^^ value used here after move\\n   |\\nhelp: consider cloning the value if the performance cost is acceptable\\n   |\\n13 |             result = serde_json::Value::from(next.clone());\\n   |                                                  ++++++++\\n\\nerror: aborting due to 1 previous error; 1 warning emitted\\n\\nFor more information about this error, try `rustc --explain E0382`.\\n\",\"cases_passed\":0,\"cases_total\":6,\"content_role\":\"compilation_feedback_only\",\"original_failure_is_not_a_success\":true,\"passed\":false,\"private_inputs_or_expected_outputs_exposed\":false,\"quarantined\":true,\"run_id\":\"4f565ac2-df05-48ad-944d-d5eb0f7989c5\",\"student_generation_complete\":true,\"tool\":\"trusted_container_grader\",\"trace_complete\":false}\nCritique and revise the candidate. Put any short explanation in Rust // comments and return complete compilable Rust source only. Do not invent tool results.",
+    "max_new_tokens": 768,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "supporting_sample_ids": []
+}

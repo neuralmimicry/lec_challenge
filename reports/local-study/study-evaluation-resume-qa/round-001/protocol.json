@@ -1,0 +1,129 @@
+{
+  "adapter": {
+    "bytes": 551352,
+    "path": "reports/local-study/native-composed-operator/adapter.safetensors",
+    "sha256": "b71e448fd3e298f226aa6ba121d89ee8551e3b9e86374d5330269d7c97207511"
+  },
+  "arguments": [
+    "study-evaluate",
+    "--base",
+    "offline_bundle/base",
+    "--checkpoint",
+    "reports/local-study/native-composed-operator",
+    "--output",
+    "reports/local-study/study-evaluation-resume-qa/round-001/evaluation",
+    "--split",
+    "development",
+    "--device",
+    "cuda",
+    "--dtype",
+    "f32",
+    "--offline"
+  ],
+  "base_assets": {
+    "bytes": 788,
+    "path": "offline_bundle/base/assets.json",
+    "sha256": "54304e7f41519a4196674cba5e86593802f852b2b47882d6c19706f85f303ad4"
+  },
+  "coding_quality_or_learning_claim": false,
+  "engine": {
+    "bytes": 45017416,
+    "cpu_build": {
+      "build": {
+        "architecture": "x86_64",
+        "cargo_features": [
+          "cuda"
+        ],
+        "cargo_lock_sha256": "bd62f0019341d1a6432ba9153fefdfda757ac26856dc5da297995462176742bb",
+        "encoded_rustflags": "-C\u001ftarget-cpu=generic\u001f-C\u001fdebug-assertions=no\u001f-C\u001fpanic=unwind\u001f-C\u001ftarget-feature=+avx2,+fma,+f16c",
+        "profile": "avx2-fma-f16c",
+        "protocol": "explicit_cpu_simd_build_v1",
+        "required_features": [
+          "avx",
+          "avx2",
+          "f16c",
+          "fma"
+        ],
+        "resolved_rustc": {
+          "bytes": 645952,
+          "executable": "/home/pbisaacs/.rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/rustc",
+          "sha256": "859254978c0a0402c32f949f6de0d99aee73be8d15f45aac00ae1448aac51e74"
+        },
+        "rustc_cfg": [
+          "panic=\"unwind\"",
+          "target_abi=\"\"",
+          "target_arch=\"x86_64\"",
+          "target_endian=\"little\"",
+          "target_env=\"gnu\"",
+          "target_family=\"unix\"",
+          "target_feature=\"avx\"",
+          "target_feature=\"avx2\"",
+          "target_feature=\"f16c\"",
+          "target_feature=\"fma\"",
+          "target_feature=\"sse\"",
+          "target_feature=\"sse2\"",
+          "target_feature=\"sse3\"",
+          "target_feature=\"sse4.1\"",
+          "target_feature=\"sse4.2\"",
+          "target_feature=\"ssse3\"",
+          "target_has_atomic=\"16\"",
+          "target_has_atomic=\"32\"",
+          "target_has_atomic=\"64\"",
+          "target_has_atomic=\"8\"",
+          "target_has_atomic=\"ptr\"",
+          "target_has_atomic_primitive_alignment=\"16\"",
+          "target_has_atomic_primitive_alignment=\"32\"",
+          "target_has_atomic_primitive_alignment=\"64\"",
+          "target_has_atomic_primitive_alignment=\"8\"",
+          "target_has_atomic_primitive_alignment=\"ptr\"",
+          "target_os=\"linux\"",
+          "target_pointer_width=\"64\"",
+          "target_vendor=\"unknown\"",
+          "unix"
+        ],
+        "rustc_version_verbose": "rustc 1.98.1 (48a229cea 2026-09-01)\nbinary: rustc\ncommit-hash: 48a229ceaefd4985c50990b14116b6d856af0985\ncommit-date: 2026-09-01\nhost: x86_64-unknown-linux-gnu\nrelease: 1.98.1\nLLVM version: 22.1.8\n",
+        "rustflags": [
+          "-C",
+          "target-cpu=generic",
+          "-C",
+          "debug-assertions=no",
+          "-C",
+          "panic=unwind",
+          "-C",
+          "target-feature=+avx2,+fma,+f16c"
+        ],
+        "schema_version": 1,
+        "target_triple": "x86_64-unknown-linux-gnu"
+      },
+      "executable_bytes": 45017416,
+      "executable_sha256": "f5d2f2f520f0c7a69186163c33bd28207c37414fb3cdae0499c169957a846944"
+    },
+    "path": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/state/engines/f5d2f2f520f0c7a69186163c33bd28207c37414fb3cdae0499c169957a846944/lec-distil",
+    "sha256": "f5d2f2f520f0c7a69186163c33bd28207c37414fb3cdae0499c169957a846944"
+  },
+  "evidence_kind": "frozen_owned_study_evaluation_sigkill_resume_qa",
+  "held_out_used": false,
+  "manifest": {
+    "bytes": 18851,
+    "path": "reports/local-study/native-composed-operator/manifest.json",
+    "sha256": "2dbfe4ce9bef7d6aa281eb781eb43a4627f4dc75d40aad7ad21c1354d79166e1"
+  },
+  "production_eligible": false,
+  "qa_executable": {
+    "bytes": 9186640,
+    "path": "state/engines/diagnostics/5e13e69cfdd0be797091b01a676e384d1edd231018e159332db729dad02755af/lec-distil",
+    "sha256": "5e13e69cfdd0be797091b01a676e384d1edd231018e159332db729dad02755af"
+  },
+  "schema_version": 1,
+  "split": "development",
+  "thread_environment": {
+    "LEC_STUDY_CPU_THREADS": "4",
+    "LEC_STUDY_OFFLINE": "1",
+    "MKL_NUM_THREADS": "4",
+    "OMP_NUM_THREADS": "4",
+    "OPENBLAS_NUM_THREADS": "4",
+    "RAYON_NUM_THREADS": "4",
+    "TOKIO_WORKER_THREADS": "4"
+  },
+  "wall_timeout_seconds": 1800
+}

@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "a52d044d05dc99f9af1879cdb69e7d80c4abc41b317440255f0ff27069084831",
+  "task_id": "intervals.peak",
+  "source_id": "private-intervals-v1",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an array of integer half-open intervals, start<end. Return maximum simultaneous overlap; an end at t does not overlap a start at t.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[[1,3],[2,4],[3,5]],\"expected\":2}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let intervals = input.as_array().unwrap();\n    let mut max_overlap = 0;\n    let mut current_overlap = 0;\n\n    for interval in intervals {\n        let start = interval.as_array().unwrap().get(0).unwrap().as_i64().unwrap();\n        let end = interval.as_array().unwrap().get(1).unwrap().as_i64().unwrap();\n\n        if start < end {\n            current_overlap += 1;\n            max_overlap = max_overlap.max(current_overlap);\n        } else {\n            current_overlap = 0;\n        }\n    }\n\n    Value::from(max_overlap)\n}\n```",
+    "checkpoint_id": "2217a994f8b74ded1d52f30ef7add2cb190578e3d108168a85d1409160ad88c3",
+    "finish_reason": "stop",
+    "input_tokens": 241,
+    "output_tokens": 146,
+    "elapsed_ms": 8816,
+    "complete": true
+  },
+  "model_error": null
+}

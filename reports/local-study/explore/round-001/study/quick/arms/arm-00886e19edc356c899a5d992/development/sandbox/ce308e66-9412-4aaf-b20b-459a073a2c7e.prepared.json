@@ -1,0 +1,69 @@
+{
+  "schema_version": 3,
+  "run_id": "66e71fd6-94cf-4b4d-b211-a16db4a179ef",
+  "ownership_nonce": "eb2918a3-e7ef-4cc3-9f5f-ffab5337fbb9",
+  "attempt_key": "ce308e66-9412-4aaf-b20b-459a073a2c7e",
+  "receipt_path": "reports/local-study/explore/round-001/study/quick/arms/arm-00886e19edc356c899a5d992/development/sandbox/ce308e66-9412-4aaf-b20b-459a073a2c7e.prepared.json",
+  "report_path": "reports/local-study/explore/round-001/study/quick/arms/arm-00886e19edc356c899a5d992/development/sandbox/66e71fd6-94cf-4b4d-b211-a16db4a179ef.json",
+  "task": {
+    "id": "tables.inner_join",
+    "source_id": "private-tables-v1",
+    "lineage_id": "local-contract-pack-15",
+    "split": "development",
+    "specification": "Input [left,right] has arrays of [key,value] integer rows, each side with unique keys. Return [key,left_value,right_value] for common keys in ascending key order.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "369ef237ff250179b0b3e3c7af051af8aebc0329b6494d33af5f436c827ac699",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": [
+          [
+            [
+              2,
+              9
+            ],
+            [
+              1,
+              4
+            ]
+          ],
+          [
+            [
+              2,
+              3
+            ],
+            [
+              3,
+              8
+            ]
+          ]
+        ],
+        "expected": [
+          [
+            2,
+            9,
+            3
+          ]
+        ]
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "use serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let mut result = Vec::new();\n    let mut left = Vec::new();\n    let mut right = Vec::new();\n\n    for line in input.as_array() {\n        let mut row = Vec::new();\n        for item in line.as_array() {\n            row.push(item.as_i64().unwrap());\n        }\n        left.push(row);\n    }\n\n    for line in input.as_array() {\n        let mut row = Vec::new();\n        for item in line.as_array() {\n            row.push(item.as_i64().unwrap());\n        }\n        right.push(row);\n    }\n\n    let mut common_keys = Vec::new();\n    for (key, left_row) in left.iter().enumerate() {\n        for (key, right_row) in right.iter().enumerate() {\n            if left_row.iter().any(|&value| right_row.iter().any(|&value| value == value)) {\n                common_keys.push((key, left_row.iter().min().unwrap(), right_row.iter().min().unwrap()));\n            }\n        }\n    }\n\n    common_keys.sort_by(|&(k1, l1, r1), &(k2, l2, r2)| {\n        if l1 < l2 {\n            return Ordering::Less;\n        }\n        if l2 < l1 {\n            return Ordering::Greater;\n        }\n        if r1 < r2 {\n            return Ordering::Less;\n        }\n        if r2 < r1 {\n            return Ordering::Greater;\n        }\n        Ordering::Equal\n    });\n\n    let mut result = Vec::new();\n    for (key, left_value, right_value) in common_keys {\n        result.push(vec![key, left_value, right_value]);\n    }\n\n    serde_json::Value::Object(result)\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/explore/round-001/study/quick/arms/arm-00886e19edc356c899a5d992/development/sandbox"
+  },
+  "code_sha256": "84f332515b0b6c4c7bfd766f5f0ae74cea8d611087465f5ffade941bc37bf4d6",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

@@ -1,0 +1,40 @@
+{
+  "run_id": "ddfed530-15a2-4594-8ae4-e030f86a77b4",
+  "task_id": "intervals.largest_gap",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: warning: unused import: `serde_json::Value`\n --> /candidate/main.rs:1:5\n  |\n1 | use serde_json::Value;\n  |     ^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0559]: variant `Value::Object` has no field named `key`\n   --> /candidate/main.rs:35:9\n    |\n 35 |         key: \"expected\".to_string(),\n    |         ^^^ field does not exist\n    |\n   ::: /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:175:5\n    |\n175 |     Object(Map<String, Value>),\n    |     ------ `Value::Object` defined here\n    |\nhelp: `Value::Object` is a tuple variant, use the appropriate syntax\n    |\n 34 -     serde_json::Value::Object {\n 35 -         key: \"expected\".to_string(),\n 36 -         value: serde_json::Value::Number(max_gap as f64),\n 37 -     }\n 34 +     serde_json::Value::Object(/* serde_json::Map<std::string::String, Value> */)\n    |\n\nerror[E0559]: variant `Value::Object` has no field named `value`\n   --> /candidate/main.rs:36:9\n    |\n 36 |         value: serde_json::Value::Number(max_gap as f64),\n    |         ^^^^^ field does not exist\n    |\n   ::: /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:175:5\n    |\n175 |     Object(Map<String, Value>),\n    |     ------ `Value::Object` defined here\n    |\nhelp: `Value::Object` is a tuple variant, use the appropriate syntax\n    |\n 34 -     serde_json::Value::Object {\n 35 -         key: \"expected\".to_string(),\n 36 -         value: serde_json::Value::Number(max_gap as f64),\n 37 -     }\n 34 +     serde_json::Value::Object(/* serde_json::Map<std::string::String, Value> */)\n    |\n\nerror[E0308]: mismatched types\n   --> /candidate/main.rs:36:42\n    |\n 36 |         value: serde_json::Value::Number(max_gap as f64),\n    |                ------------------------- ^^^^^^^^^^^^^^ expected `Number`, found `f64`\n    |                |\n    |                arguments to this enum variant are incorrect\n    |\nnote: tuple variant defined here\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:142:5\n    |\n142 |     Number(Number),\n    |     ^^^^^^\n\nerror: aborting due to 3 previous errors; 1 warning emitted\n\nSome errors have detailed explanations: E0308, E0559.\nFor more information about an error, try `rustc --explain E0308`.\n"
+  ],
+  "cases_total": 6,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "e49ba9125436f8c90c074fa097c880fa39830cb619b71ce1184728de9b53142f",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/explore/round-001/cohorts/76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c/rollouts/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/explore/round-001/cohorts/76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c/rollouts/sandbox/ddfed530-15a2-4594-8ae4-e030f86a77b4.audit.json",
+  "audit_sha256": "ab3ef143eb4d606673c08807437a7c38a886a1912f233f5c1ebf2af08c774e50",
+  "failure": "compilation failed: warning: unused import: `serde_json::Value`\n --> /candidate/main.rs:1:5\n  |\n1 | use serde_json::Value;\n  |     ^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0559]: variant `Value::Object` has no field named `key`\n   --> /candidate/main.rs:35:9\n    |\n 35 |         key: \"expected\".to_string(),\n    |         ^^^ field does not exist\n    |\n   ::: /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:175:5\n    |\n175 |     Object(Map<String, Value>),\n    |     ------ `Value::Object` defined here\n    |\nhelp: `Value::Object` is a tuple variant, use the appropriate syntax\n    |\n 34 -     serde_json::Value::Object {\n 35 -         key: \"expected\".to_string(),\n 36 -         value: serde_json::Value::Number(max_gap as f64),\n 37 -     }\n 34 +     serde_json::Value::Object(/* serde_json::Map<std::string::String, Value> */)\n    |\n\nerror[E0559]: variant `Value::Object` has no field named `value`\n   --> /candidate/main.rs:36:9\n    |\n 36 |         value: serde_json::Value::Number(max_gap as f64),\n    |         ^^^^^ field does not exist\n    |\n   ::: /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:175:5\n    |\n175 |     Object(Map<String, Value>),\n    |     ------ `Value::Object` defined here\n    |\nhelp: `Value::Object` is a tuple variant, use the appropriate syntax\n    |\n 34 -     serde_json::Value::Object {\n 35 -         key: \"expected\".to_string(),\n 36 -         value: serde_json::Value::Number(max_gap as f64),\n 37 -     }\n 34 +     serde_json::Value::Object(/* serde_json::Map<std::string::String, Value> */)\n    |\n\nerror[E0308]: mismatched types\n   --> /candidate/main.rs:36:42\n    |\n 36 |         value: serde_json::Value::Number(max_gap as f64),\n    |                ------------------------- ^^^^^^^^^^^^^^ expected `Number`, found `f64`\n    |                |\n    |                arguments to this enum variant are incorrect\n    |\nnote: tuple variant defined here\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:142:5\n    |\n142 |     Number(Number),\n    |     ^^^^^^\n\nerror: aborting due to 3 previous errors; 1 warning emitted\n\nSome errors have detailed explanations: E0308, E0559.\nFor more information about an error, try `rustc --explain E0308`.\n",
+  "duration_ms": 12923,
+  "timeout_evidence": null,
+  "lifecycle_evidence": {
+    "receipt_path": "reports/local-study/explore/round-001/cohorts/76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c/rollouts/sandbox/ddfed530-15a2-4594-8ae4-e030f86a77b4.lifecycle.json",
+    "receipt_sha256": "8adb1ec8c48c01d89301f429b00d46d4280df1f0664a1d38f4403482dc5af0e9"
+  }
+}

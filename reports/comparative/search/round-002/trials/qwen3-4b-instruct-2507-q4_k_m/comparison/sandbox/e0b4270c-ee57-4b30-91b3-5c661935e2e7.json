@@ -1,0 +1,40 @@
+{
+  "run_id": "e0b4270c-ee57-4b30-91b3-5c661935e2e7",
+  "task_id": "tables.inner_join",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error: cannot find macro `json` in this scope\n --> /candidate/main.rs:6:24\n  |\n6 |         None => return json!([[]]),\n  |                        ^^^^\n  |\n  = note: `json` is in scope, but it is a function, not a macro\n\nerror: cannot find macro `json` in this scope\n  --> /candidate/main.rs:11:24\n   |\n11 |         None => return json!([[]]),\n   |                        ^^^^\n   |\n   = note: `json` is in scope, but it is a function, not a macro\n\nerror: cannot find macro `json` in this scope\n  --> /candidate/main.rs:44:29\n   |\n44 |                 result.push(json!([key, left_val, right_val]));\n   |                             ^^^^\n   |\n   = note: `json` is in scope, but it is a function, not a macro\n\nerror: cannot find macro `json` in this scope\n  --> /candidate/main.rs:49:5\n   |\n49 |     json!(result)\n   |     ^^^^\n   |\n   = note: `json` is in scope, but it is a function, not a macro\n\nerror[E0433]: cannot find module or crate `serde` in this scope\n  --> /candidate/main.rs:54:8\n   |\n54 |     T: serde::Serialize,\n   |        ^^^^^ use of unresolved module or unlinked crate `serde`\n   |\n   = help: you might be missing a crate named `serde`\n\nerror: aborting due to 5 previous errors\n\nFor more information about this error, try `rustc --explain E0433`.\n"
+  ],
+  "cases_total": 5,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "db26c6f11e5a6b335f3e83fd08b57e55258aeda2afc9dd5715f833e285fd0dfd",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison/sandbox/e0b4270c-ee57-4b30-91b3-5c661935e2e7.audit.json",
+  "audit_sha256": "810cf86ad6a51a3a12abbc141c0fad82746b799683a1e22e060f5bec97ae388e",
+  "failure": "compilation failed: error: cannot find macro `json` in this scope\n --> /candidate/main.rs:6:24\n  |\n6 |         None => return json!([[]]),\n  |                        ^^^^\n  |\n  = note: `json` is in scope, but it is a function, not a macro\n\nerror: cannot find macro `json` in this scope\n  --> /candidate/main.rs:11:24\n   |\n11 |         None => return json!([[]]),\n   |                        ^^^^\n   |\n   = note: `json` is in scope, but it is a function, not a macro\n\nerror: cannot find macro `json` in this scope\n  --> /candidate/main.rs:44:29\n   |\n44 |                 result.push(json!([key, left_val, right_val]));\n   |                             ^^^^\n   |\n   = note: `json` is in scope, but it is a function, not a macro\n\nerror: cannot find macro `json` in this scope\n  --> /candidate/main.rs:49:5\n   |\n49 |     json!(result)\n   |     ^^^^\n   |\n   = note: `json` is in scope, but it is a function, not a macro\n\nerror[E0433]: cannot find module or crate `serde` in this scope\n  --> /candidate/main.rs:54:8\n   |\n54 |     T: serde::Serialize,\n   |        ^^^^^ use of unresolved module or unlinked crate `serde`\n   |\n   = help: you might be missing a crate named `serde`\n\nerror: aborting due to 5 previous errors\n\nFor more information about this error, try `rustc --explain E0433`.\n",
+  "duration_ms": 27579,
+  "timeout_evidence": null,
+  "lifecycle_evidence": {
+    "receipt_path": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison/sandbox/e0b4270c-ee57-4b30-91b3-5c661935e2e7.lifecycle.json",
+    "receipt_sha256": "bb436d631bc334b628f955621bddcaa7dddd9688da28a82e839b381ab3596c18"
+  }
+}

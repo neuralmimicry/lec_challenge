@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "initial_plan": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/bits.popcount/student-plan.json",
+    "sha256": "f4bad97ed3bd4eda1ab5ab77e4024544f5f3206727a410590af7a67c48a79176",
+    "bytes": 3752
+  },
+  "student_raw": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/bits.popcount/student-raw.json",
+    "sha256": "d930c3b56ce42552ddad76e25eb10ebe47c5d4a0aa0622b816ffe53c0ed4a4ce",
+    "bytes": 1498
+  },
+  "student_grade": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox/9f52ca69-eecc-4d2e-a372-262e7f231bc7.json",
+    "sha256": "172237275525967258109728d321acb22e07d29bfff1d8de4e54f93cb0369bfb",
+    "bytes": 3717
+  },
+  "teacher_id": "qwen-coder-7b-q4_k_m",
+  "teacher_assets": {
+    "path": "offline_bundle/comparative/qwen-coder-7b-q4_k_m/gguf-assets.json",
+    "sha256": "606bfac02a103d208ccef73067cb6a4581e9b099e19bc9ed8e2021ebb1143114",
+    "bytes": 1206
+  },
+  "teacher_checkpoint": null,
+  "runtime": {
+    "device": {
+      "cuda": {
+        "ordinal": 0
+      }
+    },
+    "dtype": "f32"
+  },
+  "request": {
+    "prompt": "New task:\nWrite Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an integer in 0..4294967295. Return the number of set bits in its unsigned 32-bit representation.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":13,\"expected\":3}]\nActual frozen student candidate:\n```rust\nuse serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let num = input.as_i64().unwrap();\n    num.count_ones() as i64\n}\n```\nActual trusted tool feedback:\n{\"bounded_diagnostic_untrusted_data\":\"compilation failed: warning: unused import: `serde_json::Value`\\n --> /candidate/main.rs:1:5\\n  |\\n1 | use serde_json::Value;\\n  |     ^^^^^^^^^^^^^^^^^\\n  |\\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\\n\\nerror[E0308]: mismatched types\\n --> /candidate/main.rs:5:5\\n  |\\n3 | pub fn solve(input: serde_json::Value) -> serde_json::Value {\\n  |                                           ----------------- expected `Value` because of return type\\n4 |     let num = input.as_i64().unwrap();\\n5 |     num.count_ones() as i64\\n  |     ^^^^^^^^^^^^^^^^^^^^^^^ expected `Value`, found `i64`\\n  |\\nhelp: call `Into::into` on this expression to convert `i64` into `Value`\\n  |\\n5 |     (num.count_ones() as i64).into()\\n  |     +                       ++++++++\\n\\nerror: aborting due to 1 previous error; 1 warning emitted\\n\\nFor more information about this error, try `rustc --explain E0308`.\\n\",\"cases_passed\":0,\"cases_total\":7,\"content_role\":\"compilation_feedback_only\",\"original_failure_is_not_a_success\":true,\"passed\":false,\"private_inputs_or_expected_outputs_exposed\":false,\"quarantined\":true,\"run_id\":\"9f52ca69-eecc-4d2e-a372-262e7f231bc7\",\"student_generation_complete\":true,\"tool\":\"trusted_container_grader\",\"trace_complete\":false}\nCritique and revise the candidate. Put any short explanation in Rust // comments and return complete compilable Rust source only. Do not invent tool results.",
+    "max_new_tokens": 768,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "supporting_sample_ids": []
+}

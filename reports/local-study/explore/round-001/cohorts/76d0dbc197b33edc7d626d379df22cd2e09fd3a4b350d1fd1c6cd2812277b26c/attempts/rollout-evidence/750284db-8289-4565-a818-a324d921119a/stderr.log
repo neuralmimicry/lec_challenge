@@ -1,0 +1,66 @@
+student rollout collection: cached local weights only; explicit offline=false; frozen-student batch then offline updates
+execution: resuming original frozen runtime RuntimeOptions { device: Cuda { ordinal: 0 }, dtype: F32 }; resource availability is checked before new computation
+Sandbox recovered owned run lec-5f9de0e4-cc71-4555-bab2-3d119ca11700 after verified original-owner death
+student rollout task=ledger.sum complete=true
+student rollout task=ledger.prefix complete=true
+student rollout task=ledger.differences complete=true
+student rollout task=ledger.bounds complete=true
+student rollout task=stock.counts complete=true
+student rollout task=stock.stable_unique complete=true
+student rollout task=stock.duplicates complete=true
+student rollout task=stock.mode complete=true
+student rollout task=text.lower_trim complete=false
+student rollout task=text.squash complete=true
+student rollout task=text.slug complete=true
+student rollout task=text.reverse_words complete=true
+student rollout task=intervals.merge complete=true
+student rollout task=intervals.coverage complete=true
+student rollout task=intervals.largest_gap complete=true
+student rollout task=intervals.peak complete=true
+student rollout task=graph.reachable complete=true
+student rollout task=graph.distance complete=true
+student rollout task=graph.indegrees complete=true
+student rollout task=graph.topological complete=true
+student rollout task=validation.luhn complete=true
+student rollout task=validation.ipv4 complete=true
+student rollout task=validation.brackets complete=true
+student rollout task=validation.identifier complete=true
+student rollout task=matrices.transpose complete=true
+student rollout task=matrices.row_sums complete=true
+student rollout task=matrices.rotate complete=true
+student rollout task=matrices.diagonals complete=true
+student rollout task=search.occurrences complete=true
+student rollout task=search.common_prefix complete=true
+student rollout task=search.runs complete=true
+student rollout task=search.anagram complete=true
+student rollout task=paths.normalise complete=true
+student rollout task=paths.basename complete=true
+student rollout task=paths.extension complete=false
+student rollout task=paths.ancestors complete=true
+student rollout task=sequences.interleave complete=true
+student rollout task=sequences.zip_longest complete=true
+student rollout task=sequences.chunks complete=true
+student rollout task=sequences.move_zeroes complete=true
+student rollout task=calendar.leap complete=true
+student rollout task=calendar.month_days complete=true
+student rollout task=calendar.ordinal complete=true
+student rollout task=calendar.valid_date complete=true
+student rollout task=bits.popcount complete=true
+student rollout task=bits.hamming complete=true
+student rollout task=bits.parity complete=true
+student rollout task=bits.lowest complete=true
+rollout revision mode=SelfDistillation teacher=student-self-f9523886352217de task=ledger.sum accepted=false
+rollout revision mode=SelfDistillation teacher=student-self-f9523886352217de task=ledger.prefix accepted=false
+rollout revision mode=SelfDistillation teacher=student-self-f9523886352217de task=ledger.differences accepted=false
+rollout revision mode=SelfDistillation teacher=student-self-f9523886352217de task=ledger.bounds accepted=false
+rollout revision mode=SelfDistillation teacher=student-self-f9523886352217de task=stock.counts accepted=false
+rollout revision mode=SelfDistillation teacher=student-self-f9523886352217de task=stock.stable_unique accepted=false
+rollout revision mode=SelfDistillation teacher=student-self-f9523886352217de task=stock.duplicates accepted=false
+rollout revision mode=SelfDistillation teacher=student-self-f9523886352217de task=stock.mode accepted=false
+rollout revision mode=SelfDistillation teacher=student-self-f9523886352217de task=text.lower_trim accepted=false
+rollout revision mode=SelfDistillation teacher=student-self-f9523886352217de task=text.squash accepted=false
+rollout revision mode=SelfDistillation teacher=student-self-f9523886352217de task=text.slug accepted=false
+rollout revision mode=SelfDistillation teacher=student-self-f9523886352217de task=text.reverse_words accepted=false
+rollout revision mode=SelfDistillation teacher=student-self-f9523886352217de task=intervals.merge accepted=false
+rollout revision mode=SelfDistillation teacher=student-self-f9523886352217de task=intervals.coverage accepted=false
+rollout revision mode=SelfDistillation teacher=student-self-f9523886352217de task=intervals.largest_gap accepted=false

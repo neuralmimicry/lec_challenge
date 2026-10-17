@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "regrade_plan_sha256": "a0446d7d7140381e80efb5b83f144abfcbe58892dba6fc50ccbc9ec31002cc3a",
+  "task_id": "calendar.ordinal",
+  "source_id": "private-calendar-v1",
+  "original_plan": {
+    "path": "reports/local-study/native-full-quality-001/base-train/plan.json",
+    "sha256": "55c6614d90fbff0e580fd8fbfa9e06ce99715d8d0c78320e0fe70605545cc489",
+    "bytes": 63584
+  },
+  "original_raw": {
+    "path": "reports/local-study/native-full-quality-001/base-train/generations/calendar.ordinal.json",
+    "sha256": "3b4c016c382db0ad5c7d07c3f40e06ac95de0a69d236574c2d13093eaeed0780",
+    "bytes": 2548
+  },
+  "outcome": {
+    "kind": "graded",
+    "prepared": {
+      "path": "reports/local-study/regraded-v3-001/evaluation-003-train-f95238863522/prepared/calendar.ordinal.json",
+      "sha256": "bc2a21ac21e3c439f67628ff34133807c67b4a8a756f123d954451b42962aae7",
+      "bytes": 3421
+    },
+    "report": {
+      "path": "reports/local-study/regraded-v3-001/evaluation-003-train-f95238863522/sandbox/3415f6b6-5b4c-4390-8739-bf56c43b5027.json",
+      "sha256": "da88b71963bd77128a5f20e61871f0fcce785f0dc6fa4426a38f70da9c1eab64",
+      "bytes": 3846
+    },
+    "audit": {
+      "path": "reports/local-study/regraded-v3-001/evaluation-003-train-f95238863522/sandbox/3415f6b6-5b4c-4390-8739-bf56c43b5027.audit.json",
+      "sha256": "9fa16520281087f49f4907fe061552fb4fdd17d2a8666b9481e1afc238868f1b",
+      "bytes": 1348
+    }
+  },
+  "success": false
+}

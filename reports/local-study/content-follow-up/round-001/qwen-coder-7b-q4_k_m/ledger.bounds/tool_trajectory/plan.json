@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "task_id": "ledger.bounds",
+  "teacher_id": "qwen-coder-7b-q4_k_m",
+  "content": "tool_trajectory",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an integer array. Return [minimum,maximum], or null for an empty array.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[2,-4,8],\"expected\":[-4,8]}]\nYour previous candidate:\n```rust\nuse serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    match input {\n        Value::Array(arr) if arr.is_empty() => Value::Null,\n        Value::Array(arr) => {\n            let mut min_val = i64::MAX;\n            let mut max_val = i64::MIN;\n            for item in arr {\n                if let Value::Number(num) = item {\n                    if let Some(n) = num.as_i64() {\n                        if n < min_val {\n                            min_val = n;\n                        }\n                        if n > max_val {\n                            max_val = n;\n                        }\n                    }\n                }\n            }\n            Value::Array(vec![Value::Number(serde_json::Number::from(min_val)), Value::Number(serde_json::Number::from(max_val))])\n        },\n        _ => Value::Null,\n    }\n}\n```\nActual trusted tool feedback:\n{\"cases_passed\":14,\"cases_total\":14,\"passed\":true,\"private_inputs_or_expected_outputs_exposed\":false,\"quarantined\":false,\"run_id\":\"a64384c0-53ee-471e-a850-72c389c509e9\",\"tool\":\"trusted_container_grader\",\"trace_complete\":true}\nReview and revise the implementation. Return only complete Rust source. Do not invent tool calls or test results.",
+    "max_new_tokens": 768,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "runtime": {
+    "device": {
+      "cuda": {
+        "ordinal": 0
+      }
+    },
+    "dtype": "f32"
+  },
+  "teacher_assets": {
+    "path": "offline_bundle/comparative/qwen-coder-7b-q4_k_m/gguf-assets.json",
+    "sha256": "606bfac02a103d208ccef73067cb6a4581e9b099e19bc9ed8e2021ebb1143114",
+    "bytes": 1206
+  },
+  "supporting_sample_ids": [],
+  "feedback_candidate": {
+    "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/ledger.bounds.json",
+    "sha256": "ac52f35b25af0ecad4d4431e91a50e460c6e973d57b1b919184c6831dee88d11",
+    "bytes": 2948
+  },
+  "feedback_summary": "{\"cases_passed\":14,\"cases_total\":14,\"passed\":true,\"private_inputs_or_expected_outputs_exposed\":false,\"quarantined\":false,\"run_id\":\"a64384c0-53ee-471e-a850-72c389c509e9\",\"tool\":\"trusted_container_grader\",\"trace_complete\":true}",
+  "sandbox": {
+    "controller_version": 2,
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:1",
+    "expected_image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/content-follow-up/round-001/sandbox"
+  },
+  "preflight": {
+    "path": "reports/local-study/content-follow-up/round-001/sandbox-preflight.json",
+    "sha256": "5ff9e8927412955503111628b4961ced4cd48d0110eb88381e766c0fdb5f99db",
+    "bytes": 990
+  },
+  "engine_binary_sha256": "f5d2f2f520f0c7a69186163c33bd28207c37414fb3cdae0499c169957a846944"
+}

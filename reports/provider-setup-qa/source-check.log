@@ -1,0 +1,8 @@
+src/fleet/access.rs: OK
+src/fleet/config.rs: OK
+src/fleet/setup.rs: OK
+src/fleet/setup_tests.rs: OK
+src/provider_cli.rs: OK
+src/fleet.rs: OK
+src/main.rs: OK
+config/api-providers.toml: OK

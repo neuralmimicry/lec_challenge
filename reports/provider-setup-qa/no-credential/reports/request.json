@@ -1,0 +1,4 @@
+{
+  "complete": false,
+  "reason": "fleet exhausted without a valid completion: provider=openai; preflight refused: credential OPENAI_API_KEY is absent (value redacted)"
+}

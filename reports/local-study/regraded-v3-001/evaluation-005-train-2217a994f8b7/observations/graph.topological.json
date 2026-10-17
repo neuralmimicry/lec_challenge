@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "regrade_plan_sha256": "c321d8059463124f5c671ef40d0ed51dad10e49b26e0a18aa6f2f45add5739a9",
+  "task_id": "graph.topological",
+  "source_id": "private-graph-v1",
+  "original_plan": {
+    "path": "reports/local-study/native-full-quality-001/composed-train/plan.json",
+    "sha256": "a52d044d05dc99f9af1879cdb69e7d80c4abc41b317440255f0ff27069084831",
+    "bytes": 63656
+  },
+  "original_raw": {
+    "path": "reports/local-study/native-full-quality-001/composed-train/generations/graph.topological.json",
+    "sha256": "780e429b15d7eb18c48258ce50190d28cd1000be4ef1a8009720c955eeb7f721",
+    "bytes": 2559
+  },
+  "outcome": {
+    "kind": "graded",
+    "prepared": {
+      "path": "reports/local-study/regraded-v3-001/evaluation-005-train-2217a994f8b7/prepared/graph.topological.json",
+      "sha256": "55ed6b2ee4b52061299258bf90f0d42beb4efb1ce52689b79e4093cd7c7dba72",
+      "bytes": 3596
+    },
+    "report": {
+      "path": "reports/local-study/regraded-v3-001/evaluation-005-train-2217a994f8b7/sandbox/4a1583b4-a493-49f5-b20f-c1ab659b45b3.json",
+      "sha256": "dde5a0e3534df5f1cd3c2094880f2b728815b4a7c56544fb772f45247024d40c",
+      "bytes": 8987
+    },
+    "audit": {
+      "path": "reports/local-study/regraded-v3-001/evaluation-005-train-2217a994f8b7/sandbox/4a1583b4-a493-49f5-b20f-c1ab659b45b3.audit.json",
+      "sha256": "ae06b3b6694a092c11c8ee9c94b090616f15cf6dcbe413376c5f2ee150b5710e",
+      "bytes": 3918
+    }
+  },
+  "success": false
+}

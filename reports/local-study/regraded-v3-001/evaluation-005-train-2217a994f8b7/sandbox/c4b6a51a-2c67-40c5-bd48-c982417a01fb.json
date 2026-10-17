@@ -1,0 +1,40 @@
+{
+  "run_id": "c4b6a51a-2c67-40c5-bd48-c982417a01fb",
+  "task_id": "validation.luhn",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "candidate exit Some(101): \nthread 'main' (33) panicked at /candidate/main.rs:9:36:\ncalled `Option::unwrap()` on a `None` value\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n"
+  ],
+  "cases_total": 8,
+  "cases_passed": 0,
+  "trace_complete": true,
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "ea7558c371b8bd8369bec52a882e542371b0153b7c32480a76b6715a8b0576f4",
+  "stdout_sha256": "74835d41cfcd7e77205e5d486035fe0f3432940790ff89253cf338d0a8fb47bc",
+  "sandbox_config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/regraded-v3-001/evaluation-005-train-2217a994f8b7/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/regraded-v3-001/evaluation-005-train-2217a994f8b7/sandbox/c4b6a51a-2c67-40c5-bd48-c982417a01fb.audit.json",
+  "audit_sha256": "1d34a8b2632d08f1ddb99bd1cdc0c11ec4e9e4ab14947e11ae9e8177168bd505",
+  "failure": "candidate exit Some(101): \nthread 'main' (33) panicked at /candidate/main.rs:9:36:\ncalled `Option::unwrap()` on a `None` value\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n",
+  "duration_ms": 17362,
+  "timeout_evidence": null,
+  "lifecycle_evidence": {
+    "receipt_path": "reports/local-study/regraded-v3-001/evaluation-005-train-2217a994f8b7/sandbox/c4b6a51a-2c67-40c5-bd48-c982417a01fb.lifecycle.json",
+    "receipt_sha256": "b49c282d2b75ea5c4b7046b1435b461f979f60c2fb39f6466e95a644563ee882"
+  }
+}

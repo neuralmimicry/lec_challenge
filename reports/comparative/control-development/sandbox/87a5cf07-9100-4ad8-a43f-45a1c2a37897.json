@@ -1,0 +1,33 @@
+{
+  "run_id": "87a5cf07-9100-4ad8-a43f-45a1c2a37897",
+  "task_id": "dispatch.finish_order",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: warning: variable does not need to be mutable\n --> /candidate/main.rs:4:9\n  |\n4 |     let mut jobs = input.as_array().unwrap();\n  |         ----^^^^\n  |         |\n  |         help: remove this `mut`\n  |\n  = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0596]: cannot borrow `*jobs` as mutable, as it is behind a `&` reference\n --> /candidate/main.rs:5:5\n  |\n5 |     jobs.sort_by_key(|job| job.get(\"arrival\").unwrap().as_i64().unwrap());\n  |     ^^^^ `jobs` is a `&` reference, so it cannot be borrowed as mutable\n  |\nhelp: consider specifying this binding's type\n  |\n4 |     let mut jobs: &mut Vec<Value> = input.as_array().unwrap();\n  |                 +++++++++++++++++\n\nerror: aborting due to 1 previous error; 1 warning emitted\n\nFor more information about this error, try `rustc --explain E0596`.\n"
+  ],
+  "cases_total": 5,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "0bf995b5f69865792503015f6af52b457c861b679877956e939c2137ddb4a562",
+  "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+  "oracle_sha256": "a734f6d465714cbebb072790fedff161d2fc28cbb257b3d04cee0feaf8b5b5fe",
+  "code_sha256": "24186f5b0cef51891e70f215945393224eb0e373e8879508c9884c6a735bae39",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:1",
+    "expected_image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/comparative/control-development/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/comparative/control-development/sandbox/87a5cf07-9100-4ad8-a43f-45a1c2a37897.audit.json",
+  "audit_sha256": "689c0b4e01effaacda0bd4b49eb6a5ef41d087dd4682785316c797ffec8d6648",
+  "failure": "compilation failed: warning: variable does not need to be mutable\n --> /candidate/main.rs:4:9\n  |\n4 |     let mut jobs = input.as_array().unwrap();\n  |         ----^^^^\n  |         |\n  |         help: remove this `mut`\n  |\n  = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0596]: cannot borrow `*jobs` as mutable, as it is behind a `&` reference\n --> /candidate/main.rs:5:5\n  |\n5 |     jobs.sort_by_key(|job| job.get(\"arrival\").unwrap().as_i64().unwrap());\n  |     ^^^^ `jobs` is a `&` reference, so it cannot be borrowed as mutable\n  |\nhelp: consider specifying this binding's type\n  |\n4 |     let mut jobs: &mut Vec<Value> = input.as_array().unwrap();\n  |                 +++++++++++++++++\n\nerror: aborting due to 1 previous error; 1 warning emitted\n\nFor more information about this error, try `rustc --explain E0596`.\n",
+  "duration_ms": 8966,
+  "timeout_evidence": null
+}

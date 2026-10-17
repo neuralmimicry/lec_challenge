@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "a5b39d544c85b76111246b8fda40c638ce104251a1c56368277fef8fe4033eb6",
+  "task_id": "matrices.rotate",
+  "source_id": "private-matrices-v1",
+  "success": true,
+  "raw_generation": {
+    "path": "reports/local-study/native-full-quality-001/sft-train/generations/matrices.rotate.json",
+    "sha256": "ca5fd91877203eac7557152443b43d94896e0ef842098af05d503929dd0a7c8b",
+    "bytes": 2033
+  },
+  "sandbox_report": {
+    "path": "reports/local-study/native-full-quality-001/sft-train/sandbox/06068946-5f72-4875-ae73-33ebc17d9693.json",
+    "sha256": "c38ed8546690289c05557e31dfec608a9a4575cb175a0611960f819e6afb098b",
+    "bytes": 1355
+  },
+  "grading_error": null
+}

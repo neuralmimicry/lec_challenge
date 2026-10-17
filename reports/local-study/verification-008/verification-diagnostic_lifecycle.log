@@ -1,0 +1,9 @@
+
+running 1 test
+test tests::whole_process_deadline_kills_and_reaps_an_owned_worker ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.10s
+
+   Compiling lec-distil v0.1.0 (/home/pbisaacs/Developer/neuralmimicry/lec_challenge)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 2.05s
+     Running unittests examples/quantised_prefix_qa.rs (target/debug/examples/quantised_prefix_qa-168531a20c503e7d)

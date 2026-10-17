@@ -1,0 +1,40 @@
+{
+  "run_id": "f9898845-86c3-48d8-9094-8c8cdeb3d8e7",
+  "task_id": "dispatch.round_robin",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error[E0308]: mismatched types\n --> /candidate/main.rs:2:65\n  |\n2 |     let input_map: serde_json::Map<String, serde_json::Value> = input.as_object().unwrap();\n  |                    ------------------------------------------   ^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `Map<String, Value>`, found `&Map<String, Value>`\n  |                    |\n  |                    expected due to this\n  |\n  = note: expected struct `Map<_, _>`\n          found reference `&Map<_, _>`\nhelp: consider using clone here\n  |\n2 |     let input_map: serde_json::Map<String, serde_json::Value> = input.as_object().unwrap().clone();\n  |                                                                                           ++++++++\n\nerror[E0369]: binary operation `>` cannot be applied to type `Value`\n   --> /candidate/main.rs:21:34\n    |\n 21 |     while work.iter().any(|&w| w > 0) {\n    |                                - ^ - {integer}\n    |                                |\n    |                                Value\n    |\nnote: `Value` does not implement `PartialOrd<{integer}>`\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:116:1\n    |\n116 | pub enum Value {\n    | ^^^^^^^^^^^^^^ `Value` is defined in another crate\n\nerror[E0369]: binary operation `>` cannot be applied to type `Value`\n   --> /candidate/main.rs:26:34\n    |\n 26 |             if work[current_idx] > 0 {\n    |                ----------------- ^ - {integer}\n    |                |\n    |                Value\n    |\nnote: `Value` does not implement `PartialOrd<{integer}>`\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:116:1\n    |\n116 | pub enum Value {\n    | ^^^^^^^^^^^^^^ `Value` is defined in another crate\n\nerror[E0368]: binary assignment operation `-=` cannot be applied to type `Value`\n   --> /candidate/main.rs:28:17\n    |\n 28 |                 work[current_idx] -= work_to_do;\n    |                 -----------------^^^^^^^^^^^^^^\n    |                 |\n    |                 cannot use `-=` on type `Value`\n    |\nnote: `Value` does not implement `SubAssign<usize>`\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:116:1\n    |\n116 | pub enum Value {\n    | ^^^^^^^^^^^^^^ `Value` is defined in another crate\n\nerror[E0605]: non-primitive cast: `Value` as `i64`\n  --> /candidate/main.rs:27:34\n   |\n27 |                 let work_to_do = (work[current_idx] as i64).min(quantum as i64) as usize;\n   |                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^ an `as` expression can be used to convert enum types to numeric types only if the enum type is unit-only or field-less\n   |\n   = note: see https://doc.rust-lang.org/reference/items/enumerations.html#casting for more information\n\nerror: aborting due to 5 previous errors\n\nSome errors have detailed explanations: E0308, E0368, E0369, E0605.\nFor more information about an error, try `rustc --explain E0308`.\n"
+  ],
+  "cases_total": 5,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "b38603392a3197ed6cef3df36c43c72956264c1fac4ee679cb916c97eb2e2d25",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison/sandbox/f9898845-86c3-48d8-9094-8c8cdeb3d8e7.audit.json",
+  "audit_sha256": "9248c396144affd7b60c39f775112d2933ce537e6e6e488e7997b7e3adda38c7",
+  "failure": "compilation failed: error[E0308]: mismatched types\n --> /candidate/main.rs:2:65\n  |\n2 |     let input_map: serde_json::Map<String, serde_json::Value> = input.as_object().unwrap();\n  |                    ------------------------------------------   ^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `Map<String, Value>`, found `&Map<String, Value>`\n  |                    |\n  |                    expected due to this\n  |\n  = note: expected struct `Map<_, _>`\n          found reference `&Map<_, _>`\nhelp: consider using clone here\n  |\n2 |     let input_map: serde_json::Map<String, serde_json::Value> = input.as_object().unwrap().clone();\n  |                                                                                           ++++++++\n\nerror[E0369]: binary operation `>` cannot be applied to type `Value`\n   --> /candidate/main.rs:21:34\n    |\n 21 |     while work.iter().any(|&w| w > 0) {\n    |                                - ^ - {integer}\n    |                                |\n    |                                Value\n    |\nnote: `Value` does not implement `PartialOrd<{integer}>`\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:116:1\n    |\n116 | pub enum Value {\n    | ^^^^^^^^^^^^^^ `Value` is defined in another crate\n\nerror[E0369]: binary operation `>` cannot be applied to type `Value`\n   --> /candidate/main.rs:26:34\n    |\n 26 |             if work[current_idx] > 0 {\n    |                ----------------- ^ - {integer}\n    |                |\n    |                Value\n    |\nnote: `Value` does not implement `PartialOrd<{integer}>`\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:116:1\n    |\n116 | pub enum Value {\n    | ^^^^^^^^^^^^^^ `Value` is defined in another crate\n\nerror[E0368]: binary assignment operation `-=` cannot be applied to type `Value`\n   --> /candidate/main.rs:28:17\n    |\n 28 |                 work[current_idx] -= work_to_do;\n    |                 -----------------^^^^^^^^^^^^^^\n    |                 |\n    |                 cannot use `-=` on type `Value`\n    |\nnote: `Value` does not implement `SubAssign<usize>`\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:116:1\n    |\n116 | pub enum Value {\n    | ^^^^^^^^^^^^^^ `Value` is defined in another crate\n\nerror[E0605]: non-primitive cast: `Value` as `i64`\n  --> /candidate/main.rs:27:34\n   |\n27 |                 let work_to_do = (work[current_idx] as i64).min(quantum as i64) as usize;\n   |                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^ an `as` expression can be used to convert enum types to numeric types only if the enum type is unit-only or field-less\n   |\n   = note: see https://doc.rust-lang.org/reference/items/enumerations.html#casting for more information\n\nerror: aborting due to 5 previous errors\n\nSome errors have detailed explanations: E0308, E0368, E0369, E0605.\nFor more information about an error, try `rustc --explain E0308`.\n",
+  "duration_ms": 28117,
+  "timeout_evidence": null,
+  "lifecycle_evidence": {
+    "receipt_path": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison/sandbox/f9898845-86c3-48d8-9094-8c8cdeb3d8e7.lifecycle.json",
+    "receipt_sha256": "8db7751807a3847a29e98d04973f60231653a57c0bd6e8d56690884cbe6a88bc"
+  }
+}

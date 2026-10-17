@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "task_id": "graph.distance",
+  "teacher_id": "qwen-coder-7b-q4_k_m",
+  "content": "tool_trajectory",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input {n,start,target,edges} is a directed unweighted graph, n>=1. Return shortest edge distance start->target, or -1 if unreachable. Graph vertex counts are at most 64.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":{\"edges\":[[0,1],[1,2]],\"n\":4,\"start\":0,\"target\":2},\"expected\":2}]\nYour previous candidate:\n```rust\nuse serde_json::{Value, json};\n\npub fn solve(input: Value) -> Value {\n    let obj = input.as_object().unwrap();\n    let n = obj[\"n\"].as_i64().unwrap();\n    let start = obj[\"start\"].as_i64().unwrap();\n    let target = obj[\"target\"].as_i64().unwrap();\n    let edges = obj[\"edges\"].as_array().unwrap();\n\n    let mut graph = vec![vec![]; n as usize];\n    for edge in edges {\n        let edge = edge.as_array().unwrap();\n        let from = edge[0].as_i64().unwrap() as usize;\n        let to = edge[1].as_i64().unwrap() as usize;\n        graph[from].push(to);\n    }\n\n    let mut distances = vec![i64::MAX; n as usize];\n    distances[start as usize] = 0;\n\n    let mut queue = vec![start];\n    while let Some(node) = queue.pop() {\n        for &neighbor in &graph[node] {\n            if distances[node] + 1 < distances[neighbor] {\n                distances[neighbor] = distances[node] + 1;\n                queue.push(neighbor);\n            }\n        }\n    }\n\n    if distances[target as usize] == i64::MAX {\n        json!(-1)\n    } else {\n        json!(distances[target as usize])\n    }\n}\n```\nActual trusted tool feedback:\n{\"cases_passed\":0,\"cases_total\":6,\"passed\":false,\"private_inputs_or_expected_outputs_exposed\":false,\"quarantined\":true,\"run_id\":\"7e8b1d88-f71f-4cc6-b504-74dc2dd83015\",\"tool\":\"trusted_container_grader\",\"trace_complete\":false}\nReview and revise the implementation. Return only complete Rust source. Do not invent tool calls or test results.",
+    "max_new_tokens": 768,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "runtime": {
+    "device": {
+      "cuda": {
+        "ordinal": 0
+      }
+    },
+    "dtype": "f32"
+  },
+  "teacher_assets": {
+    "path": "offline_bundle/comparative/qwen-coder-7b-q4_k_m/gguf-assets.json",
+    "sha256": "606bfac02a103d208ccef73067cb6a4581e9b099e19bc9ed8e2021ebb1143114",
+    "bytes": 1206
+  },
+  "supporting_sample_ids": [],
+  "feedback_candidate": {
+    "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/graph.distance.json",
+    "sha256": "d05f48f8169ed9b5cbb529ac758a9af8a8e22b6d2be6a4b5bb5bfa581ab72b17",
+    "bytes": 3353
+  },
+  "feedback_summary": "{\"cases_passed\":0,\"cases_total\":6,\"passed\":false,\"private_inputs_or_expected_outputs_exposed\":false,\"quarantined\":true,\"run_id\":\"7e8b1d88-f71f-4cc6-b504-74dc2dd83015\",\"tool\":\"trusted_container_grader\",\"trace_complete\":false}",
+  "sandbox": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/explore/round-001/content-v1/sandbox"
+  },
+  "preflight": {
+    "path": "reports/local-study/explore/round-001/content-v1/sandbox-preflight.json",
+    "sha256": "177e2ef21e36cbec4f692ca35960e457194cb5c74266c869808e60d56ead923d",
+    "bytes": 1287
+  },
+  "engine_binary_sha256": "3f348bdfa71c49df5b5d0b7581ae9ad3114645127f99abbec9e4aac1064563bd"
+}

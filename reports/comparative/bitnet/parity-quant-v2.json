@@ -1,0 +1,109 @@
+{
+  "schema_version": 2,
+  "evidence_kind": "actual_original_bitnet_rust_i2s_numerical_parity",
+  "plan": {
+    "path": "reports/comparative/bitnet/parity-quant-v2.plan.json",
+    "sha256": "5e05af46c9c9cae9f29232062fa6fbe42a38731c5c39d538c00ac3c1c1faa3e4",
+    "bytes": 6035
+  },
+  "observations": [
+    {
+      "prompt_index": 0,
+      "native_response": {
+        "path": "reports/comparative/bitnet/parity-quant-v2.probe-0.json",
+        "sha256": "2aedd2083fa1010b3b0bfcfea659f51fcccb1c14ea1663079b61a3d39034292e",
+        "bytes": 5882
+      },
+      "rust_logprobs": {
+        "path": "reports/comparative/bitnet/parity-quant-v2.rust-0.json",
+        "sha256": "de42d0c39d2d95e6f52f71d9bff8889976f5c1954822fc0fc173a73737671db6",
+        "bytes": 3120980
+      }
+    },
+    {
+      "prompt_index": 1,
+      "native_response": {
+        "path": "reports/comparative/bitnet/parity-quant-v2.probe-1.json",
+        "sha256": "5e60aa8e20d8566f7090e6c74831b45b96659b08770c769f6f0a0bd247d5d87d",
+        "bytes": 5658
+      },
+      "rust_logprobs": {
+        "path": "reports/comparative/bitnet/parity-quant-v2.rust-1.json",
+        "sha256": "81438aa050b3e1386f45af0b7cc1b97c772a2bc439a92c23994140e6912711e9",
+        "bytes": 3140951
+      }
+    },
+    {
+      "prompt_index": 2,
+      "native_response": {
+        "path": "reports/comparative/bitnet/parity-quant-v2.probe-2.json",
+        "sha256": "549fd79dc576ba1d1d8ffa294c36f243779ff860b9fd7a763a951f7cb7f7ef33",
+        "bytes": 5655
+      },
+      "rust_logprobs": {
+        "path": "reports/comparative/bitnet/parity-quant-v2.rust-2.json",
+        "sha256": "41519b678103524819d30db9deffa29116786da354df49e42e14d9ced352fb5f",
+        "bytes": 3155492
+      }
+    }
+  ],
+  "cpp_execution": {
+    "actual_device": "Cpu",
+    "actual_dtype": "F32",
+    "architecture": "bitnet",
+    "checkpoint_id": "8143ae115ed6babe5e5ada8fb8c5b769d8f417802b2db042ad98b4f7ed73975b",
+    "context_tokens": 4096,
+    "cpu_fallback": false,
+    "cpu_mask": null,
+    "cpu_threads": 4,
+    "cuda_active": false,
+    "engine": "pinned_bitnet_cpp_supervised_by_rust",
+    "engine_manifest": {
+      "bytes": 6033,
+      "path": "state/engines/bitnet-quant-v2-build/engine-manifest.json",
+      "sha256": "2c9dc38d6feca0e394177c48a478422066ecea0c181a8f42824f7068b38b4c8b"
+    },
+    "evaluation_only": true,
+    "gguf": {
+      "bytes": 1843959008,
+      "path": "reports/comparative/bitnet/schema2/model.i2_s.gguf",
+      "sha256": "2e097b3dda58f8308b03c8b62cce7cb8767470aafb7400e5f169c108b86c75a7"
+    },
+    "inference_protocol": "explicit_original_tokens_cpu_f32_kv_quant_v3",
+    "inherited_affinity": "0-15",
+    "key_cache_dtype": "F32",
+    "kv_cache": true,
+    "lifetime_supervision": "persistent_native_owner_thread_linux_pdeathsig_sigkill_parent_pid_race_check",
+    "log": "reports/comparative/bitnet/engine-runs/950f5eab-aa4d-4ab6-be6f-e4a2c16ef8e9.log",
+    "model_id": "microsoft/bitnet-b1.58-2B-4T",
+    "native_server_pid": 854109,
+    "original_tokeniser_parity_verified": true,
+    "production_eligible": false,
+    "requested": {
+      "device": "cpu",
+      "dtype": "f32"
+    },
+    "revision": "04c3b9ad9361b824064a1f25ea60a8be9599b127",
+    "value_cache_dtype": "F32"
+  },
+  "rust_execution": {
+    "activation_forward": "symmetric_per_token_int8_ties_even_ste",
+    "actual_device": "Cpu",
+    "actual_dtype": "F32",
+    "architecture": "bitnet",
+    "checkpoint_directory": null,
+    "checkpoint_id": "8143ae115ed6babe5e5ada8fb8c5b769d8f417802b2db042ad98b4f7ed73975b",
+    "cpu_fallback": false,
+    "cuda_active": false,
+    "decoding_cache": "none_full_prefix_recomputed",
+    "engine": "native_rust_candle",
+    "evaluation_only": true,
+    "model_id": "microsoft/bitnet-b1.58-2B-4T",
+    "production_eligible": false,
+    "revision": "04c3b9ad9361b824064a1f25ea60a8be9599b127",
+    "weight_forward": "official_fixed_scale_ternary_effective_qat"
+  },
+  "comparison_completed": true,
+  "passed": false,
+  "production_eligible": false
+}

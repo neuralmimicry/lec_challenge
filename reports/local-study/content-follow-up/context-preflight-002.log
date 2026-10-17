@@ -1,0 +1,97 @@
+{
+  "maximum_input_tokens": 548,
+  "memory_estimates": [
+    {
+      "actual_free_vram_bytes": 5450498048,
+      "actual_guarded_free_vram_bytes": 4771230516,
+      "all_twelve_prompts_fit_with_768_output": true,
+      "context_tokens": 1536,
+      "cpu": {
+        "activation_workspace_bytes": 393216000,
+        "assumptions": "Full quantised weights on the selected device; embedding expanded to GPU float16 or CPU float32; float32 activations/KV/attention; no hybrid offload. Driver/allocator/workspace behaviour may require additional headroom.",
+        "attention_score_bytes": 264241152,
+        "conservative_total_bytes": 7763789824,
+        "context_tokens": 1536,
+        "dense_embedding_bytes": 2179989504,
+        "kv_cache_bytes": 176160768,
+        "quantised_file_bytes": 4683073536,
+        "runtime_reserve_bytes": 67108864
+      },
+      "fits_current_gpu_guard": false,
+      "gpu": {
+        "activation_workspace_bytes": 393216000,
+        "assumptions": "Full quantised weights on the selected device; embedding expanded to GPU float16 or CPU float32; float32 activations/KV/attention; no hybrid offload. Driver/allocator/workspace behaviour may require additional headroom.",
+        "attention_score_bytes": 264241152,
+        "conservative_total_bytes": 6875121664,
+        "context_tokens": 1536,
+        "dense_embedding_bytes": 1089994752,
+        "kv_cache_bytes": 176160768,
+        "quantised_file_bytes": 4683073536,
+        "runtime_reserve_bytes": 268435456
+      },
+      "minimum_required_free_vram_bytes": 7788154879
+    },
+    {
+      "actual_free_vram_bytes": 5450498048,
+      "actual_guarded_free_vram_bytes": 4771230516,
+      "all_twelve_prompts_fit_with_768_output": true,
+      "context_tokens": 1792,
+      "cpu": {
+        "activation_workspace_bytes": 458752000,
+        "assumptions": "Full quantised weights on the selected device; embedding expanded to GPU float16 or CPU float32; float32 activations/KV/attention; no hybrid offload. Driver/allocator/workspace behaviour may require additional headroom.",
+        "attention_score_bytes": 359661568,
+        "conservative_total_bytes": 7954106368,
+        "context_tokens": 1792,
+        "dense_embedding_bytes": 2179989504,
+        "kv_cache_bytes": 205520896,
+        "quantised_file_bytes": 4683073536,
+        "runtime_reserve_bytes": 67108864
+      },
+      "fits_current_gpu_guard": false,
+      "gpu": {
+        "activation_workspace_bytes": 458752000,
+        "assumptions": "Full quantised weights on the selected device; embedding expanded to GPU float16 or CPU float32; float32 activations/KV/attention; no hybrid offload. Driver/allocator/workspace behaviour may require additional headroom.",
+        "attention_score_bytes": 359661568,
+        "conservative_total_bytes": 7065438208,
+        "context_tokens": 1792,
+        "dense_embedding_bytes": 1089994752,
+        "kv_cache_bytes": 205520896,
+        "quantised_file_bytes": 4683073536,
+        "runtime_reserve_bytes": 268435456
+      },
+      "minimum_required_free_vram_bytes": 7999617706
+    },
+    {
+      "actual_free_vram_bytes": 5450498048,
+      "actual_guarded_free_vram_bytes": 4771230516,
+      "all_twelve_prompts_fit_with_768_output": true,
+      "context_tokens": 2048,
+      "cpu": {
+        "activation_workspace_bytes": 524288000,
+        "assumptions": "Full quantised weights on the selected device; embedding expanded to GPU float16 or CPU float32; float32 activations/KV/attention; no hybrid offload. Driver/allocator/workspace behaviour may require additional headroom.",
+        "attention_score_bytes": 469762048,
+        "conservative_total_bytes": 8159102976,
+        "context_tokens": 2048,
+        "dense_embedding_bytes": 2179989504,
+        "kv_cache_bytes": 234881024,
+        "quantised_file_bytes": 4683073536,
+        "runtime_reserve_bytes": 67108864
+      },
+      "fits_current_gpu_guard": false,
+      "gpu": {
+        "activation_workspace_bytes": 524288000,
+        "assumptions": "Full quantised weights on the selected device; embedding expanded to GPU float16 or CPU float32; float32 activations/KV/attention; no hybrid offload. Driver/allocator/workspace behaviour may require additional headroom.",
+        "attention_score_bytes": 469762048,
+        "conservative_total_bytes": 7270434816,
+        "context_tokens": 2048,
+        "dense_embedding_bytes": 1089994752,
+        "kv_cache_bytes": 234881024,
+        "quantised_file_bytes": 4683073536,
+        "runtime_reserve_bytes": 268435456
+      },
+      "minimum_required_free_vram_bytes": 8227391715
+    }
+  ],
+  "minimum_total_tokens": 1316,
+  "report": "reports/local-study/content-follow-up/context-preflight-002.json"
+}

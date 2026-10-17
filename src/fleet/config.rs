@@ -82,6 +82,11 @@ pub struct PermissionDecision {
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ProviderConfig {
+    #[serde(default)]
+    pub api: ProviderApi,
+    /// Inference access never grants permission to train on the returned output.
+    #[serde(default)]
+    pub inference_only: bool,
     pub id: String,
     pub business_id: String,
     pub enabled: bool,
@@ -117,16 +122,26 @@ impl ProviderConfig {
                 && !self.model_revision.is_empty(),
             "provider/model identity is incomplete"
         );
+        ensure!(
+            !self.model.starts_with("UNRESOLVED") && !self.model_revision.starts_with("UNRESOLVED"),
+            "model ID or revision policy is unresolved"
+        );
         let url = reqwest::Url::parse(&self.endpoint)?;
         ensure!(
             url.scheme() == "https"
                 && url.username().is_empty()
                 && url.password().is_none()
-                && url.query().is_none(),
+                && url.query().is_none()
+                && url.fragment().is_none(),
             "provider endpoint must be HTTPS without credentials or query"
         );
         ensure!(
-            !self.api_key_environment.is_empty(),
+            !self.api_key_environment.is_empty()
+                && self
+                    .api_key_environment
+                    .bytes()
+                    .all(|b| b.is_ascii_alphanumeric() || b == b'_')
+                && !self.api_key_environment.as_bytes()[0].is_ascii_digit(),
             "API key environment name missing"
         );
         ensure!(
@@ -143,7 +158,7 @@ impl ProviderConfig {
         ensure!(
             matches!(
                 self.output_cap_parameter.as_str(),
-                "max_tokens" | "max_completion_tokens"
+                "max_tokens" | "max_completion_tokens" | "max_output_tokens" | "maxOutputTokens"
             ) && self.output_cap_includes_reasoning,
             "billable output is not demonstrably capped"
         );
@@ -157,21 +172,25 @@ impl ProviderConfig {
                 && self.retries <= 5,
             "unbounded retry/circuit/timeout configuration"
         );
-        ensure!(
-            self.permission.approved_for_output_training,
-            "output training permission unresolved for {}",
-            self.id
-        );
-        ensure!(
-            !self.permission.decision_id.is_empty()
-                && !self.permission.reviewed_at.is_empty()
-                && !self.permission.model_licence.is_empty(),
-            "incomplete permission decision"
-        );
-        ensure!(
-            valid_hash(&self.permission.evidence_sha256),
-            "permission evidence hash missing"
-        );
+        self.api
+            .validate_endpoint(&url, &self.model, &self.output_cap_parameter)?;
+        if !self.inference_only {
+            ensure!(
+                self.permission.approved_for_output_training,
+                "output training permission unresolved for {}",
+                self.id
+            );
+            ensure!(
+                !self.permission.decision_id.is_empty()
+                    && !self.permission.reviewed_at.is_empty()
+                    && !self.permission.model_licence.is_empty(),
+                "incomplete permission decision"
+            );
+            ensure!(
+                valid_hash(&self.permission.evidence_sha256),
+                "permission evidence hash missing"
+            );
+        }
         self.price
             .as_ref()
             .context("missing price snapshot")?
@@ -188,12 +207,38 @@ pub struct FleetConfig {
 
 impl FleetConfig {
     pub fn load(path: impl AsRef<Path>) -> Result<Self> {
-        let config: Self = toml::from_str(&fs::read_to_string(path)?)?;
-        config.validate()?;
+        let path = path.as_ref();
+        let config = Self::read(path)?;
+        config
+            .validate()
+            .with_context(|| format!("invalid provider configuration {}", path.display()))?;
         Ok(config)
+    }
+    pub(super) fn read(path: &Path) -> Result<Self> {
+        let source = fs::read_to_string(path).with_context(|| {
+            if !path.exists() {
+                format!("provider configuration {} does not exist; create a local configuration with ./run.sh provider-init --help (see docs/api-providers.md), then use the same --config path for provider-check and provider-request", path.display())
+            } else {
+                format!("cannot read provider configuration {}", path.display())
+            }
+        })?;
+        toml::from_str(&source)
+            .with_context(|| format!("cannot parse provider configuration {}", path.display()))
     }
     pub fn validate(&self) -> Result<()> {
         ensure!(self.max_parallel_tasks > 0, "zero fleet concurrency");
+        ensure!(
+            [
+                self.budgets.tokens.round,
+                self.budgets.tokens.task,
+                self.budgets.tokens.provider,
+                self.budgets.tokens.model
+            ]
+            .into_iter()
+            .flatten()
+            .all(|n| n <= i64::MAX as u64),
+            "token budget exceeds database integer range"
+        );
         ensure!(
             [
                 self.budgets.round_nanos,
@@ -226,7 +271,7 @@ impl FleetConfig {
         let businesses: std::collections::HashSet<_> = self
             .providers
             .iter()
-            .filter(|p| p.enabled)
+            .filter(|p| p.enabled && !p.inference_only && p.permission.approved_for_output_training)
             .map(|p| p.business_id.as_str())
             .collect();
         ensure!(
@@ -312,7 +357,10 @@ pub fn prepare(provider: &ProviderConfig, request: &FleetRequest) -> Result<Prep
             && generation.max_output_tokens <= provider.max_output_tokens,
         "output exceeds approved billable cap"
     );
-    let body = chat_body(&provider.model, &provider.output_cap_parameter, request);
+    let body =
+        provider
+            .api
+            .request_body(&provider.model, &provider.output_cap_parameter, request)?;
     // Byte fallback deliberately over-reserves where an exact provider tokenizer is
     // unavailable. The fixed overhead covers ordinary chat framing, not arbitrary tools.
     let input_bound = u64::try_from(serde_json::to_vec(&body)?.len())?

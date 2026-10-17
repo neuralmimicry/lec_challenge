@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "evidence_kind": "actual_local_model_generation",
+  "recorded_unix_ms": 1792137592018,
+  "model_id": "qwen3-4b-instruct-2507-q4_k_m",
+  "task_id": "encoding.hex_decode",
+  "source_id": "private-encoding-v1",
+  "specification_sha256": "535cec08e7ca750ff6426c55df5e10382b5d98dd2b972889c664a544c49c2a87",
+  "seed": 1729,
+  "plan_sha256": "6d343a1ee585d9daf2a7fbaea768580a60e310abaf7186964443ef83a9a1013d",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an ASCII string. Decode even-length hexadecimal accepting upper/lowercase; return byte array, or null for invalid digits or odd length. The returned array may contain up to 128 items.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":\"00aF\",\"expected\":[0,175]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let s = input.as_str().unwrap_or(\"\");\n    let mut result = Vec::new();\n    \n    if s.is_empty() {\n        return serde_json::json!(null);\n    }\n    \n    let mut i = 0;\n    while i < s.len() {\n        if !('0'..='9').contains(&s[i]) && !('a'..='f').contains(&s[i]) && !('A'..='F').contains(&s[i]) {\n            return serde_json::json!(null);\n        }\n        if i + 1 < s.len() && !('0'..='9').contains(&s[i + 1]) && !('a'..='f').contains(&s[i + 1]) && !('A'..='F').contains(&s[i + 1]) {\n            return serde_json::json!(null);\n        }\n        i += 1;\n    }\n    \n    if s.len() % 2 != 0 {\n        return serde_json::json!(null);\n    }\n    \n    for i in (0..s.len()).step_by(2) {\n        let high = match s[i] {\n            '0'..='9' => s[i] as u8 - b'0',\n            'a'..='f' => s[i] as u8 - b'a' + 10,\n            'A'..='F' => s[i] as u8 - b'A' + 10,\n            _ => return serde_json::json!(null),\n        };\n        let low = match s[i + 1] {\n            '0'..='9' => s[i + 1] as u8 - b'0',\n            'a'..='f' => s[i + 1] as u8 - b'a' + 10,\n            'A'..='F' => s[i + 1] as u8 - b'A' + 10,\n            _ => return serde_json::json!(null),\n        };\n        result.push((high << 4 | low) as u8 as i64);\n    }\n    \n    serde_json::json!(result)\n}\n```",
+    "checkpoint_id": "2fde00ce69dd4899c70d020845e2638353015bba0fdf161b3eb965f2bca4464e",
+    "finish_reason": "stop",
+    "input_tokens": 227,
+    "output_tokens": 476,
+    "elapsed_ms": 69042,
+    "complete": true
+  },
+  "generation_error": null,
+  "execution": {
+    "actual_device": "Cuda { gpu_id: 0 }",
+    "actual_dtype": "F32",
+    "asset_lifetime_shared_lease": true,
+    "available_cpu_threads": 16,
+    "candle_cpu_threads": 4,
+    "checkpoint_id": "2fde00ce69dd4899c70d020845e2638353015bba0fdf161b3eb965f2bca4464e",
+    "context_cap": 1024,
+    "cpu_fallback": false,
+    "cuda_active": true,
+    "cuda_feature_compiled": true,
+    "engine": "native_rust_candle",
+    "model_id": "bartowski/Qwen_Qwen3-4B-Instruct-2507-GGUF",
+    "quantisation": {
+      "all_weights_dequantised": false,
+      "embedding_precision": "F16",
+      "format": "gguf",
+      "hybrid_cpu_offload": false,
+      "kv_precision": "F32",
+      "matrix_backend": "native_candle_QMatMul",
+      "memory_estimate": {
+        "activation_workspace_bytes": 140509184,
+        "assumptions": "Full quantised weights on the selected device; embedding expanded to GPU float16 or CPU float32; float32 activations/KV/attention; no hybrid offload. Driver/allocator/workspace behaviour may require additional headroom.",
+        "attention_score_bytes": 134217728,
+        "conservative_total_bytes": 4120345312,
+        "context_tokens": 1024,
+        "dense_embedding_bytes": 777912320,
+        "kv_cache_bytes": 301989888,
+        "quantised_file_bytes": 2497280736,
+        "runtime_reserve_bytes": 268435456
+      },
+      "original_source_model_id": "Qwen/Qwen3-4B-Instruct-2507",
+      "original_source_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+      "quantised_publisher_model_id": "bartowski/Qwen_Qwen3-4B-Instruct-2507-GGUF",
+      "quantised_publisher_revision": "ae44f08e1392f39c0e474af10c3ff8355c8b6688",
+      "tensor_types": {
+        "F32": 145,
+        "Q4K": 216,
+        "Q6K": 37
+      },
+      "weight_sha256": "2fde00ce69dd4899c70d020845e2638353015bba0fdf161b3eb965f2bca4464e"
+    },
+    "requested": {
+      "device": {
+        "cuda": {
+          "ordinal": 0
+        }
+      },
+      "dtype": "f32"
+    },
+    "revision": "ae44f08e1392f39c0e474af10c3ff8355c8b6688",
+    "weight_format": "gguf"
+  }
+}

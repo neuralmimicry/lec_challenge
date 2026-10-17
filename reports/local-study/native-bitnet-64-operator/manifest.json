@@ -1,0 +1,704 @@
+{
+  "schema_version": 1,
+  "evidence_kind": "verified_local_teacher_experimental_distillation",
+  "spec": {
+    "schema_version": 1,
+    "arm_id": "native_bitnet_64_operator_qa",
+    "student_base": "offline_bundle/students/bitnet-2b-4t",
+    "student_kind": "ternary_bitnet",
+    "evidence_bundle": "reports/local-study/qwen7b-evidence/bundle.json",
+    "output": "reports/local-study/native-bitnet-64-operator",
+    "seed": 1701,
+    "steps": 64,
+    "max_sequence_tokens": 32,
+    "sequence_policy": "assistant_window",
+    "rank": 2,
+    "alpha": 4.0,
+    "learning_rate": 0.005,
+    "temperature": 2.0,
+    "dpo_beta": 0.1,
+    "losses": [
+      {
+        "kind": "sequence_sft",
+        "weight": 1.0
+      }
+    ],
+    "teacher_ids": [
+      "qwen-coder-7b-q4_k_m"
+    ],
+    "contents": [
+      "complete_sequence"
+    ],
+    "teacher_runtime": {
+      "device": "cpu",
+      "dtype": "f32"
+    },
+    "teacher_target_policy": "cache_only",
+    "student_runtime": {
+      "device": "cpu",
+      "dtype": "f32"
+    },
+    "initial_checkpoint": null,
+    "data_policy": "offline",
+    "progressive": false,
+    "self_distillation": false
+  },
+  "freeze_sha256": "7f8fa1d353e3ae0c1660dfc0d575bb1aa2c07ff0f4bf9613cffed430081d370f",
+  "base_sha256": "8143ae115ed6babe5e5ada8fb8c5b769d8f417802b2db042ad98b4f7ed73975b",
+  "base_sha256_after": "8143ae115ed6babe5e5ada8fb8c5b769d8f417802b2db042ad98b4f7ed73975b",
+  "tokenizer_sha256": "e134af98b985517b4f068e3755ae90d4e9cd2d45d328325dc503f1c6b2d06cc7",
+  "evidence_bundle": {
+    "path": "reports/local-study/qwen7b-evidence/bundle.json",
+    "sha256": "d6899a4dff1b7c5180c006b38f9441f916eb7bda2f59df21df1f64784e8f1417",
+    "bytes": 166535
+  },
+  "adapter": {
+    "rank": 2,
+    "alpha": 4.0
+  },
+  "adapter_sha256": "a7bd00bfe048d1d31dfe402558017c8e3c5e73eee1f8bab6720673e832cc19dd",
+  "optimizer_sha256": "36be5bb7d39cdaf076310396f470fd6993711a65819899b47e180eb87652b067",
+  "initial_adapter_sha256": "a83ebffa8cd35331a61b484d9a2b7c3ceeb9ed160ba58110e7ee9a1fc8c7a19a",
+  "initial_adapter": {
+    "path": "reports/local-study/native-bitnet-64-operator/initial-adapter.safetensors",
+    "sha256": "a83ebffa8cd35331a61b484d9a2b7c3ceeb9ed160ba58110e7ee9a1fc8c7a19a",
+    "bytes": 2009448
+  },
+  "initial_checkpoint": null,
+  "dpo_reference": null,
+  "steps": 64,
+  "losses": [
+    3.0413382053375244,
+    3.340406656265259,
+    3.119142532348633,
+    3.2258100509643555,
+    3.2173948287963867,
+    3.4550015926361084,
+    2.9885201454162598,
+    3.3659682273864746,
+    3.579442024230957,
+    3.0413382053375244,
+    2.9560747146606445,
+    2.9560747146606445,
+    3.0659031867980957,
+    2.9560747146606445,
+    2.849348545074463,
+    3.3659682273864746,
+    2.694418430328369,
+    3.5715832710266113,
+    3.0413382053375244,
+    3.340406656265259,
+    3.119142532348633,
+    3.2258100509643555,
+    3.2173948287963867,
+    3.4550015926361084,
+    2.9885201454162598,
+    3.3659682273864746,
+    3.579442024230957,
+    3.0413382053375244,
+    2.9560747146606445,
+    2.9560747146606445,
+    3.0659031867980957,
+    2.9560747146606445,
+    2.849348545074463,
+    3.3659682273864746,
+    2.694418430328369,
+    3.5715832710266113,
+    3.0413382053375244,
+    3.340406656265259,
+    3.119142532348633,
+    3.2258100509643555,
+    3.2173948287963867,
+    3.4550015926361084,
+    2.9885201454162598,
+    3.3659682273864746,
+    3.579442024230957,
+    3.0413382053375244,
+    2.9560747146606445,
+    2.9560747146606445,
+    3.0659031867980957,
+    2.9560747146606445,
+    2.849348545074463,
+    3.3659682273864746,
+    2.694418430328369,
+    3.5715832710266113,
+    3.0413382053375244,
+    3.340406656265259,
+    3.119142532348633,
+    3.2258100509643555,
+    3.2173948287963867,
+    3.4550015926361084,
+    2.9720513820648193,
+    3.235797643661499,
+    3.3925600051879883,
+    2.800044298171997
+  ],
+  "gradient_norms": [
+    0.006901837382305186,
+    0.03614816544677258,
+    0.07881699563430297,
+    0.15015985689021694,
+    0.18475643175817047,
+    0.27123881908792113,
+    0.33048876894497276,
+    0.41091157625595287,
+    0.4854658088230168,
+    0.5394686905325982,
+    0.6291884416595322,
+    0.7077850334594779,
+    0.8476888546543911,
+    0.8714437612438751,
+    0.9923921500099202,
+    1.057783555070688,
+    1.1018629248783485,
+    1.221320536978863,
+    1.2689820529062406,
+    1.4223381580795842,
+    1.3782168820678222,
+    1.6365160009560855,
+    1.5380250410766945,
+    1.791795835088038,
+    1.817712004369273,
+    1.9847213784422406,
+    2.0816515721091466,
+    2.0669903274371824,
+    2.2223335700445674,
+    2.3150392548178758,
+    2.598497457656686,
+    2.502074503390212,
+    2.7038129146477816,
+    2.7438807615803302,
+    2.715616687769756,
+    2.895440051217074,
+    2.8791548952021975,
+    3.1139697523956476,
+    2.919805700146337,
+    3.3591470379747896,
+    3.071638715320618,
+    3.4890933922245875,
+    3.451962336160147,
+    3.697606755943233,
+    3.795249304711777,
+    3.683417444248608,
+    3.893248928662739,
+    3.9847197191570163,
+    4.4041292831101355,
+    4.168822546318792,
+    4.44469892331938,
+    4.447718876117476,
+    4.334899765300817,
+    4.571059086078885,
+    4.481064042762806,
+    4.793688416130127,
+    4.44544376335992,
+    5.061145265814935,
+    4.578997962048779,
+    5.155622356973335,
+    4.935819506097154,
+    5.055458839485194,
+    5.0627762210613385,
+    4.426622774270149
+  ],
+  "component_losses": [
+    {
+      "sequence_sft": 3.0413382053375244
+    },
+    {
+      "sequence_sft": 3.340406656265259
+    },
+    {
+      "sequence_sft": 3.119142532348633
+    },
+    {
+      "sequence_sft": 3.2258100509643555
+    },
+    {
+      "sequence_sft": 3.2173948287963867
+    },
+    {
+      "sequence_sft": 3.4550015926361084
+    },
+    {
+      "sequence_sft": 2.9885201454162598
+    },
+    {
+      "sequence_sft": 3.3659682273864746
+    },
+    {
+      "sequence_sft": 3.579442024230957
+    },
+    {
+      "sequence_sft": 3.0413382053375244
+    },
+    {
+      "sequence_sft": 2.9560747146606445
+    },
+    {
+      "sequence_sft": 2.9560747146606445
+    },
+    {
+      "sequence_sft": 3.0659031867980957
+    },
+    {
+      "sequence_sft": 2.9560747146606445
+    },
+    {
+      "sequence_sft": 2.849348545074463
+    },
+    {
+      "sequence_sft": 3.3659682273864746
+    },
+    {
+      "sequence_sft": 2.694418430328369
+    },
+    {
+      "sequence_sft": 3.5715832710266113
+    },
+    {
+      "sequence_sft": 3.0413382053375244
+    },
+    {
+      "sequence_sft": 3.340406656265259
+    },
+    {
+      "sequence_sft": 3.119142532348633
+    },
+    {
+      "sequence_sft": 3.2258100509643555
+    },
+    {
+      "sequence_sft": 3.2173948287963867
+    },
+    {
+      "sequence_sft": 3.4550015926361084
+    },
+    {
+      "sequence_sft": 2.9885201454162598
+    },
+    {
+      "sequence_sft": 3.3659682273864746
+    },
+    {
+      "sequence_sft": 3.579442024230957
+    },
+    {
+      "sequence_sft": 3.0413382053375244
+    },
+    {
+      "sequence_sft": 2.9560747146606445
+    },
+    {
+      "sequence_sft": 2.9560747146606445
+    },
+    {
+      "sequence_sft": 3.0659031867980957
+    },
+    {
+      "sequence_sft": 2.9560747146606445
+    },
+    {
+      "sequence_sft": 2.849348545074463
+    },
+    {
+      "sequence_sft": 3.3659682273864746
+    },
+    {
+      "sequence_sft": 2.694418430328369
+    },
+    {
+      "sequence_sft": 3.5715832710266113
+    },
+    {
+      "sequence_sft": 3.0413382053375244
+    },
+    {
+      "sequence_sft": 3.340406656265259
+    },
+    {
+      "sequence_sft": 3.119142532348633
+    },
+    {
+      "sequence_sft": 3.2258100509643555
+    },
+    {
+      "sequence_sft": 3.2173948287963867
+    },
+    {
+      "sequence_sft": 3.4550015926361084
+    },
+    {
+      "sequence_sft": 2.9885201454162598
+    },
+    {
+      "sequence_sft": 3.3659682273864746
+    },
+    {
+      "sequence_sft": 3.579442024230957
+    },
+    {
+      "sequence_sft": 3.0413382053375244
+    },
+    {
+      "sequence_sft": 2.9560747146606445
+    },
+    {
+      "sequence_sft": 2.9560747146606445
+    },
+    {
+      "sequence_sft": 3.0659031867980957
+    },
+    {
+      "sequence_sft": 2.9560747146606445
+    },
+    {
+      "sequence_sft": 2.849348545074463
+    },
+    {
+      "sequence_sft": 3.3659682273864746
+    },
+    {
+      "sequence_sft": 2.694418430328369
+    },
+    {
+      "sequence_sft": 3.5715832710266113
+    },
+    {
+      "sequence_sft": 3.0413382053375244
+    },
+    {
+      "sequence_sft": 3.340406656265259
+    },
+    {
+      "sequence_sft": 3.119142532348633
+    },
+    {
+      "sequence_sft": 3.2258100509643555
+    },
+    {
+      "sequence_sft": 3.2173948287963867
+    },
+    {
+      "sequence_sft": 3.4550015926361084
+    },
+    {
+      "sequence_sft": 2.9720513820648193
+    },
+    {
+      "sequence_sft": 3.235797643661499
+    },
+    {
+      "sequence_sft": 3.3925600051879883
+    },
+    {
+      "sequence_sft": 2.800044298171997
+    }
+  ],
+  "alignment_diagnostics": [],
+  "qat_effective_trits": {
+    "final": {
+      "changed_from_frozen_base": 230999,
+      "nonzero": 135388286,
+      "sha256": "46e8b97e496415c1962423e2e058c3f816451209f528a1157d9f8ed3a54021d4",
+      "values": 245760000
+    },
+    "initial": {
+      "changed_from_frozen_base": 0,
+      "nonzero": 135343019,
+      "sha256": "c4c7d893f70b848b82253c2336ebdf074c2a8ec17a8c56b4d31422a1cfea578a",
+      "values": 245760000
+    },
+    "semantics": "Actual ternary q/v forward lattice after STE QAT, including names and scales; distinct from latent adapter identity."
+  },
+  "sample_ids": [
+    "9a709fd0afa880d7d61490074636b6a836aa05da5d9a338a46aa8aca31efdce4",
+    "d34031fab7990f9d5bb1ac0465e3173de67d17f95496ed535260f239f3c4bc90",
+    "21748f9f3a9dec33f5c19fb7179ecdada908a2b27e6486b333f8a379f57d93bb",
+    "5dedbab9841301331ad4a8a4ef9d893e994c7abd27be5b97777071860da49a35",
+    "9f34cf373961913a3cf1067f1f2a71e0bef8368e1557d10e998cc099a00fab71",
+    "be57ee99f53e14a44a210dee5a0a227fbee04ea80f1c914f14447c3db087cded",
+    "f23b74be49ae4fb9f5a42d58f33244ef0c157aa0e4afe342a565baa7e7493c91",
+    "e89aa62fc9a189c19a13370ba9410f99991e685167f68b4f7ce97f6a4c78f965",
+    "5b46a85ec5f9398290c023c26ef8cb662e6e4d19da293a71b2bcee316514f6b7",
+    "12106a8bfb9356904186b558fd37127f1ee55e650cb57a6e843d8983be952bd0",
+    "83cc42aa11a66d768d6f952f81812adff3032a39e39b89bfa188e7270ab75a62",
+    "a8205f0759f126c3bd851691f7b45cbd3b043c2ba4b2bdf4f534398fe11795b5",
+    "6f54a188344a4c4834c5a9bfe0969e33003547ea371fbf2ba03a4e5fd88d6e07",
+    "279b6d10fb8f3e4f1d9e8b547e1207c9c65214b57d0270ab76e419d02e5165d2",
+    "ff06039fd8278f904a9e03151a5b46d0452d3c207474b4da9dd4b770fe9d6d26",
+    "2d22b678d0bb8aadd704350c150da710a8be0fe59dc30172accfbbb0b25f792b",
+    "60cad86431ce13f24f3525d348b75936b4659f22832705f61513e6920d3c0913",
+    "b385fb6bb3931d6b39a919d387b625b8e5c0db4506f12df96b46489b5f340498",
+    "9a709fd0afa880d7d61490074636b6a836aa05da5d9a338a46aa8aca31efdce4",
+    "d34031fab7990f9d5bb1ac0465e3173de67d17f95496ed535260f239f3c4bc90",
+    "21748f9f3a9dec33f5c19fb7179ecdada908a2b27e6486b333f8a379f57d93bb",
+    "5dedbab9841301331ad4a8a4ef9d893e994c7abd27be5b97777071860da49a35",
+    "9f34cf373961913a3cf1067f1f2a71e0bef8368e1557d10e998cc099a00fab71",
+    "be57ee99f53e14a44a210dee5a0a227fbee04ea80f1c914f14447c3db087cded",
+    "f23b74be49ae4fb9f5a42d58f33244ef0c157aa0e4afe342a565baa7e7493c91",
+    "e89aa62fc9a189c19a13370ba9410f99991e685167f68b4f7ce97f6a4c78f965",
+    "5b46a85ec5f9398290c023c26ef8cb662e6e4d19da293a71b2bcee316514f6b7",
+    "12106a8bfb9356904186b558fd37127f1ee55e650cb57a6e843d8983be952bd0",
+    "83cc42aa11a66d768d6f952f81812adff3032a39e39b89bfa188e7270ab75a62",
+    "a8205f0759f126c3bd851691f7b45cbd3b043c2ba4b2bdf4f534398fe11795b5",
+    "6f54a188344a4c4834c5a9bfe0969e33003547ea371fbf2ba03a4e5fd88d6e07",
+    "279b6d10fb8f3e4f1d9e8b547e1207c9c65214b57d0270ab76e419d02e5165d2",
+    "ff06039fd8278f904a9e03151a5b46d0452d3c207474b4da9dd4b770fe9d6d26",
+    "2d22b678d0bb8aadd704350c150da710a8be0fe59dc30172accfbbb0b25f792b",
+    "60cad86431ce13f24f3525d348b75936b4659f22832705f61513e6920d3c0913",
+    "b385fb6bb3931d6b39a919d387b625b8e5c0db4506f12df96b46489b5f340498",
+    "9a709fd0afa880d7d61490074636b6a836aa05da5d9a338a46aa8aca31efdce4",
+    "d34031fab7990f9d5bb1ac0465e3173de67d17f95496ed535260f239f3c4bc90",
+    "21748f9f3a9dec33f5c19fb7179ecdada908a2b27e6486b333f8a379f57d93bb",
+    "5dedbab9841301331ad4a8a4ef9d893e994c7abd27be5b97777071860da49a35",
+    "9f34cf373961913a3cf1067f1f2a71e0bef8368e1557d10e998cc099a00fab71",
+    "be57ee99f53e14a44a210dee5a0a227fbee04ea80f1c914f14447c3db087cded",
+    "f23b74be49ae4fb9f5a42d58f33244ef0c157aa0e4afe342a565baa7e7493c91",
+    "e89aa62fc9a189c19a13370ba9410f99991e685167f68b4f7ce97f6a4c78f965",
+    "5b46a85ec5f9398290c023c26ef8cb662e6e4d19da293a71b2bcee316514f6b7",
+    "12106a8bfb9356904186b558fd37127f1ee55e650cb57a6e843d8983be952bd0",
+    "83cc42aa11a66d768d6f952f81812adff3032a39e39b89bfa188e7270ab75a62",
+    "a8205f0759f126c3bd851691f7b45cbd3b043c2ba4b2bdf4f534398fe11795b5",
+    "6f54a188344a4c4834c5a9bfe0969e33003547ea371fbf2ba03a4e5fd88d6e07",
+    "279b6d10fb8f3e4f1d9e8b547e1207c9c65214b57d0270ab76e419d02e5165d2",
+    "ff06039fd8278f904a9e03151a5b46d0452d3c207474b4da9dd4b770fe9d6d26",
+    "2d22b678d0bb8aadd704350c150da710a8be0fe59dc30172accfbbb0b25f792b",
+    "60cad86431ce13f24f3525d348b75936b4659f22832705f61513e6920d3c0913",
+    "b385fb6bb3931d6b39a919d387b625b8e5c0db4506f12df96b46489b5f340498",
+    "9a709fd0afa880d7d61490074636b6a836aa05da5d9a338a46aa8aca31efdce4",
+    "d34031fab7990f9d5bb1ac0465e3173de67d17f95496ed535260f239f3c4bc90",
+    "21748f9f3a9dec33f5c19fb7179ecdada908a2b27e6486b333f8a379f57d93bb",
+    "5dedbab9841301331ad4a8a4ef9d893e994c7abd27be5b97777071860da49a35",
+    "9f34cf373961913a3cf1067f1f2a71e0bef8368e1557d10e998cc099a00fab71",
+    "be57ee99f53e14a44a210dee5a0a227fbee04ea80f1c914f14447c3db087cded",
+    "f23b74be49ae4fb9f5a42d58f33244ef0c157aa0e4afe342a565baa7e7493c91",
+    "e89aa62fc9a189c19a13370ba9410f99991e685167f68b4f7ce97f6a4c78f965",
+    "5b46a85ec5f9398290c023c26ef8cb662e6e4d19da293a71b2bcee316514f6b7",
+    "12106a8bfb9356904186b558fd37127f1ee55e650cb57a6e843d8983be952bd0"
+  ],
+  "realised_update_counts": {
+    "content/complete_sequence": 64,
+    "teacher/qwen-coder-7b-q4_k_m": 64
+  },
+  "trace_records": [],
+  "teacher_rights": [
+    {
+      "assets": {
+        "bytes": 1206,
+        "path": "offline_bundle/comparative/qwen-coder-7b-q4_k_m/gguf-assets.json",
+        "sha256": "606bfac02a103d208ccef73067cb6a4581e9b099e19bc9ed8e2021ebb1143114"
+      },
+      "capabilities": {
+        "attention": {
+          "artefacts": [],
+          "available": false,
+          "reason": "Not recorded: require actual causal attention matrices and declared head mapping",
+          "supported": true
+        },
+        "complete_sequences": {
+          "artefacts": [
+            {
+              "bytes": 4160,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/bits.hamming.generation.json",
+              "sha256": "19172d7b4c738dac55e7dc508eeeea43bbd27a824b54d1cd20a7d257e9f03d0c"
+            },
+            {
+              "bytes": 4023,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/bits.popcount.generation.json",
+              "sha256": "580efb002272a51f28c13547f99fd1b12627b078a43a0d4dcf3b7ae3212a82e9"
+            },
+            {
+              "bytes": 4078,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/calendar.leap.generation.json",
+              "sha256": "1ddc8215a1627afee40421627b1a8bcbcb9da3994f595e0645de4f5babb1186a"
+            },
+            {
+              "bytes": 4327,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/calendar.month_days.generation.json",
+              "sha256": "dd6cf8aad9bb5927dd348e169d71b45bf1866edbdcb252458b95ca740709520a"
+            },
+            {
+              "bytes": 4524,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/calendar.ordinal.generation.json",
+              "sha256": "06c36a2f6080a85452632e489e07afe357df6a9fa00e33e4a3b52bff8c333e6b"
+            },
+            {
+              "bytes": 4291,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/graph.indegrees.generation.json",
+              "sha256": "88c9bcad44eb92e454e4841dffd5cc281edd3722e7dc76cf7f43e301568984e7"
+            },
+            {
+              "bytes": 4853,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/intervals.coverage.generation.json",
+              "sha256": "99a1c524d6f042a1842ed25778ae33ec9240b053b5a63addfb777a94ec5904d9"
+            },
+            {
+              "bytes": 4468,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/intervals.peak.generation.json",
+              "sha256": "32bd9858cddc772409654bc7aed2fadd6d58e25088966e50400430a1d612ae2a"
+            },
+            {
+              "bytes": 4618,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/ledger.bounds.generation.json",
+              "sha256": "c029ffe946a0cb28c8dee81560093c198540df081b2d39cc50f4c2e2eaf78c93"
+            },
+            {
+              "bytes": 4347,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/ledger.prefix.generation.json",
+              "sha256": "b525f34b6fc4d10be932ac48de97fb17eae958bbd651c9e26dc78ac07152749e"
+            },
+            {
+              "bytes": 4078,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/ledger.sum.generation.json",
+              "sha256": "6f3d4bba8600110d5989ff6b79c4dbeb0b5c4506b4e5e456f91c6b04dedba773"
+            },
+            {
+              "bytes": 4553,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/matrices.diagonals.generation.json",
+              "sha256": "f4f91c4bc8e21777e536532b67191bfb3d995720dcc4a5d2991278f07ac4dade"
+            },
+            {
+              "bytes": 4397,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/matrices.rotate.generation.json",
+              "sha256": "979fdab750ffd71c3c4db9704589d6ed167a72ec5ce73db0e4a690c5f6b951e2"
+            },
+            {
+              "bytes": 4228,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/paths.basename.generation.json",
+              "sha256": "f36bacb2143af3429a30fb69a0613cd660c1747735b92dbd012d10f31bc05230"
+            },
+            {
+              "bytes": 4354,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/search.runs.generation.json",
+              "sha256": "5d4d8a7d851490bf4e2b910ac532b0286b45f6e4d888474a9e23b5a980b99a74"
+            },
+            {
+              "bytes": 4692,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/stock.mode.generation.json",
+              "sha256": "cbd509dbfada7161d8f5d39465101e6ecb9d7a8c8517dff743f3cc5fe317ee3c"
+            },
+            {
+              "bytes": 4113,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/text.lower_trim.generation.json",
+              "sha256": "18c986ab02ef8587e9bfcef5a240cc768b6a2b95f917c183d1ebcba73e71dabb"
+            },
+            {
+              "bytes": 4565,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/validation.brackets.generation.json",
+              "sha256": "dfd9cf6ef938865e8b564079016bfaee11aaf943a5a00b0c6c7543f010b3d54d"
+            }
+          ],
+          "available": true,
+          "reason": "Complete, nonempty generations passed every trusted container case",
+          "supported": true
+        },
+        "context": {
+          "artefacts": [],
+          "available": false,
+          "reason": "No generation with pinned additional train-only context",
+          "supported": true
+        },
+        "hidden_states": {
+          "artefacts": [],
+          "available": false,
+          "reason": "Not recorded: require actual layer states and declared dimensional projection",
+          "supported": true
+        },
+        "logits": {
+          "artefacts": [],
+          "available": false,
+          "reason": "Not recorded: a native teacher-forced worker must produce and bind actual token logits; KL also requires tokeniser alignment",
+          "supported": true
+        },
+        "on_policy": {
+          "artefacts": [],
+          "available": false,
+          "reason": "No checkpoint-bound student rollout plus teacher feedback and regrading",
+          "supported": true
+        },
+        "preferences": {
+          "artefacts": [],
+          "available": false,
+          "reason": "No safe same-task verified positive/negative pair",
+          "supported": true
+        },
+        "process": {
+          "artefacts": [],
+          "available": false,
+          "reason": "No independently generated and checked planning/process trace",
+          "supported": true
+        },
+        "self_distillation": {
+          "artefacts": [],
+          "available": false,
+          "reason": "No original student-checkpoint teacher outputs; supervised teacher rows cannot be relabelled",
+          "supported": true
+        },
+        "student_tokeniser_sha256": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+        "tokeniser_aligned": true,
+        "tokeniser_sha256": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+        "tool_trajectories": {
+          "artefacts": [],
+          "available": false,
+          "reason": "A sandbox grade alone is not a teacher feedback/revision trajectory",
+          "supported": true
+        }
+      },
+      "id": "qwen-coder-7b-q4_k_m",
+      "model": {
+        "architecture": "qwen2",
+        "developer_id": "alibaba-qwen",
+        "directory": "offline_bundle/comparative/qwen-coder-7b-q4_k_m",
+        "id": "qwen-coder-7b-q4_k_m",
+        "licence": "Apache-2.0",
+        "model_id": "Qwen/Qwen2.5-Coder-7B-Instruct-GGUF",
+        "revision": "13fb94bfda8c8cf22497dc57b78f391a9acb426a",
+        "role": "coding_teacher",
+        "weight_format": "gguf"
+      },
+      "rights": {
+        "eligible": true,
+        "inherited_restrictions": [
+          "Retain original model licence, copyright notices and attribution; no ownership guarantee for independently reproduced code."
+        ],
+        "licence": "apache-2.0",
+        "licence_artefacts": [
+          {
+            "bytes": 11343,
+            "path": "offline_bundle/comparative/qwen-coder-7b-q4_k_m/source/LICENSE",
+            "sha256": "832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e"
+          },
+          {
+            "bytes": 6392,
+            "path": "offline_bundle/comparative/qwen-coder-7b-q4_k_m/source/README.md",
+            "sha256": "3c090be37f829adc1e4cdb78733667437732541470430ab2cd785d7f0d460077"
+          }
+        ],
+        "reasoning": "Explicit recognised original model licence and publisher-verified local assets, subject to preserved licence obligations",
+        "scope": "local open-weight output adaptation only; no API terms inferred"
+      }
+    }
+  ],
+  "student_execution": {
+    "actual_device": "Cpu",
+    "actual_dtype": "F32",
+    "available_cpu_threads": 16,
+    "candle_cpu_threads": 4,
+    "cpu_fallback": false,
+    "cuda_active": false,
+    "engine": "native_rust_candle",
+    "student_backend": "bitnet_ternary_qat",
+    "ternary_quantisation_during_every_forward": true,
+    "trainable_adapter_tensors": 120
+  },
+  "reloaded": true,
+  "production_eligible": false,
+  "elapsed_seconds": 2241.633612325,
+  "limitations": [
+    "48 tasks from 12 locally authored train source groups; no held-out or development data enters training.",
+    "Local model developers do not count as independent paid API provider businesses.",
+    "No learning, promotion, cash saving or teacher trace is inferred from this bundle alone.",
+    "Process, contextual revision, teacher-feedback trajectories, on-policy and self-distillation require additional genuine generation evidence.",
+    "Exploratory local-teacher adaptation; no independent API-provider or held-out promotion claim. Reload is a fresh model instance inside the worker; external evaluation must reload in its own process.",
+    "Declared assistant-token windows exercise actual operators and optimiser updates; omitted context/targets are recorded in freeze.json and these quick arms do not establish task learning."
+  ]
+}

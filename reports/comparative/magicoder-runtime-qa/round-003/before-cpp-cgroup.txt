@@ -1,0 +1,1 @@
+0::/user.slice/user-1000.slice/user@1000.service/app.slice/app-gnome-jetbrains\x2drustrover\x2d396ef542\x2d516b\x2d4b0d\x2d881d\x2d3efb4620088e-358242.scope

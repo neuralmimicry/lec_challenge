@@ -1,0 +1,427 @@
+{
+  "evidence_kind": "actual_original_template_prompt_counts_and_context_memory_preflight",
+  "executable": {
+    "bytes": 14711560,
+    "path": "state/diagnostics/content-context-preflight/verify",
+    "sha256": "31da9e53a9c79ece6076a19a206e65a710661507b631a2cb1267247a713da41c"
+  },
+  "gpu_allocation_requested": false,
+  "hardware_snapshot": {
+    "architecture": "x86_64",
+    "available_cpu_threads": 16,
+    "available_ram_bytes": 51795976192,
+    "cuda_backend_compiled": true,
+    "gpu_probe_note": "NVIDIA driver reported memory availability",
+    "gpus": [
+      {
+        "backend": "cuda",
+        "compute_capability": "7.5",
+        "free_memory_bytes": 5450498048,
+        "name": "NVIDIA GeForce RTX 2080",
+        "ordinal": 0,
+        "total_memory_bytes": 8589934592
+      }
+    ],
+    "host_available_ram_bytes": 51795976192,
+    "memory_constraint": "Linux MemAvailable",
+    "operating_system": "linux",
+    "usable_ram_bytes": 46347943117
+  },
+  "limitation": "Prompt counts use the original pinned f5d application-build library and original publisher tokeniser/template. Memory estimates are conservative arithmetic, not measured future allocation. Current GPU headroom may be occupied by another authorised evaluation; require a fresh guard after it releases. No original plan/raw/result was altered.",
+  "linked_library": {
+    "bytes": 61427758,
+    "path": "target/cuda-simd/x86_64/avx2-fma-f16c/fd9ee87c2cd2aa99/x86_64-unknown-linux-gnu/release/deps/liblec_distil-f4a6362f963a7d65.rlib",
+    "sha256": "74c23c52192541d49f3147fbd5a77f8a91f1bd3cc5e9002543de1f649e45ee95"
+  },
+  "maximum_input_tokens": 548,
+  "maximum_output_tokens": 768,
+  "memory_estimates": [
+    {
+      "actual_free_vram_bytes": 5450498048,
+      "actual_guarded_free_vram_bytes": 4771230516,
+      "all_twelve_prompts_fit_with_768_output": true,
+      "context_tokens": 1536,
+      "cpu": {
+        "activation_workspace_bytes": 393216000,
+        "assumptions": "Full quantised weights on the selected device; embedding expanded to GPU float16 or CPU float32; float32 activations/KV/attention; no hybrid offload. Driver/allocator/workspace behaviour may require additional headroom.",
+        "attention_score_bytes": 264241152,
+        "conservative_total_bytes": 7763789824,
+        "context_tokens": 1536,
+        "dense_embedding_bytes": 2179989504,
+        "kv_cache_bytes": 176160768,
+        "quantised_file_bytes": 4683073536,
+        "runtime_reserve_bytes": 67108864
+      },
+      "fits_current_gpu_guard": false,
+      "gpu": {
+        "activation_workspace_bytes": 393216000,
+        "assumptions": "Full quantised weights on the selected device; embedding expanded to GPU float16 or CPU float32; float32 activations/KV/attention; no hybrid offload. Driver/allocator/workspace behaviour may require additional headroom.",
+        "attention_score_bytes": 264241152,
+        "conservative_total_bytes": 6875121664,
+        "context_tokens": 1536,
+        "dense_embedding_bytes": 1089994752,
+        "kv_cache_bytes": 176160768,
+        "quantised_file_bytes": 4683073536,
+        "runtime_reserve_bytes": 268435456
+      },
+      "minimum_required_free_vram_bytes": 7788154879
+    },
+    {
+      "actual_free_vram_bytes": 5450498048,
+      "actual_guarded_free_vram_bytes": 4771230516,
+      "all_twelve_prompts_fit_with_768_output": true,
+      "context_tokens": 1792,
+      "cpu": {
+        "activation_workspace_bytes": 458752000,
+        "assumptions": "Full quantised weights on the selected device; embedding expanded to GPU float16 or CPU float32; float32 activations/KV/attention; no hybrid offload. Driver/allocator/workspace behaviour may require additional headroom.",
+        "attention_score_bytes": 359661568,
+        "conservative_total_bytes": 7954106368,
+        "context_tokens": 1792,
+        "dense_embedding_bytes": 2179989504,
+        "kv_cache_bytes": 205520896,
+        "quantised_file_bytes": 4683073536,
+        "runtime_reserve_bytes": 67108864
+      },
+      "fits_current_gpu_guard": false,
+      "gpu": {
+        "activation_workspace_bytes": 458752000,
+        "assumptions": "Full quantised weights on the selected device; embedding expanded to GPU float16 or CPU float32; float32 activations/KV/attention; no hybrid offload. Driver/allocator/workspace behaviour may require additional headroom.",
+        "attention_score_bytes": 359661568,
+        "conservative_total_bytes": 7065438208,
+        "context_tokens": 1792,
+        "dense_embedding_bytes": 1089994752,
+        "kv_cache_bytes": 205520896,
+        "quantised_file_bytes": 4683073536,
+        "runtime_reserve_bytes": 268435456
+      },
+      "minimum_required_free_vram_bytes": 7999617706
+    },
+    {
+      "actual_free_vram_bytes": 5450498048,
+      "actual_guarded_free_vram_bytes": 4771230516,
+      "all_twelve_prompts_fit_with_768_output": true,
+      "context_tokens": 2048,
+      "cpu": {
+        "activation_workspace_bytes": 524288000,
+        "assumptions": "Full quantised weights on the selected device; embedding expanded to GPU float16 or CPU float32; float32 activations/KV/attention; no hybrid offload. Driver/allocator/workspace behaviour may require additional headroom.",
+        "attention_score_bytes": 469762048,
+        "conservative_total_bytes": 8159102976,
+        "context_tokens": 2048,
+        "dense_embedding_bytes": 2179989504,
+        "kv_cache_bytes": 234881024,
+        "quantised_file_bytes": 4683073536,
+        "runtime_reserve_bytes": 67108864
+      },
+      "fits_current_gpu_guard": false,
+      "gpu": {
+        "activation_workspace_bytes": 524288000,
+        "assumptions": "Full quantised weights on the selected device; embedding expanded to GPU float16 or CPU float32; float32 activations/KV/attention; no hybrid offload. Driver/allocator/workspace behaviour may require additional headroom.",
+        "attention_score_bytes": 469762048,
+        "conservative_total_bytes": 7270434816,
+        "context_tokens": 2048,
+        "dense_embedding_bytes": 1089994752,
+        "kv_cache_bytes": 234881024,
+        "quantised_file_bytes": 4683073536,
+        "runtime_reserve_bytes": 268435456
+      },
+      "minimum_required_free_vram_bytes": 8227391715
+    }
+  ],
+  "minimum_context_for_all_requests": 1316,
+  "model_loaded": false,
+  "new_generations": 0,
+  "original_app_build_receipt": {
+    "bytes": 14239,
+    "path": "reports/local-study/build-cuda-simd-001/result.json",
+    "sha256": "cf24eb9ae18573fce4ec18178969739d8b1243b77ed1fa8309553296132e0339"
+  },
+  "original_policy": {
+    "bytes": 589,
+    "path": "reports/local-study/content-follow-up/round-001/content-policy.json",
+    "sha256": "0819329aa2d60f70e805f7b9a754e548262a082099d0ee09be1d915a56f7d5e4"
+  },
+  "planned_requests": 12,
+  "process_id": 978569,
+  "production_eligible": false,
+  "quality_claimed": false,
+  "rows": [
+    {
+      "content": "context",
+      "fits_1536": true,
+      "fits_1792": true,
+      "fits_2048": true,
+      "input_tokens": 487,
+      "maximum_output_tokens": 768,
+      "original_generation_error": "local inference context cap is 1024 tokens",
+      "plan": {
+        "bytes": 3450,
+        "path": "reports/local-study/content-follow-up/round-001/qwen-coder-7b-q4_k_m/ledger.bounds/context/plan.json",
+        "sha256": "3c44d28002327374487f06b5a281ec2f088803cbb263986f1cee23b97862e5d1"
+      },
+      "raw": {
+        "bytes": 2463,
+        "path": "reports/local-study/content-follow-up/round-001/qwen-coder-7b-q4_k_m/ledger.bounds/context/raw-generation.json",
+        "sha256": "c70f8c97d83880b27a59931b5fe4cc07b8315782dc7fcb9e62dbf52d95724968"
+      },
+      "required_total_tokens": 1255,
+      "task_id": "ledger.bounds"
+    },
+    {
+      "content": "process",
+      "fits_1536": true,
+      "fits_1792": true,
+      "fits_2048": true,
+      "input_tokens": 255,
+      "maximum_output_tokens": 768,
+      "original_generation_error": null,
+      "plan": {
+        "bytes": 2371,
+        "path": "reports/local-study/content-follow-up/round-001/qwen-coder-7b-q4_k_m/ledger.bounds/process/plan.json",
+        "sha256": "4f148e2865a339113b6e604c4483dc80ca3c0394382ce4d3d6836cba5f12cead"
+      },
+      "raw": {
+        "bytes": 3886,
+        "path": "reports/local-study/content-follow-up/round-001/qwen-coder-7b-q4_k_m/ledger.bounds/process/raw-generation.json",
+        "sha256": "52df98ca4905999e005b5a71bcb8d366b44f2a85495624f93aaff3729349fe52"
+      },
+      "required_total_tokens": 1023,
+      "task_id": "ledger.bounds"
+    },
+    {
+      "content": "tool_trajectory",
+      "fits_1536": true,
+      "fits_1792": true,
+      "fits_2048": true,
+      "input_tokens": 523,
+      "maximum_output_tokens": 768,
+      "original_generation_error": "local inference context cap is 1024 tokens",
+      "plan": {
+        "bytes": 3932,
+        "path": "reports/local-study/content-follow-up/round-001/qwen-coder-7b-q4_k_m/ledger.bounds/tool_trajectory/plan.json",
+        "sha256": "b0a01e00dd8e62061077388c2cd3428ec9d9365573d8e7ea236bb32735343a6c"
+      },
+      "raw": {
+        "bytes": 2471,
+        "path": "reports/local-study/content-follow-up/round-001/qwen-coder-7b-q4_k_m/ledger.bounds/tool_trajectory/raw-generation.json",
+        "sha256": "4d3c976792044c205f8e237215eab960d54036631f474e3a3eb11fdaf652102d"
+      },
+      "required_total_tokens": 1291,
+      "task_id": "ledger.bounds"
+    },
+    {
+      "content": "context",
+      "fits_1536": true,
+      "fits_1792": true,
+      "fits_2048": true,
+      "input_tokens": 538,
+      "maximum_output_tokens": 768,
+      "original_generation_error": "local inference context cap is 1024 tokens",
+      "plan": {
+        "bytes": 3756,
+        "path": "reports/local-study/content-follow-up/round-001/qwen-coder-7b-q4_k_m/ledger.differences/context/plan.json",
+        "sha256": "cb3c70d484c5dbbabfcd96d219883034c4c2ba4711102d0f6f905cf7072261e0"
+      },
+      "raw": {
+        "bytes": 2468,
+        "path": "reports/local-study/content-follow-up/round-001/qwen-coder-7b-q4_k_m/ledger.differences/context/raw-generation.json",
+        "sha256": "bfeff29f0bc71ea30cf76d0ad256dba7389386a6962f89357ed9ca082b7cbb80"
+      },
+      "required_total_tokens": 1306,
+      "task_id": "ledger.differences"
+    },
+    {
+      "content": "process",
+      "fits_1536": true,
+      "fits_1792": true,
+      "fits_2048": true,
+      "input_tokens": 259,
+      "maximum_output_tokens": 768,
+      "original_generation_error": "local inference context cap is 1024 tokens",
+      "plan": {
+        "bytes": 2404,
+        "path": "reports/local-study/content-follow-up/round-001/qwen-coder-7b-q4_k_m/ledger.differences/process/plan.json",
+        "sha256": "e7ed2f9913fc8574177844d9146dd6d81342540b25ce298fce8ea354157fd3fe"
+      },
+      "raw": {
+        "bytes": 2468,
+        "path": "reports/local-study/content-follow-up/round-001/qwen-coder-7b-q4_k_m/ledger.differences/process/raw-generation.json",
+        "sha256": "b04a2475f73d6a1efe8bd0264503ace6cb25447900eb90676ca6ac827890b4f6"
+      },
+      "required_total_tokens": 1027,
+      "task_id": "ledger.differences"
+    },
+    {
+      "content": "tool_trajectory",
+      "fits_1536": true,
+      "fits_1792": true,
+      "fits_2048": true,
+      "input_tokens": 495,
+      "maximum_output_tokens": 768,
+      "original_generation_error": "local inference context cap is 1024 tokens",
+      "plan": {
+        "bytes": 3683,
+        "path": "reports/local-study/content-follow-up/round-001/qwen-coder-7b-q4_k_m/ledger.differences/tool_trajectory/plan.json",
+        "sha256": "ff9b08d050dd850ea1c40a3f5f4deab6f107607c09c4e2b6310347d12cedbc08"
+      },
+      "raw": {
+        "bytes": 2476,
+        "path": "reports/local-study/content-follow-up/round-001/qwen-coder-7b-q4_k_m/ledger.differences/tool_trajectory/raw-generation.json",
+        "sha256": "f1cd984f7f34a34148b07b31582907944a6a5cc0929732fedb1dff9a7c8e7ca0"
+      },
+      "required_total_tokens": 1263,
+      "task_id": "ledger.differences"
+    },
+    {
+      "content": "context",
+      "fits_1536": true,
+      "fits_1792": true,
+      "fits_2048": true,
+      "input_tokens": 548,
+      "maximum_output_tokens": 768,
+      "original_generation_error": "local inference context cap is 1024 tokens",
+      "plan": {
+        "bytes": 3774,
+        "path": "reports/local-study/content-follow-up/round-001/qwen-coder-7b-q4_k_m/ledger.prefix/context/plan.json",
+        "sha256": "a7a5f700a2b0ddaa4cb9ed7307bc4f08cad617ec041e3501056794011919cc24"
+      },
+      "raw": {
+        "bytes": 2463,
+        "path": "reports/local-study/content-follow-up/round-001/qwen-coder-7b-q4_k_m/ledger.prefix/context/raw-generation.json",
+        "sha256": "e93442d037bcbdb57038774f173a8e6c2aedd12582fc991d21be2d939b82f343"
+      },
+      "required_total_tokens": 1316,
+      "task_id": "ledger.prefix"
+    },
+    {
+      "content": "process",
+      "fits_1536": true,
+      "fits_1792": true,
+      "fits_2048": true,
+      "input_tokens": 269,
+      "maximum_output_tokens": 768,
+      "original_generation_error": "local inference context cap is 1024 tokens",
+      "plan": {
+        "bytes": 2422,
+        "path": "reports/local-study/content-follow-up/round-001/qwen-coder-7b-q4_k_m/ledger.prefix/process/plan.json",
+        "sha256": "f3c6964b898fde6993aa4d60b92dc71bce7d152e11467e640f17fefabc684cab"
+      },
+      "raw": {
+        "bytes": 2463,
+        "path": "reports/local-study/content-follow-up/round-001/qwen-coder-7b-q4_k_m/ledger.prefix/process/raw-generation.json",
+        "sha256": "bac647b6bd52aeaac7d85f3a64a2ab97a3c86b3635663edbf64a9c6c271fd13f"
+      },
+      "required_total_tokens": 1037,
+      "task_id": "ledger.prefix"
+    },
+    {
+      "content": "tool_trajectory",
+      "fits_1536": true,
+      "fits_1792": true,
+      "fits_2048": true,
+      "input_tokens": 471,
+      "maximum_output_tokens": 768,
+      "original_generation_error": "local inference context cap is 1024 tokens",
+      "plan": {
+        "bytes": 3661,
+        "path": "reports/local-study/content-follow-up/round-001/qwen-coder-7b-q4_k_m/ledger.prefix/tool_trajectory/plan.json",
+        "sha256": "82b31fa4aaee2672808473b87d180bdd58ea34c9a07be80772836c6064a312cf"
+      },
+      "raw": {
+        "bytes": 2471,
+        "path": "reports/local-study/content-follow-up/round-001/qwen-coder-7b-q4_k_m/ledger.prefix/tool_trajectory/raw-generation.json",
+        "sha256": "f31d025733e014fb1cf5c4c4e09b7929edf625cf73fc4abe39533a233090cfba"
+      },
+      "required_total_tokens": 1239,
+      "task_id": "ledger.prefix"
+    },
+    {
+      "content": "context",
+      "fits_1536": true,
+      "fits_1792": true,
+      "fits_2048": true,
+      "input_tokens": 547,
+      "maximum_output_tokens": 768,
+      "original_generation_error": "local inference context cap is 1024 tokens",
+      "plan": {
+        "bytes": 3735,
+        "path": "reports/local-study/content-follow-up/round-001/qwen-coder-7b-q4_k_m/ledger.sum/context/plan.json",
+        "sha256": "9391ca9b4e72ebdd1b27e93abf6848440212a490d00e282ba73ef2e0ff4eab3d"
+      },
+      "raw": {
+        "bytes": 2460,
+        "path": "reports/local-study/content-follow-up/round-001/qwen-coder-7b-q4_k_m/ledger.sum/context/raw-generation.json",
+        "sha256": "dce14d2ff76fd9392b9a2509a7aa5df496cdbebcda33814aceaa3d670836453f"
+      },
+      "required_total_tokens": 1315,
+      "task_id": "ledger.sum"
+    },
+    {
+      "content": "process",
+      "fits_1536": true,
+      "fits_1792": true,
+      "fits_2048": true,
+      "input_tokens": 268,
+      "maximum_output_tokens": 768,
+      "original_generation_error": "local inference context cap is 1024 tokens",
+      "plan": {
+        "bytes": 2383,
+        "path": "reports/local-study/content-follow-up/round-001/qwen-coder-7b-q4_k_m/ledger.sum/process/plan.json",
+        "sha256": "4d68d1edc24d791f9bec3dd2a0a87b39e95019bf50d4084d83d581953d158872"
+      },
+      "raw": {
+        "bytes": 2460,
+        "path": "reports/local-study/content-follow-up/round-001/qwen-coder-7b-q4_k_m/ledger.sum/process/raw-generation.json",
+        "sha256": "a47f166593413eefefea4f31a6801c4181a76d6d4c0eb2c08639a46eb2bb95c3"
+      },
+      "required_total_tokens": 1036,
+      "task_id": "ledger.sum"
+    },
+    {
+      "content": "tool_trajectory",
+      "fits_1536": true,
+      "fits_1792": true,
+      "fits_2048": true,
+      "input_tokens": 437,
+      "maximum_output_tokens": 768,
+      "original_generation_error": "local inference context cap is 1024 tokens",
+      "plan": {
+        "bytes": 3390,
+        "path": "reports/local-study/content-follow-up/round-001/qwen-coder-7b-q4_k_m/ledger.sum/tool_trajectory/plan.json",
+        "sha256": "5d093cdca8da5b10ee0391fad144c113b97e97e191c09c44474ce9df84d6f59f"
+      },
+      "raw": {
+        "bytes": 2468,
+        "path": "reports/local-study/content-follow-up/round-001/qwen-coder-7b-q4_k_m/ledger.sum/tool_trajectory/raw-generation.json",
+        "sha256": "4fb22af35172487cdfc91224b36f40dd4d3c3be98166d8cf3cf70a116799e19b"
+      },
+      "required_total_tokens": 1205,
+      "task_id": "ledger.sum"
+    }
+  ],
+  "schema_version": 1,
+  "source": {
+    "bytes": 7101,
+    "path": "state/diagnostics/content-context-preflight/main.rs",
+    "sha256": "624596c6663fd3f25ee6b65b29b840243ca512b380b7c7b1ca5fd915a69cadcc"
+  },
+  "source_configuration": {
+    "bytes": 663,
+    "path": "offline_bundle/comparative/qwen-coder-7b-q4_k_m/source/config.json",
+    "sha256": "c0242402ad6a13b331ea320feea8c7e3776ffb7a4eff0757b9cd667e116d9a28"
+  },
+  "teacher_provenance": {
+    "bytes": 39044,
+    "path": "offline_bundle/comparative/qwen-coder-7b-q4_k_m/gguf-provenance.json",
+    "sha256": "a4ab1eafb77e59a071f5b49b4a12314c5bc8871beeb3daefa9cb3ad803c77583"
+  },
+  "tokenizer": {
+    "bytes": 7031645,
+    "path": "offline_bundle/comparative/qwen-coder-7b-q4_k_m/source/tokenizer.json",
+    "sha256": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539"
+  },
+  "tokenizer_configuration": {
+    "bytes": 7305,
+    "path": "offline_bundle/comparative/qwen-coder-7b-q4_k_m/source/tokenizer_config.json",
+    "sha256": "959e7f1d9a1b7641a6d6ce05ca97b75c7894fcb66cbe5a040406458fb1128ee4"
+  }
+}

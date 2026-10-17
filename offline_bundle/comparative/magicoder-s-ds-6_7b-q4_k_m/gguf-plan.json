@@ -1,0 +1,22 @@
+{
+  "model_id": "TheBloke/Magicoder-S-DS-6.7B-GGUF",
+  "revision": "d41a33f9393ebc06c6beb44b1ded091b6d19496c",
+  "files": {
+    "README.md": {
+      "filename": "README.md",
+      "bytes": 23808,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "7d7bf950cb0b03d88f661965869f04665691c724"
+      }
+    },
+    "magicoder-s-ds-6.7b.Q4_K_M.gguf": {
+      "filename": "magicoder-s-ds-6.7b.Q4_K_M.gguf",
+      "bytes": 4082886528,
+      "publisher_identity": {
+        "kind": "lfs_sha256",
+        "digest": "4b340a9d033091627273fa0f95a4d43b5fe95500c714f9d2f683fbe266c9bc52"
+      }
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "run_id": "d9562ee2-7ede-4726-826b-4c0739eb8c0f",
+  "task_id": "stock.counts",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error: mismatched closing delimiter: `}`\n  --> /candidate/main.rs:10:18\n   |\n 3 | pub fn solve(input: Value) -> Value {\n   |                                     - closing delimiter possibly meant for this\n...\n10 |     Value::Object(frequency.into_iter().map(|(k, v)| (k, Value::Number(serde_json::Number::from(v as i64))).collect())\n   |                  ^ unclosed delimiter\n11 | }\n   | ^ mismatched closing delimiter\n\nerror: aborting due to 1 previous error\n\n"
+  ],
+  "cases_total": 6,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "d3f85fb9d1ef7044e2eb0dd8373d331defffb46637c7ff7028206ea7bb3bf4e3",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/regraded-v3-001/evaluation-005-train-2217a994f8b7/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/regraded-v3-001/evaluation-005-train-2217a994f8b7/sandbox/d9562ee2-7ede-4726-826b-4c0739eb8c0f.audit.json",
+  "audit_sha256": "d94e42df81f6c188ff9dede0a38729708a9dd86be1d01adc7201ed136a3f833f",
+  "failure": "compilation failed: error: mismatched closing delimiter: `}`\n  --> /candidate/main.rs:10:18\n   |\n 3 | pub fn solve(input: Value) -> Value {\n   |                                     - closing delimiter possibly meant for this\n...\n10 |     Value::Object(frequency.into_iter().map(|(k, v)| (k, Value::Number(serde_json::Number::from(v as i64))).collect())\n   |                  ^ unclosed delimiter\n11 | }\n   | ^ mismatched closing delimiter\n\nerror: aborting due to 1 previous error\n\n",
+  "duration_ms": 18075,
+  "timeout_evidence": null,
+  "lifecycle_evidence": {
+    "receipt_path": "reports/local-study/regraded-v3-001/evaluation-005-train-2217a994f8b7/sandbox/d9562ee2-7ede-4726-826b-4c0739eb8c0f.lifecycle.json",
+    "receipt_sha256": "8d0a61d6c964bae735b1578ca84296626bc61828a8e402edb81175908272ffaa"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "model_id": "deepseek-coder-6_7b-q4_k_m",
+  "task_id": "tables.group_sums",
+  "source_id": "private-tables-v1",
+  "specification_sha256": "783b75a94404c8e383623a9281b851d2ccf76f4a4e9832001b8703de0bf64172",
+  "seed": 1729,
+  "plan_sha256": "79e25584f785f04f53b60d4cf3e4a730d2cf181ce11620a413bb1e0123bc1de2",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an array of [key,value] integer rows. Sum values per key and return rows sorted by key.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[[2,9],[1,4],[2,3]],\"expected\":[[1,4],[2,12]]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "Here is a Rust function that solves the problem. This function uses the `HashMap` from the `std::collections` module to sum the values for each key. It then converts the `HashMap` back into a `Vec` of `(i64, i64)` tuples, sorts this `Vec`, and returns it as a `serde_json::Value`.\n\n```rust\nuse serde_json::Value;\nuse std::collections::HashMap;\n\npub fn solve(input: Value) -> Value {\n    let mut map = HashMap::new();\n\n    for item in input.as_array().unwrap() {\n        let key = item.as_array().unwrap()[0].as_i64().unwrap();\n        let value = item.as_array().unwrap()[1].as_i64().unwrap();\n        let sum = map.entry(key).or_insert(0);\n        *sum += value;\n    }\n\n    let mut result = map.into_iter().map(|(k, v)| {\n        let mut arr = [Value::Number(Value::from_i64(k).unwrap()), Value::Number(Value::from_i64(v).unwrap())];\n        arr.into()\n    }).collect::<Vec<Value>>();\n\n    result.sort_by(|a, b| {\n        let a0 = a[0].as_i64().unwrap();\n        let b0 = b[0].as_i64().unwrap();\n        a0.cmp(&b0)\n    });\n\n    Value::Array(result)\n}\n```\n\nThis function assumes that the input is a JSON array of arrays, where each inner array has exactly two elements: a key and a value. The key and value are both 64-bit integers. The function returns a JSON array of arrays, where each inner array has exactly two elements: a key and the sum of all values with that key. The arrays are sorted by key.\n\nPlease note that this function does not handle any potential errors that might occur when parsing the JSON input. In a production environment, you would want to add error handling",
+    "checkpoint_id": "92da6238854f2fa902d8b2ad79d548536af1d3ab06821f323bd5bbcea2013276",
+    "finish_reason": "length",
+    "input_tokens": 311,
+    "output_tokens": 512,
+    "elapsed_ms": 81850,
+    "complete": false
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/comparative/search/round-002/trials/deepseek-coder-6_7b-q4_k_m/comparison/deepseek-coder-6_7b-q4_k_m/tables.group_sums.generation.json",
+    "sha256": "da1e9484758a9a83815761880e937d1af2865dd67653c8f3462d58f468670c80",
+    "bytes": 5440
+  },
+  "sandbox_report": null,
+  "grading_error": null,
+  "success": false
+}

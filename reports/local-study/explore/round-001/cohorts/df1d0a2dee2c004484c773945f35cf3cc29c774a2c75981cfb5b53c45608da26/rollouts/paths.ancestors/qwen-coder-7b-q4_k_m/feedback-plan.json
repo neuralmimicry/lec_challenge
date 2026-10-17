@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "initial_plan": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/paths.ancestors/student-plan.json",
+    "sha256": "55cff4b009d57d150dd8455d91000b0a494e6a7fa3429432c8f827d460d456f7",
+    "bytes": 4025
+  },
+  "student_raw": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/paths.ancestors/student-raw.json",
+    "sha256": "ce1d21abe4da3a920fbef274e096fe077d533b6f8f1657d41a467405099fda34",
+    "bytes": 1750
+  },
+  "student_grade": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox/fcc78b9a-9002-4756-b687-23f2aea0584f.json",
+    "sha256": "980e887060db4ccf7b997bf1701c45c1e2a1d4f65749b7cdd13ee4eea6f8f9b7",
+    "bytes": 4987
+  },
+  "teacher_id": "qwen-coder-7b-q4_k_m",
+  "teacher_assets": {
+    "path": "offline_bundle/comparative/qwen-coder-7b-q4_k_m/gguf-assets.json",
+    "sha256": "606bfac02a103d208ccef73067cb6a4581e9b099e19bc9ed8e2021ebb1143114",
+    "bytes": 1206
+  },
+  "teacher_checkpoint": null,
+  "runtime": {
+    "device": {
+      "cuda": {
+        "ordinal": 0
+      }
+    },
+    "dtype": "f32"
+  },
+  "request": {
+    "prompt": "New task:\nWrite Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is a canonical absolute POSIX path (no . or ..). Return proper ancestor paths starting at / and ending at its parent; root has no ancestors. The returned array may contain up to 128 items.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":\"/a/b/c\",\"expected\":[\"/\",\"/a\",\"/a/b\"]}]\nActual frozen student candidate:\n```rust\nuse serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let path = input.as_str().unwrap();\n    let mut ancestors = Vec::new();\n    let mut current_path = path.to_string();\n    while current_path != \"/\" {\n        ancestors.push(current_path);\n        current_path = current_path.split('/').next().unwrap_or(\"/\");\n    }\n    ancestors.reverse();\n    ancestors\n}\n```\nActual trusted tool feedback:\n{\"bounded_diagnostic_untrusted_data\":\"compilation failed: warning: unused import: `serde_json::Value`\\n --> /candidate/main.rs:1:5\\n  |\\n1 | use serde_json::Value;\\n  |     ^^^^^^^^^^^^^^^^^\\n  |\\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\\n\\nerror[E0308]: mismatched types\\n --> /candidate/main.rs:9:24\\n  |\\n6 |     let mut current_path = path.to_string();\\n  |                            ---------------- expected due to this value\\n...\\n9 |         current_path = current_path.split('/').next().unwrap_or(\\\"/\\\");\\n  |                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `String`, found `&str`\\n  |\\nhelp: try using a conversion method\\n  |\\n9 |         current_path = current_path.split('/').next().unwrap_or(\\\"/\\\").to_string();\\n  |                                                                     ++++++++++++\\n\\nerror[E0308]: mismatched types\\n  --> /candidate/main.rs:12:5\\n   |\\n 3 | pub fn solve(input: serde_json::Value) -> serde_json::Value {\\n   |                                           ----------------- expected `Value` because of return type\\n...\\n12 |     ancestors\\n   |     ^^^^^^^^^ expected `Value`, found `Vec<String>`\\n   |\\n   = note: expected enum `Value`\\n            found struct `Vec<std::string::String>`\\nhelp: call `Into::into` on this expression to convert `Vec<std::string::String>` into `Value`\\n   |\\n12 |     ancestors.into()\\n   |              +++++++\\n\\nerror: aborting due to 2 previous errors; 1 warning emitted\\n\\nFor more information about this error, try `rustc --explain E0308`.\\n\",\"cases_passed\":0,\"cases_total\":5,\"content_role\":\"compilation_feedback_only\",\"original_failure_is_not_a_success\":true,\"passed\":false,\"private_inputs_or_expected_outputs_exposed\":false,\"quarantined\":true,\"run_id\":\"fcc78b9a-9002-4756-b687-23f2aea0584f\",\"student_generation_complete\":true,\"tool\":\"trusted_container_grader\",\"trace_complete\":false}\nCritique and revise the candidate. Put any short explanation in Rust // comments and return complete compilable Rust source only. Do not invent tool results.",
+    "max_new_tokens": 768,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "supporting_sample_ids": []
+}

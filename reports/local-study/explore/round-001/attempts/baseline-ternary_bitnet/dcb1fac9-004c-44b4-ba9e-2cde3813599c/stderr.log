@@ -1,0 +1,9 @@
+execution: resuming original frozen runtime RuntimeOptions { device: Cpu, dtype: F32 }; resource availability is checked before new computation
+Hub hashing model.safetensors: 0/1178623988 bytes, 0.00 MiB/s, ETA unknown (publisher checksum pending)
+Hub hashing model.safetensors: 0/1178623988 bytes, 0.00 MiB/s, ETA unknown (publisher checksum pending)
+Hub hashing model.safetensors: 0/1178623988 bytes, 0.00 MiB/s, ETA unknown (publisher checksum pending)
+study-evaluate: verifying effective sandbox controls
+Hub hashing model.safetensors: 0/1178623988 bytes, 0.00 MiB/s, ETA unknown (publisher checksum pending)
+study-evaluate: frozen tasks=16 seed1729 max512; graders=1 inference_overlap=true
+study-evaluate: heartbeat grading; completed=15/16
+FAILURE: local checkpoint evaluation has generation/infrastructure errors; observations retained

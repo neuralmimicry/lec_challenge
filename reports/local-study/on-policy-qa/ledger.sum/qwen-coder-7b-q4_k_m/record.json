@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "evidence_kind": "actual_checkpoint_bound_rollout_observation",
+  "teacher_id": "qwen-coder-7b-q4_k_m",
+  "plan": {
+    "path": "reports/local-study/on-policy-qa/ledger.sum/student-plan.json",
+    "sha256": "9b3e257afd531cafca08e7192b614471a23629736587fbaca710d2b8b821a6eb",
+    "bytes": 3644
+  },
+  "student_raw": {
+    "path": "reports/local-study/on-policy-qa/ledger.sum/student-raw.json",
+    "sha256": "76b844e41f363badd501a0c80f663eeee51868dbde4497fd224e29c6d936c010",
+    "bytes": 1439
+  },
+  "student_grade": {
+    "path": "reports/local-study/on-policy-qa/sandbox/f0172167-8b45-4bc0-b2ba-e17dc85c750e.json",
+    "sha256": "40047f230125e3d28d28143d188cd3d40035e12efa3735b84ac437182d4112b4",
+    "bytes": 5663
+  },
+  "feedback_plan": null,
+  "feedback_raw": null,
+  "feedback_grade": null,
+  "errors": [
+    "Unsafe/quarantined or empty student attempt cannot become a teacher-feedback prompt"
+  ],
+  "success": false
+}

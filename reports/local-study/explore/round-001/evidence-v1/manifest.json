@@ -1,0 +1,13 @@
+{
+  "bundle": {
+    "bytes": 166535,
+    "path": "reports/local-study/explore/round-001/evidence-v1/bundle.json",
+    "sha256": "f07777912bf685e4c7207678d13cb0ef763e06bad34ffb60e2b0cfa2e277301a"
+  },
+  "evidence_kind": "local_study_teacher_bundle_manifest",
+  "preferences": 0,
+  "promotable": false,
+  "samples": 18,
+  "schema_version": 1,
+  "train_corpus_sha256": "037e9f5719624d6c411c8c354295697f6ef87c8d95e1771ac60696e93a487b6d"
+}

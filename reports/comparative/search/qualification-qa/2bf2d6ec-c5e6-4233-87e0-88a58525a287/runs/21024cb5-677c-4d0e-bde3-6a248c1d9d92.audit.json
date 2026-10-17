@@ -1,0 +1,1 @@
+{"candidate_exit":0,"compile_ok":true,"events":[],"failure":null,"output":"{\"host\":\"api.example\",\"port\":443}\n{\"host\":\"x\",\"port\":1}\n{\"host\":\"a-b.c\",\"port\":65535}\nnull\nnull\nnull\nnull\nnull\nnull\n","output_truncated":false,"schema_version":1,"stderr":"","stderr_truncated":false,"syscalls_observed":71,"trace_complete":true}

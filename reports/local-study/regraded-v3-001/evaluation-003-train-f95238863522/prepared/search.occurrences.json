@@ -1,0 +1,48 @@
+{
+  "schema_version": 3,
+  "run_id": "cd23d72f-28cb-4f78-b2df-68c42832efbd",
+  "ownership_nonce": "35cedb07-184c-47ed-8981-bb7d35e5ac1c",
+  "attempt_key": "557b1d1dcd22dadd17736b882a6eea18eaa3c3f2516353824d94eb80b47e757d",
+  "receipt_path": "reports/local-study/regraded-v3-001/evaluation-003-train-f95238863522/prepared/search.occurrences.json",
+  "report_path": "reports/local-study/regraded-v3-001/evaluation-003-train-f95238863522/sandbox/cd23d72f-28cb-4f78-b2df-68c42832efbd.json",
+  "task": {
+    "id": "search.occurrences",
+    "source_id": "private-search-v1",
+    "lineage_id": "local-contract-pack-07",
+    "split": "train",
+    "specification": "Input {text,pattern} contains ASCII strings with nonempty pattern. Return zero-based starting indices of every occurrence, including overlaps. The returned array may contain up to 256 items.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "b96bcc32161d3f470a03a9091c1e0c031f76339230175ae6e9623b852bc663cf",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": {
+          "pattern": "aba",
+          "text": "ababa"
+        },
+        "expected": [
+          0,
+          2
+        ]
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "use serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let mut result = Vec::new();\n    let mut current_index = 0;\n    let mut pattern = input.as_str().unwrap();\n\n    while let Some(&value) = input.get(current_index) {\n        if let Some(&text) = value.as_str() {\n            if text == pattern {\n                result.push(current_index);\n            }\n        }\n        current_index += 1;\n    }\n\n    serde_json::Value::Array(result)\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/regraded-v3-001/evaluation-003-train-f95238863522/sandbox"
+  },
+  "code_sha256": "f8bfaf0d32215674109cafc3a91b3d9663467af7ff889907c2fec8887e6da533",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

@@ -1,0 +1,33 @@
+{
+  "run_id": "16750fd6-7688-42d9-a0bf-38bf5b6d0089",
+  "task_id": "tables.last_by_key",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error: unknown start of token: `\n --> /candidate/main.rs:3:1\n  |\n3 | ```rust\n  | ^^^\n  |\n  = note: character appears 2 more times\nhelp: Unicode character '`' (Grave Accent) looks like ''' (Single Quote), but it is not\n  |\n3 - ```rust\n3 + '''rust\n  |\n\nerror: unknown start of token: `\n  --> /candidate/main.rs:35:1\n   |\n35 | ```\n   | ^^^\n   |\n   = note: character appears 2 more times\nhelp: Unicode character '`' (Grave Accent) looks like ''' (Single Quote), but it is not\n   |\n35 - ```\n35 + '''\n   |\n\nerror: expected one of `!` or `::`, found `is`\n --> /candidate/main.rs:1:6\n  |\n1 | Here is the Rust code that solves the problem:\n  |      ^^ expected one of `!` or `::`\n\nerror: aborting due to 3 previous errors\n\n"
+  ],
+  "cases_total": 5,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "0bf995b5f69865792503015f6af52b457c861b679877956e939c2137ddb4a562",
+  "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+  "oracle_sha256": "a734f6d465714cbebb072790fedff161d2fc28cbb257b3d04cee0feaf8b5b5fe",
+  "code_sha256": "23d18af42a811dd8cec3e5d1919cf4592223dca5c5656aab916df89667c610b5",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:1",
+    "expected_image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/comparative/coding-development/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/comparative/coding-development/sandbox/16750fd6-7688-42d9-a0bf-38bf5b6d0089.audit.json",
+  "audit_sha256": "e00eb621f2e72b4d9aee5d72009dea836d2700a9f223282afb3a2767e1a0bef6",
+  "failure": "compilation failed: error: unknown start of token: `\n --> /candidate/main.rs:3:1\n  |\n3 | ```rust\n  | ^^^\n  |\n  = note: character appears 2 more times\nhelp: Unicode character '`' (Grave Accent) looks like ''' (Single Quote), but it is not\n  |\n3 - ```rust\n3 + '''rust\n  |\n\nerror: unknown start of token: `\n  --> /candidate/main.rs:35:1\n   |\n35 | ```\n   | ^^^\n   |\n   = note: character appears 2 more times\nhelp: Unicode character '`' (Grave Accent) looks like ''' (Single Quote), but it is not\n   |\n35 - ```\n35 + '''\n   |\n\nerror: expected one of `!` or `::`, found `is`\n --> /candidate/main.rs:1:6\n  |\n1 | Here is the Rust code that solves the problem:\n  |      ^^ expected one of `!` or `::`\n\nerror: aborting due to 3 previous errors\n\n",
+  "duration_ms": 7980,
+  "timeout_evidence": null
+}

@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "0805ba5b12c7f6a3f7a46cf71c1c8db0aa8542d736a3dcd82b56da5f168b46c4",
+  "task_id": "dispatch.priority",
+  "source_id": "private-dispatch-v1",
+  "success": false,
+  "raw_generation": {
+    "path": "reports/local-study/native-full-quality-001/sft-development/generations/dispatch.priority.json",
+    "sha256": "999fd9c021161fdfcb03ad68966b12c115fe41973347d5fdd6245c5d5eefdb5a",
+    "bytes": 1847
+  },
+  "sandbox_report": {
+    "path": "reports/local-study/native-full-quality-001/sft-development/sandbox/7198857b-d150-4430-8de8-00d9c3160793.json",
+    "sha256": "b2fca8fe392ab1a8fccf92effbf8ab993ba9a7f45c2868b1e07e6e424a492d33",
+    "bytes": 2508
+  },
+  "grading_error": null
+}

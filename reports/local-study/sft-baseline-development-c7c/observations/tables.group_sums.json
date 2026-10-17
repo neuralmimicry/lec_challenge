@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "df66f201f0ad3ef92171fd91d4f38a697a3cf37a3f3bc24a27cee2de59b7a6b6",
+  "task_id": "tables.group_sums",
+  "source_id": "private-tables-v1",
+  "success": false,
+  "raw_generation": {
+    "path": "reports/local-study/sft-baseline-development-c7c/generations/tables.group_sums.json",
+    "sha256": "5d073646a34099aef70b1fab2975018621091f180b3c95df8dee66430e4a9e6a",
+    "bytes": 1941
+  },
+  "sandbox_report": {
+    "path": "reports/local-study/sft-baseline-development-c7c/sandbox/604c17c2-c233-4a41-a808-61d9939c6f7b.json",
+    "sha256": "6ed76512f6134f24d6cf9baca3875233586a94d18d9b0e4b39e2228b467497dd",
+    "bytes": 4393
+  },
+  "grading_error": null
+}

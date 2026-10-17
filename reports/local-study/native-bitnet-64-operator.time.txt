@@ -1,0 +1,23 @@
+	Command being timed: "timeout --signal=TERM --kill-after=30s 3600s state/engines/af675af8e54beb9ddc672d13bb860aec4175d7071b43fe9345af8c4ba9bbf182/lec-distil worker reports/local-study/native-bitnet-64-request.json"
+	User time (seconds): 2796.33
+	System time (seconds): 107.32
+	Percent of CPU this job got: 124%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 38:45.52
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 16330624
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 68
+	Minor (reclaiming a frame) page faults: 19327232
+	Voluntary context switches: 1300015
+	Involuntary context switches: 7408619
+	Swaps: 0
+	File system inputs: 22609936
+	File system outputs: 772648
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

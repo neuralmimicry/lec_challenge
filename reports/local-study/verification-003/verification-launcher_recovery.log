@@ -1,0 +1,17 @@
+
+running 9 tests
+test tests::explicit_fresh_does_not_consult_previous_corrupt_progress ... ok
+test tests::application_protocol_wins_over_a_stale_launcher_receipt ... ok
+test tests::cpu_recovery_keeps_frozen_requirements_and_rejects_their_removal ... ok
+test tests::legacy_content_recovers_homogeneous_plans_without_rewriting_policy ... ok
+test tests::runtime_library_search_does_not_require_a_compiler_or_toolkit_binary ... ok
+test tests::launch_receipt_cannot_hide_corrupted_snapshot_bytes_or_length ... ok
+test tests::legacy_content_rejects_mixed_plan_origins_and_conflicting_receipts ... ok
+test tests::pre_protocol_export_interruption_recovers_its_original_launch_engine ... ok
+test tests::legacy_policy_with_no_engine_bound_work_can_build_its_first_engine ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+   Compiling lec-distil v0.1.0 (/home/pbisaacs/Developer/neuralmimicry/lec_challenge)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 9.96s
+     Running unittests examples/platform_launch.rs (target/debug/examples/platform_launch-a147bc444bf3d13d)

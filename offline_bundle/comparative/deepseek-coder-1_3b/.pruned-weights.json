@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "candidate_id": "deepseek-coder-1_3b",
+  "model_id": "deepseek-ai/deepseek-coder-1.3b-instruct",
+  "revision": "e063262dac8366fc1f28a4da0ff3c50ea66259ca",
+  "directory": "offline_bundle/comparative/deepseek-coder-1_3b",
+  "manifest_filename": "assets.json",
+  "manifest_sha256": "98da8d2cf78e5e52fd8a09831512db8a08f3ea0cee8ebeab67712dd9c6d1bcb4",
+  "created_unix_ms": 1792077135184,
+  "removal_state": "completed",
+  "removed_weights": [
+    {
+      "filename": "model.safetensors",
+      "sha256": "4ff570bf9a558d23c5cb4171bad00daf663be8282150cdb5769e0f6975b0007a",
+      "bytes": 2692969128
+    }
+  ]
+}

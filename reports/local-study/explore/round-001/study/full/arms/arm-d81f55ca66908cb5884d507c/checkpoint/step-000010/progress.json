@@ -1,0 +1,84 @@
+{
+  "freeze_sha256": "a7394511a9ba4dc64ead2d7ea3934b2ab4f62821bfed00585b0d3ec8b32a4edf",
+  "steps": 10,
+  "adapter": {
+    "path": "reports/local-study/explore/round-001/study/full/arms/arm-d81f55ca66908cb5884d507c/checkpoint/step-000010/adapter.safetensors",
+    "sha256": "48e8b969fff10a23550b51f5cd9355652b3ca3dfacf69267eb1d75a46bab9d01",
+    "bytes": 2173504
+  },
+  "optimizer": {
+    "path": "reports/local-study/explore/round-001/study/full/arms/arm-d81f55ca66908cb5884d507c/checkpoint/step-000010/optimizer.safetensors",
+    "sha256": "3b3378c84da517c50bd6feb1cf7ddb3ba71ad5773a93bcebcfd61c41bc3c0c6f",
+    "bytes": 4347480
+  },
+  "initial_adapter_sha256": "97f700bf02c1bd271edb8c743d5b28a3557d8617c8b68b143e88f5d87ed2cd76",
+  "losses": [
+    0.004306495189666748,
+    0.0032459679059684277,
+    0.0035140595864504576,
+    0.004294927231967449,
+    0.002889370545744896,
+    0.00387334986589849,
+    0.002899088431149721,
+    0.0034006540663540363,
+    0.004033549688756466,
+    0.0025959527119994164
+  ],
+  "gradient_norms": [
+    0.009617112075915302,
+    0.007483612882833028,
+    0.007281775431620182,
+    0.007804853446469396,
+    0.0064836271324683606,
+    0.016704311718560873,
+    0.006929372471197173,
+    0.01377364269988948,
+    0.00647673681283655,
+    0.006191099774652439
+  ],
+  "component_losses": [
+    {
+      "attention_relation": 0.004306495189666748
+    },
+    {
+      "attention_relation": 0.0032459679059684277
+    },
+    {
+      "attention_relation": 0.0035140595864504576
+    },
+    {
+      "attention_relation": 0.004294927231967449
+    },
+    {
+      "attention_relation": 0.002889370545744896
+    },
+    {
+      "attention_relation": 0.00387334986589849
+    },
+    {
+      "attention_relation": 0.002899088431149721
+    },
+    {
+      "attention_relation": 0.0034006540663540363
+    },
+    {
+      "attention_relation": 0.004033549688756466
+    },
+    {
+      "attention_relation": 0.0025959527119994164
+    }
+  ],
+  "alignment_diagnostics": [],
+  "sample_ids": [
+    "5b46a85ec5f9398290c023c26ef8cb662e6e4d19da293a71b2bcee316514f6b7",
+    "f23b74be49ae4fb9f5a42d58f33244ef0c157aa0e4afe342a565baa7e7493c91",
+    "12106a8bfb9356904186b558fd37127f1ee55e650cb57a6e843d8983be952bd0",
+    "279b6d10fb8f3e4f1d9e8b547e1207c9c65214b57d0270ab76e419d02e5165d2",
+    "9f34cf373961913a3cf1067f1f2a71e0bef8368e1557d10e998cc099a00fab71",
+    "d34031fab7990f9d5bb1ac0465e3173de67d17f95496ed535260f239f3c4bc90",
+    "b385fb6bb3931d6b39a919d387b625b8e5c0db4506f12df96b46489b5f340498",
+    "83cc42aa11a66d768d6f952f81812adff3032a39e39b89bfa188e7270ab75a62",
+    "be57ee99f53e14a44a210dee5a0a227fbee04ea80f1c914f14447c3db087cded",
+    "6f54a188344a4c4834c5a9bfe0969e33003547ea371fbf2ba03a4e5fd88d6e07"
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "run_id": "1df5cfd8-26a1-4a35-8193-b8e2dfc0e033",
+  "task_id": "search.common_prefix",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: warning: unused import: `serde_json::Value`\n --> /candidate/main.rs:1:5\n  |\n1 | use serde_json::Value;\n  |     ^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0599]: no method named `as_str` found for reference `&Vec<Value>` in the current scope\n --> /candidate/main.rs:8:37\n  |\n8 |         let mut current_item = item.as_str().unwrap();\n  |                                     ^^^^^^\n  |\nhelp: there is a method `as_ptr` with a similar name\n  |\n8 -         let mut current_item = item.as_str().unwrap();\n8 +         let mut current_item = item.as_ptr().unwrap();\n  |\n\nerror[E0308]: mismatched types\n  --> /candidate/main.rs:15:5\n   |\n 3 | pub fn solve(input: serde_json::Value) -> serde_json::Value {\n   |                                           ----------------- expected `Value` because of return type\n...\n15 |     longest_prefix\n   |     ^^^^^^^^^^^^^^ expected `Value`, found `String`\n   |\nhelp: try wrapping the expression in `serde_json::Value::String`\n   |\n15 |     serde_json::Value::String(longest_prefix)\n   |     ++++++++++++++++++++++++++              +\n\nerror: aborting due to 2 previous errors; 1 warning emitted\n\nSome errors have detailed explanations: E0308, E0599.\nFor more information about an error, try `rustc --explain E0308`.\n"
+  ],
+  "cases_total": 7,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "8fa5768928ca165c3eebdc306a4cd5530e8aa06029c839e71df508bb2b6520ea",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/regraded-v3-001/evaluation-003-train-f95238863522/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/regraded-v3-001/evaluation-003-train-f95238863522/sandbox/1df5cfd8-26a1-4a35-8193-b8e2dfc0e033.audit.json",
+  "audit_sha256": "60ff53e3bc8e0503df1b7521b50ef0fb16356500eca9ffdb656a07dda63b0cd3",
+  "failure": "compilation failed: warning: unused import: `serde_json::Value`\n --> /candidate/main.rs:1:5\n  |\n1 | use serde_json::Value;\n  |     ^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0599]: no method named `as_str` found for reference `&Vec<Value>` in the current scope\n --> /candidate/main.rs:8:37\n  |\n8 |         let mut current_item = item.as_str().unwrap();\n  |                                     ^^^^^^\n  |\nhelp: there is a method `as_ptr` with a similar name\n  |\n8 -         let mut current_item = item.as_str().unwrap();\n8 +         let mut current_item = item.as_ptr().unwrap();\n  |\n\nerror[E0308]: mismatched types\n  --> /candidate/main.rs:15:5\n   |\n 3 | pub fn solve(input: serde_json::Value) -> serde_json::Value {\n   |                                           ----------------- expected `Value` because of return type\n...\n15 |     longest_prefix\n   |     ^^^^^^^^^^^^^^ expected `Value`, found `String`\n   |\nhelp: try wrapping the expression in `serde_json::Value::String`\n   |\n15 |     serde_json::Value::String(longest_prefix)\n   |     ++++++++++++++++++++++++++              +\n\nerror: aborting due to 2 previous errors; 1 warning emitted\n\nSome errors have detailed explanations: E0308, E0599.\nFor more information about an error, try `rustc --explain E0308`.\n",
+  "duration_ms": 27556,
+  "timeout_evidence": null,
+  "lifecycle_evidence": {
+    "receipt_path": "reports/local-study/regraded-v3-001/evaluation-003-train-f95238863522/sandbox/1df5cfd8-26a1-4a35-8193-b8e2dfc0e033.lifecycle.json",
+    "receipt_sha256": "b5c0ccc500800b50082c39fe927ab85efefbcd3ee0040ff7fd03c6a5dc647317"
+  }
+}

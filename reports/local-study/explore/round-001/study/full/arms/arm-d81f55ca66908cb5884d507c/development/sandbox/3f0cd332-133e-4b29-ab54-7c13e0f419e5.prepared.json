@@ -1,0 +1,59 @@
+{
+  "schema_version": 3,
+  "run_id": "c07bd759-e57e-4265-abe9-1d9648f8c204",
+  "ownership_nonce": "e6a0f8e6-01d6-4783-ad08-7e205072d429",
+  "attempt_key": "3f0cd332-133e-4b29-ab54-7c13e0f419e5",
+  "receipt_path": "reports/local-study/explore/round-001/study/full/arms/arm-d81f55ca66908cb5884d507c/development/sandbox/3f0cd332-133e-4b29-ab54-7c13e0f419e5.prepared.json",
+  "report_path": "reports/local-study/explore/round-001/study/full/arms/arm-d81f55ca66908cb5884d507c/development/sandbox/c07bd759-e57e-4265-abe9-1d9648f8c204.json",
+  "task": {
+    "id": "dispatch.finish_order",
+    "source_id": "private-dispatch-v1",
+    "lineage_id": "local-contract-pack-13",
+    "split": "development",
+    "specification": "Input is an array of [arrival,duration], nonnegative integers. A single server processes input order, starting each job at max(previous finish,arrival). Return finish times.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "bd65bbcd2943471a0fa07872b15464820b0d1c4b37db971d13f3b63850727773",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": [
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            8,
+            1
+          ]
+        ],
+        "expected": [
+          3,
+          5,
+          9
+        ]
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "```rust\nuse serde_json::Value;\n\nfn solve(input: serde_json::Value) -> serde_json::Value {\n    let data = input.as_array();\n    if data.is_none() {\n        return serde_json::Value::Null;\n    }\n\n    let mut finish_times = Vec::new();\n    let mut current_finish = 0;\n\n    for item in data {\n        let arrival = item.as_i64().unwrap();\n        let duration = item.as_i64().unwrap();\n\n        current_finish = std::cmp::max(current_finish, arrival + duration);\n        finish_times.push(current_finish);\n    }\n\n    serde_json::Value::Array(finish_times)\n}\n\nfn main() {\n    let input = serde_json::Value::from(\"{\\\"input\\\":[[0,3],[1,2],[8,1]],\\\"expected\\\":[3,5,9]}\");\n    let result = solve(input);\n    println!(\"{:?}\", result);\n}\n```\n\nThis Rust code defines a function `solve` that takes a JSON input and returns a JSON array of finish times. It uses the `serde_json` crate to parse the input and process the data. The function iterates over the input array, calculates the current finish time for each job, and appends it to the `finish_times` vector. Finally, it returns the `finish_times` vector as a JSON array.",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/explore/round-001/study/full/arms/arm-d81f55ca66908cb5884d507c/development/sandbox"
+  },
+  "code_sha256": "101627e58bc347e94c1f3845459e983ae4caf7f2995757db164bb682411285ce",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

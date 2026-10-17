@@ -1,0 +1,40 @@
+{
+  "run_id": "3a153ab7-2bca-4ac5-986e-92bcf0bc93fb",
+  "task_id": "money.format",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error[E0277]: the trait bound `serde_json::Number: From<f64>` is not satisfied\n  --> /candidate/main.rs:13:40\n   |\n13 |                 result = Value::Number(serde_json::Number::from(pounds_rounded));\n   |                                        ^^^^^^^^^^^^^^^^^^ the trait `From<f64>` is not implemented for `serde_json::Number`\n   |\n   = help: `serde_json::Number` implements trait `From<T>`:\n             From<de::ParserNumber>\n             From<i16>\n             From<i32>\n             From<i64>\n             From<i8>\n             From<isize>\n             From<u16>\n             From<u32>\n           and 3 others\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0277`.\n"
+  ],
+  "cases_total": 6,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "c8131544959cc1dc7c29c785adfc64b0fc6d6c3c43c95eb2f1a3bccf9783e91b",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/regraded-v3-001/evaluation-001-development-e2bcd1355276/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/regraded-v3-001/evaluation-001-development-e2bcd1355276/sandbox/3a153ab7-2bca-4ac5-986e-92bcf0bc93fb.audit.json",
+  "audit_sha256": "4f1147813e35522adef97aad45651e454a3c1c3dcd38f765ff40ac61aff8acde",
+  "failure": "compilation failed: error[E0277]: the trait bound `serde_json::Number: From<f64>` is not satisfied\n  --> /candidate/main.rs:13:40\n   |\n13 |                 result = Value::Number(serde_json::Number::from(pounds_rounded));\n   |                                        ^^^^^^^^^^^^^^^^^^ the trait `From<f64>` is not implemented for `serde_json::Number`\n   |\n   = help: `serde_json::Number` implements trait `From<T>`:\n             From<de::ParserNumber>\n             From<i16>\n             From<i32>\n             From<i64>\n             From<i8>\n             From<isize>\n             From<u16>\n             From<u32>\n           and 3 others\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0277`.\n",
+  "duration_ms": 68179,
+  "timeout_evidence": null,
+  "lifecycle_evidence": {
+    "receipt_path": "reports/local-study/regraded-v3-001/evaluation-001-development-e2bcd1355276/sandbox/3a153ab7-2bca-4ac5-986e-92bcf0bc93fb.lifecycle.json",
+    "receipt_sha256": "bc88b64fe8a02c5d0ba080d470f93ce8b2957f46f175f11606ab8175c3b6387f"
+  }
+}

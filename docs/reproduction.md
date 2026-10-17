@@ -10,6 +10,17 @@ Model weights occupy 988,097,824 bytes on disk; the CPU float32 base alone is ab
 
 The launcher is a minimal shell `exec` wrapper. Application, training, tests, candidates, statistical calculations and evidence preparation are Rust. OCI build recipes invoke Cargo/rustc; ffmpeg is used only for standard video encoding. The reasons are recorded in deviations.md.
 
+In a Git checkout, non-research commands use Cargo's locked offline release
+build, so a historical `offline_bundle/bin/lec-distil` cannot hide local source
+changes. Both a `.git` directory and a worktree pointer file identify a checkout.
+An exported source tree without that marker can select the same path with
+`LEC_BUILD_FROM_SOURCE=1 ./run.sh <command>`. Research commands already use the
+resource-aware Rust launcher. A delivery extracted without `.git` continues to
+use its compatible prebuilt binary, requiring no compiler for that dispatch;
+its asset inventory and disconnected rehearsal still need verification. This
+dispatch rule does not repair or certify an old archive or the extension's
+missing portable execution closure.
+
 ## Source bootstrap: explicitly online
 
 ```sh
@@ -39,6 +50,12 @@ The first three model examples are reusable executable QA, with genuine base inf
 The drill exits nonzero until all required real evidence exists. Its JSON separates software-assurance fixtures from real candidate execution and actual-checkpoint controls. Read `reports/drill.md` rather than treating an expected assertion as a completed assessment round.
 
 ## A genuine provider round
+
+Configure native OpenAI/Gemini/Claude **general inference** through the separate
+[API setup guide](api-providers.md). Inference access alone does not clear an
+output-training provider. Offline execution or absent detectable internet must
+preserve cached assets and models; teacher-search pruning checks connectivity
+before deleting any inactive weights.
 
 1. Supply the three provider key environment variables locally. Never put secrets in config, Git, candidate containers, reports or the video.
 2. Review `docs/rights.md` and the selected account/model terms. Pin exact model IDs/revision policy and applicable prices in `config/fleet.toml`. Record document hashes and a dated decision. Enable only rights-cleared, priced providers whose output cap covers every billable token.

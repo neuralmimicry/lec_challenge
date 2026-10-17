@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "evidence_kind": "actual_checkpoint_bound_rollout_generation",
+  "plan": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/paths.extension/student-plan.json",
+    "sha256": "613593988da7d09d63c7c202d42144949e4d23953a0f376534ffb11d8bd987f9",
+    "bytes": 3873
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let filename = input.as_str().unwrap_or_default();\n    let suffix = filename.trim_end_matches(|c| c == '.' || c == '\\t' || c == '\\n' || c == '\\x0C' || c == '\\r');\n    if suffix.is_empty() {\n        return serde_json::Value::Null;\n    }\n    let suffix = suffix.to_lowercase();\n    let suffix = match suffix.as_str() {\n        \"gz\" => \"gz\",\n        \"tar.gz\" => \"gz\",\n        \"tar\" => \"tar\",\n        _ => suffix,\n    };\n    let suffix = suffix.trim_start_matches(|c| c == '.' || c == '\\t' || c == '\\n' || c == '\\x0C' || c == '\\r');\n    if suffix.is_empty() {\n        return serde_json::Value::Null;\n    }\n    let suffix = suffix.to_lowercase();\n    let suffix = match suffix.as_str() {\n        \"gz\" => \"gz\",\n        \"tar.gz\" => \"gz\",\n        \"tar\" => \"tar\",\n        _ => suffix,\n    };\n    let suffix = suffix.trim_start_matches(|c| c == '.' || c == '\\t' || c == '\\n' || c == '\\x0C' || c == '\\r');\n    if suffix.is_empty() {\n        return serde_json::Value::Null;\n    }\n    let suffix = suffix.to_lowercase();\n    let suffix = match suffix.as_str() {\n        \"gz\" => \"gz\",\n        \"tar.gz\" => \"gz\",\n        \"tar\" => \"tar\",\n        _ => suffix,\n    };\n    let suffix = suffix.trim_start_matches(|c| c == '.' || c == '\\t' || c == '\\n' || c == '\\x0C' || c == '\\r');\n    if suffix.is_empty() {\n        return serde_json::Value::Null;\n    }\n    let suffix = suffix.to_lowercase();\n    let suffix = match suffix.as_str() {\n        \"gz\" => \"gz\",\n        \"tar.gz\" => \"gz\",\n        \"tar\" => \"tar\",\n        _ => suffix,\n    };\n    let suffix = suffix.trim_start_matches(|c| c == '.' || c == '\\t' || c == '\\n' || c == '\\x0C' || c == '\\r');\n    if suffix.is_empty() {\n        return serde_json::Value::Null;\n    }\n    let suffix = suffix.to_lowercase();\n    let suffix = match suffix.as_str() {\n        \"gz\" => \"gz\",\n        \"tar.gz\" => \"gz\",\n        \"tar\" => \"tar\",\n        _ => suffix,\n    };\n    let suffix = suffix.trim_start_matches(|c| c == '.' || c == '\\t' || c == '\\n' || c == '\\x0C' || c == '\\r');\n    if suffix.is_empty() {\n        return serde_json::Value::Null;\n    }\n    let suffix = suffix.to_lowercase();\n    let suffix = match suffix.as_str() {\n        \"gz\" => \"gz\",\n        \"tar.gz\" => \"gz\",\n        \"tar\" => \"tar\",\n        _ => suffix,\n    };\n    let suffix = suffix.trim_start_matches(|c| c == '.' || c == '\\t' || c",
+    "checkpoint_id": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+    "finish_reason": "timeout",
+    "input_tokens": 231,
+    "output_tokens": 707,
+    "elapsed_ms": 120091,
+    "complete": false
+  },
+  "generation_error": null,
+  "execution": {
+    "actual_device": "Cpu",
+    "actual_dtype": "F32",
+    "asset_lifetime_shared_lease": false,
+    "available_cpu_threads": 16,
+    "candle_cpu_threads": 16,
+    "checkpoint_id": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+    "context_cap": 4096,
+    "cpu_fallback": false,
+    "cuda_active": false,
+    "cuda_feature_compiled": true,
+    "engine": "native_rust_candle",
+    "model_id": "Qwen/Qwen2.5-Coder-0.5B-Instruct",
+    "quantisation": null,
+    "requested": {
+      "device": "cpu",
+      "dtype": "f32"
+    },
+    "revision": "ea3f2471cf1b1f0db85067f1ef93848e38e88c25",
+    "weight_format": "safetensors"
+  }
+}

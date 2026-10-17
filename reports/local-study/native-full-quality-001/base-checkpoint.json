@@ -1,0 +1,48 @@
+{
+  "arm": "base",
+  "base_assets": {
+    "bytes": 788,
+    "path": "offline_bundle/base/assets.json",
+    "sha256": "54304e7f41519a4196674cba5e86593802f852b2b47882d6c19706f85f303ad4"
+  },
+  "binding_executable": {
+    "bytes": 5054240,
+    "path": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/state/diagnostics/bind-native-full-quality",
+    "sha256": "8f12a6ef461dd908de9725ac4eb56322e18fe259652c0487345b897f15d4338a"
+  },
+  "binding_source": {
+    "bytes": 5999,
+    "path": "state/diagnostics/bind-native-full-quality.rs",
+    "sha256": "9120af378e91d490a96c591e11cf05149191b3398c53dd3f180ff890a869c62c"
+  },
+  "checkpoint": {
+    "actual_unadapted_base": true,
+    "checkpoint_id": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+    "manifest": {
+      "bytes": 788,
+      "path": "offline_bundle/base/assets.json",
+      "sha256": "54304e7f41519a4196674cba5e86593802f852b2b47882d6c19706f85f303ad4"
+    },
+    "tensor": {
+      "bytes": 988097824,
+      "path": "offline_bundle/base/model.safetensors",
+      "sha256": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44"
+    }
+  },
+  "engine": {
+    "bytes": 45017416,
+    "path": "state/engines/f5d2f2f520f0c7a69186163c33bd28207c37414fb3cdae0499c169957a846944/lec-distil",
+    "sha256": "f5d2f2f520f0c7a69186163c33bd28207c37414fb3cdae0499c169957a846944"
+  },
+  "evidence_kind": "prerun_actual_checkpoint_identity_binding",
+  "held_out_used": false,
+  "model_allocated": false,
+  "production_eligible": false,
+  "protocol": {
+    "bytes": 91361,
+    "path": "reports/local-study/native-full-quality-001/requested-protocol.json",
+    "sha256": "7696c3b8e50504e404a5bb069105bf7825111130eafd25ff163a740947d7643a"
+  },
+  "quality_observations_produced": false,
+  "schema_version": 1
+}

@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "evidence_kind": "frozen_local_research_teacher_selection",
+  "registry": {
+    "path": "reports/local-study/explore/round-001/selection/registry.toml",
+    "sha256": "9baa0f5085e3b4f69c35e94c796ff0983b1868b689b8678d6b6a3b78e818a276",
+    "bytes": 347
+  },
+  "search_freeze": {
+    "path": "reports/comparative/search/round-001/freeze.json",
+    "sha256": "a016c70107c0aba509477df7f675efb8e9097ee398f65f8931eff2dfe59523ac",
+    "bytes": 23077
+  },
+  "search_state_snapshot": {
+    "path": "reports/local-study/explore/round-001/selection/search-state-snapshot.json",
+    "sha256": "feb9c0935222b1a4a9a4925ef47c6b408f8f427f7c7662e486d9691c68f90047",
+    "bytes": 20637
+  },
+  "search_report_snapshot": {
+    "path": "reports/local-study/explore/round-001/selection/search-report-snapshot.json",
+    "sha256": "7c8156db0353e233a3135eb4d4e3b6a79b4c38c4ffc8a5c26a27db4151cdcc0a",
+    "bytes": 22493
+  },
+  "models": [
+    {
+      "id": "qwen-coder-7b-q4_k_m",
+      "model_id": "Qwen/Qwen2.5-Coder-7B-Instruct-GGUF",
+      "revision": "13fb94bfda8c8cf22497dc57b78f391a9acb426a",
+      "directory": "offline_bundle/comparative/qwen-coder-7b-q4_k_m",
+      "architecture": "qwen2",
+      "role": "coding_teacher",
+      "licence": "Apache-2.0",
+      "developer_id": "alibaba-qwen",
+      "weight_format": "gguf"
+    }
+  ],
+  "trials": [
+    {
+      "model": {
+        "id": "qwen-coder-7b-q4_k_m",
+        "model_id": "Qwen/Qwen2.5-Coder-7B-Instruct-GGUF",
+        "revision": "13fb94bfda8c8cf22497dc57b78f391a9acb426a",
+        "directory": "offline_bundle/comparative/qwen-coder-7b-q4_k_m",
+        "architecture": "qwen2",
+        "role": "coding_teacher",
+        "licence": "Apache-2.0",
+        "developer_id": "alibaba-qwen",
+        "weight_format": "gguf"
+      },
+      "source_model_id": "Qwen/Qwen2.5-Coder-7B-Instruct",
+      "assets": {
+        "path": "offline_bundle/comparative/qwen-coder-7b-q4_k_m/gguf-assets.json",
+        "sha256": "606bfac02a103d208ccef73067cb6a4581e9b099e19bc9ed8e2021ebb1143114",
+        "bytes": 1206
+      },
+      "primary_plan": {
+        "path": "reports/comparative/search/round-001/trials/qwen-coder-7b-q4_k_m/comparison/plan.json",
+        "sha256": "200759192521afac59cea45865938541e0b82a51fec381b932583cea1b983683",
+        "bytes": 23654
+      },
+      "primary_report": {
+        "path": "reports/comparative/search/round-001/trials/qwen-coder-7b-q4_k_m/comparison/report.json",
+        "sha256": "6f43b8184d872bb1e397f9a5d5f66bf27251b9f50ad2e26f3f122d90cf83696b",
+        "bytes": 1122
+      },
+      "qualification_plan": null,
+      "qualification_report": null,
+      "qualified": false
+    }
+  ],
+  "runtime": {
+    "device": {
+      "cuda": {
+        "ordinal": 0
+      }
+    },
+    "dtype": "f32"
+  },
+  "target_models": 3,
+  "minimum_pass_rate": 0.8,
+  "qualified_target_met": false,
+  "held_out_used": false,
+  "production_eligible": false
+}

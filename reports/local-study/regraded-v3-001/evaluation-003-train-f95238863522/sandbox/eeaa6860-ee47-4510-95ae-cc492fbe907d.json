@@ -1,0 +1,40 @@
+{
+  "run_id": "eeaa6860-ee47-4510-95ae-cc492fbe907d",
+  "task_id": "search.runs",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error: unknown character escape: `f`\n --> /candidate/main.rs:9:58\n  |\n9 |         if c == '\\n' || c == '\\r' || c == '\\t' || c == '\\f' || c == ' ' {\n  |                                                          ^ unknown character escape\n  |\n  = help: for more information, visit <https://doc.rust-lang.org/reference/tokens.html#literals>\nhelp: if you meant to write a literal backslash (perhaps escaping in a regular expression), consider a raw string literal\n  |\n9 -         if c == '\\n' || c == '\\r' || c == '\\t' || c == '\\f' || c == ' ' {\n9 +         if c == '\\n' || c == '\\r' || c == '\\t' || c == r\"\\f\" || c == ' ' {\n  |\nhelp: if you meant to write a form feed, use a hex escape\n  |\n9 -         if c == '\\n' || c == '\\r' || c == '\\t' || c == '\\f' || c == ' ' {\n9 +         if c == '\\n' || c == '\\r' || c == '\\t' || c == '\\x0C' || c == ' ' {\n  |\n\nwarning: unused import: `serde_json::Value`\n --> /candidate/main.rs:1:5\n  |\n1 | use serde_json::Value;\n  |     ^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0599]: no method named `chars` found for enum `Option<T>` in the current scope\n --> /candidate/main.rs:8:29\n  |\n8 |     for c in input.as_str().chars() {\n  |                             ^^^^^ method not found in `Option<&str>`\n  |\nnote: the method `chars` exists on the type `&str`\n --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/str/mod.rs:1079:4\nhelp: consider using `Option::expect` to unwrap the `&str` value, panicking if the value is an `Option::None`\n  |\n8 |     for c in input.as_str().expect(\"REASON\").chars() {\n  |                            +++++++++++++++++\n\nerror[E0308]: mismatched types\n   --> /candidate/main.rs:25:30\n    |\n 11 |                 result.push(current_run);\n    |                 ------      ----------- this argument has type `Vec<_>`...\n    |                 |\n    |                 ... which causes `result` to have type `Vec<Vec<_>>`\n...\n 25 |     serde_json::Value::Array(result)\n    |     ------------------------ ^^^^^^ expected `Vec<Value>`, found `Vec<Vec<_>>`\n    |     |\n    |     arguments to this enum variant are incorrect\n    |\n    = note: expected struct `Vec<Value>`\n               found struct `Vec<Vec<_>>`\nnote: tuple variant defined here\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:160:5\n    |\n160 |     Array(Vec<Value>),\n    |     ^^^^^\nhelp: try wrapping the expression in `serde_json::Value::Array`\n    |\n 11 |                 result.push(serde_json::Value::Array(current_run));\n    |                             +++++++++++++++++++++++++           +\n\nerror: aborting due to 3 previous errors; 1 warning emitted\n\nSome errors have detailed explanations: E0308, E0599.\nFor more information about an error, try `rustc --explain E0308`.\n"
+  ],
+  "cases_total": 6,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "e7a47f6479e9419846b262dfa8d111885b477cccc945defa69b9c1fb06b9bb6a",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/regraded-v3-001/evaluation-003-train-f95238863522/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/regraded-v3-001/evaluation-003-train-f95238863522/sandbox/eeaa6860-ee47-4510-95ae-cc492fbe907d.audit.json",
+  "audit_sha256": "7ec101be647870f3e27175d27f2ebce3f08943de5cf2b8998abfba490caca46e",
+  "failure": "compilation failed: error: unknown character escape: `f`\n --> /candidate/main.rs:9:58\n  |\n9 |         if c == '\\n' || c == '\\r' || c == '\\t' || c == '\\f' || c == ' ' {\n  |                                                          ^ unknown character escape\n  |\n  = help: for more information, visit <https://doc.rust-lang.org/reference/tokens.html#literals>\nhelp: if you meant to write a literal backslash (perhaps escaping in a regular expression), consider a raw string literal\n  |\n9 -         if c == '\\n' || c == '\\r' || c == '\\t' || c == '\\f' || c == ' ' {\n9 +         if c == '\\n' || c == '\\r' || c == '\\t' || c == r\"\\f\" || c == ' ' {\n  |\nhelp: if you meant to write a form feed, use a hex escape\n  |\n9 -         if c == '\\n' || c == '\\r' || c == '\\t' || c == '\\f' || c == ' ' {\n9 +         if c == '\\n' || c == '\\r' || c == '\\t' || c == '\\x0C' || c == ' ' {\n  |\n\nwarning: unused import: `serde_json::Value`\n --> /candidate/main.rs:1:5\n  |\n1 | use serde_json::Value;\n  |     ^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0599]: no method named `chars` found for enum `Option<T>` in the current scope\n --> /candidate/main.rs:8:29\n  |\n8 |     for c in input.as_str().chars() {\n  |                             ^^^^^ method not found in `Option<&str>`\n  |\nnote: the method `chars` exists on the type `&str`\n --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/str/mod.rs:1079:4\nhelp: consider using `Option::expect` to unwrap the `&str` value, panicking if the value is an `Option::None`\n  |\n8 |     for c in input.as_str().expect(\"REASON\").chars() {\n  |                            +++++++++++++++++\n\nerror[E0308]: mismatched types\n   --> /candidate/main.rs:25:30\n    |\n 11 |                 result.push(current_run);\n    |                 ------      ----------- this argument has type `Vec<_>`...\n    |                 |\n    |                 ... which causes `result` to have type `Vec<Vec<_>>`\n...\n 25 |     serde_json::Value::Array(result)\n    |     ------------------------ ^^^^^^ expected `Vec<Value>`, found `Vec<Vec<_>>`\n    |     |\n    |     arguments to this enum variant are incorrect\n    |\n    = note: expected struct `Vec<Value>`\n               found struct `Vec<Vec<_>>`\nnote: tuple variant defined here\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:160:5\n    |\n160 |     Array(Vec<Value>),\n    |     ^^^^^\nhelp: try wrapping the expression in `serde_json::Value::Array`\n    |\n 11 |                 result.push(serde_json::Value::Array(current_run));\n    |                             +++++++++++++++++++++++++           +\n\nerror: aborting due to 3 previous errors; 1 warning emitted\n\nSome errors have detailed explanations: E0308, E0599.\nFor more information about an error, try `rustc --explain E0308`.\n",
+  "duration_ms": 18917,
+  "timeout_evidence": null,
+  "lifecycle_evidence": {
+    "receipt_path": "reports/local-study/regraded-v3-001/evaluation-003-train-f95238863522/sandbox/eeaa6860-ee47-4510-95ae-cc492fbe907d.lifecycle.json",
+    "receipt_sha256": "6f11a68605178a4a3f14c9adbde09e9c1cd9a0131f68760be5e3e9020594e9b0"
+  }
+}

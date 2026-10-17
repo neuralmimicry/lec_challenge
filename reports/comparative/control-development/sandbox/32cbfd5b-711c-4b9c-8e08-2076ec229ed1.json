@@ -1,0 +1,33 @@
+{
+  "run_id": "32cbfd5b-711c-4b9c-8e08-2076ec229ed1",
+  "task_id": "money.parse",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error[E0283]: type annotations needed\n  --> /candidate/main.rs:31:31\n   |\n31 |             cents += parts[0].parse().unwrap_or_default();\n   |                   --          ^^^^^ cannot infer type of the type parameter `F` declared on the method `parse`\n   |                   |\n   |                   type must be known at this point\n   |\n   = note: multiple `impl`s satisfying `i64: AddAssign<_>` found in the `core` crate:\n           - impl AddAssign for i64;\n           - impl AddAssign<&i64> for i64;\nhelp: consider specifying a concrete type for the type parameter `F`\n   |\n31 |             cents += parts[0].parse::</* Type */>().unwrap_or_default();\n   |                                    ++++++++++++++\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0283`.\n"
+  ],
+  "cases_total": 9,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "0bf995b5f69865792503015f6af52b457c861b679877956e939c2137ddb4a562",
+  "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+  "oracle_sha256": "a734f6d465714cbebb072790fedff161d2fc28cbb257b3d04cee0feaf8b5b5fe",
+  "code_sha256": "cbbfdbaa4ed06c34703f26277620d9f7f8ef66efa4a6341733b2958ea43797c9",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:1",
+    "expected_image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/comparative/control-development/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/comparative/control-development/sandbox/32cbfd5b-711c-4b9c-8e08-2076ec229ed1.audit.json",
+  "audit_sha256": "2b766d7894db186829fb95f2e623846fe128100a3227222cee2ac6a8fab0b1ad",
+  "failure": "compilation failed: error[E0283]: type annotations needed\n  --> /candidate/main.rs:31:31\n   |\n31 |             cents += parts[0].parse().unwrap_or_default();\n   |                   --          ^^^^^ cannot infer type of the type parameter `F` declared on the method `parse`\n   |                   |\n   |                   type must be known at this point\n   |\n   = note: multiple `impl`s satisfying `i64: AddAssign<_>` found in the `core` crate:\n           - impl AddAssign for i64;\n           - impl AddAssign<&i64> for i64;\nhelp: consider specifying a concrete type for the type parameter `F`\n   |\n31 |             cents += parts[0].parse::</* Type */>().unwrap_or_default();\n   |                                    ++++++++++++++\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0283`.\n",
+  "duration_ms": 7387,
+  "timeout_evidence": null
+}

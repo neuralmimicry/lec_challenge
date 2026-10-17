@@ -1,0 +1,167 @@
+{
+  "actual_sigkill": true,
+  "cached_artefacts": {
+    "reports/local-study/study-evaluation-resume-qa/round-001/evaluation/execution-attempts/fc630221-b771-4d65-bdc9-4c94ac31fc13.json": {
+      "bytes": 667,
+      "path": "reports/local-study/study-evaluation-resume-qa/round-001/evaluation/execution-attempts/fc630221-b771-4d65-bdc9-4c94ac31fc13.json",
+      "sha256": "991903873e10fe56e7b405e461fceba6baa2ea6aea5120a93461f364db9d045c"
+    },
+    "reports/local-study/study-evaluation-resume-qa/round-001/evaluation/execution.json": {
+      "bytes": 667,
+      "path": "reports/local-study/study-evaluation-resume-qa/round-001/evaluation/execution.json",
+      "sha256": "991903873e10fe56e7b405e461fceba6baa2ea6aea5120a93461f364db9d045c"
+    },
+    "reports/local-study/study-evaluation-resume-qa/round-001/evaluation/generations/money.format.json": {
+      "bytes": 1828,
+      "path": "reports/local-study/study-evaluation-resume-qa/round-001/evaluation/generations/money.format.json",
+      "sha256": "b9414a2536f455855ebda4623d2de7f221a839d10bff795312b47bc3d2ad040c"
+    },
+    "reports/local-study/study-evaluation-resume-qa/round-001/evaluation/generations/money.parse.json": {
+      "bytes": 2021,
+      "path": "reports/local-study/study-evaluation-resume-qa/round-001/evaluation/generations/money.parse.json",
+      "sha256": "14ee4b2f152406ae9a599543727528028774a18e0176899305eff11ff1319ba7"
+    },
+    "reports/local-study/study-evaluation-resume-qa/round-001/evaluation/launch-engine.json": {
+      "bytes": 2876,
+      "path": "reports/local-study/study-evaluation-resume-qa/round-001/evaluation/launch-engine.json",
+      "sha256": "3374c96aff41cf0f56e067e53bc3975ff57494aca405ef2d38acc6b29ba80801"
+    },
+    "reports/local-study/study-evaluation-resume-qa/round-001/evaluation/observations/money.parse.json": {
+      "bytes": 718,
+      "path": "reports/local-study/study-evaluation-resume-qa/round-001/evaluation/observations/money.parse.json",
+      "sha256": "99f5cd701184eb08c1b5d572702b13ab23dc195b554210bdd294c8be437a4bc9"
+    },
+    "reports/local-study/study-evaluation-resume-qa/round-001/evaluation/plan.json": {
+      "bytes": 23999,
+      "path": "reports/local-study/study-evaluation-resume-qa/round-001/evaluation/plan.json",
+      "sha256": "b04a4729bb3b68f65c9d18df57142e7901ebed367d528f3d0262f6cb2be3a6f6"
+    },
+    "reports/local-study/study-evaluation-resume-qa/round-001/evaluation/sandbox-preflight.json": {
+      "bytes": 988,
+      "path": "reports/local-study/study-evaluation-resume-qa/round-001/evaluation/sandbox-preflight.json",
+      "sha256": "e93aaea1d4f6ac47d0e89938dc21ace493ea70aaa314173f45cf23d736008935"
+    },
+    "reports/local-study/study-evaluation-resume-qa/round-001/evaluation/sandbox/725e7d3c-7016-47ac-b6f6-d72a6b0a986d.audit.json": {
+      "bytes": 1604,
+      "path": "reports/local-study/study-evaluation-resume-qa/round-001/evaluation/sandbox/725e7d3c-7016-47ac-b6f6-d72a6b0a986d.audit.json",
+      "sha256": "87c52cee25acef8d903c06108046c9e34cc4435fb429a8a4fce9e44c279a709d"
+    },
+    "reports/local-study/study-evaluation-resume-qa/round-001/evaluation/sandbox/725e7d3c-7016-47ac-b6f6-d72a6b0a986d.json": {
+      "bytes": 4331,
+      "path": "reports/local-study/study-evaluation-resume-qa/round-001/evaluation/sandbox/725e7d3c-7016-47ac-b6f6-d72a6b0a986d.json",
+      "sha256": "eacacf93bbf0284b81c9ac1d7a6b5f071d96efa191edd776e35223fdd2b2195b"
+    }
+  },
+  "changed_cached_artefacts": [],
+  "coding_quality_or_learning_claim": false,
+  "complete_healthy_evaluation": true,
+  "completed_before_kill": {
+    "anchor_kind": "verified_compilation_failure_verdict",
+    "candidate_passed": false,
+    "observation": {
+      "bytes": 718,
+      "path": "reports/local-study/study-evaluation-resume-qa/round-001/evaluation/observations/money.parse.json",
+      "sha256": "99f5cd701184eb08c1b5d572702b13ab23dc195b554210bdd294c8be437a4bc9"
+    },
+    "quarantined": true,
+    "raw_generation": {
+      "bytes": 2021,
+      "path": "reports/local-study/study-evaluation-resume-qa/round-001/evaluation/generations/money.parse.json",
+      "sha256": "14ee4b2f152406ae9a599543727528028774a18e0176899305eff11ff1319ba7"
+    },
+    "sandbox_audit": {
+      "bytes": 1604,
+      "path": "reports/local-study/study-evaluation-resume-qa/round-001/evaluation/sandbox/725e7d3c-7016-47ac-b6f6-d72a6b0a986d.audit.json",
+      "sha256": "87c52cee25acef8d903c06108046c9e34cc4435fb429a8a4fce9e44c279a709d"
+    },
+    "sandbox_report": {
+      "bytes": 4331,
+      "path": "reports/local-study/study-evaluation-resume-qa/round-001/evaluation/sandbox/725e7d3c-7016-47ac-b6f6-d72a6b0a986d.json",
+      "sha256": "eacacf93bbf0284b81c9ac1d7a6b5f071d96efa191edd776e35223fdd2b2195b"
+    },
+    "task_id": "money.parse",
+    "training_eligibility_inferred": false
+  },
+  "evaluation_report": {
+    "bytes": 1603,
+    "path": "reports/local-study/study-evaluation-resume-qa/round-001/evaluation/report.json",
+    "sha256": "47416fbb4e3ffe0544b09585d827907a3faa797afabcbd9a4e553d7b4baafc53"
+  },
+  "evidence_kind": "actual_owned_study_evaluation_sigkill_resume_qa",
+  "failure_reasons": [],
+  "held_out_used": false,
+  "independent_verification": {
+    "evidence_kind": "independently_reconstructed_complete_study_evaluation",
+    "report": {
+      "architecture": "conventional_qwen_lora",
+      "checkpoint_id": "b71e448fd3e298f226aa6ba121d89ee8551e3b9e86374d5330269d7c97207511",
+      "coverage_complete": true,
+      "evidence_kind": "actual_local_study_checkpoint_evaluation",
+      "healthy_complete": true,
+      "held_out_used": false,
+      "infrastructure_or_generation_errors": 0,
+      "input_tokens": 3902,
+      "limitations": [
+        "Local train/development measurement only; no learning or promotion claim.",
+        "One fixed evaluation seed and jointly authored source groups do not establish general superiority.",
+        "Generation time excludes loading, hashing and grading; overlapping work is not serial wall time.",
+        "Every failed, empty, truncated or missing output remains in the planned denominator."
+      ],
+      "max_new_tokens": 512,
+      "observed": 16,
+      "output_tokens": 2383,
+      "pass_rate": 0.0,
+      "passed": 0,
+      "per_source": [
+        {
+          "observed": 4,
+          "pass_rate": 0.0,
+          "passed": 0,
+          "source_id": "private-dispatch-v1"
+        },
+        {
+          "observed": 4,
+          "pass_rate": 0.0,
+          "passed": 0,
+          "source_id": "private-encoding-v1"
+        },
+        {
+          "observed": 4,
+          "pass_rate": 0.0,
+          "passed": 0,
+          "source_id": "private-money-v1"
+        },
+        {
+          "observed": 4,
+          "pass_rate": 0.0,
+          "passed": 0,
+          "source_id": "private-tables-v1"
+        }
+      ],
+      "plan_sha256": "b04a4729bb3b68f65c9d18df57142e7901ebed367d528f3d0262f6cb2be3a6f6",
+      "planned": 16,
+      "production_eligible": false,
+      "schema_version": 1,
+      "seed": 1729,
+      "split": "development",
+      "status": "complete",
+      "summed_generation_ms": 118972
+    },
+    "report_artefact": {
+      "bytes": 1603,
+      "path": "reports/local-study/study-evaluation-resume-qa/round-001/evaluation/report.json",
+      "sha256": "47416fbb4e3ffe0544b09585d827907a3faa797afabcbd9a4e553d7b4baafc53"
+    },
+    "schema_version": 1
+  },
+  "independent_verifier_exit_code": 0,
+  "limitations": [
+    "A three-step composed operator checkpoint is not evidence of useful learning.",
+    "Recovery preserves committed outputs; interrupted uncommitted inference may run again.",
+    "Errors and truncated outputs remain failures in the full original development denominator."
+  ],
+  "passed": true,
+  "production_eligible": false,
+  "resumed_exit_code": 0,
+  "schema_version": 1
+}

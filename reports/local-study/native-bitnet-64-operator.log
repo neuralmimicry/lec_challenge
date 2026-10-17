@@ -1,0 +1,295 @@
+Hub hashing qwen2.5-coder-7b-instruct-q4_k_m.gguf: 0/4683073536 bytes, 0.00 MiB/s, ETA unknown (publisher checksum pending)
+Hub hashing qwen2.5-coder-7b-instruct-q4_k_m.gguf: 1217396736/4683073536 bytes, 77.33 MiB/s, ETA 00:00:43 (publisher checksum pending)
+Hub hashing qwen2.5-coder-7b-instruct-q4_k_m.gguf: 2431647744/4683073536 bytes, 77.25 MiB/s, ETA 00:00:28 (publisher checksum pending)
+Hub hashing qwen2.5-coder-7b-instruct-q4_k_m.gguf: 3641704448/4683073536 bytes, 77.14 MiB/s, ETA 00:00:13 (publisher checksum pending)
+Hub hashing model.safetensors: 0/1178623988 bytes, 0.00 MiB/s, ETA unknown (publisher checksum pending)
+Hub hashing model.safetensors: 0/1178623988 bytes, 0.00 MiB/s, ETA unknown (publisher checksum pending)
+BitNet loading official packed tensors on CPU F32; no GPU fallback
+BitNet decoded official ternary layer 1/30 on CPU
+BitNet decoded official ternary layer 2/30 on CPU
+BitNet decoded official ternary layer 3/30 on CPU
+BitNet decoded official ternary layer 4/30 on CPU
+BitNet decoded official ternary layer 5/30 on CPU
+BitNet decoded official ternary layer 6/30 on CPU
+BitNet decoded official ternary layer 7/30 on CPU
+BitNet decoded official ternary layer 8/30 on CPU
+BitNet decoded official ternary layer 9/30 on CPU
+BitNet decoded official ternary layer 10/30 on CPU
+BitNet decoded official ternary layer 11/30 on CPU
+BitNet decoded official ternary layer 12/30 on CPU
+BitNet decoded official ternary layer 13/30 on CPU
+BitNet decoded official ternary layer 14/30 on CPU
+BitNet decoded official ternary layer 15/30 on CPU
+BitNet decoded official ternary layer 16/30 on CPU
+BitNet decoded official ternary layer 17/30 on CPU
+BitNet decoded official ternary layer 18/30 on CPU
+BitNet decoded official ternary layer 19/30 on CPU
+BitNet decoded official ternary layer 20/30 on CPU
+BitNet decoded official ternary layer 21/30 on CPU
+BitNet decoded official ternary layer 22/30 on CPU
+BitNet decoded official ternary layer 23/30 on CPU
+BitNet decoded official ternary layer 24/30 on CPU
+BitNet decoded official ternary layer 25/30 on CPU
+BitNet decoded official ternary layer 26/30 on CPU
+BitNet decoded official ternary layer 27/30 on CPU
+BitNet decoded official ternary layer 28/30 on CPU
+BitNet decoded official ternary layer 29/30 on CPU
+BitNet decoded official ternary layer 30/30 on CPU
+distillation: durable update 1/64 loss=3.041338 gradient_norm=0.006902
+distillation: durable update 2/64 loss=3.340407 gradient_norm=0.036148
+distillation: durable update 3/64 loss=3.119143 gradient_norm=0.078817
+distillation: durable update 4/64 loss=3.225810 gradient_norm=0.150160
+distillation: durable update 5/64 loss=3.217395 gradient_norm=0.184756
+distillation: durable update 6/64 loss=3.455002 gradient_norm=0.271239
+distillation: durable update 7/64 loss=2.988520 gradient_norm=0.330489
+distillation: durable update 8/64 loss=3.365968 gradient_norm=0.410912
+distillation: durable update 9/64 loss=3.579442 gradient_norm=0.485466
+distillation: durable update 10/64 loss=3.041338 gradient_norm=0.539469
+distillation: durable update 11/64 loss=2.956075 gradient_norm=0.629188
+distillation: durable update 12/64 loss=2.956075 gradient_norm=0.707785
+distillation: durable update 13/64 loss=3.065903 gradient_norm=0.847689
+distillation: durable update 14/64 loss=2.956075 gradient_norm=0.871444
+distillation: durable update 15/64 loss=2.849349 gradient_norm=0.992392
+distillation: durable update 16/64 loss=3.365968 gradient_norm=1.057784
+distillation: durable update 17/64 loss=2.694418 gradient_norm=1.101863
+distillation: durable update 18/64 loss=3.571583 gradient_norm=1.221321
+distillation: durable update 19/64 loss=3.041338 gradient_norm=1.268982
+distillation: durable update 20/64 loss=3.340407 gradient_norm=1.422338
+distillation: durable update 21/64 loss=3.119143 gradient_norm=1.378217
+distillation: durable update 22/64 loss=3.225810 gradient_norm=1.636516
+distillation: durable update 23/64 loss=3.217395 gradient_norm=1.538025
+distillation: durable update 24/64 loss=3.455002 gradient_norm=1.791796
+distillation: durable update 25/64 loss=2.988520 gradient_norm=1.817712
+distillation: durable update 26/64 loss=3.365968 gradient_norm=1.984721
+distillation: durable update 27/64 loss=3.579442 gradient_norm=2.081652
+distillation: durable update 28/64 loss=3.041338 gradient_norm=2.066990
+distillation: durable update 29/64 loss=2.956075 gradient_norm=2.222334
+distillation: durable update 30/64 loss=2.956075 gradient_norm=2.315039
+distillation: durable update 31/64 loss=3.065903 gradient_norm=2.598497
+distillation: durable update 32/64 loss=2.956075 gradient_norm=2.502075
+distillation: durable update 33/64 loss=2.849349 gradient_norm=2.703813
+distillation: durable update 34/64 loss=3.365968 gradient_norm=2.743881
+distillation: durable update 35/64 loss=2.694418 gradient_norm=2.715617
+distillation: durable update 36/64 loss=3.571583 gradient_norm=2.895440
+distillation: durable update 37/64 loss=3.041338 gradient_norm=2.879155
+distillation: durable update 38/64 loss=3.340407 gradient_norm=3.113970
+distillation: durable update 39/64 loss=3.119143 gradient_norm=2.919806
+distillation: durable update 40/64 loss=3.225810 gradient_norm=3.359147
+distillation: durable update 41/64 loss=3.217395 gradient_norm=3.071639
+distillation: durable update 42/64 loss=3.455002 gradient_norm=3.489093
+distillation: durable update 43/64 loss=2.988520 gradient_norm=3.451962
+distillation: durable update 44/64 loss=3.365968 gradient_norm=3.697607
+distillation: durable update 45/64 loss=3.579442 gradient_norm=3.795249
+distillation: durable update 46/64 loss=3.041338 gradient_norm=3.683417
+distillation: durable update 47/64 loss=2.956075 gradient_norm=3.893249
+distillation: durable update 48/64 loss=2.956075 gradient_norm=3.984720
+distillation: durable update 49/64 loss=3.065903 gradient_norm=4.404129
+distillation: durable update 50/64 loss=2.956075 gradient_norm=4.168823
+distillation: durable update 51/64 loss=2.849349 gradient_norm=4.444699
+distillation: durable update 52/64 loss=3.365968 gradient_norm=4.447719
+distillation: durable update 53/64 loss=2.694418 gradient_norm=4.334900
+distillation: durable update 54/64 loss=3.571583 gradient_norm=4.571059
+distillation: durable update 55/64 loss=3.041338 gradient_norm=4.481064
+distillation: durable update 56/64 loss=3.340407 gradient_norm=4.793688
+distillation: durable update 57/64 loss=3.119143 gradient_norm=4.445444
+distillation: durable update 58/64 loss=3.225810 gradient_norm=5.061145
+distillation: durable update 59/64 loss=3.217395 gradient_norm=4.578998
+distillation: durable update 60/64 loss=3.455002 gradient_norm=5.155622
+distillation: durable update 61/64 loss=2.972051 gradient_norm=4.935820
+distillation: durable update 62/64 loss=3.235798 gradient_norm=5.055459
+distillation: durable update 63/64 loss=3.392560 gradient_norm=5.062776
+distillation: durable update 64/64 loss=2.800044 gradient_norm=4.426623
+Hub hashing model.safetensors: 0/1178623988 bytes, 0.00 MiB/s, ETA unknown (publisher checksum pending)
+BitNet loading official packed tensors on CPU F32; no GPU fallback
+BitNet decoded official ternary layer 1/30 on CPU
+BitNet decoded official ternary layer 2/30 on CPU
+BitNet decoded official ternary layer 3/30 on CPU
+BitNet decoded official ternary layer 4/30 on CPU
+BitNet decoded official ternary layer 5/30 on CPU
+BitNet decoded official ternary layer 6/30 on CPU
+BitNet decoded official ternary layer 7/30 on CPU
+BitNet decoded official ternary layer 8/30 on CPU
+BitNet decoded official ternary layer 9/30 on CPU
+BitNet decoded official ternary layer 10/30 on CPU
+BitNet decoded official ternary layer 11/30 on CPU
+BitNet decoded official ternary layer 12/30 on CPU
+BitNet decoded official ternary layer 13/30 on CPU
+BitNet decoded official ternary layer 14/30 on CPU
+BitNet decoded official ternary layer 15/30 on CPU
+BitNet decoded official ternary layer 16/30 on CPU
+BitNet decoded official ternary layer 17/30 on CPU
+BitNet decoded official ternary layer 18/30 on CPU
+BitNet decoded official ternary layer 19/30 on CPU
+BitNet decoded official ternary layer 20/30 on CPU
+BitNet decoded official ternary layer 21/30 on CPU
+BitNet decoded official ternary layer 22/30 on CPU
+BitNet decoded official ternary layer 23/30 on CPU
+BitNet decoded official ternary layer 24/30 on CPU
+BitNet decoded official ternary layer 25/30 on CPU
+BitNet decoded official ternary layer 26/30 on CPU
+BitNet decoded official ternary layer 27/30 on CPU
+BitNet decoded official ternary layer 28/30 on CPU
+BitNet decoded official ternary layer 29/30 on CPU
+BitNet decoded official ternary layer 30/30 on CPU
+Hub hashing qwen2.5-coder-7b-instruct-q4_k_m.gguf: 0/4683073536 bytes, 0.00 MiB/s, ETA unknown (publisher checksum pending)
+Hub hashing qwen2.5-coder-7b-instruct-q4_k_m.gguf: 1146093568/4683073536 bytes, 72.63 MiB/s, ETA 00:00:47 (publisher checksum pending)
+Hub hashing qwen2.5-coder-7b-instruct-q4_k_m.gguf: 2098200576/4683073536 bytes, 66.58 MiB/s, ETA 00:00:38 (publisher checksum pending)
+Hub hashing qwen2.5-coder-7b-instruct-q4_k_m.gguf: 3167748096/4683073536 bytes, 67.05 MiB/s, ETA 00:00:22 (publisher checksum pending)
+Hub hashing qwen2.5-coder-7b-instruct-q4_k_m.gguf: 4352638976/4683073536 bytes, 69.11 MiB/s, ETA 00:00:05 (publisher checksum pending)
+{
+  "schema_version": 1,
+  "arm_id": "native_bitnet_64_operator_qa",
+  "checkpoint": "reports/local-study/native-bitnet-64-operator",
+  "manifest": {
+    "path": "reports/local-study/native-bitnet-64-operator/manifest.json",
+    "sha256": "deb79b6aa20a37018ddce15a805df887ae48a71dafb8eabfa7c443c41a55a3fe",
+    "bytes": 24403
+  },
+  "adapter_sha256": "a7bd00bfe048d1d31dfe402558017c8e3c5e73eee1f8bab6720673e832cc19dd",
+  "base_sha256": "8143ae115ed6babe5e5ada8fb8c5b769d8f417802b2db042ad98b4f7ed73975b",
+  "evidence_bundle_sha256": "d6899a4dff1b7c5180c006b38f9441f916eb7bda2f59df21df1f64784e8f1417",
+  "steps": 64,
+  "losses": [
+    3.0413382053375244,
+    3.340406656265259,
+    3.119142532348633,
+    3.2258100509643555,
+    3.2173948287963867,
+    3.4550015926361084,
+    2.9885201454162598,
+    3.3659682273864746,
+    3.579442024230957,
+    3.0413382053375244,
+    2.9560747146606445,
+    2.9560747146606445,
+    3.0659031867980957,
+    2.9560747146606445,
+    2.849348545074463,
+    3.3659682273864746,
+    2.694418430328369,
+    3.5715832710266113,
+    3.0413382053375244,
+    3.340406656265259,
+    3.119142532348633,
+    3.2258100509643555,
+    3.2173948287963867,
+    3.4550015926361084,
+    2.9885201454162598,
+    3.3659682273864746,
+    3.579442024230957,
+    3.0413382053375244,
+    2.9560747146606445,
+    2.9560747146606445,
+    3.0659031867980957,
+    2.9560747146606445,
+    2.849348545074463,
+    3.3659682273864746,
+    2.694418430328369,
+    3.5715832710266113,
+    3.0413382053375244,
+    3.340406656265259,
+    3.119142532348633,
+    3.2258100509643555,
+    3.2173948287963867,
+    3.4550015926361084,
+    2.9885201454162598,
+    3.3659682273864746,
+    3.579442024230957,
+    3.0413382053375244,
+    2.9560747146606445,
+    2.9560747146606445,
+    3.0659031867980957,
+    2.9560747146606445,
+    2.849348545074463,
+    3.3659682273864746,
+    2.694418430328369,
+    3.5715832710266113,
+    3.0413382053375244,
+    3.340406656265259,
+    3.119142532348633,
+    3.2258100509643555,
+    3.2173948287963867,
+    3.4550015926361084,
+    2.9720513820648193,
+    3.235797643661499,
+    3.3925600051879883,
+    2.800044298171997
+  ],
+  "gradient_norms": [
+    0.006901837382305186,
+    0.03614816544677258,
+    0.07881699563430297,
+    0.15015985689021694,
+    0.18475643175817047,
+    0.27123881908792113,
+    0.33048876894497276,
+    0.41091157625595287,
+    0.4854658088230168,
+    0.5394686905325982,
+    0.6291884416595322,
+    0.7077850334594779,
+    0.8476888546543911,
+    0.8714437612438751,
+    0.9923921500099202,
+    1.057783555070688,
+    1.1018629248783485,
+    1.221320536978863,
+    1.2689820529062406,
+    1.4223381580795842,
+    1.3782168820678222,
+    1.6365160009560855,
+    1.5380250410766945,
+    1.791795835088038,
+    1.817712004369273,
+    1.9847213784422406,
+    2.0816515721091466,
+    2.0669903274371824,
+    2.2223335700445674,
+    2.3150392548178758,
+    2.598497457656686,
+    2.502074503390212,
+    2.7038129146477816,
+    2.7438807615803302,
+    2.715616687769756,
+    2.895440051217074,
+    2.8791548952021975,
+    3.1139697523956476,
+    2.919805700146337,
+    3.3591470379747896,
+    3.071638715320618,
+    3.4890933922245875,
+    3.451962336160147,
+    3.697606755943233,
+    3.795249304711777,
+    3.683417444248608,
+    3.893248928662739,
+    3.9847197191570163,
+    4.4041292831101355,
+    4.168822546318792,
+    4.44469892331938,
+    4.447718876117476,
+    4.334899765300817,
+    4.571059086078885,
+    4.481064042762806,
+    4.793688416130127,
+    4.44544376335992,
+    5.061145265814935,
+    4.578997962048779,
+    5.155622356973335,
+    4.935819506097154,
+    5.055458839485194,
+    5.0627762210613385,
+    4.426622774270149
+  ],
+  "changed_adapter": true,
+  "reloaded": true,
+  "production_eligible": false,
+  "limitations": [
+    "48 tasks from 12 locally authored train source groups; no held-out or development data enters training.",
+    "Local model developers do not count as independent paid API provider businesses.",
+    "No learning, promotion, cash saving or teacher trace is inferred from this bundle alone.",
+    "Process, contextual revision, teacher-feedback trajectories, on-policy and self-distillation require additional genuine generation evidence.",
+    "Exploratory local-teacher adaptation; no independent API-provider or held-out promotion claim. Reload is a fresh model instance inside the worker; external evaluation must reload in its own process.",
+    "Declared assistant-token windows exercise actual operators and optimiser updates; omitted context/targets are recorded in freeze.json and these quick arms do not establish task learning."
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "schema_version": 3,
+  "run_id": "3a153ab7-2bca-4ac5-986e-92bcf0bc93fb",
+  "ownership_nonce": "7bbb06f1-bb4b-444d-8447-29aa919de39f",
+  "attempt_key": "bd84e6e813a8b8524d35de165c0bd23fe788fd37b714861d6754e31f08a09dce",
+  "receipt_path": "reports/local-study/regraded-v3-001/evaluation-001-development-e2bcd1355276/prepared/money.format.json",
+  "report_path": "reports/local-study/regraded-v3-001/evaluation-001-development-e2bcd1355276/sandbox/3a153ab7-2bca-4ac5-986e-92bcf0bc93fb.json",
+  "task": {
+    "id": "money.format",
+    "source_id": "private-money-v1",
+    "lineage_id": "local-contract-pack-12",
+    "split": "development",
+    "specification": "Input is signed cents, magnitude <=100000000. Return pounds with optional minus and exactly two fractional digits.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "9213c0114b6d1a6399d5db8ec1a7dcf0f9087c2d65b589e583ee9b1cba646aa9",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": -1230,
+        "expected": "-12.30"
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "use serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let cents = input.as_i64().unwrap();\n    let magnitude = input.as_u64().unwrap();\n    let pounds = cents as f64 / 100000000.0;\n    let pounds_rounded = pounds.round();\n    let pounds_str = pounds_rounded.to_string();\n    let mut result = Value::String(pounds_str);\n    if input.is_object() {\n        if let Some(magnitude_value) = input[\"magnitude\"].as_u64() {\n            if magnitude_value <= 100000000 {\n                result = Value::Number(serde_json::Number::from(pounds_rounded));\n            }\n        }\n    }\n    result\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/regraded-v3-001/evaluation-001-development-e2bcd1355276/sandbox"
+  },
+  "code_sha256": "c8131544959cc1dc7c29c785adfc64b0fc6d6c3c43c95eb2f1a3bccf9783e91b",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

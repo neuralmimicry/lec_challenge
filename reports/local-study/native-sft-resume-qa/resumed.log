@@ -1,0 +1,45 @@
+Hub hashing qwen2.5-coder-7b-instruct-q4_k_m.gguf: 0/4683073536 bytes, 0.00 MiB/s, ETA unknown (publisher checksum pending)
+Hub hashing qwen2.5-coder-7b-instruct-q4_k_m.gguf: 2189426688/4683073536 bytes, 139.18 MiB/s, ETA 00:00:18 (publisher checksum pending)
+Hub hashing qwen2.5-coder-7b-instruct-q4_k_m.gguf: 3666870272/4683073536 bytes, 116.19 MiB/s, ETA 00:00:09 (publisher checksum pending)
+Hub hashing qwen2.5-coder-7b-instruct-q4_k_m.gguf: 4236247040/4683073536 bytes, 89.36 MiB/s, ETA 00:00:05 (publisher checksum pending)
+Hub hashing qwen2.5-coder-7b-instruct-q4_k_m.gguf: 4591714304/4683073536 bytes, 72.65 MiB/s, ETA 00:00:02 (publisher checksum pending)
+distillation: durable update 2/3 loss=1.491738 gradient_norm=2.432890
+distillation: durable update 3/3 loss=1.405596 gradient_norm=2.299175
+Hub hashing qwen2.5-coder-7b-instruct-q4_k_m.gguf: 0/4683073536 bytes, 0.00 MiB/s, ETA unknown (publisher checksum pending)
+Hub hashing qwen2.5-coder-7b-instruct-q4_k_m.gguf: 1978662912/4683073536 bytes, 125.77 MiB/s, ETA 00:00:21 (publisher checksum pending)
+Hub hashing qwen2.5-coder-7b-instruct-q4_k_m.gguf: 3373268992/4683073536 bytes, 107.21 MiB/s, ETA 00:00:12 (publisher checksum pending)
+{
+  "schema_version": 1,
+  "arm_id": "native_sft_operator_qa",
+  "checkpoint": "reports/local-study/native-sft-resume-qa/interrupted",
+  "manifest": {
+    "path": "reports/local-study/native-sft-resume-qa/interrupted/manifest.json",
+    "sha256": "7357ab1a056034aae272c25d7e59f570a2502de8bcf411926e8cb7acba271352",
+    "bytes": 13312
+  },
+  "adapter_sha256": "b8b51c10874c1609e36c1b15ab8f0c0709d645f397d1979f7e17b4aea472ba5a",
+  "base_sha256": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+  "evidence_bundle_sha256": "d6899a4dff1b7c5180c006b38f9441f916eb7bda2f59df21df1f64784e8f1417",
+  "steps": 3,
+  "losses": [
+    1.254279851913452,
+    1.4917376041412354,
+    1.4055960178375244
+  ],
+  "gradient_norms": [
+    2.461904497661891,
+    2.4328899311679035,
+    2.2991750314118593
+  ],
+  "changed_adapter": true,
+  "reloaded": true,
+  "production_eligible": false,
+  "limitations": [
+    "48 tasks from 12 locally authored train source groups; no held-out or development data enters training.",
+    "Local model developers do not count as independent paid API provider businesses.",
+    "No learning, promotion, cash saving or teacher trace is inferred from this bundle alone.",
+    "Process, contextual revision, teacher-feedback trajectories, on-policy and self-distillation require additional genuine generation evidence.",
+    "Exploratory local-teacher adaptation; no independent API-provider or held-out promotion claim. Reload is a fresh model instance inside the worker; external evaluation must reload in its own process.",
+    "Declared assistant-token windows exercise actual operators and optimiser updates; omitted context/targets are recorded in freeze.json and these quick arms do not establish task learning."
+  ]
+}

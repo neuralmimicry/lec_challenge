@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "a52d044d05dc99f9af1879cdb69e7d80c4abc41b317440255f0ff27069084831",
+  "task_id": "validation.identifier",
+  "source_id": "private-validation-v1",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an ASCII string. Return whether it matches [A-Za-z_][A-Za-z0-9_]*. Do not reject language keywords.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":\"_name2\",\"expected\":true}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let str_input = input.as_str().unwrap();\n    let mut chars = str_input.chars();\n    let mut is_valid = true;\n    while let Some(c) = chars.next() {\n        if !c.is_alphabetic() && c != '_' && c != '_' {\n            is_valid = false;\n            break;\n        }\n    }\n    Value::Bool(is_valid)\n}\n```",
+    "checkpoint_id": "2217a994f8b74ded1d52f30ef7add2cb190578e3d108168a85d1409160ad88c3",
+    "finish_reason": "stop",
+    "input_tokens": 231,
+    "output_tokens": 98,
+    "elapsed_ms": 8528,
+    "complete": true
+  },
+  "model_error": null
+}

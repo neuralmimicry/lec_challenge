@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "df66f201f0ad3ef92171fd91d4f38a697a3cf37a3f3bc24a27cee2de59b7a6b6",
+  "task_id": "money.parse",
+  "source_id": "private-money-v1",
+  "success": false,
+  "raw_generation": {
+    "path": "reports/local-study/sft-baseline-development-c7c/generations/money.parse.json",
+    "sha256": "b0f13644fc90e224534927586a3e7fe37dcb45932d021339f9b21691bc57ad4b",
+    "bytes": 2021
+  },
+  "sandbox_report": {
+    "path": "reports/local-study/sft-baseline-development-c7c/sandbox/0de8363e-d995-4d19-933d-1bad35937554.json",
+    "sha256": "03f67dd3f1ba53cdbb504fa2fc0c3c5bf4069951aaaaa553f38ea2a23a7e0e6b",
+    "bytes": 4294
+  },
+  "grading_error": null
+}

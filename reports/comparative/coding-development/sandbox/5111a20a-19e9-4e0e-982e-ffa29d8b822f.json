@@ -1,0 +1,33 @@
+{
+  "run_id": "5111a20a-19e9-4e0e-982e-ffa29d8b822f",
+  "task_id": "dispatch.waiting",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error: unknown start of token: `\n --> /candidate/main.rs:1:40\n  |\n1 | Here is a simple implementation of the `solve` function in Rust. This function takes a vector of pairs of numbers as input and return...\n  |                                        ^\n  |\nhelp: Unicode character '`' (Grave Accent) looks like ''' (Single Quote), but it is not\n  |\n1 - Here is a simple implementation of the `solve` function in Rust. This function takes a vector of pairs of numbers as input and returns the total time jobs wait before service.\n1 + Here is a simple implementation of the 'solve` function in Rust. This function takes a vector of pairs of numbers as input and returns the total time jobs wait before service.\n  |\n\nerror: unknown start of token: `\n --> /candidate/main.rs:1:46\n  |\n1 | Here is a simple implementation of the `solve` function in Rust. This function takes a vector of pairs of numbers as input and return...\n  |                                              ^\n  |\nhelp: Unicode character '`' (Grave Accent) looks like ''' (Single Quote), but it is not\n  |\n1 - Here is a simple implementation of the `solve` function in Rust. This function takes a vector of pairs of numbers as input and returns the total time jobs wait before service.\n1 + Here is a simple implementation of the `solve' function in Rust. This function takes a vector of pairs of numbers as input and returns the total time jobs wait before service.\n  |\n\nerror: unknown start of token: `\n --> /candidate/main.rs:3:1\n  |\n3 | ```rust\n  | ^^^\n  |\n  = note: character appears 2 more times\nhelp: Unicode character '`' (Grave Accent) looks like ''' (Single Quote), but it is not\n  |\n3 - ```rust\n3 + '''rust\n  |\n\nerror: unknown start of token: `\n  --> /candidate/main.rs:20:1\n   |\n20 | ```\n   | ^^^\n   |\n   = note: character appears 2 more times\nhelp: Unicode character '`' (Grave Accent) looks like ''' (Single Quote), but it is not\n   |\n20 - ```\n20 + '''\n   |\n\nerror: expected one of `!` or `::`, found `is`\n --> /candidate/main.rs:1:6\n  |\n1 | Here is a simple implementation of the `solve` function in Rust. This function takes a vector of pairs of numbers as input and return...\n  |      ^^ expected one of `!` or `::`\n\nerror: aborting due to 5 previous errors\n\n"
+  ],
+  "cases_total": 5,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "0bf995b5f69865792503015f6af52b457c861b679877956e939c2137ddb4a562",
+  "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+  "oracle_sha256": "a734f6d465714cbebb072790fedff161d2fc28cbb257b3d04cee0feaf8b5b5fe",
+  "code_sha256": "abcc8e51b87e53c1d7a99c15bc55b5ae10237899c04d18880229dd6bb610aa51",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:1",
+    "expected_image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/comparative/coding-development/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/comparative/coding-development/sandbox/5111a20a-19e9-4e0e-982e-ffa29d8b822f.audit.json",
+  "audit_sha256": "145aa26bdbd5ff3913dafcbaf23354243430f850dcc2784b063abc2f33e99800",
+  "failure": "compilation failed: error: unknown start of token: `\n --> /candidate/main.rs:1:40\n  |\n1 | Here is a simple implementation of the `solve` function in Rust. This function takes a vector of pairs of numbers as input and return...\n  |                                        ^\n  |\nhelp: Unicode character '`' (Grave Accent) looks like ''' (Single Quote), but it is not\n  |\n1 - Here is a simple implementation of the `solve` function in Rust. This function takes a vector of pairs of numbers as input and returns the total time jobs wait before service.\n1 + Here is a simple implementation of the 'solve` function in Rust. This function takes a vector of pairs of numbers as input and returns the total time jobs wait before service.\n  |\n\nerror: unknown start of token: `\n --> /candidate/main.rs:1:46\n  |\n1 | Here is a simple implementation of the `solve` function in Rust. This function takes a vector of pairs of numbers as input and return...\n  |                                              ^\n  |\nhelp: Unicode character '`' (Grave Accent) looks like ''' (Single Quote), but it is not\n  |\n1 - Here is a simple implementation of the `solve` function in Rust. This function takes a vector of pairs of numbers as input and returns the total time jobs wait before service.\n1 + Here is a simple implementation of the `solve' function in Rust. This function takes a vector of pairs of numbers as input and returns the total time jobs wait before service.\n  |\n\nerror: unknown start of token: `\n --> /candidate/main.rs:3:1\n  |\n3 | ```rust\n  | ^^^\n  |\n  = note: character appears 2 more times\nhelp: Unicode character '`' (Grave Accent) looks like ''' (Single Quote), but it is not\n  |\n3 - ```rust\n3 + '''rust\n  |\n\nerror: unknown start of token: `\n  --> /candidate/main.rs:20:1\n   |\n20 | ```\n   | ^^^\n   |\n   = note: character appears 2 more times\nhelp: Unicode character '`' (Grave Accent) looks like ''' (Single Quote), but it is not\n   |\n20 - ```\n20 + '''\n   |\n\nerror: expected one of `!` or `::`, found `is`\n --> /candidate/main.rs:1:6\n  |\n1 | Here is a simple implementation of the `solve` function in Rust. This function takes a vector of pairs of numbers as input and return...\n  |      ^^ expected one of `!` or `::`\n\nerror: aborting due to 5 previous errors\n\n",
+  "duration_ms": 4056,
+  "timeout_evidence": null
+}

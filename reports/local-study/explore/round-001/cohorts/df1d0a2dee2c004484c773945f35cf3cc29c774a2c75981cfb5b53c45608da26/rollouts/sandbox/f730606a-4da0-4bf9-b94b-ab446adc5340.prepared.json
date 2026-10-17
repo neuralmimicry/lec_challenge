@@ -1,0 +1,59 @@
+{
+  "schema_version": 3,
+  "run_id": "f4f7a3d1-985f-41a6-84c1-85c66aafba81",
+  "ownership_nonce": "6d783ccf-de69-4533-b36b-76c92c757286",
+  "attempt_key": "f730606a-4da0-4bf9-b94b-ab446adc5340",
+  "receipt_path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox/f730606a-4da0-4bf9-b94b-ab446adc5340.prepared.json",
+  "report_path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox/f4f7a3d1-985f-41a6-84c1-85c66aafba81.json",
+  "task": {
+    "id": "graph.reachable",
+    "source_id": "private-graph-v1",
+    "lineage_id": "local-contract-pack-04",
+    "split": "train",
+    "specification": "Input {n,start,edges} describes a directed graph on 0..n-1, n>=1, edges unique [from,to]. Return all nodes reachable from start, including start, sorted ascending. Graph vertex counts are at most 64.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "428a5ed65c2c135f64714d3d04da661d2e593883777823a68182b5622c480267",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": {
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "n": 4,
+          "start": 0
+        },
+        "expected": [
+          0,
+          1,
+          2
+        ]
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "use serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let n = input[\"n\"].as_u64().unwrap();\n    let start = input[\"start\"].as_u64().unwrap();\n    let edges = input[\"edges\"].as_array().unwrap();\n\n    let mut reachable_nodes = Vec::new();\n\n    for edge in edges {\n        let from = edge[0].as_u64().unwrap();\n        let to = edge[1].as_u64().unwrap();\n\n        if from == start {\n            reachable_nodes.push(start);\n        } else if to == start {\n            reachable_nodes.push(to);\n        }\n    }\n\n    reachable_nodes.sort_unstable();\n    reachable_nodes.into_iter().collect()\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox"
+  },
+  "code_sha256": "2a74517fc6e2a043d9752c82ddc12be8779c9fb42c9ff0afd1f4076747842cf2",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

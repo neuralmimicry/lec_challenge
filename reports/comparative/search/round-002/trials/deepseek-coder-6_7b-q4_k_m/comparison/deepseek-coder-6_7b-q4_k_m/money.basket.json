@@ -1,0 +1,38 @@
+{
+  "model_id": "deepseek-coder-6_7b-q4_k_m",
+  "task_id": "money.basket",
+  "source_id": "private-money-v1",
+  "specification_sha256": "87f50e8f3a163aaec0042d723e8da46a44c49d75746e0fbba18ebe04ceba4a08",
+  "seed": 1729,
+  "plan_sha256": "79e25584f785f04f53b60d4cf3e4a730d2cf181ce11620a413bb1e0123bc1de2",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an array of [unit_price_cents,quantity], both nonnegative integers. Return total cents without tax.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[[120,2],[99,3]],\"expected\":537}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "Here is the Rust code that solves the problem:\n\n```rust\nuse serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let input_array = input.as_array().unwrap();\n    let mut total = 0;\n\n    for item in input_array {\n        let item_array = item.as_array().unwrap();\n        let unit_price = item_array[0].as_i64().unwrap();\n        let quantity = item_array[1].as_i64().unwrap();\n        total += unit_price * quantity;\n    }\n\n    json!(total)\n}\n```\n\nThis function takes a `serde_json::Value` as input and returns a `serde_json::Value`. It first unwraps the input into an array of arrays, then iterates over each inner array, unwrapping the integers and multiplying them together to get the total. Finally, it returns the total as a `serde_json::Value`.\n",
+    "checkpoint_id": "92da6238854f2fa902d8b2ad79d548536af1d3ab06821f323bd5bbcea2013276",
+    "finish_reason": "stop",
+    "input_tokens": 304,
+    "output_tokens": 238,
+    "elapsed_ms": 8902,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/comparative/search/round-002/trials/deepseek-coder-6_7b-q4_k_m/comparison/deepseek-coder-6_7b-q4_k_m/money.basket.generation.json",
+    "sha256": "31983c5152a24eb206b62811757848b93ad9ce1942e140cf8c0dde94be917e82",
+    "bytes": 4591
+  },
+  "sandbox_report": {
+    "path": "reports/comparative/search/round-002/trials/deepseek-coder-6_7b-q4_k_m/comparison/sandbox/59c27eb7-3602-4fab-b479-d82c1922cfd8.json",
+    "sha256": "e9fe823ddf8410ba70a5b3e06b5a4a5dd87c5ff112eec58c257ae354843d2ee3",
+    "bytes": 10136
+  },
+  "grading_error": null,
+  "success": false
+}

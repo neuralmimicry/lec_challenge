@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "c35802c4a512b17d77dd16b2e6ab7d80bbfdd14fe0c7590863f05918afeae367",
+  "task_id": "money.format",
+  "source_id": "private-money-v1",
+  "success": false,
+  "raw_generation": {
+    "path": "reports/local-study/native-full-quality-001/composed-development/generations/money.format.json",
+    "sha256": "d8a57488ad41384666ee1910f342ac6054c1ee896a7a0ede2b56a9ee1f3b573b",
+    "bytes": 1803
+  },
+  "sandbox_report": null,
+  "grading_error": "owned sandbox inspection deadline exceeded: deadline has elapsed"
+}

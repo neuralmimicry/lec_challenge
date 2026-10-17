@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "candidate_id": "qwen-general-7b-q4_k_m",
+  "model_id": "bartowski/Qwen2.5-7B-Instruct-GGUF",
+  "revision": "8911e8a47f92bac19d6f5c64a2e2095bd2f7d031",
+  "directory": "offline_bundle/comparative/qwen-general-7b-q4_k_m",
+  "manifest_filename": "gguf-assets.json",
+  "manifest_sha256": "9aee5836b168e7a82fb52b794e8168f46bc73556fe463a2538a888a6d78faf9a",
+  "created_unix_ms": 1792096088888,
+  "removal_state": "completed",
+  "removed_weights": [
+    {
+      "filename": "Qwen2.5-7B-Instruct-Q4_K_M.gguf",
+      "sha256": "65b8fcd92af6b4fefa935c625d1ac27ea29dcb6ee14589c55a8f115ceaaa1423",
+      "bytes": 4683074240
+    }
+  ]
+}

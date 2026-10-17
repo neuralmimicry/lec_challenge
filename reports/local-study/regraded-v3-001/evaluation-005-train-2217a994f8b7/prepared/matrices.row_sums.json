@@ -1,0 +1,56 @@
+{
+  "schema_version": 3,
+  "run_id": "a3670a79-df4a-45ac-acec-6a0824a34095",
+  "ownership_nonce": "865e0823-d2bc-4994-8a85-6a176f518df0",
+  "attempt_key": "a266418a731a3b53231b2fb14dc7f2c37cb73357b04465c041a27827b2d3b147",
+  "receipt_path": "reports/local-study/regraded-v3-001/evaluation-005-train-2217a994f8b7/prepared/matrices.row_sums.json",
+  "report_path": "reports/local-study/regraded-v3-001/evaluation-005-train-2217a994f8b7/sandbox/a3670a79-df4a-45ac-acec-6a0824a34095.json",
+  "task": {
+    "id": "matrices.row_sums",
+    "source_id": "private-matrices-v1",
+    "lineage_id": "local-contract-pack-06",
+    "split": "train",
+    "specification": "Input is a rectangular integer matrix with at least one row and column. Return each row's sum.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "fc17f6714268dba82f5c07808bf4192e5d348eacd44010d72d46463aad47d552",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": [
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            4,
+            5,
+            6
+          ]
+        ],
+        "expected": [
+          6,
+          15
+        ]
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "use serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let matrix = input.as_array().unwrap();\n    let mut rows = Vec::new();\n    for row in matrix {\n        let mut sum = 0;\n        for num in row.as_array().unwrap() {\n            sum += num.as_i64().unwrap();\n        }\n        rows.push(serde_json::Value::from(sum));\n    }\n    Value::Array(rows)\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/regraded-v3-001/evaluation-005-train-2217a994f8b7/sandbox"
+  },
+  "code_sha256": "c77958692b33d4f5e4304ee2a8d6cdb7e0c94bebdcd733bc4c743d08545e506e",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

@@ -1,0 +1,172 @@
+distillation: durable update 1/48 loss=0.297420 gradient_norm=2.102586
+distillation: durable update 2/48 loss=0.274727 gradient_norm=1.963547
+distillation: durable update 3/48 loss=0.471582 gradient_norm=3.198438
+distillation: durable update 4/48 loss=0.356622 gradient_norm=1.547171
+distillation: durable update 5/48 loss=0.371282 gradient_norm=2.083588
+distillation: durable update 6/48 loss=0.319496 gradient_norm=1.813681
+distillation: durable update 7/48 loss=0.274412 gradient_norm=1.891785
+distillation: durable update 8/48 loss=0.239113 gradient_norm=2.188114
+distillation: durable update 9/48 loss=0.237003 gradient_norm=1.774712
+distillation: durable update 10/48 loss=0.332573 gradient_norm=2.185671
+distillation: durable update 11/48 loss=0.353306 gradient_norm=1.594443
+distillation: durable update 12/48 loss=0.311362 gradient_norm=1.842930
+distillation: durable update 13/48 loss=0.186027 gradient_norm=1.541435
+distillation: durable update 14/48 loss=0.300769 gradient_norm=1.888686
+distillation: durable update 15/48 loss=0.165545 gradient_norm=1.232331
+distillation: durable update 16/48 loss=0.239718 gradient_norm=1.417138
+distillation: durable update 17/48 loss=0.389450 gradient_norm=2.334059
+distillation: durable update 18/48 loss=0.146253 gradient_norm=0.983961
+distillation: durable update 19/48 loss=0.145815 gradient_norm=1.258510
+distillation: durable update 20/48 loss=0.231704 gradient_norm=2.002906
+distillation: durable update 21/48 loss=0.241897 gradient_norm=1.311212
+distillation: durable update 22/48 loss=0.197098 gradient_norm=1.307813
+distillation: durable update 23/48 loss=0.178529 gradient_norm=1.519742
+distillation: durable update 24/48 loss=0.145897 gradient_norm=1.274119
+distillation: durable update 25/48 loss=0.138446 gradient_norm=2.362492
+distillation: durable update 26/48 loss=0.102187 gradient_norm=1.415176
+distillation: durable update 27/48 loss=0.202035 gradient_norm=1.801040
+distillation: durable update 28/48 loss=0.270721 gradient_norm=1.585640
+distillation: durable update 29/48 loss=0.218139 gradient_norm=1.707164
+distillation: durable update 30/48 loss=0.114902 gradient_norm=1.375006
+distillation: durable update 31/48 loss=0.194605 gradient_norm=1.729657
+distillation: durable update 32/48 loss=0.096069 gradient_norm=1.044907
+distillation: durable update 33/48 loss=0.148024 gradient_norm=1.297237
+distillation: durable update 34/48 loss=0.285607 gradient_norm=1.910822
+distillation: durable update 35/48 loss=0.080190 gradient_norm=1.017221
+distillation: durable update 36/48 loss=0.096510 gradient_norm=1.153731
+distillation: durable update 37/48 loss=0.201651 gradient_norm=2.797433
+distillation: durable update 38/48 loss=0.169578 gradient_norm=1.345705
+distillation: durable update 39/48 loss=0.119929 gradient_norm=1.339981
+distillation: durable update 40/48 loss=0.106745 gradient_norm=1.380075
+distillation: durable update 41/48 loss=0.079249 gradient_norm=1.101768
+distillation: durable update 42/48 loss=0.074129 gradient_norm=1.503107
+distillation: durable update 43/48 loss=0.047871 gradient_norm=1.223841
+distillation: durable update 44/48 loss=0.133702 gradient_norm=2.124976
+distillation: durable update 45/48 loss=0.207816 gradient_norm=1.669330
+distillation: durable update 46/48 loss=0.152751 gradient_norm=1.685279
+distillation: durable update 47/48 loss=0.069024 gradient_norm=1.365462
+distillation: durable update 48/48 loss=0.115369 gradient_norm=7.673773
+{
+  "schema_version": 1,
+  "arm_id": "native_full_sft_seed2718",
+  "checkpoint": "reports/local-study/native-full-sft-seed2718",
+  "manifest": {
+    "path": "reports/local-study/native-full-sft-seed2718/manifest.json",
+    "sha256": "1b0b38681bb23c49e4821214887568e06a9d2b997ec5c33bf1ad3f601ca78a99",
+    "bytes": 21052
+  },
+  "adapter_sha256": "fadca01f97c8e971d9f6d03103c77847dcc064c39b28e996802cb70ce3603042",
+  "base_sha256": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+  "evidence_bundle_sha256": "d6899a4dff1b7c5180c006b38f9441f916eb7bda2f59df21df1f64784e8f1417",
+  "steps": 48,
+  "losses": [
+    0.297419935464859,
+    0.27472713589668274,
+    0.4715821444988251,
+    0.3566216230392456,
+    0.37128162384033203,
+    0.31949561834335327,
+    0.27441221475601196,
+    0.23911286890506744,
+    0.23700262606143951,
+    0.3325733244419098,
+    0.3533061742782593,
+    0.3113624155521393,
+    0.1860273778438568,
+    0.30076906085014343,
+    0.16554498672485352,
+    0.2397182434797287,
+    0.38944950699806213,
+    0.14625348150730133,
+    0.14581461250782013,
+    0.23170360922813416,
+    0.24189722537994385,
+    0.19709765911102295,
+    0.17852863669395447,
+    0.1458972841501236,
+    0.1384459137916565,
+    0.10218678414821625,
+    0.20203499495983124,
+    0.2707212269306183,
+    0.21813949942588806,
+    0.11490150541067123,
+    0.19460457563400269,
+    0.09606876224279404,
+    0.14802399277687073,
+    0.2856069505214691,
+    0.08018960058689117,
+    0.09651031345129013,
+    0.20165105164051056,
+    0.16957814991474152,
+    0.11992911994457245,
+    0.10674498230218887,
+    0.07924937456846237,
+    0.0741291344165802,
+    0.047870561480522156,
+    0.13370178639888763,
+    0.2078159600496292,
+    0.15275126695632935,
+    0.06902357190847397,
+    0.11536931991577148
+  ],
+  "gradient_norms": [
+    2.102586031542836,
+    1.9635471651471565,
+    3.1984380530027514,
+    1.5471712372636952,
+    2.0835880270637688,
+    1.8136807756639917,
+    1.8917849484807336,
+    2.1881143839493538,
+    1.7747119945576986,
+    2.1856711830005335,
+    1.5944425850974195,
+    1.8429299008803348,
+    1.5414351896628695,
+    1.8886858329642655,
+    1.2323306267987084,
+    1.4171375535081014,
+    2.334059345542238,
+    0.9839609455243732,
+    1.2585095500598305,
+    2.0029061507160506,
+    1.311211983595103,
+    1.3078127761581761,
+    1.5197415896463848,
+    1.2741185159782673,
+    2.362491506030498,
+    1.4151762986804701,
+    1.8010396939016073,
+    1.5856402834175618,
+    1.7071641327604714,
+    1.3750059702121513,
+    1.7296571502247622,
+    1.0449070335883857,
+    1.2972374314371795,
+    1.9108218524065197,
+    1.0172211421923587,
+    1.1537310036781532,
+    2.797433273270004,
+    1.3457045046995872,
+    1.339980874784495,
+    1.3800747193654743,
+    1.10176794491983,
+    1.5031068247996058,
+    1.223840721440862,
+    2.1249759397730537,
+    1.6693295882434214,
+    1.6852791246136871,
+    1.3654622067669215,
+    7.673773142970685
+  ],
+  "changed_adapter": true,
+  "reloaded": true,
+  "production_eligible": false,
+  "limitations": [
+    "48 tasks from 12 locally authored train source groups; no held-out or development data enters training.",
+    "Local model developers do not count as independent paid API provider businesses.",
+    "No learning, promotion, cash saving or teacher trace is inferred from this bundle alone.",
+    "Process, contextual revision, teacher-feedback trajectories, on-policy and self-distillation require additional genuine generation evidence.",
+    "Exploratory local-teacher adaptation; no independent API-provider or held-out promotion claim. Reload is a fresh model instance inside the worker; external evaluation must reload in its own process."
+  ]
+}

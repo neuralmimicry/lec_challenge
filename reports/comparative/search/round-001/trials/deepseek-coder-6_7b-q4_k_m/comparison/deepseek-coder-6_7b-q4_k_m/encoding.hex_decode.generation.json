@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "evidence_kind": "actual_local_model_generation",
+  "recorded_unix_ms": 1792147855754,
+  "model_id": "deepseek-coder-6_7b-q4_k_m",
+  "task_id": "encoding.hex_decode",
+  "source_id": "private-encoding-v1",
+  "specification_sha256": "535cec08e7ca750ff6426c55df5e10382b5d98dd2b972889c664a544c49c2a87",
+  "seed": 1729,
+  "plan_sha256": "7e8ac08343327333638e13a48db34cc069c251aad12e7848d71fd8942d83cc6f",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an ASCII string. Decode even-length hexadecimal accepting upper/lowercase; return byte array, or null for invalid digits or odd length. The returned array may contain up to 128 items.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":\"00aF\",\"expected\":[0,175]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": null,
+  "generation_error": "model loading failed: GGUF/source rotary scaling differs",
+  "execution": null
+}

@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "a5b39d544c85b76111246b8fda40c638ce104251a1c56368277fef8fe4033eb6",
+  "task_id": "sequences.interleave",
+  "source_id": "private-sequences-v1",
+  "success": false,
+  "raw_generation": {
+    "path": "reports/local-study/native-full-quality-001/sft-train/generations/sequences.interleave.json",
+    "sha256": "632b055a8153e3d552b26158bde836a0e957595e2448dec7fce3517a2e6762ff",
+    "bytes": 2499
+  },
+  "sandbox_report": {
+    "path": "reports/local-study/native-full-quality-001/sft-train/sandbox/785903c6-6f90-4589-8027-139b5864cdb1.json",
+    "sha256": "633b18f918bbb399f109a9c21f01c852a3fcc570c13d35719fc3069fb1b684fb",
+    "bytes": 6172
+  },
+  "grading_error": null
+}

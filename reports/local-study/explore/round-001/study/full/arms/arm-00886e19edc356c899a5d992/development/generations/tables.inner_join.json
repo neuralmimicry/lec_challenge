@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "23183bfa90e4ec5f088260cbb0cdffc7321925e65ff2284b1086e4b85cbdf13e",
+  "task_id": "tables.inner_join",
+  "source_id": "private-tables-v1",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input [left,right] has arrays of [key,value] integer rows, each side with unique keys. Return [key,left_value,right_value] for common keys in ascending key order.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[[[2,9],[1,4]],[[2,3],[3,8]]],\"expected\":[[2,9,3]]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let left = input.as_array().unwrap();\n    let right = input.as_array().unwrap();\n    let mut common_keys = Vec::new();\n    let mut left_values = Vec::new();\n    let mut right_values = Vec::new();\n\n    for (left_key, left_value) in left.iter() {\n        for (right_key, right_value) in right.iter() {\n            if left_key == right_key {\n                common_keys.push(left_key.clone());\n                left_values.push(left_value.clone());\n                right_values.push(right_value.clone());\n            }\n        }\n    }\n\n    let mut result = Value::Array::new();\n    for key in common_keys {\n        result.push(Value::String(key));\n        result.push(Value::Number(serde_json::Number::from(left_values.iter().find(|&x| x == &key).unwrap())));\n        result.push(Value::Number(serde_json::Number::from(right_values.iter().find(|&x| x == &key).unwrap())));\n    }\n\n    result\n}\n```",
+    "checkpoint_id": "6e07fcdaa532adbc1916fa0a8ff21187e2eff3b2ead31205d6d48ec239f465d4",
+    "finish_reason": "stop",
+    "input_tokens": 259,
+    "output_tokens": 226,
+    "elapsed_ms": 37472,
+    "complete": true
+  },
+  "model_error": null
+}

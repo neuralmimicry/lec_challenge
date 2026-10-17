@@ -1,0 +1,38 @@
+{
+  "model_id": "smollm2-1_7b",
+  "task_id": "dispatch.priority",
+  "source_id": "private-dispatch-v1",
+  "specification_sha256": "fe12d97428801ef000ddf3a459ad82ad8f7812a5fb888ab3e6b35444d33a7856",
+  "seed": 1729,
+  "plan_sha256": "b2e46b0f4ac46ecbb1b6568e9669ef5157b8a6343802f749cfac8ae999e29d88",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an array of [priority,id] integer pairs with unique ids. Return ids sorted by decreasing priority, with increasing id on ties.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[[2,7],[3,8],[2,1]],\"expected\":[8,1,7]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::json;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let mut result = json!([]);\n    let mut pairs = input.as_array().unwrap().iter();\n    let mut sorted_pairs = Vec::new();\n\n    while let Some(pair) = pairs.next() {\n        let priority = pair[0];\n        let id = pair[1];\n\n        sorted_pairs.push((priority, id));\n    }\n\n    sorted_pairs.sort_by(|(p1, _), (p2, _)| p2.cmp(p1));\n\n    for (priority, id) in sorted_pairs {\n        result = json!([result, json!(id)]);\n    }\n\n    result\n}\n```",
+    "checkpoint_id": "f55217be716b6a997b97b9d8d7eb6fad02e00858f5010ec24f64603c3a98a0e8",
+    "finish_reason": "stop",
+    "input_tokens": 264,
+    "output_tokens": 179,
+    "elapsed_ms": 10324,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/comparative/control-development/smollm2-1_7b/dispatch.priority.generation.json",
+    "sha256": "dbd6aef61fcc891b54e69c89696ef37536bc8a4cfe3b98940c0e38f507be536a",
+    "bytes": 2892
+  },
+  "sandbox_report": {
+    "path": "reports/comparative/control-development/sandbox/1026e542-6793-4cb2-b67b-f16196a062ac.json",
+    "sha256": "bf779226befa18d30f968217e583458c393bda77bee22d3865cfca2bc7a9c814",
+    "bytes": 3326
+  },
+  "grading_error": null,
+  "success": false
+}

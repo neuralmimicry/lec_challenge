@@ -1,0 +1,22 @@
+{
+  "model_id": "TheBloke/deepseek-coder-6.7B-instruct-GGUF",
+  "revision": "9e221e6b41cb1bf1c5d8f9718e81e3dc781f7557",
+  "files": {
+    "README.md": {
+      "filename": "README.md",
+      "bytes": 21322,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "54c389cb50b3f32c924d922046797bfbd43d5611"
+      }
+    },
+    "deepseek-coder-6.7b-instruct.Q4_K_M.gguf": {
+      "filename": "deepseek-coder-6.7b-instruct.Q4_K_M.gguf",
+      "bytes": 4083015904,
+      "publisher_identity": {
+        "kind": "lfs_sha256",
+        "digest": "92da6238854f2fa902d8b2ad79d548536af1d3ab06821f323bd5bbcea2013276"
+      }
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "evidence_kind": "actual_checkpoint_bound_rollout_generation",
+  "plan": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/validation.brackets/student-plan.json",
+    "sha256": "f0e2e9cd8caf4ab4dc53d4201918e68b1c165b13606b66572d9f860ef29bdf82",
+    "bytes": 3794
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let mut stack = Vec::new();\n    let mut current_value = String::new();\n\n    for ch in input.as_str() {\n        match ch {\n            '{' => {\n                stack.push(ch);\n                current_value.push(ch);\n            },\n            '}' => {\n                if stack.pop().is_none() {\n                    return serde_json::Value::Null;\n                }\n                current_value.push(ch);\n            },\n            ',' => {\n                if stack.pop().is_none() {\n                    return serde_json::Value::Null;\n                }\n                current_value.push(ch);\n            },\n            '[' => {\n                stack.push(ch);\n                current_value.push(ch);\n            },\n            ']' => {\n                if stack.pop().is_none() {\n                    return serde_json::Value::Null;\n                }\n                current_value.push(ch);\n            },\n            '\"' => {\n                if stack.pop().is_none() {\n                    return serde_json::Value::Null;\n                }\n                current_value.push(ch);\n            },\n            '0'..='9' => {\n                current_value.push(ch);\n            },\n            _ => {\n                return serde_json::Value::Null;\n            }\n        }\n    }\n\n    if stack.len() != 0 {\n        return serde_json::Value::Null;\n    }\n\n    serde_json::Value::Bool(current_value.chars().all(|c| c.is_ascii_digit() || c == '[' || c == ']'))\n}\n\nfn main() {\n    let input = serde_json::Value::from(\"{a{b[c](d)}\");\n    let expected = serde_json::Value::from(true);\n    assert_eq!(solve(input), expected);\n}\n```",
+    "checkpoint_id": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+    "finish_reason": "stop",
+    "input_tokens": 225,
+    "output_tokens": 355,
+    "elapsed_ms": 59479,
+    "complete": true
+  },
+  "generation_error": null,
+  "execution": {
+    "actual_device": "Cpu",
+    "actual_dtype": "F32",
+    "asset_lifetime_shared_lease": false,
+    "available_cpu_threads": 16,
+    "candle_cpu_threads": 16,
+    "checkpoint_id": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+    "context_cap": 4096,
+    "cpu_fallback": false,
+    "cuda_active": false,
+    "cuda_feature_compiled": true,
+    "engine": "native_rust_candle",
+    "model_id": "Qwen/Qwen2.5-Coder-0.5B-Instruct",
+    "quantisation": null,
+    "requested": {
+      "device": "cpu",
+      "dtype": "f32"
+    },
+    "revision": "ea3f2471cf1b1f0db85067f1ef93848e38e88c25",
+    "weight_format": "safetensors"
+  }
+}

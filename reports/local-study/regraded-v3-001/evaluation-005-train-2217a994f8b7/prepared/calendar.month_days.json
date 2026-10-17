@@ -1,0 +1,45 @@
+{
+  "schema_version": 3,
+  "run_id": "118f10cd-aa4f-4b29-ac24-f34531f18716",
+  "ownership_nonce": "2877a6b2-c8ce-4ce1-9222-d02ee73fc14d",
+  "attempt_key": "4ded64033793def556af9e300e64f169b8c1ea68ab79aaf7e783730338b80799",
+  "receipt_path": "reports/local-study/regraded-v3-001/evaluation-005-train-2217a994f8b7/prepared/calendar.month_days.json",
+  "report_path": "reports/local-study/regraded-v3-001/evaluation-005-train-2217a994f8b7/sandbox/118f10cd-aa4f-4b29-ac24-f34531f18716.json",
+  "task": {
+    "id": "calendar.month_days",
+    "source_id": "private-calendar-v1",
+    "lineage_id": "local-contract-pack-10",
+    "split": "train",
+    "specification": "Input is [year,month] with year 1..9999 and month 1..12. Return Gregorian days in that month.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "409720229a9d05c7b1d88cab24586a0ef3178a33950aa4ea0f81318f45e03be3",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": [
+          2024,
+          2
+        ],
+        "expected": 29
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "use serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let year = input.as_i64().unwrap();\n    let month = input.as_i64().unwrap();\n    let days_in_month = match month {\n        1 | 3 | 5 | 7 | 8 | 10 | 12 => 31,\n        4 | 6 | 9 | 11 => 30,\n        2 => {\n            if year % 4 == 0 && year % 100 != 0 || year % 400 == 0 {\n                29\n            } else {\n                28\n            }\n        }\n        _ => 0,\n    };\n    Value::Number(serde_json::Number::from(days_in_month))\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/regraded-v3-001/evaluation-005-train-2217a994f8b7/sandbox"
+  },
+  "code_sha256": "03f2390f066b474a6ff93a0b05a21d1b1b13de45b193d3959fc5d915113a3ad6",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

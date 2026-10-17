@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "a5b39d544c85b76111246b8fda40c638ce104251a1c56368277fef8fe4033eb6",
+  "task_id": "calendar.ordinal",
+  "source_id": "private-calendar-v1",
+  "success": false,
+  "raw_generation": {
+    "path": "reports/local-study/native-full-quality-001/sft-train/generations/calendar.ordinal.json",
+    "sha256": "921f80aaba2e7dc3544ad72b979331c6793556a0537fb203e3fdcb9ec1764228",
+    "bytes": 2015
+  },
+  "sandbox_report": {
+    "path": "reports/local-study/native-full-quality-001/sft-train/sandbox/bbacb247-8957-47a8-98bb-2bf7a303cae0.json",
+    "sha256": "3335e3fd845f86edc112cd2763874ef684ff98a8f2890a1d496a88f2b15ad626",
+    "bytes": 1781
+  },
+  "grading_error": null
+}

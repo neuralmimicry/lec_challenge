@@ -1,0 +1,7 @@
+{
+  "completion": "Here is a simple Rust function that adds two numbers:\n\n\n",
+  "exit_success": true,
+  "generation_limit_tokens": 16,
+  "prompt_tokens": 61,
+  "wall_seconds": 13.007367767
+}

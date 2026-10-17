@@ -1,0 +1,541 @@
+{
+  "accepted_samples": 17,
+  "arm_id": "native_full_composed_seed2718",
+  "base_assets": {
+    "bytes": 788,
+    "path": "offline_bundle/base/assets.json",
+    "sha256": "54304e7f41519a4196674cba5e86593802f852b2b47882d6c19706f85f303ad4"
+  },
+  "base_weight_sha256": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+  "canonical_request_sha256": "edc29d6ee33270ae570960f978b46c56e79dd2048e601c9c40411cc3e40a4fd7",
+  "engine_sha256": "5db09c632f6ffccc636bdfec2f693af102bf5327ce7510bc593ebe7089c9c126",
+  "evidence_bundle": {
+    "bytes": 166535,
+    "path": "reports/local-study/qwen7b-evidence/bundle.json",
+    "sha256": "d6899a4dff1b7c5180c006b38f9441f916eb7bda2f59df21df1f64784e8f1417"
+  },
+  "evidence_kind": "verified_native_worker_selection_preflight",
+  "excluded_overlength_samples": 1,
+  "held_out_used": false,
+  "limitation": "Eligibility and exact realised order only; this is neither a trained checkpoint nor a measured quality result.",
+  "max_sequence_tokens": 512,
+  "model_weights_allocated": false,
+  "optimiser_created": false,
+  "planned_updates": 48,
+  "production_eligible": false,
+  "request": {
+    "bytes": 1065,
+    "path": "reports/local-study/native-full-composed-seed2718-request.json",
+    "sha256": "e938665812dcd439d470c8951ccd635b29aec521b88ea65741d2ba9ecdc527b1"
+  },
+  "schema_version": 1,
+  "selected_unique_samples": 17,
+  "selection": {
+    "accepted": {
+      "12106a8bfb9356904186b558fd37127f1ee55e650cb57a6e843d8983be952bd0": {
+        "assistant_tokens_supervised": 239,
+        "content": "complete_sequence",
+        "eos_supervised": true,
+        "original_input_tokens": 473,
+        "original_tokens_including_eos": 474,
+        "retained_input_tokens": 473,
+        "selected_for_updates": true,
+        "source_id": "private-intervals-v1",
+        "supervised_tokens": 240,
+        "task_id": "intervals.coverage",
+        "teacher_id": "qwen-coder-7b-q4_k_m",
+        "window": null
+      },
+      "21748f9f3a9dec33f5c19fb7179ecdada908a2b27e6486b333f8a379f57d93bb": {
+        "assistant_tokens_supervised": 101,
+        "content": "complete_sequence",
+        "eos_supervised": true,
+        "original_input_tokens": 332,
+        "original_tokens_including_eos": 333,
+        "retained_input_tokens": 332,
+        "selected_for_updates": true,
+        "source_id": "private-paths-v1",
+        "supervised_tokens": 102,
+        "task_id": "paths.basename",
+        "teacher_id": "qwen-coder-7b-q4_k_m",
+        "window": null
+      },
+      "279b6d10fb8f3e4f1d9e8b547e1207c9c65214b57d0270ab76e419d02e5165d2": {
+        "assistant_tokens_supervised": 130,
+        "content": "complete_sequence",
+        "eos_supervised": true,
+        "original_input_tokens": 351,
+        "original_tokens_including_eos": 352,
+        "retained_input_tokens": 351,
+        "selected_for_updates": true,
+        "source_id": "private-bits-v1",
+        "supervised_tokens": 131,
+        "task_id": "bits.hamming",
+        "teacher_id": "qwen-coder-7b-q4_k_m",
+        "window": null
+      },
+      "2d22b678d0bb8aadd704350c150da710a8be0fe59dc30172accfbbb0b25f792b": {
+        "assistant_tokens_supervised": 89,
+        "content": "complete_sequence",
+        "eos_supervised": true,
+        "original_input_tokens": 326,
+        "original_tokens_including_eos": 327,
+        "retained_input_tokens": 326,
+        "selected_for_updates": true,
+        "source_id": "private-ledger-v1",
+        "supervised_tokens": 90,
+        "task_id": "ledger.sum",
+        "teacher_id": "qwen-coder-7b-q4_k_m",
+        "window": null
+      },
+      "5b46a85ec5f9398290c023c26ef8cb662e6e4d19da293a71b2bcee316514f6b7": {
+        "assistant_tokens_supervised": 181,
+        "content": "complete_sequence",
+        "eos_supervised": true,
+        "original_input_tokens": 419,
+        "original_tokens_including_eos": 420,
+        "retained_input_tokens": 419,
+        "selected_for_updates": true,
+        "source_id": "private-matrices-v1",
+        "supervised_tokens": 182,
+        "task_id": "matrices.diagonals",
+        "teacher_id": "qwen-coder-7b-q4_k_m",
+        "window": null
+      },
+      "5dedbab9841301331ad4a8a4ef9d893e994c7abd27be5b97777071860da49a35": {
+        "assistant_tokens_supervised": 77,
+        "content": "complete_sequence",
+        "eos_supervised": true,
+        "original_input_tokens": 310,
+        "original_tokens_including_eos": 311,
+        "retained_input_tokens": 310,
+        "selected_for_updates": true,
+        "source_id": "private-bits-v1",
+        "supervised_tokens": 78,
+        "task_id": "bits.popcount",
+        "teacher_id": "qwen-coder-7b-q4_k_m",
+        "window": null
+      },
+      "60cad86431ce13f24f3525d348b75936b4659f22832705f61513e6920d3c0913": {
+        "assistant_tokens_supervised": 175,
+        "content": "complete_sequence",
+        "eos_supervised": true,
+        "original_input_tokens": 400,
+        "original_tokens_including_eos": 401,
+        "retained_input_tokens": 400,
+        "selected_for_updates": true,
+        "source_id": "private-validation-v1",
+        "supervised_tokens": 176,
+        "task_id": "validation.brackets",
+        "teacher_id": "qwen-coder-7b-q4_k_m",
+        "window": null
+      },
+      "6f54a188344a4c4834c5a9bfe0969e33003547ea371fbf2ba03a4e5fd88d6e07": {
+        "assistant_tokens_supervised": 184,
+        "content": "complete_sequence",
+        "eos_supervised": true,
+        "original_input_tokens": 408,
+        "original_tokens_including_eos": 409,
+        "retained_input_tokens": 408,
+        "selected_for_updates": true,
+        "source_id": "private-ledger-v1",
+        "supervised_tokens": 185,
+        "task_id": "ledger.bounds",
+        "teacher_id": "qwen-coder-7b-q4_k_m",
+        "window": null
+      },
+      "83cc42aa11a66d768d6f952f81812adff3032a39e39b89bfa188e7270ab75a62": {
+        "assistant_tokens_supervised": 187,
+        "content": "complete_sequence",
+        "eos_supervised": true,
+        "original_input_tokens": 423,
+        "original_tokens_including_eos": 424,
+        "retained_input_tokens": 423,
+        "selected_for_updates": true,
+        "source_id": "private-calendar-v1",
+        "supervised_tokens": 188,
+        "task_id": "calendar.month_days",
+        "teacher_id": "qwen-coder-7b-q4_k_m",
+        "window": null
+      },
+      "9a709fd0afa880d7d61490074636b6a836aa05da5d9a338a46aa8aca31efdce4": {
+        "assistant_tokens_supervised": 181,
+        "content": "complete_sequence",
+        "eos_supervised": true,
+        "original_input_tokens": 422,
+        "original_tokens_including_eos": 423,
+        "retained_input_tokens": 422,
+        "selected_for_updates": true,
+        "source_id": "private-intervals-v1",
+        "supervised_tokens": 182,
+        "task_id": "intervals.peak",
+        "teacher_id": "qwen-coder-7b-q4_k_m",
+        "window": null
+      },
+      "9f34cf373961913a3cf1067f1f2a71e0bef8368e1557d10e998cc099a00fab71": {
+        "assistant_tokens_supervised": 213,
+        "content": "complete_sequence",
+        "eos_supervised": true,
+        "original_input_tokens": 442,
+        "original_tokens_including_eos": 443,
+        "retained_input_tokens": 442,
+        "selected_for_updates": true,
+        "source_id": "private-stock-v1",
+        "supervised_tokens": 214,
+        "task_id": "stock.mode",
+        "teacher_id": "qwen-coder-7b-q4_k_m",
+        "window": null
+      },
+      "b385fb6bb3931d6b39a919d387b625b8e5c0db4506f12df96b46489b5f340498": {
+        "assistant_tokens_supervised": 159,
+        "content": "complete_sequence",
+        "eos_supervised": true,
+        "original_input_tokens": 406,
+        "original_tokens_including_eos": 407,
+        "retained_input_tokens": 406,
+        "selected_for_updates": true,
+        "source_id": "private-matrices-v1",
+        "supervised_tokens": 160,
+        "task_id": "matrices.rotate",
+        "teacher_id": "qwen-coder-7b-q4_k_m",
+        "window": null
+      },
+      "be57ee99f53e14a44a210dee5a0a227fbee04ea80f1c914f14447c3db087cded": {
+        "assistant_tokens_supervised": 125,
+        "content": "complete_sequence",
+        "eos_supervised": true,
+        "original_input_tokens": 390,
+        "original_tokens_including_eos": 391,
+        "retained_input_tokens": 390,
+        "selected_for_updates": true,
+        "source_id": "private-graph-v1",
+        "supervised_tokens": 126,
+        "task_id": "graph.indegrees",
+        "teacher_id": "qwen-coder-7b-q4_k_m",
+        "window": null
+      },
+      "d34031fab7990f9d5bb1ac0465e3173de67d17f95496ed535260f239f3c4bc90": {
+        "assistant_tokens_supervised": 92,
+        "content": "complete_sequence",
+        "eos_supervised": true,
+        "original_input_tokens": 331,
+        "original_tokens_including_eos": 332,
+        "retained_input_tokens": 331,
+        "selected_for_updates": true,
+        "source_id": "private-calendar-v1",
+        "supervised_tokens": 93,
+        "task_id": "calendar.leap",
+        "teacher_id": "qwen-coder-7b-q4_k_m",
+        "window": null
+      },
+      "e89aa62fc9a189c19a13370ba9410f99991e685167f68b4f7ce97f6a4c78f965": {
+        "assistant_tokens_supervised": 125,
+        "content": "complete_sequence",
+        "eos_supervised": true,
+        "original_input_tokens": 363,
+        "original_tokens_including_eos": 364,
+        "retained_input_tokens": 363,
+        "selected_for_updates": true,
+        "source_id": "private-ledger-v1",
+        "supervised_tokens": 126,
+        "task_id": "ledger.prefix",
+        "teacher_id": "qwen-coder-7b-q4_k_m",
+        "window": null
+      },
+      "f23b74be49ae4fb9f5a42d58f33244ef0c157aa0e4afe342a565baa7e7493c91": {
+        "assistant_tokens_supervised": 116,
+        "content": "complete_sequence",
+        "eos_supervised": true,
+        "original_input_tokens": 371,
+        "original_tokens_including_eos": 372,
+        "retained_input_tokens": 371,
+        "selected_for_updates": true,
+        "source_id": "private-search-v1",
+        "supervised_tokens": 117,
+        "task_id": "search.runs",
+        "teacher_id": "qwen-coder-7b-q4_k_m",
+        "window": null
+      },
+      "ff06039fd8278f904a9e03151a5b46d0452d3c207474b4da9dd4b770fe9d6d26": {
+        "assistant_tokens_supervised": 65,
+        "content": "complete_sequence",
+        "eos_supervised": true,
+        "original_input_tokens": 291,
+        "original_tokens_including_eos": 292,
+        "retained_input_tokens": 291,
+        "selected_for_updates": true,
+        "source_id": "private-text-v1",
+        "supervised_tokens": 66,
+        "task_id": "text.lower_trim",
+        "teacher_id": "qwen-coder-7b-q4_k_m",
+        "window": null
+      }
+    },
+    "excluded_overlength": {
+      "a8205f0759f126c3bd851691f7b45cbd3b043c2ba4b2bdf4f534398fe11795b5": {
+        "assistant_tokens_supervised": 302,
+        "content": "complete_sequence",
+        "eos_supervised": true,
+        "original_input_tokens": 540,
+        "original_tokens_including_eos": 541,
+        "reason": "distillation sequence exceeds its frozen token cap",
+        "retained_input_tokens": 540,
+        "source_id": "private-calendar-v1",
+        "supervised_tokens": 303,
+        "task_id": "calendar.ordinal",
+        "teacher_id": "qwen-coder-7b-q4_k_m",
+        "window": null
+      }
+    },
+    "order": [
+      {
+        "sample_id": "6f54a188344a4c4834c5a9bfe0969e33003547ea371fbf2ba03a4e5fd88d6e07",
+        "stage": 0,
+        "teacher_id": "qwen-coder-7b-q4_k_m"
+      },
+      {
+        "sample_id": "5b46a85ec5f9398290c023c26ef8cb662e6e4d19da293a71b2bcee316514f6b7",
+        "stage": 0,
+        "teacher_id": "qwen-coder-7b-q4_k_m"
+      },
+      {
+        "sample_id": "d34031fab7990f9d5bb1ac0465e3173de67d17f95496ed535260f239f3c4bc90",
+        "stage": 0,
+        "teacher_id": "qwen-coder-7b-q4_k_m"
+      },
+      {
+        "sample_id": "12106a8bfb9356904186b558fd37127f1ee55e650cb57a6e843d8983be952bd0",
+        "stage": 0,
+        "teacher_id": "qwen-coder-7b-q4_k_m"
+      },
+      {
+        "sample_id": "21748f9f3a9dec33f5c19fb7179ecdada908a2b27e6486b333f8a379f57d93bb",
+        "stage": 0,
+        "teacher_id": "qwen-coder-7b-q4_k_m"
+      },
+      {
+        "sample_id": "2d22b678d0bb8aadd704350c150da710a8be0fe59dc30172accfbbb0b25f792b",
+        "stage": 0,
+        "teacher_id": "qwen-coder-7b-q4_k_m"
+      },
+      {
+        "sample_id": "e89aa62fc9a189c19a13370ba9410f99991e685167f68b4f7ce97f6a4c78f965",
+        "stage": 0,
+        "teacher_id": "qwen-coder-7b-q4_k_m"
+      },
+      {
+        "sample_id": "ff06039fd8278f904a9e03151a5b46d0452d3c207474b4da9dd4b770fe9d6d26",
+        "stage": 0,
+        "teacher_id": "qwen-coder-7b-q4_k_m"
+      },
+      {
+        "sample_id": "5dedbab9841301331ad4a8a4ef9d893e994c7abd27be5b97777071860da49a35",
+        "stage": 0,
+        "teacher_id": "qwen-coder-7b-q4_k_m"
+      },
+      {
+        "sample_id": "279b6d10fb8f3e4f1d9e8b547e1207c9c65214b57d0270ab76e419d02e5165d2",
+        "stage": 0,
+        "teacher_id": "qwen-coder-7b-q4_k_m"
+      },
+      {
+        "sample_id": "9f34cf373961913a3cf1067f1f2a71e0bef8368e1557d10e998cc099a00fab71",
+        "stage": 0,
+        "teacher_id": "qwen-coder-7b-q4_k_m"
+      },
+      {
+        "sample_id": "f23b74be49ae4fb9f5a42d58f33244ef0c157aa0e4afe342a565baa7e7493c91",
+        "stage": 0,
+        "teacher_id": "qwen-coder-7b-q4_k_m"
+      },
+      {
+        "sample_id": "be57ee99f53e14a44a210dee5a0a227fbee04ea80f1c914f14447c3db087cded",
+        "stage": 0,
+        "teacher_id": "qwen-coder-7b-q4_k_m"
+      },
+      {
+        "sample_id": "b385fb6bb3931d6b39a919d387b625b8e5c0db4506f12df96b46489b5f340498",
+        "stage": 0,
+        "teacher_id": "qwen-coder-7b-q4_k_m"
+      },
+      {
+        "sample_id": "83cc42aa11a66d768d6f952f81812adff3032a39e39b89bfa188e7270ab75a62",
+        "stage": 0,
+        "teacher_id": "qwen-coder-7b-q4_k_m"
+      },
+      {
+        "sample_id": "60cad86431ce13f24f3525d348b75936b4659f22832705f61513e6920d3c0913",
+        "stage": 0,
+        "teacher_id": "qwen-coder-7b-q4_k_m"
+      },
+      {
+        "sample_id": "9a709fd0afa880d7d61490074636b6a836aa05da5d9a338a46aa8aca31efdce4",
+        "stage": 0,
+        "teacher_id": "qwen-coder-7b-q4_k_m"
+      },
+      {
+        "sample_id": "6f54a188344a4c4834c5a9bfe0969e33003547ea371fbf2ba03a4e5fd88d6e07",
+        "stage": 0,
+        "teacher_id": "qwen-coder-7b-q4_k_m"
+      },
+      {
+        "sample_id": "5b46a85ec5f9398290c023c26ef8cb662e6e4d19da293a71b2bcee316514f6b7",
+        "stage": 0,
+        "teacher_id": "qwen-coder-7b-q4_k_m"
+      },
+      {
+        "sample_id": "d34031fab7990f9d5bb1ac0465e3173de67d17f95496ed535260f239f3c4bc90",
+        "stage": 0,
+        "teacher_id": "qwen-coder-7b-q4_k_m"
+      },
+      {
+        "sample_id": "12106a8bfb9356904186b558fd37127f1ee55e650cb57a6e843d8983be952bd0",
+        "stage": 0,
+        "teacher_id": "qwen-coder-7b-q4_k_m"
+      },
+      {
+        "sample_id": "21748f9f3a9dec33f5c19fb7179ecdada908a2b27e6486b333f8a379f57d93bb",
+        "stage": 0,
+        "teacher_id": "qwen-coder-7b-q4_k_m"
+      },
+      {
+        "sample_id": "2d22b678d0bb8aadd704350c150da710a8be0fe59dc30172accfbbb0b25f792b",
+        "stage": 0,
+        "teacher_id": "qwen-coder-7b-q4_k_m"
+      },
+      {
+        "sample_id": "e89aa62fc9a189c19a13370ba9410f99991e685167f68b4f7ce97f6a4c78f965",
+        "stage": 0,
+        "teacher_id": "qwen-coder-7b-q4_k_m"
+      },
+      {
+        "sample_id": "ff06039fd8278f904a9e03151a5b46d0452d3c207474b4da9dd4b770fe9d6d26",
+        "stage": 0,
+        "teacher_id": "qwen-coder-7b-q4_k_m"
+      },
+      {
+        "sample_id": "5dedbab9841301331ad4a8a4ef9d893e994c7abd27be5b97777071860da49a35",
+        "stage": 0,
+        "teacher_id": "qwen-coder-7b-q4_k_m"
+      },
+      {
+        "sample_id": "279b6d10fb8f3e4f1d9e8b547e1207c9c65214b57d0270ab76e419d02e5165d2",
+        "stage": 0,
+        "teacher_id": "qwen-coder-7b-q4_k_m"
+      },
+      {
+        "sample_id": "9f34cf373961913a3cf1067f1f2a71e0bef8368e1557d10e998cc099a00fab71",
+        "stage": 0,
+        "teacher_id": "qwen-coder-7b-q4_k_m"
+      },
+      {
+        "sample_id": "f23b74be49ae4fb9f5a42d58f33244ef0c157aa0e4afe342a565baa7e7493c91",
+        "stage": 0,
+        "teacher_id": "qwen-coder-7b-q4_k_m"
+      },
+      {
+        "sample_id": "be57ee99f53e14a44a210dee5a0a227fbee04ea80f1c914f14447c3db087cded",
+        "stage": 0,
+        "teacher_id": "qwen-coder-7b-q4_k_m"
+      },
+      {
+        "sample_id": "b385fb6bb3931d6b39a919d387b625b8e5c0db4506f12df96b46489b5f340498",
+        "stage": 0,
+        "teacher_id": "qwen-coder-7b-q4_k_m"
+      },
+      {
+        "sample_id": "83cc42aa11a66d768d6f952f81812adff3032a39e39b89bfa188e7270ab75a62",
+        "stage": 0,
+        "teacher_id": "qwen-coder-7b-q4_k_m"
+      },
+      {
+        "sample_id": "60cad86431ce13f24f3525d348b75936b4659f22832705f61513e6920d3c0913",
+        "stage": 0,
+        "teacher_id": "qwen-coder-7b-q4_k_m"
+      },
+      {
+        "sample_id": "9a709fd0afa880d7d61490074636b6a836aa05da5d9a338a46aa8aca31efdce4",
+        "stage": 0,
+        "teacher_id": "qwen-coder-7b-q4_k_m"
+      },
+      {
+        "sample_id": "6f54a188344a4c4834c5a9bfe0969e33003547ea371fbf2ba03a4e5fd88d6e07",
+        "stage": 0,
+        "teacher_id": "qwen-coder-7b-q4_k_m"
+      },
+      {
+        "sample_id": "5b46a85ec5f9398290c023c26ef8cb662e6e4d19da293a71b2bcee316514f6b7",
+        "stage": 0,
+        "teacher_id": "qwen-coder-7b-q4_k_m"
+      },
+      {
+        "sample_id": "d34031fab7990f9d5bb1ac0465e3173de67d17f95496ed535260f239f3c4bc90",
+        "stage": 0,
+        "teacher_id": "qwen-coder-7b-q4_k_m"
+      },
+      {
+        "sample_id": "12106a8bfb9356904186b558fd37127f1ee55e650cb57a6e843d8983be952bd0",
+        "stage": 0,
+        "teacher_id": "qwen-coder-7b-q4_k_m"
+      },
+      {
+        "sample_id": "21748f9f3a9dec33f5c19fb7179ecdada908a2b27e6486b333f8a379f57d93bb",
+        "stage": 0,
+        "teacher_id": "qwen-coder-7b-q4_k_m"
+      },
+      {
+        "sample_id": "2d22b678d0bb8aadd704350c150da710a8be0fe59dc30172accfbbb0b25f792b",
+        "stage": 0,
+        "teacher_id": "qwen-coder-7b-q4_k_m"
+      },
+      {
+        "sample_id": "e89aa62fc9a189c19a13370ba9410f99991e685167f68b4f7ce97f6a4c78f965",
+        "stage": 0,
+        "teacher_id": "qwen-coder-7b-q4_k_m"
+      },
+      {
+        "sample_id": "ff06039fd8278f904a9e03151a5b46d0452d3c207474b4da9dd4b770fe9d6d26",
+        "stage": 0,
+        "teacher_id": "qwen-coder-7b-q4_k_m"
+      },
+      {
+        "sample_id": "5dedbab9841301331ad4a8a4ef9d893e994c7abd27be5b97777071860da49a35",
+        "stage": 0,
+        "teacher_id": "qwen-coder-7b-q4_k_m"
+      },
+      {
+        "sample_id": "279b6d10fb8f3e4f1d9e8b547e1207c9c65214b57d0270ab76e419d02e5165d2",
+        "stage": 0,
+        "teacher_id": "qwen-coder-7b-q4_k_m"
+      },
+      {
+        "sample_id": "9f34cf373961913a3cf1067f1f2a71e0bef8368e1557d10e998cc099a00fab71",
+        "stage": 0,
+        "teacher_id": "qwen-coder-7b-q4_k_m"
+      },
+      {
+        "sample_id": "f23b74be49ae4fb9f5a42d58f33244ef0c157aa0e4afe342a565baa7e7493c91",
+        "stage": 0,
+        "teacher_id": "qwen-coder-7b-q4_k_m"
+      },
+      {
+        "sample_id": "be57ee99f53e14a44a210dee5a0a227fbee04ea80f1c914f14447c3db087cded",
+        "stage": 0,
+        "teacher_id": "qwen-coder-7b-q4_k_m"
+      },
+      {
+        "sample_id": "b385fb6bb3931d6b39a919d387b625b8e5c0db4506f12df96b46489b5f340498",
+        "stage": 0,
+        "teacher_id": "qwen-coder-7b-q4_k_m"
+      }
+    ]
+  },
+  "selection_sha256": "771a6b861cddca27688d62dd06ed9af5f7b03cb6e25c72973a9e4616a00c4c74",
+  "sequence_policy": "reject_overlength",
+  "teacher_targets_acquired": false,
+  "tokeniser": {
+    "bytes": 7031645,
+    "path": "offline_bundle/base/tokenizer.json",
+    "sha256": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539"
+  }
+}

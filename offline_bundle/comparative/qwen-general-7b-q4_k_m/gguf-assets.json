@@ -1,0 +1,17 @@
+{
+  "model_id": "bartowski/Qwen2.5-7B-Instruct-GGUF",
+  "revision": "8911e8a47f92bac19d6f5c64a2e2095bd2f7d031",
+  "licence": "apache-2.0",
+  "files": {
+    "Qwen2.5-7B-Instruct-Q4_K_M.gguf": "65b8fcd92af6b4fefa935c625d1ac27ea29dcb6ee14589c55a8f115ceaaa1423",
+    "README.md": "19d387dea35bfd70233213d9eb3212026fb7e0a93aed9a982fd094458706f76c",
+    "source/LICENSE": "832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e",
+    "source/README.md": "f366f33bbf6bcadbb7d87f0a21a7b65584a56b8d58b0743c77c88bee625b93a6",
+    "source/config.json": "7463bb0ea78315365e6c6b74de4e73bbcc8359dfb0c5a737584e077d42c0b03c",
+    "source/generation_config.json": "3a8f9087e486054c8a4a08dae2e5a3ba62e23da212b5b8c08bc42cb983c3459f",
+    "source/merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+    "source/tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+    "source/tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+    "source/vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+  }
+}

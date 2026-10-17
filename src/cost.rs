@@ -209,7 +209,7 @@ fn completed_plan(
                     "completed acquisition differs from immutable plan"
                 );
                 if record.origin == "real_provider" {
-                    crate::fleet::parse_response(&record.response)?;
+                    crate::fleet::parse_recording(&record)?;
                     businesses.insert(record.business_id);
                     successes.push(attempt_id);
                 }
@@ -558,6 +558,8 @@ mod tests {
     use super::*;
     fn row() -> CostRow {
         CostRow {
+            reserved_tokens: None,
+            token_upper_bound: None,
             attempt_id: "attempt".into(),
             round_id: "round".into(),
             task_id: "task".into(),

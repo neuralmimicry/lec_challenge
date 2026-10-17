@@ -1,0 +1,522 @@
+{
+  "schema_version": 1,
+  "evidence_kind": "frozen_local_study_checkpoint_evaluation",
+  "frozen_unix_ms": 1792182468091,
+  "checkpoint": {
+    "checkpoint_id": "ae6e22bf858359186e261fd41d5c180cb020bf79d29fccc2dbb611ea12dc4870",
+    "tensor": {
+      "path": "reports/local-study/explore/round-001/study/quick/arms/arm-2793b743b590917d497c4794/checkpoint/adapter.safetensors",
+      "sha256": "ae6e22bf858359186e261fd41d5c180cb020bf79d29fccc2dbb611ea12dc4870",
+      "bytes": 551352
+    },
+    "manifest": {
+      "path": "reports/local-study/explore/round-001/study/quick/arms/arm-2793b743b590917d497c4794/checkpoint/manifest.json",
+      "sha256": "dc0eb6a7b86ee15857f1cd7f9351b40d7309a6be6d3d20c857e5ded29d3b1ee7",
+      "bytes": 15419
+    },
+    "base_assets": {
+      "path": "offline_bundle/base/assets.json",
+      "sha256": "54304e7f41519a4196674cba5e86593802f852b2b47882d6c19706f85f303ad4",
+      "bytes": 788
+    },
+    "tokenizer": {
+      "path": "offline_bundle/base/tokenizer.json",
+      "sha256": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+      "bytes": 7031645
+    },
+    "architecture": "conventional_qwen_lora"
+  },
+  "runtime": {
+    "device": "cpu",
+    "dtype": "f32"
+  },
+  "engine": {
+    "path": "state/engines/3f348bdfa71c49df5b5d0b7581ae9ad3114645127f99abbec9e4aac1064563bd/lec-distil",
+    "sha256": "3f348bdfa71c49df5b5d0b7581ae9ad3114645127f99abbec9e4aac1064563bd",
+    "bytes": 46867184
+  },
+  "backend_artefacts": [],
+  "split": "development",
+  "tasks": [
+    {
+      "id": "money.parse",
+      "source_id": "private-money-v1",
+      "lineage_id": "local-contract-pack-12",
+      "split": "development",
+      "specification": "Input is an ASCII decimal monetary string. Accept optional leading minus, one or more digits, and optional dot followed by exactly two digits. Return signed cents, or null for invalid syntax; magnitudes <=1000000 pounds.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+      "specification_sha256": "d2e4ee5432fb3996c6eaa9004d032f82e2ebfcb2f8df8fd10fd99bfbced5ddef",
+      "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+      "public_examples": [
+        {
+          "input": "-12.30",
+          "expected": -1230
+        }
+      ],
+      "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+      "licence": "Apache-2.0"
+    },
+    {
+      "id": "money.format",
+      "source_id": "private-money-v1",
+      "lineage_id": "local-contract-pack-12",
+      "split": "development",
+      "specification": "Input is signed cents, magnitude <=100000000. Return pounds with optional minus and exactly two fractional digits.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+      "specification_sha256": "9213c0114b6d1a6399d5db8ec1a7dcf0f9087c2d65b589e583ee9b1cba646aa9",
+      "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+      "public_examples": [
+        {
+          "input": -1230,
+          "expected": "-12.30"
+        }
+      ],
+      "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+      "licence": "Apache-2.0"
+    },
+    {
+      "id": "money.split",
+      "source_id": "private-money-v1",
+      "lineage_id": "local-contract-pack-12",
+      "split": "development",
+      "specification": "Input [cents,n] has nonnegative cents and n>=1. Split into n integer shares differing by at most one, with larger shares first. The number of shares is at most 64.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+      "specification_sha256": "639498c83f5e053773149696cb44aea438f77b20c7b0e571d728085fde4db87b",
+      "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+      "public_examples": [
+        {
+          "input": [
+            10,
+            3
+          ],
+          "expected": [
+            4,
+            3,
+            3
+          ]
+        }
+      ],
+      "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+      "licence": "Apache-2.0"
+    },
+    {
+      "id": "money.basket",
+      "source_id": "private-money-v1",
+      "lineage_id": "local-contract-pack-12",
+      "split": "development",
+      "specification": "Input is an array of [unit_price_cents,quantity], both nonnegative integers. Return total cents without tax.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+      "specification_sha256": "87f50e8f3a163aaec0042d723e8da46a44c49d75746e0fbba18ebe04ceba4a08",
+      "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+      "public_examples": [
+        {
+          "input": [
+            [
+              120,
+              2
+            ],
+            [
+              99,
+              3
+            ]
+          ],
+          "expected": 537
+        }
+      ],
+      "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+      "licence": "Apache-2.0"
+    },
+    {
+      "id": "dispatch.finish_order",
+      "source_id": "private-dispatch-v1",
+      "lineage_id": "local-contract-pack-13",
+      "split": "development",
+      "specification": "Input is an array of [arrival,duration], nonnegative integers. A single server processes input order, starting each job at max(previous finish,arrival). Return finish times.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+      "specification_sha256": "bd65bbcd2943471a0fa07872b15464820b0d1c4b37db971d13f3b63850727773",
+      "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+      "public_examples": [
+        {
+          "input": [
+            [
+              0,
+              3
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              8,
+              1
+            ]
+          ],
+          "expected": [
+            3,
+            5,
+            9
+          ]
+        }
+      ],
+      "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+      "licence": "Apache-2.0"
+    },
+    {
+      "id": "dispatch.waiting",
+      "source_id": "private-dispatch-v1",
+      "lineage_id": "local-contract-pack-13",
+      "split": "development",
+      "specification": "Input is an array of [arrival,duration] processed in input order by one server, initially free at zero. Return total time jobs wait before service.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+      "specification_sha256": "779f79aab8092a883c5d3bb26675a6b8228a3ca11fe3e11a31e0316d053d0563",
+      "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+      "public_examples": [
+        {
+          "input": [
+            [
+              0,
+              3
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              8,
+              1
+            ]
+          ],
+          "expected": 2
+        }
+      ],
+      "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+      "licence": "Apache-2.0"
+    },
+    {
+      "id": "dispatch.round_robin",
+      "source_id": "private-dispatch-v1",
+      "lineage_id": "local-contract-pack-13",
+      "split": "development",
+      "specification": "Input {jobs,quantum} has nonnegative integer work amounts and positive quantum. Cycle job indices, giving up to quantum work each turn; return indices in order of completion, initially zero-work jobs first in index order.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+      "specification_sha256": "e445e145f0405de8c854262451687ad1958cdfd2793c0f20d7b13efdf5c0a5fa",
+      "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+      "public_examples": [
+        {
+          "input": {
+            "jobs": [
+              3,
+              1,
+              2
+            ],
+            "quantum": 2
+          },
+          "expected": [
+            1,
+            2,
+            0
+          ]
+        }
+      ],
+      "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+      "licence": "Apache-2.0"
+    },
+    {
+      "id": "dispatch.priority",
+      "source_id": "private-dispatch-v1",
+      "lineage_id": "local-contract-pack-13",
+      "split": "development",
+      "specification": "Input is an array of [priority,id] integer pairs with unique ids. Return ids sorted by decreasing priority, with increasing id on ties.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+      "specification_sha256": "fe12d97428801ef000ddf3a459ad82ad8f7812a5fb888ab3e6b35444d33a7856",
+      "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+      "public_examples": [
+        {
+          "input": [
+            [
+              2,
+              7
+            ],
+            [
+              3,
+              8
+            ],
+            [
+              2,
+              1
+            ]
+          ],
+          "expected": [
+            8,
+            1,
+            7
+          ]
+        }
+      ],
+      "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+      "licence": "Apache-2.0"
+    },
+    {
+      "id": "encoding.hex_encode",
+      "source_id": "private-encoding-v1",
+      "lineage_id": "local-contract-pack-14",
+      "split": "development",
+      "specification": "Input is an array of bytes (integers 0..255). Return concatenated two-digit lowercase hexadecimal.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+      "specification_sha256": "dc43dce8ef138a6d990fb8d5450f3fed524046e2e019c18509d025f22b594956",
+      "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+      "public_examples": [
+        {
+          "input": [
+            0,
+            15,
+            255
+          ],
+          "expected": "000fff"
+        }
+      ],
+      "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+      "licence": "Apache-2.0"
+    },
+    {
+      "id": "encoding.hex_decode",
+      "source_id": "private-encoding-v1",
+      "lineage_id": "local-contract-pack-14",
+      "split": "development",
+      "specification": "Input is an ASCII string. Decode even-length hexadecimal accepting upper/lowercase; return byte array, or null for invalid digits or odd length. The returned array may contain up to 128 items.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+      "specification_sha256": "535cec08e7ca750ff6426c55df5e10382b5d98dd2b972889c664a544c49c2a87",
+      "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+      "public_examples": [
+        {
+          "input": "00aF",
+          "expected": [
+            0,
+            175
+          ]
+        }
+      ],
+      "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+      "licence": "Apache-2.0"
+    },
+    {
+      "id": "encoding.caesar",
+      "source_id": "private-encoding-v1",
+      "lineage_id": "local-contract-pack-14",
+      "split": "development",
+      "specification": "Input {text,shift} has ASCII text and integer shift. Rotate lowercase a..z only modulo 26; preserve all other characters.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+      "specification_sha256": "6d5a2e4829f195b5e54e08b45300ecba1a3b178763b2ee6e7a9c90c50c633efa",
+      "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+      "public_examples": [
+        {
+          "input": {
+            "shift": 3,
+            "text": "xyz A!"
+          },
+          "expected": "abc A!"
+        }
+      ],
+      "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+      "licence": "Apache-2.0"
+    },
+    {
+      "id": "encoding.rot13",
+      "source_id": "private-encoding-v1",
+      "lineage_id": "local-contract-pack-14",
+      "split": "development",
+      "specification": "Input is an ASCII string. Apply ROT13 to upper/lowercase letters and preserve other characters.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+      "specification_sha256": "56794b6c25031b0931d378f8f3955bc2d10c4ef04da0be851795e2ca9a832cfa",
+      "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+      "public_examples": [
+        {
+          "input": "Hello, Z!",
+          "expected": "Uryyb, M!"
+        }
+      ],
+      "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+      "licence": "Apache-2.0"
+    },
+    {
+      "id": "tables.sort_rows",
+      "source_id": "private-tables-v1",
+      "lineage_id": "local-contract-pack-15",
+      "split": "development",
+      "specification": "Input is an array of [key,value] integer rows. Sort ascending by key and then value; keep duplicates.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+      "specification_sha256": "df1fea127338d7c1399d9b922559c0782ff3fec80cb89b6d508a51249e019c1c",
+      "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+      "public_examples": [
+        {
+          "input": [
+            [
+              2,
+              9
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              2,
+              3
+            ]
+          ],
+          "expected": [
+            [
+              1,
+              4
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              2,
+              9
+            ]
+          ]
+        }
+      ],
+      "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+      "licence": "Apache-2.0"
+    },
+    {
+      "id": "tables.last_by_key",
+      "source_id": "private-tables-v1",
+      "lineage_id": "local-contract-pack-15",
+      "split": "development",
+      "specification": "Input is an array of [key,value] integer rows. Keep the last value per key and return [key,value] rows sorted by key.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+      "specification_sha256": "60d2667ffa0dcdb540f2de2f41533a9d0b6c027ee25be4adb993cda6f67122f7",
+      "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+      "public_examples": [
+        {
+          "input": [
+            [
+              2,
+              9
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              2,
+              3
+            ]
+          ],
+          "expected": [
+            [
+              1,
+              4
+            ],
+            [
+              2,
+              3
+            ]
+          ]
+        }
+      ],
+      "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+      "licence": "Apache-2.0"
+    },
+    {
+      "id": "tables.group_sums",
+      "source_id": "private-tables-v1",
+      "lineage_id": "local-contract-pack-15",
+      "split": "development",
+      "specification": "Input is an array of [key,value] integer rows. Sum values per key and return rows sorted by key.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+      "specification_sha256": "783b75a94404c8e383623a9281b851d2ccf76f4a4e9832001b8703de0bf64172",
+      "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+      "public_examples": [
+        {
+          "input": [
+            [
+              2,
+              9
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              2,
+              3
+            ]
+          ],
+          "expected": [
+            [
+              1,
+              4
+            ],
+            [
+              2,
+              12
+            ]
+          ]
+        }
+      ],
+      "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+      "licence": "Apache-2.0"
+    },
+    {
+      "id": "tables.inner_join",
+      "source_id": "private-tables-v1",
+      "lineage_id": "local-contract-pack-15",
+      "split": "development",
+      "specification": "Input [left,right] has arrays of [key,value] integer rows, each side with unique keys. Return [key,left_value,right_value] for common keys in ascending key order.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+      "specification_sha256": "369ef237ff250179b0b3e3c7af051af8aebc0329b6494d33af5f436c827ac699",
+      "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+      "public_examples": [
+        {
+          "input": [
+            [
+              [
+                2,
+                9
+              ],
+              [
+                1,
+                4
+              ]
+            ],
+            [
+              [
+                2,
+                3
+              ],
+              [
+                3,
+                8
+              ]
+            ]
+          ],
+          "expected": [
+            [
+              2,
+              9,
+              3
+            ]
+          ]
+        }
+      ],
+      "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+      "licence": "Apache-2.0"
+    }
+  ],
+  "seed": 1729,
+  "max_new_tokens": 512,
+  "temperature": 0.2,
+  "top_p": 0.95,
+  "timeout_seconds": 120,
+  "maximum_concurrent_graders": 4,
+  "sandbox": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/explore/round-001/study/quick/arms/arm-2793b743b590917d497c4794/development/sandbox"
+  },
+  "sandbox_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "sandbox_policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "sandbox_preflight": {
+    "path": "reports/local-study/explore/round-001/study/quick/arms/arm-2793b743b590917d497c4794/development/sandbox-preflight.json",
+    "sha256": "99241f4c2024bfb6914170472245209de36015dd5233a60c1c1fb2e44f75ebdd",
+    "bytes": 1334
+  },
+  "production_eligible": false
+}

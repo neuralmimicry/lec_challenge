@@ -1,0 +1,106 @@
+Hub hashing qwen2.5-coder-7b-instruct-q4_k_m.gguf: 0/4683073536 bytes, 0.00 MiB/s, ETA unknown (publisher checksum pending)
+Hub hashing qwen2.5-coder-7b-instruct-q4_k_m.gguf: 2717908992/4683073536 bytes, 172.79 MiB/s, ETA 00:00:11 (publisher checksum pending)
+distillation: cached native teacher trace qwen-coder-7b-q4_k_m / 12106a8bfb9356904186b558fd37127f1ee55e650cb57a6e843d8983be952bd0
+distillation: cached native teacher trace qwen-coder-7b-q4_k_m / 21748f9f3a9dec33f5c19fb7179ecdada908a2b27e6486b333f8a379f57d93bb
+distillation: cached native teacher trace qwen-coder-7b-q4_k_m / 279b6d10fb8f3e4f1d9e8b547e1207c9c65214b57d0270ab76e419d02e5165d2
+distillation: cached native teacher trace qwen-coder-7b-q4_k_m / 2d22b678d0bb8aadd704350c150da710a8be0fe59dc30172accfbbb0b25f792b
+distillation: cached native teacher trace qwen-coder-7b-q4_k_m / 5b46a85ec5f9398290c023c26ef8cb662e6e4d19da293a71b2bcee316514f6b7
+distillation: cached native teacher trace qwen-coder-7b-q4_k_m / 5dedbab9841301331ad4a8a4ef9d893e994c7abd27be5b97777071860da49a35
+distillation: cached native teacher trace qwen-coder-7b-q4_k_m / 60cad86431ce13f24f3525d348b75936b4659f22832705f61513e6920d3c0913
+distillation: cached native teacher trace qwen-coder-7b-q4_k_m / 6f54a188344a4c4834c5a9bfe0969e33003547ea371fbf2ba03a4e5fd88d6e07
+distillation: cached native teacher trace qwen-coder-7b-q4_k_m / 83cc42aa11a66d768d6f952f81812adff3032a39e39b89bfa188e7270ab75a62
+distillation: cached native teacher trace qwen-coder-7b-q4_k_m / 9a709fd0afa880d7d61490074636b6a836aa05da5d9a338a46aa8aca31efdce4
+distillation: cached native teacher trace qwen-coder-7b-q4_k_m / 9f34cf373961913a3cf1067f1f2a71e0bef8368e1557d10e998cc099a00fab71
+distillation: cached native teacher trace qwen-coder-7b-q4_k_m / b385fb6bb3931d6b39a919d387b625b8e5c0db4506f12df96b46489b5f340498
+distillation: cached native teacher trace qwen-coder-7b-q4_k_m / be57ee99f53e14a44a210dee5a0a227fbee04ea80f1c914f14447c3db087cded
+distillation: cached native teacher trace qwen-coder-7b-q4_k_m / d34031fab7990f9d5bb1ac0465e3173de67d17f95496ed535260f239f3c4bc90
+distillation: cached native teacher trace qwen-coder-7b-q4_k_m / e89aa62fc9a189c19a13370ba9410f99991e685167f68b4f7ce97f6a4c78f965
+distillation: cached native teacher trace qwen-coder-7b-q4_k_m / f23b74be49ae4fb9f5a42d58f33244ef0c157aa0e4afe342a565baa7e7493c91
+distillation: cached native teacher trace qwen-coder-7b-q4_k_m / ff06039fd8278f904a9e03151a5b46d0452d3c207474b4da9dd4b770fe9d6d26
+[
+  {
+    "path": "offline_bundle/distillation-traces/cd68c2d2848f63ef3c9dab0de26623f0fe1c767d4b34ecc754c405627a4cc47d.json",
+    "sha256": "db4cc66c1260d98a1c682159063b7c16a9d4eeee78795cd22f3427c5a91a4513",
+    "bytes": 8871
+  },
+  {
+    "path": "offline_bundle/distillation-traces/9edc0ab15ace8c1c52efc2eba07c5a59c4ef3058b7fddfca308b828285cc8e8c.json",
+    "sha256": "483ba5a9f2626dc9720cbfe3fdbc5b1230c78432c58270e3d019320a1ad7ba37",
+    "bytes": 5830
+  },
+  {
+    "path": "offline_bundle/distillation-traces/90dee6dbfa0a0d23f99adcc0199b2f036d68470aa22bd2fe4393a3544036ac70.json",
+    "sha256": "15e73cd1b8ad2d9d2ee42fddc7850610d21823f644b99b05f8c4fe9bcdd4af4d",
+    "bytes": 6466
+  },
+  {
+    "path": "offline_bundle/distillation-traces/f58b463721e4f15419c6111705bc8c82893f55ba8c62d8590f57fe29bb438ed3.json",
+    "sha256": "38618f37d8e8db81a78a2baf622c332f46fe3c46aac65aded4c38ebe2c8f8ff0",
+    "bytes": 5558
+  },
+  {
+    "path": "offline_bundle/distillation-traces/1e8a41eb95f7d0551b55d9829e556c09f2b20ab8f637c184045810cd1562af59.json",
+    "sha256": "b558133574b0019f97541f1b6e821f12f0d1598d12fc83c3a5c32adbb7ee4a40",
+    "bytes": 7595
+  },
+  {
+    "path": "offline_bundle/distillation-traces/92bfe8403ddfc7eb476f6e29ccb5b0cf061aa217bdb073d21563a58584ee0703.json",
+    "sha256": "b75fa9bdf9776a806a23d4752f68b47cfbe3167e7c36dc60a116bbd9676474f6",
+    "bytes": 5297
+  },
+  {
+    "path": "offline_bundle/distillation-traces/1381179157f77efb309112b38d988676a97c26630cb134bf2d05bd7c6aaea824.json",
+    "sha256": "b7fedce8d6c8d30294eab6c406ce2e89cbc02d3bc9fc32cd8d6ded2542908741",
+    "bytes": 7464
+  },
+  {
+    "path": "offline_bundle/distillation-traces/5407e076257ad66568119012acbacbf2d875fef936a998fcbbd2a5c852a117c9.json",
+    "sha256": "26c789f5f8f0f65a8fdc6cb28e1a803a408cc9a2c003d359fa98fd4a959c8edc",
+    "bytes": 7656
+  },
+  {
+    "path": "offline_bundle/distillation-traces/8adc6ecefa44f692e7944369aa39c4efa6db55445b952690eb73d2a829cac559.json",
+    "sha256": "b2b1b5bcc0e8675ca58f4a6407e5552e76bf5f79326c41b246a5eb821837a8ae",
+    "bytes": 7728
+  },
+  {
+    "path": "offline_bundle/distillation-traces/ca3972029b67f4717f5d0ed474eae68bf753260ae7319178c3c9d7caf4e0a958.json",
+    "sha256": "3637c3a3d4457f2ff4c417ae4e2676838163a3bd76e295c7d0a94bb664f8f4d6",
+    "bytes": 7591
+  },
+  {
+    "path": "offline_bundle/distillation-traces/7a9219a61ee078e02e4045871713b2668ab244e3c6b59d1d04d915ee946f27cc.json",
+    "sha256": "85f2172271ac6434e3080a090793ce34fe6c3a0b5e225a667c7a5c6aa1126e58",
+    "bytes": 8291
+  },
+  {
+    "path": "offline_bundle/distillation-traces/25173884ca06e41ba5ea5b75353b4e86c85726e450e0b0752b34972e678fb115.json",
+    "sha256": "55924ea19fc90fb2965ddb4972c55da8a81f6ac783d0f10ac2707b71c26865a1",
+    "bytes": 7107
+  },
+  {
+    "path": "offline_bundle/distillation-traces/063851f0351dae2ebbb3a442ad6f7eba88a4f8cc6f6ee2bad8de0de88bac2be1.json",
+    "sha256": "1b61bd59eef9fb82e36f16dd7fdf388c1372cc2ba71803b2b56377fc9e07e5e0",
+    "bytes": 6359
+  },
+  {
+    "path": "offline_bundle/distillation-traces/b8e46d09ff8b197b17838058f8e5dac9929ce597b665a21a5db8c39a0e9100f3.json",
+    "sha256": "69312a6e297b99845b44012b44799cbbc9d1073763f1b4c1b588fcd7a0e31d5e",
+    "bytes": 5627
+  },
+  {
+    "path": "offline_bundle/distillation-traces/d1bfc569213bcf14b7870325381dd33ad1b01fa133bbf4bf579700433acc991d.json",
+    "sha256": "c75998d14143badd6015a9faaef06313ffbbbf8292bedd4cf15caaa9daaab944",
+    "bytes": 6357
+  },
+  {
+    "path": "offline_bundle/distillation-traces/90733baa3d3d306335b15143aebb95c6c685a5e41de627ff79c6ca1906108275.json",
+    "sha256": "30cf9386e7ff58e3cb1fe8c15d3f9f9254df5982d28e4a82aefc9836f082cfc6",
+    "bytes": 6157
+  },
+  {
+    "path": "offline_bundle/distillation-traces/d262e6c44943a1e3828216fd97e7e195b07fed29002b85e49eff119e0d295323.json",
+    "sha256": "f3e4b93669b3aa5b0f4cf31ca4bc6708f38c2ef5718d2015168cb4e5a4843e84",
+    "bytes": 5035
+  }
+]

@@ -1,0 +1,3 @@
+Source checkout detected; Cargo will verify and reuse the current CPU build.
+    Finished `release` profile [optimized] target(s) in 0.25s
+     Running `target/release/lec-distil provider-check --config state/api-providers.local.toml`

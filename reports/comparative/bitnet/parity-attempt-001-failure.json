@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "evidence_kind": "retrospective_record_of_observed_native_parity_infrastructure_failure",
+  "command": "RAYON_NUM_THREADS=4 target/release/examples/bitnet_parity",
+  "passed": false,
+  "comparison_completed": false,
+  "failure": "Native loopback completion POST failed with Broken pipe after the full original Rust model loaded; no numerical comparison was reached.",
+  "engine_log": "reports/comparative/bitnet/engine-runs/1b0983c8-48de-4def-a4d5-0933486f82bd.log",
+  "suspected_cause": "The parked HTTP runtime reused a pooled connection closed by the native server during the intervening model load.",
+  "quality_evaluation": false,
+  "production_eligible": false
+}

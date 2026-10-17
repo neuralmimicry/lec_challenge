@@ -1,0 +1,40 @@
+{
+  "run_id": "75321602-8b3d-4ba8-ad71-0b40b5e852aa",
+  "task_id": "money.split",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error: mismatched closing delimiter: `}`\n  --> /candidate/main.rs:21:43\n   |\n21 |     let expected = serde_json::Value::from(vec![4, 3, 3]});\n   |                                           ^             ^ mismatched closing delimiter\n   |                                           |\n   |                                           unclosed delimiter\n\nerror: unexpected closing delimiter: `)`\n  --> /candidate/main.rs:21:58\n   |\n19 | fn main() {\n   |           - this delimiter might not be properly closed...\n20 |     let input = serde_json::Value::from(\"{\\\"input\\\":[10,3]}\");\n21 |     let expected = serde_json::Value::from(vec![4, 3, 3]});\n   |                                                         -^ unexpected closing delimiter\n   |                                                         |\n   |                                                         ...as it matches this but it has different indentation\n\nerror: aborting due to 2 previous errors\n\n"
+  ],
+  "cases_total": 5,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "4ea678bc5fde7844c5fc78ef21949edd1a3e5d31dd3e792351cf9b3486f1a184",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/explore/round-001/study/full/arms/arm-d81f55ca66908cb5884d507c/development/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/explore/round-001/study/full/arms/arm-d81f55ca66908cb5884d507c/development/sandbox/75321602-8b3d-4ba8-ad71-0b40b5e852aa.audit.json",
+  "audit_sha256": "4564bfdae6cbe19985f86f13fc7438b7f2f978375176133c2d86312663340083",
+  "failure": "compilation failed: error: mismatched closing delimiter: `}`\n  --> /candidate/main.rs:21:43\n   |\n21 |     let expected = serde_json::Value::from(vec![4, 3, 3]});\n   |                                           ^             ^ mismatched closing delimiter\n   |                                           |\n   |                                           unclosed delimiter\n\nerror: unexpected closing delimiter: `)`\n  --> /candidate/main.rs:21:58\n   |\n19 | fn main() {\n   |           - this delimiter might not be properly closed...\n20 |     let input = serde_json::Value::from(\"{\\\"input\\\":[10,3]}\");\n21 |     let expected = serde_json::Value::from(vec![4, 3, 3]});\n   |                                                         -^ unexpected closing delimiter\n   |                                                         |\n   |                                                         ...as it matches this but it has different indentation\n\nerror: aborting due to 2 previous errors\n\n",
+  "duration_ms": 16125,
+  "timeout_evidence": null,
+  "lifecycle_evidence": {
+    "receipt_path": "reports/local-study/explore/round-001/study/full/arms/arm-d81f55ca66908cb5884d507c/development/sandbox/75321602-8b3d-4ba8-ad71-0b40b5e852aa.lifecycle.json",
+    "receipt_sha256": "c663c14771d4d65be4d91dee49422db6910e13d1fce13cbe0a1f0c530ea1e3b9"
+  }
+}

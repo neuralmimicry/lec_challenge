@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "regrade_plan_sha256": "a0446d7d7140381e80efb5b83f144abfcbe58892dba6fc50ccbc9ec31002cc3a",
+  "task_id": "paths.extension",
+  "source_id": "private-paths-v1",
+  "original_plan": {
+    "path": "reports/local-study/native-full-quality-001/base-train/plan.json",
+    "sha256": "55c6614d90fbff0e580fd8fbfa9e06ce99715d8d0c78320e0fe70605545cc489",
+    "bytes": 63584
+  },
+  "original_raw": {
+    "path": "reports/local-study/native-full-quality-001/base-train/generations/paths.extension.json",
+    "sha256": "c92be9716e715838221267955ec4beae01f564214096d17083294a631c3724b2",
+    "bytes": 3393
+  },
+  "outcome": {
+    "kind": "original_generation_failure"
+  },
+  "success": false
+}

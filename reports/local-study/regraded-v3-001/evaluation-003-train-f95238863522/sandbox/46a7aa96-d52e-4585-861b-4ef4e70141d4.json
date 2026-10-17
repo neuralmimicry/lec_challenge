@@ -1,0 +1,40 @@
+{
+  "run_id": "46a7aa96-d52e-4585-861b-4ef4e70141d4",
+  "task_id": "intervals.merge",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: warning: unused import: `serde_json::Value`\n --> /candidate/main.rs:1:5\n  |\n1 | use serde_json::Value;\n  |     ^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0308]: mismatched types\n  --> /candidate/main.rs:20:32\n   |\n20 |         } else if interval.0 > current_end {\n   |                   ----------   ^^^^^^^^^^^ expected `i64`, found `Option<_>`\n   |                   |\n   |                   expected because this is `i64`\n   |\n   = note: expected type `i64`\n              found enum `Option<_>`\nhelp: consider using `Option::expect` to unwrap the `Option<_>` value, panicking if the value is an `Option::None`\n   |\n20 |         } else if interval.0 > current_end.expect(\"REASON\") {\n   |                                           +++++++++++++++++\n\nerror[E0277]: the trait bound `Value: From<(i64, _)>` is not satisfied\n  --> /candidate/main.rs:30:5\n   |\n30 |     serde_json::Value::from(result)\n   |     ^^^^^^^^^^^^^^^^^ the trait `From<(i64, _)>` is not implemented for `Value`\n   |\n   = help: `Value` implements trait `From<T>`:\n             From<&[T]>\n             From<&str>\n             From<()>\n             From<Cow<'_, str>>\n             From<Option<T>>\n             From<Vec<T>>\n             From<[T; N]>\n             From<bool>\n           and 15 others\n   = note: required for `(i64, _)` to implement `Into<Value>`\n   = note: required for `Value` to implement `From<Vec<(i64, _)>>`\n\nerror: aborting due to 2 previous errors; 1 warning emitted\n\nSome errors have detailed explanations: E0277, E0308.\nFor more information about an error, try `rustc --explain E0277`.\n"
+  ],
+  "cases_total": 6,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "60064936c088a11be44aa81186bddbb3c711cdbb5fa6f3580827d21317f78e3b",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/regraded-v3-001/evaluation-003-train-f95238863522/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/regraded-v3-001/evaluation-003-train-f95238863522/sandbox/46a7aa96-d52e-4585-861b-4ef4e70141d4.audit.json",
+  "audit_sha256": "fd929402cee6d0ae6fd404376bff3c99d998fd933ee4e493de34916d811d1e7d",
+  "failure": "compilation failed: warning: unused import: `serde_json::Value`\n --> /candidate/main.rs:1:5\n  |\n1 | use serde_json::Value;\n  |     ^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0308]: mismatched types\n  --> /candidate/main.rs:20:32\n   |\n20 |         } else if interval.0 > current_end {\n   |                   ----------   ^^^^^^^^^^^ expected `i64`, found `Option<_>`\n   |                   |\n   |                   expected because this is `i64`\n   |\n   = note: expected type `i64`\n              found enum `Option<_>`\nhelp: consider using `Option::expect` to unwrap the `Option<_>` value, panicking if the value is an `Option::None`\n   |\n20 |         } else if interval.0 > current_end.expect(\"REASON\") {\n   |                                           +++++++++++++++++\n\nerror[E0277]: the trait bound `Value: From<(i64, _)>` is not satisfied\n  --> /candidate/main.rs:30:5\n   |\n30 |     serde_json::Value::from(result)\n   |     ^^^^^^^^^^^^^^^^^ the trait `From<(i64, _)>` is not implemented for `Value`\n   |\n   = help: `Value` implements trait `From<T>`:\n             From<&[T]>\n             From<&str>\n             From<()>\n             From<Cow<'_, str>>\n             From<Option<T>>\n             From<Vec<T>>\n             From<[T; N]>\n             From<bool>\n           and 15 others\n   = note: required for `(i64, _)` to implement `Into<Value>`\n   = note: required for `Value` to implement `From<Vec<(i64, _)>>`\n\nerror: aborting due to 2 previous errors; 1 warning emitted\n\nSome errors have detailed explanations: E0277, E0308.\nFor more information about an error, try `rustc --explain E0277`.\n",
+  "duration_ms": 16106,
+  "timeout_evidence": null,
+  "lifecycle_evidence": {
+    "receipt_path": "reports/local-study/regraded-v3-001/evaluation-003-train-f95238863522/sandbox/46a7aa96-d52e-4585-861b-4ef4e70141d4.lifecycle.json",
+    "receipt_sha256": "4dd0c31dabd1e6b6c459be9bb40cfac515939dbb59b947b36d355bf910c15333"
+  }
+}

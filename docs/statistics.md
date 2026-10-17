@@ -21,6 +21,14 @@ The predeclared gate in `config/gate.toml` requires both of these lower bounds t
 - A two-sided 95% Student t interval over the eight source effects, with seven degrees of freedom.
 - A percentile bootstrap interval resampling whole sources, with the fixed configured seed and trial count.
 
+New reports retain their actual confidence level and render both interval labels
+from the frozen alpha. Historical reports without that field explicitly say
+that their confidence was not retained; a reader never substitutes today's
+configuration. Detectability tables likewise use the configured power target,
+and empty discordance/correlation grids fail instead of producing an empty
+successful sensitivity report. These reporting corrections do not change the
+frozen assessment's 95% intervals, 80% power target or promotion rule.
+
 The source t interval assumes approximately independent source effects and reasonable small-sample t behaviour. The bootstrap is a sensitivity calculation using only eight observed clusters; it does not remove dependence between sources or repair a narrow source distribution. The locally authored packs share AI authorship and may share algorithms. These are material weaknesses, and the report states them.
 
 Every prescribed task/seed must be present exactly once. Invalid identities, duplicate/missing outcomes, changed settings and failed security/operational checks block promotion. A source regression exceeding the predeclared slice ceiling also blocks promotion. Decisions distinguish SHIP, NO SHIP / REGRESSION, NO SHIP / INCONCLUSIVE and INVALID EVALUATION. A negative observed effect is reported as a regression rather than concealed behind a wide interval; it need not establish statistically significant harm. An interval containing zero is insufficient evidence of superiority, not proof of equality. Better training scores cannot rescue a held-out loss.

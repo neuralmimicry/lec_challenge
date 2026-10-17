@@ -1,0 +1,34 @@
+{
+  "run_id": "02fec6de-8f20-4921-b0de-093844e3e219",
+  "task_id": "search.runs",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error[E0382]: borrow of moved value: `current`\n  --> /candidate/main.rs:23:13\n   |\n 6 |         let mut current = String::new();\n   |             ----------- move occurs because `current` has type `std::string::String`, which does not implement the `Copy` trait\n...\n 9 |         for c in s.chars() {\n   |         ------------------ inside of this loop\n...\n14 |                 result.push(serde_json::Value::String(current));\n   |                                                       ------- value moved here, in previous iteration of loop\n...\n23 |         if !current.is_empty() {\n   |             ^^^^^^^ value borrowed here after move\n   |\nhelp: consider cloning the value if the performance cost is acceptable\n   |\n14 |                 result.push(serde_json::Value::String(current.clone()));\n   |                                                              ++++++++\n\nwarning: variable `count` is assigned to, but never used\n --> /candidate/main.rs:7:13\n  |\n7 |         let mut count = 0;\n  |             ^^^^^^^^^\n  |\n  = note: consider using `_count` instead\n  = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default\n\nwarning: value assigned to `count` is never read\n  --> /candidate/main.rs:19:17\n   |\n16 |                 count = 0;\n   |                 --------- `count` is overwritten here before the previous value is read\n...\n19 |                 count += 1;\n   |                 ^^^^^^^^^^ this value is reassigned later and never used\n   |\n   = note: `#[warn(unused_assignments)]` (part of `#[warn(unused)]`) on by default\n\nwarning: value assigned to `count` is never read\n  --> /candidate/main.rs:16:17\n   |\n16 |                 count = 0;\n   |                 ^^^^^^^^^\n   |\n   = help: maybe it is overwritten before being read?\n\nerror: aborting due to 1 previous error; 3 warnings emitted\n\nFor more information about this error, try `rustc --explain E0382`.\n"
+  ],
+  "cases_total": 6,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "4b2556745b303526f354ded7f2c473b77f6da0c99a77f0a493c7272a8d800aac",
+  "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "bfe9854fbf0b817248026abed0576b3806d0f2894f6273f91bc08073e369990d",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "controller_version": 2,
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:1",
+    "expected_image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/native-full-quality-001/sft-train/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/native-full-quality-001/sft-train/sandbox/02fec6de-8f20-4921-b0de-093844e3e219.audit.json",
+  "audit_sha256": "7673b5309911faa32de9bbead449a9f487df7d01ab846101ebe2c6aa0a5bd8ac",
+  "failure": "compilation failed: error[E0382]: borrow of moved value: `current`\n  --> /candidate/main.rs:23:13\n   |\n 6 |         let mut current = String::new();\n   |             ----------- move occurs because `current` has type `std::string::String`, which does not implement the `Copy` trait\n...\n 9 |         for c in s.chars() {\n   |         ------------------ inside of this loop\n...\n14 |                 result.push(serde_json::Value::String(current));\n   |                                                       ------- value moved here, in previous iteration of loop\n...\n23 |         if !current.is_empty() {\n   |             ^^^^^^^ value borrowed here after move\n   |\nhelp: consider cloning the value if the performance cost is acceptable\n   |\n14 |                 result.push(serde_json::Value::String(current.clone()));\n   |                                                              ++++++++\n\nwarning: variable `count` is assigned to, but never used\n --> /candidate/main.rs:7:13\n  |\n7 |         let mut count = 0;\n  |             ^^^^^^^^^\n  |\n  = note: consider using `_count` instead\n  = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default\n\nwarning: value assigned to `count` is never read\n  --> /candidate/main.rs:19:17\n   |\n16 |                 count = 0;\n   |                 --------- `count` is overwritten here before the previous value is read\n...\n19 |                 count += 1;\n   |                 ^^^^^^^^^^ this value is reassigned later and never used\n   |\n   = note: `#[warn(unused_assignments)]` (part of `#[warn(unused)]`) on by default\n\nwarning: value assigned to `count` is never read\n  --> /candidate/main.rs:16:17\n   |\n16 |                 count = 0;\n   |                 ^^^^^^^^^\n   |\n   = help: maybe it is overwritten before being read?\n\nerror: aborting due to 1 previous error; 3 warnings emitted\n\nFor more information about this error, try `rustc --explain E0382`.\n",
+  "duration_ms": 7847,
+  "timeout_evidence": null
+}

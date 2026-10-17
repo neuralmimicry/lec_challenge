@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "1c8417e29ab67fbe325c00e231236374fdda50f71928ab5f925ddb9ac6538038",
+  "task_id": "money.parse",
+  "source_id": "private-money-v1",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an ASCII decimal monetary string. Accept optional leading minus, one or more digits, and optional dot followed by exactly two digits. Return signed cents, or null for invalid syntax; magnitudes <=1000000 pounds.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":\"-12.30\",\"expected\":-1230}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let str_input = input.as_str().unwrap();\n    let mut parts = str_input.split('.');\n    let mut sign = None;\n    let mut dollars = None;\n    let mut cents = None;\n\n    if let Some(first_part) = parts.next() {\n        let mut num = first_part.parse::<i64>().unwrap();\n        if let Some(second_part) = parts.next() {\n            if let Some(dot_part) = second_part.split('.').next() {\n                let mut num2 = dot_part.parse::<i64>().unwrap();\n                if let Some(third_part) = parts.next() {\n                    if let Some(fourth_part) = third_part.split('.').next() {\n                        let mut num3 = fourth_part.parse::<i64>().unwrap();\n                        if let Some(fifth_part) = parts.next() {\n                            if let Some(sixth_part) = fifth_part.split('.').next() {\n                                let mut num4 = sixth_part.parse::<i64>().unwrap();\n                                if let Some(seventh_part) = parts.next() {\n                                    let mut num5 = seventh_part.parse::<i64>().unwrap();\n                                    if let Some(eighth_part) = parts.next() {\n                                        let mut num6 = eighth_part.parse::<i64>().unwrap();\n                                        if let Some(ninth_part) = parts.next() {\n                                            let mut num7 = ninth_part.parse::<i64>().unwrap();\n                                            if let Some(tenth_part) = parts.next() {\n                                                let mut num8 = tenth_part.parse::<i64>().unwrap();\n                                                if let Some(eleventh_part) = parts.next() {\n                                                    let mut num9 = eleventh_part.parse::<i64>().unwrap();\n                                                    if let Some(twelfth_part) = parts.next() {\n                                                        let mut num10 = twelfth_part.parse::<i64>().unwrap();\n                                                        if let Some(thirteenth_part) = parts.next() {\n                                                            let mut num11 = thirteenth_part.parse::<i64>().unwrap();\n                                                            if let Some(fourteenth_part) = parts.next() {\n                                                                let mut num12 = frithteenth_part.parse::<i64>().unwrap();\n                                                                if let Some(fifteenth_part) = parts.next() {\n                                                                    let mut num13 = fifteenth_part.parse::<i64>().unwrap();\n                                                                    if let Some(sixteenth_part) = parts",
+    "checkpoint_id": "294945edfa66bce11119c4ad89e9c8e55f443958b4c3e9fa0ca2d73f79b32c98",
+    "finish_reason": "length",
+    "input_tokens": 255,
+    "output_tokens": 512,
+    "elapsed_ms": 87214,
+    "complete": false
+  },
+  "model_error": null
+}

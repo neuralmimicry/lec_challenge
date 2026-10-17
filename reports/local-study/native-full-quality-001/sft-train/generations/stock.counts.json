@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "a5b39d544c85b76111246b8fda40c638ce104251a1c56368277fef8fe4033eb6",
+  "task_id": "stock.counts",
+  "source_id": "private-stock-v1",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an array of ASCII strings. Return an object mapping every distinct string to its frequency.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[\"b\",\"a\",\"b\"],\"expected\":{\"a\":1,\"b\":2}}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let arr = input.as_array().unwrap();\n    let mut freq_map: std::collections::HashMap<String, i64> = std::collections::HashMap::new();\n\n    for item in arr {\n        let str_val = item.as_str().unwrap();\n        *freq_map.entry(str_val.to_string()).or_insert(0) += 1;\n    }\n\n    Value::Object(freq_map.into_iter().map(|(k, v)| (k.to_string(), Value::from(v))).collect())\n}\n```",
+    "checkpoint_id": "e2bcd135527659042304d936fa56c7240f6f96a43b9f81f2a888c38b7762a949",
+    "finish_reason": "stop",
+    "input_tokens": 228,
+    "output_tokens": 123,
+    "elapsed_ms": 4688,
+    "complete": true
+  },
+  "model_error": null
+}

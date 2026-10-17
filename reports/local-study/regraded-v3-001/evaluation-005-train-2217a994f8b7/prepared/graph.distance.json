@@ -1,0 +1,56 @@
+{
+  "schema_version": 3,
+  "run_id": "ac4c3af3-12c6-477e-acae-03a794a5b6ea",
+  "ownership_nonce": "e3688410-2c1f-4c6f-8f54-a034f05a8713",
+  "attempt_key": "0dc0cb8de14f5a9accc4eeec9cdc70c6854af9f3a29369ae9a6c3efdcc16f024",
+  "receipt_path": "reports/local-study/regraded-v3-001/evaluation-005-train-2217a994f8b7/prepared/graph.distance.json",
+  "report_path": "reports/local-study/regraded-v3-001/evaluation-005-train-2217a994f8b7/sandbox/ac4c3af3-12c6-477e-acae-03a794a5b6ea.json",
+  "task": {
+    "id": "graph.distance",
+    "source_id": "private-graph-v1",
+    "lineage_id": "local-contract-pack-04",
+    "split": "train",
+    "specification": "Input {n,start,target,edges} is a directed unweighted graph, n>=1. Return shortest edge distance start->target, or -1 if unreachable. Graph vertex counts are at most 64.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "d0d3cdf321951e8e1e6913d95763ef957bf16751a85a1fda56eab10d4f51e473",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": {
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "n": 4,
+          "start": 0,
+          "target": 2
+        },
+        "expected": 2
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "use serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let n = input[\"n\"].as_u64().unwrap();\n    let start = input[\"start\"].as_u64().unwrap();\n    let target = input[\"target\"].as_u64().unwrap();\n    let edges = input[\"edges\"].as_array().unwrap();\n    let mut dist = vec![i64::MAX; n];\n    dist[start as usize] = 0;\n\n    for edge in edges {\n        let u = edge[0].as_u64().unwrap();\n        let v = edge[1].as_u64().unwrap();\n        dist[v as usize] = dist[u as usize].min(dist[v as usize]);\n    }\n\n    if dist[target as usize] == i64::MAX {\n        Value::from(-1)\n    } else {\n        Value::from(dist[target as usize])\n    }\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/regraded-v3-001/evaluation-005-train-2217a994f8b7/sandbox"
+  },
+  "code_sha256": "3678f162913a3974d5c2dfa78fed2f51197cf4652e34554143e024b68c6c370d",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

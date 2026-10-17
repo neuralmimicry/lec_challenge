@@ -1,0 +1,38 @@
+{
+  "model_id": "qwen3-4b-instruct-2507-q4_k_m",
+  "task_id": "tables.sort_rows",
+  "source_id": "private-tables-v1",
+  "specification_sha256": "df1fea127338d7c1399d9b922559c0782ff3fec80cb89b6d508a51249e019c1c",
+  "seed": 1729,
+  "plan_sha256": "6d343a1ee585d9daf2a7fbaea768580a60e310abaf7186964443ef83a9a1013d",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an array of [key,value] integer rows. Sort ascending by key and then value; keep duplicates.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[[2,9],[1,4],[2,3]],\"expected\":[[1,4],[2,3],[2,9]]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let mut pairs: Vec<(i64, i64)> = Vec::new();\n\n    if let serde_json::Value::Array(array) = input {\n        for item in array {\n            if let serde_json::Value::Array([key_val, val_val]) = item {\n                if let Ok(key) = key_val.as_i64() {\n                    if let Ok(val) = val_val.as_i64() {\n                        pairs.push((key, val));\n                    }\n                }\n            }\n        }\n    }\n\n    pairs.sort_by(|a, b| {\n        if a.0 == b.0 {\n            a.1.cmp(&b.1)\n        } else {\n            a.0.cmp(&b.0)\n        }\n    });\n\n    let mut result = Vec::new();\n    for (key, val) in pairs {\n        result.push(vec![key as i64, val as i64]);\n    }\n\n    serde_json::to_value(result).unwrap()\n}\n```",
+    "checkpoint_id": "2fde00ce69dd4899c70d020845e2638353015bba0fdf161b3eb965f2bca4464e",
+    "finish_reason": "stop",
+    "input_tokens": 224,
+    "output_tokens": 226,
+    "elapsed_ms": 35297,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison/qwen3-4b-instruct-2507-q4_k_m/tables.sort_rows.generation.json",
+    "sha256": "5965dbee0ffa36265bc3d2168b494d20f491f01e21603706d1c5c7ed42eff116",
+    "bytes": 4657
+  },
+  "sandbox_report": {
+    "path": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison/sandbox/8c9e0ec7-8bf6-46fd-ac53-3af87e3da72e.json",
+    "sha256": "1e2c048d0eeeac44c22fc5abd88194a58d0a15ef16f7d336c9304aa9c19bba5e",
+    "bytes": 2631
+  },
+  "grading_error": null,
+  "success": false
+}

@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "a52d044d05dc99f9af1879cdb69e7d80c4abc41b317440255f0ff27069084831",
+  "task_id": "sequences.chunks",
+  "source_id": "private-sequences-v1",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input {values,size} has an integer array and positive integer size. Return consecutive chunks of at most size elements, preserving order.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":{\"size\":2,\"values\":[1,2,3,4,5]},\"expected\":[[1,2],[3,4],[5]]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let value = input.as_object().unwrap();\n    let size = value.get(\"size\").unwrap().as_i64().unwrap();\n    let values = value.get(\"values\").unwrap().as_array().unwrap();\n    let mut result = Vec::new();\n    let mut current_chunk = Vec::new();\n    for &value in values {\n        current_chunk.push(value.as_i64().unwrap());\n        if current_chunk.len() == size {\n            result.push(serde_json::Value::Array(current_chunk));\n            current_chunk.clear();\n        }\n    }\n    if !current_chunk.is_empty() {\n        result.push(serde_json::Value::Array(current_chunk));\n    }\n    Value::Array(result)\n}\n```",
+    "checkpoint_id": "2217a994f8b74ded1d52f30ef7add2cb190578e3d108168a85d1409160ad88c3",
+    "finish_reason": "stop",
+    "input_tokens": 249,
+    "output_tokens": 164,
+    "elapsed_ms": 13184,
+    "complete": true
+  },
+  "model_error": null
+}

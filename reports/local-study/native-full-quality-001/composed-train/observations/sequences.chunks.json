@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "a52d044d05dc99f9af1879cdb69e7d80c4abc41b317440255f0ff27069084831",
+  "task_id": "sequences.chunks",
+  "source_id": "private-sequences-v1",
+  "success": false,
+  "raw_generation": {
+    "path": "reports/local-study/native-full-quality-001/composed-train/generations/sequences.chunks.json",
+    "sha256": "f2ffa55ba2e3b772cd81ade0182a20e3415e16ba1cd6f1a8a7d0b0dfa284ef0a",
+    "bytes": 2269
+  },
+  "sandbox_report": {
+    "path": "reports/local-study/native-full-quality-001/composed-train/sandbox/2a316c1f-0334-4cb3-8ee5-6ef506711890.json",
+    "sha256": "2d566e1e5fb98e65f3d3dc4fd4ae925ab3bf55153d168a93d4bb8da39a6bfe71",
+    "bytes": 9244
+  },
+  "grading_error": null
+}

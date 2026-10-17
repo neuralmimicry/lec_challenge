@@ -11,6 +11,12 @@ case "${1:-}" in
     exec ./run-gpu.sh "$@"
     ;;
 esac
+# Source checkouts must execute their current Rust sources. The bundled binary
+# belongs to a separately inventoried delivery and may predate local changes.
+if [[ -e .git || ${LEC_BUILD_FROM_SOURCE:-0} == 1 ]]; then
+  printf '%s\n' 'Source checkout detected; Cargo will verify and reuse the current CPU build.' >&2
+  exec cargo run --locked --offline --release -- "$@"
+fi
 if [[ -x offline_bundle/bin/lec-distil ]] && offline_bundle/bin/lec-distil --version >/dev/null 2>&1; then
   exec offline_bundle/bin/lec-distil "$@"
 fi

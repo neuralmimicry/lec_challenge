@@ -1,0 +1,40 @@
+{
+  "run_id": "e294f494-5b64-4a65-923b-a33d94a461ee",
+  "task_id": "money.parse",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error[E0428]: the name `main` is defined multiple times\n  --> /candidate/main.rs:42:1\n   |\n37 | fn main() {\n   | --------- previous definition of the value `main` here\n...\n42 | fn main() { let stdin = std::io::stdin(); for line in std::io::BufRead::lines(stdin.lock()) { let line = line.expect(\"input read\"); ...\n   | ^^^^^^^^^ `main` redefined here\n   |\n   = note: `main` must be defined only once in the value namespace of this module\n\nwarning: unused import: `serde_json::Value`\n --> /candidate/main.rs:1:5\n  |\n1 | use serde_json::Value;\n  |     ^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0308]: mismatched types\n --> /candidate/main.rs:5:29\n  |\n5 |     let cents = parse_cents(input_str);\n  |                 ----------- ^^^^^^^^^ expected `&str`, found `String`\n  |                 |\n  |                 arguments to this function are incorrect\n  |\nnote: function defined here\n --> /candidate/main.rs:9:4\n  |\n9 | fn parse_cents(input_str: &str) -> i64 {\n  |    ^^^^^^^^^^^ ---------------\nhelp: consider borrowing here\n  |\n5 |     let cents = parse_cents(&input_str);\n  |                             +\n\nerror[E0599]: `i64` is not an iterator\n --> /candidate/main.rs:6:11\n  |\n6 |     cents.map(|cents| cents.to_string())\n  |           ^^^ `i64` is not an iterator\n  |\n  = note: the following trait bounds were not satisfied:\n          `i64: Iterator`\n          which is required by `&mut i64: Iterator`\n\nerror[E0308]: mismatched types\n  --> /candidate/main.rs:18:24\n   |\n 9 | fn parse_cents(input_str: &str) -> i64 {\n   |                                    --- expected `i64` because of return type\n...\n18 |                 return None;\n   |                        ^^^^ expected `i64`, found `Option<_>`\n   |\n   = note: expected type `i64`\n              found enum `Option<_>`\n\nerror: aborting due to 4 previous errors; 1 warning emitted\n\nSome errors have detailed explanations: E0308, E0428, E0599.\nFor more information about an error, try `rustc --explain E0308`.\n"
+  ],
+  "cases_total": 9,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "39fd327e2822e7457d30488e15dbd493df46ed0965c1c5fb362f8b47e22acf43",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/explore/round-001/study/full/arms/arm-10219d27497b8da52d90f257/development/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/explore/round-001/study/full/arms/arm-10219d27497b8da52d90f257/development/sandbox/e294f494-5b64-4a65-923b-a33d94a461ee.audit.json",
+  "audit_sha256": "e0695dfc558b9b1f4b18f06ce8062d23343c2841b21e8557d189783a63679ad1",
+  "failure": "compilation failed: error[E0428]: the name `main` is defined multiple times\n  --> /candidate/main.rs:42:1\n   |\n37 | fn main() {\n   | --------- previous definition of the value `main` here\n...\n42 | fn main() { let stdin = std::io::stdin(); for line in std::io::BufRead::lines(stdin.lock()) { let line = line.expect(\"input read\"); ...\n   | ^^^^^^^^^ `main` redefined here\n   |\n   = note: `main` must be defined only once in the value namespace of this module\n\nwarning: unused import: `serde_json::Value`\n --> /candidate/main.rs:1:5\n  |\n1 | use serde_json::Value;\n  |     ^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0308]: mismatched types\n --> /candidate/main.rs:5:29\n  |\n5 |     let cents = parse_cents(input_str);\n  |                 ----------- ^^^^^^^^^ expected `&str`, found `String`\n  |                 |\n  |                 arguments to this function are incorrect\n  |\nnote: function defined here\n --> /candidate/main.rs:9:4\n  |\n9 | fn parse_cents(input_str: &str) -> i64 {\n  |    ^^^^^^^^^^^ ---------------\nhelp: consider borrowing here\n  |\n5 |     let cents = parse_cents(&input_str);\n  |                             +\n\nerror[E0599]: `i64` is not an iterator\n --> /candidate/main.rs:6:11\n  |\n6 |     cents.map(|cents| cents.to_string())\n  |           ^^^ `i64` is not an iterator\n  |\n  = note: the following trait bounds were not satisfied:\n          `i64: Iterator`\n          which is required by `&mut i64: Iterator`\n\nerror[E0308]: mismatched types\n  --> /candidate/main.rs:18:24\n   |\n 9 | fn parse_cents(input_str: &str) -> i64 {\n   |                                    --- expected `i64` because of return type\n...\n18 |                 return None;\n   |                        ^^^^ expected `i64`, found `Option<_>`\n   |\n   = note: expected type `i64`\n              found enum `Option<_>`\n\nerror: aborting due to 4 previous errors; 1 warning emitted\n\nSome errors have detailed explanations: E0308, E0428, E0599.\nFor more information about an error, try `rustc --explain E0308`.\n",
+  "duration_ms": 15667,
+  "timeout_evidence": null,
+  "lifecycle_evidence": {
+    "receipt_path": "reports/local-study/explore/round-001/study/full/arms/arm-10219d27497b8da52d90f257/development/sandbox/e294f494-5b64-4a65-923b-a33d94a461ee.lifecycle.json",
+    "receipt_sha256": "3257d95714f29e68851224b9d9d70ec024bdf3eef3e15adb576db999f47058f9"
+  }
+}

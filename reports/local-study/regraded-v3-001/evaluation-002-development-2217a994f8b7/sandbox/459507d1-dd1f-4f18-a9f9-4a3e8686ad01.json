@@ -1,0 +1,40 @@
+{
+  "run_id": "459507d1-dd1f-4f18-a9f9-4a3e8686ad01",
+  "task_id": "money.split",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error[E0384]: cannot assign twice to immutable variable `cents`\n  --> /candidate/main.rs:11:9\n   |\n 4 |     let cents = input.as_i64().unwrap();\n   |         ----- first assignment to `cents`\n...\n11 |         cents %= 64;\n   |         ^^^^^^^^^^^ cannot assign twice to immutable variable\n   |\nhelp: consider making this binding mutable\n   |\n 4 |     let mut cents = input.as_i64().unwrap();\n   |         +++\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0384`.\n"
+  ],
+  "cases_total": 5,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "8e4475665fe19a451e727d9dcc970fa5c8154ac37071ff2719418cecd5ab3ca8",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/regraded-v3-001/evaluation-002-development-2217a994f8b7/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/regraded-v3-001/evaluation-002-development-2217a994f8b7/sandbox/459507d1-dd1f-4f18-a9f9-4a3e8686ad01.audit.json",
+  "audit_sha256": "20e0a0e3a7da604e06fbaa1953bfcde478e81ec7aa1709a904bfe6aa0c424cce",
+  "failure": "compilation failed: error[E0384]: cannot assign twice to immutable variable `cents`\n  --> /candidate/main.rs:11:9\n   |\n 4 |     let cents = input.as_i64().unwrap();\n   |         ----- first assignment to `cents`\n...\n11 |         cents %= 64;\n   |         ^^^^^^^^^^^ cannot assign twice to immutable variable\n   |\nhelp: consider making this binding mutable\n   |\n 4 |     let mut cents = input.as_i64().unwrap();\n   |         +++\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0384`.\n",
+  "duration_ms": 18979,
+  "timeout_evidence": null,
+  "lifecycle_evidence": {
+    "receipt_path": "reports/local-study/regraded-v3-001/evaluation-002-development-2217a994f8b7/sandbox/459507d1-dd1f-4f18-a9f9-4a3e8686ad01.lifecycle.json",
+    "receipt_sha256": "cf36188ec3a57f951732be8bbe7c62347c19900eac1223e80651a4765b804115"
+  }
+}

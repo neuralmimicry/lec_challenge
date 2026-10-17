@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "regrade_plan_sha256": "a0446d7d7140381e80efb5b83f144abfcbe58892dba6fc50ccbc9ec31002cc3a",
+  "task_id": "text.reverse_words",
+  "source_id": "private-text-v1",
+  "original_plan": {
+    "path": "reports/local-study/native-full-quality-001/base-train/plan.json",
+    "sha256": "55c6614d90fbff0e580fd8fbfa9e06ce99715d8d0c78320e0fe70605545cc489",
+    "bytes": 63584
+  },
+  "original_raw": {
+    "path": "reports/local-study/native-full-quality-001/base-train/generations/text.reverse_words.json",
+    "sha256": "a762d0f91925e30bab88c659e12272cbe463f6e2d8ece3a2eee19662bcd46468",
+    "bytes": 1958
+  },
+  "outcome": {
+    "kind": "graded",
+    "prepared": {
+      "path": "reports/local-study/regraded-v3-001/evaluation-003-train-f95238863522/prepared/text.reverse_words.json",
+      "sha256": "cb30bed971358b1992e07fc2fc340796c0c882de9127a01e94c324109b393e38",
+      "bytes": 2787
+    },
+    "report": {
+      "path": "reports/local-study/regraded-v3-001/evaluation-003-train-f95238863522/sandbox/77de40dd-535a-4c93-a42b-f1c7f1b18074.json",
+      "sha256": "cef8d33478d51751a6889146dd44602536f8f19f64d6a3bba928163e1d5dfc52",
+      "bytes": 5578
+    },
+    "audit": {
+      "path": "reports/local-study/regraded-v3-001/evaluation-003-train-f95238863522/sandbox/77de40dd-535a-4c93-a42b-f1c7f1b18074.audit.json",
+      "sha256": "987e7604f25ad2dc92fa86adef61b5b5966ce0d75fa79d4f70c734b8baa921b8",
+      "bytes": 2213
+    }
+  },
+  "success": false
+}

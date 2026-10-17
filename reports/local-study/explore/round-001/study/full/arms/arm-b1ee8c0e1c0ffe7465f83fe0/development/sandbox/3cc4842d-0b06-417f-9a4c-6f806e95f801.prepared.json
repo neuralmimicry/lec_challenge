@@ -1,0 +1,42 @@
+{
+  "schema_version": 3,
+  "run_id": "b2157994-e596-45d3-b680-c30f0532a238",
+  "ownership_nonce": "023f7154-eeeb-4a58-9026-ade1708b5900",
+  "attempt_key": "3cc4842d-0b06-417f-9a4c-6f806e95f801",
+  "receipt_path": "reports/local-study/explore/round-001/study/full/arms/arm-b1ee8c0e1c0ffe7465f83fe0/development/sandbox/3cc4842d-0b06-417f-9a4c-6f806e95f801.prepared.json",
+  "report_path": "reports/local-study/explore/round-001/study/full/arms/arm-b1ee8c0e1c0ffe7465f83fe0/development/sandbox/b2157994-e596-45d3-b680-c30f0532a238.json",
+  "task": {
+    "id": "encoding.rot13",
+    "source_id": "private-encoding-v1",
+    "lineage_id": "local-contract-pack-14",
+    "split": "development",
+    "specification": "Input is an ASCII string. Apply ROT13 to upper/lowercase letters and preserve other characters.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "56794b6c25031b0931d378f8f3955bc2d10c4ef04da0be851795e2ca9a832cfa",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": "Hello, Z!",
+        "expected": "Uryyb, M!"
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "use serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let mut result = String::new();\n    for c in input.as_str().unwrap().chars() {\n        if c.is_alphabetic() {\n            let base = if c.is_uppercase() { 65 } else { 97 };\n            let offset = if c.is_uppercase() { 32 } else { 0 };\n            result.push((c as u8 - base + offset) as char);\n        } else {\n            result.push(c);\n        }\n    }\n    Value::String(result)\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/explore/round-001/study/full/arms/arm-b1ee8c0e1c0ffe7465f83fe0/development/sandbox"
+  },
+  "code_sha256": "416db2a0e3ff4e57b0c44feac5f0ae75017b0548b0cf8d7a94b9549adac5a4ff",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

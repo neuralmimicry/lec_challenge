@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "regrade_plan_sha256": "bfc326f4b6c851d1ea3b545d37e6b071f312a124c9a4670db95f0f4900df4629",
+  "task_id": "money.split",
+  "source_id": "private-money-v1",
+  "original_plan": {
+    "path": "reports/local-study/native-full-quality-001/base-development/plan.json",
+    "sha256": "0b0b9d0039da0867922749f2f76f43c30915c537c32a74f7c8e2f090a8148cea",
+    "bytes": 23932
+  },
+  "original_raw": {
+    "path": "reports/local-study/native-full-quality-001/base-development/generations/money.split.json",
+    "sha256": "b384ce35934c2f89fe56a4b11114b04bf23782c1becf8f9d51515fade94db50b",
+    "bytes": 1987
+  },
+  "outcome": {
+    "kind": "graded",
+    "prepared": {
+      "path": "reports/local-study/regraded-v3-001/evaluation-000-development-f95238863522/prepared/money.split.json",
+      "sha256": "951e9b3f15336856bed1639e63b5f3c5be563279078a70a60bfb6cfe9155e146",
+      "bytes": 2911
+    },
+    "report": {
+      "path": "reports/local-study/regraded-v3-001/evaluation-000-development-f95238863522/sandbox/97d3e6af-02f8-4b80-8d26-e242e315ed82.json",
+      "sha256": "fa0bac56993dc6b904acc09a6357adcf27c4edfeb34cd58f5288ea7ad3248920",
+      "bytes": 3347
+    },
+    "audit": {
+      "path": "reports/local-study/regraded-v3-001/evaluation-000-development-f95238863522/sandbox/97d3e6af-02f8-4b80-8d26-e242e315ed82.audit.json",
+      "sha256": "f25ef9ae757a77f173283d718aa09b2e94a93407ad64c5781d0353621874d878",
+      "bytes": 1092
+    }
+  },
+  "success": false
+}

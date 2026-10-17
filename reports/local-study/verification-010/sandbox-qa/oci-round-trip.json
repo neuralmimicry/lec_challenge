@@ -1,0 +1,7 @@
+{
+  "archive": "offline_bundle/images/lec-rust-sandbox.tar",
+  "evidence_kind": "actual_hash_verified_offline_oci_load",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "network_downloads": 0,
+  "passed": true
+}

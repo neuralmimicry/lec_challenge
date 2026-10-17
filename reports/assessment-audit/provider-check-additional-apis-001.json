@@ -1,0 +1,58 @@
+{
+  "providers": [
+    {
+      "id": "openai",
+      "api": "openai_responses",
+      "enabled": false,
+      "api_key_environment": "OPENAI_API_KEY",
+      "credential_present": false,
+      "configuration_error": "model ID or revision policy is unresolved",
+      "training_eligible": false,
+      "network_contacted": false
+    },
+    {
+      "id": "gemini",
+      "api": "gemini_generate_content",
+      "enabled": false,
+      "api_key_environment": "GEMINI_API_KEY",
+      "credential_present": false,
+      "configuration_error": "model ID or revision policy is unresolved",
+      "training_eligible": false,
+      "network_contacted": false
+    },
+    {
+      "id": "vertex",
+      "api": "vertex_generate_content",
+      "enabled": false,
+      "api_key_environment": "GOOGLE_CLOUD_ACCESS_TOKEN",
+      "credential_present": false,
+      "configuration_error": "model ID or revision policy is unresolved",
+      "training_eligible": false,
+      "network_contacted": false
+    },
+    {
+      "id": "claude",
+      "api": "anthropic_messages",
+      "enabled": false,
+      "api_key_environment": "ANTHROPIC_API_KEY",
+      "credential_present": false,
+      "configuration_error": "model ID or revision policy is unresolved",
+      "training_eligible": false,
+      "network_contacted": false
+    }
+  ],
+  "budgets": {
+    "round_nanos": 0,
+    "task_nanos": 0,
+    "provider_nanos": 0,
+    "model_nanos": 0,
+    "tokens": {
+      "round": 0,
+      "task": 0,
+      "provider": 0,
+      "model": 0
+    }
+  },
+  "configuration_error": null,
+  "network_contacted": false
+}

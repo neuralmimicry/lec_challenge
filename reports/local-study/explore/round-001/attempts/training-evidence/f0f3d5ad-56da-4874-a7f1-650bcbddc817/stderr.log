@@ -1,0 +1,2 @@
+local teacher collection: local execution — cached local weights only; no provider HTTP calls
+execution: resuming original frozen runtime RuntimeOptions { device: Cuda { ordinal: 0 }, dtype: F32 }; resource availability is checked before new computation

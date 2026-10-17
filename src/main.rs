@@ -1,5 +1,6 @@
 //! Thin command boundary: trusted modules own decisions and durable evidence.
 mod cli_demo;
+mod provider_cli;
 use anyhow::{Context, Result, bail, ensure};
 use clap::{Parser, Subcommand};
 use futures_util::{StreamExt, stream};
@@ -485,6 +486,42 @@ enum Command {
         #[arg(long)]
         code: PathBuf,
     },
+    /// Create a bounded inference configuration without credentials, HTTP or spending.
+    ProviderInit(provider_cli::ProviderInitArguments),
+    /// Inspect provider configuration and credential presence without HTTP or spending.
+    ProviderCheck {
+        #[arg(long, default_value = "config/api-providers.toml")]
+        config: PathBuf,
+        /// Exit nonzero when no route passes local readiness checks; does not test HTTP.
+        #[arg(long)]
+        require_ready: bool,
+    },
+    /// Make one bounded text request or exact offline replay; never execute its output.
+    #[command(group(clap::ArgGroup::new("provider_mode").required(true).multiple(false).args(["offline", "live"])))]
+    ProviderRequest {
+        #[arg(long, conflicts_with = "live")]
+        offline: bool,
+        #[arg(long, conflicts_with = "offline")]
+        live: bool,
+        #[arg(long, requires = "live", conflicts_with = "offline")]
+        authorised_usd: Option<String>,
+        #[arg(long, default_value = "config/api-providers.toml")]
+        config: PathBuf,
+        #[arg(long)]
+        provider: String,
+        #[arg(long)]
+        prompt: String,
+        #[arg(long, default_value_t = 2048)]
+        max_output_tokens: u64,
+        #[arg(long, default_value = "api-001")]
+        round: String,
+        #[arg(long, default_value = "state/provider-api")]
+        state_dir: PathBuf,
+        #[arg(long, default_value = "recordings")]
+        recordings: PathBuf,
+        #[arg(long, default_value = "reports/provider-api")]
+        output: PathBuf,
+    },
     /// Acquire/replay all three configured businesses; persist responses before grading.
     Collect {
         #[arg(long)]
@@ -608,6 +645,17 @@ enum Command {
         #[arg(long)]
         round: Option<String>,
     },
+    /// Audit original assessment evidence without API calls or model execution.
+    AssessmentAudit {
+        #[arg(
+            long,
+            default_value = "reports/local-study/explore/round-001/report.json"
+        )]
+        exploration: PathBuf,
+        /// Defaults to a new directory; existing audit observations are preserved.
+        #[arg(long)]
+        output: Option<PathBuf>,
+    },
     Drill {
         #[arg(long)]
         offline: bool,
@@ -704,6 +752,7 @@ async fn main() {
         | Command::StudyEvaluateWorker { output, .. }
         | Command::Train { output, .. }
         | Command::Evaluate { output, .. } => output.join("last-failure.json"),
+        Command::ProviderRequest { output, .. } => output.join("last-failure.json"),
         Command::StudyRegrade { .. }
         | Command::StudyVerify { .. }
         | Command::StudyCompare { .. } => {
@@ -719,6 +768,8 @@ async fn main() {
             .unwrap_or_else(|| study.join(profile))
             .join("last-failure.json"),
         Command::StudySelect { study, .. } => study.join("selection-failure.json"),
+        Command::AssessmentAudit { .. } => PathBuf::from("reports/assessment-audit")
+            .join(format!("failure-{}.json", uuid::Uuid::new_v4())),
         _ => PathBuf::from("reports/last-failure.json"),
     };
     if let Err(error) = execute(cli.command).await {
@@ -1478,6 +1529,75 @@ async fn execute(command: Command) -> Result<()> {
             print(&report)?;
             ensure!(report.passed, "candidate failed or was quarantined");
         }
+        Command::AssessmentAudit {
+            exploration,
+            output,
+        } => {
+            let root = std::env::current_dir()?;
+            let output = output.unwrap_or_else(|| {
+                PathBuf::from("reports/assessment-audit").join(uuid::Uuid::new_v4().to_string())
+            });
+            let destination = output.clone();
+            let report = tokio::task::spawn_blocking(move || -> Result<_> {
+                let report = lec_distil::assessment::inspect(&root, &exploration)?;
+                lec_distil::assessment::write(&report, &destination)?;
+                Ok(report)
+            })
+            .await??;
+            print(
+                &serde_json::json!({"original_request_satisfied":report.original_request_satisfied,
+                "requirements":report.requirements,"audit_json":output.join("audit.json"),
+                "audit_markdown":output.join("audit.md"),"paid_api_calls":0,"model_execution":false}),
+            )?;
+            ensure!(
+                report.original_request_satisfied,
+                "original assessment evidence is incomplete or unverified; inspect the audit for exact next actions"
+            );
+        }
+        Command::ProviderInit(arguments) => {
+            print(&tokio::task::spawn_blocking(move || arguments.initialise()).await??)?;
+        }
+        Command::ProviderCheck {
+            config,
+            require_ready,
+        } => {
+            let status =
+                tokio::task::spawn_blocking(move || fleet::provider_status(&config)).await??;
+            print(&status)?;
+            ensure!(
+                !require_ready || status.locally_ready_for_live_request,
+                "no provider is locally ready; inspect readiness_blockers in the check output; this command made no network request"
+            );
+        }
+        Command::ProviderRequest {
+            offline,
+            live,
+            authorised_usd,
+            config,
+            provider,
+            prompt,
+            max_output_tokens,
+            round,
+            state_dir,
+            recordings,
+            output,
+        } => {
+            ensure!(offline != live, "choose exactly one of --live or --offline");
+            let completion = fleet::provider_request(fleet::ProviderRequestOptions {
+                config,
+                provider,
+                prompt,
+                max_output_tokens,
+                round,
+                authorised_nanos: authorised_usd.as_deref().map(usd_nanos).transpose()?,
+                offline,
+                state_directory: state_dir,
+                recordings,
+                output,
+            })
+            .await?;
+            print(&completion)?;
+        }
         Command::Collect {
             offline,
             live,
@@ -1748,6 +1868,13 @@ async fn collect(
         "another orchestrator owns this state directory"
     );
     let mut config = FleetConfig::load(config_path)?;
+    // General inference adapters cannot become assessment training providers or
+    // fallback routes merely by being enabled in the same configuration file.
+    for provider in &mut config.providers {
+        if provider.inference_only {
+            provider.enabled = false;
+        }
+    }
     config.require_three_businesses()?;
     let transport: Arc<dyn Transport> = if offline {
         Arc::new(ReplayTransport::load("recordings")?)
@@ -1775,7 +1902,11 @@ async fn collect(
         .collect::<Vec<_>>();
     let planned=tasks.iter().flat_map(|t|providers.iter().enumerate().map(move|(slot,p)|(t.clone(),p.clone(),slot as u32))).map(|(task,provider,slot)|{
         let cap=config.providers.iter().find(|p|p.id==provider).context("missing planned provider")?.max_output_tokens;
-        let request=fleet::FleetRequest{task_id:task.id.clone(),source_id:task.source_id.clone(),specification_sha256:task.specification_sha256.clone(),system_prompt:"Return only the requested Rust solve function. Do not attempt network, files or grader access.".into(),prompt:task.prompt(),sample_slot:slot,generation:fleet::GenerationParameters{max_output_tokens:cap,..Default::default()}};
+        let api=config.providers.iter().find(|p|p.id==provider).context("missing provider API")?.api;
+        let generation = if api == fleet::ProviderApi::ChatCompletions {
+            fleet::GenerationParameters{max_output_tokens:cap,..Default::default()}
+        } else { fleet::GenerationParameters{max_output_tokens:cap,temperature:1.0,top_p:1.0,seed:None} };
+        let request=fleet::FleetRequest{task_id:task.id.clone(),source_id:task.source_id.clone(),specification_sha256:task.specification_sha256.clone(),system_prompt:"Return only the requested Rust solve function. Do not attempt network, files or grader access.".into(),prompt:task.prompt(),sample_slot:slot,generation};
         Ok((task,provider,request))
     }).collect::<Result<Vec<_>>>()?;
     let plan_jobs = planned
@@ -1965,7 +2096,13 @@ async fn gate_command(incumbent: PathBuf, candidate: PathBuf) -> Result<()> {
         if !cached_pair{cli_demo::demo_freeze(Path::new("reports/gate-request-freeze.json"),&plan,&["incumbent","candidate"])?;}
         let a = resolve(incumbent, "incumbent").await?;
         let b = resolve(candidate, "candidate").await?;
-        evaluate::gate_files(&a, &b, &root, Path::new("config/gate.toml"))
+        // Full checkpoint/audit reconstruction hashes large artefacts and
+        // simulates intervals. Keep it off the asynchronous executor.
+        let verification_root = root.clone();
+        tokio::task::spawn_blocking(move || {
+            evaluate::gate_files(&a, &b, &verification_root, Path::new("config/gate.toml"))
+        })
+        .await?
     }
     .await;
     match result {
@@ -2294,7 +2431,71 @@ mod tests {
         Ok(())
     }
     #[test]
+    fn provider_cli_requires_explicit_mode_and_cannot_attach_spending_to_offline() {
+        let base = [
+            "lec-distil",
+            "provider-request",
+            "--provider",
+            "openai",
+            "--prompt",
+            "hello",
+        ];
+        assert!(Cli::try_parse_from(base).is_err());
+        let mut no_mode = base.to_vec();
+        no_mode.extend(["--authorised-usd", "0.25"]);
+        assert!(Cli::try_parse_from(no_mode).is_err());
+        let mut args = base.to_vec();
+        args.push("--offline");
+        assert!(Cli::try_parse_from(&args).is_ok());
+        args.extend(["--authorised-usd", "0.25"]);
+        assert!(Cli::try_parse_from(&args).is_err());
+        let mut args = base.to_vec();
+        args.extend(["--live", "--authorised-usd", "0.25"]);
+        assert!(Cli::try_parse_from(&args).is_ok());
+        args.push("--offline");
+        assert!(Cli::try_parse_from(&args).is_err());
+        assert!(Cli::try_parse_from(["lec-distil", "provider-check"]).is_ok());
+    }
+
+    #[test]
+    fn provider_setup_requires_explicit_choices_and_never_accepts_spending_authority() {
+        assert!(
+            Cli::try_parse_from(["lec-distil", "provider-init", "--provider", "openai"]).is_err()
+        );
+        let arguments = [
+            "lec-distil",
+            "provider-init",
+            "--provider",
+            "openai",
+            "--model",
+            "fixture-model",
+            "--model-revision",
+            "fixture-pinned",
+            "--input-usd-per-million",
+            "2.5",
+            "--cached-input-usd-per-million",
+            "2.5",
+            "--output-usd-per-million",
+            "10",
+            "--price-source",
+            "https://fixture.invalid/pricing",
+            "--price-date",
+            "2026-10-16",
+            "--budget-usd",
+            "0.25",
+        ];
+        assert!(Cli::try_parse_from(arguments).is_ok());
+        for extra in [vec!["--live"], vec!["--authorised-usd", "0.25"]] {
+            let mut altered = arguments.to_vec();
+            altered.extend(extra);
+            assert!(Cli::try_parse_from(altered).is_err());
+        }
+        assert!(Cli::try_parse_from(["lec-distil", "provider-check", "--require-ready"]).is_ok());
+    }
+
+    #[test]
     fn decimal_spend_is_exact_and_rejects_overflow() {
+        assert_eq!(usd_nanos("2.50").unwrap(), 2_500_000_000);
         assert_eq!(usd_nanos("20.000000001").unwrap(), 20_000_000_001);
         for v in ["NaN", "-1", "1e3", "1.0000000001", "9223372036854775807"] {
             assert!(usd_nanos(v).is_err());

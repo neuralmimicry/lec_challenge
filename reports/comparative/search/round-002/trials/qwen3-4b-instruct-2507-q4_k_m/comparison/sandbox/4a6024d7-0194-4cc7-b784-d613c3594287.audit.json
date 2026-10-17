@@ -1,0 +1,1 @@
+{"architecture":"x86_64","candidate_exit":0,"compile_ok":true,"deadline_elapsed_ms":2749,"deadline_exceeded":false,"deadline_ms":20000,"deadline_started_unix_ms":1792137429578,"events":[],"failure":null,"output":"2\n0\n0\n6\n10\n","output_truncated":false,"schema_version":3,"started_at_eof":true,"stderr":"","stderr_truncated":false,"syscalls_observed":67,"trace_complete":true}

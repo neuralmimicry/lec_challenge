@@ -1,0 +1,33 @@
+{
+  "run_id": "e9cea6a5-c56d-4863-92ef-b065a1b2e78f",
+  "task_id": "tables.last_by_key",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: warning: unused imports: `Value` and `from_str`\n --> /candidate/main.rs:1:18\n  |\n1 | use serde_json::{Value, from_str};\n  |                  ^^^^^  ^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0308]: mismatched types\n  --> /candidate/main.rs:16:35\n   |\n16 |         result.push(vec![key, map[key]]);\n   |                                   ^^^ expected `&i64`, found `i64`\n   |\nhelp: consider borrowing here\n   |\n16 |         result.push(vec![key, map[&key]]);\n   |                                   +\n\nerror: aborting due to 1 previous error; 1 warning emitted\n\nFor more information about this error, try `rustc --explain E0308`.\n"
+  ],
+  "cases_total": 5,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "0bf995b5f69865792503015f6af52b457c861b679877956e939c2137ddb4a562",
+  "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+  "oracle_sha256": "a734f6d465714cbebb072790fedff161d2fc28cbb257b3d04cee0feaf8b5b5fe",
+  "code_sha256": "cc3abfa2cd77fc94f514bd9f1f5d641b6e2ca8115be96089e22d336cb25d8b40",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:1",
+    "expected_image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/comparative/coding-development/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/comparative/coding-development/sandbox/e9cea6a5-c56d-4863-92ef-b065a1b2e78f.audit.json",
+  "audit_sha256": "c49805c0a9bce48c63605dceab9d789f9c3f3895257e315858e1d1516a58684f",
+  "failure": "compilation failed: warning: unused imports: `Value` and `from_str`\n --> /candidate/main.rs:1:18\n  |\n1 | use serde_json::{Value, from_str};\n  |                  ^^^^^  ^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0308]: mismatched types\n  --> /candidate/main.rs:16:35\n   |\n16 |         result.push(vec![key, map[key]]);\n   |                                   ^^^ expected `&i64`, found `i64`\n   |\nhelp: consider borrowing here\n   |\n16 |         result.push(vec![key, map[&key]]);\n   |                                   +\n\nerror: aborting due to 1 previous error; 1 warning emitted\n\nFor more information about this error, try `rustc --explain E0308`.\n",
+  "duration_ms": 7516,
+  "timeout_evidence": null
+}

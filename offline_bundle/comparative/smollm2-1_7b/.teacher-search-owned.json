@@ -1,0 +1,7 @@
+{
+  "schema_version": 1,
+  "directory": "offline_bundle/comparative/smollm2-1_7b",
+  "candidate_id": "smollm2-1_7b",
+  "model_id": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+  "revision": "31b70e2e869a7173562077fd711b654946d38674"
+}

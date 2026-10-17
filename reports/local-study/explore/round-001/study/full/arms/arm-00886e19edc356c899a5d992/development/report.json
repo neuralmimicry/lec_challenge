@@ -1,0 +1,55 @@
+{
+  "architecture": "conventional_qwen_lora",
+  "checkpoint_id": "6e07fcdaa532adbc1916fa0a8ff21187e2eff3b2ead31205d6d48ec239f465d4",
+  "coverage_complete": true,
+  "evidence_kind": "actual_local_study_checkpoint_evaluation",
+  "healthy_complete": true,
+  "held_out_used": false,
+  "infrastructure_or_generation_errors": 0,
+  "input_tokens": 3902,
+  "limitations": [
+    "Local train/development measurement only; no learning or promotion claim.",
+    "One fixed evaluation seed and jointly authored source groups do not establish general superiority.",
+    "Generation time excludes loading, hashing and grading; overlapping work is not serial wall time.",
+    "Every failed, empty, truncated or missing output remains in the planned denominator."
+  ],
+  "max_new_tokens": 512,
+  "observed": 16,
+  "output_tokens": 2351,
+  "pass_rate": 0.0625,
+  "passed": 1,
+  "per_source": [
+    {
+      "observed": 4,
+      "pass_rate": 0.0,
+      "passed": 0,
+      "source_id": "private-dispatch-v1"
+    },
+    {
+      "observed": 4,
+      "pass_rate": 0.0,
+      "passed": 0,
+      "source_id": "private-encoding-v1"
+    },
+    {
+      "observed": 4,
+      "pass_rate": 0.0,
+      "passed": 0,
+      "source_id": "private-money-v1"
+    },
+    {
+      "observed": 4,
+      "pass_rate": 0.25,
+      "passed": 1,
+      "source_id": "private-tables-v1"
+    }
+  ],
+  "plan_sha256": "23183bfa90e4ec5f088260cbb0cdffc7321925e65ff2284b1086e4b85cbdf13e",
+  "planned": 16,
+  "production_eligible": false,
+  "schema_version": 1,
+  "seed": 1729,
+  "split": "development",
+  "status": "complete",
+  "summed_generation_ms": 393026
+}

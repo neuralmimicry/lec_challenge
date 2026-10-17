@@ -1,0 +1,40 @@
+{
+  "run_id": "929b42ec-a2ea-4331-abfb-e7d025dc830b",
+  "task_id": "validation.identifier",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error[E0277]: can't compare `&char` with `char`\n --> /candidate/main.rs:9:59\n  |\n9 |                 chars.filter(|c| c.is_alphanumeric() || c == '_').for_each(|c| result.push(c));\n  |                                                           ^^ no implementation for `&char == char`\n  |\n  = help: the trait `PartialEq<char>` is not implemented for `&char`\nhelp: consider dereferencing here\n  |\n9 |                 chars.filter(|c| c.is_alphanumeric() || *c == '_').for_each(|c| result.push(c));\n  |                                                         +\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0277`.\n"
+  ],
+  "cases_total": 7,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "2903aa307cc68f12b909e9d116502f0bafded310dc2d9d4b7400593f4bf77355",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/sandbox/929b42ec-a2ea-4331-abfb-e7d025dc830b.audit.json",
+  "audit_sha256": "fb31509bcec81c569103b801650e1987087a092644bbc5b5905a121d04bb2199",
+  "failure": "compilation failed: error[E0277]: can't compare `&char` with `char`\n --> /candidate/main.rs:9:59\n  |\n9 |                 chars.filter(|c| c.is_alphanumeric() || c == '_').for_each(|c| result.push(c));\n  |                                                           ^^ no implementation for `&char == char`\n  |\n  = help: the trait `PartialEq<char>` is not implemented for `&char`\nhelp: consider dereferencing here\n  |\n9 |                 chars.filter(|c| c.is_alphanumeric() || *c == '_').for_each(|c| result.push(c));\n  |                                                         +\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0277`.\n",
+  "duration_ms": 25977,
+  "timeout_evidence": null,
+  "lifecycle_evidence": {
+    "receipt_path": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/sandbox/929b42ec-a2ea-4331-abfb-e7d025dc830b.lifecycle.json",
+    "receipt_sha256": "d35f17c0f2fdafb1bb5cfe9a4c3bf26859a3d88c7cfa6108a7352c0361626f8e"
+  }
+}

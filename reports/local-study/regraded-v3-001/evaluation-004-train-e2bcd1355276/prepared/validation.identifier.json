@@ -1,0 +1,42 @@
+{
+  "schema_version": 3,
+  "run_id": "929b42ec-a2ea-4331-abfb-e7d025dc830b",
+  "ownership_nonce": "6eae0dae-043c-42ee-bc64-165679e300c0",
+  "attempt_key": "ec6fe5770aa34df065b3e0dda2b1bf1cb4c558a898cdca870c09de5ab6d8c7a4",
+  "receipt_path": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/prepared/validation.identifier.json",
+  "report_path": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/sandbox/929b42ec-a2ea-4331-abfb-e7d025dc830b.json",
+  "task": {
+    "id": "validation.identifier",
+    "source_id": "private-validation-v1",
+    "lineage_id": "local-contract-pack-05",
+    "split": "train",
+    "specification": "Input is an ASCII string. Return whether it matches [A-Za-z_][A-Za-z0-9_]*. Do not reject language keywords.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "73a1daad33d404320785be889b5ca7e55a71f6754e64401370bc9d4786a282b2",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": "_name2",
+        "expected": true
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "use serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    if let Value::String(s) = input {\n        let mut chars = s.chars().peekable();\n        if let Some(c) = chars.next() {\n            if c.is_alphabetic() {\n                let mut result = String::new();\n                chars.filter(|c| c.is_alphanumeric() || c == '_').for_each(|c| result.push(c));\n                Value::String(result)\n            } else {\n                Value::Bool(false)\n            }\n        } else {\n            Value::Bool(false)\n        }\n    } else {\n        Value::Bool(false)\n    }\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/sandbox"
+  },
+  "code_sha256": "2903aa307cc68f12b909e9d116502f0bafded310dc2d9d4b7400593f4bf77355",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

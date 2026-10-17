@@ -1,0 +1,38 @@
+{
+  "model_id": "deepseek-coder-6_7b-q4_k_m",
+  "task_id": "encoding.hex_decode",
+  "source_id": "private-encoding-v1",
+  "specification_sha256": "535cec08e7ca750ff6426c55df5e10382b5d98dd2b972889c664a544c49c2a87",
+  "seed": 1729,
+  "plan_sha256": "79e25584f785f04f53b60d4cf3e4a730d2cf181ce11620a413bb1e0123bc1de2",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an ASCII string. Decode even-length hexadecimal accepting upper/lowercase; return byte array, or null for invalid digits or odd length. The returned array may contain up to 128 items.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":\"00aF\",\"expected\":[0,175]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "Here is the Rust code that solves the problem:\n\n```rust\nuse serde_json::Value;\nuse std::str::FromStr;\n\npub fn solve(input: Value) -> Value {\n    let input_str = input.as_str().unwrap();\n    if input_str.len() % 2 != 0 {\n        return Value::Null;\n    }\n    let bytes = hex::decode(input_str).unwrap_or(vec![0; 128]);\n    Value::Array(bytes.into_iter().map(|b| Value::Number(b.to_string().parse().unwrap())).collect())\n}\n```\n\nThis function takes a `serde_json::Value` as input, which is expected to be a string. It then checks if the length of the string is even. If it's not, it returns `Value::Null`.\n\nIf the string is even, it decodes the hexadecimal string into a byte array. If the decoding fails, it returns a byte array of 128 zeros.\n\nFinally, it converts each byte in the byte array to a number and returns a `Value::Array` containing these numbers.\n\nPlease note that this code assumes that the input is always a valid hexadecimal string. If the input might not be a valid hexadecimal string, you should add error handling to handle the `hex::FromHex` error.\n",
+    "checkpoint_id": "92da6238854f2fa902d8b2ad79d548536af1d3ab06821f323bd5bbcea2013276",
+    "finish_reason": "stop",
+    "input_tokens": 322,
+    "output_tokens": 329,
+    "elapsed_ms": 31397,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/comparative/search/round-002/trials/deepseek-coder-6_7b-q4_k_m/comparison/deepseek-coder-6_7b-q4_k_m/encoding.hex_decode.generation.json",
+    "sha256": "f4ab38158fe7b3d049aec62a1dfe8df80f8dd53cf9924186dabb3a5ee3fb3c76",
+    "bytes": 4991
+  },
+  "sandbox_report": {
+    "path": "reports/comparative/search/round-002/trials/deepseek-coder-6_7b-q4_k_m/comparison/sandbox/7f06976c-dc72-4e1c-bb33-1d419e4f6204.json",
+    "sha256": "c0c7574198ca812c7f61365e4acf5b0ae0fce8f1519a05c9b6e9f3c85927a8fb",
+    "bytes": 10181
+  },
+  "grading_error": null,
+  "success": false
+}

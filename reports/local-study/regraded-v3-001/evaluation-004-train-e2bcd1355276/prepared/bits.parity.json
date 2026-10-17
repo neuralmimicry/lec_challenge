@@ -1,0 +1,42 @@
+{
+  "schema_version": 3,
+  "run_id": "c7f9b869-f40e-4290-8d39-b56d333d0e8b",
+  "ownership_nonce": "e3b9949f-1ca1-4557-a5de-7765a5c343c7",
+  "attempt_key": "1adcaef90f0c59461f3db53ab8951f2bea5bc38812ea39d086e0ce57e6209c48",
+  "receipt_path": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/prepared/bits.parity.json",
+  "report_path": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/sandbox/c7f9b869-f40e-4290-8d39-b56d333d0e8b.json",
+  "task": {
+    "id": "bits.parity",
+    "source_id": "private-bits-v1",
+    "lineage_id": "local-contract-pack-11",
+    "split": "train",
+    "specification": "Input is an unsigned 32-bit integer. Return 0 for an even number of set bits and 1 for an odd number.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "0bcd161167bada8a31d8277e5b10e7a37f6d578b18487534fdccd5eac7023186",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": 13,
+        "expected": 1
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "use serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let num = input.as_u64().unwrap();\n    let count = num.count_ones() as u32;\n    if count % 2 == 0 {\n        Value::from(0)\n    } else {\n        Value::from(1)\n    }\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/sandbox"
+  },
+  "code_sha256": "b7f42a2c8d3e8af10f91cd8dbe970cb0de75ac233b6d679558bb9e06de7f82bd",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

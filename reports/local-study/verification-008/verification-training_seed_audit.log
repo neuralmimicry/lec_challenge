@@ -1,0 +1,10 @@
+
+running 2 tests
+test tests::partial_cycles_retain_their_actual_per_sample_exposure ... ok
+test tests::seed_labels_cannot_hide_an_optimiser_or_source_change ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Compiling lec-distil v0.1.0 (/home/pbisaacs/Developer/neuralmimicry/lec_challenge)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 2.16s
+     Running unittests examples/training_seed_audit.rs (target/debug/examples/training_seed_audit-048bdeba1703c6ef)

@@ -1,0 +1,40 @@
+{
+  "run_id": "b953b152-f0d6-4c69-816f-1366f86487ce",
+  "task_id": "intervals.merge",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error[E0599]: `()` is not an iterator\n --> /candidate/main.rs:5:77\n  |\n5 |     let mut intervals = intervals.sort_unstable_by_key(|&(start, _)| start).collect();\n  |                                                                             ^^^^^^^ `()` is not an iterator\n  |\nnote: method `sort_unstable_by_key` modifies its receiver in-place\n --> /candidate/main.rs:5:35\n  |\n5 |     let mut intervals = intervals.sort_unstable_by_key(|&(start, _)| start).collect();\n  |                                   ^^^^^^^^^^^^^^^^^^^^ this call modifies `intervals` in-place\n  = note: the following trait bounds were not satisfied:\n          `(): Iterator`\n          which is required by `&mut (): Iterator`\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0599`.\n"
+  ],
+  "cases_total": 6,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "1f654cfca4cf80b34877f7a97e1fa52c57f93873aaad4e41ef340fd946b6741c",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/sandbox/b953b152-f0d6-4c69-816f-1366f86487ce.audit.json",
+  "audit_sha256": "b272d2f5f33480e4bdc8a6b9b748a7cf39e9e4a9f7cb4efef0951925cd1c259c",
+  "failure": "compilation failed: error[E0599]: `()` is not an iterator\n --> /candidate/main.rs:5:77\n  |\n5 |     let mut intervals = intervals.sort_unstable_by_key(|&(start, _)| start).collect();\n  |                                                                             ^^^^^^^ `()` is not an iterator\n  |\nnote: method `sort_unstable_by_key` modifies its receiver in-place\n --> /candidate/main.rs:5:35\n  |\n5 |     let mut intervals = intervals.sort_unstable_by_key(|&(start, _)| start).collect();\n  |                                   ^^^^^^^^^^^^^^^^^^^^ this call modifies `intervals` in-place\n  = note: the following trait bounds were not satisfied:\n          `(): Iterator`\n          which is required by `&mut (): Iterator`\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0599`.\n",
+  "duration_ms": 20439,
+  "timeout_evidence": null,
+  "lifecycle_evidence": {
+    "receipt_path": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/sandbox/b953b152-f0d6-4c69-816f-1366f86487ce.lifecycle.json",
+    "receipt_sha256": "ec335070ee1b93ced1dd815fecdbc829712e109617d12652e0e0d92af9a02dbe"
+  }
+}

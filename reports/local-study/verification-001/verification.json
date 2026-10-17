@@ -1,0 +1,115 @@
+{
+  "assessment_complete": false,
+  "dependency_notices_complete": false,
+  "evidence_rule": "Passing software QA does not replace missing dependency grants, real provider recordings, approved data, assessment checkpoints or measured held-out learning.",
+  "local_quality_checks_passed": false,
+  "notice_gap_details": [
+    "bindgen_cuda-0.1.6"
+  ],
+  "observed_unix_ms": 1792083212709,
+  "original_notice_gaps": 1,
+  "project_skill_validated": true,
+  "resolved_dependency_packages": 350,
+  "schema_version": 1,
+  "software_checks_passed": true,
+  "steps": [
+    {
+      "command": [
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "elapsed_seconds": 2.294229223,
+      "evidence": {
+        "bytes": 0,
+        "path": "reports/local-study/verification-001/verification-format.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "exit_code": 0,
+      "name": "format",
+      "success": true
+    },
+    {
+      "command": [
+        "clippy",
+        "--locked",
+        "--offline",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "elapsed_seconds": 67.108893828,
+      "evidence": {
+        "bytes": 351,
+        "path": "reports/local-study/verification-001/verification-clippy.log",
+        "sha256": "95fdbe76e56b6a8c65078e13836d483c4e2963acd13c3723e2961cff8740e48c"
+      },
+      "exit_code": 0,
+      "name": "clippy",
+      "success": true
+    },
+    {
+      "command": [
+        "test",
+        "--locked",
+        "--offline"
+      ],
+      "elapsed_seconds": 210.59601146400001,
+      "evidence": {
+        "bytes": 20392,
+        "path": "reports/local-study/verification-001/verification-unit.log",
+        "sha256": "e2005e27c9bc03983838074748864fd819b55f292a65dc80175a84859915d0ff"
+      },
+      "exit_code": 0,
+      "name": "unit",
+      "success": true
+    },
+    {
+      "command": [
+        "test",
+        "--locked",
+        "--offline",
+        "original_tokenizer_masks_prompt_and_preserves_assistant_eos",
+        "--",
+        "--ignored"
+      ],
+      "elapsed_seconds": 168.690009114,
+      "evidence": {
+        "bytes": 1090,
+        "path": "reports/local-study/verification-001/verification-original_tokeniser.log",
+        "sha256": "c18ba8c66f08225bcfc6021e47c4d9acffc2cb28d2dbdf0e2fbf4728b9ac6120"
+      },
+      "exit_code": 0,
+      "name": "original_tokeniser",
+      "success": true
+    },
+    {
+      "command": [
+        "test",
+        "--locked",
+        "--offline",
+        "--test",
+        "sandbox_contract",
+        "--",
+        "--ignored",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "elapsed_seconds": 291.670194924,
+      "evidence": {
+        "bytes": 788,
+        "path": "reports/local-study/verification-001/verification-real_container_qa.log",
+        "sha256": "7aaaa1ed116eddeb8fd19e47fa3cbe9ebd5d899e129f03490157d2004a366a1c"
+      },
+      "exit_code": 0,
+      "name": "real_container_qa",
+      "success": true
+    }
+  ],
+  "validated_project_skills": [
+    "rust-distillation-evidence",
+    "rust-distillation-study"
+  ]
+}

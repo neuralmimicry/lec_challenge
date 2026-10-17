@@ -1,0 +1,8 @@
+{
+  "launch_unix_ms": 1792137357359,
+  "owner_pid": 1146431,
+  "prepared_receipt": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/prepared/graph.indegrees.json",
+  "prepared_sha256": "7f21d7f164ee70075124bbaab8fe305d496f2dac8aa00d9fd6eead4153c57663",
+  "run_id": "4c57f1b3-b424-4dfe-8192-ca1ee517f9b5",
+  "schema_version": 3
+}

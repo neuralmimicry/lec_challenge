@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "a52d044d05dc99f9af1879cdb69e7d80c4abc41b317440255f0ff27069084831",
+  "task_id": "text.reverse_words",
+  "source_id": "private-text-v1",
+  "success": false,
+  "raw_generation": {
+    "path": "reports/local-study/native-full-quality-001/composed-train/generations/text.reverse_words.json",
+    "sha256": "f211c1d6c6cfece52c76e02999043ba012b460e809aaeb77ceab41a009100bd8",
+    "bytes": 1786
+  },
+  "sandbox_report": {
+    "path": "reports/local-study/native-full-quality-001/composed-train/sandbox/54a629df-4c0d-4c43-8f91-d55b6becb815.json",
+    "sha256": "9b12a4c3c82467e5ee088fb7bf5afbbee2113aba365671c9e7b6a356a71c378f",
+    "bytes": 1435
+  },
+  "grading_error": null
+}

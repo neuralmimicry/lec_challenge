@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "initial_plan": {
+    "path": "reports/local-study/explore/round-001/cohorts/76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c/rollouts/stock.counts/student-plan.json",
+    "sha256": "81382f57e67170de57ded5785d4f7f2cd852d811f512392fdd9267218937f83f",
+    "bytes": 5207
+  },
+  "student_raw": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/stock.counts/student-raw.json",
+    "sha256": "26ab065783f1eb4e5973e54d364d9b8828a0bd28f02f37aadd76222fa1abdcc3",
+    "bytes": 2247
+  },
+  "student_grade": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox/aa458168-8857-4afb-9f03-2bdd4c52163e.json",
+    "sha256": "5e838cf5c4244e06f930b84c14a8b50d7b4e1ac983bc843423ec69640f4f80e2",
+    "bytes": 8492
+  },
+  "teacher_id": "student-self-f9523886352217de",
+  "teacher_assets": {
+    "path": "offline_bundle/base/assets.json",
+    "sha256": "54304e7f41519a4196674cba5e86593802f852b2b47882d6c19706f85f303ad4",
+    "bytes": 788
+  },
+  "teacher_checkpoint": null,
+  "runtime": {
+    "device": {
+      "cuda": {
+        "ordinal": 0
+      }
+    },
+    "dtype": "f32"
+  },
+  "request": {
+    "prompt": "Verified different training contract: Input is an array of ASCII strings. Return the most frequent string, lexicographically smallest on ties; return null if empty.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nVerified solution:\n```rust\nuse serde_json::{Value, Map};\nuse std::collections::HashMap;\n\npub fn solve(input: Value) -> Value {\n    if let Value::Array(arr) = input {\n        if arr.is_empty() {\n            return Value::Null;\n        }\n\n        let mut counts = HashMap::new();\n        for item in arr {\n            if let Value::String(s) = item {\n                *counts.entry(s).or_insert(0) += 1;\n            }\n        }\n\n        let mut most_frequent: Option<&String> = None;\n        let mut max_count = 0;\n\n        for (s, &count) in counts.iter() {\n            if count > max_count || (count == max_count && most_frequent.map_or(true, |mf| s < mf)) {\n                most_frequent = Some(s);\n                max_count = count;\n            }\n        }\n\n        most_frequent.map_or(Value::Null, |s| Value::String(s.clone()))\n    } else {\n        Value::Null\n    }\n}\n```\nNew task:\nWrite Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an array of ASCII strings. Return an object mapping every distinct string to its frequency.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[\"b\",\"a\",\"b\"],\"expected\":{\"a\":1,\"b\":2}}]\nActual frozen student candidate:\n```rust\nuse serde::{Deserialize, Serialize};\nuse std::collections::HashMap;\n\n#[derive(Deserialize, Serialize)]\npub struct Result {\n    pub frequency: HashMap<String, i64>,\n}\n\nfn solve(input: serde_json::Value) -> serde_json::Value {\n    let mut frequency = HashMap::new();\n    for line in input.as_array() {\n        let mut chars = line.as_str().chars().collect::<Vec<char>>();\n        let mut count = 0;\n        for c in chars {\n            count += c.to_digit(10).unwrap();\n        }\n        frequency.insert(chars.into_iter().collect::<String>(), count);\n    }\n    serde_json::Value::Object(frequency)\n}\n\nfn main() {\n    // Example usage\n    let input = serde_json::Value::Array(vec![\n        serde_json::Value::String(\"b\"),\n        serde_json::Value::String(\"a\"),\n        serde_json::Value::String(\"b\"),\n    ]);\n    let result = solve(input);\n    println!(\"{:?}\", result);\n}\n```\nActual trusted tool feedback:\n{\"bounded_diagnostic_untrusted_data\":\"compilation failed: error[E0428]: the name `main` is defined multiple times\\n  --> /candidate/main.rs:32:1\\n   |\\n22 | fn main() {\\n   | --------- previous definition of the value `main` here\\n...\\n32 | fn main() { let stdin = std::io::stdin(); for line in std::io::BufRead::lines(stdin.lock()) { let line = line.expect(\\\"input read\\\"); ...\\n   | ^^^^^^^^^ `main` redefined here\\n   |\\n   = note: `main` must be defined only once in the value namespace of this module\\n\\nerror[E0432]: unresolved import `serde`\\n --> /candidate/main.rs:1:5\\n  |\\n1 | use serde::{Deserialize, Serialize};\\n  |     ^^^^^ use of unresolved module or unlinked crate `serde`\\n  |\\n  = help: you might be missing a crate named `serde`\\n\\nerror[E0599]: no method named `as_str` found for reference `&Vec<Value>` in the current scope\\n  --> /candidate/main.rs:12:30\\n   |\\n12 |         let mut chars = line.as_str().chars().collect::<Vec<char>>();\\n   |                              ^^^^^^\\n   |\\nhelp: there is a method `as_ptr` with a similar name\\n   |\\n12 -         let mut chars = line.as_str().chars().collect::<Vec<char>>();\\n12 +         let mut chars = line.as_ptr().chars().collect::<Vec<char>>();\\n   |\\n\\nerror[E0308]: mismatched types\\n   --> /candidate/main.rs:25:35\\n    |\\n 25 |         serde_json::Value::String(\\\"b\\\"),\\n    |         ------------------------- ^^^ expected `String`, found `&str`\\n    |         |\\n    |         arguments to this enum variant are incorrect\\n    |\\nnote: tuple variant defined here\\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:151:5\\n    |\\n151 |     String(String),\\n    |     ^^^^^^\\nhelp: try using a conversion method\\n    |\\n 25 |         serde_json::Value::String(\\\"b\\\".to_string()),\\n    |                                      ++++++++++++\\n\\nerror[E0308]: mismatched types\\n   --> /candidate/main.rs:26:35\\n    |\\n 26 |         serde_json::Value::String(\\\"a\\\"),\\n    |         ------------------------- ^^^ expected `String`, found `&str`\\n    |         |\\n    |         arguments to this enum variant are incorrect\\n    |\\nnote: tuple variant defined here\\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:151:5\\n    |\\n151 |     String(String),\\n    |     ^^^^^^\\nhelp: try using a conversion method\\n    |\\n 26 |         serde_json::Value::String(\\\"a\\\".to_string()),\\n    |                                      ++++++++++++\\n\\nerror[E0308]: mismatched types\\n   --> /candidate/main.rs:27:35\\n    |\\n 27 |         serde_json::Value::String(\\\"b\\\"),\\n    |         ------------------------- ^^^ expected `String`, found `&str`\\n    |         |\\n    |         arguments to this enum variant are incorrect\\n    |\\nnote: tuple variant defined here\\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:151:5\\n    |\\n151 |     String(String),\\n    |     ^^^^^^\\nhelp: try using a conversion method\\n    |\\n 27 |         serde_json::Value::String(\\\"b\\\".to_string()),\\n    |                                      ++++++++++++\\n\\nerror: aborting due to 6 previous errors\\n\\nSome errors have detailed explanations: E0308, E0428, E0432, E0599.\\nFor more information about an error, try `rustc --explain E0308`.\\n\",\"cases_passed\":0,\"cases_total\":6,\"content_role\":\"compilation_feedback_only\",\"original_failure_is_not_a_success\":true,\"passed\":false,\"private_inputs_or_expected_outputs_exposed\":false,\"quarantined\":true,\"run_id\":\"aa458168-8857-4afb-9f03-2bdd4c52163e\",\"student_generation_complete\":true,\"tool\":\"trusted_container_grader\",\"trace_complete\":false}\nCritique and revise the candidate. Put any short explanation in Rust // comments and return complete compilable Rust source only. Do not invent tool results.",
+    "max_new_tokens": 768,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "supporting_sample_ids": [
+    "9f34cf373961913a3cf1067f1f2a71e0bef8368e1557d10e998cc099a00fab71"
+  ]
+}

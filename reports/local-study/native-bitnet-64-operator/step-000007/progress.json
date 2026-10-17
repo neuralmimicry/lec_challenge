@@ -1,0 +1,66 @@
+{
+  "freeze_sha256": "7f8fa1d353e3ae0c1660dfc0d575bb1aa2c07ff0f4bf9613cffed430081d370f",
+  "steps": 7,
+  "adapter": {
+    "path": "reports/local-study/native-bitnet-64-operator/step-000007/adapter.safetensors",
+    "sha256": "1e3d393fd562ac5fe4cf8e78f9d88b60a26aedb60c1cb4d39936ef814f48860d",
+    "bytes": 2009448
+  },
+  "optimizer": {
+    "path": "reports/local-study/native-bitnet-64-operator/step-000007/optimizer.safetensors",
+    "sha256": "933e69d22960e35e98b62b840e6a4ff6e63aca033600b4388533a7d6b3e55e65",
+    "bytes": 4019504
+  },
+  "initial_adapter_sha256": "a83ebffa8cd35331a61b484d9a2b7c3ceeb9ed160ba58110e7ee9a1fc8c7a19a",
+  "losses": [
+    3.0413382053375244,
+    3.340406656265259,
+    3.119142532348633,
+    3.2258100509643555,
+    3.2173948287963867,
+    3.4550015926361084,
+    2.9885201454162598
+  ],
+  "gradient_norms": [
+    0.006901837382305186,
+    0.03614816544677258,
+    0.07881699563430297,
+    0.15015985689021694,
+    0.18475643175817047,
+    0.27123881908792113,
+    0.33048876894497276
+  ],
+  "component_losses": [
+    {
+      "sequence_sft": 3.0413382053375244
+    },
+    {
+      "sequence_sft": 3.340406656265259
+    },
+    {
+      "sequence_sft": 3.119142532348633
+    },
+    {
+      "sequence_sft": 3.2258100509643555
+    },
+    {
+      "sequence_sft": 3.2173948287963867
+    },
+    {
+      "sequence_sft": 3.4550015926361084
+    },
+    {
+      "sequence_sft": 2.9885201454162598
+    }
+  ],
+  "alignment_diagnostics": [],
+  "sample_ids": [
+    "9a709fd0afa880d7d61490074636b6a836aa05da5d9a338a46aa8aca31efdce4",
+    "d34031fab7990f9d5bb1ac0465e3173de67d17f95496ed535260f239f3c4bc90",
+    "21748f9f3a9dec33f5c19fb7179ecdada908a2b27e6486b333f8a379f57d93bb",
+    "5dedbab9841301331ad4a8a4ef9d893e994c7abd27be5b97777071860da49a35",
+    "9f34cf373961913a3cf1067f1f2a71e0bef8368e1557d10e998cc099a00fab71",
+    "be57ee99f53e14a44a210dee5a0a227fbee04ea80f1c914f14447c3db087cded",
+    "f23b74be49ae4fb9f5a42d58f33244ef0c157aa0e4afe342a565baa7e7493c91"
+  ]
+}

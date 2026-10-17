@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "evidence_kind": "local_labelled_protocol_budget_and_failure_qa",
+  "date": "2026-10-16",
+  "assessment_promotion": false,
+  "live_api_connectivity_verified": false,
+  "paid_api_calls_made": 0,
+  "real_provider_outputs_collected": 0,
+  "provider_check": "provider-check.json",
+  "source_fingerprints": "source-sha256.txt",
+  "observed_credentials": {
+    "OPENAI_API_KEY": "absent",
+    "GEMINI_API_KEY": "absent",
+    "GOOGLE_CLOUD_ACCESS_TOKEN": "absent",
+    "ANTHROPIC_API_KEY": "absent"
+  },
+  "checks": [
+    {
+      "command": "cargo test --locked --offline --lib --bins --tests",
+      "exit_code": 0,
+      "passed": 321,
+      "failed": 0,
+      "ignored": 5,
+      "groups": [
+        {"target": "library", "passed": 298, "ignored": 2},
+        {"target": "binary", "passed": 17, "ignored": 0},
+        {"target": "gate_reporting", "passed": 3, "ignored": 0},
+        {"target": "run_launcher", "passed": 3, "ignored": 0},
+        {"target": "sandbox_contract", "passed": 0, "ignored": 3}
+      ],
+      "log": "tests.log"
+    },
+    {
+      "command": "cargo clippy --locked --offline --all-targets -- -D warnings",
+      "exit_code": 0,
+      "log": "clippy.log"
+    },
+    {"command": "cargo fmt --all --check", "exit_code": 0},
+    {"command": "git diff --check", "exit_code": 0}
+  ],
+  "cli_checks": [
+    {"case": "local provider-check with disabled template", "exit_code": 0, "network_contacted": false},
+    {"case": "live mode without spending authority", "exit_code": 1, "log": "missing-authority.log"},
+    {"case": "offline mode with empty recording directory", "exit_code": 1, "log": "missing-recording.log"},
+    {"case": "offline mode with a spending flag", "exit_code": 2, "log": "incompatible-mode.log"}
+  ],
+  "corrected_failures": [
+    {
+      "command": "cargo test --locked --offline",
+      "exit_code": 101,
+      "library_passed": 292,
+      "library_failed": 1,
+      "library_ignored": 2,
+      "failed_test": "teacher_search::tests::offline_and_failed_connectivity_preserve_inactive_model_bytes",
+      "cause": "Fixture used an absolute model directory against relative managed roots, so no candidate was eligible for the connectivity probe.",
+      "correction": "Fixture path now follows the production relative-directory contract. The final test verifies offline zero-probe behaviour, failed-connectivity state and unchanged weight bytes."
+    },
+    {
+      "command": "cargo test --locked --offline --lib --bins --tests",
+      "exit_code": 101,
+      "library_passed": 296,
+      "library_ignored": 2,
+      "binary_passed": 16,
+      "binary_failed": 1,
+      "failed_test": "tests::provider_cli_requires_explicit_mode_and_cannot_attach_spending_to_offline",
+      "cause": "A requires annotation did not reject the offline/spending combination at argument parsing. The runtime spending guard still rejected it before transport.",
+      "correction": "Added an explicit mutually exclusive mode group, offline/spending conflict and runtime mode assertion.",
+      "log": "intermediate-tests.log"
+    }
+  ],
+  "limitations": [
+    "Native response/authentication/recovery tests use explicitly labelled fixtures and make no paid provider calls.",
+    "Available models, account access, actual billing and output-training rights remain unresolved until an operator supplies reviewed configuration and authority.",
+    "Gemini requires a model accepting thinkingBudget=0; automatic thinking and tools are deliberately unsupported.",
+    "The five ignored tests cover actual CUDA driver QA, the original Qwen tokeniser and three OCI/container integration checks; this follow-up does not claim a new GPU, sandbox or provider-trained rehearsal."
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "51e2a803f86359125c31f16c1d0da7fc35ac18527b51f85f956f4872bf05792e",
+  "task_id": "dispatch.round_robin",
+  "source_id": "private-dispatch-v1",
+  "success": false,
+  "raw_generation": {
+    "path": "reports/local-study/explore/round-001/baselines/ternary_bitnet/generations/dispatch.round_robin.json",
+    "sha256": "52ac143ca2ee2107d71e4c64ea1e4242bfd4b005dea75fb953dfdfeb420bdf68",
+    "bytes": 1469
+  },
+  "sandbox_report": null,
+  "grading_error": null
+}

@@ -1,0 +1,38 @@
+{
+  "model_id": "qwen3-4b-instruct-2507-q4_k_m",
+  "task_id": "tables.inner_join",
+  "source_id": "private-tables-v1",
+  "specification_sha256": "369ef237ff250179b0b3e3c7af051af8aebc0329b6494d33af5f436c827ac699",
+  "seed": 1729,
+  "plan_sha256": "6d343a1ee585d9daf2a7fbaea768580a60e310abaf7186964443ef83a9a1013d",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input [left,right] has arrays of [key,value] integer rows, each side with unique keys. Return [key,left_value,right_value] for common keys in ascending key order.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[[[2,9],[1,4]],[[2,3],[3,8]]],\"expected\":[[2,9,3]]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let left: Vec<Value> = match input.get(\"left\") {\n        Some(v) => v.as_array().cloned().unwrap_or_default(),\n        None => return json!([[]]),\n    };\n\n    let right: Vec<Value> = match input.get(\"right\") {\n        Some(v) => v.as_array().cloned().unwrap_or_default(),\n        None => return json!([[]]),\n    };\n\n    let mut left_map: std::collections::HashMap<String, i64> = std::collections::HashMap::new();\n    let mut right_map: std::collections::HashMap<String, i64> = std::collections::HashMap::new();\n\n    for row in &left {\n        if let [key, value] = row.as_array().unwrap_or(&vec![]) {\n            if let Some(k) = key.as_str() {\n                if let Some(v) = value.as_i64() {\n                    left_map.insert(k.to_string(), v);\n                }\n            }\n        }\n    }\n\n    for row in &right {\n        if let [key, value] = row.as_array().unwrap_or(&vec![]) {\n            if let Some(k) = key.as_str() {\n                if let Some(v) = value.as_i64() {\n                    right_map.insert(k.to_string(), v);\n                }\n            }\n        }\n    }\n\n    let mut result = Vec::new();\n    let mut keys: Vec<String> = left_map.keys().cloned().collect();\n    keys.sort();\n\n    for key in keys {\n        if let Some(&left_val) = left_map.get(&key) {\n            if let Some(&right_val) = right_map.get(&key) {\n                result.push(json!([key, left_val, right_val]));\n            }\n        }\n    }\n\n    json!(result)\n}\n\nfn json<T>(value: T) -> Value\nwhere\n    T: serde::Serialize,\n{\n    serde_json::to_value(value).unwrap()\n}\n```",
+    "checkpoint_id": "2fde00ce69dd4899c70d020845e2638353015bba0fdf161b3eb965f2bca4464e",
+    "finish_reason": "stop",
+    "input_tokens": 238,
+    "output_tokens": 425,
+    "elapsed_ms": 68801,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison/qwen3-4b-instruct-2507-q4_k_m/tables.inner_join.generation.json",
+    "sha256": "38e5fc73430540188e360266328577e0f233f76a384be637567ad4abd9b867e2",
+    "bytes": 5584
+  },
+  "sandbox_report": {
+    "path": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison/sandbox/e0b4270c-ee57-4b30-91b3-5c661935e2e7.json",
+    "sha256": "e8ee5eff1d8f50ca93dcc99bc38e77214208c71b3ec5e8936f61ec2ac485dca3",
+    "bytes": 4432
+  },
+  "grading_error": null,
+  "success": false
+}

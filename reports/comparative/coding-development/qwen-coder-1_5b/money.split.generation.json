@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "evidence_kind": "actual_local_model_generation",
+  "recorded_unix_ms": 1792072428364,
+  "model_id": "qwen-coder-1_5b",
+  "task_id": "money.split",
+  "source_id": "private-money-v1",
+  "specification_sha256": "639498c83f5e053773149696cb44aea438f77b20c7b0e571d728085fde4db87b",
+  "seed": 1729,
+  "plan_sha256": "9aefcaf935435b296c63229638aad5a22a416ae171eda011a6812dd745667ea8",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input [cents,n] has nonnegative cents and n>=1. Split into n integer shares differing by at most one, with larger shares first. The number of shares is at most 64.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[10,3],\"expected\":[4,3,3]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::{Value, from_str};\n\npub fn solve(input: Value) -> Value {\n    let cents = input.as_array().unwrap().get(0).unwrap().as_i64().unwrap();\n    let n = input.as_array().unwrap().get(1).unwrap().as_i64().unwrap();\n    if cents < 0 || n < 1 {\n        return serde_json::Value::Null;\n    }\n\n    let mut shares = Vec::new();\n    let mut remaining_cents = cents;\n    let mut share_size = remaining_cents / n;\n    let remainder = remaining_cents % n;\n\n    for _ in 0..n {\n        shares.push(share_size);\n        if remainder > 0 {\n            share_size += 1;\n            remainder -= 1;\n        }\n    }\n\n    serde_json::to_value(shares).unwrap()\n}\n```",
+    "checkpoint_id": "c1b9b30e907950516ba3c646bdf570d8084c25a6410a0cdca80cf04b11bc13a8",
+    "finish_reason": "stop",
+    "input_tokens": 247,
+    "output_tokens": 184,
+    "elapsed_ms": 7859,
+    "complete": true
+  },
+  "generation_error": null,
+  "execution": {
+    "actual_device": "Cuda { gpu_id: 0 }",
+    "actual_dtype": "F16",
+    "checkpoint_id": "c1b9b30e907950516ba3c646bdf570d8084c25a6410a0cdca80cf04b11bc13a8",
+    "context_cap": 2048,
+    "cpu_fallback": false,
+    "cuda_active": true,
+    "cuda_feature_compiled": true,
+    "engine": "native_rust_candle",
+    "model_id": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+    "requested": {
+      "device": {
+        "cuda": {
+          "ordinal": 0
+        }
+      },
+      "dtype": "f16"
+    },
+    "revision": "2e1fd397ee46e1388853d2af2c993145b0f1098a"
+  }
+}

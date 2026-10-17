@@ -1,0 +1,33 @@
+{
+  "run_id": "27b950ac-2724-4843-b808-a5b690ae9ef1",
+  "task_id": "dispatch.priority",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: warning: unused import: `serde_json::Value`\n --> /candidate/main.rs:1:5\n  |\n1 | use serde_json::Value;\n  |     ^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0277]: a value of type `Vec<(i64, i64)>` cannot be built from an iterator over elements of type `(Value, Value)`\n --> /candidate/main.rs:6:18\n  |\n6 |     }).collect::<Vec<(i64, i64)>>();\n  |        -------   ^^^^^^^^^^^^^^^ value of type `Vec<(i64, i64)>` cannot be built from `std::iter::Iterator<Item=(Value, Value)>`\n  |        |\n  |        required by a bound introduced by this call\n  |\nhelp: the trait `FromIterator<(Value, Value)>` is not implemented for `Vec<(i64, i64)>`\n      but trait `FromIterator<(i64, i64)>` is implemented for it\n --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/alloc/src/vec/mod.rs:3993:0\n  = help: for that trait implementation, expected `i64`, found `Value`\nnote: the method call chain might not have had the expected associated types\n --> /candidate/main.rs:4:59\n  |\n4 |       let mut sorted_ids = input.as_array().unwrap().iter().map(|pair| {\n  |  __________________________-----_____________________------_^\n  | |                          |                         |\n  | |                          |                         `Iterator::Item` is `&Value` here\n  | |                          this expression has type `Value`\n5 | |         (pair[1], pair[0])\n6 | |     }).collect::<Vec<(i64, i64)>>();\n  | |______^ `Iterator::Item` changed to `(Value, Value)` here\nnote: required by a bound in `collect`\n --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/iter/traits/iterator.rs:2073:4\n\nerror[E0308]: mismatched types\n   --> /candidate/main.rs:16:100\n    |\n 16 |     serde_json::Value::Array(sorted_ids.into_iter().map(|(id, priority)| serde_json::Value::Number(id as f64)).collect())\n    |                                                                          ------------------------- ^^^^^^^^^ expected `Number`, found `f64`\n    |                                                                          |\n    |                                                                          arguments to this enum variant are incorrect\n    |\nnote: tuple variant defined here\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:142:5\n    |\n142 |     Number(Number),\n    |     ^^^^^^\n\nerror: aborting due to 2 previous errors; 1 warning emitted\n\nSome errors have detailed explanations: E0277, E0308.\nFor more information about an error, try `rustc --explain E0277`.\n"
+  ],
+  "cases_total": 5,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "0bf995b5f69865792503015f6af52b457c861b679877956e939c2137ddb4a562",
+  "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+  "oracle_sha256": "a734f6d465714cbebb072790fedff161d2fc28cbb257b3d04cee0feaf8b5b5fe",
+  "code_sha256": "dc2a50fe37f7cbe16e11d9314d0aa46f6067d0b961aa31a77c1541a0635ec79b",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:1",
+    "expected_image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/comparative/coding-development/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/comparative/coding-development/sandbox/27b950ac-2724-4843-b808-a5b690ae9ef1.audit.json",
+  "audit_sha256": "f0876b78c48791e7a1f31189417ed3d654646b79884e560141e36d56c4b9af0b",
+  "failure": "compilation failed: warning: unused import: `serde_json::Value`\n --> /candidate/main.rs:1:5\n  |\n1 | use serde_json::Value;\n  |     ^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0277]: a value of type `Vec<(i64, i64)>` cannot be built from an iterator over elements of type `(Value, Value)`\n --> /candidate/main.rs:6:18\n  |\n6 |     }).collect::<Vec<(i64, i64)>>();\n  |        -------   ^^^^^^^^^^^^^^^ value of type `Vec<(i64, i64)>` cannot be built from `std::iter::Iterator<Item=(Value, Value)>`\n  |        |\n  |        required by a bound introduced by this call\n  |\nhelp: the trait `FromIterator<(Value, Value)>` is not implemented for `Vec<(i64, i64)>`\n      but trait `FromIterator<(i64, i64)>` is implemented for it\n --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/alloc/src/vec/mod.rs:3993:0\n  = help: for that trait implementation, expected `i64`, found `Value`\nnote: the method call chain might not have had the expected associated types\n --> /candidate/main.rs:4:59\n  |\n4 |       let mut sorted_ids = input.as_array().unwrap().iter().map(|pair| {\n  |  __________________________-----_____________________------_^\n  | |                          |                         |\n  | |                          |                         `Iterator::Item` is `&Value` here\n  | |                          this expression has type `Value`\n5 | |         (pair[1], pair[0])\n6 | |     }).collect::<Vec<(i64, i64)>>();\n  | |______^ `Iterator::Item` changed to `(Value, Value)` here\nnote: required by a bound in `collect`\n --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/iter/traits/iterator.rs:2073:4\n\nerror[E0308]: mismatched types\n   --> /candidate/main.rs:16:100\n    |\n 16 |     serde_json::Value::Array(sorted_ids.into_iter().map(|(id, priority)| serde_json::Value::Number(id as f64)).collect())\n    |                                                                          ------------------------- ^^^^^^^^^ expected `Number`, found `f64`\n    |                                                                          |\n    |                                                                          arguments to this enum variant are incorrect\n    |\nnote: tuple variant defined here\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:142:5\n    |\n142 |     Number(Number),\n    |     ^^^^^^\n\nerror: aborting due to 2 previous errors; 1 warning emitted\n\nSome errors have detailed explanations: E0277, E0308.\nFor more information about an error, try `rustc --explain E0277`.\n",
+  "duration_ms": 5735,
+  "timeout_evidence": null
+}

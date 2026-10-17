@@ -1,0 +1,1904 @@
+{
+  "evidence_kind": "derived_measured_local_comparative_resources",
+  "inputs": [
+    {
+      "plan": {
+        "bytes": 24638,
+        "path": "reports/comparative/coding-development/plan.json",
+        "sha256": "9aefcaf935435b296c63229638aad5a22a416ae171eda011a6812dd745667ea8"
+      },
+      "report": {
+        "bytes": 1653,
+        "path": "reports/comparative/coding-development/report.json",
+        "sha256": "a1761cfabc8dea910d15fe3e0a133c4b81f28f27bbefba25ff760fc045082ab2"
+      }
+    },
+    {
+      "plan": {
+        "bytes": 23455,
+        "path": "reports/comparative/control-development/plan.json",
+        "sha256": "b2e46b0f4ac46ecbb1b6568e9669ef5157b8a6343802f749cfac8ae999e29d88"
+      },
+      "report": {
+        "bytes": 1124,
+        "path": "reports/comparative/control-development/report.json",
+        "sha256": "140ec32fde7644d05d0f37b47868fea788afd7c18cccdd5d05d6c702942a80fc"
+      }
+    }
+  ],
+  "limitations": [
+    "Generation time is reported by the native engine; sums exclude asset checks, loading, grading and idle time, and are not CUDA kernel time.",
+    "Sandbox durations include container compilation/execution/cleanup and can overlap inference and each other; summed times are not end-to-end elapsed time or CPU core time.",
+    "Missing generations have unknown duration and remain failures in comparative denominators.",
+    "All inference is local. Zero remote inference charges do not imply zero total cost: electricity, hardware depreciation, model downloads and labour were not priced.",
+    "No training round or learning improvement occurred in this experiment, so cost per point of learning is not applicable.",
+    "One decoding seed on four jointly authored development sources supports descriptive comparisons only."
+  ],
+  "models": [
+    {
+      "complete_generations": 16,
+      "cost_per_point_of_learning_usd": null,
+      "generations": 16,
+      "input_tokens": 3902,
+      "mean_generation_seconds": 5.3416875,
+      "model": "qwen-coder-0_5b",
+      "output_tokens": 2210,
+      "passed": 0,
+      "planned_tasks": 16,
+      "remote_inference_calls": 0,
+      "remote_inference_charge_usd": 0,
+      "sandbox_runs": 16,
+      "summed_generation_seconds": 85.467,
+      "summed_sandbox_wall_seconds": 116.77,
+      "total_monetary_cost_usd": null
+    },
+    {
+      "complete_generations": 16,
+      "cost_per_point_of_learning_usd": null,
+      "generations": 16,
+      "input_tokens": 3902,
+      "mean_generation_seconds": 9.350875,
+      "model": "qwen-coder-1_5b",
+      "output_tokens": 2346,
+      "passed": 2,
+      "planned_tasks": 16,
+      "remote_inference_calls": 0,
+      "remote_inference_charge_usd": 0,
+      "sandbox_runs": 16,
+      "summed_generation_seconds": 149.614,
+      "summed_sandbox_wall_seconds": 126.527,
+      "total_monetary_cost_usd": null
+    },
+    {
+      "complete_generations": 16,
+      "cost_per_point_of_learning_usd": null,
+      "generations": 16,
+      "input_tokens": 5046,
+      "mean_generation_seconds": 20.0609375,
+      "model": "deepseek-coder-1_3b",
+      "output_tokens": 5328,
+      "passed": 0,
+      "planned_tasks": 16,
+      "remote_inference_calls": 0,
+      "remote_inference_charge_usd": 0,
+      "sandbox_runs": 16,
+      "summed_generation_seconds": 320.975,
+      "summed_sandbox_wall_seconds": 114.36,
+      "total_monetary_cost_usd": null
+    },
+    {
+      "complete_generations": 16,
+      "cost_per_point_of_learning_usd": null,
+      "generations": 16,
+      "input_tokens": 4258,
+      "mean_generation_seconds": 16.63725,
+      "model": "smollm2-1_7b",
+      "output_tokens": 3984,
+      "passed": 0,
+      "planned_tasks": 16,
+      "remote_inference_calls": 0,
+      "remote_inference_charge_usd": 0,
+      "sandbox_runs": 16,
+      "summed_generation_seconds": 266.196,
+      "summed_sandbox_wall_seconds": 124.613,
+      "total_monetary_cost_usd": null
+    }
+  ],
+  "observed_unix_ms": 1792073382076,
+  "promotable": false,
+  "schema_version": 1,
+  "tasks": [
+    {
+      "evidence": {
+        "bytes": 2647,
+        "path": "reports/comparative/coding-development/qwen-coder-0_5b/money.parse.json",
+        "sha256": "f9193762a2f423ac5a87dc702b796b3565457929bcda534403c62574f3536a79"
+      },
+      "generation": {
+        "complete": true,
+        "elapsed_ms": 4518,
+        "finish_reason": "stop",
+        "input_tokens": 255,
+        "output_tokens": 120
+      },
+      "generation_error": null,
+      "grading_error": null,
+      "model": "qwen-coder-0_5b",
+      "sandbox": {
+        "cases_passed": 0,
+        "cases_total": 9,
+        "elapsed_ms": 5551,
+        "passed": false,
+        "quarantined": true,
+        "trace_complete": false
+      },
+      "source_id": "private-money-v1",
+      "success": false,
+      "task_id": "money.parse"
+    },
+    {
+      "evidence": {
+        "bytes": 2459,
+        "path": "reports/comparative/coding-development/qwen-coder-0_5b/money.format.json",
+        "sha256": "5a3ffeb3b2092cd4d6fdea86f6c81a4df6f529cd0dcc2551d7993e9be5891bee"
+      },
+      "generation": {
+        "complete": true,
+        "elapsed_ms": 3409,
+        "finish_reason": "stop",
+        "input_tokens": 235,
+        "output_tokens": 96
+      },
+      "generation_error": null,
+      "grading_error": null,
+      "model": "qwen-coder-0_5b",
+      "sandbox": {
+        "cases_passed": 0,
+        "cases_total": 6,
+        "elapsed_ms": 4988,
+        "passed": false,
+        "quarantined": true,
+        "trace_complete": false
+      },
+      "source_id": "private-money-v1",
+      "success": false,
+      "task_id": "money.format"
+    },
+    {
+      "evidence": {
+        "bytes": 2613,
+        "path": "reports/comparative/coding-development/qwen-coder-0_5b/money.split.json",
+        "sha256": "a32434f3765f26f79a9910e7080c5a85ee15f3d2b2e18f52257f505039655d2f"
+      },
+      "generation": {
+        "complete": true,
+        "elapsed_ms": 4724,
+        "finish_reason": "stop",
+        "input_tokens": 247,
+        "output_tokens": 121
+      },
+      "generation_error": null,
+      "grading_error": null,
+      "model": "qwen-coder-0_5b",
+      "sandbox": {
+        "cases_passed": 0,
+        "cases_total": 5,
+        "elapsed_ms": 9096,
+        "passed": false,
+        "quarantined": true,
+        "trace_complete": false
+      },
+      "source_id": "private-money-v1",
+      "success": false,
+      "task_id": "money.split"
+    },
+    {
+      "evidence": {
+        "bytes": 2457,
+        "path": "reports/comparative/coding-development/qwen-coder-0_5b/money.basket.json",
+        "sha256": "76a18b3cf1734276648a1e0f98fdf17766c812aef81a996260ea8cfc89b0a483"
+      },
+      "generation": {
+        "complete": true,
+        "elapsed_ms": 3548,
+        "finish_reason": "stop",
+        "input_tokens": 235,
+        "output_tokens": 88
+      },
+      "generation_error": null,
+      "grading_error": null,
+      "model": "qwen-coder-0_5b",
+      "sandbox": {
+        "cases_passed": 0,
+        "cases_total": 5,
+        "elapsed_ms": 6514,
+        "passed": false,
+        "quarantined": true,
+        "trace_complete": false
+      },
+      "source_id": "private-money-v1",
+      "success": false,
+      "task_id": "money.basket"
+    },
+    {
+      "evidence": {
+        "bytes": 2714,
+        "path": "reports/comparative/coding-development/qwen-coder-0_5b/dispatch.finish_order.json",
+        "sha256": "cbb75156b1b69eaf96151731747b60700741b2c846d6f1f40987a7d4139e67cd"
+      },
+      "generation": {
+        "complete": true,
+        "elapsed_ms": 4569,
+        "finish_reason": "stop",
+        "input_tokens": 250,
+        "output_tokens": 113
+      },
+      "generation_error": null,
+      "grading_error": null,
+      "model": "qwen-coder-0_5b",
+      "sandbox": {
+        "cases_passed": 0,
+        "cases_total": 5,
+        "elapsed_ms": 9602,
+        "passed": false,
+        "quarantined": true,
+        "trace_complete": false
+      },
+      "source_id": "private-dispatch-v1",
+      "success": false,
+      "task_id": "dispatch.finish_order"
+    },
+    {
+      "evidence": {
+        "bytes": 2494,
+        "path": "reports/comparative/coding-development/qwen-coder-0_5b/dispatch.waiting.json",
+        "sha256": "1e470ffc1fe6f313894f67fcf2c94545643f380fe09475193d3128c33a26d33d"
+      },
+      "generation": {
+        "complete": true,
+        "elapsed_ms": 2907,
+        "finish_reason": "stop",
+        "input_tokens": 241,
+        "output_tokens": 83
+      },
+      "generation_error": null,
+      "grading_error": null,
+      "model": "qwen-coder-0_5b",
+      "sandbox": {
+        "cases_passed": 0,
+        "cases_total": 5,
+        "elapsed_ms": 7542,
+        "passed": false,
+        "quarantined": true,
+        "trace_complete": false
+      },
+      "source_id": "private-dispatch-v1",
+      "success": false,
+      "task_id": "dispatch.waiting"
+    },
+    {
+      "evidence": {
+        "bytes": 2959,
+        "path": "reports/comparative/coding-development/qwen-coder-0_5b/dispatch.round_robin.json",
+        "sha256": "33c3eb0169131443d40d932bfa547d4c4a8ea1f6cba1c1cdf3d3c4c0e8e7a6bc"
+      },
+      "generation": {
+        "complete": true,
+        "elapsed_ms": 5753,
+        "finish_reason": "stop",
+        "input_tokens": 259,
+        "output_tokens": 162
+      },
+      "generation_error": null,
+      "grading_error": null,
+      "model": "qwen-coder-0_5b",
+      "sandbox": {
+        "cases_passed": 0,
+        "cases_total": 5,
+        "elapsed_ms": 8884,
+        "passed": false,
+        "quarantined": true,
+        "trace_complete": false
+      },
+      "source_id": "private-dispatch-v1",
+      "success": false,
+      "task_id": "dispatch.round_robin"
+    },
+    {
+      "evidence": {
+        "bytes": 2680,
+        "path": "reports/comparative/coding-development/qwen-coder-0_5b/dispatch.priority.json",
+        "sha256": "203919c81b358e87e88588dd05946288be1e4ef82e862dbf697a7b3545c8513f"
+      },
+      "generation": {
+        "complete": true,
+        "elapsed_ms": 5579,
+        "finish_reason": "stop",
+        "input_tokens": 243,
+        "output_tokens": 155
+      },
+      "generation_error": null,
+      "grading_error": null,
+      "model": "qwen-coder-0_5b",
+      "sandbox": {
+        "cases_passed": 0,
+        "cases_total": 5,
+        "elapsed_ms": 5735,
+        "passed": false,
+        "quarantined": true,
+        "trace_complete": false
+      },
+      "source_id": "private-dispatch-v1",
+      "success": false,
+      "task_id": "dispatch.priority"
+    },
+    {
+      "evidence": {
+        "bytes": 2419,
+        "path": "reports/comparative/coding-development/qwen-coder-0_5b/encoding.hex_encode.json",
+        "sha256": "68562c7a77caa28b2c48ef63b8d4130fb9c53a01a2887c03176933b0920c020c"
+      },
+      "generation": {
+        "complete": true,
+        "elapsed_ms": 2788,
+        "finish_reason": "stop",
+        "input_tokens": 232,
+        "output_tokens": 73
+      },
+      "generation_error": null,
+      "grading_error": null,
+      "model": "qwen-coder-0_5b",
+      "sandbox": {
+        "cases_passed": 0,
+        "cases_total": 5,
+        "elapsed_ms": 9554,
+        "passed": false,
+        "quarantined": true,
+        "trace_complete": false
+      },
+      "source_id": "private-encoding-v1",
+      "success": false,
+      "task_id": "encoding.hex_encode"
+    },
+    {
+      "evidence": {
+        "bytes": 2682,
+        "path": "reports/comparative/coding-development/qwen-coder-0_5b/encoding.hex_decode.json",
+        "sha256": "4a2ac209325ea12b5e21ea67a5aab26843edc4ff61d60ceca0ef2eec23b9d716"
+      },
+      "generation": {
+        "complete": true,
+        "elapsed_ms": 4497,
+        "finish_reason": "stop",
+        "input_tokens": 248,
+        "output_tokens": 131
+      },
+      "generation_error": null,
+      "grading_error": null,
+      "model": "qwen-coder-0_5b",
+      "sandbox": {
+        "cases_passed": 0,
+        "cases_total": 7,
+        "elapsed_ms": 11144,
+        "passed": false,
+        "quarantined": true,
+        "trace_complete": false
+      },
+      "source_id": "private-encoding-v1",
+      "success": false,
+      "task_id": "encoding.hex_decode"
+    },
+    {
+      "evidence": {
+        "bytes": 2702,
+        "path": "reports/comparative/coding-development/qwen-coder-0_5b/encoding.caesar.json",
+        "sha256": "975dcfe7018a1771aab31f5afeab0d751738ce3e8db05fa88778e423d64c0973"
+      },
+      "generation": {
+        "complete": true,
+        "elapsed_ms": 4957,
+        "finish_reason": "stop",
+        "input_tokens": 237,
+        "output_tokens": 140
+      },
+      "generation_error": null,
+      "grading_error": null,
+      "model": "qwen-coder-0_5b",
+      "sandbox": {
+        "cases_passed": 0,
+        "cases_total": 5,
+        "elapsed_ms": 4771,
+        "passed": false,
+        "quarantined": true,
+        "trace_complete": false
+      },
+      "source_id": "private-encoding-v1",
+      "success": false,
+      "task_id": "encoding.caesar"
+    },
+    {
+      "evidence": {
+        "bytes": 2962,
+        "path": "reports/comparative/coding-development/qwen-coder-0_5b/encoding.rot13.json",
+        "sha256": "a8350d82cc6ff57e3da75add892e66c60312b7c8d3a96b845e49d0942ba63368"
+      },
+      "generation": {
+        "complete": true,
+        "elapsed_ms": 8605,
+        "finish_reason": "stop",
+        "input_tokens": 227,
+        "output_tokens": 216
+      },
+      "generation_error": null,
+      "grading_error": null,
+      "model": "qwen-coder-0_5b",
+      "sandbox": {
+        "cases_passed": 0,
+        "cases_total": 5,
+        "elapsed_ms": 9393,
+        "passed": false,
+        "quarantined": true,
+        "trace_complete": false
+      },
+      "source_id": "private-encoding-v1",
+      "success": false,
+      "task_id": "encoding.rot13"
+    },
+    {
+      "evidence": {
+        "bytes": 2657,
+        "path": "reports/comparative/coding-development/qwen-coder-0_5b/tables.sort_rows.json",
+        "sha256": "c5db1fa97f8480ae157c85b86ac79646fb6cb5b78489a461a444cc85134ae784"
+      },
+      "generation": {
+        "complete": true,
+        "elapsed_ms": 5415,
+        "finish_reason": "stop",
+        "input_tokens": 245,
+        "output_tokens": 142
+      },
+      "generation_error": null,
+      "grading_error": null,
+      "model": "qwen-coder-0_5b",
+      "sandbox": {
+        "cases_passed": 0,
+        "cases_total": 5,
+        "elapsed_ms": 5048,
+        "passed": false,
+        "quarantined": true,
+        "trace_complete": false
+      },
+      "source_id": "private-tables-v1",
+      "success": false,
+      "task_id": "tables.sort_rows"
+    },
+    {
+      "evidence": {
+        "bytes": 2708,
+        "path": "reports/comparative/coding-development/qwen-coder-0_5b/tables.last_by_key.json",
+        "sha256": "82b23d65c4eda9cb151be282769ab1622d90f2e8586b1f7c5134e907fc3143c3"
+      },
+      "generation": {
+        "complete": true,
+        "elapsed_ms": 4678,
+        "finish_reason": "stop",
+        "input_tokens": 247,
+        "output_tokens": 128
+      },
+      "generation_error": null,
+      "grading_error": null,
+      "model": "qwen-coder-0_5b",
+      "sandbox": {
+        "cases_passed": 0,
+        "cases_total": 5,
+        "elapsed_ms": 9312,
+        "passed": false,
+        "quarantined": true,
+        "trace_complete": false
+      },
+      "source_id": "private-tables-v1",
+      "success": false,
+      "task_id": "tables.last_by_key"
+    },
+    {
+      "evidence": {
+        "bytes": 2572,
+        "path": "reports/comparative/coding-development/qwen-coder-0_5b/tables.group_sums.json",
+        "sha256": "36c3c54cbd4d1fe3afe1607270020c3a6f25dd667c7d1b5c9fcb446f13d83614"
+      },
+      "generation": {
+        "complete": true,
+        "elapsed_ms": 5436,
+        "finish_reason": "stop",
+        "input_tokens": 242,
+        "output_tokens": 126
+      },
+      "generation_error": null,
+      "grading_error": null,
+      "model": "qwen-coder-0_5b",
+      "sandbox": {
+        "cases_passed": 0,
+        "cases_total": 5,
+        "elapsed_ms": 6233,
+        "passed": false,
+        "quarantined": true,
+        "trace_complete": false
+      },
+      "source_id": "private-tables-v1",
+      "success": false,
+      "task_id": "tables.group_sums"
+    },
+    {
+      "evidence": {
+        "bytes": 3453,
+        "path": "reports/comparative/coding-development/qwen-coder-0_5b/tables.inner_join.json",
+        "sha256": "c7b9780caf73082a2aa10de1706c900250f4be47152ef5dfbaa6aaec526917b1"
+      },
+      "generation": {
+        "complete": true,
+        "elapsed_ms": 14084,
+        "finish_reason": "stop",
+        "input_tokens": 259,
+        "output_tokens": 316
+      },
+      "generation_error": null,
+      "grading_error": null,
+      "model": "qwen-coder-0_5b",
+      "sandbox": {
+        "cases_passed": 0,
+        "cases_total": 5,
+        "elapsed_ms": 3403,
+        "passed": false,
+        "quarantined": true,
+        "trace_complete": false
+      },
+      "source_id": "private-tables-v1",
+      "success": false,
+      "task_id": "tables.inner_join"
+    },
+    {
+      "evidence": {
+        "bytes": 2676,
+        "path": "reports/comparative/coding-development/qwen-coder-1_5b/money.parse.json",
+        "sha256": "c5d583b8200d6c695845a3ddddb8b581c6cc39ce458a34eb4fc156d3650fe77e"
+      },
+      "generation": {
+        "complete": true,
+        "elapsed_ms": 5681,
+        "finish_reason": "stop",
+        "input_tokens": 255,
+        "output_tokens": 137
+      },
+      "generation_error": null,
+      "grading_error": null,
+      "model": "qwen-coder-1_5b",
+      "sandbox": {
+        "cases_passed": 5,
+        "cases_total": 9,
+        "elapsed_ms": 5521,
+        "passed": false,
+        "quarantined": true,
+        "trace_complete": true
+      },
+      "source_id": "private-money-v1",
+      "success": false,
+      "task_id": "money.parse"
+    },
+    {
+      "evidence": {
+        "bytes": 2745,
+        "path": "reports/comparative/coding-development/qwen-coder-1_5b/money.format.json",
+        "sha256": "5cefb74644504f019f9984c37c51ae217f33abc6f4f696b742ec3e540bbd90d2"
+      },
+      "generation": {
+        "complete": true,
+        "elapsed_ms": 6676,
+        "finish_reason": "stop",
+        "input_tokens": 235,
+        "output_tokens": 162
+      },
+      "generation_error": null,
+      "grading_error": null,
+      "model": "qwen-coder-1_5b",
+      "sandbox": {
+        "cases_passed": 0,
+        "cases_total": 6,
+        "elapsed_ms": 11126,
+        "passed": false,
+        "quarantined": true,
+        "trace_complete": false
+      },
+      "source_id": "private-money-v1",
+      "success": false,
+      "task_id": "money.format"
+    },
+    {
+      "evidence": {
+        "bytes": 2852,
+        "path": "reports/comparative/coding-development/qwen-coder-1_5b/money.split.json",
+        "sha256": "951ca18cfb182ea86d2ba92e51a6b8c5f65c7df924b1df487303cb02ce2ebb75"
+      },
+      "generation": {
+        "complete": true,
+        "elapsed_ms": 7859,
+        "finish_reason": "stop",
+        "input_tokens": 247,
+        "output_tokens": 184
+      },
+      "generation_error": null,
+      "grading_error": null,
+      "model": "qwen-coder-1_5b",
+      "sandbox": {
+        "cases_passed": 0,
+        "cases_total": 5,
+        "elapsed_ms": 3611,
+        "passed": false,
+        "quarantined": true,
+        "trace_complete": false
+      },
+      "source_id": "private-money-v1",
+      "success": false,
+      "task_id": "money.split"
+    },
+    {
+      "evidence": {
+        "bytes": 2391,
+        "path": "reports/comparative/coding-development/qwen-coder-1_5b/money.basket.json",
+        "sha256": "05848aba7a76ae8059dde3fad8fce0ed2c4a7fc4ba531fc4c1bdb7a30edfa772"
+      },
+      "generation": {
+        "complete": true,
+        "elapsed_ms": 4478,
+        "finish_reason": "stop",
+        "input_tokens": 235,
+        "output_tokens": 78
+      },
+      "generation_error": null,
+      "grading_error": null,
+      "model": "qwen-coder-1_5b",
+      "sandbox": {
+        "cases_passed": 0,
+        "cases_total": 5,
+        "elapsed_ms": 12211,
+        "passed": false,
+        "quarantined": true,
+        "trace_complete": false
+      },
+      "source_id": "private-money-v1",
+      "success": false,
+      "task_id": "money.basket"
+    },
+    {
+      "evidence": {
+        "bytes": 2673,
+        "path": "reports/comparative/coding-development/qwen-coder-1_5b/dispatch.finish_order.json",
+        "sha256": "a74e69fa81ae8d05b9160848bdf77ef5fe26056ecdd31c049c35dd54aec4404f"
+      },
+      "generation": {
+        "complete": true,
+        "elapsed_ms": 7225,
+        "finish_reason": "stop",
+        "input_tokens": 250,
+        "output_tokens": 122
+      },
+      "generation_error": null,
+      "grading_error": null,
+      "model": "qwen-coder-1_5b",
+      "sandbox": {
+        "cases_passed": 5,
+        "cases_total": 5,
+        "elapsed_ms": 6448,
+        "passed": true,
+        "quarantined": false,
+        "trace_complete": true
+      },
+      "source_id": "private-dispatch-v1",
+      "success": true,
+      "task_id": "dispatch.finish_order"
+    },
+    {
+      "evidence": {
+        "bytes": 2659,
+        "path": "reports/comparative/coding-development/qwen-coder-1_5b/dispatch.waiting.json",
+        "sha256": "9a53d8c96a7029412fc04749f984a12e490828a7cea4a2eed68a1c54ce51c36d"
+      },
+      "generation": {
+        "complete": true,
+        "elapsed_ms": 6007,
+        "finish_reason": "stop",
+        "input_tokens": 241,
+        "output_tokens": 124
+      },
+      "generation_error": null,
+      "grading_error": null,
+      "model": "qwen-coder-1_5b",
+      "sandbox": {
+        "cases_passed": 5,
+        "cases_total": 5,
+        "elapsed_ms": 10531,
+        "passed": true,
+        "quarantined": false,
+        "trace_complete": true
+      },
+      "source_id": "private-dispatch-v1",
+      "success": true,
+      "task_id": "dispatch.waiting"
+    },
+    {
+      "evidence": {
+        "bytes": 2944,
+        "path": "reports/comparative/coding-development/qwen-coder-1_5b/dispatch.round_robin.json",
+        "sha256": "970cd14702f401ccf79a5ce373cb9aba36ca9736fb4f56c70f97c1df96539e55"
+      },
+      "generation": {
+        "complete": true,
+        "elapsed_ms": 6984,
+        "finish_reason": "stop",
+        "input_tokens": 259,
+        "output_tokens": 170
+      },
+      "generation_error": null,
+      "grading_error": null,
+      "model": "qwen-coder-1_5b",
+      "sandbox": {
+        "cases_passed": 0,
+        "cases_total": 5,
+        "elapsed_ms": 4998,
+        "passed": false,
+        "quarantined": true,
+        "trace_complete": false
+      },
+      "source_id": "private-dispatch-v1",
+      "success": false,
+      "task_id": "dispatch.round_robin"
+    },
+    {
+      "evidence": {
+        "bytes": 2519,
+        "path": "reports/comparative/coding-development/qwen-coder-1_5b/dispatch.priority.json",
+        "sha256": "4d3140c328300a0d773182484ea5bc59b1080aceab3b671a82bbb7c5f0e1b085"
+      },
+      "generation": {
+        "complete": true,
+        "elapsed_ms": 4859,
+        "finish_reason": "stop",
+        "input_tokens": 243,
+        "output_tokens": 107
+      },
+      "generation_error": null,
+      "grading_error": null,
+      "model": "qwen-coder-1_5b",
+      "sandbox": {
+        "cases_passed": 1,
+        "cases_total": 5,
+        "elapsed_ms": 11087,
+        "passed": false,
+        "quarantined": true,
+        "trace_complete": true
+      },
+      "source_id": "private-dispatch-v1",
+      "success": false,
+      "task_id": "dispatch.priority"
+    },
+    {
+      "evidence": {
+        "bytes": 2553,
+        "path": "reports/comparative/coding-development/qwen-coder-1_5b/encoding.hex_encode.json",
+        "sha256": "7f0bb4f642bbfd13f4801d94019d01841c14dc503f8df37ba6bdb1242dd97d59"
+      },
+      "generation": {
+        "complete": true,
+        "elapsed_ms": 5606,
+        "finish_reason": "stop",
+        "input_tokens": 232,
+        "output_tokens": 111
+      },
+      "generation_error": null,
+      "grading_error": null,
+      "model": "qwen-coder-1_5b",
+      "sandbox": {
+        "cases_passed": 0,
+        "cases_total": 5,
+        "elapsed_ms": 10370,
+        "passed": false,
+        "quarantined": true,
+        "trace_complete": false
+      },
+      "source_id": "private-encoding-v1",
+      "success": false,
+      "task_id": "encoding.hex_encode"
+    },
+    {
+      "evidence": {
+        "bytes": 2758,
+        "path": "reports/comparative/coding-development/qwen-coder-1_5b/encoding.hex_decode.json",
+        "sha256": "7f24d7b4362fbc9d6f96b509662835fc849e6e78a37732bd6d213742d9ff7478"
+      },
+      "generation": {
+        "complete": true,
+        "elapsed_ms": 7885,
+        "finish_reason": "stop",
+        "input_tokens": 248,
+        "output_tokens": 154
+      },
+      "generation_error": null,
+      "grading_error": null,
+      "model": "qwen-coder-1_5b",
+      "sandbox": {
+        "cases_passed": 0,
+        "cases_total": 7,
+        "elapsed_ms": 5568,
+        "passed": false,
+        "quarantined": true,
+        "trace_complete": true
+      },
+      "source_id": "private-encoding-v1",
+      "success": false,
+      "task_id": "encoding.hex_decode"
+    },
+    {
+      "evidence": {
+        "bytes": 2884,
+        "path": "reports/comparative/coding-development/qwen-coder-1_5b/encoding.caesar.json",
+        "sha256": "1cf1e46ab54f21a91ce528201bc20a9dc9be07deffce858bc4e8922aa970f263"
+      },
+      "generation": {
+        "complete": true,
+        "elapsed_ms": 23201,
+        "finish_reason": "stop",
+        "input_tokens": 237,
+        "output_tokens": 190
+      },
+      "generation_error": null,
+      "grading_error": null,
+      "model": "qwen-coder-1_5b",
+      "sandbox": {
+        "cases_passed": 0,
+        "cases_total": 5,
+        "elapsed_ms": 9540,
+        "passed": false,
+        "quarantined": true,
+        "trace_complete": false
+      },
+      "source_id": "private-encoding-v1",
+      "success": false,
+      "task_id": "encoding.caesar"
+    },
+    {
+      "evidence": {
+        "bytes": 2668,
+        "path": "reports/comparative/coding-development/qwen-coder-1_5b/encoding.rot13.json",
+        "sha256": "57b68546e89eb4c930c4724fe3d3e46f95b873ace77eb0df6c5fc00c60d6619e"
+      },
+      "generation": {
+        "complete": true,
+        "elapsed_ms": 12309,
+        "finish_reason": "stop",
+        "input_tokens": 227,
+        "output_tokens": 132
+      },
+      "generation_error": null,
+      "grading_error": null,
+      "model": "qwen-coder-1_5b",
+      "sandbox": {
+        "cases_passed": 0,
+        "cases_total": 5,
+        "elapsed_ms": 10066,
+        "passed": false,
+        "quarantined": true,
+        "trace_complete": false
+      },
+      "source_id": "private-encoding-v1",
+      "success": false,
+      "task_id": "encoding.rot13"
+    },
+    {
+      "evidence": {
+        "bytes": 2426,
+        "path": "reports/comparative/coding-development/qwen-coder-1_5b/tables.sort_rows.json",
+        "sha256": "1b9917b247bde832b5a8bcb07ab86038777b095660ce415064786e0f0e496b4e"
+      },
+      "generation": {
+        "complete": true,
+        "elapsed_ms": 5125,
+        "finish_reason": "stop",
+        "input_tokens": 245,
+        "output_tokens": 86
+      },
+      "generation_error": null,
+      "grading_error": null,
+      "model": "qwen-coder-1_5b",
+      "sandbox": {
+        "cases_passed": 0,
+        "cases_total": 5,
+        "elapsed_ms": 8182,
+        "passed": false,
+        "quarantined": true,
+        "trace_complete": false
+      },
+      "source_id": "private-tables-v1",
+      "success": false,
+      "task_id": "tables.sort_rows"
+    },
+    {
+      "evidence": {
+        "bytes": 2821,
+        "path": "reports/comparative/coding-development/qwen-coder-1_5b/tables.last_by_key.json",
+        "sha256": "b5eaad39c817f11902bfb38e33c6e43a0d55f67212a20ef9539612d0eefbd042"
+      },
+      "generation": {
+        "complete": true,
+        "elapsed_ms": 15100,
+        "finish_reason": "stop",
+        "input_tokens": 247,
+        "output_tokens": 181
+      },
+      "generation_error": null,
+      "grading_error": null,
+      "model": "qwen-coder-1_5b",
+      "sandbox": {
+        "cases_passed": 0,
+        "cases_total": 5,
+        "elapsed_ms": 7516,
+        "passed": false,
+        "quarantined": true,
+        "trace_complete": false
+      },
+      "source_id": "private-tables-v1",
+      "success": false,
+      "task_id": "tables.last_by_key"
+    },
+    {
+      "evidence": {
+        "bytes": 2714,
+        "path": "reports/comparative/coding-development/qwen-coder-1_5b/tables.group_sums.json",
+        "sha256": "c1d70cc772640eb071738a190cf026e6f07751f8adfed282f5e808d68479ec4c"
+      },
+      "generation": {
+        "complete": true,
+        "elapsed_ms": 11698,
+        "finish_reason": "stop",
+        "input_tokens": 242,
+        "output_tokens": 160
+      },
+      "generation_error": null,
+      "grading_error": null,
+      "model": "qwen-coder-1_5b",
+      "sandbox": {
+        "cases_passed": 0,
+        "cases_total": 5,
+        "elapsed_ms": 5076,
+        "passed": false,
+        "quarantined": true,
+        "trace_complete": false
+      },
+      "source_id": "private-tables-v1",
+      "success": false,
+      "task_id": "tables.group_sums"
+    },
+    {
+      "evidence": {
+        "bytes": 3235,
+        "path": "reports/comparative/coding-development/qwen-coder-1_5b/tables.inner_join.json",
+        "sha256": "b1fefa33578c278aab62f0a6588b81ed36fc46c30e631614fa01780e897b5f7b"
+      },
+      "generation": {
+        "complete": true,
+        "elapsed_ms": 18921,
+        "finish_reason": "stop",
+        "input_tokens": 259,
+        "output_tokens": 248
+      },
+      "generation_error": null,
+      "grading_error": null,
+      "model": "qwen-coder-1_5b",
+      "sandbox": {
+        "cases_passed": 0,
+        "cases_total": 5,
+        "elapsed_ms": 4676,
+        "passed": false,
+        "quarantined": true,
+        "trace_complete": false
+      },
+      "source_id": "private-tables-v1",
+      "success": false,
+      "task_id": "tables.inner_join"
+    },
+    {
+      "evidence": {
+        "bytes": 3157,
+        "path": "reports/comparative/coding-development/deepseek-coder-1_3b/money.parse.json",
+        "sha256": "a5a62449e91b98ebb1c3bda4d6994ca209de82e0fed669ddb65f8a4ca2f891f3"
+      },
+      "generation": {
+        "complete": true,
+        "elapsed_ms": 9727,
+        "finish_reason": "stop",
+        "input_tokens": 326,
+        "output_tokens": 256
+      },
+      "generation_error": null,
+      "grading_error": null,
+      "model": "deepseek-coder-1_3b",
+      "sandbox": {
+        "cases_passed": 0,
+        "cases_total": 9,
+        "elapsed_ms": 4395,
+        "passed": false,
+        "quarantined": true,
+        "trace_complete": false
+      },
+      "source_id": "private-money-v1",
+      "success": false,
+      "task_id": "money.parse"
+    },
+    {
+      "evidence": {
+        "bytes": 3424,
+        "path": "reports/comparative/coding-development/deepseek-coder-1_3b/money.format.json",
+        "sha256": "581f5c94137ed0f1922943a102f18cce766ab1995e0ab74cbcb1c531d42bdd78"
+      },
+      "generation": {
+        "complete": true,
+        "elapsed_ms": 12739,
+        "finish_reason": "stop",
+        "input_tokens": 303,
+        "output_tokens": 344
+      },
+      "generation_error": null,
+      "grading_error": null,
+      "model": "deepseek-coder-1_3b",
+      "sandbox": {
+        "cases_passed": 0,
+        "cases_total": 6,
+        "elapsed_ms": 7642,
+        "passed": false,
+        "quarantined": true,
+        "trace_complete": false
+      },
+      "source_id": "private-money-v1",
+      "success": false,
+      "task_id": "money.format"
+    },
+    {
+      "evidence": {
+        "bytes": 3416,
+        "path": "reports/comparative/coding-development/deepseek-coder-1_3b/money.split.json",
+        "sha256": "5851dcbc761947bca3a406d0dfa82be523ed09108a1475a51bd712456974355f"
+      },
+      "generation": {
+        "complete": true,
+        "elapsed_ms": 12371,
+        "finish_reason": "stop",
+        "input_tokens": 319,
+        "output_tokens": 295
+      },
+      "generation_error": null,
+      "grading_error": null,
+      "model": "deepseek-coder-1_3b",
+      "sandbox": {
+        "cases_passed": 0,
+        "cases_total": 5,
+        "elapsed_ms": 13190,
+        "passed": false,
+        "quarantined": true,
+        "trace_complete": false
+      },
+      "source_id": "private-money-v1",
+      "success": false,
+      "task_id": "money.split"
+    },
+    {
+      "evidence": {
+        "bytes": 3206,
+        "path": "reports/comparative/coding-development/deepseek-coder-1_3b/money.basket.json",
+        "sha256": "a02bbf4e1b2c1e065a21109a662be23a3f0fcb64f0a91511b4c0299eead830e8"
+      },
+      "generation": {
+        "complete": true,
+        "elapsed_ms": 17254,
+        "finish_reason": "stop",
+        "input_tokens": 304,
+        "output_tokens": 303
+      },
+      "generation_error": null,
+      "grading_error": null,
+      "model": "deepseek-coder-1_3b",
+      "sandbox": {
+        "cases_passed": 0,
+        "cases_total": 5,
+        "elapsed_ms": 9232,
+        "passed": false,
+        "quarantined": true,
+        "trace_complete": false
+      },
+      "source_id": "private-money-v1",
+      "success": false,
+      "task_id": "money.basket"
+    },
+    {
+      "evidence": {
+        "bytes": 3901,
+        "path": "reports/comparative/coding-development/deepseek-coder-1_3b/dispatch.finish_order.json",
+        "sha256": "439d4ca212fc1e8f7d296160aca4b226a16f020da11d57797cdd9c41f21f1153"
+      },
+      "generation": {
+        "complete": true,
+        "elapsed_ms": 31010,
+        "finish_reason": "stop",
+        "input_tokens": 323,
+        "output_tokens": 443
+      },
+      "generation_error": null,
+      "grading_error": null,
+      "model": "deepseek-coder-1_3b",
+      "sandbox": {
+        "cases_passed": 0,
+        "cases_total": 5,
+        "elapsed_ms": 3086,
+        "passed": false,
+        "quarantined": true,
+        "trace_complete": false
+      },
+      "source_id": "private-dispatch-v1",
+      "success": false,
+      "task_id": "dispatch.finish_order"
+    },
+    {
+      "evidence": {
+        "bytes": 3172,
+        "path": "reports/comparative/coding-development/deepseek-coder-1_3b/dispatch.waiting.json",
+        "sha256": "63b58c1f0017250bafedfa40adb4b7153b7f034f0c3b530424a73fc558ea12d6"
+      },
+      "generation": {
+        "complete": true,
+        "elapsed_ms": 19782,
+        "finish_reason": "stop",
+        "input_tokens": 310,
+        "output_tokens": 269
+      },
+      "generation_error": null,
+      "grading_error": null,
+      "model": "deepseek-coder-1_3b",
+      "sandbox": {
+        "cases_passed": 0,
+        "cases_total": 5,
+        "elapsed_ms": 4056,
+        "passed": false,
+        "quarantined": true,
+        "trace_complete": false
+      },
+      "source_id": "private-dispatch-v1",
+      "success": false,
+      "task_id": "dispatch.waiting"
+    },
+    {
+      "evidence": {
+        "bytes": 3829,
+        "path": "reports/comparative/coding-development/deepseek-coder-1_3b/dispatch.round_robin.json",
+        "sha256": "dc57d57d2d7e99d4edd48faa5296d8f6823f003969e22526f306a63880f7d450"
+      },
+      "generation": {
+        "complete": true,
+        "elapsed_ms": 23002,
+        "finish_reason": "stop",
+        "input_tokens": 333,
+        "output_tokens": 468
+      },
+      "generation_error": null,
+      "grading_error": null,
+      "model": "deepseek-coder-1_3b",
+      "sandbox": {
+        "cases_passed": 0,
+        "cases_total": 5,
+        "elapsed_ms": 6066,
+        "passed": false,
+        "quarantined": true,
+        "trace_complete": false
+      },
+      "source_id": "private-dispatch-v1",
+      "success": false,
+      "task_id": "dispatch.round_robin"
+    },
+    {
+      "evidence": {
+        "bytes": 3300,
+        "path": "reports/comparative/coding-development/deepseek-coder-1_3b/dispatch.priority.json",
+        "sha256": "bf878567906e779d1e5e4e4526292aeafbfeda4b3aad04167d0f59c2189a37f4"
+      },
+      "generation": {
+        "complete": true,
+        "elapsed_ms": 21290,
+        "finish_reason": "stop",
+        "input_tokens": 315,
+        "output_tokens": 345
+      },
+      "generation_error": null,
+      "grading_error": null,
+      "model": "deepseek-coder-1_3b",
+      "sandbox": {
+        "cases_passed": 0,
+        "cases_total": 5,
+        "elapsed_ms": 9379,
+        "passed": false,
+        "quarantined": true,
+        "trace_complete": false
+      },
+      "source_id": "private-dispatch-v1",
+      "success": false,
+      "task_id": "dispatch.priority"
+    },
+    {
+      "evidence": {
+        "bytes": 3027,
+        "path": "reports/comparative/coding-development/deepseek-coder-1_3b/encoding.hex_encode.json",
+        "sha256": "c522e7213e14f47c6ad257709163bc3b4395b71d435643f7576bee2d9bc171e0"
+      },
+      "generation": {
+        "complete": true,
+        "elapsed_ms": 14669,
+        "finish_reason": "stop",
+        "input_tokens": 306,
+        "output_tokens": 264
+      },
+      "generation_error": null,
+      "grading_error": null,
+      "model": "deepseek-coder-1_3b",
+      "sandbox": {
+        "cases_passed": 0,
+        "cases_total": 5,
+        "elapsed_ms": 9821,
+        "passed": false,
+        "quarantined": true,
+        "trace_complete": false
+      },
+      "source_id": "private-encoding-v1",
+      "success": false,
+      "task_id": "encoding.hex_encode"
+    },
+    {
+      "evidence": {
+        "bytes": 3326,
+        "path": "reports/comparative/coding-development/deepseek-coder-1_3b/encoding.hex_decode.json",
+        "sha256": "321f14b357268f2bfdf0ed6c30abbc26bd775e6bba6dac0823260dc65d07498c"
+      },
+      "generation": {
+        "complete": true,
+        "elapsed_ms": 28866,
+        "finish_reason": "stop",
+        "input_tokens": 322,
+        "output_tokens": 314
+      },
+      "generation_error": null,
+      "grading_error": null,
+      "model": "deepseek-coder-1_3b",
+      "sandbox": {
+        "cases_passed": 0,
+        "cases_total": 7,
+        "elapsed_ms": 6009,
+        "passed": false,
+        "quarantined": true,
+        "trace_complete": false
+      },
+      "source_id": "private-encoding-v1",
+      "success": false,
+      "task_id": "encoding.hex_decode"
+    },
+    {
+      "evidence": {
+        "bytes": 3512,
+        "path": "reports/comparative/coding-development/deepseek-coder-1_3b/encoding.caesar.json",
+        "sha256": "5538ad094c6bf0fa77ff54b7fbf49ba31bfaad90a6b3938e69b87685c22e4501"
+      },
+      "generation": {
+        "complete": true,
+        "elapsed_ms": 26569,
+        "finish_reason": "stop",
+        "input_tokens": 309,
+        "output_tokens": 374
+      },
+      "generation_error": null,
+      "grading_error": null,
+      "model": "deepseek-coder-1_3b",
+      "sandbox": {
+        "cases_passed": 0,
+        "cases_total": 5,
+        "elapsed_ms": 5077,
+        "passed": false,
+        "quarantined": true,
+        "trace_complete": false
+      },
+      "source_id": "private-encoding-v1",
+      "success": false,
+      "task_id": "encoding.caesar"
+    },
+    {
+      "evidence": {
+        "bytes": 3030,
+        "path": "reports/comparative/coding-development/deepseek-coder-1_3b/encoding.rot13.json",
+        "sha256": "f7d178126bd8eedae5798bbf50bf3b53397785f920425cf625f0104f6064542d"
+      },
+      "generation": {
+        "complete": true,
+        "elapsed_ms": 15856,
+        "finish_reason": "stop",
+        "input_tokens": 296,
+        "output_tokens": 243
+      },
+      "generation_error": null,
+      "grading_error": null,
+      "model": "deepseek-coder-1_3b",
+      "sandbox": {
+        "cases_passed": 0,
+        "cases_total": 5,
+        "elapsed_ms": 8747,
+        "passed": false,
+        "quarantined": true,
+        "trace_complete": false
+      },
+      "source_id": "private-encoding-v1",
+      "success": false,
+      "task_id": "encoding.rot13"
+    },
+    {
+      "evidence": {
+        "bytes": 3044,
+        "path": "reports/comparative/coding-development/deepseek-coder-1_3b/tables.sort_rows.json",
+        "sha256": "39aa0dd47e1446e26bbf056137194659478d32ad40e192c2d95ec4879fac7e5f"
+      },
+      "generation": {
+        "complete": true,
+        "elapsed_ms": 18528,
+        "finish_reason": "stop",
+        "input_tokens": 317,
+        "output_tokens": 293
+      },
+      "generation_error": null,
+      "grading_error": null,
+      "model": "deepseek-coder-1_3b",
+      "sandbox": {
+        "cases_passed": 0,
+        "cases_total": 5,
+        "elapsed_ms": 8757,
+        "passed": false,
+        "quarantined": true,
+        "trace_complete": false
+      },
+      "source_id": "private-tables-v1",
+      "success": false,
+      "task_id": "tables.sort_rows"
+    },
+    {
+      "evidence": {
+        "bytes": 3319,
+        "path": "reports/comparative/coding-development/deepseek-coder-1_3b/tables.last_by_key.json",
+        "sha256": "7541a7295d4391ee3d98b0b3d5fbf6e3ed41725d495c59b9d983f6cff82560ff"
+      },
+      "generation": {
+        "complete": true,
+        "elapsed_ms": 28129,
+        "finish_reason": "stop",
+        "input_tokens": 317,
+        "output_tokens": 385
+      },
+      "generation_error": null,
+      "grading_error": null,
+      "model": "deepseek-coder-1_3b",
+      "sandbox": {
+        "cases_passed": 0,
+        "cases_total": 5,
+        "elapsed_ms": 7980,
+        "passed": false,
+        "quarantined": true,
+        "trace_complete": false
+      },
+      "source_id": "private-tables-v1",
+      "success": false,
+      "task_id": "tables.last_by_key"
+    },
+    {
+      "evidence": {
+        "bytes": 3298,
+        "path": "reports/comparative/coding-development/deepseek-coder-1_3b/tables.group_sums.json",
+        "sha256": "f19414b003cef875d08524b633fc8cf224b5f0e3bdb92690cd42da59856ff300"
+      },
+      "generation": {
+        "complete": true,
+        "elapsed_ms": 20418,
+        "finish_reason": "stop",
+        "input_tokens": 311,
+        "output_tokens": 362
+      },
+      "generation_error": null,
+      "grading_error": null,
+      "model": "deepseek-coder-1_3b",
+      "sandbox": {
+        "cases_passed": 0,
+        "cases_total": 5,
+        "elapsed_ms": 9334,
+        "passed": false,
+        "quarantined": true,
+        "trace_complete": false
+      },
+      "source_id": "private-tables-v1",
+      "success": false,
+      "task_id": "tables.group_sums"
+    },
+    {
+      "evidence": {
+        "bytes": 3351,
+        "path": "reports/comparative/coding-development/deepseek-coder-1_3b/tables.inner_join.json",
+        "sha256": "7493359f6a83528a1820225a38d4cc43557e00065a19f12495c10627b39646fa"
+      },
+      "generation": {
+        "complete": true,
+        "elapsed_ms": 20765,
+        "finish_reason": "stop",
+        "input_tokens": 335,
+        "output_tokens": 370
+      },
+      "generation_error": null,
+      "grading_error": null,
+      "model": "deepseek-coder-1_3b",
+      "sandbox": {
+        "cases_passed": 0,
+        "cases_total": 5,
+        "elapsed_ms": 1589,
+        "passed": false,
+        "quarantined": true,
+        "trace_complete": false
+      },
+      "source_id": "private-tables-v1",
+      "success": false,
+      "task_id": "tables.inner_join"
+    },
+    {
+      "evidence": {
+        "bytes": 3660,
+        "path": "reports/comparative/control-development/smollm2-1_7b/money.parse.json",
+        "sha256": "44efd7ecc48cb57d4dbc80a3d4c7345367404e99eea5a3597edda0d3b3c568f2"
+      },
+      "generation": {
+        "complete": true,
+        "elapsed_ms": 13491,
+        "finish_reason": "stop",
+        "input_tokens": 274,
+        "output_tokens": 440
+      },
+      "generation_error": null,
+      "grading_error": null,
+      "model": "smollm2-1_7b",
+      "sandbox": {
+        "cases_passed": 0,
+        "cases_total": 9,
+        "elapsed_ms": 7387,
+        "passed": false,
+        "quarantined": true,
+        "trace_complete": false
+      },
+      "source_id": "private-money-v1",
+      "success": false,
+      "task_id": "money.parse"
+    },
+    {
+      "evidence": {
+        "bytes": 2621,
+        "path": "reports/comparative/control-development/smollm2-1_7b/money.format.json",
+        "sha256": "1d4960598e7199c0e5756c8136775580bd619a7d697238fa9c0d38450df5fbd8"
+      },
+      "generation": {
+        "complete": true,
+        "elapsed_ms": 5165,
+        "finish_reason": "stop",
+        "input_tokens": 255,
+        "output_tokens": 169
+      },
+      "generation_error": null,
+      "grading_error": null,
+      "model": "smollm2-1_7b",
+      "sandbox": {
+        "cases_passed": 0,
+        "cases_total": 6,
+        "elapsed_ms": 10470,
+        "passed": false,
+        "quarantined": true,
+        "trace_complete": true
+      },
+      "source_id": "private-money-v1",
+      "success": false,
+      "task_id": "money.format"
+    },
+    {
+      "evidence": {
+        "bytes": 3190,
+        "path": "reports/comparative/control-development/smollm2-1_7b/money.split.json",
+        "sha256": "638c1f0d8e7f80cc6ec326ab3f502659c9f5a2a28bfec7e0e0218850c56c8f7e"
+      },
+      "generation": {
+        "complete": true,
+        "elapsed_ms": 17464,
+        "finish_reason": "stop",
+        "input_tokens": 271,
+        "output_tokens": 323
+      },
+      "generation_error": null,
+      "grading_error": null,
+      "model": "smollm2-1_7b",
+      "sandbox": {
+        "cases_passed": 0,
+        "cases_total": 5,
+        "elapsed_ms": 4720,
+        "passed": false,
+        "quarantined": true,
+        "trace_complete": false
+      },
+      "source_id": "private-money-v1",
+      "success": false,
+      "task_id": "money.split"
+    },
+    {
+      "evidence": {
+        "bytes": 2790,
+        "path": "reports/comparative/control-development/smollm2-1_7b/money.basket.json",
+        "sha256": "5c0704c57712ea412ab3c5dee9930c3e12ed08d316c8d91124a859f1f5f1560b"
+      },
+      "generation": {
+        "complete": true,
+        "elapsed_ms": 15479,
+        "finish_reason": "stop",
+        "input_tokens": 256,
+        "output_tokens": 238
+      },
+      "generation_error": null,
+      "grading_error": null,
+      "model": "smollm2-1_7b",
+      "sandbox": {
+        "cases_passed": 0,
+        "cases_total": 5,
+        "elapsed_ms": 3212,
+        "passed": false,
+        "quarantined": true,
+        "trace_complete": false
+      },
+      "source_id": "private-money-v1",
+      "success": false,
+      "task_id": "money.basket"
+    },
+    {
+      "evidence": {
+        "bytes": 3007,
+        "path": "reports/comparative/control-development/smollm2-1_7b/dispatch.finish_order.json",
+        "sha256": "2e8d3d6a8f2717328d9be083fbbeb79952e0eb1d2a60837b547956f5d980b6f8"
+      },
+      "generation": {
+        "complete": true,
+        "elapsed_ms": 16655,
+        "finish_reason": "stop",
+        "input_tokens": 273,
+        "output_tokens": 243
+      },
+      "generation_error": null,
+      "grading_error": null,
+      "model": "smollm2-1_7b",
+      "sandbox": {
+        "cases_passed": 0,
+        "cases_total": 5,
+        "elapsed_ms": 8966,
+        "passed": false,
+        "quarantined": true,
+        "trace_complete": false
+      },
+      "source_id": "private-dispatch-v1",
+      "success": false,
+      "task_id": "dispatch.finish_order"
+    },
+    {
+      "evidence": {
+        "bytes": 2996,
+        "path": "reports/comparative/control-development/smollm2-1_7b/dispatch.waiting.json",
+        "sha256": "4722c831c22aad1bfbb53a1ffaf9dfda0874140b9869e1f91da9d33987225f2f"
+      },
+      "generation": {
+        "complete": true,
+        "elapsed_ms": 18556,
+        "finish_reason": "stop",
+        "input_tokens": 261,
+        "output_tokens": 252
+      },
+      "generation_error": null,
+      "grading_error": null,
+      "model": "smollm2-1_7b",
+      "sandbox": {
+        "cases_passed": 0,
+        "cases_total": 5,
+        "elapsed_ms": 10494,
+        "passed": false,
+        "quarantined": true,
+        "trace_complete": false
+      },
+      "source_id": "private-dispatch-v1",
+      "success": false,
+      "task_id": "dispatch.waiting"
+    },
+    {
+      "evidence": {
+        "bytes": 3384,
+        "path": "reports/comparative/control-development/smollm2-1_7b/dispatch.round_robin.json",
+        "sha256": "6ab8ce6a1e83db9a735ca806637e6b5d441d1e46793a93818ea2e518f262a384"
+      },
+      "generation": {
+        "complete": true,
+        "elapsed_ms": 25264,
+        "finish_reason": "stop",
+        "input_tokens": 284,
+        "output_tokens": 344
+      },
+      "generation_error": null,
+      "grading_error": null,
+      "model": "smollm2-1_7b",
+      "sandbox": {
+        "cases_passed": 0,
+        "cases_total": 5,
+        "elapsed_ms": 9997,
+        "passed": false,
+        "quarantined": true,
+        "trace_complete": false
+      },
+      "source_id": "private-dispatch-v1",
+      "success": false,
+      "task_id": "dispatch.round_robin"
+    },
+    {
+      "evidence": {
+        "bytes": 2718,
+        "path": "reports/comparative/control-development/smollm2-1_7b/dispatch.priority.json",
+        "sha256": "28c7ec4b82afaaa9c31fed89430573651e8d76d73195c61cd5a4fb3b33e2b2a1"
+      },
+      "generation": {
+        "complete": true,
+        "elapsed_ms": 10324,
+        "finish_reason": "stop",
+        "input_tokens": 264,
+        "output_tokens": 179
+      },
+      "generation_error": null,
+      "grading_error": null,
+      "model": "smollm2-1_7b",
+      "sandbox": {
+        "cases_passed": 0,
+        "cases_total": 5,
+        "elapsed_ms": 9765,
+        "passed": false,
+        "quarantined": true,
+        "trace_complete": false
+      },
+      "source_id": "private-dispatch-v1",
+      "success": false,
+      "task_id": "dispatch.priority"
+    },
+    {
+      "evidence": {
+        "bytes": 2721,
+        "path": "reports/comparative/control-development/smollm2-1_7b/encoding.hex_encode.json",
+        "sha256": "b10fccc56823d5b6fdb5f675a1b8ff544791c6d643b51deae93be79afcd585bc"
+      },
+      "generation": {
+        "complete": true,
+        "elapsed_ms": 19603,
+        "finish_reason": "stop",
+        "input_tokens": 259,
+        "output_tokens": 199
+      },
+      "generation_error": null,
+      "grading_error": null,
+      "model": "smollm2-1_7b",
+      "sandbox": {
+        "cases_passed": 2,
+        "cases_total": 5,
+        "elapsed_ms": 15431,
+        "passed": false,
+        "quarantined": true,
+        "trace_complete": true
+      },
+      "source_id": "private-encoding-v1",
+      "success": false,
+      "task_id": "encoding.hex_encode"
+    },
+    {
+      "evidence": {
+        "bytes": 3044,
+        "path": "reports/comparative/control-development/smollm2-1_7b/encoding.hex_decode.json",
+        "sha256": "f7025e2823e09a677cddcb466f446854effec8c1ba4b4beea11825892c416697"
+      },
+      "generation": {
+        "complete": true,
+        "elapsed_ms": 23138,
+        "finish_reason": "stop",
+        "input_tokens": 273,
+        "output_tokens": 251
+      },
+      "generation_error": null,
+      "grading_error": null,
+      "model": "smollm2-1_7b",
+      "sandbox": {
+        "cases_passed": 0,
+        "cases_total": 7,
+        "elapsed_ms": 10857,
+        "passed": false,
+        "quarantined": true,
+        "trace_complete": false
+      },
+      "source_id": "private-encoding-v1",
+      "success": false,
+      "task_id": "encoding.hex_decode"
+    },
+    {
+      "evidence": {
+        "bytes": 2718,
+        "path": "reports/comparative/control-development/smollm2-1_7b/encoding.caesar.json",
+        "sha256": "31a277df548a019e1183c4ef45d0f4761efb9e0e73b6313915c3e032b7f763c2"
+      },
+      "generation": {
+        "complete": true,
+        "elapsed_ms": 10745,
+        "finish_reason": "stop",
+        "input_tokens": 260,
+        "output_tokens": 176
+      },
+      "generation_error": null,
+      "grading_error": null,
+      "model": "smollm2-1_7b",
+      "sandbox": {
+        "cases_passed": 0,
+        "cases_total": 5,
+        "elapsed_ms": 5591,
+        "passed": false,
+        "quarantined": true,
+        "trace_complete": false
+      },
+      "source_id": "private-encoding-v1",
+      "success": false,
+      "task_id": "encoding.caesar"
+    },
+    {
+      "evidence": {
+        "bytes": 2606,
+        "path": "reports/comparative/control-development/smollm2-1_7b/encoding.rot13.json",
+        "sha256": "806fb757b8a6d46c1933bd63c47bd0d38e4b177078be0c97f71564fab4ee2007"
+      },
+      "generation": {
+        "complete": true,
+        "elapsed_ms": 10920,
+        "finish_reason": "stop",
+        "input_tokens": 248,
+        "output_tokens": 174
+      },
+      "generation_error": null,
+      "grading_error": null,
+      "model": "smollm2-1_7b",
+      "sandbox": {
+        "cases_passed": 0,
+        "cases_total": 5,
+        "elapsed_ms": 6801,
+        "passed": false,
+        "quarantined": true,
+        "trace_complete": false
+      },
+      "source_id": "private-encoding-v1",
+      "success": false,
+      "task_id": "encoding.rot13"
+    },
+    {
+      "evidence": {
+        "bytes": 3137,
+        "path": "reports/comparative/control-development/smollm2-1_7b/tables.sort_rows.json",
+        "sha256": "df883406e0e18dd1c3458e2765d553b396e2d2ec2bf1a947216df2229ed6dfba"
+      },
+      "generation": {
+        "complete": true,
+        "elapsed_ms": 27688,
+        "finish_reason": "stop",
+        "input_tokens": 265,
+        "output_tokens": 317
+      },
+      "generation_error": null,
+      "grading_error": null,
+      "model": "smollm2-1_7b",
+      "sandbox": {
+        "cases_passed": 0,
+        "cases_total": 5,
+        "elapsed_ms": 5386,
+        "passed": false,
+        "quarantined": true,
+        "trace_complete": false
+      },
+      "source_id": "private-tables-v1",
+      "success": false,
+      "task_id": "tables.sort_rows"
+    },
+    {
+      "evidence": {
+        "bytes": 2746,
+        "path": "reports/comparative/control-development/smollm2-1_7b/tables.last_by_key.json",
+        "sha256": "15787376f9958904f69c7b1f148d1a8bd7ca870377dd101e328427c5916773dd"
+      },
+      "generation": {
+        "complete": true,
+        "elapsed_ms": 15397,
+        "finish_reason": "stop",
+        "input_tokens": 268,
+        "output_tokens": 175
+      },
+      "generation_error": null,
+      "grading_error": null,
+      "model": "smollm2-1_7b",
+      "sandbox": {
+        "cases_passed": 0,
+        "cases_total": 5,
+        "elapsed_ms": 7650,
+        "passed": false,
+        "quarantined": true,
+        "trace_complete": false
+      },
+      "source_id": "private-tables-v1",
+      "success": false,
+      "task_id": "tables.last_by_key"
+    },
+    {
+      "evidence": {
+        "bytes": 2640,
+        "path": "reports/comparative/control-development/smollm2-1_7b/tables.group_sums.json",
+        "sha256": "0936cb6b7b48514dc2fa5c5a03362ff4254d83ef52fcbfb621741ba7bf2d470f"
+      },
+      "generation": {
+        "complete": true,
+        "elapsed_ms": 10479,
+        "finish_reason": "stop",
+        "input_tokens": 262,
+        "output_tokens": 147
+      },
+      "generation_error": null,
+      "grading_error": null,
+      "model": "smollm2-1_7b",
+      "sandbox": {
+        "cases_passed": 0,
+        "cases_total": 5,
+        "elapsed_ms": 4745,
+        "passed": false,
+        "quarantined": true,
+        "trace_complete": false
+      },
+      "source_id": "private-tables-v1",
+      "success": false,
+      "task_id": "tables.group_sums"
+    },
+    {
+      "evidence": {
+        "bytes": 3441,
+        "path": "reports/comparative/control-development/smollm2-1_7b/tables.inner_join.json",
+        "sha256": "880a3d420d8551ccdd2af07a140f7d8fb616efb5529d91dc157b5d3a6e951850"
+      },
+      "generation": {
+        "complete": true,
+        "elapsed_ms": 25828,
+        "finish_reason": "stop",
+        "input_tokens": 285,
+        "output_tokens": 357
+      },
+      "generation_error": null,
+      "grading_error": null,
+      "model": "smollm2-1_7b",
+      "sandbox": {
+        "cases_passed": 0,
+        "cases_total": 5,
+        "elapsed_ms": 3141,
+        "passed": false,
+        "quarantined": true,
+        "trace_complete": false
+      },
+      "source_id": "private-tables-v1",
+      "success": false,
+      "task_id": "tables.inner_join"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "runtime": "podman",
+  "controls": {
+    "effective": {
+      "cpu_max": "100000 100000",
+      "memory_max": "536870912",
+      "network_none": true,
+      "pids_max": "64",
+      "root_write_denied": true,
+      "root_write_errno": 30,
+      "swap_max": "0",
+      "uid_status": "Uid:\t65532\t65532\t65532\t65532"
+    },
+    "host_timeout_asserted": true,
+    "memory_pressure_exit": 137,
+    "pids": {
+      "children_created": 63,
+      "creation_denied": true
+    },
+    "reference_run_id": "8b2ec0d1-c920-4941-b40a-746ac36180d8",
+    "timeout_evidence": {
+      "cleanup_ms": 4826,
+      "container_removed": true,
+      "deadline_ms": 1000,
+      "kernel_proof": {
+        "receipt_path": "reports/local-study/explore/round-001/study/quick/arms/arm-2793b743b590917d497c4794/development/sandbox/lec-deadline-ef55de23-5625-4ac5-bac6-53081932e7d5.probe-proof.json",
+        "receipt_sha256": "398c30016011ea8e08079d44d499837e65293c09071f30955fd472f180e392f4"
+      },
+      "kill_acknowledged": true,
+      "kill_method": "preopened_exact_owned_cgroup_v2_kill",
+      "kill_request_ms": 0,
+      "wait_elapsed_ms": 1000
+    }
+  },
+  "probes_passed": true
+}

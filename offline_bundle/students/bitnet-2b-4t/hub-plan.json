@@ -1,0 +1,70 @@
+{
+  "model_id": "microsoft/bitnet-b1.58-2B-4T",
+  "revision": "04c3b9ad9361b824064a1f25ea60a8be9599b127",
+  "files": {
+    "LICENSE": {
+      "filename": "LICENSE",
+      "bytes": 1073,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "48ea6616b5b8581df3401872996cecf1f8b08a0d"
+      }
+    },
+    "README.md": {
+      "filename": "README.md",
+      "bytes": 9647,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "34bf8c6fb3024fc9195a7ee0dce583ce8af4bf65"
+      }
+    },
+    "config.json": {
+      "filename": "config.json",
+      "bytes": 844,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "4acf191af5817ad7534d03d3ca8a45a8d4f4a82a"
+      }
+    },
+    "generation_config.json": {
+      "filename": "generation_config.json",
+      "bytes": 199,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "650ab2390d65b8182f2599fe7a0f2014eec3f38b"
+      }
+    },
+    "model.safetensors": {
+      "filename": "model.safetensors",
+      "bytes": 1178623988,
+      "publisher_identity": {
+        "kind": "lfs_sha256",
+        "digest": "8143ae115ed6babe5e5ada8fb8c5b769d8f417802b2db042ad98b4f7ed73975b"
+      }
+    },
+    "special_tokens_map.json": {
+      "filename": "special_tokens_map.json",
+      "bytes": 73,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "d8cd5076496dbe4be2320312abc10adc43097b81"
+      }
+    },
+    "tokenizer.json": {
+      "filename": "tokenizer.json",
+      "bytes": 9085698,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "b197f72effb9d5ed16ee0f5663e11e4cfac2ba62"
+      }
+    },
+    "tokenizer_config.json": {
+      "filename": "tokenizer_config.json",
+      "bytes": 50834,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "d54415c89774937967b9baac420d12455ff6e267"
+      }
+    }
+  }
+}

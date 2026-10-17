@@ -1,0 +1,40 @@
+{
+  "run_id": "55b6d8a6-efaf-47c9-8014-e6f845684769",
+  "task_id": "money.split",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error: unknown start of token: `\n --> /candidate/main.rs:3:1\n  |\n3 | ```rust\n  | ^^^\n  |\n  = note: character appears 2 more times\nhelp: Unicode character '`' (Grave Accent) looks like ''' (Single Quote), but it is not\n  |\n3 - ```rust\n3 + '''rust\n  |\n\nerror: unknown start of token: `\n  --> /candidate/main.rs:40:1\n   |\n40 | ```\n   | ^^^\n   |\n   = note: character appears 2 more times\nhelp: Unicode character '`' (Grave Accent) looks like ''' (Single Quote), but it is not\n   |\n40 - ```\n40 + '''\n   |\n\nerror: expected one of `!` or `::`, found `is`\n --> /candidate/main.rs:1:6\n  |\n1 | Here is the Rust code that solves the problem:\n  |      ^^ expected one of `!` or `::`\n\nerror: aborting due to 3 previous errors\n\n"
+  ],
+  "cases_total": 5,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "8f30a912e04e6a9797cd36ae04a45398062c51459c50d4b7040016ddfeb90048",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/comparative/search/round-002/trials/deepseek-coder-6_7b-q4_k_m/comparison/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/comparative/search/round-002/trials/deepseek-coder-6_7b-q4_k_m/comparison/sandbox/55b6d8a6-efaf-47c9-8014-e6f845684769.audit.json",
+  "audit_sha256": "9acdf1f36f5b384220ad4cb59dcf6c078eb455667eb113cc896d09c00ee6d3aa",
+  "failure": "compilation failed: error: unknown start of token: `\n --> /candidate/main.rs:3:1\n  |\n3 | ```rust\n  | ^^^\n  |\n  = note: character appears 2 more times\nhelp: Unicode character '`' (Grave Accent) looks like ''' (Single Quote), but it is not\n  |\n3 - ```rust\n3 + '''rust\n  |\n\nerror: unknown start of token: `\n  --> /candidate/main.rs:40:1\n   |\n40 | ```\n   | ^^^\n   |\n   = note: character appears 2 more times\nhelp: Unicode character '`' (Grave Accent) looks like ''' (Single Quote), but it is not\n   |\n40 - ```\n40 + '''\n   |\n\nerror: expected one of `!` or `::`, found `is`\n --> /candidate/main.rs:1:6\n  |\n1 | Here is the Rust code that solves the problem:\n  |      ^^ expected one of `!` or `::`\n\nerror: aborting due to 3 previous errors\n\n",
+  "duration_ms": 51319,
+  "timeout_evidence": null,
+  "lifecycle_evidence": {
+    "receipt_path": "reports/comparative/search/round-002/trials/deepseek-coder-6_7b-q4_k_m/comparison/sandbox/55b6d8a6-efaf-47c9-8014-e6f845684769.lifecycle.json",
+    "receipt_sha256": "5e942a664fd230459285f7e4fce6b7e719b4051ad0117edbd51388abe9d97d39"
+  }
+}

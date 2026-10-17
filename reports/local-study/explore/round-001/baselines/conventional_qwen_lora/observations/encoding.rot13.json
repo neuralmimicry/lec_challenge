@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "224a7bf3ed4af8e3b7e99d10e6fddc59fa41f55219d9fb813cec482d1e9f3e7f",
+  "task_id": "encoding.rot13",
+  "source_id": "private-encoding-v1",
+  "success": false,
+  "raw_generation": {
+    "path": "reports/local-study/explore/round-001/baselines/conventional_qwen_lora/generations/encoding.rot13.json",
+    "sha256": "6f06d2fee225e53730a10edf68d621214c1704fa99a87438fba59171e2cdc60e",
+    "bytes": 2334
+  },
+  "sandbox_report": {
+    "path": "reports/local-study/explore/round-001/baselines/conventional_qwen_lora/sandbox/ff9a7272-50e4-48c5-8727-f8aecf6b9b23.json",
+    "sha256": "5048c43f960a2f4c70f86e86ac6d768bddeb1a1ab6bb6e180c5db4919465c9f7",
+    "bytes": 5275
+  },
+  "grading_error": null
+}

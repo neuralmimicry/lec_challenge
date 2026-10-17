@@ -1,0 +1,33 @@
+{
+  "run_id": "42a8b835-af87-41b6-ba34-c0ffa33bce15",
+  "task_id": "tables.inner_join",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error[E0282]: type annotations needed\n --> /candidate/main.rs:4:9\n  |\n4 |     let input = from_str(&input.to_string()).unwrap();\n  |         ^^^^^\n...\n7 |     for (left, right) in input.as_array().unwrap().iter().cloned() {\n  |                          ----- type must be known at this point\n  |\nhelp: consider giving `input` an explicit type\n  |\n4 |     let input: /* Type */ = from_str(&input.to_string()).unwrap();\n  |              ++++++++++++\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0282`.\n"
+  ],
+  "cases_total": 5,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "0bf995b5f69865792503015f6af52b457c861b679877956e939c2137ddb4a562",
+  "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+  "oracle_sha256": "a734f6d465714cbebb072790fedff161d2fc28cbb257b3d04cee0feaf8b5b5fe",
+  "code_sha256": "42a7729482a8c5737c7cd07f937cc4a42989fa6fc18f2b6ee4f7ce72173f7fe6",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:1",
+    "expected_image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/comparative/coding-development/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/comparative/coding-development/sandbox/42a8b835-af87-41b6-ba34-c0ffa33bce15.audit.json",
+  "audit_sha256": "7be9ab4e3431ac7f96cb94dce94a5df04bc3e5cddba8777c1c66a4d0b58dd2a0",
+  "failure": "compilation failed: error[E0282]: type annotations needed\n --> /candidate/main.rs:4:9\n  |\n4 |     let input = from_str(&input.to_string()).unwrap();\n  |         ^^^^^\n...\n7 |     for (left, right) in input.as_array().unwrap().iter().cloned() {\n  |                          ----- type must be known at this point\n  |\nhelp: consider giving `input` an explicit type\n  |\n4 |     let input: /* Type */ = from_str(&input.to_string()).unwrap();\n  |              ++++++++++++\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0282`.\n",
+  "duration_ms": 4676,
+  "timeout_evidence": null
+}

@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "448b2d86361801414c47e32433b6e0bce070909a486feaecc2fd744b94dca8f4",
+  "task_id": "money.split",
+  "source_id": "private-money-v1",
+  "success": false,
+  "raw_generation": {
+    "path": "reports/local-study/sft-adapter-development-c7c/generations/money.split.json",
+    "sha256": "6566d259c581411497dc0aad92c3257a0c96883b35c7f23567fbb01ddba4b466",
+    "bytes": 1990
+  },
+  "sandbox_report": null,
+  "grading_error": "trusted grade rejected: trusted audit artifact missing: No such file or directory (os error 2)"
+}

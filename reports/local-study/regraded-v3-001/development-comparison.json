@@ -1,0 +1,173 @@
+{
+  "all_quality_comparisons_valid": false,
+  "build_receipt": null,
+  "comparisons": [
+    {
+      "actual_runtime_matched": true,
+      "architecture": "conventional_qwen_lora",
+      "baseline": {
+        "bytes": 2787,
+        "path": "reports/local-study/regraded-v3-001/evaluation-000-development-f95238863522/report.json",
+        "sha256": "3a62b1403f676c215a910bbbbd315a79664b9544b4049f4b84088f047204aefa"
+      },
+      "baseline_checkpoint_id": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+      "baseline_errors": 0,
+      "baseline_generation_ms": 92214,
+      "baseline_grading_identity": {
+        "controller_version": 3,
+        "engine_sha256": "b45d32ca11ccc84633ab2de0bb9d195dc38a61c78e2ef1a87c03ea90091aa301",
+        "extractor_sha256": "e17ff8dba14acb9946c51c4d36a3ef727ce02e3fe4cf1b1c1c093b9394d72967",
+        "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+        "kind": "frozen_local_study_generation_regrade",
+        "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2"
+      },
+      "baseline_inference_threads": 4,
+      "baseline_numerical_equivalence": {
+        "attachment": null,
+        "qualified": true,
+        "reasons": [],
+        "reconstructed": null,
+        "report": null,
+        "required": false,
+        "status": "not_required"
+      },
+      "baseline_output_tokens": 2234,
+      "baseline_passed": 0,
+      "baseline_source_macro_pass_rate": 0.0,
+      "candidate": {
+        "bytes": 2800,
+        "path": "reports/local-study/regraded-v3-001/evaluation-001-development-e2bcd1355276/report.json",
+        "sha256": "783dcf31deada93abc233ec0c9a28a1274856c041aa7f754f20a0dc83029e4b0"
+      },
+      "candidate_checkpoint_id": "e2bcd135527659042304d936fa56c7240f6f96a43b9f81f2a888c38b7762a949",
+      "candidate_errors": 1,
+      "candidate_generation_ms": 109283,
+      "candidate_grading_identity": {
+        "controller_version": 3,
+        "engine_sha256": "b45d32ca11ccc84633ab2de0bb9d195dc38a61c78e2ef1a87c03ea90091aa301",
+        "extractor_sha256": "e17ff8dba14acb9946c51c4d36a3ef727ce02e3fe4cf1b1c1c093b9394d72967",
+        "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+        "kind": "frozen_local_study_generation_regrade",
+        "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2"
+      },
+      "candidate_inference_threads": 4,
+      "candidate_minus_baseline_percentage_points": null,
+      "candidate_numerical_equivalence": {
+        "attachment": null,
+        "qualified": true,
+        "reasons": [],
+        "reconstructed": null,
+        "report": null,
+        "required": false,
+        "status": "not_required"
+      },
+      "candidate_output_tokens": 2485,
+      "candidate_passed": 0,
+      "candidate_source_macro_pass_rate": 0.0,
+      "evidence_kind": "descriptive_matched_local_student_baseline_comparison",
+      "held_out_used": false,
+      "limitations": [
+        "Observed local train/development differences only; no confidence interval, significant win, learning guarantee or global optimum is inferred.",
+        "Generation time excludes loading, training and grading; different thread allocations are disclosed rather than treated as a fair speed comparison.",
+        "Any baseline/candidate generation or infrastructure failure prevents a model-quality improvement claim.",
+        "BitNet quality comparisons require independently reconstructed checkpoint-bound Rust/C++ numerical equivalence; missing, stale and failed receipts preserve descriptive scores but cannot establish improvement."
+      ],
+      "observed_score_delta_percentage_points": 0.0,
+      "planned_tasks": 16,
+      "positive_observed_delta": false,
+      "production_eligible": false,
+      "quality_comparison_valid": false,
+      "same_inference_thread_allocation": true,
+      "schema_version": 2,
+      "split": "development",
+      "timings_support_matched_resource_comparison": true
+    },
+    {
+      "actual_runtime_matched": true,
+      "architecture": "conventional_qwen_lora",
+      "baseline": {
+        "bytes": 2787,
+        "path": "reports/local-study/regraded-v3-001/evaluation-000-development-f95238863522/report.json",
+        "sha256": "3a62b1403f676c215a910bbbbd315a79664b9544b4049f4b84088f047204aefa"
+      },
+      "baseline_checkpoint_id": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+      "baseline_errors": 0,
+      "baseline_generation_ms": 92214,
+      "baseline_grading_identity": {
+        "controller_version": 3,
+        "engine_sha256": "b45d32ca11ccc84633ab2de0bb9d195dc38a61c78e2ef1a87c03ea90091aa301",
+        "extractor_sha256": "e17ff8dba14acb9946c51c4d36a3ef727ce02e3fe4cf1b1c1c093b9394d72967",
+        "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+        "kind": "frozen_local_study_generation_regrade",
+        "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2"
+      },
+      "baseline_inference_threads": 4,
+      "baseline_numerical_equivalence": {
+        "attachment": null,
+        "qualified": true,
+        "reasons": [],
+        "reconstructed": null,
+        "report": null,
+        "required": false,
+        "status": "not_required"
+      },
+      "baseline_output_tokens": 2234,
+      "baseline_passed": 0,
+      "baseline_source_macro_pass_rate": 0.0,
+      "candidate": {
+        "bytes": 2792,
+        "path": "reports/local-study/regraded-v3-001/evaluation-002-development-2217a994f8b7/report.json",
+        "sha256": "9e001b208799ecdaa487e96164b9cf9c21539c15a0661ba15a6eb63121bf8414"
+      },
+      "candidate_checkpoint_id": "2217a994f8b74ded1d52f30ef7add2cb190578e3d108168a85d1409160ad88c3",
+      "candidate_errors": 0,
+      "candidate_generation_ms": 147717,
+      "candidate_grading_identity": {
+        "controller_version": 3,
+        "engine_sha256": "b45d32ca11ccc84633ab2de0bb9d195dc38a61c78e2ef1a87c03ea90091aa301",
+        "extractor_sha256": "e17ff8dba14acb9946c51c4d36a3ef727ce02e3fe4cf1b1c1c093b9394d72967",
+        "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+        "kind": "frozen_local_study_generation_regrade",
+        "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2"
+      },
+      "candidate_inference_threads": 4,
+      "candidate_minus_baseline_percentage_points": 0.0,
+      "candidate_numerical_equivalence": {
+        "attachment": null,
+        "qualified": true,
+        "reasons": [],
+        "reconstructed": null,
+        "report": null,
+        "required": false,
+        "status": "not_required"
+      },
+      "candidate_output_tokens": 2626,
+      "candidate_passed": 0,
+      "candidate_source_macro_pass_rate": 0.0,
+      "evidence_kind": "descriptive_matched_local_student_baseline_comparison",
+      "held_out_used": false,
+      "limitations": [
+        "Observed local train/development differences only; no confidence interval, significant win, learning guarantee or global optimum is inferred.",
+        "Generation time excludes loading, training and grading; different thread allocations are disclosed rather than treated as a fair speed comparison.",
+        "Any baseline/candidate generation or infrastructure failure prevents a model-quality improvement claim.",
+        "BitNet quality comparisons require independently reconstructed checkpoint-bound Rust/C++ numerical equivalence; missing, stale and failed receipts preserve descriptive scores but cannot establish improvement."
+      ],
+      "observed_score_delta_percentage_points": 0.0,
+      "planned_tasks": 16,
+      "positive_observed_delta": false,
+      "production_eligible": false,
+      "quality_comparison_valid": true,
+      "same_inference_thread_allocation": true,
+      "schema_version": 2,
+      "split": "development",
+      "timings_support_matched_resource_comparison": true
+    }
+  ],
+  "containers_started": false,
+  "evidence_kind": "independently_verified_descriptive_study_comparisons",
+  "held_out_used": false,
+  "inference_performed": false,
+  "production_eligible": false,
+  "schema_version": 1,
+  "status": "invalid_quality_comparison"
+}

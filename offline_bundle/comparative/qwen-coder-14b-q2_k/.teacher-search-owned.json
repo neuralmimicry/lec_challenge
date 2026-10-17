@@ -1,0 +1,7 @@
+{
+  "schema_version": 1,
+  "directory": "offline_bundle/comparative/qwen-coder-14b-q2_k",
+  "candidate_id": "qwen-coder-14b-q2_k",
+  "model_id": "Qwen/Qwen2.5-Coder-14B-Instruct-GGUF",
+  "revision": "d0a692ef765eefbf2fabb130b3cb2e8917e3d225"
+}

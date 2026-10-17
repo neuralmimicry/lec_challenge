@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "448b2d86361801414c47e32433b6e0bce070909a486feaecc2fd744b94dca8f4",
+  "task_id": "encoding.hex_encode",
+  "source_id": "private-encoding-v1",
+  "success": false,
+  "raw_generation": {
+    "path": "reports/local-study/sft-adapter-development-c7c/generations/encoding.hex_encode.json",
+    "sha256": "68e0692d1eb8ab5530aac0aabfc81bdfe5cfcfebc2f7e128a07e737d000b0de9",
+    "bytes": 1786
+  },
+  "sandbox_report": null,
+  "grading_error": "trusted grade rejected: trusted audit artifact missing: No such file or directory (os error 2)"
+}

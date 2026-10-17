@@ -1,0 +1,12 @@
+{
+  "bundle": {
+    "bytes": 218818,
+    "path": "reports/local-study/explore/round-001/content-v1/bundle.json",
+    "sha256": "6256372fa9e690dbf230f5042904001db2bb1583b195015ddce53b0def40c8c6"
+  },
+  "preferences": 0,
+  "promotable": false,
+  "samples": 22,
+  "schema_version": 1,
+  "train_corpus_sha256": "037e9f5719624d6c411c8c354295697f6ef87c8d95e1771ac60696e93a487b6d"
+}

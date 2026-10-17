@@ -1,0 +1,77 @@
+{
+  "architecture": "conventional_qwen_lora",
+  "batch_plan": {
+    "bytes": 431447,
+    "path": "reports/local-study/regraded-v3-001/batch-plan.json",
+    "sha256": "61efeb7afb1ef5e1f662a11c2361809185e2f01e8f457e5a133f311473c55915"
+  },
+  "checkpoint_id": "e2bcd135527659042304d936fa56c7240f6f96a43b9f81f2a888c38b7762a949",
+  "coverage_complete": true,
+  "evidence_kind": "derived_local_study_generation_regrade",
+  "generation_reused": true,
+  "grading_identity": {
+    "controller_version": 3,
+    "engine_sha256": "b45d32ca11ccc84633ab2de0bb9d195dc38a61c78e2ef1a87c03ea90091aa301",
+    "extractor_sha256": "e17ff8dba14acb9946c51c4d36a3ef727ce02e3fe4cf1b1c1c093b9394d72967",
+    "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "kind": "frozen_local_study_generation_regrade",
+    "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2"
+  },
+  "healthy_complete": false,
+  "held_out_used": false,
+  "infrastructure_or_generation_errors": 1,
+  "input_tokens": 3902,
+  "limitations": [
+    "Local train/development measurement only; no learning or promotion claim.",
+    "One fixed evaluation seed and jointly authored source groups do not establish general superiority.",
+    "Generation time excludes loading, hashing and grading; overlapping work is not serial wall time.",
+    "Every failed, empty, truncated or missing output remains in the planned denominator.",
+    "All inference timings/tokens are reused original measurements. New host grading has a separately bound controller/policy/image and never regenerates an output. Original and replacement verdicts remain distinct; no SHIP decision."
+  ],
+  "max_new_tokens": 512,
+  "new_inference_tokens": 0,
+  "new_model_calls": 0,
+  "observed": 16,
+  "original_plan": {
+    "bytes": 23984,
+    "path": "reports/local-study/native-full-quality-001/sft-development/plan.json",
+    "sha256": "0805ba5b12c7f6a3f7a46cf71c1c8db0aa8542d736a3dcd82b56da5f168b46c4"
+  },
+  "output_tokens": 2485,
+  "pass_rate": 0.0,
+  "passed": 0,
+  "per_source": [
+    {
+      "observed": 4,
+      "pass_rate": 0.0,
+      "passed": 0,
+      "source_id": "private-dispatch-v1"
+    },
+    {
+      "observed": 4,
+      "pass_rate": 0.0,
+      "passed": 0,
+      "source_id": "private-encoding-v1"
+    },
+    {
+      "observed": 4,
+      "pass_rate": 0.0,
+      "passed": 0,
+      "source_id": "private-money-v1"
+    },
+    {
+      "observed": 4,
+      "pass_rate": 0.0,
+      "passed": 0,
+      "source_id": "private-tables-v1"
+    }
+  ],
+  "plan_sha256": "db41cc8e16bc2c0a434bb31a9f326dffbc17094eba18e0489c23539f03e657bd",
+  "planned": 16,
+  "production_eligible": false,
+  "schema_version": 1,
+  "seed": 1729,
+  "split": "development",
+  "status": "complete_with_errors",
+  "summed_generation_ms": 109283
+}

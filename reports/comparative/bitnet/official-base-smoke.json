@@ -1,0 +1,44 @@
+{
+  "assessment_training": false,
+  "device": "Cpu",
+  "dtype": "F32",
+  "evidence_kind": "actual_official_bitnet_base_synthetic_operator_smoke",
+  "forward_finite": true,
+  "forward_seconds": 8.724380182999997,
+  "gradient_norm": 0.08754446434374663,
+  "limitations": [
+    "Actual full-size pretrained model forward/backward and memory measurement; no optimiser update, task learning, adapter quality or promotion claim.",
+    "Sequence activations and optimiser state may increase memory for longer real training arms."
+  ],
+  "load_seconds": 24.564718541,
+  "loss": 26.430429458618164,
+  "official_full_base": true,
+  "optimiser_steps": 0,
+  "peak_rss_bytes": 16199495680,
+  "production_eligible": false,
+  "resource_estimate": {
+    "estimated_peak_bytes": 16086392832,
+    "execution": "cpu_f32_serial_student; sequence activations require additional headroom",
+    "frozen_f32_bytes": 9651281920,
+    "qat_intermediate_reserve_bytes": 6435110912
+  },
+  "schema_version": 1,
+  "source_model": {
+    "files": {
+      "LICENSE": "646f8936b8ddcd14e13e578ff6857e368780b0d1a4f6066bee89211923a373e2",
+      "README.md": "d945337057d24807958449cadead36fb57bf38ab259f3dc8d75c07e2fe7188c2",
+      "config.json": "2b43e80788972e6d53967b01ac3609d7df23cf0aabb0c866e51be694a59c1149",
+      "generation_config.json": "af34a37cd006fd230106fcefc6bfdc1f775503aee05a80c174ccc5c6594f7054",
+      "model.safetensors": "8143ae115ed6babe5e5ada8fb8c5b769d8f417802b2db042ad98b4f7ed73975b",
+      "special_tokens_map.json": "462d91939dbc37178aa5a3eae7068d1990ccc92e09f288cc71f42cdf139d69cc",
+      "tokenizer.json": "e134af98b985517b4f068e3755ae90d4e9cd2d45d328325dc503f1c6b2d06cc7",
+      "tokenizer_config.json": "d27b698683435b0b0dd544a591a30196b2b63f5fd4c8c64b9060a84dc185386f"
+    },
+    "licence": "mit",
+    "model_id": "microsoft/bitnet-b1.58-2B-4T",
+    "revision": "04c3b9ad9361b824064a1f25ea60a8be9599b127"
+  },
+  "tokens": 16,
+  "total_seconds": 42.586497073,
+  "training_data": "labelled_synthetic_text_not_teacher_output"
+}

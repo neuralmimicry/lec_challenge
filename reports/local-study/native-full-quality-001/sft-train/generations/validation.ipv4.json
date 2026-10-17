@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "a5b39d544c85b76111246b8fda40c638ce104251a1c56368277fef8fe4033eb6",
+  "task_id": "validation.ipv4",
+  "source_id": "private-validation-v1",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an ASCII string. Return true iff exactly four decimal components separated by dots each have value 0..255 and no leading zero unless the component is exactly 0.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":\"192.168.0.1\",\"expected\":true}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let s = input.as_str().unwrap();\n    let parts: Vec<&str> = s.split('.').collect();\n    if parts.len() != 4 {\n        return Value::Bool(false);\n    }\n    for part in parts {\n        if !part.chars().all(|c| c.is_digit(10)) {\n            return Value::Bool(false);\n        }\n        if part == \"0\" && part.len() > 1 {\n            return Value::Bool(false);\n        }\n    }\n    Value::Bool(true)\n}\n```",
+    "checkpoint_id": "e2bcd135527659042304d936fa56c7240f6f96a43b9f81f2a888c38b7762a949",
+    "finish_reason": "stop",
+    "input_tokens": 245,
+    "output_tokens": 129,
+    "elapsed_ms": 5747,
+    "complete": true
+  },
+  "model_error": null
+}

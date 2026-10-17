@@ -1,0 +1,141 @@
+{
+  "auditor": {
+    "bytes": 386096768,
+    "path": "target/debug/examples/training_seed_audit",
+    "sha256": "c0709c100974251caf193f064232f4ee3f3c86a46c290004a998adc41ec69a06"
+  },
+  "declared_config": {
+    "bytes": 1590,
+    "path": "config/distillation-study.toml",
+    "sha256": "a3712f1135dd5471c80aecc2f91b99742355e3fb01720465833d2b63a8e2b5ba"
+  },
+  "eligible_complete_samples": 17,
+  "evidence_kind": "independent_verified_whole_training_seed_audit",
+  "held_out_used": false,
+  "inference_performed": false,
+  "left_affinity": "0-15",
+  "limitations": [
+    "The captured configuration proves declared seed membership; this audit alone does not establish preregistration chronology.",
+    "Whole-training seed changes initialisation and sample shuffling, including any partial final cycle.",
+    "Affinity placement is disclosed separately; effective numerical pools and all remaining training settings must match.",
+    "Changed or reloaded weights do not establish coding improvement, statistical seed equivalence or an assessment gate result."
+  ],
+  "model_constructed": false,
+  "passed": true,
+  "production_eligible": false,
+  "quality_evaluation": false,
+  "right_affinity": "4-11",
+  "same_final_adapter": false,
+  "same_initial_adapter": false,
+  "same_realised_order": false,
+  "schema_version": 1,
+  "source_sha256": "2ed45e8283a0aff00708363e1f3ba24b417b94c5ef6702bd5793b873df0881ec",
+  "variants": [
+    {
+      "adapter_sha256": "e2bcd135527659042304d936fa56c7240f6f96a43b9f81f2a888c38b7762a949",
+      "freeze": {
+        "bytes": 351838,
+        "path": "reports/local-study/native-full-sft-seed1729/freeze.json",
+        "sha256": "26a469a3b6d9311d9df716a60f60a1dab9c13f581607b60f94678b441a908842"
+      },
+      "initial_adapter_sha256": "97f700bf02c1bd271edb8c743d5b28a3557d8617c8b68b143e88f5d87ed2cd76",
+      "launch": {
+        "bytes": 697,
+        "path": "reports/local-study/native-full-sft-seed1729/helper-launch.json",
+        "sha256": "1091bbafbb95286318554a35e0f48b363867b03e1dcd224a06c3338615a3b28d"
+      },
+      "manifest": {
+        "bytes": 21029,
+        "path": "reports/local-study/native-full-sft-seed1729/manifest.json",
+        "sha256": "7644d325a57ac74a11a7aa4396a307adac1f086c006fdc388d9cf12a14a7601c"
+      },
+      "reload": {
+        "finite_logits": 303872,
+        "receipt": {
+          "bytes": 1319,
+          "path": "reports/local-study/native-full-sft-reload.json",
+          "sha256": "2d95509b5b93de33a66ca29a21b90f058447ffc7b47882429d64130a1c3ad105"
+        },
+        "request": {
+          "bytes": 903,
+          "path": "reports/local-study/native-full-sft-request.json",
+          "sha256": "95c3010348985dc00e4ad1f517a98a6883ba32570dd3865efbfb305d4d889f3a"
+        }
+      },
+      "sample_update_counts": {
+        "12106a8bfb9356904186b558fd37127f1ee55e650cb57a6e843d8983be952bd0": 3,
+        "21748f9f3a9dec33f5c19fb7179ecdada908a2b27e6486b333f8a379f57d93bb": 3,
+        "279b6d10fb8f3e4f1d9e8b547e1207c9c65214b57d0270ab76e419d02e5165d2": 3,
+        "2d22b678d0bb8aadd704350c150da710a8be0fe59dc30172accfbbb0b25f792b": 3,
+        "5b46a85ec5f9398290c023c26ef8cb662e6e4d19da293a71b2bcee316514f6b7": 3,
+        "5dedbab9841301331ad4a8a4ef9d893e994c7abd27be5b97777071860da49a35": 3,
+        "60cad86431ce13f24f3525d348b75936b4659f22832705f61513e6920d3c0913": 2,
+        "6f54a188344a4c4834c5a9bfe0969e33003547ea371fbf2ba03a4e5fd88d6e07": 3,
+        "83cc42aa11a66d768d6f952f81812adff3032a39e39b89bfa188e7270ab75a62": 3,
+        "9a709fd0afa880d7d61490074636b6a836aa05da5d9a338a46aa8aca31efdce4": 2,
+        "9f34cf373961913a3cf1067f1f2a71e0bef8368e1557d10e998cc099a00fab71": 3,
+        "b385fb6bb3931d6b39a919d387b625b8e5c0db4506f12df96b46489b5f340498": 3,
+        "be57ee99f53e14a44a210dee5a0a227fbee04ea80f1c914f14447c3db087cded": 3,
+        "d34031fab7990f9d5bb1ac0465e3173de67d17f95496ed535260f239f3c4bc90": 3,
+        "e89aa62fc9a189c19a13370ba9410f99991e685167f68b4f7ce97f6a4c78f965": 3,
+        "f23b74be49ae4fb9f5a42d58f33244ef0c157aa0e4afe342a565baa7e7493c91": 3,
+        "ff06039fd8278f904a9e03151a5b46d0452d3c207474b4da9dd4b770fe9d6d26": 2
+      },
+      "seed": 1729,
+      "steps": 48
+    },
+    {
+      "adapter_sha256": "fadca01f97c8e971d9f6d03103c77847dcc064c39b28e996802cb70ce3603042",
+      "freeze": {
+        "bytes": 351838,
+        "path": "reports/local-study/native-full-sft-seed2718/freeze.json",
+        "sha256": "7eedf2641f821c7d22fc913855cd14e7c998cd9d8c4b45d03d288a804961f05e"
+      },
+      "initial_adapter_sha256": "e60f59ab6101fd2d552556817000719e3b88115a444f7eda339a9feb9f6145bd",
+      "launch": {
+        "bytes": 697,
+        "path": "reports/local-study/native-full-sft-seed2718/helper-launch.json",
+        "sha256": "e102e969612fce721bb85d36101179600be001f7a72dffcffeffa051a7d11a4e"
+      },
+      "manifest": {
+        "bytes": 21052,
+        "path": "reports/local-study/native-full-sft-seed2718/manifest.json",
+        "sha256": "1b0b38681bb23c49e4821214887568e06a9d2b997ec5c33bf1ad3f601ca78a99"
+      },
+      "reload": {
+        "finite_logits": 303872,
+        "receipt": {
+          "bytes": 1328,
+          "path": "reports/local-study/native-full-sft-seed2718-reload.json",
+          "sha256": "fadaab03b87eb6fa3fcd3c893e2988f77399d38df2598853928db4349f69f82a"
+        },
+        "request": {
+          "bytes": 903,
+          "path": "reports/local-study/native-full-sft-seed2718-request.json",
+          "sha256": "e81c75dfab9211b63eb97196ab7e6853884311db69f8c8bc97e14cc9ec4076f2"
+        }
+      },
+      "sample_update_counts": {
+        "12106a8bfb9356904186b558fd37127f1ee55e650cb57a6e843d8983be952bd0": 3,
+        "21748f9f3a9dec33f5c19fb7179ecdada908a2b27e6486b333f8a379f57d93bb": 3,
+        "279b6d10fb8f3e4f1d9e8b547e1207c9c65214b57d0270ab76e419d02e5165d2": 3,
+        "2d22b678d0bb8aadd704350c150da710a8be0fe59dc30172accfbbb0b25f792b": 3,
+        "5b46a85ec5f9398290c023c26ef8cb662e6e4d19da293a71b2bcee316514f6b7": 3,
+        "5dedbab9841301331ad4a8a4ef9d893e994c7abd27be5b97777071860da49a35": 3,
+        "60cad86431ce13f24f3525d348b75936b4659f22832705f61513e6920d3c0913": 2,
+        "6f54a188344a4c4834c5a9bfe0969e33003547ea371fbf2ba03a4e5fd88d6e07": 3,
+        "83cc42aa11a66d768d6f952f81812adff3032a39e39b89bfa188e7270ab75a62": 2,
+        "9a709fd0afa880d7d61490074636b6a836aa05da5d9a338a46aa8aca31efdce4": 2,
+        "9f34cf373961913a3cf1067f1f2a71e0bef8368e1557d10e998cc099a00fab71": 3,
+        "b385fb6bb3931d6b39a919d387b625b8e5c0db4506f12df96b46489b5f340498": 3,
+        "be57ee99f53e14a44a210dee5a0a227fbee04ea80f1c914f14447c3db087cded": 3,
+        "d34031fab7990f9d5bb1ac0465e3173de67d17f95496ed535260f239f3c4bc90": 3,
+        "e89aa62fc9a189c19a13370ba9410f99991e685167f68b4f7ce97f6a4c78f965": 3,
+        "f23b74be49ae4fb9f5a42d58f33244ef0c157aa0e4afe342a565baa7e7493c91": 3,
+        "ff06039fd8278f904a9e03151a5b46d0452d3c207474b4da9dd4b770fe9d6d26": 3
+      },
+      "seed": 2718,
+      "steps": 48
+    }
+  ]
+}

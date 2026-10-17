@@ -1,0 +1,34 @@
+{
+  "run_id": "3f6392ed-7fdf-44b0-b98c-f7553c2698b0",
+  "task_id": "matrices.diagonals",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error[E0605]: non-primitive cast: `Value` as `i64`\n  --> /candidate/main.rs:10:30\n   |\n10 |         main_diagonal_sum += matrix[i][i] as i64;\n   |                              ^^^^^^^^^^^^^^^^^^^ an `as` expression can be used to convert enum types to numeric types only if the enum type is unit-only or field-less\n   |\n   = note: see https://doc.rust-lang.org/reference/items/enumerations.html#casting for more information\n\nerror[E0605]: non-primitive cast: `Value` as `i64`\n  --> /candidate/main.rs:11:30\n   |\n11 |         anti_diagonal_sum += matrix[i][n - 1 - i] as i64;\n   |                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^ an `as` expression can be used to convert enum types to numeric types only if the enum type is unit-only or field-less\n   |\n   = note: see https://doc.rust-lang.org/reference/items/enumerations.html#casting for more information\n\nerror: aborting due to 2 previous errors\n\nFor more information about this error, try `rustc --explain E0605`.\n"
+  ],
+  "cases_total": 5,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "4b2556745b303526f354ded7f2c473b77f6da0c99a77f0a493c7272a8d800aac",
+  "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "39bc2cd720c8437d53e5d31f0015316ab4336ba3d3a22a0c73f88ae72217db3c",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "controller_version": 2,
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:1",
+    "expected_image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/native-full-quality-001/sft-train/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/native-full-quality-001/sft-train/sandbox/3f6392ed-7fdf-44b0-b98c-f7553c2698b0.audit.json",
+  "audit_sha256": "32dbc5268b859e1f7d1f21273595abbae3cbf269d876e23217a955a5cfc3b0bf",
+  "failure": "compilation failed: error[E0605]: non-primitive cast: `Value` as `i64`\n  --> /candidate/main.rs:10:30\n   |\n10 |         main_diagonal_sum += matrix[i][i] as i64;\n   |                              ^^^^^^^^^^^^^^^^^^^ an `as` expression can be used to convert enum types to numeric types only if the enum type is unit-only or field-less\n   |\n   = note: see https://doc.rust-lang.org/reference/items/enumerations.html#casting for more information\n\nerror[E0605]: non-primitive cast: `Value` as `i64`\n  --> /candidate/main.rs:11:30\n   |\n11 |         anti_diagonal_sum += matrix[i][n - 1 - i] as i64;\n   |                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^ an `as` expression can be used to convert enum types to numeric types only if the enum type is unit-only or field-less\n   |\n   = note: see https://doc.rust-lang.org/reference/items/enumerations.html#casting for more information\n\nerror: aborting due to 2 previous errors\n\nFor more information about this error, try `rustc --explain E0605`.\n",
+  "duration_ms": 6019,
+  "timeout_evidence": null
+}

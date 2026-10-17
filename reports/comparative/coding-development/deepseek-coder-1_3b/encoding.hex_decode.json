@@ -1,0 +1,38 @@
+{
+  "model_id": "deepseek-coder-1_3b",
+  "task_id": "encoding.hex_decode",
+  "source_id": "private-encoding-v1",
+  "specification_sha256": "535cec08e7ca750ff6426c55df5e10382b5d98dd2b972889c664a544c49c2a87",
+  "seed": 1729,
+  "plan_sha256": "9aefcaf935435b296c63229638aad5a22a416ae171eda011a6812dd745667ea8",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an ASCII string. Decode even-length hexadecimal accepting upper/lowercase; return byte array, or null for invalid digits or odd length. The returned array may contain up to 128 items.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":\"00aF\",\"expected\":[0,175]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "Here is a simple implementation of the `solve` function in Rust. This function takes a string input and converts it to a byte array. If the input is not a valid hexadecimal string, it returns `None`.\n\n```rust\nuse serde_json::Value;\nuse std::str::FromStr;\n\npub fn solve(input: String) -> Option<Vec<u8>> {\n    if input.chars().all(|c| c.is_digit(16)) {\n        Some(input.parse::<Vec<u8>>().unwrap())\n    } else {\n        None\n    }\n}\n```\n\nThis function uses the `parse` method of the `String` type to convert the input string to a byte array. If the input string is not a valid hexadecimal string, the `parse` method will return an error, which is then wrapped in `unwrap` to give us a `Result`. If the input string is a valid hexadecimal string, the `parse` method will return a `Result` of type `Vec<u8>`, which is then wrapped in `Some` to return a `Option`.\n\nPlease note that this function does not handle invalid hexadecimal strings that are not even-length or contain non-digit characters. You may want to add error handling for these cases depending on your specific requirements.\n",
+    "checkpoint_id": "4ff570bf9a558d23c5cb4171bad00daf663be8282150cdb5769e0f6975b0007a",
+    "finish_reason": "stop",
+    "input_tokens": 322,
+    "output_tokens": 314,
+    "elapsed_ms": 28866,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/comparative/coding-development/deepseek-coder-1_3b/encoding.hex_decode.generation.json",
+    "sha256": "4e1948f10332ab37a76b7fed8d22ffd4562862bd96a68767b6b4c9ac65110b13",
+    "bytes": 3498
+  },
+  "sandbox_report": {
+    "path": "reports/comparative/coding-development/sandbox/dc83426c-73d1-42d6-8f5e-b328adca58f3.json",
+    "sha256": "5c7b83297b2300d594c3fa25480ba3efc1a8974a4184c1bfaa1bdad01c1e9182",
+    "bytes": 9704
+  },
+  "grading_error": null,
+  "success": false
+}

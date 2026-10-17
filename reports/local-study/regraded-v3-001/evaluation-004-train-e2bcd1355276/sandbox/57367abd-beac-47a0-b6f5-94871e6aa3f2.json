@@ -1,0 +1,40 @@
+{
+  "run_id": "57367abd-beac-47a0-b6f5-94871e6aa3f2",
+  "task_id": "search.anagram",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error[E0308]: mismatched types\n --> /candidate/main.rs:4:9\n  |\n4 |     let (a, b) = input.as_array().unwrap();\n  |         ^^^^^^   ------------------------- this expression has type `&Vec<Value>`\n  |         |\n  |         expected `Vec<Value>`, found `(_, _)`\n  |\n  = note: expected struct `Vec<Value>`\n              found tuple `(_, _)`\n\nerror[E0308]: mismatched types\n  --> /candidate/main.rs:13:5\n   |\n 3 | pub fn solve(input: Value) -> Value {\n   |                               ----- expected `Value` because of return type\n...\n13 |     a_chars == b_chars\n   |     ^^^^^^^^^^^^^^^^^^ expected `Value`, found `bool`\n   |\nhelp: try wrapping the expression in `serde_json::Value::Bool`\n   |\n13 |     serde_json::Value::Bool(a_chars == b_chars)\n   |     ++++++++++++++++++++++++                  +\n\nerror: aborting due to 2 previous errors\n\nFor more information about this error, try `rustc --explain E0308`.\n"
+  ],
+  "cases_total": 6,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "d96d44934f4be6077c46e0b3fbf76ab984892d485eed71779fac76807d652555",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/sandbox/57367abd-beac-47a0-b6f5-94871e6aa3f2.audit.json",
+  "audit_sha256": "1d87d9b50f7cd6fa26348778e0e5573eae345225df0f8789c4f3207a8b77d71c",
+  "failure": "compilation failed: error[E0308]: mismatched types\n --> /candidate/main.rs:4:9\n  |\n4 |     let (a, b) = input.as_array().unwrap();\n  |         ^^^^^^   ------------------------- this expression has type `&Vec<Value>`\n  |         |\n  |         expected `Vec<Value>`, found `(_, _)`\n  |\n  = note: expected struct `Vec<Value>`\n              found tuple `(_, _)`\n\nerror[E0308]: mismatched types\n  --> /candidate/main.rs:13:5\n   |\n 3 | pub fn solve(input: Value) -> Value {\n   |                               ----- expected `Value` because of return type\n...\n13 |     a_chars == b_chars\n   |     ^^^^^^^^^^^^^^^^^^ expected `Value`, found `bool`\n   |\nhelp: try wrapping the expression in `serde_json::Value::Bool`\n   |\n13 |     serde_json::Value::Bool(a_chars == b_chars)\n   |     ++++++++++++++++++++++++                  +\n\nerror: aborting due to 2 previous errors\n\nFor more information about this error, try `rustc --explain E0308`.\n",
+  "duration_ms": 27285,
+  "timeout_evidence": null,
+  "lifecycle_evidence": {
+    "receipt_path": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/sandbox/57367abd-beac-47a0-b6f5-94871e6aa3f2.lifecycle.json",
+    "receipt_sha256": "6f6298b2aecbcc8e0af5efb94df9e19a9522c376245d956790b83ffb4ba2ce76"
+  }
+}

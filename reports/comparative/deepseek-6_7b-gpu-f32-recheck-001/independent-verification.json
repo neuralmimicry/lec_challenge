@@ -1,0 +1,164 @@
+{
+  "actual_coding_verdicts": 0,
+  "actual_execution_available": false,
+  "actual_generations": 0,
+  "affinity_continuously_observed": false,
+  "application_exit_code_observed": 1,
+  "bounded_gguf_metadata": {
+    "gguf_version": 3,
+    "metadata_count": 22,
+    "relevant_scalars": {
+      "general.architecture": "llama",
+      "llama.context_length": 16384,
+      "llama.rope.dimension_count": 128,
+      "llama.rope.freq_base": 100000.0,
+      "llama.rope.scale_linear": 4.0
+    },
+    "tensor_count": 291,
+    "tensor_payload_read": false
+  },
+  "classification": "loader_incompatible_not_model_quality_evidence",
+  "evidence_kind": "independent_rust_fresh_deepseek_development_verification",
+  "execution": {
+    "bytes": 2218,
+    "path": "reports/comparative/deepseek-6_7b-gpu-f32-recheck-001/evaluation/execution.json",
+    "sha256": "197779c86c0aedbec96edd784eddd0564ddfd52d665d58324a1ac3d4dc717022"
+  },
+  "failure": "model loading failed: GGUF/source rotary scaling differs",
+  "held_out_used": false,
+  "loading_errors": 16,
+  "maximum_concurrent_graders": 3,
+  "model_allocated": false,
+  "observed": 16,
+  "passed": true,
+  "plan": {
+    "bytes": 23685,
+    "path": "reports/comparative/deepseek-6_7b-gpu-f32-recheck-001/evaluation/plan.json",
+    "sha256": "c0eb6b9a6ac62bd4f1c35803db2f748b8cdf1ac7607088924c2c80518e92289b"
+  },
+  "planned": 16,
+  "production_source_changed": false,
+  "promotable": false,
+  "report": {
+    "bytes": 1133,
+    "path": "reports/comparative/deepseek-6_7b-gpu-f32-recheck-001/evaluation/report.json",
+    "sha256": "21d850b32401fb6a78815e1ca190203ac59639953074571f68cbbf2d51e27f83"
+  },
+  "request": {
+    "bytes": 28083,
+    "path": "reports/comparative/deepseek-6_7b-gpu-f32-recheck-001/requested-protocol.json",
+    "sha256": "20a7ae3bf104737663c7771742bbdfc7942b54fcc785a63e9386248e7a979a4d"
+  },
+  "requested_affinity_cpus": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "requested_device": "cuda:0",
+  "requested_dtype": "f32",
+  "retry_performed": false,
+  "schema_version": 1,
+  "source_config": {
+    "bytes": 760,
+    "path": "offline_bundle/comparative/deepseek-coder-6_7b-q4_k_m/source/config.json",
+    "sha256": "a3a2ce1a623b367d3799fb0c1e1ba12d5b8fa51a8e7abba14d10dd3739cd73e4"
+  },
+  "source_rope_scaling": {
+    "factor": 4.0,
+    "type": "linear"
+  },
+  "verdicts": [
+    {
+      "bytes": 1880,
+      "path": "reports/comparative/deepseek-6_7b-gpu-f32-recheck-001/evaluation/deepseek-coder-6_7b-q4_k_m/money.parse.json",
+      "sha256": "1c1986657e95bd00f0e94131c3fa778966b3d96d31a6b34a91ed6a4f53a76c4b"
+    },
+    {
+      "bytes": 1776,
+      "path": "reports/comparative/deepseek-6_7b-gpu-f32-recheck-001/evaluation/deepseek-coder-6_7b-q4_k_m/money.format.json",
+      "sha256": "47eceb6908dc36ea8174635705acd61834f3e01b41f9ac530d2c8afd085d8bc8"
+    },
+    {
+      "bytes": 1821,
+      "path": "reports/comparative/deepseek-6_7b-gpu-f32-recheck-001/evaluation/deepseek-coder-6_7b-q4_k_m/money.split.json",
+      "sha256": "bc354195e4e3e5447b540c5edf57ae418b7d2db52c87badd581eb13bd92ebc43"
+    },
+    {
+      "bytes": 1774,
+      "path": "reports/comparative/deepseek-6_7b-gpu-f32-recheck-001/evaluation/deepseek-coder-6_7b-q4_k_m/money.basket.json",
+      "sha256": "b279c3f67d80d5b6318c06f9fad28070b75a9db54b1d122b56ff713496b1b1a2"
+    },
+    {
+      "bytes": 1867,
+      "path": "reports/comparative/deepseek-6_7b-gpu-f32-recheck-001/evaluation/deepseek-coder-6_7b-q4_k_m/dispatch.finish_order.json",
+      "sha256": "2bb8b33236be78d7d34b930bfc7be5ba601c58df71868bf24fc227cec423c096"
+    },
+    {
+      "bytes": 1825,
+      "path": "reports/comparative/deepseek-6_7b-gpu-f32-recheck-001/evaluation/deepseek-coder-6_7b-q4_k_m/dispatch.waiting.json",
+      "sha256": "a02a682b302dd156ef1b043c3ab6fa030a0962569ecef1c9fc5edf23f6565544"
+    },
+    {
+      "bytes": 1926,
+      "path": "reports/comparative/deepseek-6_7b-gpu-f32-recheck-001/evaluation/deepseek-coder-6_7b-q4_k_m/dispatch.round_robin.json",
+      "sha256": "2ef8bf28a31f97b71302348e086228eaf9e1dd3ea94f40661b72db919d75237d"
+    },
+    {
+      "bytes": 1821,
+      "path": "reports/comparative/deepseek-6_7b-gpu-f32-recheck-001/evaluation/deepseek-coder-6_7b-q4_k_m/dispatch.priority.json",
+      "sha256": "54a021c9b869b5d6c885711e5204eed1361c5a064133f5ec499231a5dbb884a3"
+    },
+    {
+      "bytes": 1782,
+      "path": "reports/comparative/deepseek-6_7b-gpu-f32-recheck-001/evaluation/deepseek-coder-6_7b-q4_k_m/encoding.hex_encode.json",
+      "sha256": "6d034dc46cc484499ecb08dc1d073c78c9a2285ae57a58b76ed892d5b966b657"
+    },
+    {
+      "bytes": 1871,
+      "path": "reports/comparative/deepseek-6_7b-gpu-f32-recheck-001/evaluation/deepseek-coder-6_7b-q4_k_m/encoding.hex_decode.json",
+      "sha256": "fd8ab249261704797418184b03cc3c0e8b71a8144ad573e8ed739a230d02b911"
+    },
+    {
+      "bytes": 1820,
+      "path": "reports/comparative/deepseek-6_7b-gpu-f32-recheck-001/evaluation/deepseek-coder-6_7b-q4_k_m/encoding.caesar.json",
+      "sha256": "3ee5830cee174bf7550fb5dcde6a70e9eb48feb1521cf13a0418e95da79d7b50"
+    },
+    {
+      "bytes": 1775,
+      "path": "reports/comparative/deepseek-6_7b-gpu-f32-recheck-001/evaluation/deepseek-coder-6_7b-q4_k_m/encoding.rot13.json",
+      "sha256": "380732f75b1a4d52a2d8a2832c589f14e91c5b57ec1bf10f71dd670476238717"
+    },
+    {
+      "bytes": 1795,
+      "path": "reports/comparative/deepseek-6_7b-gpu-f32-recheck-001/evaluation/deepseek-coder-6_7b-q4_k_m/tables.sort_rows.json",
+      "sha256": "ad430f8dad585938118cae1ed2ffd72eb277820845b4bb8581ffb8b315c03cff"
+    },
+    {
+      "bytes": 1809,
+      "path": "reports/comparative/deepseek-6_7b-gpu-f32-recheck-001/evaluation/deepseek-coder-6_7b-q4_k_m/tables.last_by_key.json",
+      "sha256": "6e669f1879466a62142b9cd204a57c9c0993d3a503af95bdabf831d07e9768b8"
+    },
+    {
+      "bytes": 1787,
+      "path": "reports/comparative/deepseek-6_7b-gpu-f32-recheck-001/evaluation/deepseek-coder-6_7b-q4_k_m/tables.group_sums.json",
+      "sha256": "b9708708201520fa0ab5fdf378b714f4634bd9c1fc988ece18fabf539d3085a7"
+    },
+    {
+      "bytes": 1858,
+      "path": "reports/comparative/deepseek-6_7b-gpu-f32-recheck-001/evaluation/deepseek-coder-6_7b-q4_k_m/tables.inner_join.json",
+      "sha256": "7f89b3e14cce1297640c944666fc853b931e504aa60ef489857d624a2c1e7e79"
+    }
+  ],
+  "verifier_executable": {
+    "bytes": 5201928,
+    "path": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/state/diagnostics/verify-deepseek-gpu-recheck",
+    "sha256": "542d9d8113924b8b5485d88f3e7cf79e744b0bf591f78a5ff9dca06b496dd0c4"
+  },
+  "verifier_source": {
+    "bytes": 11344,
+    "path": "state/diagnostics/verify-deepseek-gpu-recheck.rs",
+    "sha256": "c052bd10c60f5aad3a325c0a43f66482d4698afff091b3aeb24edb8350893ee5"
+  },
+  "whole_gguf_checksum_recomputed_by_this_verifier": false
+}

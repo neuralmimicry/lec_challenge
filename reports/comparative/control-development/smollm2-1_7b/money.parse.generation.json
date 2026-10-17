@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "evidence_kind": "actual_local_model_generation",
+  "recorded_unix_ms": 1792073094084,
+  "model_id": "smollm2-1_7b",
+  "task_id": "money.parse",
+  "source_id": "private-money-v1",
+  "specification_sha256": "d2e4ee5432fb3996c6eaa9004d032f82e2ebfcb2f8df8fd10fd99bfbced5ddef",
+  "seed": 1729,
+  "plan_sha256": "b2e46b0f4ac46ecbb1b6568e9669ef5157b8a6343802f749cfac8ae999e29d88",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an ASCII decimal monetary string. Accept optional leading minus, one or more digits, and optional dot followed by exactly two digits. Return signed cents, or null for invalid syntax; magnitudes <=1000000 pounds.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":\"-12.30\",\"expected\":-1230}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::json;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let input_str = input.as_str();\n    let input_str = input_str.unwrap_or_default();\n    let input_str = input_str.trim();\n    let input_str = input_str.to_lowercase();\n\n    let mut parts: Vec<&str> = input_str.split('.').collect();\n    let mut cents: i64 = 0;\n    let mut magnitude: i64 = 0;\n\n    if parts.len() == 1 {\n        let parts: Vec<&str> = parts[0].split('-').collect();\n        if parts.len() == 1 {\n            magnitude = -1;\n        } else {\n            magnitude = 1;\n        }\n        cents = parts[0].parse().unwrap_or_default();\n    } else if parts.len() == 2 {\n        let parts: Vec<&str> = parts[0].split('-').collect();\n        if parts.len() == 1 {\n            magnitude = 1;\n        } else {\n            magnitude = 1000000;\n        }\n        cents = parts[0].parse().unwrap_or_default();\n        let parts: Vec<&str> = parts[1].split('.').collect();\n        if parts.len() == 1 {\n            cents += parts[0].parse().unwrap_or_default();\n        } else {\n            cents += parts[0].parse().unwrap_or_default();\n            cents *= 100;\n            cents += parts[1].parse().unwrap_or_default();\n        }\n    } else {\n        panic!(\"Invalid input format\");\n    }\n\n    if magnitude == 1000000 {\n        json!(cents as i64)\n    } else {\n        json!(cents)\n    }\n}\n```",
+    "checkpoint_id": "f55217be716b6a997b97b9d8d7eb6fad02e00858f5010ec24f64603c3a98a0e8",
+    "finish_reason": "stop",
+    "input_tokens": 274,
+    "output_tokens": 440,
+    "elapsed_ms": 13491,
+    "complete": true
+  },
+  "generation_error": null,
+  "execution": {
+    "actual_device": "Cuda { gpu_id: 0 }",
+    "actual_dtype": "F16",
+    "checkpoint_id": "f55217be716b6a997b97b9d8d7eb6fad02e00858f5010ec24f64603c3a98a0e8",
+    "context_cap": 2048,
+    "cpu_fallback": false,
+    "cuda_active": true,
+    "cuda_feature_compiled": true,
+    "engine": "native_rust_candle",
+    "model_id": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+    "requested": {
+      "device": {
+        "cuda": {
+          "ordinal": 0
+        }
+      },
+      "dtype": "f16"
+    },
+    "revision": "31b70e2e869a7173562077fd711b654946d38674"
+  }
+}

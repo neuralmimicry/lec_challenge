@@ -1,0 +1,38 @@
+{
+  "model_id": "qwen-coder-1_5b",
+  "task_id": "encoding.rot13",
+  "source_id": "private-encoding-v1",
+  "specification_sha256": "56794b6c25031b0931d378f8f3955bc2d10c4ef04da0be851795e2ca9a832cfa",
+  "seed": 1729,
+  "plan_sha256": "9aefcaf935435b296c63229638aad5a22a416ae171eda011a6812dd745667ea8",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an ASCII string. Apply ROT13 to upper/lowercase letters and preserve other characters.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":\"Hello, Z!\",\"expected\":\"Uryyb, M!\"}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::{Value, from_str};\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let input_str = input.as_str().unwrap_or(\"\");\n    let mut output_str = String::new();\n\n    for c in input_str.chars() {\n        if c.is_ascii_uppercase() {\n            output_str.push(c.to_ascii_lowercase() + 13);\n        } else if c.is_ascii_lowercase() {\n            output_str.push(c.to_ascii_uppercase() - 13);\n        } else {\n            output_str.push(c);\n        }\n    }\n\n    from_str(&output_str).unwrap()\n}\n```",
+    "checkpoint_id": "c1b9b30e907950516ba3c646bdf570d8084c25a6410a0cdca80cf04b11bc13a8",
+    "finish_reason": "stop",
+    "input_tokens": 227,
+    "output_tokens": 132,
+    "elapsed_ms": 12309,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/comparative/coding-development/qwen-coder-1_5b/encoding.rot13.generation.json",
+    "sha256": "c16a9ff7da41f616662efc6e7e80cfb6f6cfaf654d7e792c96afe8c540a64e1b",
+    "bytes": 2841
+  },
+  "sandbox_report": {
+    "path": "reports/comparative/coding-development/sandbox/4f8e2b42-9030-4470-aca5-438fbeee3f3f.json",
+    "sha256": "b3ac720bd46ebeff2853d3142a35c74313fa45b3e3e144636e5b196284cffd13",
+    "bytes": 3248
+  },
+  "grading_error": null,
+  "success": false
+}

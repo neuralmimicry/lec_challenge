@@ -1,0 +1,38 @@
+{
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "runtime": "podman",
+  "controls": {
+    "effective": {
+      "cpu_max": "100000 100000",
+      "memory_max": "536870912",
+      "network_none": true,
+      "pids_max": "64",
+      "root_write_denied": true,
+      "root_write_errno": 30,
+      "swap_max": "0",
+      "uid_status": "Uid:\t65532\t65532\t65532\t65532"
+    },
+    "host_timeout_asserted": true,
+    "memory_pressure_exit": 137,
+    "pids": {
+      "children_created": 63,
+      "creation_denied": true
+    },
+    "reference_run_id": "68e1a5e0-1c73-4f71-9921-89e04bc29c7a",
+    "timeout_evidence": {
+      "cleanup_ms": 7261,
+      "container_removed": true,
+      "deadline_ms": 1000,
+      "kernel_proof": {
+        "receipt_path": "reports/local-study/content-follow-up/round-002-cpu/sandbox/lec-deadline-489c8615-6a00-4b93-bc3e-d9dbe9e1d63e.probe-proof.json",
+        "receipt_sha256": "f222bc82d3f54cb346f89d14aa4685f2dbf0d5a9473ead722c7e0a944ce7726f"
+      },
+      "kill_acknowledged": true,
+      "kill_method": "preopened_exact_owned_cgroup_v2_kill",
+      "kill_request_ms": 0,
+      "wait_elapsed_ms": 1000
+    }
+  },
+  "probes_passed": true
+}

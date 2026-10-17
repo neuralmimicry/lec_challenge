@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "66b6333e8d5fd52d56446b62e6a098fdf1fe58e7c6925b86c925b6ba6259670a",
+  "task_id": "money.format",
+  "source_id": "private-money-v1",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is signed cents, magnitude <=100000000. Return pounds with optional minus and exactly two fractional digits.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":-1230,\"expected\":\"-12.30\"}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let cents = input.as_i64().unwrap();\n    let pounds = cents / 100000000.0;\n    let rounded_pounds = pounds.round();\n    let formatted_pounds = format!(\"{:.2}\", rounded_pounds);\n    serde_json::Value::String(formatted_pounds)\n}\n```",
+    "checkpoint_id": "b43771435431e48f3531fd823590d1c8af48342249a3fc21a451ba50ab850b7a",
+    "finish_reason": "stop",
+    "input_tokens": 235,
+    "output_tokens": 94,
+    "elapsed_ms": 17066,
+    "complete": true
+  },
+  "model_error": null
+}

@@ -1,5 +1,19 @@
 # Durable teacher acquisition
 
+For OpenAI Codex/Responses, Gemini (including GCP Vertex) and Claude/Messages,
+see [API credentials, token limits and failure handling](api-providers.md).
+`provider-check` is a local check without HTTP; `provider-request` is an explicit
+bounded inference/replay path. Inference-only providers are excluded from
+assessment collection and its fallbacks. Native protocols preserve the same
+request identity, recording, reservation, recovery and evidence boundaries as
+Chat Completions.
+
+Optional `[budgets.tokens]` round/task/provider/model limits atomically reserve
+input plus billable output before each attempt. Known usage settles that token
+liability; missing usage retains it, including failed attempts. A legacy unknown
+liability cannot be counted as zero. `costs.json/csv` include `reserved_tokens`
+and `token_upper_bound` alongside the existing usage and money fields.
+
 The runner and ledger are native Rust. SQLite transactions and filesystem synchronisation run on Tokio blocking workers; HTTP, bounded task concurrency, rate windows and backoff use asynchronous Tokio operations. The three provider businesses are configured in `config/fleet.toml`. All remain disabled because no live model/account rights decision, current price snapshot, credential or authorised spending instruction has been supplied. No provider call, usage or acquisition cost has been fabricated.
 
 `FleetRunner::complete_on(round_id, provider_id, request)` buys one intended sample, with configured failover. `complete` chooses the first enabled provider. `run_many` bounds parallel task work. Collecting best of three should call `complete_on` once for each independently owned business and send the returned candidates to the trusted grader; failover identity is retained. The host must call `require_three_businesses` when claiming assessment collection.
@@ -12,7 +26,14 @@ A completed response is published to a SHA-256 addressed file, fsynced, and its 
 
 An HTTP error with no usage retains a historical cost interval from zero to the entire reservation. That error response is durable evidence of failure and can be retried or failed over; a timeout/disconnect after dispatch has ambiguous remote acceptance and stops automatically. Authentication/configuration errors are not retried. 429 respects numeric and HTTP-date Retry-After, all retries traverse the rate and budget gates, and a shared provider circuit breaker bounds failures. A delay above 60 seconds causes failover, without retrying the throttled provider early. Empty content, malformed JSON, absent usage, tool calls and non-stop/truncated output never become successful completions.
 
-The live transport only sends ordinary OpenAI-compatible text chat requests over HTTPS, rejects redirects, caps response bytes and stores only an allowlist of non-secret response headers. It contains no web search or tools. `LiveTransport::new(true)` requires the caller to have explicit spending authority; the default roster also fails closed on missing prices, rights evidence and output-cap semantics. Environment variable names are logged, never their values.
+The live transport sends text-only Chat Completions, OpenAI Responses, Gemini
+generateContent or Anthropic Messages requests over HTTPS. It rejects redirects,
+caps response bytes and stores only an allowlist of non-secret response headers.
+It contains no web search or tools. `LiveTransport::new(true)` requires explicit
+spending authority; the assessment roster also fails closed on missing prices,
+rights evidence and output-cap semantics. General inference uses the separate
+inference-only configuration and still requires reviewed prices and bounded
+output. Environment variable names are logged, never their values.
 
 Offline replay uses `ReplayTransport::load(recording_directory)`. Files must be `<sha256>.json`, match their checksum and contain an exact request key and attempt ordinal. There is no HTTP client or network fallback in this transport. Recorded pricing supplies historical acquisition figures; replay's new API spend is zero. Labelled fixtures require an explicit alternative policy and cannot acquire the real-recording flag required by curation. Replay is not evidence that an API call occurred: the original acquisition and applicable invoice/request evidence remain necessary.
 
@@ -20,7 +41,13 @@ Offline replay uses `ReplayTransport::load(recording_directory)`. Files must be 
 
 The fleet invariant tests use conspicuously labelled synthetic responses to test transactional claims, restart reuse, UNKNOWN retention, pre-dispatch budget stops, failover, canonical keys, integer pricing and response rejection. They do not satisfy the three-real-provider requirement. The subprocess drills likewise distinguish software assurance from missing real acquisition evidence.
 
-To enable a provider, preserve dated applicable terms and selected model licence, hash the evidence, add the reviewed permission decision, pin the actual model/revision policy and price schedule, verify that its output cap includes all billable reasoning, supply the named credential outside candidate containers, and obtain an explicit maximum spend instruction. An ordinary price table has these fields:
+To enable an assessment output-training provider, preserve dated applicable terms
+and selected model licence, hash the evidence, add the reviewed permission
+decision, pin the actual model/revision policy and price schedule, verify that its
+output cap includes all billable reasoning, supply the named credential outside
+candidate containers, and obtain an explicit maximum spend instruction. For
+general inference setup, follow [the separate guide](api-providers.md). An
+ordinary price table has these fields:
 
 ```toml
 [providers.price]

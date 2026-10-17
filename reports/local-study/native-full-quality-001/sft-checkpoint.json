@@ -1,0 +1,69 @@
+{
+  "arm": "sft",
+  "base_assets": {
+    "bytes": 788,
+    "path": "offline_bundle/base/assets.json",
+    "sha256": "54304e7f41519a4196674cba5e86593802f852b2b47882d6c19706f85f303ad4"
+  },
+  "binding_executable": {
+    "bytes": 5054240,
+    "path": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/state/diagnostics/bind-native-full-quality",
+    "sha256": "8f12a6ef461dd908de9725ac4eb56322e18fe259652c0487345b897f15d4338a"
+  },
+  "binding_source": {
+    "bytes": 5999,
+    "path": "state/diagnostics/bind-native-full-quality.rs",
+    "sha256": "9120af378e91d490a96c591e11cf05149191b3398c53dd3f180ff890a869c62c"
+  },
+  "checkpoint": {
+    "actual_unadapted_base": false,
+    "checkpoint_id": "e2bcd135527659042304d936fa56c7240f6f96a43b9f81f2a888c38b7762a949",
+    "completed_steps": 48,
+    "freeze": {
+      "bytes": 351838,
+      "path": "reports/local-study/native-full-sft-seed1729/freeze.json",
+      "sha256": "26a469a3b6d9311d9df716a60f60a1dab9c13f581607b60f94678b441a908842"
+    },
+    "fresh_process_reload": {
+      "bytes": 1319,
+      "path": "reports/local-study/native-full-sft-reload.json",
+      "sha256": "2d95509b5b93de33a66ca29a21b90f058447ffc7b47882429d64130a1c3ad105"
+    },
+    "manifest": {
+      "bytes": 21029,
+      "path": "reports/local-study/native-full-sft-seed1729/manifest.json",
+      "sha256": "7644d325a57ac74a11a7aa4396a307adac1f086c006fdc388d9cf12a14a7601c"
+    },
+    "matched_selection": {
+      "bytes": 2909,
+      "path": "reports/local-study/native-full-matched-selection.json",
+      "sha256": "eb894624673631ece642419bc84d0f2f31b42be4c93d1f9f1a5714eac08bb6e2"
+    },
+    "request": {
+      "bytes": 903,
+      "path": "reports/local-study/native-full-sft-request.json",
+      "sha256": "95c3010348985dc00e4ad1f517a98a6883ba32570dd3865efbfb305d4d889f3a"
+    },
+    "tensor": {
+      "bytes": 2173504,
+      "path": "reports/local-study/native-full-sft-seed1729/adapter.safetensors",
+      "sha256": "e2bcd135527659042304d936fa56c7240f6f96a43b9f81f2a888c38b7762a949"
+    }
+  },
+  "engine": {
+    "bytes": 45017416,
+    "path": "state/engines/f5d2f2f520f0c7a69186163c33bd28207c37414fb3cdae0499c169957a846944/lec-distil",
+    "sha256": "f5d2f2f520f0c7a69186163c33bd28207c37414fb3cdae0499c169957a846944"
+  },
+  "evidence_kind": "prerun_actual_checkpoint_identity_binding",
+  "held_out_used": false,
+  "model_allocated": false,
+  "production_eligible": false,
+  "protocol": {
+    "bytes": 91361,
+    "path": "reports/local-study/native-full-quality-001/requested-protocol.json",
+    "sha256": "7696c3b8e50504e404a5bb069105bf7825111130eafd25ff163a740947d7643a"
+  },
+  "quality_observations_produced": false,
+  "schema_version": 1
+}

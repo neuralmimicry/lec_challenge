@@ -1,0 +1,495 @@
+{
+  "cached_only": false,
+  "connectivity_reason": null,
+  "cost": "Local compute, bandwidth, storage and energy cash costs remain unmeasured; no paid provider calls are made.",
+  "download_budget_kind": "Logical declared weight bytes plus 64 MiB auxiliary allocation per candidate; not measured wire transfer or cash expenditure",
+  "download_bytes_reserved": 25209217184,
+  "events": [
+    {
+      "evidence": {
+        "allocated_bytes_removed": 2692976640,
+        "candidate_id": "deepseek-coder-1_3b",
+        "directory": "offline_bundle/comparative/deepseek-coder-1_3b",
+        "dry_run": false,
+        "files": [
+          "offline_bundle/comparative/deepseek-coder-1_3b/model.safetensors"
+        ],
+        "metadata_preserved": true,
+        "planned_bytes": 2692969128,
+        "reclaimed_bytes": 2692969128,
+        "retained_files": [
+          "offline_bundle/comparative/deepseek-coder-1_3b/.hub-download.lock",
+          "offline_bundle/comparative/deepseek-coder-1_3b/.teacher-search-owned.json",
+          "offline_bundle/comparative/deepseek-coder-1_3b/LICENSE",
+          "offline_bundle/comparative/deepseek-coder-1_3b/README.md",
+          "offline_bundle/comparative/deepseek-coder-1_3b/assets.json",
+          "offline_bundle/comparative/deepseek-coder-1_3b/config.json",
+          "offline_bundle/comparative/deepseek-coder-1_3b/generation_config.json",
+          "offline_bundle/comparative/deepseek-coder-1_3b/hub-metadata.json",
+          "offline_bundle/comparative/deepseek-coder-1_3b/hub-plan.json",
+          "offline_bundle/comparative/deepseek-coder-1_3b/hub-provenance.json",
+          "offline_bundle/comparative/deepseek-coder-1_3b/tokenizer.json",
+          "offline_bundle/comparative/deepseek-coder-1_3b/tokenizer_config.json"
+        ]
+      },
+      "kind": "pruned_scored_inactive_model"
+    },
+    {
+      "evidence": {
+        "allocated_bytes_removed": 3422785536,
+        "candidate_id": "smollm2-1_7b",
+        "directory": "offline_bundle/comparative/smollm2-1_7b",
+        "dry_run": false,
+        "files": [
+          "offline_bundle/comparative/smollm2-1_7b/model.safetensors"
+        ],
+        "metadata_preserved": true,
+        "planned_bytes": 3422777952,
+        "reclaimed_bytes": 3422777952,
+        "retained_files": [
+          "offline_bundle/comparative/smollm2-1_7b/.hub-download.lock",
+          "offline_bundle/comparative/smollm2-1_7b/.teacher-search-owned.json",
+          "offline_bundle/comparative/smollm2-1_7b/README.md",
+          "offline_bundle/comparative/smollm2-1_7b/assets.json",
+          "offline_bundle/comparative/smollm2-1_7b/config.json",
+          "offline_bundle/comparative/smollm2-1_7b/generation_config.json",
+          "offline_bundle/comparative/smollm2-1_7b/hub-metadata.json",
+          "offline_bundle/comparative/smollm2-1_7b/hub-plan.json",
+          "offline_bundle/comparative/smollm2-1_7b/hub-provenance.json",
+          "offline_bundle/comparative/smollm2-1_7b/merges.txt",
+          "offline_bundle/comparative/smollm2-1_7b/special_tokens_map.json",
+          "offline_bundle/comparative/smollm2-1_7b/tokenizer.json",
+          "offline_bundle/comparative/smollm2-1_7b/tokenizer_config.json",
+          "offline_bundle/comparative/smollm2-1_7b/vocab.json"
+        ]
+      },
+      "kind": "pruned_scored_inactive_model"
+    },
+    {
+      "evidence": {
+        "allocated_bytes_removed": 3087474688,
+        "candidate_id": "qwen-coder-1_5b",
+        "directory": "offline_bundle/comparative/qwen-coder-1_5b",
+        "dry_run": false,
+        "files": [
+          "offline_bundle/comparative/qwen-coder-1_5b/model.safetensors"
+        ],
+        "metadata_preserved": true,
+        "planned_bytes": 3087467144,
+        "reclaimed_bytes": 3087467144,
+        "retained_files": [
+          "offline_bundle/comparative/qwen-coder-1_5b/.hub-download.lock",
+          "offline_bundle/comparative/qwen-coder-1_5b/.teacher-search-owned.json",
+          "offline_bundle/comparative/qwen-coder-1_5b/LICENSE",
+          "offline_bundle/comparative/qwen-coder-1_5b/README.md",
+          "offline_bundle/comparative/qwen-coder-1_5b/assets.json",
+          "offline_bundle/comparative/qwen-coder-1_5b/config.json",
+          "offline_bundle/comparative/qwen-coder-1_5b/generation_config.json",
+          "offline_bundle/comparative/qwen-coder-1_5b/hub-metadata.json",
+          "offline_bundle/comparative/qwen-coder-1_5b/hub-plan.json",
+          "offline_bundle/comparative/qwen-coder-1_5b/hub-provenance.json",
+          "offline_bundle/comparative/qwen-coder-1_5b/merges.txt",
+          "offline_bundle/comparative/qwen-coder-1_5b/tokenizer.json",
+          "offline_bundle/comparative/qwen-coder-1_5b/tokenizer_config.json",
+          "offline_bundle/comparative/qwen-coder-1_5b/vocab.json"
+        ]
+      },
+      "kind": "pruned_scored_inactive_model"
+    },
+    {
+      "bytes": 4150124768,
+      "candidate": "deepseek-coder-6_7b-q4_k_m",
+      "kind": "asset_budget_reserved"
+    },
+    {
+      "bytes": 4149995392,
+      "candidate": "magicoder-s-ds-6_7b-q4_k_m",
+      "kind": "asset_budget_reserved"
+    },
+    {
+      "bytes": 5837606272,
+      "candidate": "qwen-coder-14b-q2_k",
+      "kind": "asset_budget_reserved"
+    },
+    {
+      "bytes": 4750183104,
+      "candidate": "qwen-general-7b-q4_k_m",
+      "kind": "asset_budget_reserved"
+    },
+    {
+      "evidence": {
+        "allocated_bytes_removed": 4683079680,
+        "candidate_id": "qwen-general-7b-q4_k_m",
+        "directory": "offline_bundle/comparative/qwen-general-7b-q4_k_m",
+        "dry_run": false,
+        "files": [
+          "offline_bundle/comparative/qwen-general-7b-q4_k_m/Qwen2.5-7B-Instruct-Q4_K_M.gguf"
+        ],
+        "metadata_preserved": true,
+        "planned_bytes": 4683074240,
+        "reclaimed_bytes": 4683074240,
+        "retained_files": [
+          "offline_bundle/comparative/qwen-general-7b-q4_k_m/.hub-download.lock",
+          "offline_bundle/comparative/qwen-general-7b-q4_k_m/.teacher-search-owned.json",
+          "offline_bundle/comparative/qwen-general-7b-q4_k_m/README.md",
+          "offline_bundle/comparative/qwen-general-7b-q4_k_m/gguf-assets.json",
+          "offline_bundle/comparative/qwen-general-7b-q4_k_m/gguf-hub-metadata.json",
+          "offline_bundle/comparative/qwen-general-7b-q4_k_m/gguf-plan.json",
+          "offline_bundle/comparative/qwen-general-7b-q4_k_m/gguf-provenance.json",
+          "offline_bundle/comparative/qwen-general-7b-q4_k_m/source/LICENSE",
+          "offline_bundle/comparative/qwen-general-7b-q4_k_m/source/README.md",
+          "offline_bundle/comparative/qwen-general-7b-q4_k_m/source/assets.json",
+          "offline_bundle/comparative/qwen-general-7b-q4_k_m/source/config.json",
+          "offline_bundle/comparative/qwen-general-7b-q4_k_m/source/generation_config.json",
+          "offline_bundle/comparative/qwen-general-7b-q4_k_m/source/hub-metadata.json",
+          "offline_bundle/comparative/qwen-general-7b-q4_k_m/source/hub-plan.json",
+          "offline_bundle/comparative/qwen-general-7b-q4_k_m/source/hub-provenance.json",
+          "offline_bundle/comparative/qwen-general-7b-q4_k_m/source/merges.txt",
+          "offline_bundle/comparative/qwen-general-7b-q4_k_m/source/tokenizer.json",
+          "offline_bundle/comparative/qwen-general-7b-q4_k_m/source/tokenizer_config.json",
+          "offline_bundle/comparative/qwen-general-7b-q4_k_m/source/vocab.json"
+        ]
+      },
+      "kind": "pruned_scored_inactive_model"
+    },
+    {
+      "bytes": 6321307648,
+      "candidate": "qwen-coder-7b-q6_k",
+      "kind": "asset_budget_reserved"
+    },
+    {
+      "evidence": {
+        "allocated_bytes_removed": 6254202880,
+        "candidate_id": "qwen-coder-7b-q6_k",
+        "directory": "offline_bundle/comparative/qwen-coder-7b-q6_k",
+        "dry_run": false,
+        "files": [
+          "offline_bundle/comparative/qwen-coder-7b-q6_k/qwen2.5-coder-7b-instruct-q6_k.gguf"
+        ],
+        "metadata_preserved": true,
+        "planned_bytes": 6254198784,
+        "reclaimed_bytes": 6254198784,
+        "retained_files": [
+          "offline_bundle/comparative/qwen-coder-7b-q6_k/.hub-download.lock",
+          "offline_bundle/comparative/qwen-coder-7b-q6_k/.teacher-search-owned.json",
+          "offline_bundle/comparative/qwen-coder-7b-q6_k/LICENSE",
+          "offline_bundle/comparative/qwen-coder-7b-q6_k/README.md",
+          "offline_bundle/comparative/qwen-coder-7b-q6_k/gguf-assets.json",
+          "offline_bundle/comparative/qwen-coder-7b-q6_k/gguf-hub-metadata.json",
+          "offline_bundle/comparative/qwen-coder-7b-q6_k/gguf-plan.json",
+          "offline_bundle/comparative/qwen-coder-7b-q6_k/gguf-provenance.json",
+          "offline_bundle/comparative/qwen-coder-7b-q6_k/source/LICENSE",
+          "offline_bundle/comparative/qwen-coder-7b-q6_k/source/README.md",
+          "offline_bundle/comparative/qwen-coder-7b-q6_k/source/assets.json",
+          "offline_bundle/comparative/qwen-coder-7b-q6_k/source/config.json",
+          "offline_bundle/comparative/qwen-coder-7b-q6_k/source/generation_config.json",
+          "offline_bundle/comparative/qwen-coder-7b-q6_k/source/hub-metadata.json",
+          "offline_bundle/comparative/qwen-coder-7b-q6_k/source/hub-plan.json",
+          "offline_bundle/comparative/qwen-coder-7b-q6_k/source/hub-provenance.json",
+          "offline_bundle/comparative/qwen-coder-7b-q6_k/source/merges.txt",
+          "offline_bundle/comparative/qwen-coder-7b-q6_k/source/tokenizer.json",
+          "offline_bundle/comparative/qwen-coder-7b-q6_k/source/tokenizer_config.json",
+          "offline_bundle/comparative/qwen-coder-7b-q6_k/source/vocab.json"
+        ]
+      },
+      "kind": "pruned_scored_inactive_model"
+    }
+  ],
+  "evidence_kind": "bounded_exploratory_development_teacher_selection",
+  "held_out_access": false,
+  "limitations": [
+    "Repeated development selection is exploratory and can overfit locally authored source groups; the independent fresh pack improves selection discipline but does not establish clean held-out quality.",
+    "Every 16-task development denominator remains complete. Seed 1729 and 512 output tokens are fixed before inference.",
+    "Quantisation variants share original model identity and cannot inflate the teacher count. Different fine-tunes may still share pretraining and correlated errors.",
+    "Automatic hardware selection may use different device/precision; every actual choice and reason are retained in per-trial evidence.",
+    "Locally hosted models do not satisfy the original three independent real-provider businesses; no assessment learning gain or SHIP is claimed."
+  ],
+  "minimum_pass_rate": 0.8,
+  "promotable": false,
+  "qualification_rule": "Each distinct original model must meet the threshold separately on both the original 16-task development pack and the independently frozen fresh 16-task development qualification pack, with complete coverage and zero infrastructure/generation errors in each.",
+  "qualified_models": [],
+  "qualified_target_met": false,
+  "retained_model_ids": [
+    "deepseek-coder-6_7b-q4_k_m",
+    "magicoder-s-ds-6_7b-q4_k_m",
+    "qwen-coder-0_5b",
+    "qwen-coder-14b-q2_k",
+    "qwen-coder-7b-q4_k_m"
+  ],
+  "schema_version": 1,
+  "selection_scope": "Below-target fallback is ranked only by original development selection score; fresh status is disclosed per trial",
+  "status": "declared_roster_exhausted_shortfall",
+  "target_models": 3,
+  "trials": [
+    {
+      "comparison": "reports/comparative/coding-development",
+      "directory": "offline_bundle/base",
+      "elapsed_seconds": null,
+      "errors": 0,
+      "id": "qwen-coder-0_5b",
+      "imported": true,
+      "model_id": "Qwen/Qwen2.5-Coder-0.5B-Instruct",
+      "passed": 0,
+      "planned": 16,
+      "pruned": false,
+      "qualification_comparison": null,
+      "qualification_errors": null,
+      "qualification_passed": null,
+      "qualification_report": null,
+      "qualified": false,
+      "reason": null,
+      "report": {
+        "bytes": 1653,
+        "path": "reports/comparative/coding-development/report.json",
+        "sha256": "a1761cfabc8dea910d15fe3e0a133c4b81f28f27bbefba25ff760fc045082ab2"
+      },
+      "revision": "ea3f2471cf1b1f0db85067f1ef93848e38e88c25",
+      "role": "student_baseline",
+      "source_model_id": "Qwen/Qwen2.5-Coder-0.5B-Instruct",
+      "status": "verified_initial_comparison"
+    },
+    {
+      "comparison": "reports/comparative/coding-development",
+      "directory": "offline_bundle/comparative/qwen-coder-1_5b",
+      "elapsed_seconds": null,
+      "errors": 0,
+      "id": "qwen-coder-1_5b",
+      "imported": true,
+      "model_id": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+      "passed": 2,
+      "planned": 16,
+      "pruned": true,
+      "qualification_comparison": null,
+      "qualification_errors": null,
+      "qualification_passed": null,
+      "qualification_report": null,
+      "qualified": false,
+      "reason": null,
+      "report": {
+        "bytes": 1653,
+        "path": "reports/comparative/coding-development/report.json",
+        "sha256": "a1761cfabc8dea910d15fe3e0a133c4b81f28f27bbefba25ff760fc045082ab2"
+      },
+      "revision": "2e1fd397ee46e1388853d2af2c993145b0f1098a",
+      "role": "coding_teacher",
+      "source_model_id": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+      "status": "verified_initial_comparison"
+    },
+    {
+      "comparison": "reports/comparative/coding-development",
+      "directory": "offline_bundle/comparative/deepseek-coder-1_3b",
+      "elapsed_seconds": null,
+      "errors": 0,
+      "id": "deepseek-coder-1_3b",
+      "imported": true,
+      "model_id": "deepseek-ai/deepseek-coder-1.3b-instruct",
+      "passed": 0,
+      "planned": 16,
+      "pruned": true,
+      "qualification_comparison": null,
+      "qualification_errors": null,
+      "qualification_passed": null,
+      "qualification_report": null,
+      "qualified": false,
+      "reason": null,
+      "report": {
+        "bytes": 1653,
+        "path": "reports/comparative/coding-development/report.json",
+        "sha256": "a1761cfabc8dea910d15fe3e0a133c4b81f28f27bbefba25ff760fc045082ab2"
+      },
+      "revision": "e063262dac8366fc1f28a4da0ff3c50ea66259ca",
+      "role": "coding_teacher",
+      "source_model_id": "deepseek-ai/deepseek-coder-1.3b-instruct",
+      "status": "verified_initial_comparison"
+    },
+    {
+      "comparison": "reports/comparative/control-development",
+      "directory": "offline_bundle/comparative/smollm2-1_7b",
+      "elapsed_seconds": null,
+      "errors": 0,
+      "id": "smollm2-1_7b",
+      "imported": true,
+      "model_id": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+      "passed": 0,
+      "planned": 16,
+      "pruned": true,
+      "qualification_comparison": null,
+      "qualification_errors": null,
+      "qualification_passed": null,
+      "qualification_report": null,
+      "qualified": false,
+      "reason": null,
+      "report": {
+        "bytes": 1124,
+        "path": "reports/comparative/control-development/report.json",
+        "sha256": "140ec32fde7644d05d0f37b47868fea788afd7c18cccdd5d05d6c702942a80fc"
+      },
+      "revision": "31b70e2e869a7173562077fd711b654946d38674",
+      "role": "general_instruction_control",
+      "source_model_id": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+      "status": "verified_initial_comparison"
+    },
+    {
+      "comparison": "reports/comparative/search/round-001/trials/qwen-coder-7b-q4_k_m/comparison",
+      "directory": "offline_bundle/comparative/qwen-coder-7b-q4_k_m",
+      "elapsed_seconds": 491.974776611,
+      "errors": 0,
+      "id": "qwen-coder-7b-q4_k_m",
+      "imported": false,
+      "model_id": "Qwen/Qwen2.5-Coder-7B-Instruct-GGUF",
+      "passed": 7,
+      "planned": 16,
+      "pruned": false,
+      "qualification_comparison": null,
+      "qualification_errors": null,
+      "qualification_passed": null,
+      "qualification_report": null,
+      "qualified": false,
+      "reason": "CUDA GPU NVIDIA GeForce RTX 2080 selected: estimated resident 6538528768 bytes fits guarded free VRAM 6873835111 bytes",
+      "report": {
+        "bytes": 1122,
+        "path": "reports/comparative/search/round-001/trials/qwen-coder-7b-q4_k_m/comparison/report.json",
+        "sha256": "6f43b8184d872bb1e397f9a5d5f66bf27251b9f50ad2e26f3f122d90cf83696b"
+      },
+      "revision": "13fb94bfda8c8cf22497dc57b78f391a9acb426a",
+      "role": "coding_teacher",
+      "source_model_id": "Qwen/Qwen2.5-Coder-7B-Instruct",
+      "status": "verified_below_threshold"
+    },
+    {
+      "comparison": "reports/comparative/search/round-001/trials/deepseek-coder-6_7b-q4_k_m/comparison",
+      "directory": "offline_bundle/comparative/deepseek-coder-6_7b-q4_k_m",
+      "elapsed_seconds": 105.460126511,
+      "errors": 16,
+      "id": "deepseek-coder-6_7b-q4_k_m",
+      "imported": false,
+      "model_id": "TheBloke/deepseek-coder-6.7B-instruct-GGUF",
+      "passed": 0,
+      "planned": 16,
+      "pruned": false,
+      "qualification_comparison": null,
+      "qualification_errors": null,
+      "qualification_passed": null,
+      "qualification_report": null,
+      "qualified": false,
+      "reason": "CUDA GPU NVIDIA GeForce RTX 2080 selected: estimated resident 5992472800 bytes fits guarded free VRAM 7089002906 bytes",
+      "report": {
+        "bytes": 1133,
+        "path": "reports/comparative/search/round-001/trials/deepseek-coder-6_7b-q4_k_m/comparison/report.json",
+        "sha256": "21d850b32401fb6a78815e1ca190203ac59639953074571f68cbbf2d51e27f83"
+      },
+      "revision": "9e221e6b41cb1bf1c5d8f9718e81e3dc781f7557",
+      "role": "coding_teacher",
+      "source_model_id": "deepseek-ai/deepseek-coder-6.7b-instruct",
+      "status": "verified_below_threshold"
+    },
+    {
+      "comparison": "reports/comparative/search/round-001/trials/magicoder-s-ds-6_7b-q4_k_m/comparison",
+      "directory": "offline_bundle/comparative/magicoder-s-ds-6_7b-q4_k_m",
+      "elapsed_seconds": 2639.359244842,
+      "errors": 16,
+      "id": "magicoder-s-ds-6_7b-q4_k_m",
+      "imported": false,
+      "model_id": "TheBloke/Magicoder-S-DS-6.7B-GGUF",
+      "passed": 0,
+      "planned": 16,
+      "pruned": false,
+      "qualification_comparison": null,
+      "qualification_errors": null,
+      "qualification_passed": null,
+      "qualification_report": null,
+      "qualified": false,
+      "reason": "CUDA GPU NVIDIA GeForce RTX 2080 selected: estimated resident 5992343424 bytes fits guarded free VRAM 6830424064 bytes",
+      "report": {
+        "bytes": 1124,
+        "path": "reports/comparative/search/round-001/trials/magicoder-s-ds-6_7b-q4_k_m/comparison/report.json",
+        "sha256": "4497ed7391c663ec11047528c10766d65f94e4be27cbe84ae42bef9237b5ce9a"
+      },
+      "revision": "d41a33f9393ebc06c6beb44b1ded091b6d19496c",
+      "role": "coding_teacher",
+      "source_model_id": "ise-uiuc/Magicoder-S-DS-6.7B",
+      "status": "verified_below_threshold"
+    },
+    {
+      "comparison": "reports/comparative/search/round-001/trials/qwen-coder-14b-q2_k/comparison",
+      "directory": "offline_bundle/comparative/qwen-coder-14b-q2_k",
+      "elapsed_seconds": 12425.298089447,
+      "errors": 3,
+      "id": "qwen-coder-14b-q2_k",
+      "imported": false,
+      "model_id": "Qwen/Qwen2.5-Coder-14B-Instruct-GGUF",
+      "passed": 6,
+      "planned": 16,
+      "pruned": false,
+      "qualification_comparison": null,
+      "qualification_errors": null,
+      "qualification_passed": null,
+      "qualification_report": null,
+      "qualified": false,
+      "reason": "Automatic CPU selected: no compiled, available CUDA device has sufficient free VRAM; 16 threads and 33878304359 guarded RAM bytes available",
+      "report": {
+        "bytes": 1121,
+        "path": "reports/comparative/search/round-001/trials/qwen-coder-14b-q2_k/comparison/report.json",
+        "sha256": "77bc2d2c876df27d1762b86e2b9c50244aec22c91da733ad95b8b8382d59dcf1"
+      },
+      "revision": "d0a692ef765eefbf2fabb130b3cb2e8917e3d225",
+      "role": "coding_teacher",
+      "source_model_id": "Qwen/Qwen2.5-Coder-14B-Instruct",
+      "status": "verified_below_threshold"
+    },
+    {
+      "comparison": "reports/comparative/search/round-001/trials/qwen-general-7b-q4_k_m/comparison",
+      "directory": "offline_bundle/comparative/qwen-general-7b-q4_k_m",
+      "elapsed_seconds": 1365.049135582,
+      "errors": 0,
+      "id": "qwen-general-7b-q4_k_m",
+      "imported": false,
+      "model_id": "bartowski/Qwen2.5-7B-Instruct-GGUF",
+      "passed": 5,
+      "planned": 16,
+      "pruned": true,
+      "qualification_comparison": null,
+      "qualification_errors": null,
+      "qualification_passed": null,
+      "qualification_report": null,
+      "qualified": false,
+      "reason": "CUDA GPU NVIDIA GeForce RTX 2080 selected: estimated resident 6538529472 bytes fits guarded free VRAM 6948388864 bytes",
+      "report": {
+        "bytes": 1123,
+        "path": "reports/comparative/search/round-001/trials/qwen-general-7b-q4_k_m/comparison/report.json",
+        "sha256": "c569bf05acccbb3cee29b6a5d1f6ce5aa0eed3bd9a2ce2a3a5ace33746000806"
+      },
+      "revision": "8911e8a47f92bac19d6f5c64a2e2095bd2f7d031",
+      "role": "coding_teacher",
+      "source_model_id": "Qwen/Qwen2.5-7B-Instruct",
+      "status": "verified_below_threshold"
+    },
+    {
+      "comparison": "reports/comparative/search/round-001/trials/qwen-coder-7b-q6_k/comparison",
+      "directory": "offline_bundle/comparative/qwen-coder-7b-q6_k",
+      "elapsed_seconds": 5851.321912805,
+      "errors": 0,
+      "id": "qwen-coder-7b-q6_k",
+      "imported": false,
+      "model_id": "Qwen/Qwen2.5-Coder-7B-Instruct-GGUF",
+      "passed": 6,
+      "planned": 16,
+      "pruned": true,
+      "qualification_comparison": null,
+      "qualification_errors": null,
+      "qualification_passed": null,
+      "qualification_report": null,
+      "qualified": false,
+      "reason": "Automatic CPU selected: no compiled, available CUDA device has sufficient free VRAM; 16 threads and 45738208871 guarded RAM bytes available",
+      "report": {
+        "bytes": 1119,
+        "path": "reports/comparative/search/round-001/trials/qwen-coder-7b-q6_k/comparison/report.json",
+        "sha256": "4a0c5096b9074da0b503be50f6ad9ca63034ed530c70d5655169eb0832f5839e"
+      },
+      "revision": "13fb94bfda8c8cf22497dc57b78f391a9acb426a",
+      "role": "coding_teacher",
+      "source_model_id": "Qwen/Qwen2.5-Coder-7B-Instruct",
+      "status": "verified_below_threshold"
+    }
+  ]
+}

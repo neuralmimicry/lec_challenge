@@ -1,6 +1,112 @@
 # Assessment status
 
+## Provider setup repair — 16 October 2026
+
+The reported failure came from an absent `state/api-providers.local.toml`;
+the unqualified check was inspecting the disabled, zero-budget shipped template.
+Rust `provider-init` now creates a valid bounded inference profile atomically
+without overwriting existing files/symlinks. It requires explicit model/revision,
+prices, source/date and budget choices. Checks identify the file, selected model,
+credential presence, readiness and zero-budget/disabled/unpriced blockers;
+`--require-ready` can enforce those local checks without HTTP. Missing-file errors
+include the path and setup action. The request default is 2,048 output tokens,
+including reasoning; explicit smaller caps remain enforced.
+
+The actual README initialisation command passed through `./run.sh` and created
+the ignored, secret-free local file. It enables only OpenAI `gpt-6.1-sol`, with
+USD 0.25 and 20,000-token ceilings in each of the four scopes. Its maximum call
+reservation is USD 0.06144. The input pricing ceiling deliberately covers cache
+writes; reported profile costs are conservative estimates, not exact invoices.
+The dated official model/pricing sources and alias limitation are documented.
+Output training remains forbidden; this profile cannot supply an assessment
+training set without a separate applicable permission decision.
+
+All four actual agent-environment credential checks were absent. The user's
+terminal reported an OpenAI key in that shell; it is not inherited here. The
+local OpenAI check has no configuration error and only the absent key blocker.
+No live provider access or account entitlement is claimed, and no paid API call
+was made. Labelled missing-key CLI injection failed before reservation with an
+empty cost report; missing-config, empty-recording, require-ready and duplicate
+initialisation probes all exited nonzero as required. Existing historical runs,
+the user's original failure artefact and caches/models were preserved.
+
+Verification passed **333 tests**, with five intentional ignores, strict
+all-target Clippy, formatting and whitespace checks. The optimised release build
+passed in 6m 20s; the subsequent launcher initialisation/check reused it in
+1.77s / 0.25s of Cargo build time. Logs, source hashes, CLI outcomes and evidence
+boundaries are retained in
+[reports/provider-setup-qa/verification.json](reports/provider-setup-qa/verification.json).
+README and `docs/api-providers.md` contain creation, credentials, four-provider
+configuration, budgets, reasoning caps, replay and error-specific remedies.
+The original assessment's real-provider/training/evaluation gaps remain open.
+
+## Latest-log assessment review — 16 October 2026
+
+The latest retained exploration still reports `success=false`; one local full
+SFT seed reports 1/16 development passes versus the base's 0/16, without sealed
+held-out proof. The original assessment still has zero real API-provider
+businesses/recordings, no provider-derived assessment dataset/checkpoint, an
+INVALID EVALUATION, five incomplete drills and no attributable round cost or
+cost per improvement point. Local genuine checkpoints remain separate evidence.
+Fresh credential-presence checks found all three original-roster and four
+additional API environment credentials absent; no values were printed.
+
+`assessment-audit` now creates a new read-only, checksum-linked JSON/Markdown
+review and exits nonzero for missing, invalid or unverified original evidence.
+It does not call providers, run models, change frozen observations or prune
+caches/models. The [latest-log review](docs/assessment-latest-logs.md) describes
+the measured gaps and closure order.
+
+The latest rollout's original `host deadline terminated probe pids` failure was
+masked by a parent missing-file error. Current source verifies the child receipt
+and log before retaining its cause/exit/path; a missing report remains failure
+even after exit zero. The read-only audit reconstructed that actual old failure
+without rerunning it. Failed sandbox enforcement remains failed; no thresholds,
+timeouts or sealed evaluations were changed.
+
+Final verification passed **327 tests**, with five intentionally ignored, plus
+formatting and strict all-target Clippy. The fresh
+[audit](reports/assessment-audit/latest-log-review-002/audit.md) exited 1 with
+`original_request_satisfied=false`, identified thirteen incomplete requirements
+and reconstructed two failed child receipts. Seven historical observations
+remain distinct from independent verification. Test logs, source hashes and
+the exact verification boundary are retained in
+`reports/assessment-audit/verification-001/`. No paid calls, new training or
+sealed generations were performed during this review.
+
 The design was frozen before assessment code in commit `74eba150f766a0d93c2a8ad18066daac562314cf` on 15 October 2026. Original history and the prebuild pack are preserved. Four specialist agents have implemented and executed their local work in parallel; responsibilities are recorded in agents/PLAN.md.
+
+Operational constraint added on 16 October 2026: preserve caches and models when
+working with `--offline` or when no internet connection can be detected. The
+teacher-search workflow now skips offline pruning and requires confirmed Hub
+connectivity before each deletion. Labelled fixture tests verify that inactive
+weight bytes survive offline operation and failed connectivity detection.
+
+## API connectivity follow-up — 16 October 2026
+
+- Native Rust adapters now cover OpenAI Responses/Codex, Gemini Developer API,
+  Gemini on GCP Vertex AI and Anthropic Messages. `provider-check` performs local
+  checks without HTTP; `provider-request` supports explicitly authorised live
+  inference or exact offline replay. Setup is in `docs/api-providers.md` and the
+  README. The new template is disabled, unpriced and has zero budgets.
+- Credentials use environment variables and provider-specific sensitive headers.
+  Missing credentials and definite connection failures can use configured
+  fallbacks. Permanent authentication/model/quota failures disable that route for
+  the runner; transient errors honour bounded retries, circuits and Retry-After.
+  Possible remote acceptance remains UNKNOWN and blocks automatic repurchase.
+- Transactional round/task/provider/model token limits count input and billable
+  output alongside the existing dollar budgets. Failed observations, unresolved
+  liabilities and historical unknown token usage remain visible. General
+  inference cannot clear output-training permission or enter assessment
+  collection through a fallback.
+- Verification: **321 tests passed, five intentionally ignored**, formatting and
+  strict all-target Clippy passed. CLI QA observed exit 1 without spending
+  authority, exit 1 with missing offline recordings and exit 2 for incompatible
+  offline/spending flags. Earlier fixture-path and CLI-validation failures are
+  retained in `reports/provider-api-qa/verification.json` and the intermediate
+  log. No paid API calls, real provider outputs or live connectivity are claimed;
+  all four credential checks reported absent. Existing provider/training evidence
+  gaps remain unchanged.
 
 ## Verified local evidence
 
@@ -60,7 +166,15 @@ Existing delivery archives and their disconnected rehearsal describe the earlier
 
 ## External evidence still unavailable
 
-No provider credentials, explicit spending ceiling or applicable account/model output-training decisions were supplied. The default roster remains disabled/unpriced. There are no real teacher recordings, approved curated provider dataset, primary/seed/degraded/overfit assessment adapters or complete real paired evaluations. No improvement, SHIP decision, real round cost per point or complete provider-trained disconnected rehearsal is claimed.
+The agent still lacks provider credentials and applicable account/model
+output-training decisions. The user's terminal reports a locally exported
+OpenAI key; the new general-inference profile is bounded at USD 0.25, but its
+account access is unverified and it carries no assessment training clearance.
+The default assessment roster remains disabled/unpriced. There are no real
+teacher recordings, approved curated provider dataset,
+primary/seed/degraded/overfit assessment adapters or complete real paired
+evaluations. No improvement, SHIP decision, real round cost per point or complete
+provider-trained disconnected rehearsal is claimed.
 
 `./run.sh demo --offline` and `./run.sh drill --offline` must currently exit nonzero and identify these gaps. The actual worse/train-overfit/seed controls remain incomplete; synthetic decision fixtures remain separate. Publication and email submission have not been authorised or attempted.
 

@@ -1,0 +1,33 @@
+{
+  "run_id": "1026e542-6793-4cb2-b67b-f16196a062ac",
+  "task_id": "dispatch.priority",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error[E0599]: the method `cmp` exists for reference `&Value`, but its trait bounds were not satisfied\n   --> /candidate/main.rs:15:48\n    |\n 15 |     sorted_pairs.sort_by(|(p1, _), (p2, _)| p2.cmp(p1));\n    |                                                ^^^ method cannot be called on `&Value` due to unsatisfied trait bounds\n    |\n   ::: /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:116:1\n    |\n116 | pub enum Value {\n    | -------------- doesn't satisfy `Value: Iterator` or `Value: Ord`\n    |\n    = note: the following trait bounds were not satisfied:\n            `Value: Ord`\n            which is required by `&Value: Ord`\n            `&Value: Iterator`\n            which is required by `&mut &Value: Iterator`\n            `Value: Iterator`\n            which is required by `&mut Value: Iterator`\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0599`.\n"
+  ],
+  "cases_total": 5,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "0bf995b5f69865792503015f6af52b457c861b679877956e939c2137ddb4a562",
+  "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+  "oracle_sha256": "a734f6d465714cbebb072790fedff161d2fc28cbb257b3d04cee0feaf8b5b5fe",
+  "code_sha256": "5aa6663b60e2086326cda890ff1ca87fc515c1aa59b6ec9928c6727e6b85a1bc",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:1",
+    "expected_image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/comparative/control-development/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/comparative/control-development/sandbox/1026e542-6793-4cb2-b67b-f16196a062ac.audit.json",
+  "audit_sha256": "67c57569e69adb3236ace818ee2ff9ebd4ce252612ce7a48f4a114520b137961",
+  "failure": "compilation failed: error[E0599]: the method `cmp` exists for reference `&Value`, but its trait bounds were not satisfied\n   --> /candidate/main.rs:15:48\n    |\n 15 |     sorted_pairs.sort_by(|(p1, _), (p2, _)| p2.cmp(p1));\n    |                                                ^^^ method cannot be called on `&Value` due to unsatisfied trait bounds\n    |\n   ::: /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:116:1\n    |\n116 | pub enum Value {\n    | -------------- doesn't satisfy `Value: Iterator` or `Value: Ord`\n    |\n    = note: the following trait bounds were not satisfied:\n            `Value: Ord`\n            which is required by `&Value: Ord`\n            `&Value: Iterator`\n            which is required by `&mut &Value: Iterator`\n            `Value: Iterator`\n            which is required by `&mut Value: Iterator`\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0599`.\n",
+  "duration_ms": 9765,
+  "timeout_evidence": null
+}

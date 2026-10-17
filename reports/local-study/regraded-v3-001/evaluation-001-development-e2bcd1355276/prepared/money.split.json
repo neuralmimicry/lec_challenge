@@ -1,0 +1,49 @@
+{
+  "schema_version": 3,
+  "run_id": "dc2ffdf3-ac8c-4633-a653-09783c2d114d",
+  "ownership_nonce": "9b1fc20d-0c51-4738-8986-e7b24abed406",
+  "attempt_key": "6e77c5fa5f49a176c40ff2b8e4f11e6d42cf5ef4c1027b2b18fc812d8330a04e",
+  "receipt_path": "reports/local-study/regraded-v3-001/evaluation-001-development-e2bcd1355276/prepared/money.split.json",
+  "report_path": "reports/local-study/regraded-v3-001/evaluation-001-development-e2bcd1355276/sandbox/dc2ffdf3-ac8c-4633-a653-09783c2d114d.json",
+  "task": {
+    "id": "money.split",
+    "source_id": "private-money-v1",
+    "lineage_id": "local-contract-pack-12",
+    "split": "development",
+    "specification": "Input [cents,n] has nonnegative cents and n>=1. Split into n integer shares differing by at most one, with larger shares first. The number of shares is at most 64.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "639498c83f5e053773149696cb44aea438f77b20c7b0e571d728085fde4db87b",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": [
+          10,
+          3
+        ],
+        "expected": [
+          4,
+          3,
+          3
+        ]
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "use serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let input = input.as_array().unwrap();\n    let cents = input[0].as_u64().unwrap();\n    let n = input[1].as_u64().unwrap();\n    let mut result = Value::new_array();\n    let mut count = 0;\n    for _ in 0..n {\n        let mut share = Value::new_array();\n        for _ in 0..n {\n            let num = Value::new_i64(count);\n            share.push(num);\n            count += 1;\n        }\n        result.push(share);\n    }\n    result\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/regraded-v3-001/evaluation-001-development-e2bcd1355276/sandbox"
+  },
+  "code_sha256": "d6c3e82b7ca3ce8cbd1f7b9aac065d1349160f43ed92f407992b22a625a376ca",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

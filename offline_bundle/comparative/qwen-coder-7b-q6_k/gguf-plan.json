@@ -1,0 +1,30 @@
+{
+  "model_id": "Qwen/Qwen2.5-Coder-7B-Instruct-GGUF",
+  "revision": "13fb94bfda8c8cf22497dc57b78f391a9acb426a",
+  "files": {
+    "LICENSE": {
+      "filename": "LICENSE",
+      "bytes": 11343,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "6634c8cc3133b3848ec74b9f275acaaa1ea618ab"
+      }
+    },
+    "README.md": {
+      "filename": "README.md",
+      "bytes": 5670,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "747d6b46289e3d0837f841216e74bf8a2bfa0376"
+      }
+    },
+    "qwen2.5-coder-7b-instruct-q6_k.gguf": {
+      "filename": "qwen2.5-coder-7b-instruct-q6_k.gguf",
+      "bytes": 6254198784,
+      "publisher_identity": {
+        "kind": "lfs_sha256",
+        "digest": "46291ddea1bfb608fe63d9a1907eea6918bda87a7626593edc4bf97c5fd73f9d"
+      }
+    }
+  }
+}

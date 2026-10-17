@@ -1,0 +1,55 @@
+{
+  "schema_version": 3,
+  "run_id": "87ebbbfa-79d9-478b-8bb0-f6ecd27b04d3",
+  "ownership_nonce": "590325c7-11d5-4857-a15b-52600ed2fa2a",
+  "attempt_key": "04db934909420ff522552b9616f5bf426bc796c5d04d7b316884cfff577570fa",
+  "receipt_path": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/prepared/intervals.peak.json",
+  "report_path": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/sandbox/87ebbbfa-79d9-478b-8bb0-f6ecd27b04d3.json",
+  "task": {
+    "id": "intervals.peak",
+    "source_id": "private-intervals-v1",
+    "lineage_id": "local-contract-pack-03",
+    "split": "train",
+    "specification": "Input is an array of integer half-open intervals, start<end. Return maximum simultaneous overlap; an end at t does not overlap a start at t.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "6a4bee6bde7ad865746a6f57eb08aa191e04fcfce46110b214e05250fd470453",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": [
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            5
+          ]
+        ],
+        "expected": 2
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "use serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let intervals = input.as_array().unwrap();\n    let mut max_overlap = 0;\n    let mut current_overlap = 0;\n\n    for interval in intervals {\n        let start = interval[0].as_i64().unwrap();\n        let end = interval[1].as_i64().unwrap();\n\n        if start < end {\n            current_overlap += 1;\n            max_overlap = max_overlap.max(current_overlap);\n        } else {\n            current_overlap = 0;\n        }\n    }\n\n    Value::from(max_overlap)\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/sandbox"
+  },
+  "code_sha256": "aa22c3f5754ba4627f05e021f53a8c59593e1797e0cf269804823da032722fed",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

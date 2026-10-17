@@ -1,0 +1,55 @@
+{
+  "schema_version": 3,
+  "run_id": "7e0d8eba-3794-4caf-a333-cf0efdac898f",
+  "ownership_nonce": "bc870f47-8571-4616-aca5-e9c0823d83fc",
+  "attempt_key": "3dd0a875-18d0-492d-bebb-f35b49b20254",
+  "receipt_path": "reports/comparative/search/round-002/trials/deepseek-coder-6_7b-q4_k_m/comparison/sandbox/3dd0a875-18d0-492d-bebb-f35b49b20254.prepared.json",
+  "report_path": "reports/comparative/search/round-002/trials/deepseek-coder-6_7b-q4_k_m/comparison/sandbox/7e0d8eba-3794-4caf-a333-cf0efdac898f.json",
+  "task": {
+    "id": "dispatch.waiting",
+    "source_id": "private-dispatch-v1",
+    "lineage_id": "local-contract-pack-13",
+    "split": "development",
+    "specification": "Input is an array of [arrival,duration] processed in input order by one server, initially free at zero. Return total time jobs wait before service.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "779f79aab8092a883c5d3bb26675a6b8228a3ca11fe3e11a31e0316d053d0563",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": [
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            8,
+            1
+          ]
+        ],
+        "expected": 2
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "Here is a simple Rust function that solves the problem. This function assumes that the input is a JSON array of arrays, where each inner array has two elements. Each inner array represents a job with an arrival time and a duration. The function calculates the total waiting time for each job.\n\n```rust\nuse serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let jobs: Vec<Vec<i64>> = input.as_array().unwrap();\n    let mut waiting_times: Vec<i64> = Vec::new();\n    let mut current_time = 0;\n\n    for job in jobs {\n        let arrival_time = job[0];\n        let duration = job[1];\n\n        if arrival_time > current_time {\n            current_time = arrival_time;\n        }\n\n        waiting_times.push(current_time - arrival_time);\n        current_time += duration;\n    }\n\n    Value::from(waiting_times)\n}\n```\n\nThis function works by iterating over the jobs in the order they arrive. For each job, it calculates the waiting time as the difference between the current time and the arrival time of the job. If the current time is less than the arrival time, it sets the current time to the arrival time. Then, it adds the duration of the job to the current time.\n\nThe function returns a JSON array of waiting times for each job.",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/comparative/search/round-002/trials/deepseek-coder-6_7b-q4_k_m/comparison/sandbox"
+  },
+  "code_sha256": "29a18404c13450c4491a7c821addadb81bef00b35f509cded79c6318589a4c5d",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

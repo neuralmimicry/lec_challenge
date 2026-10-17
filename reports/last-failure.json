@@ -1,6 +1,6 @@
 {
-  "error": "full offline assessment incomplete; inspect reports/demo.json and reports/drill.md",
-  "observed_unix_ms": 1792059336913,
+  "error": "required drill evidence incomplete; see reports/drill.md",
+  "observed_unix_ms": 1792184408136,
   "promotion": "incumbent_retained",
   "status": "FAILURE"
 }

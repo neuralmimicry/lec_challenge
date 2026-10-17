@@ -1,0 +1,334 @@
+{
+  "evidence_kind": "actual_adversarial_candidate_execution",
+  "passed": true,
+  "reports": [
+    {
+      "audit_events": [],
+      "audit_path": "reports/local-study/verification-008/sandbox-qa/runs/dcf2fb1d-20fa-4d4b-b46f-e1058fd8af3b.audit.json",
+      "audit_sha256": "8c473c549d52023187e8a8a08ccb12907375bae41d5bb213d2481361d03e2075",
+      "cases_passed": 0,
+      "cases_total": 14,
+      "code_sha256": "4c93375dc29a23f3bc0aea750ac7df7f0cfce5a1ea9eedadab3a957a4c7db77b",
+      "duration_ms": 17370,
+      "failure": "candidate output cap exceeded",
+      "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+      "lifecycle_evidence": {
+        "receipt_path": "reports/local-study/verification-008/sandbox-qa/runs/dcf2fb1d-20fa-4d4b-b46f-e1058fd8af3b.lifecycle.json",
+        "receipt_sha256": "0cc632471718d33f9c80807325ce04196ca3231e7d61d111f81ed2943c34aafb"
+      },
+      "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+      "passed": false,
+      "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+      "quarantine_reasons": [
+        "candidate output cap exceeded"
+      ],
+      "quarantined": true,
+      "run_id": "dcf2fb1d-20fa-4d4b-b46f-e1058fd8af3b",
+      "sandbox_config": {
+        "architecture": "x86_64",
+        "controller_version": 3,
+        "cpu_limit": 1.0,
+        "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+        "image": "localhost/lec-rust-sandbox:3-x86_64",
+        "memory_mb": 512,
+        "pids_limit": 64,
+        "policy_version": 3,
+        "report_dir": "reports/local-study/verification-008/sandbox-qa/runs",
+        "runtime": "podman",
+        "wall_timeout_secs": 20
+      },
+      "stdout_sha256": "1850c921c9d5c1f3f97ae5815e687394f0a1302e31fddde534ca6aebc203356e",
+      "task_id": "ledger.sum",
+      "timeout_evidence": null,
+      "trace_complete": true
+    },
+    {
+      "audit_events": [
+        {
+          "category": "process",
+          "result": "denied:EPERM",
+          "syscall": 88,
+          "target": "/proc/1/fd/1 -> /tmp/audit-alias"
+        },
+        {
+          "category": "filesystem",
+          "result": "denied:EPERM",
+          "syscall": 257,
+          "target": "/lib/../../proc/1/fd/1"
+        },
+        {
+          "category": "process",
+          "result": "denied:EPERM",
+          "syscall": 88,
+          "target": "/proc/1/fd/1 -> /tmp/audit-alias"
+        },
+        {
+          "category": "filesystem",
+          "result": "denied:EPERM",
+          "syscall": 257,
+          "target": "/lib/../../proc/1/fd/1"
+        },
+        {
+          "category": "process",
+          "result": "denied:EPERM",
+          "syscall": 88,
+          "target": "/proc/1/fd/1 -> /tmp/audit-alias"
+        },
+        {
+          "category": "filesystem",
+          "result": "denied:EPERM",
+          "syscall": 257,
+          "target": "/lib/../../proc/1/fd/1"
+        },
+        {
+          "category": "process",
+          "result": "denied:EPERM",
+          "syscall": 88,
+          "target": "/proc/1/fd/1 -> /tmp/audit-alias"
+        },
+        {
+          "category": "filesystem",
+          "result": "denied:EPERM",
+          "syscall": 257,
+          "target": "/lib/../../proc/1/fd/1"
+        },
+        {
+          "category": "process",
+          "result": "denied:EPERM",
+          "syscall": 88,
+          "target": "/proc/1/fd/1 -> /tmp/audit-alias"
+        },
+        {
+          "category": "filesystem",
+          "result": "denied:EPERM",
+          "syscall": 257,
+          "target": "/lib/../../proc/1/fd/1"
+        },
+        {
+          "category": "process",
+          "result": "denied:EPERM",
+          "syscall": 88,
+          "target": "/proc/1/fd/1 -> /tmp/audit-alias"
+        },
+        {
+          "category": "filesystem",
+          "result": "denied:EPERM",
+          "syscall": 257,
+          "target": "/lib/../../proc/1/fd/1"
+        },
+        {
+          "category": "process",
+          "result": "denied:EPERM",
+          "syscall": 88,
+          "target": "/proc/1/fd/1 -> /tmp/audit-alias"
+        },
+        {
+          "category": "filesystem",
+          "result": "denied:EPERM",
+          "syscall": 257,
+          "target": "/lib/../../proc/1/fd/1"
+        },
+        {
+          "category": "process",
+          "result": "denied:EPERM",
+          "syscall": 88,
+          "target": "/proc/1/fd/1 -> /tmp/audit-alias"
+        },
+        {
+          "category": "filesystem",
+          "result": "denied:EPERM",
+          "syscall": 257,
+          "target": "/lib/../../proc/1/fd/1"
+        },
+        {
+          "category": "process",
+          "result": "denied:EPERM",
+          "syscall": 88,
+          "target": "/proc/1/fd/1 -> /tmp/audit-alias"
+        },
+        {
+          "category": "filesystem",
+          "result": "denied:EPERM",
+          "syscall": 257,
+          "target": "/lib/../../proc/1/fd/1"
+        },
+        {
+          "category": "process",
+          "result": "denied:EPERM",
+          "syscall": 88,
+          "target": "/proc/1/fd/1 -> /tmp/audit-alias"
+        },
+        {
+          "category": "filesystem",
+          "result": "denied:EPERM",
+          "syscall": 257,
+          "target": "/lib/../../proc/1/fd/1"
+        },
+        {
+          "category": "process",
+          "result": "denied:EPERM",
+          "syscall": 88,
+          "target": "/proc/1/fd/1 -> /tmp/audit-alias"
+        },
+        {
+          "category": "filesystem",
+          "result": "denied:EPERM",
+          "syscall": 257,
+          "target": "/lib/../../proc/1/fd/1"
+        },
+        {
+          "category": "process",
+          "result": "denied:EPERM",
+          "syscall": 88,
+          "target": "/proc/1/fd/1 -> /tmp/audit-alias"
+        },
+        {
+          "category": "filesystem",
+          "result": "denied:EPERM",
+          "syscall": 257,
+          "target": "/lib/../../proc/1/fd/1"
+        },
+        {
+          "category": "process",
+          "result": "denied:EPERM",
+          "syscall": 88,
+          "target": "/proc/1/fd/1 -> /tmp/audit-alias"
+        },
+        {
+          "category": "filesystem",
+          "result": "denied:EPERM",
+          "syscall": 257,
+          "target": "/lib/../../proc/1/fd/1"
+        },
+        {
+          "category": "process",
+          "result": "denied:EPERM",
+          "syscall": 88,
+          "target": "/proc/1/fd/1 -> /tmp/audit-alias"
+        },
+        {
+          "category": "filesystem",
+          "result": "denied:EPERM",
+          "syscall": 257,
+          "target": "/lib/../../proc/1/fd/1"
+        }
+      ],
+      "audit_path": "reports/local-study/verification-008/sandbox-qa/runs/7653641f-a0f3-4184-906b-12b9d9fb0d1a.audit.json",
+      "audit_sha256": "3f6dbf514606c9af6039771bf12b9b5c2ddbc2e19dc241e923e7b67e4046cfa3",
+      "cases_passed": 14,
+      "cases_total": 14,
+      "code_sha256": "7b263d820cfb8e2a5ec07edd47a98f769aa73171883f650a4e12e5315474933a",
+      "duration_ms": 14528,
+      "failure": null,
+      "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+      "lifecycle_evidence": {
+        "receipt_path": "reports/local-study/verification-008/sandbox-qa/runs/7653641f-a0f3-4184-906b-12b9d9fb0d1a.lifecycle.json",
+        "receipt_sha256": "f090371d8e0d49acf689f5e5a52545853e332d9e848321c6e8ba40ec41633b29"
+      },
+      "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+      "passed": false,
+      "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+      "quarantine_reasons": [
+        "prohibited process attempt: syscall 88 target /proc/1/fd/1 -> /tmp/audit-alias",
+        "prohibited filesystem attempt: syscall 257 target /lib/../../proc/1/fd/1",
+        "prohibited process attempt: syscall 88 target /proc/1/fd/1 -> /tmp/audit-alias",
+        "prohibited filesystem attempt: syscall 257 target /lib/../../proc/1/fd/1",
+        "prohibited process attempt: syscall 88 target /proc/1/fd/1 -> /tmp/audit-alias",
+        "prohibited filesystem attempt: syscall 257 target /lib/../../proc/1/fd/1",
+        "prohibited process attempt: syscall 88 target /proc/1/fd/1 -> /tmp/audit-alias",
+        "prohibited filesystem attempt: syscall 257 target /lib/../../proc/1/fd/1",
+        "prohibited process attempt: syscall 88 target /proc/1/fd/1 -> /tmp/audit-alias",
+        "prohibited filesystem attempt: syscall 257 target /lib/../../proc/1/fd/1",
+        "prohibited process attempt: syscall 88 target /proc/1/fd/1 -> /tmp/audit-alias",
+        "prohibited filesystem attempt: syscall 257 target /lib/../../proc/1/fd/1",
+        "prohibited process attempt: syscall 88 target /proc/1/fd/1 -> /tmp/audit-alias",
+        "prohibited filesystem attempt: syscall 257 target /lib/../../proc/1/fd/1",
+        "prohibited process attempt: syscall 88 target /proc/1/fd/1 -> /tmp/audit-alias",
+        "prohibited filesystem attempt: syscall 257 target /lib/../../proc/1/fd/1",
+        "prohibited process attempt: syscall 88 target /proc/1/fd/1 -> /tmp/audit-alias",
+        "prohibited filesystem attempt: syscall 257 target /lib/../../proc/1/fd/1",
+        "prohibited process attempt: syscall 88 target /proc/1/fd/1 -> /tmp/audit-alias",
+        "prohibited filesystem attempt: syscall 257 target /lib/../../proc/1/fd/1",
+        "prohibited process attempt: syscall 88 target /proc/1/fd/1 -> /tmp/audit-alias",
+        "prohibited filesystem attempt: syscall 257 target /lib/../../proc/1/fd/1",
+        "prohibited process attempt: syscall 88 target /proc/1/fd/1 -> /tmp/audit-alias",
+        "prohibited filesystem attempt: syscall 257 target /lib/../../proc/1/fd/1",
+        "prohibited process attempt: syscall 88 target /proc/1/fd/1 -> /tmp/audit-alias",
+        "prohibited filesystem attempt: syscall 257 target /lib/../../proc/1/fd/1",
+        "prohibited process attempt: syscall 88 target /proc/1/fd/1 -> /tmp/audit-alias",
+        "prohibited filesystem attempt: syscall 257 target /lib/../../proc/1/fd/1"
+      ],
+      "quarantined": true,
+      "run_id": "7653641f-a0f3-4184-906b-12b9d9fb0d1a",
+      "sandbox_config": {
+        "architecture": "x86_64",
+        "controller_version": 3,
+        "cpu_limit": 1.0,
+        "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+        "image": "localhost/lec-rust-sandbox:3-x86_64",
+        "memory_mb": 512,
+        "pids_limit": 64,
+        "policy_version": 3,
+        "report_dir": "reports/local-study/verification-008/sandbox-qa/runs",
+        "runtime": "podman",
+        "wall_timeout_secs": 20
+      },
+      "stdout_sha256": "1850c921c9d5c1f3f97ae5815e687394f0a1302e31fddde534ca6aebc203356e",
+      "task_id": "ledger.sum",
+      "timeout_evidence": null,
+      "trace_complete": true
+    },
+    {
+      "audit_events": [],
+      "audit_path": "reports/local-study/verification-008/sandbox-qa/runs/9e829cab-b43b-41d1-b18e-3d26bb9288d2.audit.json",
+      "audit_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "cases_passed": 0,
+      "cases_total": 14,
+      "code_sha256": "8a849481e09c6eed540a648fadff3924fd23527393d467030182f4a4af405a6f",
+      "duration_ms": 36264,
+      "failure": "candidate wall-clock deadline exceeded; exact cached cgroup SIGKILL and empty group observed; owned container removed",
+      "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+      "lifecycle_evidence": {
+        "receipt_path": "reports/local-study/verification-008/sandbox-qa/runs/9e829cab-b43b-41d1-b18e-3d26bb9288d2.lifecycle.json",
+        "receipt_sha256": "e419218f1a01f6da8405e105a9cf3034507a56a059f969a3d5426cfab08f43da"
+      },
+      "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+      "passed": false,
+      "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+      "quarantine_reasons": [
+        "candidate wall-clock deadline exceeded; exact cached cgroup SIGKILL and empty group observed; owned container removed"
+      ],
+      "quarantined": true,
+      "run_id": "9e829cab-b43b-41d1-b18e-3d26bb9288d2",
+      "sandbox_config": {
+        "architecture": "x86_64",
+        "controller_version": 3,
+        "cpu_limit": 1.0,
+        "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+        "image": "localhost/lec-rust-sandbox:3-x86_64",
+        "memory_mb": 512,
+        "pids_limit": 64,
+        "policy_version": 3,
+        "report_dir": "reports/local-study/verification-008/sandbox-qa/runs",
+        "runtime": "podman",
+        "wall_timeout_secs": 20
+      },
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "task_id": "ledger.sum",
+      "timeout_evidence": {
+        "cleanup_ms": 8329,
+        "container_removed": true,
+        "deadline_ms": 20000,
+        "kernel_proof": {
+          "receipt_path": "reports/local-study/verification-008/sandbox-qa/runs/9e829cab-b43b-41d1-b18e-3d26bb9288d2.lifecycle.json",
+          "receipt_sha256": "e419218f1a01f6da8405e105a9cf3034507a56a059f969a3d5426cfab08f43da"
+        },
+        "kill_acknowledged": true,
+        "kill_method": "preopened_exact_owned_cgroup_v2_kill",
+        "kill_request_ms": 0,
+        "wait_elapsed_ms": 20000
+      },
+      "trace_complete": false
+    }
+  ]
+}

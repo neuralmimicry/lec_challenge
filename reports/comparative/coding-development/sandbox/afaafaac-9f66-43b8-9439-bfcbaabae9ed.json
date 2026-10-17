@@ -1,0 +1,33 @@
+{
+  "run_id": "afaafaac-9f66-43b8-9439-bfcbaabae9ed",
+  "task_id": "money.format",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error[E0599]: no associated function or constant named `from_str` found for struct `serde_json::Number` in the current scope\n   --> /candidate/main.rs:21:13\n    |\n 21 |     Number::from_str(result).unwrap()\n    |             ^^^^^^^^ associated function or constant not found in `serde_json::Number`\n    |\nnote: if you're trying to build a new `serde_json::Number` consider using one of the following associated functions:\n      serde_json::Number::from_f64\n      serde_json::Number::from_i128\n      serde_json::Number::from_u128\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/number.rs:183:5\n    |\n183 |     pub fn from_f64(f: f64) -> Option<Number> {\n    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n...\n235 |     pub fn from_i128(i: i128) -> Option<Number> {\n    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n...\n264 |     pub fn from_u128(i: u128) -> Option<Number> {\n    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    = help: items from traits can only be used if the trait is in scope\nhelp: trait `FromStr` which provides `from_str` is implemented but not in scope; perhaps you want to import it\n    |\n  1 + use std::str::FromStr;\n    |\nhelp: there is an associated function `from` with a similar name\n    |\n 21 -     Number::from_str(result).unwrap()\n 21 +     Number::from(result).unwrap()\n    |\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0599`.\n"
+  ],
+  "cases_total": 6,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "0bf995b5f69865792503015f6af52b457c861b679877956e939c2137ddb4a562",
+  "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+  "oracle_sha256": "a734f6d465714cbebb072790fedff161d2fc28cbb257b3d04cee0feaf8b5b5fe",
+  "code_sha256": "ef1cb3426f4363750acd95f79e686baa10a92084bcc9a999d6f79c9f0e92e84c",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:1",
+    "expected_image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/comparative/coding-development/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/comparative/coding-development/sandbox/afaafaac-9f66-43b8-9439-bfcbaabae9ed.audit.json",
+  "audit_sha256": "f4396af69a372be903c84d4e89bcc63e005291e2188a60936cee656c7117459b",
+  "failure": "compilation failed: error[E0599]: no associated function or constant named `from_str` found for struct `serde_json::Number` in the current scope\n   --> /candidate/main.rs:21:13\n    |\n 21 |     Number::from_str(result).unwrap()\n    |             ^^^^^^^^ associated function or constant not found in `serde_json::Number`\n    |\nnote: if you're trying to build a new `serde_json::Number` consider using one of the following associated functions:\n      serde_json::Number::from_f64\n      serde_json::Number::from_i128\n      serde_json::Number::from_u128\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/number.rs:183:5\n    |\n183 |     pub fn from_f64(f: f64) -> Option<Number> {\n    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n...\n235 |     pub fn from_i128(i: i128) -> Option<Number> {\n    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n...\n264 |     pub fn from_u128(i: u128) -> Option<Number> {\n    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    = help: items from traits can only be used if the trait is in scope\nhelp: trait `FromStr` which provides `from_str` is implemented but not in scope; perhaps you want to import it\n    |\n  1 + use std::str::FromStr;\n    |\nhelp: there is an associated function `from` with a similar name\n    |\n 21 -     Number::from_str(result).unwrap()\n 21 +     Number::from(result).unwrap()\n    |\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0599`.\n",
+  "duration_ms": 11126,
+  "timeout_evidence": null
+}

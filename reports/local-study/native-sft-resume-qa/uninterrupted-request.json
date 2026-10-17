@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "arm_id": "native_sft_operator_qa",
+  "student_base": "offline_bundle/base",
+  "student_kind": "conventional_qwen_lora",
+  "evidence_bundle": "reports/local-study/qwen7b-evidence/bundle.json",
+  "output": "reports/local-study/native-sft-resume-qa/uninterrupted",
+  "seed": 1701,
+  "steps": 3,
+  "max_sequence_tokens": 64,
+  "sequence_policy": "assistant_window",
+  "rank": 2,
+  "alpha": 4.0,
+  "learning_rate": 0.0002,
+  "temperature": 2.0,
+  "dpo_beta": 0.1,
+  "losses": [
+    {
+      "kind": "sequence_sft",
+      "weight": 1.0
+    }
+  ],
+  "teacher_ids": [
+    "qwen-coder-7b-q4_k_m"
+  ],
+  "contents": [
+    "complete_sequence"
+  ],
+  "teacher_runtime": {
+    "device": "cpu",
+    "dtype": "f32"
+  },
+  "teacher_target_policy": "cache_only",
+  "student_runtime": {
+    "device": "cpu",
+    "dtype": "f32"
+  },
+  "initial_checkpoint": null,
+  "data_policy": "offline",
+  "progressive": false,
+  "self_distillation": false
+}

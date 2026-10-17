@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "evidence_kind": "frozen_resumable_local_exploration_protocol",
+  "options": {
+    "base": "offline_bundle/base",
+    "bitnet_base": "offline_bundle/students/bitnet-2b-4t",
+    "collection_max_tokens": 512,
+    "content_max_tokens": 768,
+    "content_maximum_tasks": 48,
+    "maximum_parallel_jobs": null,
+    "output": "reports/local-study/explore/round-001",
+    "reuse_train_comparisons": [
+      "reports/local-study/qwen7b-train"
+    ],
+    "search_config": "config/teacher-search.toml",
+    "search_output": "reports/comparative/search/round-001",
+    "study_config": "config/distillation-study.toml",
+    "teacher_runtime": null,
+    "top_groups": 2
+  },
+  "search_config": {
+    "path": "config/teacher-search.toml",
+    "sha256": "e391eba553c74645c9429b5c164629d3cb521c2590a3112005f44ddfaa4c4b10",
+    "bytes": 4788
+  },
+  "study_config": {
+    "path": "config/distillation-study.toml",
+    "sha256": "a3712f1135dd5471c80aecc2f91b99742355e3fb01720465833d2b63a8e2b5ba",
+    "bytes": 1590
+  },
+  "stage_engine": {
+    "path": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/state/engines/3f348bdfa71c49df5b5d0b7581ae9ad3114645127f99abbec9e4aac1064563bd/lec-distil",
+    "sha256": "3f348bdfa71c49df5b5d0b7581ae9ad3114645127f99abbec9e4aac1064563bd",
+    "bytes": 46867184,
+    "cpu_build": {
+      "build": {
+        "schema_version": 1,
+        "protocol": "explicit_cpu_simd_build_v1",
+        "architecture": "x86_64",
+        "profile": "avx2-fma-f16c",
+        "target_triple": "x86_64-unknown-linux-gnu",
+        "required_features": [
+          "avx",
+          "avx2",
+          "f16c",
+          "fma"
+        ],
+        "rustflags": [
+          "-C",
+          "target-cpu=generic",
+          "-C",
+          "debug-assertions=no",
+          "-C",
+          "panic=unwind",
+          "-C",
+          "target-feature=+avx2,+fma,+f16c"
+        ],
+        "encoded_rustflags": "-C\u001ftarget-cpu=generic\u001f-C\u001fdebug-assertions=no\u001f-C\u001fpanic=unwind\u001f-C\u001ftarget-feature=+avx2,+fma,+f16c",
+        "rustc_version_verbose": "rustc 1.98.1 (48a229cea 2026-09-01)\nbinary: rustc\ncommit-hash: 48a229ceaefd4985c50990b14116b6d856af0985\ncommit-date: 2026-09-01\nhost: x86_64-unknown-linux-gnu\nrelease: 1.98.1\nLLVM version: 22.1.8\n",
+        "rustc_cfg": [
+          "panic=\"unwind\"",
+          "target_abi=\"\"",
+          "target_arch=\"x86_64\"",
+          "target_endian=\"little\"",
+          "target_env=\"gnu\"",
+          "target_family=\"unix\"",
+          "target_feature=\"avx\"",
+          "target_feature=\"avx2\"",
+          "target_feature=\"f16c\"",
+          "target_feature=\"fma\"",
+          "target_feature=\"sse\"",
+          "target_feature=\"sse2\"",
+          "target_feature=\"sse3\"",
+          "target_feature=\"sse4.1\"",
+          "target_feature=\"sse4.2\"",
+          "target_feature=\"ssse3\"",
+          "target_has_atomic=\"16\"",
+          "target_has_atomic=\"32\"",
+          "target_has_atomic=\"64\"",
+          "target_has_atomic=\"8\"",
+          "target_has_atomic=\"ptr\"",
+          "target_has_atomic_primitive_alignment=\"16\"",
+          "target_has_atomic_primitive_alignment=\"32\"",
+          "target_has_atomic_primitive_alignment=\"64\"",
+          "target_has_atomic_primitive_alignment=\"8\"",
+          "target_has_atomic_primitive_alignment=\"ptr\"",
+          "target_os=\"linux\"",
+          "target_pointer_width=\"64\"",
+          "target_vendor=\"unknown\"",
+          "unix"
+        ],
+        "cargo_lock_sha256": "bd62f0019341d1a6432ba9153fefdfda757ac26856dc5da297995462176742bb",
+        "cargo_features": [
+          "cuda"
+        ],
+        "resolved_rustc": {
+          "executable": "/home/pbisaacs/.rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/rustc",
+          "sha256": "859254978c0a0402c32f949f6de0d99aee73be8d15f45aac00ae1448aac51e74",
+          "bytes": 645952
+        }
+      },
+      "executable_sha256": "3f348bdfa71c49df5b5d0b7581ae9ad3114645127f99abbec9e4aac1064563bd",
+      "executable_bytes": 46867184
+    }
+  },
+  "held_out_used": false,
+  "production_eligible": false
+}

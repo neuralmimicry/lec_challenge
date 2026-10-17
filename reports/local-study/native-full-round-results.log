@@ -1,0 +1,16 @@
+{
+  "arms": [
+    {
+      "adapter_sha256": "e2bcd135527659042304d936fa56c7240f6f96a43b9f81f2a888c38b7762a949",
+      "arm": "sft",
+      "changed_values": 540672
+    },
+    {
+      "adapter_sha256": "2217a994f8b74ded1d52f30ef7add2cb190578e3d108168a85d1409160ad88c3",
+      "arm": "composed",
+      "changed_values": 540672
+    }
+  ],
+  "passed": true,
+  "report": "reports/local-study/native-full-round-results.json"
+}

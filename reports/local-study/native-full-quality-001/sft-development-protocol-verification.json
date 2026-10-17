@@ -1,0 +1,314 @@
+{
+  "actual_execution": {
+    "bytes": 666,
+    "path": "reports/local-study/native-full-quality-001/sft-development/execution.json",
+    "sha256": "7b5e9a2f43468714742569de04e745aae5cde886e2ab5f82ae78c4344b1718c0"
+  },
+  "actual_plan": {
+    "bytes": 23984,
+    "path": "reports/local-study/native-full-quality-001/sft-development/plan.json",
+    "sha256": "0805ba5b12c7f6a3f7a46cf71c1c8db0aa8542d736a3dcd82b56da5f168b46c4"
+  },
+  "checkpoint_binding": {
+    "bytes": 2673,
+    "path": "reports/local-study/native-full-quality-001/sft-checkpoint.json",
+    "sha256": "d95ed485bfa403462f4fc7a90229e5df5015442179ecfaca098d6d358742b979"
+  },
+  "coding_passes": 0,
+  "evidence_kind": "independent_actual_quality_protocol_and_hash_audit",
+  "executable": {
+    "bytes": 5103744,
+    "path": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/state/diagnostics/audit-native-full-quality",
+    "sha256": "6e0fbe14c7cbde64038e82a143d71d413ca2a6d434c053731abc998aebf9fd75"
+  },
+  "generation_errors": 0,
+  "gnu_time": {
+    "bytes": 1171,
+    "path": "state/diagnostics/native-full-quality-sft-development.time.txt",
+    "sha256": "5f7000211273e6de0487ebbee2af13360989178e40cb64cc7b97dd44578e17f8"
+  },
+  "grading_errors": 3,
+  "healthy_complete": false,
+  "held_out_used": false,
+  "label": "sft-development",
+  "observations": [
+    {
+      "generation_error": false,
+      "grading_error": false,
+      "observation": {
+        "bytes": 702,
+        "path": "reports/local-study/native-full-quality-001/sft-development/observations/money.parse.json",
+        "sha256": "b1f8e2b14a9ea78b91a376cb9f21c4ed49ddede787247944e2bd78b652c3898b"
+      },
+      "raw_generation": {
+        "bytes": 2967,
+        "path": "reports/local-study/native-full-quality-001/sft-development/generations/money.parse.json",
+        "sha256": "30f4c7270a8bbca86fcf45a44a107645873e06b16614782273eba28554b0d9c1"
+      },
+      "success": false,
+      "task_id": "money.parse"
+    },
+    {
+      "generation_error": false,
+      "grading_error": false,
+      "observation": {
+        "bytes": 704,
+        "path": "reports/local-study/native-full-quality-001/sft-development/observations/money.format.json",
+        "sha256": "f172b6fe2157e7762af169ff3bc3b2811af252ce2e1c65dc790135bd68424744"
+      },
+      "raw_generation": {
+        "bytes": 2119,
+        "path": "reports/local-study/native-full-quality-001/sft-development/generations/money.format.json",
+        "sha256": "2f42455647f933aac425b7a4e4ce33c96e8bd26a952675f36ccbd5736e0f41cf"
+      },
+      "success": false,
+      "task_id": "money.format"
+    },
+    {
+      "generation_error": false,
+      "grading_error": false,
+      "observation": {
+        "bytes": 702,
+        "path": "reports/local-study/native-full-quality-001/sft-development/observations/money.split.json",
+        "sha256": "c54d5301f768ddbe76b13141e4a866dbff166f3de62118ceca7222b7ad9cfae5"
+      },
+      "raw_generation": {
+        "bytes": 2062,
+        "path": "reports/local-study/native-full-quality-001/sft-development/generations/money.split.json",
+        "sha256": "f0676f5161fe2eccebcbf0bee360fb651706dca93725886608112f4fcd5a8f9d"
+      },
+      "success": false,
+      "task_id": "money.split"
+    },
+    {
+      "generation_error": false,
+      "grading_error": false,
+      "observation": {
+        "bytes": 704,
+        "path": "reports/local-study/native-full-quality-001/sft-development/observations/money.basket.json",
+        "sha256": "92db7c78b2be76857cfc984b5ff5f9d7422393ed2c4529122bc2495edef030d5"
+      },
+      "raw_generation": {
+        "bytes": 1827,
+        "path": "reports/local-study/native-full-quality-001/sft-development/generations/money.basket.json",
+        "sha256": "2c38521d5ef898d06d9cb8e6f3a6ec669cece5693d483eaa3e0054376417198a"
+      },
+      "success": false,
+      "task_id": "money.basket"
+    },
+    {
+      "generation_error": false,
+      "grading_error": false,
+      "observation": {
+        "bytes": 725,
+        "path": "reports/local-study/native-full-quality-001/sft-development/observations/dispatch.finish_order.json",
+        "sha256": "4d1425e59f8e9d1ee0b7dd081eb8d38704cb9be2893719374e7aaa6ad02643f9"
+      },
+      "raw_generation": {
+        "bytes": 2200,
+        "path": "reports/local-study/native-full-quality-001/sft-development/generations/dispatch.finish_order.json",
+        "sha256": "3e6f398a5753a288ebccef75196cd96e49290690e025fc8575902e572ce3909e"
+      },
+      "success": false,
+      "task_id": "dispatch.finish_order"
+    },
+    {
+      "generation_error": false,
+      "grading_error": true,
+      "observation": {
+        "bytes": 581,
+        "path": "reports/local-study/native-full-quality-001/sft-development/observations/dispatch.waiting.json",
+        "sha256": "20c4091347264a139f4827bc5db1f1490f3bf837ada29b16e7d8a9aab5f9a810"
+      },
+      "raw_generation": {
+        "bytes": 2138,
+        "path": "reports/local-study/native-full-quality-001/sft-development/generations/dispatch.waiting.json",
+        "sha256": "c121e4942b282bb4ce87eea47d85c81c3291fc61ce0ccae87c8ca95133970af0"
+      },
+      "success": false,
+      "task_id": "dispatch.waiting"
+    },
+    {
+      "generation_error": false,
+      "grading_error": false,
+      "observation": {
+        "bytes": 723,
+        "path": "reports/local-study/native-full-quality-001/sft-development/observations/dispatch.round_robin.json",
+        "sha256": "33e78c01fad5baa729d33748fbad08e4f01b7686d54ed352c9f4a437cc98808c"
+      },
+      "raw_generation": {
+        "bytes": 2294,
+        "path": "reports/local-study/native-full-quality-001/sft-development/generations/dispatch.round_robin.json",
+        "sha256": "03c2a16b2380a274b4a47b88fd486699d0cc4580f6fbcd269d8098a1f540d3d2"
+      },
+      "success": false,
+      "task_id": "dispatch.round_robin"
+    },
+    {
+      "generation_error": false,
+      "grading_error": false,
+      "observation": {
+        "bytes": 717,
+        "path": "reports/local-study/native-full-quality-001/sft-development/observations/dispatch.priority.json",
+        "sha256": "9a87150692dccfd8217ae14d991794b7d4e2c8336ef518a150f9fbd2f7d58371"
+      },
+      "raw_generation": {
+        "bytes": 1847,
+        "path": "reports/local-study/native-full-quality-001/sft-development/generations/dispatch.priority.json",
+        "sha256": "999fd9c021161fdfcb03ad68966b12c115fe41973347d5fdd6245c5d5eefdb5a"
+      },
+      "success": false,
+      "task_id": "dispatch.priority"
+    },
+    {
+      "generation_error": false,
+      "grading_error": false,
+      "observation": {
+        "bytes": 721,
+        "path": "reports/local-study/native-full-quality-001/sft-development/observations/encoding.hex_encode.json",
+        "sha256": "efa9938fb4962d09fa2c6dacae1a5f3aa9939b1657c5612759b0da8ae13332c7"
+      },
+      "raw_generation": {
+        "bytes": 1863,
+        "path": "reports/local-study/native-full-quality-001/sft-development/generations/encoding.hex_encode.json",
+        "sha256": "384d78cb5c63f83fc8c9994c7563a5937785a65d5ccf6b4391777f9a9dd5bf91"
+      },
+      "success": false,
+      "task_id": "encoding.hex_encode"
+    },
+    {
+      "generation_error": false,
+      "grading_error": true,
+      "observation": {
+        "bytes": 587,
+        "path": "reports/local-study/native-full-quality-001/sft-development/observations/encoding.hex_decode.json",
+        "sha256": "101c37d0018a57831b68f09480991361fe406ec6815fc91df33af44abc210235"
+      },
+      "raw_generation": {
+        "bytes": 1972,
+        "path": "reports/local-study/native-full-quality-001/sft-development/generations/encoding.hex_decode.json",
+        "sha256": "6805ef76fd511a4118d49c58aed2d34c69121a407308ffc0930c6868401162d6"
+      },
+      "success": false,
+      "task_id": "encoding.hex_decode"
+    },
+    {
+      "generation_error": false,
+      "grading_error": false,
+      "observation": {
+        "bytes": 713,
+        "path": "reports/local-study/native-full-quality-001/sft-development/observations/encoding.caesar.json",
+        "sha256": "4cf42b169426eeff0e6226365d3fb840aaa4e8a6d4311d26b09fcb004914485e"
+      },
+      "raw_generation": {
+        "bytes": 2114,
+        "path": "reports/local-study/native-full-quality-001/sft-development/generations/encoding.caesar.json",
+        "sha256": "e139bef9cdda5cee33e5c7661059b377e0e2161c4a52222088623172bbdb9956"
+      },
+      "success": false,
+      "task_id": "encoding.caesar"
+    },
+    {
+      "generation_error": false,
+      "grading_error": false,
+      "observation": {
+        "bytes": 711,
+        "path": "reports/local-study/native-full-quality-001/sft-development/observations/encoding.rot13.json",
+        "sha256": "7e42a216108a64a08411c3f781f026866312d5a090f9986264e473c6623f0b05"
+      },
+      "raw_generation": {
+        "bytes": 2046,
+        "path": "reports/local-study/native-full-quality-001/sft-development/generations/encoding.rot13.json",
+        "sha256": "3dbe5c8212a202c376bffbc1d2a373fb408d203473f9f9cc9558c7b8e99f70d8"
+      },
+      "success": false,
+      "task_id": "encoding.rot13"
+    },
+    {
+      "generation_error": false,
+      "grading_error": false,
+      "observation": {
+        "bytes": 713,
+        "path": "reports/local-study/native-full-quality-001/sft-development/observations/tables.sort_rows.json",
+        "sha256": "1d1196488c12dda27bd0d0f846d15de33b8b5e632d20e905a0101137e08f240f"
+      },
+      "raw_generation": {
+        "bytes": 1860,
+        "path": "reports/local-study/native-full-quality-001/sft-development/generations/tables.sort_rows.json",
+        "sha256": "d6e942e1308e868edfbc44f11862ea08d874e53d02127affda9909be4ead96ea"
+      },
+      "success": false,
+      "task_id": "tables.sort_rows"
+    },
+    {
+      "generation_error": false,
+      "grading_error": false,
+      "observation": {
+        "bytes": 717,
+        "path": "reports/local-study/native-full-quality-001/sft-development/observations/tables.last_by_key.json",
+        "sha256": "d462dec97e1064d9cd8cf49be87fb0370046705f24073a1e17ebbd5c5c736e9d"
+      },
+      "raw_generation": {
+        "bytes": 2340,
+        "path": "reports/local-study/native-full-quality-001/sft-development/generations/tables.last_by_key.json",
+        "sha256": "25e6735d3f7550e67a9754d7deb5c91b8fdd1321cae2325c85cb7506fa2f7843"
+      },
+      "success": false,
+      "task_id": "tables.last_by_key"
+    },
+    {
+      "generation_error": false,
+      "grading_error": false,
+      "observation": {
+        "bytes": 715,
+        "path": "reports/local-study/native-full-quality-001/sft-development/observations/tables.group_sums.json",
+        "sha256": "644dc28792068cd1c5493e47bf97abd62055013306aad9c573b696b39f9f6279"
+      },
+      "raw_generation": {
+        "bytes": 2032,
+        "path": "reports/local-study/native-full-quality-001/sft-development/generations/tables.group_sums.json",
+        "sha256": "e4bcaa7caf989de59025a9a83b9e07165934356a41dfb986c04bec0364851fcc"
+      },
+      "success": false,
+      "task_id": "tables.group_sums"
+    },
+    {
+      "generation_error": false,
+      "grading_error": true,
+      "observation": {
+        "bytes": 581,
+        "path": "reports/local-study/native-full-quality-001/sft-development/observations/tables.inner_join.json",
+        "sha256": "daba9aace1a5e0599cc603c630295801e5698caf9a34f0a618f01c704cb24ac4"
+      },
+      "raw_generation": {
+        "bytes": 2299,
+        "path": "reports/local-study/native-full-quality-001/sft-development/generations/tables.inner_join.json",
+        "sha256": "264e60263c7d54bdf4980d2a4e1f3c59b607f78161bcd7351d38080847760047"
+      },
+      "success": false,
+      "task_id": "tables.inner_join"
+    }
+  ],
+  "observed": 16,
+  "passed": true,
+  "planned": 16,
+  "production_eligible": false,
+  "protocol": {
+    "bytes": 91361,
+    "path": "reports/local-study/native-full-quality-001/requested-protocol.json",
+    "sha256": "7696c3b8e50504e404a5bb069105bf7825111130eafd25ff163a740947d7643a"
+  },
+  "report": {
+    "bytes": 1616,
+    "path": "reports/local-study/native-full-quality-001/sft-development/report.json",
+    "sha256": "c2536d11f461e1f0304f7353beccb1ceb5bfad0d6fb2dad524cc29dc4f139437"
+  },
+  "schema_version": 1,
+  "source": {
+    "bytes": 8114,
+    "path": "state/diagnostics/audit-native-full-quality.rs",
+    "sha256": "0c1bae670020ecfb72dcdc44bcf49a64844ffbce15d5e67a5818339675362e0c"
+  },
+  "trusted_grade_verifier": "separate current-build study_comparison helper",
+  "trusted_grades_reconstructed_by_this_wrapper": false
+}

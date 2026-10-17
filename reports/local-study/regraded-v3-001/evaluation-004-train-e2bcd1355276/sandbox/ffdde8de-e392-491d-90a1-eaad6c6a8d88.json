@@ -1,0 +1,40 @@
+{
+  "run_id": "ffdde8de-e392-491d-90a1-eaad6c6a8d88",
+  "task_id": "graph.topological",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error[E0277]: the type `[Vec<usize>]` cannot be indexed by `&usize`\n  --> /candidate/main.rs:25:22\n   |\n25 |             if graph[v].is_empty() {\n   |                      ^ slice indices are of type `usize` or ranges of `usize`\n   |\n   = help: the trait `SliceIndex<[Vec<usize>]>` is not implemented for `&usize`\nhelp: `usize` implements trait `SliceIndex<T>`\n  --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/slice/index.rs:179:0\n   |\n   = note: `SliceIndex<[T]>`\n  --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/bstr/traits.rs:197:0\n   |\n   = note: `SliceIndex<ByteStr>`\n   = note: required for `Vec<Vec<usize>>` to implement `std::ops::Index<&usize>`\nhelp: dereference this index\n   |\n25 |             if graph[*v].is_empty() {\n   |                      +\n\nerror[E0308]: mismatched types\n  --> /candidate/main.rs:26:28\n   |\n18 |             stack.push(i);\n   |             -----      - this argument has type `usize`...\n   |             |\n   |             ... which causes `stack` to have type `Vec<usize>`\n...\n26 |                 stack.push(v);\n   |                       ---- ^ expected `usize`, found `&usize`\n   |                       |\n   |                       arguments to this method are incorrect\n   |\nnote: method defined here\n  --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/alloc/src/vec/mod.rs:995:11\nhelp: consider dereferencing the borrow\n   |\n26 |                 stack.push(*v);\n   |                            +\n\nerror: aborting due to 2 previous errors\n\nSome errors have detailed explanations: E0277, E0308.\nFor more information about an error, try `rustc --explain E0277`.\n"
+  ],
+  "cases_total": 6,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "b8f605089aae5d673dd8faef870a08bdb5c37419aa9bfd1ce69f77c8228be0fc",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/sandbox/ffdde8de-e392-491d-90a1-eaad6c6a8d88.audit.json",
+  "audit_sha256": "f33242694ca8efcc1850fad835c9a003212fe5a35c439c4b04db861f9fb4f363",
+  "failure": "compilation failed: error[E0277]: the type `[Vec<usize>]` cannot be indexed by `&usize`\n  --> /candidate/main.rs:25:22\n   |\n25 |             if graph[v].is_empty() {\n   |                      ^ slice indices are of type `usize` or ranges of `usize`\n   |\n   = help: the trait `SliceIndex<[Vec<usize>]>` is not implemented for `&usize`\nhelp: `usize` implements trait `SliceIndex<T>`\n  --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/slice/index.rs:179:0\n   |\n   = note: `SliceIndex<[T]>`\n  --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/bstr/traits.rs:197:0\n   |\n   = note: `SliceIndex<ByteStr>`\n   = note: required for `Vec<Vec<usize>>` to implement `std::ops::Index<&usize>`\nhelp: dereference this index\n   |\n25 |             if graph[*v].is_empty() {\n   |                      +\n\nerror[E0308]: mismatched types\n  --> /candidate/main.rs:26:28\n   |\n18 |             stack.push(i);\n   |             -----      - this argument has type `usize`...\n   |             |\n   |             ... which causes `stack` to have type `Vec<usize>`\n...\n26 |                 stack.push(v);\n   |                       ---- ^ expected `usize`, found `&usize`\n   |                       |\n   |                       arguments to this method are incorrect\n   |\nnote: method defined here\n  --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/alloc/src/vec/mod.rs:995:11\nhelp: consider dereferencing the borrow\n   |\n26 |                 stack.push(*v);\n   |                            +\n\nerror: aborting due to 2 previous errors\n\nSome errors have detailed explanations: E0277, E0308.\nFor more information about an error, try `rustc --explain E0277`.\n",
+  "duration_ms": 29312,
+  "timeout_evidence": null,
+  "lifecycle_evidence": {
+    "receipt_path": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/sandbox/ffdde8de-e392-491d-90a1-eaad6c6a8d88.lifecycle.json",
+    "receipt_sha256": "854acb27b1bf508aa2038d0fc341ed7854b946484ca5e7e18233d5f7b0a2a44b"
+  }
+}

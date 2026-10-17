@@ -1,0 +1,10 @@
+warning: no usable GPU found, --gpu-layers option will be ignored
+warning: one possible reason is that llama.cpp was compiled without GPU support
+warning: consult docs/build.md for compilation instructions
+0.00.014.520 I cmn  common_param: common_params_print_info: verbosity = 3 (adjust with the `-lv N` CLI arg)
+0.00.015.117 I srv          init: The UI is disabled
+0.00.015.335 I srv          init: Use --ui/--no-ui (or deprecated --webui/--no-webui) to enable/disable
+0.00.017.865 I srv    load_model: loading model 'offline_bundle/students/bitnet-2b-4t/model.i2_s.gguf'
+0.04.783.717 I srv    load_model: initializing, n_slots = 1, n_ctx_slot = 4096, kv_unified = 'false'
+0.04.788.713 I srv  llama_server: model loaded
+0.04.788.730 I srv  llama_server: listening on http://127.0.0.1:45889

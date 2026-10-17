@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "df66f201f0ad3ef92171fd91d4f38a697a3cf37a3f3bc24a27cee2de59b7a6b6",
+  "task_id": "dispatch.round_robin",
+  "source_id": "private-dispatch-v1",
+  "success": false,
+  "raw_generation": {
+    "path": "reports/local-study/sft-baseline-development-c7c/generations/dispatch.round_robin.json",
+    "sha256": "889f89129904ac8fda7dc9c81a26fe72b5b651b7f1061cc1cb5a8e1e2e6cbd52",
+    "bytes": 2454
+  },
+  "sandbox_report": {
+    "path": "reports/local-study/sft-baseline-development-c7c/sandbox/8d6269a7-877d-4cba-89f9-181d6488e1b3.json",
+    "sha256": "8d4d4e0f4b0e5421a53f17698309bf6bd825c65638548493014489e1c93214b2",
+    "bytes": 7902
+  },
+  "grading_error": null
+}

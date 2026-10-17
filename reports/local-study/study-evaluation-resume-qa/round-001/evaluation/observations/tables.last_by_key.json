@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "b04a4729bb3b68f65c9d18df57142e7901ebed367d528f3d0262f6cb2be3a6f6",
+  "task_id": "tables.last_by_key",
+  "source_id": "private-tables-v1",
+  "success": false,
+  "raw_generation": {
+    "path": "reports/local-study/study-evaluation-resume-qa/round-001/evaluation/generations/tables.last_by_key.json",
+    "sha256": "af2ec84fb64604ef4abc15df4a6a1d73df94a06ef9843580f1a7ced5e79fee15",
+    "bytes": 2110
+  },
+  "sandbox_report": {
+    "path": "reports/local-study/study-evaluation-resume-qa/round-001/evaluation/sandbox/5f7642c7-a40c-461d-8b7b-964b52aa80e3.json",
+    "sha256": "686e92074b96f191be0083cfd682640ee9d23746578c33189da7caab3a1859ad",
+    "bytes": 2645
+  },
+  "grading_error": null
+}

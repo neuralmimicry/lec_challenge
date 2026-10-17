@@ -1,0 +1,787 @@
+{
+  "conclusions": [
+    "Complete model generations and grading infrastructure failures are separate observations; the original zero scores and error denominator remain unchanged.",
+    "Stored timeout reports and ownership journals are diagnostic evidence, not missing trusted execution audits or successful grades.",
+    "A later cleanup acknowledgement does not establish the candidate's missing execution result.",
+    "Without matching retained runtime events/audits, the reports cannot distinguish runtime startup/cleanup delay, compiler delay, host contention or candidate runtime as the underlying cause."
+  ],
+  "containers_started": false,
+  "evaluations": [
+    {
+      "category_counts": {
+        "missing_trusted_audit": 5,
+        "owned_cleanup_inspection_timeout": 2
+      },
+      "complete_generations": 16,
+      "evaluation": "reports/local-study/sft-adapter-development-c7c",
+      "frozen_sandbox": {
+        "controller_version": 2,
+        "cpu_limit": 1.0,
+        "expected_image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+        "image": "localhost/lec-rust-sandbox:1",
+        "memory_mb": 512,
+        "pids_limit": 64,
+        "report_dir": "reports/local-study/sft-adapter-development-c7c/sandbox",
+        "runtime": "podman",
+        "wall_timeout_secs": 20
+      },
+      "input_artefacts_unchanged": true,
+      "original_artefacts": {
+        "reports/local-study/sft-adapter-development-c7c/generations/dispatch.finish_order.json": {
+          "bytes": 2078,
+          "path": "reports/local-study/sft-adapter-development-c7c/generations/dispatch.finish_order.json",
+          "sha256": "62c30237f6ded2bf394298b31ed7fcaa18382db26c01bcb5f60c61189047a6a3"
+        },
+        "reports/local-study/sft-adapter-development-c7c/generations/dispatch.priority.json": {
+          "bytes": 1852,
+          "path": "reports/local-study/sft-adapter-development-c7c/generations/dispatch.priority.json",
+          "sha256": "f8dfad56af21d588f4f9a5c9f2037bbeb0bce57a2a9ac86bcfb3625c78318fb2"
+        },
+        "reports/local-study/sft-adapter-development-c7c/generations/dispatch.round_robin.json": {
+          "bytes": 2224,
+          "path": "reports/local-study/sft-adapter-development-c7c/generations/dispatch.round_robin.json",
+          "sha256": "f12e4fd4303f032dcdb6f6da3b6117b4d06896c3b84c7016f5255dc4ed4b0121"
+        },
+        "reports/local-study/sft-adapter-development-c7c/generations/dispatch.waiting.json": {
+          "bytes": 1863,
+          "path": "reports/local-study/sft-adapter-development-c7c/generations/dispatch.waiting.json",
+          "sha256": "a47971a7e8c357b9b6afb95c2103d06d0c0ae48cf1d49c94cc31c6b883eccbbd"
+        },
+        "reports/local-study/sft-adapter-development-c7c/generations/encoding.caesar.json": {
+          "bytes": 2114,
+          "path": "reports/local-study/sft-adapter-development-c7c/generations/encoding.caesar.json",
+          "sha256": "58c02ef2ef3822272010d1ff8d5bce034ae7713b32d16b0638e2037cc3524842"
+        },
+        "reports/local-study/sft-adapter-development-c7c/generations/encoding.hex_decode.json": {
+          "bytes": 2158,
+          "path": "reports/local-study/sft-adapter-development-c7c/generations/encoding.hex_decode.json",
+          "sha256": "c21bbf6c9665043c7af329bf08a2a7254400724f9adce8691009c8178457ad18"
+        },
+        "reports/local-study/sft-adapter-development-c7c/generations/encoding.hex_encode.json": {
+          "bytes": 1786,
+          "path": "reports/local-study/sft-adapter-development-c7c/generations/encoding.hex_encode.json",
+          "sha256": "68e0692d1eb8ab5530aac0aabfc81bdfe5cfcfebc2f7e128a07e737d000b0de9"
+        },
+        "reports/local-study/sft-adapter-development-c7c/generations/encoding.rot13.json": {
+          "bytes": 2334,
+          "path": "reports/local-study/sft-adapter-development-c7c/generations/encoding.rot13.json",
+          "sha256": "972905b85f26b2ef56e95e2f7c7f43e534597a635464bd1fd2c3e9967f035b25"
+        },
+        "reports/local-study/sft-adapter-development-c7c/generations/money.basket.json": {
+          "bytes": 1830,
+          "path": "reports/local-study/sft-adapter-development-c7c/generations/money.basket.json",
+          "sha256": "2a5537d225fe1c166a39ec731e7e0a05dfa8f5bc872d76f0fe7d51815f6e7a70"
+        },
+        "reports/local-study/sft-adapter-development-c7c/generations/money.format.json": {
+          "bytes": 1828,
+          "path": "reports/local-study/sft-adapter-development-c7c/generations/money.format.json",
+          "sha256": "610e90e6ea0f3b1f2f723e3294b0f64f622984de32cf30fbeac8c1dd09cc769b"
+        },
+        "reports/local-study/sft-adapter-development-c7c/generations/money.parse.json": {
+          "bytes": 2021,
+          "path": "reports/local-study/sft-adapter-development-c7c/generations/money.parse.json",
+          "sha256": "c67ca47db3e7d8eb3094aa0e45b2547834a67d647773a38b5750c0acd7240dc1"
+        },
+        "reports/local-study/sft-adapter-development-c7c/generations/money.split.json": {
+          "bytes": 1990,
+          "path": "reports/local-study/sft-adapter-development-c7c/generations/money.split.json",
+          "sha256": "6566d259c581411497dc0aad92c3257a0c96883b35c7f23567fbb01ddba4b466"
+        },
+        "reports/local-study/sft-adapter-development-c7c/generations/tables.group_sums.json": {
+          "bytes": 1941,
+          "path": "reports/local-study/sft-adapter-development-c7c/generations/tables.group_sums.json",
+          "sha256": "d7c9a9671a2fb042d24599b7df97a1cebd7ba0a0bf5c224b450ac1c169c6fd9e"
+        },
+        "reports/local-study/sft-adapter-development-c7c/generations/tables.inner_join.json": {
+          "bytes": 2974,
+          "path": "reports/local-study/sft-adapter-development-c7c/generations/tables.inner_join.json",
+          "sha256": "854fb6fe0f49b3951e98eeb5e84450cd4eb5a45d8c472625de19c20fac04b4e4"
+        },
+        "reports/local-study/sft-adapter-development-c7c/generations/tables.last_by_key.json": {
+          "bytes": 2111,
+          "path": "reports/local-study/sft-adapter-development-c7c/generations/tables.last_by_key.json",
+          "sha256": "f64c62253a4c0fac2ca2b82e90f2eff5088bd4d5b990c9c7f076edc576f82c18"
+        },
+        "reports/local-study/sft-adapter-development-c7c/generations/tables.sort_rows.json": {
+          "bytes": 2063,
+          "path": "reports/local-study/sft-adapter-development-c7c/generations/tables.sort_rows.json",
+          "sha256": "b9591d5344d77b8ac658167473e277e3984499531a16adb06a19ebf523dc055c"
+        },
+        "reports/local-study/sft-adapter-development-c7c/observations/dispatch.finish_order.json": {
+          "bytes": 701,
+          "path": "reports/local-study/sft-adapter-development-c7c/observations/dispatch.finish_order.json",
+          "sha256": "ec690d6aae856bbb80cf7799b1a39e851e86f5d61cf29afa0b31ac52e11961ef"
+        },
+        "reports/local-study/sft-adapter-development-c7c/observations/dispatch.priority.json": {
+          "bytes": 541,
+          "path": "reports/local-study/sft-adapter-development-c7c/observations/dispatch.priority.json",
+          "sha256": "36f4d67c04477e9d255d685effc7c213bdf090dbffe34dd726de996da98b1fae"
+        },
+        "reports/local-study/sft-adapter-development-c7c/observations/dispatch.round_robin.json": {
+          "bytes": 547,
+          "path": "reports/local-study/sft-adapter-development-c7c/observations/dispatch.round_robin.json",
+          "sha256": "7afad0725d599fb30c6e3c6a8963167e58625b5a910772c0de646b2a10d9ae34"
+        },
+        "reports/local-study/sft-adapter-development-c7c/observations/dispatch.waiting.json": {
+          "bytes": 569,
+          "path": "reports/local-study/sft-adapter-development-c7c/observations/dispatch.waiting.json",
+          "sha256": "b4e2d94117ad2ba3c27817211258a3ded2d76535c2beee063076d844dfad0504"
+        },
+        "reports/local-study/sft-adapter-development-c7c/observations/encoding.caesar.json": {
+          "bytes": 689,
+          "path": "reports/local-study/sft-adapter-development-c7c/observations/encoding.caesar.json",
+          "sha256": "d3b218c03c9a2ca9660e30d63e0f819db2167aa274f19254346c40d29319e850"
+        },
+        "reports/local-study/sft-adapter-development-c7c/observations/encoding.hex_decode.json": {
+          "bytes": 697,
+          "path": "reports/local-study/sft-adapter-development-c7c/observations/encoding.hex_decode.json",
+          "sha256": "2f40ad88fe52bf0ee5cf9fba40101d82bac98f7f27ea0ccaeedd4b828e96b5da"
+        },
+        "reports/local-study/sft-adapter-development-c7c/observations/encoding.hex_encode.json": {
+          "bytes": 575,
+          "path": "reports/local-study/sft-adapter-development-c7c/observations/encoding.hex_encode.json",
+          "sha256": "71347d3fa03e25af28ac1b145984f9d33aa2111713ce91dc4528cbee4c7b3fe2"
+        },
+        "reports/local-study/sft-adapter-development-c7c/observations/encoding.rot13.json": {
+          "bytes": 687,
+          "path": "reports/local-study/sft-adapter-development-c7c/observations/encoding.rot13.json",
+          "sha256": "8bbbd71e8b39188a1a5a1822bffd56fda4168acc49ffba165c1bcac3503ece26"
+        },
+        "reports/local-study/sft-adapter-development-c7c/observations/money.basket.json": {
+          "bytes": 680,
+          "path": "reports/local-study/sft-adapter-development-c7c/observations/money.basket.json",
+          "sha256": "87eb3eee7f8db896c0e4c29a4e836eb479bf46b3372edc9f1189dadec02591c7"
+        },
+        "reports/local-study/sft-adapter-development-c7c/observations/money.format.json": {
+          "bytes": 558,
+          "path": "reports/local-study/sft-adapter-development-c7c/observations/money.format.json",
+          "sha256": "0b4522aec2ebb3f9db6c8ee4fa7fbf149b08792e61bde44cc5b554e20e9509fb"
+        },
+        "reports/local-study/sft-adapter-development-c7c/observations/money.parse.json": {
+          "bytes": 556,
+          "path": "reports/local-study/sft-adapter-development-c7c/observations/money.parse.json",
+          "sha256": "0b02bd14e8b2912a016838d970007448d9e2845dd7ffc32f376e64adbea1adfb"
+        },
+        "reports/local-study/sft-adapter-development-c7c/observations/money.split.json": {
+          "bytes": 556,
+          "path": "reports/local-study/sft-adapter-development-c7c/observations/money.split.json",
+          "sha256": "19c87e862fc8df7d39a84dbcddfeeef721d6da281b55f5fd1bd400be8b3dc745"
+        },
+        "reports/local-study/sft-adapter-development-c7c/observations/tables.group_sums.json": {
+          "bytes": 691,
+          "path": "reports/local-study/sft-adapter-development-c7c/observations/tables.group_sums.json",
+          "sha256": "cf1a1e85e389d9997ad315802e8c503c2be079a937f4cef5f6dfe1350a8413f8"
+        },
+        "reports/local-study/sft-adapter-development-c7c/observations/tables.inner_join.json": {
+          "bytes": 691,
+          "path": "reports/local-study/sft-adapter-development-c7c/observations/tables.inner_join.json",
+          "sha256": "e196469971550f20512b35f6d622d62e8e89910ebbaae879d80f29200b1bc326"
+        },
+        "reports/local-study/sft-adapter-development-c7c/observations/tables.last_by_key.json": {
+          "bytes": 693,
+          "path": "reports/local-study/sft-adapter-development-c7c/observations/tables.last_by_key.json",
+          "sha256": "b0cdac18e138de4e69b57d77fa703ba3bd02a6fbb7768636b88df06a103366a3"
+        },
+        "reports/local-study/sft-adapter-development-c7c/observations/tables.sort_rows.json": {
+          "bytes": 689,
+          "path": "reports/local-study/sft-adapter-development-c7c/observations/tables.sort_rows.json",
+          "sha256": "a781a5178ce9cbce56135bf7e14c712d5be3f8cd0cb3c3c48d741cb6efede4f1"
+        },
+        "reports/local-study/sft-adapter-development-c7c/sandbox/0c611252-f1fa-4270-b2b5-d1d3309e4ce4.json": {
+          "bytes": 1629,
+          "path": "reports/local-study/sft-adapter-development-c7c/sandbox/0c611252-f1fa-4270-b2b5-d1d3309e4ce4.json",
+          "sha256": "2aa02cf5529bd9a8c8f5b66bb1ec835d11b7c38cb6ad3a2ceaf9087d98f70e61"
+        },
+        "reports/local-study/sft-adapter-development-c7c/sandbox/39fb81ec-e063-4822-8b42-b99ffc056772.json": {
+          "bytes": 1627,
+          "path": "reports/local-study/sft-adapter-development-c7c/sandbox/39fb81ec-e063-4822-8b42-b99ffc056772.json",
+          "sha256": "32c0c75b76498a7a890881dee44e84ef4023fb05275de833fe4ae8f5c11cfd6e"
+        },
+        "reports/local-study/sft-adapter-development-c7c/sandbox/3aafb6ec-044f-4b00-a3f2-fc3cf5371570.json": {
+          "bytes": 1627,
+          "path": "reports/local-study/sft-adapter-development-c7c/sandbox/3aafb6ec-044f-4b00-a3f2-fc3cf5371570.json",
+          "sha256": "5a95c1c9f9e32c8c42d4cd531a84ca4c7b184d7d7a3e9068ef157da1300da52b"
+        },
+        "reports/local-study/sft-adapter-development-c7c/sandbox/59353a07-200e-48a7-8b78-2cb5c30ee18f.json": {
+          "bytes": 1656,
+          "path": "reports/local-study/sft-adapter-development-c7c/sandbox/59353a07-200e-48a7-8b78-2cb5c30ee18f.json",
+          "sha256": "fdbde33d2dcc5dc4c626e9277a193d4ea0d24f3ce4877d73843775926c3138cf"
+        },
+        "reports/local-study/sft-adapter-development-c7c/sandbox/5d8132b7-bcea-4b3d-b533-08bc835c8d67.json": {
+          "bytes": 1635,
+          "path": "reports/local-study/sft-adapter-development-c7c/sandbox/5d8132b7-bcea-4b3d-b533-08bc835c8d67.json",
+          "sha256": "5af2b63d136390d2dabb9c095a95e8303d0d2df1f67913e8077982b39b6ff056"
+        },
+        "reports/local-study/sft-adapter-development-c7c/sandbox/6d75159f-4008-44ca-8cb2-66ebe98d2021.json": {
+          "bytes": 1633,
+          "path": "reports/local-study/sft-adapter-development-c7c/sandbox/6d75159f-4008-44ca-8cb2-66ebe98d2021.json",
+          "sha256": "5cb3544bdcce32604463d111c31356055539fa4a2e7ad009345ccf4d753049cc"
+        },
+        "reports/local-study/sft-adapter-development-c7c/sandbox/911af298-982e-49d3-8bcb-072db993ac99.json": {
+          "bytes": 1636,
+          "path": "reports/local-study/sft-adapter-development-c7c/sandbox/911af298-982e-49d3-8bcb-072db993ac99.json",
+          "sha256": "c1fd9a892c72ec4ad2388705f6624979a085bb34df3577339812857a278c5ca1"
+        }
+      },
+      "plan": {
+        "bytes": 23975,
+        "path": "reports/local-study/sft-adapter-development-c7c/plan.json",
+        "sha256": "448b2d86361801414c47e32433b6e0bce070909a486feaecc2fd744b94dca8f4"
+      },
+      "planned": 16,
+      "report": {
+        "bytes": 1616,
+        "path": "reports/local-study/sft-adapter-development-c7c/report.json",
+        "sha256": "54ed67a7caa08146d24c3a7a89c8bbd4ad4083fe226d2626a8241995e35d1e11"
+      },
+      "retained_error_count": 7,
+      "rows": [
+        {
+          "candidate_quality_inferred": false,
+          "category": "owned_cleanup_inspection_timeout",
+          "generation_complete": true,
+          "grading_error": "owned sandbox inspection deadline exceeded: deadline has elapsed",
+          "model_error": null,
+          "observation": {
+            "bytes": 541,
+            "path": "reports/local-study/sft-adapter-development-c7c/observations/dispatch.priority.json",
+            "sha256": "36f4d67c04477e9d255d685effc7c213bdf090dbffe34dd726de996da98b1fae"
+          },
+          "raw_generation": {
+            "bytes": 1852,
+            "path": "reports/local-study/sft-adapter-development-c7c/generations/dispatch.priority.json",
+            "sha256": "f8dfad56af21d588f4f9a5c9f2037bbeb0bce57a2a9ac86bcfb3625c78318fb2"
+          },
+          "source_id": "private-dispatch-v1",
+          "stored_sandbox_reports": [
+            {
+              "artefact": {
+                "bytes": 1635,
+                "path": "reports/local-study/sft-adapter-development-c7c/sandbox/5d8132b7-bcea-4b3d-b533-08bc835c8d67.json",
+                "sha256": "5af2b63d136390d2dabb9c095a95e8303d0d2df1f67913e8077982b39b6ff056"
+              },
+              "declared_audit_path": "reports/local-study/sft-adapter-development-c7c/sandbox/5d8132b7-bcea-4b3d-b533-08bc835c8d67.audit.json",
+              "declared_audit_sha256": "",
+              "duration_ms": 50010,
+              "failure": "host wall-clock deadline exceeded; cleanup/kill evidence incomplete",
+              "ownership_journals": [
+                {
+                  "artefact": {
+                    "bytes": 727,
+                    "path": "state/sandbox-owned-runs/7e2fdd3e3868dc5eec92f65e0e60b324873bcae1c436b948d9882da7392f9b9b/lec-5d8132b7-bcea-4b3d-b533-08bc835c8d67.json",
+                    "sha256": "a5a3bce063d60a41cf45ff1c8a2c2241870f1ad0f2f06abc98e225a6d662d99a"
+                  },
+                  "record": {
+                    "completed_unix_ms": 1792087519317,
+                    "completion_reason": "recovered_after_original_owner_died",
+                    "controller_version": 2,
+                    "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+                    "name": "lec-5d8132b7-bcea-4b3d-b533-08bc835c8d67",
+                    "nonce": "0ef14939-d5d0-4eda-9342-53cff2798d7f",
+                    "owner_boot_id": "42620037-44e4-4188-8cfa-c75177e23084",
+                    "owner_pid": 814103,
+                    "owner_start_ticks": 10740664,
+                    "planned_unix_ms": 1792087209221,
+                    "runtime": "/usr/local/bin/podman",
+                    "schema_version": 1,
+                    "scope": "7e2fdd3e3868dc5eec92f65e0e60b324873bcae1c436b948d9882da7392f9b9b",
+                    "uid": 1000,
+                    "verified_container_id": null,
+                    "workspace": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge"
+                  }
+                }
+              ],
+              "quarantined": true,
+              "retained_audit": null,
+              "timeout_evidence": {
+                "cleanup_ms": 20519,
+                "container_removed": true,
+                "deadline_ms": 20000,
+                "kill_acknowledged": false,
+                "kill_method": "runtime_sigkill",
+                "kill_request_ms": 7007,
+                "wait_elapsed_ms": 20001
+              },
+              "trace_complete": false
+            }
+          ],
+          "success_retained": false,
+          "task_id": "dispatch.priority"
+        },
+        {
+          "candidate_quality_inferred": false,
+          "category": "owned_cleanup_inspection_timeout",
+          "generation_complete": true,
+          "grading_error": "owned sandbox inspection deadline exceeded: deadline has elapsed",
+          "model_error": null,
+          "observation": {
+            "bytes": 547,
+            "path": "reports/local-study/sft-adapter-development-c7c/observations/dispatch.round_robin.json",
+            "sha256": "7afad0725d599fb30c6e3c6a8963167e58625b5a910772c0de646b2a10d9ae34"
+          },
+          "raw_generation": {
+            "bytes": 2224,
+            "path": "reports/local-study/sft-adapter-development-c7c/generations/dispatch.round_robin.json",
+            "sha256": "f12e4fd4303f032dcdb6f6da3b6117b4d06896c3b84c7016f5255dc4ed4b0121"
+          },
+          "source_id": "private-dispatch-v1",
+          "stored_sandbox_reports": [
+            {
+              "artefact": {
+                "bytes": 1636,
+                "path": "reports/local-study/sft-adapter-development-c7c/sandbox/911af298-982e-49d3-8bcb-072db993ac99.json",
+                "sha256": "c1fd9a892c72ec4ad2388705f6624979a085bb34df3577339812857a278c5ca1"
+              },
+              "declared_audit_path": "reports/local-study/sft-adapter-development-c7c/sandbox/911af298-982e-49d3-8bcb-072db993ac99.audit.json",
+              "declared_audit_sha256": "",
+              "duration_ms": 44568,
+              "failure": "host wall-clock deadline exceeded; cleanup/kill evidence incomplete",
+              "ownership_journals": [
+                {
+                  "artefact": {
+                    "bytes": 727,
+                    "path": "state/sandbox-owned-runs/7e2fdd3e3868dc5eec92f65e0e60b324873bcae1c436b948d9882da7392f9b9b/lec-911af298-982e-49d3-8bcb-072db993ac99.json",
+                    "sha256": "f054ae795347bd6386fea77ab4ac54b6528c88c6a26d9212666e1e41b0b34d02"
+                  },
+                  "record": {
+                    "completed_unix_ms": 1792087519802,
+                    "completion_reason": "recovered_after_original_owner_died",
+                    "controller_version": 2,
+                    "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+                    "name": "lec-911af298-982e-49d3-8bcb-072db993ac99",
+                    "nonce": "c7b23b70-9ff0-459d-b7d5-754e1e664202",
+                    "owner_boot_id": "42620037-44e4-4188-8cfa-c75177e23084",
+                    "owner_pid": 814103,
+                    "owner_start_ticks": 10740664,
+                    "planned_unix_ms": 1792087200134,
+                    "runtime": "/usr/local/bin/podman",
+                    "schema_version": 1,
+                    "scope": "7e2fdd3e3868dc5eec92f65e0e60b324873bcae1c436b948d9882da7392f9b9b",
+                    "uid": 1000,
+                    "verified_container_id": null,
+                    "workspace": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge"
+                  }
+                }
+              ],
+              "quarantined": true,
+              "retained_audit": null,
+              "timeout_evidence": {
+                "cleanup_ms": 19751,
+                "container_removed": false,
+                "deadline_ms": 20000,
+                "kill_acknowledged": true,
+                "kill_method": "cgroup_v2_kill",
+                "kill_request_ms": 402,
+                "wait_elapsed_ms": 20001
+              },
+              "trace_complete": false
+            }
+          ],
+          "success_retained": false,
+          "task_id": "dispatch.round_robin"
+        },
+        {
+          "candidate_quality_inferred": false,
+          "category": "missing_trusted_audit",
+          "generation_complete": true,
+          "grading_error": "trusted grade rejected: trusted audit artifact missing: No such file or directory (os error 2)",
+          "model_error": null,
+          "observation": {
+            "bytes": 569,
+            "path": "reports/local-study/sft-adapter-development-c7c/observations/dispatch.waiting.json",
+            "sha256": "b4e2d94117ad2ba3c27817211258a3ded2d76535c2beee063076d844dfad0504"
+          },
+          "raw_generation": {
+            "bytes": 1863,
+            "path": "reports/local-study/sft-adapter-development-c7c/generations/dispatch.waiting.json",
+            "sha256": "a47971a7e8c357b9b6afb95c2103d06d0c0ae48cf1d49c94cc31c6b883eccbbd"
+          },
+          "source_id": "private-dispatch-v1",
+          "stored_sandbox_reports": [
+            {
+              "artefact": {
+                "bytes": 1633,
+                "path": "reports/local-study/sft-adapter-development-c7c/sandbox/6d75159f-4008-44ca-8cb2-66ebe98d2021.json",
+                "sha256": "5cb3544bdcce32604463d111c31356055539fa4a2e7ad009345ccf4d753049cc"
+              },
+              "declared_audit_path": "reports/local-study/sft-adapter-development-c7c/sandbox/6d75159f-4008-44ca-8cb2-66ebe98d2021.audit.json",
+              "declared_audit_sha256": "",
+              "duration_ms": 37900,
+              "failure": "host wall-clock deadline exceeded; cleanup/kill evidence incomplete",
+              "ownership_journals": [
+                {
+                  "artefact": {
+                    "bytes": 711,
+                    "path": "state/sandbox-owned-runs/7e2fdd3e3868dc5eec92f65e0e60b324873bcae1c436b948d9882da7392f9b9b/lec-6d75159f-4008-44ca-8cb2-66ebe98d2021.json",
+                    "sha256": "f154aa6507e30b7d876abba24759f57eaca1bde176ab41338f8817676855a068"
+                  },
+                  "record": {
+                    "completed_unix_ms": 1792087198486,
+                    "completion_reason": "controller_finished",
+                    "controller_version": 2,
+                    "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+                    "name": "lec-6d75159f-4008-44ca-8cb2-66ebe98d2021",
+                    "nonce": "2c1b6b90-e943-4c88-a4c2-95147858162f",
+                    "owner_boot_id": "42620037-44e4-4188-8cfa-c75177e23084",
+                    "owner_pid": 814103,
+                    "owner_start_ticks": 10740664,
+                    "planned_unix_ms": 1792087161883,
+                    "runtime": "/usr/local/bin/podman",
+                    "schema_version": 1,
+                    "scope": "7e2fdd3e3868dc5eec92f65e0e60b324873bcae1c436b948d9882da7392f9b9b",
+                    "uid": 1000,
+                    "verified_container_id": null,
+                    "workspace": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge"
+                  }
+                }
+              ],
+              "quarantined": true,
+              "retained_audit": null,
+              "timeout_evidence": {
+                "cleanup_ms": 8113,
+                "container_removed": true,
+                "deadline_ms": 20000,
+                "kill_acknowledged": false,
+                "kill_method": "runtime_sigkill",
+                "kill_request_ms": 7010,
+                "wait_elapsed_ms": 20003
+              },
+              "trace_complete": false
+            }
+          ],
+          "success_retained": false,
+          "task_id": "dispatch.waiting"
+        },
+        {
+          "candidate_quality_inferred": false,
+          "category": "missing_trusted_audit",
+          "generation_complete": true,
+          "grading_error": "trusted grade rejected: trusted audit artifact missing: No such file or directory (os error 2)",
+          "model_error": null,
+          "observation": {
+            "bytes": 575,
+            "path": "reports/local-study/sft-adapter-development-c7c/observations/encoding.hex_encode.json",
+            "sha256": "71347d3fa03e25af28ac1b145984f9d33aa2111713ce91dc4528cbee4c7b3fe2"
+          },
+          "raw_generation": {
+            "bytes": 1786,
+            "path": "reports/local-study/sft-adapter-development-c7c/generations/encoding.hex_encode.json",
+            "sha256": "68e0692d1eb8ab5530aac0aabfc81bdfe5cfcfebc2f7e128a07e737d000b0de9"
+          },
+          "source_id": "private-encoding-v1",
+          "stored_sandbox_reports": [
+            {
+              "artefact": {
+                "bytes": 1656,
+                "path": "reports/local-study/sft-adapter-development-c7c/sandbox/59353a07-200e-48a7-8b78-2cb5c30ee18f.json",
+                "sha256": "fdbde33d2dcc5dc4c626e9277a193d4ea0d24f3ce4877d73843775926c3138cf"
+              },
+              "declared_audit_path": "reports/local-study/sft-adapter-development-c7c/sandbox/59353a07-200e-48a7-8b78-2cb5c30ee18f.audit.json",
+              "declared_audit_sha256": "",
+              "duration_ms": 42741,
+              "failure": "host wall-clock deadline exceeded; SIGKILL acknowledged and container removed",
+              "ownership_journals": [
+                {
+                  "artefact": {
+                    "bytes": 711,
+                    "path": "state/sandbox-owned-runs/7e2fdd3e3868dc5eec92f65e0e60b324873bcae1c436b948d9882da7392f9b9b/lec-59353a07-200e-48a7-8b78-2cb5c30ee18f.json",
+                    "sha256": "3e5ca1cd46cede7f80440592e7b4efe74fe0820695502fe00590c27cef74282f"
+                  },
+                  "record": {
+                    "completed_unix_ms": 1792087268460,
+                    "completion_reason": "controller_finished",
+                    "controller_version": 2,
+                    "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+                    "name": "lec-59353a07-200e-48a7-8b78-2cb5c30ee18f",
+                    "nonce": "abb99922-7292-4a26-9d59-8f68db45e2a4",
+                    "owner_boot_id": "42620037-44e4-4188-8cfa-c75177e23084",
+                    "owner_pid": 814103,
+                    "owner_start_ticks": 10740664,
+                    "planned_unix_ms": 1792087229638,
+                    "runtime": "/usr/local/bin/podman",
+                    "schema_version": 1,
+                    "scope": "7e2fdd3e3868dc5eec92f65e0e60b324873bcae1c436b948d9882da7392f9b9b",
+                    "uid": 1000,
+                    "verified_container_id": null,
+                    "workspace": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge"
+                  }
+                }
+              ],
+              "quarantined": true,
+              "retained_audit": null,
+              "timeout_evidence": {
+                "cleanup_ms": 11542,
+                "container_removed": true,
+                "deadline_ms": 20000,
+                "kill_acknowledged": true,
+                "kill_method": "runtime_sigkill",
+                "kill_request_ms": 6660,
+                "wait_elapsed_ms": 20001
+              },
+              "trace_complete": false
+            }
+          ],
+          "success_retained": false,
+          "task_id": "encoding.hex_encode"
+        },
+        {
+          "candidate_quality_inferred": false,
+          "category": "missing_trusted_audit",
+          "generation_complete": true,
+          "grading_error": "trusted grade rejected: trusted audit artifact missing: No such file or directory (os error 2)",
+          "model_error": null,
+          "observation": {
+            "bytes": 558,
+            "path": "reports/local-study/sft-adapter-development-c7c/observations/money.format.json",
+            "sha256": "0b4522aec2ebb3f9db6c8ee4fa7fbf149b08792e61bde44cc5b554e20e9509fb"
+          },
+          "raw_generation": {
+            "bytes": 1828,
+            "path": "reports/local-study/sft-adapter-development-c7c/generations/money.format.json",
+            "sha256": "610e90e6ea0f3b1f2f723e3294b0f64f622984de32cf30fbeac8c1dd09cc769b"
+          },
+          "source_id": "private-money-v1",
+          "stored_sandbox_reports": [
+            {
+              "artefact": {
+                "bytes": 1629,
+                "path": "reports/local-study/sft-adapter-development-c7c/sandbox/0c611252-f1fa-4270-b2b5-d1d3309e4ce4.json",
+                "sha256": "2aa02cf5529bd9a8c8f5b66bb1ec835d11b7c38cb6ad3a2ceaf9087d98f70e61"
+              },
+              "declared_audit_path": "reports/local-study/sft-adapter-development-c7c/sandbox/0c611252-f1fa-4270-b2b5-d1d3309e4ce4.audit.json",
+              "declared_audit_sha256": "",
+              "duration_ms": 32995,
+              "failure": "host wall-clock deadline exceeded; cleanup/kill evidence incomplete",
+              "ownership_journals": [
+                {
+                  "artefact": {
+                    "bytes": 711,
+                    "path": "state/sandbox-owned-runs/7e2fdd3e3868dc5eec92f65e0e60b324873bcae1c436b948d9882da7392f9b9b/lec-0c611252-f1fa-4270-b2b5-d1d3309e4ce4.json",
+                    "sha256": "0ec857793cef7c282fc191e7253c21cc17e5a7937fe231ed48cb0fa64a4e4341"
+                  },
+                  "record": {
+                    "completed_unix_ms": 1792087150395,
+                    "completion_reason": "controller_finished",
+                    "controller_version": 2,
+                    "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+                    "name": "lec-0c611252-f1fa-4270-b2b5-d1d3309e4ce4",
+                    "nonce": "00c5f1b4-a0a7-4326-b635-9f4989f60229",
+                    "owner_boot_id": "42620037-44e4-4188-8cfa-c75177e23084",
+                    "owner_pid": 814103,
+                    "owner_start_ticks": 10740664,
+                    "planned_unix_ms": 1792087118665,
+                    "runtime": "/usr/local/bin/podman",
+                    "schema_version": 1,
+                    "scope": "7e2fdd3e3868dc5eec92f65e0e60b324873bcae1c436b948d9882da7392f9b9b",
+                    "uid": 1000,
+                    "verified_container_id": null,
+                    "workspace": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge"
+                  }
+                }
+              ],
+              "quarantined": true,
+              "retained_audit": null,
+              "timeout_evidence": {
+                "cleanup_ms": 3717,
+                "container_removed": true,
+                "deadline_ms": 20000,
+                "kill_acknowledged": false,
+                "kill_method": "runtime_sigkill",
+                "kill_request_ms": 7008,
+                "wait_elapsed_ms": 20028
+              },
+              "trace_complete": false
+            }
+          ],
+          "success_retained": false,
+          "task_id": "money.format"
+        },
+        {
+          "candidate_quality_inferred": false,
+          "category": "missing_trusted_audit",
+          "generation_complete": true,
+          "grading_error": "trusted grade rejected: trusted audit artifact missing: No such file or directory (os error 2)",
+          "model_error": null,
+          "observation": {
+            "bytes": 556,
+            "path": "reports/local-study/sft-adapter-development-c7c/observations/money.parse.json",
+            "sha256": "0b02bd14e8b2912a016838d970007448d9e2845dd7ffc32f376e64adbea1adfb"
+          },
+          "raw_generation": {
+            "bytes": 2021,
+            "path": "reports/local-study/sft-adapter-development-c7c/generations/money.parse.json",
+            "sha256": "c67ca47db3e7d8eb3094aa0e45b2547834a67d647773a38b5750c0acd7240dc1"
+          },
+          "source_id": "private-money-v1",
+          "stored_sandbox_reports": [
+            {
+              "artefact": {
+                "bytes": 1627,
+                "path": "reports/local-study/sft-adapter-development-c7c/sandbox/3aafb6ec-044f-4b00-a3f2-fc3cf5371570.json",
+                "sha256": "5a95c1c9f9e32c8c42d4cd531a84ca4c7b184d7d7a3e9068ef157da1300da52b"
+              },
+              "declared_audit_path": "reports/local-study/sft-adapter-development-c7c/sandbox/3aafb6ec-044f-4b00-a3f2-fc3cf5371570.audit.json",
+              "declared_audit_sha256": "",
+              "duration_ms": 32816,
+              "failure": "host wall-clock deadline exceeded; cleanup/kill evidence incomplete",
+              "ownership_journals": [
+                {
+                  "artefact": {
+                    "bytes": 711,
+                    "path": "state/sandbox-owned-runs/7e2fdd3e3868dc5eec92f65e0e60b324873bcae1c436b948d9882da7392f9b9b/lec-3aafb6ec-044f-4b00-a3f2-fc3cf5371570.json",
+                    "sha256": "c01b2b8e7f2255d51838b58286af2444ca7f675da4eec4768c4efb88b9409844"
+                  },
+                  "record": {
+                    "completed_unix_ms": 1792087150021,
+                    "completion_reason": "controller_finished",
+                    "controller_version": 2,
+                    "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+                    "name": "lec-3aafb6ec-044f-4b00-a3f2-fc3cf5371570",
+                    "nonce": "ce6ea946-e31f-4726-bc2b-a85dbe97b92e",
+                    "owner_boot_id": "42620037-44e4-4188-8cfa-c75177e23084",
+                    "owner_pid": 814103,
+                    "owner_start_ticks": 10740664,
+                    "planned_unix_ms": 1792087115380,
+                    "runtime": "/usr/local/bin/podman",
+                    "schema_version": 1,
+                    "scope": "7e2fdd3e3868dc5eec92f65e0e60b324873bcae1c436b948d9882da7392f9b9b",
+                    "uid": 1000,
+                    "verified_container_id": null,
+                    "workspace": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge"
+                  }
+                }
+              ],
+              "quarantined": true,
+              "retained_audit": null,
+              "timeout_evidence": {
+                "cleanup_ms": 11378,
+                "container_removed": false,
+                "deadline_ms": 20000,
+                "kill_acknowledged": true,
+                "kill_method": "cgroup_v2_kill",
+                "kill_request_ms": 451,
+                "wait_elapsed_ms": 20001
+              },
+              "trace_complete": false
+            }
+          ],
+          "success_retained": false,
+          "task_id": "money.parse"
+        },
+        {
+          "candidate_quality_inferred": false,
+          "category": "missing_trusted_audit",
+          "generation_complete": true,
+          "grading_error": "trusted grade rejected: trusted audit artifact missing: No such file or directory (os error 2)",
+          "model_error": null,
+          "observation": {
+            "bytes": 556,
+            "path": "reports/local-study/sft-adapter-development-c7c/observations/money.split.json",
+            "sha256": "19c87e862fc8df7d39a84dbcddfeeef721d6da281b55f5fd1bd400be8b3dc745"
+          },
+          "raw_generation": {
+            "bytes": 1990,
+            "path": "reports/local-study/sft-adapter-development-c7c/generations/money.split.json",
+            "sha256": "6566d259c581411497dc0aad92c3257a0c96883b35c7f23567fbb01ddba4b466"
+          },
+          "source_id": "private-money-v1",
+          "stored_sandbox_reports": [
+            {
+              "artefact": {
+                "bytes": 1627,
+                "path": "reports/local-study/sft-adapter-development-c7c/sandbox/39fb81ec-e063-4822-8b42-b99ffc056772.json",
+                "sha256": "32c0c75b76498a7a890881dee44e84ef4023fb05275de833fe4ae8f5c11cfd6e"
+              },
+              "declared_audit_path": "reports/local-study/sft-adapter-development-c7c/sandbox/39fb81ec-e063-4822-8b42-b99ffc056772.audit.json",
+              "declared_audit_sha256": "",
+              "duration_ms": 24446,
+              "failure": "host wall-clock deadline exceeded; cleanup/kill evidence incomplete",
+              "ownership_journals": [
+                {
+                  "artefact": {
+                    "bytes": 711,
+                    "path": "state/sandbox-owned-runs/7e2fdd3e3868dc5eec92f65e0e60b324873bcae1c436b948d9882da7392f9b9b/lec-39fb81ec-e063-4822-8b42-b99ffc056772.json",
+                    "sha256": "cbbd1124750d392d93ff3697a9fc706451203173a77f5c1fbbfda0efce633397"
+                  },
+                  "record": {
+                    "completed_unix_ms": 1792087150762,
+                    "completion_reason": "controller_finished",
+                    "controller_version": 2,
+                    "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+                    "name": "lec-39fb81ec-e063-4822-8b42-b99ffc056772",
+                    "nonce": "90cc3f83-c865-4fa7-8ad8-407958335e4d",
+                    "owner_boot_id": "42620037-44e4-4188-8cfa-c75177e23084",
+                    "owner_pid": 814103,
+                    "owner_start_ticks": 10740664,
+                    "planned_unix_ms": 1792087128194,
+                    "runtime": "/usr/local/bin/podman",
+                    "schema_version": 1,
+                    "scope": "7e2fdd3e3868dc5eec92f65e0e60b324873bcae1c436b948d9882da7392f9b9b",
+                    "uid": 1000,
+                    "verified_container_id": null,
+                    "workspace": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge"
+                  }
+                }
+              ],
+              "quarantined": true,
+              "retained_audit": null,
+              "timeout_evidence": {
+                "cleanup_ms": 398,
+                "container_removed": true,
+                "deadline_ms": 20000,
+                "kill_acknowledged": false,
+                "kill_method": "runtime_sigkill",
+                "kill_request_ms": 1943,
+                "wait_elapsed_ms": 20003
+              },
+              "trace_complete": false
+            }
+          ],
+          "success_retained": false,
+          "task_id": "money.split"
+        }
+      ]
+    }
+  ],
+  "evidence_kind": "read_only_retained_study_grading_failure_diagnosis",
+  "generations_replayed_or_replaced": false,
+  "held_out_used": false,
+  "inference_performed": false,
+  "production_eligible": false,
+  "retained_runtime_event_files": [
+    {
+      "artefact": {
+        "bytes": 31985,
+        "path": "reports/sandbox-crash-qa/runtime-events.jsonl",
+        "sha256": "7ce923f43c9ef29edb909dae555d64729533e77c00316a4647e93126da2fc199"
+      },
+      "event_count": 55,
+      "first_unix_seconds": 1792084914,
+      "last_unix_seconds": 1792085324,
+      "matching_error_container_events": []
+    },
+    {
+      "artefact": {
+        "bytes": 3605,
+        "path": "reports/sandbox-crash-qa/round-003/orphan-runtime-events.jsonl",
+        "sha256": "5ba893d3edfa0535d50194bf84bdd77ec67f43e18c18e7ff3d54b574f35a2234"
+      },
+      "event_count": 6,
+      "first_unix_seconds": 1792086031,
+      "last_unix_seconds": 1792086066,
+      "matching_error_container_events": []
+    },
+    {
+      "artefact": {
+        "bytes": 3605,
+        "path": "reports/sandbox-crash-qa/round-004/orphan-runtime-events.jsonl",
+        "sha256": "7d4a8bb18a62ce8c841699a643a8cdbdf62e8defdcfc8deb6941d90016a16292"
+      },
+      "event_count": 6,
+      "first_unix_seconds": 1792087785,
+      "last_unix_seconds": 1792087821,
+      "matching_error_container_events": []
+    }
+  ],
+  "schema_version": 1
+}

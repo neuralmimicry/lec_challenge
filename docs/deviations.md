@@ -1,5 +1,41 @@
 # Design decisions and departures
 
+## 16 October 2026 — repeatable original-assessment log audit
+
+The user requested a check of the newest logs against the original assessment.
+The new Rust `assessment-audit` command inspects the corpus, strict provider /
+dataset / checkpoint / gate evidence and historical drill/cost/delivery reports,
+retaining hashes and separating independent verification from observations.
+It cannot certify missing external evidence or invent an assessment score.
+A bounded parent stage-report reader preserves a verified child's original
+failure when no downstream report exists. This is a logging correction, not a
+new successful PID-control drill or permission to repeat a failed model output.
+Neither change alters the frozen design, source split, gate thresholds or
+historical experiments.
+
+## 16 October 2026 — additional native API connections
+
+The user requested OpenAI Codex, GCP Gemini and Anthropic Claude connectivity,
+missing-credential/failure handling and explicit token budgets. Native Rust
+Responses, generateContent (Developer API and Vertex) and Messages adapters now
+share the durable fleet transport/ledger. A separate general-inference command
+does not execute outputs or clear output-training rights. The original
+assessment's three independent rights-cleared acquisition businesses and
+promotion requirements remain unchanged. Optional cumulative token limits are
+additive to the original monetary reservations; legacy unknown token liabilities
+fail closed when a cap is introduced. Offline/cache preservation is now enforced
+before automatic pruning, including a fresh connectivity check per deletion.
+
+The user's subsequent terminal report exposed a missing local configuration
+step and ambiguous credential-only checks. Rust `provider-init` now publishes
+an explicitly chosen, priced, bounded inference profile without overwriting an
+existing file; readiness checks show disabled routes, absent prices/credentials
+and zero allowances. This setup does not change the frozen assessment roster,
+training rights or evaluation rules. The README uses an explicitly named
+Responses coding model and labels conservative configured-rate costs; provider
+aliases and account availability remain limitations. No new language exception
+or automatic model migration is introduced.
+
 ## 15 October 2026 — user-directed Rust implementation
 
 The assessment email allows any stack. The subsequent user instruction explicitly requires Rust throughout unless absolutely necessary and justified. This takes precedence over the prebuild pack's Python recommendation. The supervisor, provider clients, ledger, task language, trusted grader, curator, tensor training, statistics and HTTP serving are therefore Rust. Shell is limited to launching the compiled command and operating-system/container build instructions; TOML, JSON, Markdown and OCI recipes are data/documentation formats.

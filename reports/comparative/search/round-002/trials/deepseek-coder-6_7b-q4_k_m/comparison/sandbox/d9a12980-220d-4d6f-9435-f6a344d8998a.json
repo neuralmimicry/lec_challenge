@@ -1,0 +1,40 @@
+{
+  "run_id": "d9a12980-220d-4d6f-9435-f6a344d8998a",
+  "task_id": "dispatch.round_robin",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error: unknown start of token: `\n --> /candidate/main.rs:3:1\n  |\n3 | ```rust\n  | ^^^\n  |\n  = note: character appears 2 more times\nhelp: Unicode character '`' (Grave Accent) looks like ''' (Single Quote), but it is not\n  |\n3 - ```rust\n3 + '''rust\n  |\n\nerror: unknown start of token: `\n  --> /candidate/main.rs:25:1\n   |\n25 | ```\n   | ^^^\n   |\n   = note: character appears 2 more times\nhelp: Unicode character '`' (Grave Accent) looks like ''' (Single Quote), but it is not\n   |\n25 - ```\n25 + '''\n   |\n\nerror: prefix `job` is unknown\n  --> /candidate/main.rs:27:416\n   |\n27 | ... quantum and the remaining quantum is decreased by the job's work. This process is repeated until the quantum is fully assigned. ...\n   |                                                           ^^^ unknown prefix\n   |\n   = note: prefixed identifiers and literals are reserved since Rust 2021\nhelp: consider inserting whitespace here\n   |\n27 | This function first extracts the jobs and quantum from the input JSON. It then creates a vector of job indices and a vector of results, both of size equal to the number of jobs. It then enters a loop where it tries to assign the quantum to jobs. If a job has not been assigned yet and its work is less than or equal to the remaining quantum, it is assigned the quantum and the remaining quantum is decreased by the job 's work. This process is repeated until the quantum is fully assigned. Finally, it returns the vector of results as a JSON array.\n   |                                                                                                                                                                                                                                                                                                                                                                                                                                   +\n\nerror: expected one of `!` or `::`, found `is`\n --> /candidate/main.rs:1:6\n  |\n1 | Here is a Rust function that solves the problem:\n  |      ^^ expected one of `!` or `::`\n\nerror: aborting due to 4 previous errors\n\n"
+  ],
+  "cases_total": 5,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "7ddbc0b057c3c7fc7c833769d02c7b3bfdd30a47c98f67f68202d7667194267d",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/comparative/search/round-002/trials/deepseek-coder-6_7b-q4_k_m/comparison/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/comparative/search/round-002/trials/deepseek-coder-6_7b-q4_k_m/comparison/sandbox/d9a12980-220d-4d6f-9435-f6a344d8998a.audit.json",
+  "audit_sha256": "38c1217dd4655fd21bbd94cd5865d0a8f64d28eee36d4d2d86035a858ab67714",
+  "failure": "compilation failed: error: unknown start of token: `\n --> /candidate/main.rs:3:1\n  |\n3 | ```rust\n  | ^^^\n  |\n  = note: character appears 2 more times\nhelp: Unicode character '`' (Grave Accent) looks like ''' (Single Quote), but it is not\n  |\n3 - ```rust\n3 + '''rust\n  |\n\nerror: unknown start of token: `\n  --> /candidate/main.rs:25:1\n   |\n25 | ```\n   | ^^^\n   |\n   = note: character appears 2 more times\nhelp: Unicode character '`' (Grave Accent) looks like ''' (Single Quote), but it is not\n   |\n25 - ```\n25 + '''\n   |\n\nerror: prefix `job` is unknown\n  --> /candidate/main.rs:27:416\n   |\n27 | ... quantum and the remaining quantum is decreased by the job's work. This process is repeated until the quantum is fully assigned. ...\n   |                                                           ^^^ unknown prefix\n   |\n   = note: prefixed identifiers and literals are reserved since Rust 2021\nhelp: consider inserting whitespace here\n   |\n27 | This function first extracts the jobs and quantum from the input JSON. It then creates a vector of job indices and a vector of results, both of size equal to the number of jobs. It then enters a loop where it tries to assign the quantum to jobs. If a job has not been assigned yet and its work is less than or equal to the remaining quantum, it is assigned the quantum and the remaining quantum is decreased by the job 's work. This process is repeated until the quantum is fully assigned. Finally, it returns the vector of results as a JSON array.\n   |                                                                                                                                                                                                                                                                                                                                                                                                                                   +\n\nerror: expected one of `!` or `::`, found `is`\n --> /candidate/main.rs:1:6\n  |\n1 | Here is a Rust function that solves the problem:\n  |      ^^ expected one of `!` or `::`\n\nerror: aborting due to 4 previous errors\n\n",
+  "duration_ms": 37271,
+  "timeout_evidence": null,
+  "lifecycle_evidence": {
+    "receipt_path": "reports/comparative/search/round-002/trials/deepseek-coder-6_7b-q4_k_m/comparison/sandbox/d9a12980-220d-4d6f-9435-f6a344d8998a.lifecycle.json",
+    "receipt_sha256": "552b543f05c45f39a13e7d5f26de0b236c54be6011f68430b7fdc9faadf64883"
+  }
+}

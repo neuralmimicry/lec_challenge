@@ -178,7 +178,7 @@
         "evidence_kind": "synthetic_tensor_invariant_only_not_assessment_training",
         "frozen_base_sentinel_unchanged": true,
         "gradient_norm": 7.316696562585226,
-        "loss": 9.763630867004396,
+        "loss": 9.763630867004395,
         "sequence_tokens": 64,
         "supervised_tokens": 32,
         "trainable_parameters": 540672

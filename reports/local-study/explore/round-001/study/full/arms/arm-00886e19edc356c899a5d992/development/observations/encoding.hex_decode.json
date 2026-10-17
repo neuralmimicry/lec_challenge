@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "23183bfa90e4ec5f088260cbb0cdffc7321925e65ff2284b1086e4b85cbdf13e",
+  "task_id": "encoding.hex_decode",
+  "source_id": "private-encoding-v1",
+  "success": false,
+  "raw_generation": {
+    "path": "reports/local-study/explore/round-001/study/full/arms/arm-00886e19edc356c899a5d992/development/generations/encoding.hex_decode.json",
+    "sha256": "cae76bdd67cf59ff959dee0159353d207019d184ee5367630c71656b05323d16",
+    "bytes": 2002
+  },
+  "sandbox_report": {
+    "path": "reports/local-study/explore/round-001/study/full/arms/arm-00886e19edc356c899a5d992/development/sandbox/801e8a57-4c27-4035-9195-0013acf0e533.json",
+    "sha256": "c4fe8216d130e8fe8cc013264f2db9c9fe6b25420f4335d2b254f349e0947a74",
+    "bytes": 3010
+  },
+  "grading_error": null
+}

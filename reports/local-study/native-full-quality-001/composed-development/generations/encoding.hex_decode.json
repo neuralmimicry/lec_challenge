@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "c35802c4a512b17d77dd16b2e6ab7d80bbfdd14fe0c7590863f05918afeae367",
+  "task_id": "encoding.hex_decode",
+  "source_id": "private-encoding-v1",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an ASCII string. Decode even-length hexadecimal accepting upper/lowercase; return byte array, or null for invalid digits or odd length. The returned array may contain up to 128 items.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":\"00aF\",\"expected\":[0,175]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let str_input = input.as_str().unwrap();\n    let mut bytes = Vec::new();\n    let mut i = 0;\n    while i < str_input.len() {\n        let hex_char = str_input.chars().nth(i).unwrap();\n        let digit = match hex_char {\n            '0' => 0,\n            '1' => 1,\n            '2' => 2,\n            '3' => 3,\n            '4' => 4,\n            '5' => 5,\n            '6' => 6,\n            '7' => 7,\n            '8' => 8,\n            '9' => 9,\n            'A' => 10,\n            'B' => 11,\n            'C' => 12,\n            'D' => 13,\n            'E' => 14,\n            'F' => 15,\n            _ => 0,\n        };\n        if digit == 0 {\n            return Value::Null;\n        }\n        bytes.push(digit as i64);\n        i += 1;\n    }\n    Value::Array(bytes)\n}\n```",
+    "checkpoint_id": "2217a994f8b74ded1d52f30ef7add2cb190578e3d108168a85d1409160ad88c3",
+    "finish_reason": "stop",
+    "input_tokens": 248,
+    "output_tokens": 261,
+    "elapsed_ms": 14789,
+    "complete": true
+  },
+  "model_error": null
+}

@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "initial_plan": {
+    "path": "reports/local-study/explore/round-001/cohorts/76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c/rollouts/ledger.bounds/student-plan.json",
+    "sha256": "e375a05fbb4462fcab8cf85e6ea222c0aff8b27e014018e7ba777abc564c0098",
+    "bytes": 5136
+  },
+  "student_raw": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/ledger.bounds/student-raw.json",
+    "sha256": "6ff1a43f4f120d097bf5d56054bac1e6614e62b551f8b62f56f70139a41f82d3",
+    "bytes": 1740
+  },
+  "student_grade": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox/3edbfc60-eac4-4026-927a-cbb13b68dd20.json",
+    "sha256": "539617ed5704a2b006148466fa341ed140318518e85c8f76494f8e82555b3e86",
+    "bytes": 5140
+  },
+  "teacher_id": "student-self-f9523886352217de",
+  "teacher_assets": {
+    "path": "offline_bundle/base/assets.json",
+    "sha256": "54304e7f41519a4196674cba5e86593802f852b2b47882d6c19706f85f303ad4",
+    "bytes": 788
+  },
+  "teacher_checkpoint": null,
+  "runtime": {
+    "device": {
+      "cuda": {
+        "ordinal": 0
+      }
+    },
+    "dtype": "f32"
+  },
+  "request": {
+    "prompt": "Verified different training contract: Input is an integer array. Return inclusive prefix sums; empty input returns []. Bounds: length <=64 and absolute values <=10000.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nVerified solution:\n```rust\nuse serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    if let Value::Array(arr) = input {\n        let mut result = Vec::new();\n        let mut sum = 0;\n        for item in arr {\n            if let Value::Number(num) = item {\n                if let Some(n) = num.as_i64() {\n                    sum += n;\n                    result.push(Value::Number(serde_json::Number::from(sum)));\n                }\n            }\n        }\n        Value::Array(result)\n    } else {\n        Value::Array(vec![])\n    }\n}\n```\nNew task:\nWrite Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an integer array. Return [minimum,maximum], or null for an empty array.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[2,-4,8],\"expected\":[-4,8]}]\nActual frozen student candidate:\n```rust\nuse serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let numbers: Vec<i64> = input.as_array().unwrap_or_default();\n    if numbers.is_empty() {\n        return serde_json::Value::Null;\n    }\n\n    let min = numbers.iter().min().unwrap_or(&i64::MAX);\n    let max = numbers.iter().max().unwrap_or(&i64::MIN);\n\n    serde_json::Value::Array(vec![min, max])\n}\n```\nActual trusted tool feedback:\n{\"bounded_diagnostic_untrusted_data\":\"compilation failed: warning: unused import: `serde_json::Value`\\n --> /candidate/main.rs:1:5\\n  |\\n1 | use serde_json::Value;\\n  |     ^^^^^^^^^^^^^^^^^\\n  |\\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\\n\\nerror[E0277]: the trait bound `&Vec<Value>: Default` is not satisfied\\n --> /candidate/main.rs:4:46\\n  |\\n4 |     let numbers: Vec<i64> = input.as_array().unwrap_or_default();\\n  |                                              ^^^^^^^^^^^^^^^^^ the trait `Default` is not implemented for `&Vec<Value>`\\n  |\\nhelp: the trait `Default` is implemented for `Vec<T>`\\n --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/alloc/src/vec/mod.rs:4366:0\\nnote: required by a bound in `Option::<T>::unwrap_or_default`\\n --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/option.rs:1091:4\\n\\nerror[E0308]: mismatched types\\n --> /candidate/main.rs:4:29\\n  |\\n4 |     let numbers: Vec<i64> = input.as_array().unwrap_or_default();\\n  |                  --------   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `Vec<i64>`, found `&Vec<Value>`\\n  |                  |\\n  |                  expected due to this\\n  |\\n  = note: expected struct `Vec<i64>`\\n          found reference `&Vec<Value>`\\n\\nerror[E0308]: mismatched types\\n  --> /candidate/main.rs:12:35\\n   |\\n12 |     serde_json::Value::Array(vec![min, max])\\n   |                                   ^^^ expected `Value`, found `&i64`\\n\\nerror: aborting due to 3 previous errors; 1 warning emitted\\n\\nSome errors have detailed explanations: E0277, E0308.\\nFor more information about an error, try `rustc --explain E0277`.\\n\",\"cases_passed\":0,\"cases_total\":14,\"content_role\":\"compilation_feedback_only\",\"original_failure_is_not_a_success\":true,\"passed\":false,\"private_inputs_or_expected_outputs_exposed\":false,\"quarantined\":true,\"run_id\":\"3edbfc60-eac4-4026-927a-cbb13b68dd20\",\"student_generation_complete\":true,\"tool\":\"trusted_container_grader\",\"trace_complete\":false}\nCritique and revise the candidate. Put any short explanation in Rust // comments and return complete compilable Rust source only. Do not invent tool results.",
+    "max_new_tokens": 768,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "supporting_sample_ids": [
+    "e89aa62fc9a189c19a13370ba9410f99991e685167f68b4f7ce97f6a4c78f965"
+  ]
+}

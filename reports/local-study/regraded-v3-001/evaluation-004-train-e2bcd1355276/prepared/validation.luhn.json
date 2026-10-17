@@ -1,0 +1,42 @@
+{
+  "schema_version": 3,
+  "run_id": "3ec53e71-61fa-4063-beaf-f14c82441169",
+  "ownership_nonce": "5cfcc5c0-2a7d-41d1-a760-0ba59b9b3299",
+  "attempt_key": "377e1f2c05cbc9446670d9e173fa690ac324189d3be1c2ff4008be26c79a66da",
+  "receipt_path": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/prepared/validation.luhn.json",
+  "report_path": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/sandbox/3ec53e71-61fa-4063-beaf-f14c82441169.json",
+  "task": {
+    "id": "validation.luhn",
+    "source_id": "private-validation-v1",
+    "lineage_id": "local-contract-pack-05",
+    "split": "train",
+    "specification": "Input is an ASCII string. Return true iff it contains at least two decimal digits, no other characters, and passes the Luhn checksum (rightmost digit undoubled).\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "f83c8dc6d973b6ee63153560e72676584f890dcf3f889813a8f95f2cfc8cea46",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": "79927398713",
+        "expected": true
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "use serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let s = input.as_str().unwrap();\n    let mut num = 0;\n    let mut has_digit = false;\n    for c in s.chars() {\n        if c.is_digit(10) {\n            num = num * 10 + c.to_digit(10).unwrap() as i64;\n            has_digit = true;\n        }\n    }\n    if !has_digit {\n        return Value::Bool(false);\n    }\n    let mut sum = 0;\n    let mut has_odd = false;\n    for c in s.chars().rev() {\n        if c.is_digit(10) {\n            sum += c.to_digit(10).unwrap() as i64;\n            has_odd = true;\n        }\n    }\n    if !has_odd {\n        return Value::Bool(false);\n    }\n    let mut doubled = num;\n    while doubled > 0 {\n        let digit = doubled % 10;\n        doubled /= 10;\n        if digit % 2 == 0 {\n            sum += digit;\n        } else {\n            sum -= digit;\n        }\n    }\n    Value::Bool(sum % 10 == 0)\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/sandbox"
+  },
+  "code_sha256": "38788340d7c2aa1cba824f1e61c2e55263671958c641845bec1d78c9603a2968",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

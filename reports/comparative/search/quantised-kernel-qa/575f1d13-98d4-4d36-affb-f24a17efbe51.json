@@ -1,0 +1,31 @@
+{
+  "activation_dtype": "F32",
+  "actual_device": "Cuda { gpu_id: 0 }",
+  "assessment_model_or_quality_evidence": false,
+  "compared_logit_count": 256,
+  "cpu_logits_first_eight": [
+    -0.013484823517501354,
+    0.5883208513259888,
+    -0.0025579514913260937,
+    -0.004954836331307888,
+    -0.13147559762001038,
+    0.027262967079877853,
+    -0.036646902561187744,
+    0.11896277219057083
+  ],
+  "cuda_logits_first_eight": [
+    -0.013491727411746979,
+    0.5860215425491333,
+    -0.004689030349254608,
+    -0.002534443512558937,
+    -0.13114511966705322,
+    0.02438129484653473,
+    -0.032918110489845276,
+    0.11537963151931763
+  ],
+  "evidence_kind": "actual_native_cuda_Q4_GGUF_fixture_forward_compared_with_CPU",
+  "largest_absolute_logit_difference": 0.006194155663251877,
+  "matrix_weights_remain_quantised": true,
+  "nvidia_smi": "645885, /home/pbisaacs/Developer/neuralmimicry/lec_challenge/target/cuda/release/deps/lec_distil-5c0b804907cd1d3a, 172\n",
+  "process_id": 645885
+}

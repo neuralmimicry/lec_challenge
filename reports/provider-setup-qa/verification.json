@@ -1,0 +1,123 @@
+{
+  "schema": 1,
+  "observed_date": "2026-10-16",
+  "scope": "Rust provider setup, local readiness and CLI failure reporting",
+  "software_verification_passed": true,
+  "checks": [
+    {"command": "cargo test --locked --offline", "exit_code": 0, "passed": 333, "failed": 0, "ignored": 5, "log": "reports/provider-setup-qa/tests.log"},
+    {"command": "cargo clippy --locked --offline --all-targets -- -D warnings", "exit_code": 0, "log": "reports/provider-setup-qa/clippy.log"},
+    {"command": "cargo fmt --all -- --check", "exit_code": 0, "log": "reports/provider-setup-qa/format.log"},
+    {"command": "git diff --check", "exit_code": 0, "log": "reports/provider-setup-qa/whitespace.log"},
+    {"command": "cargo build --locked --offline --release", "exit_code": 0, "observed_build_seconds": 380, "log": "reports/provider-setup-qa/build.log"},
+    {"command": "sha256sum -c reports/provider-setup-qa/source-sha256.txt", "exit_code": 0, "log": "reports/provider-setup-qa/source-check.log"}
+  ],
+  "cli_observations": [
+    {
+      "case": "README provider-init command through ./run.sh",
+      "exit_code": 0,
+      "stdout": "reports/provider-setup-qa/initialise.json",
+      "stderr": "reports/provider-setup-qa/initialise.log",
+      "result": "Created state/api-providers.local.toml; exactly one enabled inference-only provider, all budget scopes bounded. Other disabled providers retain placeholders."
+    },
+    {
+      "case": "provider-check of shipped template",
+      "exit_code": 0,
+      "stdout": "reports/provider-setup-qa/template-check.json",
+      "result": "Structurally valid but locally unready: disabled providers, unresolved models, absent prices, zero money/token allowances. All four actual credentials absent."
+    },
+    {
+      "case": "./run.sh provider-check --config state/api-providers.local.toml",
+      "exit_code": 0,
+      "stdout": "reports/provider-setup-qa/local-check.json",
+      "stderr": "reports/provider-setup-qa/local-check.log",
+      "result": "OpenAI enabled with no configuration error. Its only local readiness blocker is the absent OPENAI_API_KEY. No HTTP."
+    },
+    {
+      "case": "--require-ready with OPENAI_API_KEY deliberately removed",
+      "label": "credential-absence injection",
+      "expected_exit_code": 1,
+      "observed_exit_code": 1,
+      "stdout": "reports/provider-setup-qa/ready-absent/stdout.json",
+      "failure_artifact": "reports/provider-setup-qa/ready-absent/reports/last-failure.json"
+    },
+    {
+      "case": "offline provider-request with a deliberately missing configuration path",
+      "label": "missing-file injection",
+      "expected_exit_code": 1,
+      "observed_exit_code": 1,
+      "stderr": "reports/provider-setup-qa/missing-config.stderr.log",
+      "failure_artifact": "reports/provider-setup-qa/missing-config/last-failure.json",
+      "result": "Error names the missing file, provider-init --help and same --config path requirement."
+    },
+    {
+      "case": "Original 256-token request shape with key deliberately removed and isolated state",
+      "label": "credential-absence injection; not a real provider call",
+      "expected_exit_code": 1,
+      "observed_exit_code": 1,
+      "stderr": "reports/provider-setup-qa/no-credential.stderr.log",
+      "request_report": "reports/provider-setup-qa/no-credential/reports/request.json",
+      "cost_report": "reports/provider-setup-qa/no-credential/reports/costs.json",
+      "observed_cost_rows": 0,
+      "result": "Explicit unavailable failure before reservation/dispatch; complete=false."
+    },
+    {
+      "case": "offline replay from a deliberately empty recording directory",
+      "label": "missing-evidence injection",
+      "expected_exit_code": 1,
+      "observed_exit_code": 1,
+      "stderr": "reports/provider-setup-qa/no-recording.stderr.log",
+      "failure_artifact": "reports/provider-setup-qa/no-recording/reports/last-failure.json",
+      "result": "Stopped before opening a ledger. No request/cost report is invented for this early loading failure."
+    },
+    {
+      "case": "reinitialisation of existing local file",
+      "expected_exit_code": 1,
+      "observed_exit_code": 1,
+      "stderr": "reports/provider-setup-qa/reinitialise/stderr.log",
+      "result": "Refused overwrite with File exists and actionable advice. Separate Rust invariants verify byte and symlink preservation."
+    }
+  ],
+  "local_profile": {
+    "path": "state/api-providers.local.toml",
+    "git_ignored": true,
+    "sha256": "c401a8e9f87d482e7f96f98e6517ac3a600f68966c03f4691f00006e913c798b",
+    "provider": "openai",
+    "model": "gpt-6.1-sol",
+    "model_revision": "provider alias gpt-6.1-sol; reviewed 2026-10-16; may change",
+    "inference_only": true,
+    "output_training_approved": false,
+    "usd_per_money_scope": "0.25",
+    "tokens_per_token_scope": 20000,
+    "max_input_tokens": 8192,
+    "max_output_tokens": 4096,
+    "maximum_per_call_reservation_usd": "0.06144",
+    "cost_basis": "Conservative configured-rate estimate: USD 2.50/million for both input categories covers documented cache-write rate; USD 10/million output. Not an invoice."
+  },
+  "official_documentation": [
+    {
+      "url": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+      "retrieved_sha256": "9e5e73873f373685042c7b7ecfffae91c056bd2ba508827c96d87f0de1b849d3",
+      "facts_used": "Low reasoning supported; Responses endpoint supported; short-context USD/million input 2, cached input 0.10, cache writes 2.50, output 10. Account access unverified."
+    },
+    {
+      "url": "https://developers.openai.com/api/docs/models/gpt-5.3-codex",
+      "retrieved_sha256": "8846e551ff87b270b225b89d2582d878220997f1b0b0d6c8e89e7f32e62a4753",
+      "facts_used": "Marked deprecated; not silently selected as a current default."
+    }
+  ],
+  "source_inventory": "reports/provider-setup-qa/source-sha256.txt",
+  "paid_api_calls": 0,
+  "new_api_spend_usd": "0.000000000",
+  "real_provider_access_verified": false,
+  "real_recording_or_model_created": false,
+  "pruning_performed": false,
+  "original_assessment_completed": false,
+  "limitations": [
+    "The user's shell reported a present OpenAI key; the agent's actual environment has none of the four provider credentials. No key value was requested, printed or persisted.",
+    "No live inference, account entitlement or successful greeting is claimed. Credentials must be exported in the launching shell.",
+    "The 2048-token documented request includes reasoning. Completeness is not guaranteed by a token limit; incomplete/empty/error responses remain failures.",
+    "Provider aliases can change, and prices/account terms require review before use.",
+    "Five intentional skips cover installed CUDA driver QA, the original tokeniser asset check and three OCI/container integration checks; no new container execution was required for this configuration change.",
+    "Fixture and injected-failure evidence does not satisfy absent real-provider assessment requirements."
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "error": "trusted audit/reference execution failed: Some(\"host wall-clock deadline exceeded; cleanup/kill evidence incomplete\")",
+  "evidence_kind": "incomplete_actual_sandbox_sigkill_qa",
+  "passed": false,
+  "schema_version": 1
+}

@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "a5b39d544c85b76111246b8fda40c638ce104251a1c56368277fef8fe4033eb6",
+  "task_id": "bits.parity",
+  "source_id": "private-bits-v1",
+  "success": true,
+  "raw_generation": {
+    "path": "reports/local-study/native-full-quality-001/sft-train/generations/bits.parity.json",
+    "sha256": "01f6575fc2e863cbcd71670036cbce773d9e0594842a23a094acfae7704a1c67",
+    "bytes": 1717
+  },
+  "sandbox_report": {
+    "path": "reports/local-study/native-full-quality-001/sft-train/sandbox/452cdf65-02ea-425e-a15c-5d7f5873c7a1.json",
+    "sha256": "c656a11317533e69227858b70ca1f5800ec96f9d86e85774b04b1410aef20486",
+    "bytes": 1351
+  },
+  "grading_error": null
+}

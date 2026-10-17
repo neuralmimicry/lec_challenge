@@ -1,0 +1,33 @@
+{
+  "run_id": "731490cd-b7fa-4b3d-aa5b-eea11fa3ab74",
+  "task_id": "tables.inner_join",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error[E0425]: cannot find value `key` in this scope\n  --> /candidate/main.rs:27:26\n   |\n27 |         result = json!([*key, *value, *left_value, *right_value]);\n   |                          ^^^ not found in this scope\n\nerror[E0425]: cannot find value `value` in this scope\n  --> /candidate/main.rs:27:32\n   |\n27 |         result = json!([*key, *value, *left_value, *right_value]);\n   |                                ^^^^^ not found in this scope\n\nerror[E0425]: cannot find value `left_value` in this scope\n  --> /candidate/main.rs:27:40\n   |\n27 |         result = json!([*key, *value, *left_value, *right_value]);\n   |                                        ^^^^^^^^^^ not found in this scope\n\nerror[E0425]: cannot find value `right_value` in this scope\n  --> /candidate/main.rs:27:53\n   |\n27 |         result = json!([*key, *value, *left_value, *right_value]);\n   |                                                     ^^^^^^^^^^^ not found in this scope\n\nerror[E0599]: no method named `iter` found for reference `&Value` in the current scope\n   --> /candidate/main.rs:12:33\n    |\n 12 |         for (key, value) in row.iter() {\n    |                                 ^^^^\n    |\nhelp: there is a method `pointer` with a similar name, but with different arguments\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:779:5\n    |\n779 |     pub fn pointer(&self, pointer: &str) -> Option<&Value> {\n    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\nerror: aborting due to 5 previous errors\n\nSome errors have detailed explanations: E0425, E0599.\nFor more information about an error, try `rustc --explain E0425`.\n"
+  ],
+  "cases_total": 5,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "0bf995b5f69865792503015f6af52b457c861b679877956e939c2137ddb4a562",
+  "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+  "oracle_sha256": "a734f6d465714cbebb072790fedff161d2fc28cbb257b3d04cee0feaf8b5b5fe",
+  "code_sha256": "2d6c65afb7eb917d579170a2e2bffb1926da2a7e50d4dcafd705ece7caf06ea2",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:1",
+    "expected_image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/comparative/control-development/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/comparative/control-development/sandbox/731490cd-b7fa-4b3d-aa5b-eea11fa3ab74.audit.json",
+  "audit_sha256": "66fe3914df7e5907675608992e94c6b2636088e86d326cab449d8c9c9b5b5305",
+  "failure": "compilation failed: error[E0425]: cannot find value `key` in this scope\n  --> /candidate/main.rs:27:26\n   |\n27 |         result = json!([*key, *value, *left_value, *right_value]);\n   |                          ^^^ not found in this scope\n\nerror[E0425]: cannot find value `value` in this scope\n  --> /candidate/main.rs:27:32\n   |\n27 |         result = json!([*key, *value, *left_value, *right_value]);\n   |                                ^^^^^ not found in this scope\n\nerror[E0425]: cannot find value `left_value` in this scope\n  --> /candidate/main.rs:27:40\n   |\n27 |         result = json!([*key, *value, *left_value, *right_value]);\n   |                                        ^^^^^^^^^^ not found in this scope\n\nerror[E0425]: cannot find value `right_value` in this scope\n  --> /candidate/main.rs:27:53\n   |\n27 |         result = json!([*key, *value, *left_value, *right_value]);\n   |                                                     ^^^^^^^^^^^ not found in this scope\n\nerror[E0599]: no method named `iter` found for reference `&Value` in the current scope\n   --> /candidate/main.rs:12:33\n    |\n 12 |         for (key, value) in row.iter() {\n    |                                 ^^^^\n    |\nhelp: there is a method `pointer` with a similar name, but with different arguments\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:779:5\n    |\n779 |     pub fn pointer(&self, pointer: &str) -> Option<&Value> {\n    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\nerror: aborting due to 5 previous errors\n\nSome errors have detailed explanations: E0425, E0599.\nFor more information about an error, try `rustc --explain E0425`.\n",
+  "duration_ms": 3141,
+  "timeout_evidence": null
+}

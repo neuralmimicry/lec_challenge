@@ -1,0 +1,42 @@
+{
+  "schema_version": 3,
+  "run_id": "67a8a1b2-de04-4c6a-b068-8b718ffd965f",
+  "ownership_nonce": "3f5de0cc-bad6-4919-88e7-ddc5df1898f6",
+  "attempt_key": "565544546166028617fb9c0e195a426f9fc35b459b2a1134b3198bad8d1b5ddf",
+  "receipt_path": "reports/local-study/regraded-v3-001/evaluation-005-train-2217a994f8b7/prepared/paths.basename.json",
+  "report_path": "reports/local-study/regraded-v3-001/evaluation-005-train-2217a994f8b7/sandbox/67a8a1b2-de04-4c6a-b068-8b718ffd965f.json",
+  "task": {
+    "id": "paths.basename",
+    "source_id": "private-paths-v1",
+    "lineage_id": "local-contract-pack-08",
+    "split": "train",
+    "specification": "Input is an absolute POSIX path. Ignore trailing slashes; return the last nonempty raw component, or / for root. Do not resolve . or ...\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "812cc46c866bb5250f1267527587c4967061612883928c558ba8257a3624c018",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": "/a/b///",
+        "expected": "b"
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "use serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let path = input.as_str().unwrap();\n    let mut parts = path.split('/');\n    let last_part = parts.last().unwrap_or(\"/\");\n    Value::from(last_part)\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/regraded-v3-001/evaluation-005-train-2217a994f8b7/sandbox"
+  },
+  "code_sha256": "efea07acc1c110ce2d1c60eda42bafdb8321653553a134a303bc583643c90426",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

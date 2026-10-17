@@ -1,0 +1,59 @@
+{
+  "schema_version": 3,
+  "run_id": "8758eb68-1997-451e-a829-4a32c5afadbf",
+  "ownership_nonce": "9ac84996-7d57-42fe-b1cd-375a83f26cc5",
+  "attempt_key": "923317a127b841117d9511935ef04915febc36901b2db3f27bef70428a4f4a0e",
+  "receipt_path": "reports/local-study/regraded-v3-001/evaluation-005-train-2217a994f8b7/prepared/sequences.zip_longest.json",
+  "report_path": "reports/local-study/regraded-v3-001/evaluation-005-train-2217a994f8b7/sandbox/8758eb68-1997-451e-a829-4a32c5afadbf.json",
+  "task": {
+    "id": "sequences.zip_longest",
+    "source_id": "private-sequences-v1",
+    "lineage_id": "local-contract-pack-09",
+    "split": "train",
+    "specification": "Input is [a,b], integer arrays. Return pairs by position, using null for a missing side, up to the longer length.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "a9d6bd2f5f38db050ac9cf606215a931bc2dc2805e6f17584649e0452571128b",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": [
+          [
+            1,
+            2
+          ],
+          [
+            9
+          ]
+        ],
+        "expected": [
+          [
+            1,
+            9
+          ],
+          [
+            2,
+            null
+          ]
+        ]
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "use serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let arr1 = input.as_array().unwrap();\n    let arr2 = input.as_array().unwrap();\n    let mut result = Vec::new();\n\n    let min_len = arr1.len().min(arr2.len());\n    for i in 0..min_len {\n        let a = arr1[i].as_i64().unwrap();\n        let b = arr2[i].as_i64().unwrap();\n        if a.is_none() || b.is_none() {\n            result.push(null);\n        } else {\n            result.push(Some(a.unwrap()));\n            result.push(Some(b.unwrap()));\n        }\n    }\n\n    Value::Array(result)\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/regraded-v3-001/evaluation-005-train-2217a994f8b7/sandbox"
+  },
+  "code_sha256": "aba005a4a60231942e44fa81f54265de3425b24feef8dedb5265195440a0678b",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

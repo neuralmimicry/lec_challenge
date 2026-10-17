@@ -1,0 +1,107 @@
+[
+  {
+    "actual_execution": {
+      "actual_device": "Cuda { gpu_id: 0 }",
+      "actual_dtype": "F16",
+      "checkpoint_id": "f55217be716b6a997b97b9d8d7eb6fad02e00858f5010ec24f64603c3a98a0e8",
+      "context_cap": 2048,
+      "cpu_fallback": false,
+      "cuda_active": true,
+      "cuda_feature_compiled": true,
+      "engine": "native_rust_candle",
+      "model_id": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+      "requested": {
+        "device": {
+          "cuda": {
+            "ordinal": 0
+          }
+        },
+        "dtype": "f16"
+      },
+      "revision": "31b70e2e869a7173562077fd711b654946d38674"
+    },
+    "after_loading": {
+      "compute_processes": {
+        "csv": "634272, target/cuda/release/lec-distil, 3676\n",
+        "observed_unix_ms": 1792073080015
+      },
+      "gpu": {
+        "csv": "0, NVIDIA GeForce RTX 2080, 595.91.07, 8192, 3966, 20\n",
+        "observed_unix_ms": 1792073079995
+      }
+    },
+    "before_loading": {
+      "compute_processes": {
+        "csv": "",
+        "observed_unix_ms": 1792073038207
+      },
+      "gpu": {
+        "csv": "0, NVIDIA GeForce RTX 2080, 595.91.07, 8192, 288, 27\n",
+        "observed_unix_ms": 1792073038177
+      }
+    },
+    "event": "model_loading",
+    "loading_error": null,
+    "model": "smollm2-1_7b",
+    "plan_sha256": "b2e46b0f4ac46ecbb1b6568e9669ef5157b8a6343802f749cfac8ae999e29d88",
+    "requested_runtime": {
+      "device": {
+        "cuda": {
+          "ordinal": 0
+        }
+      },
+      "dtype": "f16"
+    }
+  },
+  {
+    "actual_execution": {
+      "actual_device": "Cuda { gpu_id: 0 }",
+      "actual_dtype": "F16",
+      "checkpoint_id": "f55217be716b6a997b97b9d8d7eb6fad02e00858f5010ec24f64603c3a98a0e8",
+      "context_cap": 2048,
+      "cpu_fallback": false,
+      "cuda_active": true,
+      "cuda_feature_compiled": true,
+      "engine": "native_rust_candle",
+      "model_id": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+      "requested": {
+        "device": {
+          "cuda": {
+            "ordinal": 0
+          }
+        },
+        "dtype": "f16"
+      },
+      "revision": "31b70e2e869a7173562077fd711b654946d38674"
+    },
+    "after_generation": {
+      "compute_processes": {
+        "csv": "634272, target/cuda/release/lec-distil, 3694\n",
+        "observed_unix_ms": 1792073358396
+      },
+      "gpu": {
+        "csv": "0, NVIDIA GeForce RTX 2080, 595.91.07, 8192, 3966, 2\n",
+        "observed_unix_ms": 1792073358340
+      }
+    },
+    "event": "model_generation_complete",
+    "model": "smollm2-1_7b",
+    "plan_sha256": "b2e46b0f4ac46ecbb1b6568e9669ef5157b8a6343802f749cfac8ae999e29d88"
+  },
+  {
+    "after_release": {
+      "compute_processes": {
+        "csv": "634272, target/cuda/release/lec-distil, 132\n",
+        "observed_unix_ms": 1792073359143
+      },
+      "gpu": {
+        "csv": "0, NVIDIA GeForce RTX 2080, 595.91.07, 8192, 404, 2\n",
+        "observed_unix_ms": 1792073359081
+      }
+    },
+    "event": "model_released",
+    "model": "smollm2-1_7b",
+    "plan_sha256": "b2e46b0f4ac46ecbb1b6568e9669ef5157b8a6343802f749cfac8ae999e29d88",
+    "synchronized_before_release": true
+  }
+]

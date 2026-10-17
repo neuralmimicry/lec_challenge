@@ -1,0 +1,40 @@
+{
+  "run_id": "ac4c3af3-12c6-477e-acae-03a794a5b6ea",
+  "task_id": "graph.distance",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error[E0308]: mismatched types\n --> /candidate/main.rs:8:35\n  |\n8 |     let mut dist = vec![i64::MAX; n];\n  |                    ---------------^-\n  |                    |              |\n  |                    |              expected `usize`, found `u64`\n  |                    arguments to this function are incorrect\n  |\nnote: function defined here\n --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/alloc/src/vec/mod.rs:3772:7\nhelp: you can convert a `u64` to a `usize` and panic if the converted value doesn't fit\n  |\n8 |     let mut dist = vec![i64::MAX; n.try_into().unwrap()];\n  |                                    ++++++++++++++++++++\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0308`.\n"
+  ],
+  "cases_total": 6,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "3678f162913a3974d5c2dfa78fed2f51197cf4652e34554143e024b68c6c370d",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/regraded-v3-001/evaluation-005-train-2217a994f8b7/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/regraded-v3-001/evaluation-005-train-2217a994f8b7/sandbox/ac4c3af3-12c6-477e-acae-03a794a5b6ea.audit.json",
+  "audit_sha256": "8f211bd1e9dd2d36911ac3bd14042ddfa1cc2aa9fe66a1ff8aa500294f070de7",
+  "failure": "compilation failed: error[E0308]: mismatched types\n --> /candidate/main.rs:8:35\n  |\n8 |     let mut dist = vec![i64::MAX; n];\n  |                    ---------------^-\n  |                    |              |\n  |                    |              expected `usize`, found `u64`\n  |                    arguments to this function are incorrect\n  |\nnote: function defined here\n --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/alloc/src/vec/mod.rs:3772:7\nhelp: you can convert a `u64` to a `usize` and panic if the converted value doesn't fit\n  |\n8 |     let mut dist = vec![i64::MAX; n.try_into().unwrap()];\n  |                                    ++++++++++++++++++++\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0308`.\n",
+  "duration_ms": 14258,
+  "timeout_evidence": null,
+  "lifecycle_evidence": {
+    "receipt_path": "reports/local-study/regraded-v3-001/evaluation-005-train-2217a994f8b7/sandbox/ac4c3af3-12c6-477e-acae-03a794a5b6ea.lifecycle.json",
+    "receipt_sha256": "056262d32af2282361f9d35b53c6d4ebd8c3e8d45bce242aaf29ec9746a86bd5"
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "architecture": "x86_64",
+  "arguments": [
+    "build",
+    "--pull=never",
+    "--network=none",
+    "--build-arg",
+    "LEC_SANDBOX_BASE=08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+    "-f",
+    "sandbox/Containerfile.v3",
+    "-t",
+    "localhost/lec-rust-sandbox:3-x86_64",
+    "."
+  ],
+  "cached_parent_image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+  "cached_parent_manifest": "./offline_bundle/images/manifest.json",
+  "containerfile_sha256": "e63bf3724ce91583ed75ee23cf3df3dfa595c34cca72191d98ebc0c350967fa0",
+  "controller_version": 3,
+  "duration_ms": 6910,
+  "exit_code": 0,
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "network": "none",
+  "parent_provenance": {
+    "acquisition": "Explicit local online bootstrap; no provider calls",
+    "archive": "lec-rust-sandbox.tar",
+    "asset_kind": "oci_archive",
+    "base_image": "docker.io/library/rust@sha256:b36c246742b4d323472588f789601be34eb4af053255e2af53969078ee8dcec7",
+    "bytes": 606179328,
+    "containerfile_sha256": "967394529f4533dbc28d3bf4b635a1439f3c7b520d5d956276a4f8264294a5f7",
+    "dependency_lock_sha256": "16ed3e7e022847b26d2295f0c93bfc3e3344df9654b4ca34a4bf89c00bb0990b",
+    "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+    "licences": {
+      "additional_locked_crates": "See LICENCES.md and upstream Cargo package notices preserved in the image",
+      "debian_packages": "Multiple package licences; /usr/share/doc/*/copyright retained in the OCI root filesystem",
+      "itoa": "MIT OR Apache-2.0",
+      "local_supervisor_and_probe": "Apache-2.0",
+      "memchr": "Unlicense OR MIT",
+      "rust_toolchain": "Apache-2.0 OR MIT, plus upstream third-party notices retained in image",
+      "serde_core": "MIT OR Apache-2.0",
+      "serde_json": "MIT OR Apache-2.0",
+      "zmij": "MIT"
+    },
+    "offline_load": "podman load --input offline_bundle/images/lec-rust-sandbox.tar",
+    "schema_version": 1,
+    "sha256": "b170706ddbdf9ef9c7cec0868c61c0d834c3e50272ec6be50720071676e4bf4b",
+    "verification": "Check archive SHA-256 before load, then require exact image ID and execute enforcement preflight"
+  },
+  "policy_version": 3,
+  "pull": "never",
+  "schema_version": 3,
+  "source": "explicit cached image build; no registry or package fallback"
+}

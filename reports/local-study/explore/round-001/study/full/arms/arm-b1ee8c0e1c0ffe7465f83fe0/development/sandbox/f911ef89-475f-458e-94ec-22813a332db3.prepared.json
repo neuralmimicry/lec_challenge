@@ -1,0 +1,59 @@
+{
+  "schema_version": 3,
+  "run_id": "7ae852fa-3d99-42c7-9960-49cd9ad9da5f",
+  "ownership_nonce": "2b43d281-8b61-4485-990a-ec8c91ed1fe9",
+  "attempt_key": "f911ef89-475f-458e-94ec-22813a332db3",
+  "receipt_path": "reports/local-study/explore/round-001/study/full/arms/arm-b1ee8c0e1c0ffe7465f83fe0/development/sandbox/f911ef89-475f-458e-94ec-22813a332db3.prepared.json",
+  "report_path": "reports/local-study/explore/round-001/study/full/arms/arm-b1ee8c0e1c0ffe7465f83fe0/development/sandbox/7ae852fa-3d99-42c7-9960-49cd9ad9da5f.json",
+  "task": {
+    "id": "dispatch.priority",
+    "source_id": "private-dispatch-v1",
+    "lineage_id": "local-contract-pack-13",
+    "split": "development",
+    "specification": "Input is an array of [priority,id] integer pairs with unique ids. Return ids sorted by decreasing priority, with increasing id on ties.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "fe12d97428801ef000ddf3a459ad82ad8f7812a5fb888ab3e6b35444d33a7856",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": [
+          [
+            2,
+            7
+          ],
+          [
+            3,
+            8
+          ],
+          [
+            2,
+            1
+          ]
+        ],
+        "expected": [
+          8,
+          1,
+          7
+        ]
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "use serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let data = input.as_array().unwrap();\n    let mut ids = Vec::new();\n    for pair in data {\n        let priority = pair[0].as_i64().unwrap();\n        let id = pair[1].as_i64().unwrap();\n        ids.push(id);\n    }\n    ids.sort_by(|a, b| b.cmp(a));\n    ids.into()\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/explore/round-001/study/full/arms/arm-b1ee8c0e1c0ffe7465f83fe0/development/sandbox"
+  },
+  "code_sha256": "b8b3428217f8cd068b5bc1d53499981e7fff3e93f6d98f1663988eef4d83d8fb",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

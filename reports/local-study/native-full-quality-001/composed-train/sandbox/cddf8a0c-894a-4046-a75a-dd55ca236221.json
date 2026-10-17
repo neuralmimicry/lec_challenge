@@ -1,0 +1,34 @@
+{
+  "run_id": "cddf8a0c-894a-4046-a75a-dd55ca236221",
+  "task_id": "search.occurrences",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error[E0277]: the type `str` cannot be indexed by `usize`\n  --> /candidate/main.rs:10:25\n   |\n10 |         if c == pattern[pos] {\n   |                         ^^^ string indices are ranges of `usize`\n   |\n   = help: the trait `SliceIndex<str>` is not implemented for `usize`\nhelp: `usize` implements trait `SliceIndex<T>`\n  --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/slice/index.rs:179:0\n   |\n   = note: `SliceIndex<[T]>`\n  --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/bstr/traits.rs:197:0\n   |\n   = note: `SliceIndex<ByteStr>`\n   = note: required for `str` to implement `std::ops::Index<usize>`\n\nerror[E0308]: mismatched types\n   --> /candidate/main.rs:21:18\n    |\n 14 |                 result.push(start);\n    |                 ------      ----- this argument has type `{integer}`...\n    |                 |\n    |                 ... which causes `result` to have type `Vec<usize>`\n...\n 21 |     Value::Array(result)\n    |     ------------ ^^^^^^ expected `Vec<Value>`, found `Vec<usize>`\n    |     |\n    |     arguments to this enum variant are incorrect\n    |\n    = note: expected struct `Vec<Value>`\n               found struct `Vec<usize>`\nnote: tuple variant defined here\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:160:5\n    |\n160 |     Array(Vec<Value>),\n    |     ^^^^^\n\nerror: aborting due to 2 previous errors\n\nSome errors have detailed explanations: E0277, E0308.\nFor more information about an error, try `rustc --explain E0277`.\n"
+  ],
+  "cases_total": 6,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "4b2556745b303526f354ded7f2c473b77f6da0c99a77f0a493c7272a8d800aac",
+  "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "fff2ae39623e698ff42b7430076112139d081bf04c4229ef9cbdd671d784b909",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "controller_version": 2,
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:1",
+    "expected_image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/native-full-quality-001/composed-train/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/native-full-quality-001/composed-train/sandbox/cddf8a0c-894a-4046-a75a-dd55ca236221.audit.json",
+  "audit_sha256": "7e012fb94d6024cd1a72dcbac175cd07ccf9bd4bb3246933760853692c1ce008",
+  "failure": "compilation failed: error[E0277]: the type `str` cannot be indexed by `usize`\n  --> /candidate/main.rs:10:25\n   |\n10 |         if c == pattern[pos] {\n   |                         ^^^ string indices are ranges of `usize`\n   |\n   = help: the trait `SliceIndex<str>` is not implemented for `usize`\nhelp: `usize` implements trait `SliceIndex<T>`\n  --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/slice/index.rs:179:0\n   |\n   = note: `SliceIndex<[T]>`\n  --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/bstr/traits.rs:197:0\n   |\n   = note: `SliceIndex<ByteStr>`\n   = note: required for `str` to implement `std::ops::Index<usize>`\n\nerror[E0308]: mismatched types\n   --> /candidate/main.rs:21:18\n    |\n 14 |                 result.push(start);\n    |                 ------      ----- this argument has type `{integer}`...\n    |                 |\n    |                 ... which causes `result` to have type `Vec<usize>`\n...\n 21 |     Value::Array(result)\n    |     ------------ ^^^^^^ expected `Vec<Value>`, found `Vec<usize>`\n    |     |\n    |     arguments to this enum variant are incorrect\n    |\n    = note: expected struct `Vec<Value>`\n               found struct `Vec<usize>`\nnote: tuple variant defined here\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:160:5\n    |\n160 |     Array(Vec<Value>),\n    |     ^^^^^\n\nerror: aborting due to 2 previous errors\n\nSome errors have detailed explanations: E0277, E0308.\nFor more information about an error, try `rustc --explain E0277`.\n",
+  "duration_ms": 1656,
+  "timeout_evidence": null
+}

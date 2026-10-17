@@ -1,0 +1,59 @@
+{
+  "schema_version": 3,
+  "run_id": "5c9027f6-dc78-4fbe-98ec-d412f6dded8f",
+  "ownership_nonce": "82f89294-0f24-4b51-8722-8862cb3994a9",
+  "attempt_key": "c89cc74b-865c-4dfc-aabf-b68e8eed0f5c",
+  "receipt_path": "reports/comparative/search/round-002/trials/deepseek-coder-6_7b-q4_k_m/comparison/sandbox/c89cc74b-865c-4dfc-aabf-b68e8eed0f5c.prepared.json",
+  "report_path": "reports/comparative/search/round-002/trials/deepseek-coder-6_7b-q4_k_m/comparison/sandbox/5c9027f6-dc78-4fbe-98ec-d412f6dded8f.json",
+  "task": {
+    "id": "dispatch.priority",
+    "source_id": "private-dispatch-v1",
+    "lineage_id": "local-contract-pack-13",
+    "split": "development",
+    "specification": "Input is an array of [priority,id] integer pairs with unique ids. Return ids sorted by decreasing priority, with increasing id on ties.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "fe12d97428801ef000ddf3a459ad82ad8f7812a5fb888ab3e6b35444d33a7856",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": [
+          [
+            2,
+            7
+          ],
+          [
+            3,
+            8
+          ],
+          [
+            2,
+            1
+          ]
+        ],
+        "expected": [
+          8,
+          1,
+          7
+        ]
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "Here is the Rust code that solves the problem:\n\n```rust\nuse serde_json::Value;\nuse serde_json::Error;\n\npub fn solve(input: Value) -> Result<Value, Error> {\n    let mut data: Vec<(i64, i64)> = input.as_array()?\n        .iter()\n        .map(|item| {\n            let array = item.as_array()?;\n            (array[0].as_i64()?, array[1].as_i64()?)\n        })\n        .collect();\n\n    data.sort_by_key(|k| (-k.0, k.1));\n\n    let result: Vec<Value> = data.iter().map(|(_, id)| Value::Number(serde_json::Number::from(*id))).collect();\n\n    Ok(Value::Array(result))\n}\n```\n\nThis function takes a `serde_json::Value` as input, which is expected to be an array of arrays of two numbers. It converts these into tuples of `i64`, sorts them by the first element in descending order, and then by the second element in ascending order. It then converts these back into `serde_json::Value`s and returns them as an array.\n\nPlease note that this code assumes that the input is always valid and does not handle any potential errors. In a production environment, you would want to add error handling to ensure that the input is always valid and handle any potential errors that may occur.",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/comparative/search/round-002/trials/deepseek-coder-6_7b-q4_k_m/comparison/sandbox"
+  },
+  "code_sha256": "c1b439378d7b919ce2a8617cd02d139d5d969e250e870a3a15d79742f82fd658",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

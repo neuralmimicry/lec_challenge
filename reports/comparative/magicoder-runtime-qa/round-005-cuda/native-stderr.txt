@@ -1,0 +1,6 @@
+execution: CUDA GPU NVIDIA GeForce RTX 2080 selected: estimated resident 5992343424 bytes fits guarded free VRAM 6929514496 bytes; available CPU threads=16, usable RAM=25562512180 bytes
+Hub hashing magicoder-s-ds-6.7b.Q4_K_M.gguf: 0/4082886528 bytes, 0.00 MiB/s, ETA unknown (publisher checksum pending)
+Hub hashing magicoder-s-ds-6.7b.Q4_K_M.gguf: 1373634560/4082886528 bytes, 87.27 MiB/s, ETA 00:00:30 (publisher checksum pending)
+Hub hashing magicoder-s-ds-6.7b.Q4_K_M.gguf: 2679111680/4082886528 bytes, 85.14 MiB/s, ETA 00:00:16 (publisher checksum pending)
+Hub hashing magicoder-s-ds-6.7b.Q4_K_M.gguf: 3961520128/4082886528 bytes, 83.93 MiB/s, ETA 00:00:02 (publisher checksum pending)
+serving: immutable model listening at http://127.0.0.1:34643

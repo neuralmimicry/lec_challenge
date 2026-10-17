@@ -1,0 +1,33 @@
+{
+  "run_id": "01c1c0c2-6743-4c51-8ad0-2233249846b4",
+  "task_id": "money.basket",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error[E0283]: type annotations needed\n --> /candidate/main.rs:5:9\n  |\n5 |     let total_cents = input_array.iter().map(|item| item[0] * item[1]).sum();\n  |         ^^^^^^^^^^^                                                    --- type must be known at this point\n  |\n  = note: the type must implement `Sum<i64>`\nhelp: the trait `Sum` is implemented for `i64`\n --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/iter/traits/accum.rs:50:8\n ::: /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/iter/traits/accum.rs:206:0\n  |\n  = note: in this macro invocation\nnote: required by a bound in `std::iter::Iterator::sum`\n --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/iter/traits/iterator.rs:3665:4\n  = note: this error originates in the macro `integer_sum_product` (in Nightly builds, run with -Z macro-backtrace for more info)\nhelp: consider giving `total_cents` an explicit type, where the type for type parameter `S` is specified\n  |\n5 |     let total_cents: i64 = input_array.iter().map(|item| item[0] * item[1]).sum();\n  |                    +++++\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0283`.\n"
+  ],
+  "cases_total": 5,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "0bf995b5f69865792503015f6af52b457c861b679877956e939c2137ddb4a562",
+  "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+  "oracle_sha256": "a734f6d465714cbebb072790fedff161d2fc28cbb257b3d04cee0feaf8b5b5fe",
+  "code_sha256": "75734f12c531b94b16488f291e06e105ba57873a6ba5333e461b2d3f35c780ac",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:1",
+    "expected_image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/comparative/coding-development/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/comparative/coding-development/sandbox/01c1c0c2-6743-4c51-8ad0-2233249846b4.audit.json",
+  "audit_sha256": "258e909123209bd84445d7dc6f9b5292c0ee383488ee161bff83f19c32094679",
+  "failure": "compilation failed: error[E0283]: type annotations needed\n --> /candidate/main.rs:5:9\n  |\n5 |     let total_cents = input_array.iter().map(|item| item[0] * item[1]).sum();\n  |         ^^^^^^^^^^^                                                    --- type must be known at this point\n  |\n  = note: the type must implement `Sum<i64>`\nhelp: the trait `Sum` is implemented for `i64`\n --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/iter/traits/accum.rs:50:8\n ::: /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/iter/traits/accum.rs:206:0\n  |\n  = note: in this macro invocation\nnote: required by a bound in `std::iter::Iterator::sum`\n --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/iter/traits/iterator.rs:3665:4\n  = note: this error originates in the macro `integer_sum_product` (in Nightly builds, run with -Z macro-backtrace for more info)\nhelp: consider giving `total_cents` an explicit type, where the type for type parameter `S` is specified\n  |\n5 |     let total_cents: i64 = input_array.iter().map(|item| item[0] * item[1]).sum();\n  |                    +++++\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0283`.\n",
+  "duration_ms": 12211,
+  "timeout_evidence": null
+}

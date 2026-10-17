@@ -1,0 +1,40 @@
+{
+  "run_id": "380d34c9-f8d2-4d58-8e6b-2ee824480500",
+  "task_id": "dispatch.finish_order",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: warning: unused import: `serde_json::Value`\n --> /candidate/main.rs:1:5\n  |\n1 | use serde_json::Value;\n  |     ^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0308]: mismatched types\n --> /candidate/main.rs:8:13\n  |\n8 |         let (arrival, duration) = line.as_array().unwrap();\n  |             ^^^^^^^^^^^^^^^^^^^   ------------------------ this expression has type `&[Value; _]`\n  |             |\n  |             expected `[Value; _]`, found `(_, _)`\n  |\n  = note: expected array `[Value; _]`\n             found tuple `(_, _)`\n\nerror[E0308]: mismatched types\n   --> /candidate/main.rs:17:30\n    |\n 12 |             finish_times.push(finish);\n    |             ------------      ------ this argument has type `{integer}`...\n    |             |\n    |             ... which causes `finish_times` to have type `Vec<{integer}>`\n...\n 17 |     serde_json::Value::Array(finish_times)\n    |     ------------------------ ^^^^^^^^^^^^ expected `Vec<Value>`, found `Vec<{integer}>`\n    |     |\n    |     arguments to this enum variant are incorrect\n    |\n    = note: expected struct `Vec<Value>`\n               found struct `Vec<{integer}>`\nnote: tuple variant defined here\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:160:5\n    |\n160 |     Array(Vec<Value>),\n    |     ^^^^^\n\nerror: aborting due to 2 previous errors; 1 warning emitted\n\nFor more information about this error, try `rustc --explain E0308`.\n"
+  ],
+  "cases_total": 5,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "bc749019af8cfd65399afa674077a598748e1773a34bbe0a6ebab71f91251071",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/explore/round-001/study/quick/arms/arm-d81f55ca66908cb5884d507c/development/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/explore/round-001/study/quick/arms/arm-d81f55ca66908cb5884d507c/development/sandbox/380d34c9-f8d2-4d58-8e6b-2ee824480500.audit.json",
+  "audit_sha256": "1b49d319c4cc330f5c84cbcac7d05c781a173173cd366ce75ec9106178bd74a1",
+  "failure": "compilation failed: warning: unused import: `serde_json::Value`\n --> /candidate/main.rs:1:5\n  |\n1 | use serde_json::Value;\n  |     ^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0308]: mismatched types\n --> /candidate/main.rs:8:13\n  |\n8 |         let (arrival, duration) = line.as_array().unwrap();\n  |             ^^^^^^^^^^^^^^^^^^^   ------------------------ this expression has type `&[Value; _]`\n  |             |\n  |             expected `[Value; _]`, found `(_, _)`\n  |\n  = note: expected array `[Value; _]`\n             found tuple `(_, _)`\n\nerror[E0308]: mismatched types\n   --> /candidate/main.rs:17:30\n    |\n 12 |             finish_times.push(finish);\n    |             ------------      ------ this argument has type `{integer}`...\n    |             |\n    |             ... which causes `finish_times` to have type `Vec<{integer}>`\n...\n 17 |     serde_json::Value::Array(finish_times)\n    |     ------------------------ ^^^^^^^^^^^^ expected `Vec<Value>`, found `Vec<{integer}>`\n    |     |\n    |     arguments to this enum variant are incorrect\n    |\n    = note: expected struct `Vec<Value>`\n               found struct `Vec<{integer}>`\nnote: tuple variant defined here\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:160:5\n    |\n160 |     Array(Vec<Value>),\n    |     ^^^^^\n\nerror: aborting due to 2 previous errors; 1 warning emitted\n\nFor more information about this error, try `rustc --explain E0308`.\n",
+  "duration_ms": 13580,
+  "timeout_evidence": null,
+  "lifecycle_evidence": {
+    "receipt_path": "reports/local-study/explore/round-001/study/quick/arms/arm-d81f55ca66908cb5884d507c/development/sandbox/380d34c9-f8d2-4d58-8e6b-2ee824480500.lifecycle.json",
+    "receipt_sha256": "5d8c2986be672c11f9e7460d4c7eea5477145c5755d615e5134335afed0ae93b"
+  }
+}

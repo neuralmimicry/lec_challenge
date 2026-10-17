@@ -8,7 +8,7 @@
     },
     {
       "evidence": {
-        "corpus_sha256": "a52104fe09a8bba2a4a1834d101404f6b6a6e2fb224897961615e3dc251a92d1",
+        "corpus_sha256": "ef22dae601785f5d022e4e02c83ee2d8a3fdc4c28750ca067c44b552dca7c13e",
         "development": 16,
         "held_out": 32,
         "sources": 24,
@@ -27,13 +27,13 @@
       "error": null,
       "evidence": {
         "checkpoint_id": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
-        "elapsed_seconds": 12.57084144,
+        "elapsed_seconds": 12.625765006,
         "evidence_kind": "actual_immutable_local_endpoint_smoke",
         "generation": {
           "checkpoint_id": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
           "complete": true,
           "completion": "```rust\nfn add(a: i64, b: i64) -> i64 {\n    a + b\n}\n```",
-          "elapsed_ms": 5032,
+          "elapsed_ms": 4476,
           "finish_reason": "stop",
           "input_tokens": 57,
           "output_tokens": 29
@@ -42,12 +42,34 @@
           "base_revision": "ea3f2471cf1b1f0db85067f1ef93848e38e88c25",
           "checkpoint_id": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
           "checksum_validated": true,
+          "execution": {
+            "actual_device": "Cpu",
+            "actual_dtype": "F32",
+            "asset_lifetime_shared_lease": false,
+            "available_cpu_threads": 16,
+            "candle_cpu_threads": 16,
+            "checkpoint_id": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+            "context_cap": 4096,
+            "cpu_fallback": false,
+            "cuda_active": false,
+            "cuda_feature_compiled": false,
+            "engine": "native_rust_candle",
+            "model_id": "Qwen/Qwen2.5-Coder-0.5B-Instruct",
+            "quantisation": null,
+            "requested": {
+              "device": "cpu",
+              "dtype": "f32"
+            },
+            "revision": "ea3f2471cf1b1f0db85067f1ef93848e38e88c25",
+            "weight_format": "safetensors"
+          },
           "healthy": true,
           "immutable": true,
           "inference_smoke_output": "Certainly",
           "model_id": "Qwen/Qwen2.5-Coder-0.5B-Instruct",
+          "process_id": 1574690,
           "production_eligible": true,
-          "smoke_elapsed_ms": 320,
+          "smoke_elapsed_ms": 308,
           "tokenizer_sha256": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539"
         },
         "log": "reports/base-endpoint.log",
@@ -57,9 +79,9 @@
       "status": "complete"
     },
     {
-      "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+      "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
       "phase": "offline_container_image",
-      "policy_sha256": "0bf995b5f69865792503015f6af52b457c861b679877956e939c2137ddb4a562",
+      "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
       "status": "verified_existing"
     },
     {

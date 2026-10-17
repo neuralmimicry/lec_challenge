@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "23183bfa90e4ec5f088260cbb0cdffc7321925e65ff2284b1086e4b85cbdf13e",
+  "task_id": "money.split",
+  "source_id": "private-money-v1",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input [cents,n] has nonnegative cents and n>=1. Split into n integer shares differing by at most one, with larger shares first. The number of shares is at most 64.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[10,3],\"expected\":[4,3,3]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let cents = input.as_i64().unwrap();\n    let n = input.as_i64().unwrap();\n    let mut shares = Vec::new();\n\n    for _ in 0..n {\n        let share = cents / n;\n        shares.push(share);\n        cents %= n;\n    }\n\n    Value::Array(shares)\n}\n```",
+    "checkpoint_id": "6e07fcdaa532adbc1916fa0a8ff21187e2eff3b2ead31205d6d48ec239f465d4",
+    "finish_reason": "stop",
+    "input_tokens": 247,
+    "output_tokens": 91,
+    "elapsed_ms": 16470,
+    "complete": true
+  },
+  "model_error": null
+}

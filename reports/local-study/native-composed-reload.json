@@ -1,0 +1,36 @@
+{
+  "checkpoint_sha256": "b71e448fd3e298f226aa6ba121d89ee8551e3b9e86374d5330269d7c97207511",
+  "engine_sha256": "af675af8e54beb9ddc672d13bb860aec4175d7071b43fe9345af8c4ba9bbf182",
+  "evidence_kind": "actual_fresh_process_checkpoint_reload",
+  "execution": {
+    "actual_device": "Cpu",
+    "actual_dtype": "F32",
+    "asset_lifetime_shared_lease": false,
+    "available_cpu_threads": 16,
+    "candle_cpu_threads": 16,
+    "checkpoint_id": "b71e448fd3e298f226aa6ba121d89ee8551e3b9e86374d5330269d7c97207511",
+    "context_cap": 4096,
+    "cpu_fallback": false,
+    "cuda_active": false,
+    "cuda_feature_compiled": false,
+    "engine": "native_rust_candle",
+    "model_id": "Qwen/Qwen2.5-Coder-0.5B-Instruct",
+    "quantisation": null,
+    "requested": {
+      "device": "cpu",
+      "dtype": "f32"
+    },
+    "revision": "ea3f2471cf1b1f0db85067f1ef93848e38e88c25",
+    "weight_format": "safetensors"
+  },
+  "finite_logits": 303872,
+  "limitation": "Two synthetic token IDs test reload and numerical finiteness only; this is not a task quality observation.",
+  "process_id": 750921,
+  "production_eligible": false,
+  "request": {
+    "bytes": 1047,
+    "path": "reports/local-study/native-composed-worker.json",
+    "sha256": "233836838070524bb9f18d18fd1334f3bcadcace06d859401abeea41906d848b"
+  },
+  "schema_version": 1
+}

@@ -1,0 +1,42 @@
+{
+  "schema_version": 3,
+  "run_id": "29a36139-1b0f-42be-adaa-9b8af55a202f",
+  "ownership_nonce": "9a15da7e-6c33-44c2-b1a6-7ae5acb1d007",
+  "attempt_key": "0f344424-a12e-4e6b-a02b-b35af7541df0",
+  "receipt_path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox/0f344424-a12e-4e6b-a02b-b35af7541df0.prepared.json",
+  "report_path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox/29a36139-1b0f-42be-adaa-9b8af55a202f.json",
+  "task": {
+    "id": "text.reverse_words",
+    "source_id": "private-text-v1",
+    "lineage_id": "local-contract-pack-02",
+    "split": "train",
+    "specification": "Input is an ASCII string. Reverse the sequence of ASCII-whitespace-delimited words and join with one space.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "89c954aab785a2429ebe5f32badfde06abb8ac074c3c269bf90c327cb62b3fb8",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": " one  two\tthree ",
+        "expected": "three two one"
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "use serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let mut words = input.as_str().split_whitespace().collect();\n    words.reverse();\n    words.join(\" \")\n}\n\n// Example usage:\nfn main() {\n    let input = serde_json::Value::from(\" one  two\\tthree \");\n    let expected = serde_json::Value::from(\"three two one\");\n    let result = solve(input);\n    println!(\"{:?}\", result);\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox"
+  },
+  "code_sha256": "810db310722181f856680c8a92e98bd19a935320ba9675490353006387266ae4",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

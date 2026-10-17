@@ -1,0 +1,38 @@
+{
+  "model_id": "deepseek-coder-6_7b-q4_k_m",
+  "task_id": "tables.sort_rows",
+  "source_id": "private-tables-v1",
+  "specification_sha256": "df1fea127338d7c1399d9b922559c0782ff3fec80cb89b6d508a51249e019c1c",
+  "seed": 1729,
+  "plan_sha256": "79e25584f785f04f53b60d4cf3e4a730d2cf181ce11620a413bb1e0123bc1de2",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an array of [key,value] integer rows. Sort ascending by key and then value; keep duplicates.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[[2,9],[1,4],[2,3]],\"expected\":[[1,4],[2,3],[2,9]]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "Here is a Rust function that sorts a JSON array of key-value pairs in ascending order by key and then by value. This function uses the `serde_json` crate for JSON parsing and serialization.\n\n```rust\nuse serde_json::{Value, Result};\n\npub fn solve(input: Value) -> Value {\n    let mut arr: Vec<Value> = input.as_array().unwrap();\n    arr.sort_by_key(|k| {\n        let key = k.as_array().unwrap()[0].as_i64().unwrap();\n        (key, k.as_array().unwrap()[1].as_i64().unwrap())\n    });\n    Value::Array(arr)\n}\n```\n\nThis function works by first converting the input JSON array to a Rust `Vec<Value>`. It then sorts this vector using the `sort_by_key` method, which sorts the vector in ascending order based on the key-value pairs. The key is a tuple of the key and value, and the sorting is done first by the key and then by the value.\n\nFinally, the function converts the sorted vector back to a JSON array and returns it.\n\nPlease note that this function assumes that the input JSON array contains only arrays of two elements, where the first element is the key and the second element is the value. If this is not the case, the function may panic or return incorrect results.\n",
+    "checkpoint_id": "92da6238854f2fa902d8b2ad79d548536af1d3ab06821f323bd5bbcea2013276",
+    "finish_reason": "stop",
+    "input_tokens": 317,
+    "output_tokens": 333,
+    "elapsed_ms": 35534,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/comparative/search/round-002/trials/deepseek-coder-6_7b-q4_k_m/comparison/deepseek-coder-6_7b-q4_k_m/tables.sort_rows.generation.json",
+    "sha256": "0e5f4cbdbd8a21855606d502efaa896922423e0442a119f50f089d5bd9ba3f8f",
+    "bytes": 5019
+  },
+  "sandbox_report": {
+    "path": "reports/comparative/search/round-002/trials/deepseek-coder-6_7b-q4_k_m/comparison/sandbox/75c21d1e-4ebc-48f3-8470-29837e94ae68.json",
+    "sha256": "024c254e7a7c296157943d2cca3fd3e591136a3ce48d5a9df8a238625c7b8057",
+    "bytes": 10148
+  },
+  "grading_error": null,
+  "success": false
+}

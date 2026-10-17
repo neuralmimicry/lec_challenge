@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "df66f201f0ad3ef92171fd91d4f38a697a3cf37a3f3bc24a27cee2de59b7a6b6",
+  "task_id": "encoding.hex_decode",
+  "source_id": "private-encoding-v1",
+  "success": false,
+  "raw_generation": {
+    "path": "reports/local-study/sft-baseline-development-c7c/generations/encoding.hex_decode.json",
+    "sha256": "7a0ec3ab7e1b3325aa8260a7f97967dd69726be8cbc16d9f54efeb92cd9dba6f",
+    "bytes": 2049
+  },
+  "sandbox_report": {
+    "path": "reports/local-study/sft-baseline-development-c7c/sandbox/73a7ead2-5747-45b4-b998-0dd567423e2f.json",
+    "sha256": "d259dfc1cdff80ff813bd95e1a4caf06dfd8890eb268ceafc6d02f422f81d801",
+    "bytes": 3887
+  },
+  "grading_error": null
+}

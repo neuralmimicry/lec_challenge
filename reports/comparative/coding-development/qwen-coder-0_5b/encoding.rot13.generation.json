@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "evidence_kind": "actual_local_model_generation",
+  "recorded_unix_ms": 1792072327057,
+  "model_id": "qwen-coder-0_5b",
+  "task_id": "encoding.rot13",
+  "source_id": "private-encoding-v1",
+  "specification_sha256": "56794b6c25031b0931d378f8f3955bc2d10c4ef04da0be851795e2ca9a832cfa",
+  "seed": 1729,
+  "plan_sha256": "9aefcaf935435b296c63229638aad5a22a416ae171eda011a6812dd745667ea8",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an ASCII string. Apply ROT13 to upper/lowercase letters and preserve other characters.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":\"Hello, Z!\",\"expected\":\"Uryyb, M!\"}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\n/// Rotates each letter in the input string by 13 positions in the alphabet.\n/// Non-alphabetic characters remain unchanged.\n/// \n/// # Examples\n/// \n/// ```\n/// assert_eq!(solve(String::from(\"Hello, Z!\")), String::from(\"Uryyb, M!\"));\n/// ```\nfn solve(input: serde_json::Value) -> serde_json::Value {\n    input.to_string().chars()\n        .map(|c| {\n            if c.is_alphabetic() {\n                let offset = if c.is_uppercase() { 65 } else { 97 };\n                (c as u8 + 13 - offset) as char\n            } else {\n                c\n            }\n        })\n        .collect()\n}\n\nfn main() {\n    // Example usage\n    let input = serde_json::Value::from(\"Hello, Z!\");\n    let expected = serde_json::Value::from(\"Uryyb, M!\");\n    assert_eq!(solve(input), expected);\n}\n```",
+    "checkpoint_id": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+    "finish_reason": "stop",
+    "input_tokens": 227,
+    "output_tokens": 216,
+    "elapsed_ms": 8605,
+    "complete": true
+  },
+  "generation_error": null,
+  "execution": {
+    "actual_device": "Cuda { gpu_id: 0 }",
+    "actual_dtype": "F16",
+    "checkpoint_id": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+    "context_cap": 4096,
+    "cpu_fallback": false,
+    "cuda_active": true,
+    "cuda_feature_compiled": true,
+    "engine": "native_rust_candle",
+    "model_id": "Qwen/Qwen2.5-Coder-0.5B-Instruct",
+    "requested": {
+      "device": {
+        "cuda": {
+          "ordinal": 0
+        }
+      },
+      "dtype": "f16"
+    },
+    "revision": "ea3f2471cf1b1f0db85067f1ef93848e38e88c25"
+  }
+}

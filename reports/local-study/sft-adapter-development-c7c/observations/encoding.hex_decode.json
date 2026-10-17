@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "448b2d86361801414c47e32433b6e0bce070909a486feaecc2fd744b94dca8f4",
+  "task_id": "encoding.hex_decode",
+  "source_id": "private-encoding-v1",
+  "success": false,
+  "raw_generation": {
+    "path": "reports/local-study/sft-adapter-development-c7c/generations/encoding.hex_decode.json",
+    "sha256": "c21bbf6c9665043c7af329bf08a2a7254400724f9adce8691009c8178457ad18",
+    "bytes": 2158
+  },
+  "sandbox_report": {
+    "path": "reports/local-study/sft-adapter-development-c7c/sandbox/33b5090a-612c-4f2e-91ef-4c76440c9024.json",
+    "sha256": "bf92ee063bc4d533495938fa0ccb8594c12f3e10f909a42d562e5e10174a1191",
+    "bytes": 3246
+  },
+  "grading_error": null
+}

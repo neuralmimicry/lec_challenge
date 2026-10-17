@@ -1,0 +1,33 @@
+{
+  "run_id": "8206c426-1e0c-43c0-bb5d-cb28a6e6827d",
+  "task_id": "tables.last_by_key",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error[E0308]: mismatched types\n --> /candidate/main.rs:9:27\n  |\n9 |             if last_key > key {\n  |                --------   ^^^ expected `i64`, found `&String`\n  |                |\n  |                expected because this is `i64`\n\nerror[E0277]: can't compare `i64` with `&std::string::String`\n   --> /candidate/main.rs:11:32\n    |\n 11 |             } else if last_key == key {\n    |                                ^^ no implementation for `i64 == &std::string::String`\n    |\n    = help: the trait `PartialEq<&std::string::String>` is not implemented for `i64`\nhelp: `i64` implements trait `PartialEq<Rhs>`\n   --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/cmp.rs:2103:12\n    |\n    = note: `PartialEq`\n   ::: /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/cmp.rs:2115:5\n    |\n    = note: in this macro invocation\n    |\n   ::: /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/partial_eq.rs:76:13\n    |\n 76 |               impl PartialEq<Value> for $ty {\n    |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ `PartialEq<Value>`\n...\n 97 | / partialeq_numeric! {\n 98 | |     eq_i64[i8 i16 i32 i64 isize]\n 99 | |     eq_u64[u8 u16 u32 u64 usize]\n100 | |     eq_f32[f32]\n101 | |     eq_f64[f64]\n102 | |     eq_bool[bool]\n103 | | }\n    | |_- in this macro invocation\n    = note: this error originates in the macro `impl_partial_eq_for_primitive` which comes from the expansion of the macro `partialeq_numeric` (in Nightly builds, run with -Z macro-backtrace for more info)\n\nerror[E0308]: mismatched types\n  --> /candidate/main.rs:17:20\n   |\n 5 |     let mut last_key: Option<i64> = None;\n   |                       ----------- expected due to this type\n...\n17 |         last_key = key;\n   |                    ^^^ expected `Option<i64>`, found `&String`\n   |\n   = note:   expected enum `Option<i64>`\n           found reference `&std::string::String`\n\nerror: aborting due to 3 previous errors\n\nSome errors have detailed explanations: E0277, E0308.\nFor more information about an error, try `rustc --explain E0277`.\n"
+  ],
+  "cases_total": 5,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "0bf995b5f69865792503015f6af52b457c861b679877956e939c2137ddb4a562",
+  "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+  "oracle_sha256": "a734f6d465714cbebb072790fedff161d2fc28cbb257b3d04cee0feaf8b5b5fe",
+  "code_sha256": "1eab74b8c26b18fc24375d4241ea70d536002b27c432ade2e755ea63856d8532",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:1",
+    "expected_image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/comparative/control-development/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/comparative/control-development/sandbox/8206c426-1e0c-43c0-bb5d-cb28a6e6827d.audit.json",
+  "audit_sha256": "5908f6c5df5dd2e72b90e84c682f8472ec628cae6b9769949629ec5dda11cd41",
+  "failure": "compilation failed: error[E0308]: mismatched types\n --> /candidate/main.rs:9:27\n  |\n9 |             if last_key > key {\n  |                --------   ^^^ expected `i64`, found `&String`\n  |                |\n  |                expected because this is `i64`\n\nerror[E0277]: can't compare `i64` with `&std::string::String`\n   --> /candidate/main.rs:11:32\n    |\n 11 |             } else if last_key == key {\n    |                                ^^ no implementation for `i64 == &std::string::String`\n    |\n    = help: the trait `PartialEq<&std::string::String>` is not implemented for `i64`\nhelp: `i64` implements trait `PartialEq<Rhs>`\n   --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/cmp.rs:2103:12\n    |\n    = note: `PartialEq`\n   ::: /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/cmp.rs:2115:5\n    |\n    = note: in this macro invocation\n    |\n   ::: /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/partial_eq.rs:76:13\n    |\n 76 |               impl PartialEq<Value> for $ty {\n    |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ `PartialEq<Value>`\n...\n 97 | / partialeq_numeric! {\n 98 | |     eq_i64[i8 i16 i32 i64 isize]\n 99 | |     eq_u64[u8 u16 u32 u64 usize]\n100 | |     eq_f32[f32]\n101 | |     eq_f64[f64]\n102 | |     eq_bool[bool]\n103 | | }\n    | |_- in this macro invocation\n    = note: this error originates in the macro `impl_partial_eq_for_primitive` which comes from the expansion of the macro `partialeq_numeric` (in Nightly builds, run with -Z macro-backtrace for more info)\n\nerror[E0308]: mismatched types\n  --> /candidate/main.rs:17:20\n   |\n 5 |     let mut last_key: Option<i64> = None;\n   |                       ----------- expected due to this type\n...\n17 |         last_key = key;\n   |                    ^^^ expected `Option<i64>`, found `&String`\n   |\n   = note:   expected enum `Option<i64>`\n           found reference `&std::string::String`\n\nerror: aborting due to 3 previous errors\n\nSome errors have detailed explanations: E0277, E0308.\nFor more information about an error, try `rustc --explain E0277`.\n",
+  "duration_ms": 7650,
+  "timeout_evidence": null
+}

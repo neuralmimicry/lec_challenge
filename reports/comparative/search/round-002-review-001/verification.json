@@ -1,0 +1,607 @@
+{
+  "all_source_verifications_passed": true,
+  "comparisons": [
+    {
+      "observations": [
+        {
+          "complete": true,
+          "finish_reason": "stop",
+          "generation_error": null,
+          "grading_error": null,
+          "path": "reports/comparative/search/round-001/trials/qwen-coder-7b-q4_k_m/comparison/qwen-coder-7b-q4_k_m/money.parse.json",
+          "success": false,
+          "task_id": "money.parse"
+        },
+        {
+          "complete": true,
+          "finish_reason": "stop",
+          "generation_error": null,
+          "grading_error": null,
+          "path": "reports/comparative/search/round-001/trials/qwen-coder-7b-q4_k_m/comparison/qwen-coder-7b-q4_k_m/money.format.json",
+          "success": false,
+          "task_id": "money.format"
+        },
+        {
+          "complete": true,
+          "finish_reason": "stop",
+          "generation_error": null,
+          "grading_error": null,
+          "path": "reports/comparative/search/round-001/trials/qwen-coder-7b-q4_k_m/comparison/qwen-coder-7b-q4_k_m/money.split.json",
+          "success": false,
+          "task_id": "money.split"
+        },
+        {
+          "complete": true,
+          "finish_reason": "stop",
+          "generation_error": null,
+          "grading_error": null,
+          "path": "reports/comparative/search/round-001/trials/qwen-coder-7b-q4_k_m/comparison/qwen-coder-7b-q4_k_m/money.basket.json",
+          "success": true,
+          "task_id": "money.basket"
+        },
+        {
+          "complete": true,
+          "finish_reason": "stop",
+          "generation_error": null,
+          "grading_error": null,
+          "path": "reports/comparative/search/round-001/trials/qwen-coder-7b-q4_k_m/comparison/qwen-coder-7b-q4_k_m/dispatch.finish_order.json",
+          "success": true,
+          "task_id": "dispatch.finish_order"
+        },
+        {
+          "complete": true,
+          "finish_reason": "stop",
+          "generation_error": null,
+          "grading_error": null,
+          "path": "reports/comparative/search/round-001/trials/qwen-coder-7b-q4_k_m/comparison/qwen-coder-7b-q4_k_m/dispatch.waiting.json",
+          "success": false,
+          "task_id": "dispatch.waiting"
+        },
+        {
+          "complete": true,
+          "finish_reason": "stop",
+          "generation_error": null,
+          "grading_error": null,
+          "path": "reports/comparative/search/round-001/trials/qwen-coder-7b-q4_k_m/comparison/qwen-coder-7b-q4_k_m/dispatch.round_robin.json",
+          "success": false,
+          "task_id": "dispatch.round_robin"
+        },
+        {
+          "complete": true,
+          "finish_reason": "stop",
+          "generation_error": null,
+          "grading_error": null,
+          "path": "reports/comparative/search/round-001/trials/qwen-coder-7b-q4_k_m/comparison/qwen-coder-7b-q4_k_m/dispatch.priority.json",
+          "success": true,
+          "task_id": "dispatch.priority"
+        },
+        {
+          "complete": true,
+          "finish_reason": "stop",
+          "generation_error": null,
+          "grading_error": null,
+          "path": "reports/comparative/search/round-001/trials/qwen-coder-7b-q4_k_m/comparison/qwen-coder-7b-q4_k_m/encoding.hex_encode.json",
+          "success": true,
+          "task_id": "encoding.hex_encode"
+        },
+        {
+          "complete": true,
+          "finish_reason": "stop",
+          "generation_error": null,
+          "grading_error": null,
+          "path": "reports/comparative/search/round-001/trials/qwen-coder-7b-q4_k_m/comparison/qwen-coder-7b-q4_k_m/encoding.hex_decode.json",
+          "success": false,
+          "task_id": "encoding.hex_decode"
+        },
+        {
+          "complete": true,
+          "finish_reason": "stop",
+          "generation_error": null,
+          "grading_error": null,
+          "path": "reports/comparative/search/round-001/trials/qwen-coder-7b-q4_k_m/comparison/qwen-coder-7b-q4_k_m/encoding.caesar.json",
+          "success": false,
+          "task_id": "encoding.caesar"
+        },
+        {
+          "complete": true,
+          "finish_reason": "stop",
+          "generation_error": null,
+          "grading_error": null,
+          "path": "reports/comparative/search/round-001/trials/qwen-coder-7b-q4_k_m/comparison/qwen-coder-7b-q4_k_m/encoding.rot13.json",
+          "success": false,
+          "task_id": "encoding.rot13"
+        },
+        {
+          "complete": true,
+          "finish_reason": "stop",
+          "generation_error": null,
+          "grading_error": null,
+          "path": "reports/comparative/search/round-001/trials/qwen-coder-7b-q4_k_m/comparison/qwen-coder-7b-q4_k_m/tables.sort_rows.json",
+          "success": true,
+          "task_id": "tables.sort_rows"
+        },
+        {
+          "complete": true,
+          "finish_reason": "stop",
+          "generation_error": null,
+          "grading_error": null,
+          "path": "reports/comparative/search/round-001/trials/qwen-coder-7b-q4_k_m/comparison/qwen-coder-7b-q4_k_m/tables.last_by_key.json",
+          "success": true,
+          "task_id": "tables.last_by_key"
+        },
+        {
+          "complete": true,
+          "finish_reason": "stop",
+          "generation_error": null,
+          "grading_error": null,
+          "path": "reports/comparative/search/round-001/trials/qwen-coder-7b-q4_k_m/comparison/qwen-coder-7b-q4_k_m/tables.group_sums.json",
+          "success": true,
+          "task_id": "tables.group_sums"
+        },
+        {
+          "complete": true,
+          "finish_reason": "stop",
+          "generation_error": null,
+          "grading_error": null,
+          "path": "reports/comparative/search/round-001/trials/qwen-coder-7b-q4_k_m/comparison/qwen-coder-7b-q4_k_m/tables.inner_join.json",
+          "success": false,
+          "task_id": "tables.inner_join"
+        }
+      ],
+      "path": "reports/comparative/search/round-001/trials/qwen-coder-7b-q4_k_m/comparison",
+      "report": {
+        "coverage_complete": true,
+        "evidence_kind": "actual_local_exploratory_comparative_generations",
+        "limitations": [
+          "Development/training comparison only: no sealed held-out tasks were evaluated.",
+          "These are open-weight models hosted locally, not three independent real provider businesses.",
+          "One decoding seed and a small, jointly authored corpus give descriptive results, not proof of learning or general model superiority.",
+          "Every missing, failed or truncated generation remains a failure in the planned denominator.",
+          "GPU memory snapshots are observations, not continuous peak-memory measurements; energy and cash costs are unmeasured."
+        ],
+        "models": [
+          {
+            "id": "qwen-coder-7b-q4_k_m",
+            "infrastructure_or_generation_errors": 0,
+            "model_id": "Qwen/Qwen2.5-Coder-7B-Instruct-GGUF",
+            "observed": 16,
+            "pass_rate": 0.4375,
+            "passed": 7,
+            "planned": 16,
+            "role": "coding_teacher"
+          }
+        ],
+        "observed_observations": 16,
+        "planned_observations": 16,
+        "promotable": false,
+        "schema_version": 1,
+        "source_count": 4,
+        "split": "development"
+      },
+      "verified": true
+    },
+    {
+      "observations": [
+        {
+          "complete": true,
+          "finish_reason": "stop",
+          "generation_error": null,
+          "grading_error": null,
+          "path": "reports/comparative/search/round-002/trials/deepseek-coder-6_7b-q4_k_m/comparison/deepseek-coder-6_7b-q4_k_m/money.parse.json",
+          "success": false,
+          "task_id": "money.parse"
+        },
+        {
+          "complete": true,
+          "finish_reason": "stop",
+          "generation_error": null,
+          "grading_error": null,
+          "path": "reports/comparative/search/round-002/trials/deepseek-coder-6_7b-q4_k_m/comparison/deepseek-coder-6_7b-q4_k_m/money.format.json",
+          "success": false,
+          "task_id": "money.format"
+        },
+        {
+          "complete": true,
+          "finish_reason": "stop",
+          "generation_error": null,
+          "grading_error": null,
+          "path": "reports/comparative/search/round-002/trials/deepseek-coder-6_7b-q4_k_m/comparison/deepseek-coder-6_7b-q4_k_m/money.split.json",
+          "success": false,
+          "task_id": "money.split"
+        },
+        {
+          "complete": true,
+          "finish_reason": "stop",
+          "generation_error": null,
+          "grading_error": null,
+          "path": "reports/comparative/search/round-002/trials/deepseek-coder-6_7b-q4_k_m/comparison/deepseek-coder-6_7b-q4_k_m/money.basket.json",
+          "success": false,
+          "task_id": "money.basket"
+        },
+        {
+          "complete": true,
+          "finish_reason": "stop",
+          "generation_error": null,
+          "grading_error": null,
+          "path": "reports/comparative/search/round-002/trials/deepseek-coder-6_7b-q4_k_m/comparison/deepseek-coder-6_7b-q4_k_m/dispatch.finish_order.json",
+          "success": false,
+          "task_id": "dispatch.finish_order"
+        },
+        {
+          "complete": true,
+          "finish_reason": "stop",
+          "generation_error": null,
+          "grading_error": null,
+          "path": "reports/comparative/search/round-002/trials/deepseek-coder-6_7b-q4_k_m/comparison/deepseek-coder-6_7b-q4_k_m/dispatch.waiting.json",
+          "success": false,
+          "task_id": "dispatch.waiting"
+        },
+        {
+          "complete": true,
+          "finish_reason": "stop",
+          "generation_error": null,
+          "grading_error": null,
+          "path": "reports/comparative/search/round-002/trials/deepseek-coder-6_7b-q4_k_m/comparison/deepseek-coder-6_7b-q4_k_m/dispatch.round_robin.json",
+          "success": false,
+          "task_id": "dispatch.round_robin"
+        },
+        {
+          "complete": true,
+          "finish_reason": "stop",
+          "generation_error": null,
+          "grading_error": null,
+          "path": "reports/comparative/search/round-002/trials/deepseek-coder-6_7b-q4_k_m/comparison/deepseek-coder-6_7b-q4_k_m/dispatch.priority.json",
+          "success": false,
+          "task_id": "dispatch.priority"
+        },
+        {
+          "complete": true,
+          "finish_reason": "stop",
+          "generation_error": null,
+          "grading_error": null,
+          "path": "reports/comparative/search/round-002/trials/deepseek-coder-6_7b-q4_k_m/comparison/deepseek-coder-6_7b-q4_k_m/encoding.hex_encode.json",
+          "success": false,
+          "task_id": "encoding.hex_encode"
+        },
+        {
+          "complete": true,
+          "finish_reason": "stop",
+          "generation_error": null,
+          "grading_error": null,
+          "path": "reports/comparative/search/round-002/trials/deepseek-coder-6_7b-q4_k_m/comparison/deepseek-coder-6_7b-q4_k_m/encoding.hex_decode.json",
+          "success": false,
+          "task_id": "encoding.hex_decode"
+        },
+        {
+          "complete": true,
+          "finish_reason": "stop",
+          "generation_error": null,
+          "grading_error": null,
+          "path": "reports/comparative/search/round-002/trials/deepseek-coder-6_7b-q4_k_m/comparison/deepseek-coder-6_7b-q4_k_m/encoding.caesar.json",
+          "success": false,
+          "task_id": "encoding.caesar"
+        },
+        {
+          "complete": true,
+          "finish_reason": "stop",
+          "generation_error": null,
+          "grading_error": null,
+          "path": "reports/comparative/search/round-002/trials/deepseek-coder-6_7b-q4_k_m/comparison/deepseek-coder-6_7b-q4_k_m/encoding.rot13.json",
+          "success": false,
+          "task_id": "encoding.rot13"
+        },
+        {
+          "complete": true,
+          "finish_reason": "stop",
+          "generation_error": null,
+          "grading_error": null,
+          "path": "reports/comparative/search/round-002/trials/deepseek-coder-6_7b-q4_k_m/comparison/deepseek-coder-6_7b-q4_k_m/tables.sort_rows.json",
+          "success": false,
+          "task_id": "tables.sort_rows"
+        },
+        {
+          "complete": true,
+          "finish_reason": "stop",
+          "generation_error": null,
+          "grading_error": null,
+          "path": "reports/comparative/search/round-002/trials/deepseek-coder-6_7b-q4_k_m/comparison/deepseek-coder-6_7b-q4_k_m/tables.last_by_key.json",
+          "success": false,
+          "task_id": "tables.last_by_key"
+        },
+        {
+          "complete": false,
+          "finish_reason": "length",
+          "generation_error": null,
+          "grading_error": null,
+          "path": "reports/comparative/search/round-002/trials/deepseek-coder-6_7b-q4_k_m/comparison/deepseek-coder-6_7b-q4_k_m/tables.group_sums.json",
+          "success": false,
+          "task_id": "tables.group_sums"
+        },
+        {
+          "complete": true,
+          "finish_reason": "stop",
+          "generation_error": null,
+          "grading_error": null,
+          "path": "reports/comparative/search/round-002/trials/deepseek-coder-6_7b-q4_k_m/comparison/deepseek-coder-6_7b-q4_k_m/tables.inner_join.json",
+          "success": false,
+          "task_id": "tables.inner_join"
+        }
+      ],
+      "path": "reports/comparative/search/round-002/trials/deepseek-coder-6_7b-q4_k_m/comparison",
+      "report": {
+        "coverage_complete": true,
+        "evidence_kind": "actual_local_exploratory_comparative_generations",
+        "limitations": [
+          "Development/training comparison only: no sealed held-out tasks were evaluated.",
+          "These are open-weight models hosted locally, not three independent real provider businesses.",
+          "One decoding seed and a small, jointly authored corpus give descriptive results, not proof of learning or general model superiority.",
+          "Every missing, failed or truncated generation remains a failure in the planned denominator.",
+          "GPU memory snapshots are observations, not continuous peak-memory measurements; energy and cash costs are unmeasured."
+        ],
+        "models": [
+          {
+            "id": "deepseek-coder-6_7b-q4_k_m",
+            "infrastructure_or_generation_errors": 1,
+            "model_id": "TheBloke/deepseek-coder-6.7B-instruct-GGUF",
+            "observed": 16,
+            "pass_rate": 0.0,
+            "passed": 0,
+            "planned": 16,
+            "role": "coding_teacher"
+          }
+        ],
+        "observed_observations": 16,
+        "planned_observations": 16,
+        "promotable": false,
+        "schema_version": 1,
+        "source_count": 4,
+        "split": "development"
+      },
+      "verified": true
+    },
+    {
+      "observations": [
+        {
+          "complete": true,
+          "finish_reason": "stop",
+          "generation_error": null,
+          "grading_error": null,
+          "path": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison/qwen3-4b-instruct-2507-q4_k_m/money.parse.json",
+          "success": false,
+          "task_id": "money.parse"
+        },
+        {
+          "complete": true,
+          "finish_reason": "stop",
+          "generation_error": null,
+          "grading_error": null,
+          "path": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison/qwen3-4b-instruct-2507-q4_k_m/money.format.json",
+          "success": false,
+          "task_id": "money.format"
+        },
+        {
+          "complete": true,
+          "finish_reason": "stop",
+          "generation_error": null,
+          "grading_error": null,
+          "path": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison/qwen3-4b-instruct-2507-q4_k_m/money.split.json",
+          "success": false,
+          "task_id": "money.split"
+        },
+        {
+          "complete": true,
+          "finish_reason": "stop",
+          "generation_error": null,
+          "grading_error": null,
+          "path": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison/qwen3-4b-instruct-2507-q4_k_m/money.basket.json",
+          "success": true,
+          "task_id": "money.basket"
+        },
+        {
+          "complete": true,
+          "finish_reason": "stop",
+          "generation_error": null,
+          "grading_error": null,
+          "path": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison/qwen3-4b-instruct-2507-q4_k_m/dispatch.finish_order.json",
+          "success": true,
+          "task_id": "dispatch.finish_order"
+        },
+        {
+          "complete": true,
+          "finish_reason": "stop",
+          "generation_error": null,
+          "grading_error": null,
+          "path": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison/qwen3-4b-instruct-2507-q4_k_m/dispatch.waiting.json",
+          "success": true,
+          "task_id": "dispatch.waiting"
+        },
+        {
+          "complete": true,
+          "finish_reason": "stop",
+          "generation_error": null,
+          "grading_error": null,
+          "path": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison/qwen3-4b-instruct-2507-q4_k_m/dispatch.round_robin.json",
+          "success": false,
+          "task_id": "dispatch.round_robin"
+        },
+        {
+          "complete": true,
+          "finish_reason": "stop",
+          "generation_error": null,
+          "grading_error": null,
+          "path": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison/qwen3-4b-instruct-2507-q4_k_m/dispatch.priority.json",
+          "success": false,
+          "task_id": "dispatch.priority"
+        },
+        {
+          "complete": true,
+          "finish_reason": "stop",
+          "generation_error": null,
+          "grading_error": null,
+          "path": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison/qwen3-4b-instruct-2507-q4_k_m/encoding.hex_encode.json",
+          "success": false,
+          "task_id": "encoding.hex_encode"
+        },
+        {
+          "complete": true,
+          "finish_reason": "stop",
+          "generation_error": null,
+          "grading_error": null,
+          "path": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison/qwen3-4b-instruct-2507-q4_k_m/encoding.hex_decode.json",
+          "success": false,
+          "task_id": "encoding.hex_decode"
+        },
+        {
+          "complete": true,
+          "finish_reason": "stop",
+          "generation_error": null,
+          "grading_error": null,
+          "path": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison/qwen3-4b-instruct-2507-q4_k_m/encoding.caesar.json",
+          "success": false,
+          "task_id": "encoding.caesar"
+        },
+        {
+          "complete": true,
+          "finish_reason": "stop",
+          "generation_error": null,
+          "grading_error": null,
+          "path": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison/qwen3-4b-instruct-2507-q4_k_m/encoding.rot13.json",
+          "success": false,
+          "task_id": "encoding.rot13"
+        },
+        {
+          "complete": true,
+          "finish_reason": "stop",
+          "generation_error": null,
+          "grading_error": null,
+          "path": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison/qwen3-4b-instruct-2507-q4_k_m/tables.sort_rows.json",
+          "success": false,
+          "task_id": "tables.sort_rows"
+        },
+        {
+          "complete": true,
+          "finish_reason": "stop",
+          "generation_error": null,
+          "grading_error": null,
+          "path": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison/qwen3-4b-instruct-2507-q4_k_m/tables.last_by_key.json",
+          "success": false,
+          "task_id": "tables.last_by_key"
+        },
+        {
+          "complete": true,
+          "finish_reason": "stop",
+          "generation_error": null,
+          "grading_error": null,
+          "path": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison/qwen3-4b-instruct-2507-q4_k_m/tables.group_sums.json",
+          "success": false,
+          "task_id": "tables.group_sums"
+        },
+        {
+          "complete": true,
+          "finish_reason": "stop",
+          "generation_error": null,
+          "grading_error": null,
+          "path": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison/qwen3-4b-instruct-2507-q4_k_m/tables.inner_join.json",
+          "success": false,
+          "task_id": "tables.inner_join"
+        }
+      ],
+      "path": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison",
+      "report": {
+        "coverage_complete": true,
+        "evidence_kind": "actual_local_exploratory_comparative_generations",
+        "limitations": [
+          "Development/training comparison only: no sealed held-out tasks were evaluated.",
+          "These are open-weight models hosted locally, not three independent real provider businesses.",
+          "One decoding seed and a small, jointly authored corpus give descriptive results, not proof of learning or general model superiority.",
+          "Every missing, failed or truncated generation remains a failure in the planned denominator.",
+          "GPU memory snapshots are observations, not continuous peak-memory measurements; energy and cash costs are unmeasured."
+        ],
+        "models": [
+          {
+            "id": "qwen3-4b-instruct-2507-q4_k_m",
+            "infrastructure_or_generation_errors": 0,
+            "model_id": "bartowski/Qwen_Qwen3-4B-Instruct-2507-GGUF",
+            "observed": 16,
+            "pass_rate": 0.1875,
+            "passed": 3,
+            "planned": 16,
+            "role": "coding_teacher"
+          }
+        ],
+        "observed_observations": 16,
+        "planned_observations": 16,
+        "promotable": false,
+        "schema_version": 1,
+        "source_count": 4,
+        "split": "development"
+      },
+      "verified": true
+    }
+  ],
+  "containers_started": false,
+  "evidence": [
+    {
+      "bytes": 8307,
+      "path": "reports/comparative/search/round-002/report.json",
+      "sha256": "6f47a9587e219ec854e8497aeea5a2457928030bd2b8d03cf019c037b657b647"
+    },
+    {
+      "bytes": 6549,
+      "path": "reports/comparative/search/round-002/state.json",
+      "sha256": "3aad9fbc68ec0f694c85cba4b0f7376425ffe536212c3dc26d285d368d83a0d5"
+    },
+    {
+      "bytes": 22777,
+      "path": "reports/comparative/search/round-002/freeze.json",
+      "sha256": "5f4582556afb85e0800e33b591585b19bdcbe7c4b48f115a2b934bae61f15597"
+    },
+    {
+      "bytes": 44835,
+      "path": "reports/comparative/search/round-002/qualification-pack.json",
+      "sha256": "ae71a3cd82a34a94b2ce761ad5c223a246b46ed8bad8ce4f4ccfd6d64ffb75c1"
+    },
+    {
+      "bytes": 2115,
+      "path": "config/teacher-search-qwen3.toml",
+      "sha256": "54b31abb9c0fbe4a125f2665d1d766982be6627b8c82fcebd72061bcb38e0fb1"
+    },
+    {
+      "bytes": 680,
+      "path": "offline_bundle/comparative/qwen3-4b-instruct-2507-q4_k_m/.pruned-weights.json",
+      "sha256": "1e9aa100fce4d648e3190f116ab32d10861b20c6c70302bfe1dcc9cb9bcecb0a"
+    },
+    {
+      "bytes": 269,
+      "path": "offline_bundle/comparative/qwen3-4b-instruct-2507-q4_k_m/.teacher-search-owned.json",
+      "sha256": "f1f9e9f106518117dbd4e123b321caa09b1a00b64eae909b8bf01366b6d6fc68"
+    },
+    {
+      "bytes": 1563,
+      "path": "reports/comparative/search/round-002/attempts/qwen3-4b-instruct-2507-q4_k_m/1fd2c1b1-3728-4d0f-b831-e0137880fa07.json",
+      "sha256": "953d82532a715e485ea531f6c55495e2417cd91b826b0d4cfc0d0e6ef7ba9472"
+    },
+    {
+      "bytes": 46668832,
+      "path": "state/engines/b45d32ca11ccc84633ab2de0bb9d195dc38a61c78e2ef1a87c03ea90091aa301/lec-distil",
+      "sha256": "b45d32ca11ccc84633ab2de0bb9d195dc38a61c78e2ef1a87c03ea90091aa301"
+    },
+    {
+      "bytes": 4277,
+      "path": "reports/comparative/search/round-002-review-001/review.rs",
+      "sha256": "73127bac90c6ac7f728327ecccbf045b83a3f69dadf0cdbe33b21afb9610cd15"
+    },
+    {
+      "bytes": 9911936,
+      "path": "reports/comparative/search/round-002-review-001/review",
+      "sha256": "a463015d30f14a99e36618c627b7ed64957a116a5dee500d1028b84166e1e07a"
+    }
+  ],
+  "held_out_access": false,
+  "inference_executed": false,
+  "qwen3_owned_pruning": {
+    "verified": true
+  },
+  "review": "read_only_model_free_teacher_search_round_002",
+  "schema_version": 1
+}

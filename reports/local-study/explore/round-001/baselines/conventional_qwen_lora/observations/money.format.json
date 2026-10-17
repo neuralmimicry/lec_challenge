@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "224a7bf3ed4af8e3b7e99d10e6fddc59fa41f55219d9fb813cec482d1e9f3e7f",
+  "task_id": "money.format",
+  "source_id": "private-money-v1",
+  "success": false,
+  "raw_generation": {
+    "path": "reports/local-study/explore/round-001/baselines/conventional_qwen_lora/generations/money.format.json",
+    "sha256": "c9fa3c6a9a05909159c4e49cdd9223b9452d3bb774b8c0e5beb319c81e5fafcf",
+    "bytes": 1833
+  },
+  "sandbox_report": {
+    "path": "reports/local-study/explore/round-001/baselines/conventional_qwen_lora/sandbox/62b22abb-9576-4f19-bae7-2856e6f4df03.json",
+    "sha256": "9224bc2a237daa3109068cb498e4e57dc6fdfcbe2ff7ec146ca963c44be37d35",
+    "bytes": 4731
+  },
+  "grading_error": null
+}

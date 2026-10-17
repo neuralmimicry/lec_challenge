@@ -1,0 +1,40 @@
+{
+  "run_id": "e1af8f26-b14f-495e-9adb-aba56d7ab641",
+  "task_id": "validation.ipv4",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error: redundant argument\n  --> /candidate/main.rs:15:46\n   |\n15 |             result.push(format!(\"{num:04x}\", num));\n   |                                              ^^^ help: this can be removed\n   |\nnote: the formatting specifier is referencing the binding already\n  --> /candidate/main.rs:15:35\n   |\n15 |             result.push(format!(\"{num:04x}\", num));\n   |                                   ^^^\n\nwarning: unused import: `serde_json::Value`\n --> /candidate/main.rs:1:5\n  |\n1 | use serde_json::Value;\n  |     ^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0308]: mismatched types\n  --> /candidate/main.rs:15:25\n   |\n15 |             result.push(format!(\"{num:04x}\", num));\n   |                         ^^^^^^^^^^^^^^^^^^^^^^^^^ expected `&str`, found `String`\n\nerror: aborting due to 2 previous errors; 1 warning emitted\n\nFor more information about this error, try `rustc --explain E0308`.\n"
+  ],
+  "cases_total": 8,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "e6bc5348017be32883a569a7d66fe2807f6d28dd0ae8541d18b3bc43c4df1745",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/regraded-v3-001/evaluation-003-train-f95238863522/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/regraded-v3-001/evaluation-003-train-f95238863522/sandbox/e1af8f26-b14f-495e-9adb-aba56d7ab641.audit.json",
+  "audit_sha256": "70864dd1ebca8853af299e4d633406029cb301102b10c404a26ddc2d4ab646f5",
+  "failure": "compilation failed: error: redundant argument\n  --> /candidate/main.rs:15:46\n   |\n15 |             result.push(format!(\"{num:04x}\", num));\n   |                                              ^^^ help: this can be removed\n   |\nnote: the formatting specifier is referencing the binding already\n  --> /candidate/main.rs:15:35\n   |\n15 |             result.push(format!(\"{num:04x}\", num));\n   |                                   ^^^\n\nwarning: unused import: `serde_json::Value`\n --> /candidate/main.rs:1:5\n  |\n1 | use serde_json::Value;\n  |     ^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0308]: mismatched types\n  --> /candidate/main.rs:15:25\n   |\n15 |             result.push(format!(\"{num:04x}\", num));\n   |                         ^^^^^^^^^^^^^^^^^^^^^^^^^ expected `&str`, found `String`\n\nerror: aborting due to 2 previous errors; 1 warning emitted\n\nFor more information about this error, try `rustc --explain E0308`.\n",
+  "duration_ms": 22985,
+  "timeout_evidence": null,
+  "lifecycle_evidence": {
+    "receipt_path": "reports/local-study/regraded-v3-001/evaluation-003-train-f95238863522/sandbox/e1af8f26-b14f-495e-9adb-aba56d7ab641.lifecycle.json",
+    "receipt_sha256": "5dcc3943fab0319f24a8249f61e928a2cd866c2588fae81b2995406b9c32831e"
+  }
+}

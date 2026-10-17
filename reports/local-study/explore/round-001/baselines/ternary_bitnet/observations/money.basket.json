@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "51e2a803f86359125c31f16c1d0da7fc35ac18527b51f85f956f4872bf05792e",
+  "task_id": "money.basket",
+  "source_id": "private-money-v1",
+  "success": false,
+  "raw_generation": {
+    "path": "reports/local-study/explore/round-001/baselines/ternary_bitnet/generations/money.basket.json",
+    "sha256": "25d42a976df52fb55567236ad6e4c07dc134ced51995dcedaa763df32ace5773",
+    "bytes": 1325
+  },
+  "sandbox_report": null,
+  "grading_error": null
+}

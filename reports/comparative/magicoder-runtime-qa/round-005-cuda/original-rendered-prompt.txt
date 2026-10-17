@@ -1,0 +1,6 @@
+<｜begin▁of▁sentence｜>You are an exceptionally intelligent coding assistant that consistently delivers accurate and reliable responses to user instructions.
+
+@@ Instruction
+Write a Rust function add(a: i64, b: i64) -> i64. Return only the complete function.
+
+@@ Response

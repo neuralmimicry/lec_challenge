@@ -1,0 +1,40 @@
+{
+  "run_id": "9964be20-cdd2-4041-8ef3-4d321d2a7ded",
+  "task_id": "encoding.hex_decode",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error[E0308]: mismatched types\n --> /candidate/main.rs:7:20\n  |\n7 |             if let Ok(num) = c.to_digit(16) {\n  |                    ^^^^^^^   -------------- this expression has type `Option<u32>`\n  |                    |\n  |                    expected `Option<u32>`, found `Result<_, _>`\n  |\n  = note: expected enum `Option<u32>`\n             found enum `Result<_, _>`\n\nerror[E0599]: no variant, associated function, or constant named `U64` found for enum `Value` in the current scope\n  --> /candidate/main.rs:12:59\n   |\n12 |             Value::Array(bytes.into_iter().map(|b| Value::U64(b as u64)).collect())\n   |                                                           ^^^ variant, associated function, or constant not found in `Value`\n\nerror: aborting due to 2 previous errors\n\nSome errors have detailed explanations: E0308, E0599.\nFor more information about an error, try `rustc --explain E0308`.\n"
+  ],
+  "cases_total": 7,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "7e83db885170673409b848e77e7042c1caee620573cf409346315c6ae7dd1510",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/explore/round-001/study/full/arms/arm-b1ee8c0e1c0ffe7465f83fe0/development/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/explore/round-001/study/full/arms/arm-b1ee8c0e1c0ffe7465f83fe0/development/sandbox/9964be20-cdd2-4041-8ef3-4d321d2a7ded.audit.json",
+  "audit_sha256": "3a2aaa5a2103749b643f1d09aabf3d7003f61659fc0224666df53771561a6e32",
+  "failure": "compilation failed: error[E0308]: mismatched types\n --> /candidate/main.rs:7:20\n  |\n7 |             if let Ok(num) = c.to_digit(16) {\n  |                    ^^^^^^^   -------------- this expression has type `Option<u32>`\n  |                    |\n  |                    expected `Option<u32>`, found `Result<_, _>`\n  |\n  = note: expected enum `Option<u32>`\n             found enum `Result<_, _>`\n\nerror[E0599]: no variant, associated function, or constant named `U64` found for enum `Value` in the current scope\n  --> /candidate/main.rs:12:59\n   |\n12 |             Value::Array(bytes.into_iter().map(|b| Value::U64(b as u64)).collect())\n   |                                                           ^^^ variant, associated function, or constant not found in `Value`\n\nerror: aborting due to 2 previous errors\n\nSome errors have detailed explanations: E0308, E0599.\nFor more information about an error, try `rustc --explain E0308`.\n",
+  "duration_ms": 10420,
+  "timeout_evidence": null,
+  "lifecycle_evidence": {
+    "receipt_path": "reports/local-study/explore/round-001/study/full/arms/arm-b1ee8c0e1c0ffe7465f83fe0/development/sandbox/9964be20-cdd2-4041-8ef3-4d321d2a7ded.lifecycle.json",
+    "receipt_sha256": "d79cba6d53e00053ac432755f561fb170c5daa5926e74c7d8f4a3c9e77a1d703"
+  }
+}

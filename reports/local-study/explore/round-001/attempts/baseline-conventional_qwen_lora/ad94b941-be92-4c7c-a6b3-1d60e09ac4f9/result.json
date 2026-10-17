@@ -1,0 +1,24 @@
+{
+  "exit_code": 0,
+  "request": {
+    "bytes": 3581,
+    "path": "reports/local-study/explore/round-001/attempts/baseline-conventional_qwen_lora/ad94b941-be92-4c7c-a6b3-1d60e09ac4f9/request.json",
+    "sha256": "0a54f63afafe8df27ae291e85269586e785e647db07c06d04a557e8917e00036"
+  },
+  "schema_version": 1,
+  "stage": "baseline-conventional_qwen_lora",
+  "status": "process_completed",
+  "stderr": {
+    "bytes": 2967,
+    "path": "reports/local-study/explore/round-001/attempts/baseline-conventional_qwen_lora/ad94b941-be92-4c7c-a6b3-1d60e09ac4f9/stderr.log",
+    "sha256": "ade8d49e7c215e06129a9a0fa99ff54d8c1e544caa1a05ff6ae802db1cef18c7"
+  },
+  "stderr_tee_error": null,
+  "stdout": {
+    "bytes": 1603,
+    "path": "reports/local-study/explore/round-001/attempts/baseline-conventional_qwen_lora/ad94b941-be92-4c7c-a6b3-1d60e09ac4f9/stdout.log",
+    "sha256": "9653d18a1546676be5a4273d397e3b604818863f2a068cafd27ba079be900369"
+  },
+  "success": true,
+  "wall_seconds": 461.916527122
+}

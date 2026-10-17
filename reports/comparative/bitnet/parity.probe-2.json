@@ -1,0 +1,276 @@
+{
+  "completion_probabilities": [
+    {
+      "bytes": [
+        73,
+        110
+      ],
+      "id": 644,
+      "logprob": -0.3397791385650635,
+      "token": "In",
+      "top_logprobs": [
+        {
+          "bytes": [
+            73,
+            110
+          ],
+          "id": 644,
+          "logprob": -0.3397791385650635,
+          "token": "In"
+        },
+        {
+          "bytes": [
+            84,
+            111
+          ],
+          "id": 1271,
+          "logprob": -1.7141917943954468,
+          "token": "To"
+        },
+        {
+          "bytes": [
+            83,
+            117,
+            114,
+            101
+          ],
+          "id": 40914,
+          "logprob": -2.5769712924957275,
+          "token": "Sure"
+        },
+        {
+          "bytes": [
+            67,
+            101,
+            114,
+            116,
+            97,
+            105,
+            110,
+            108,
+            121
+          ],
+          "id": 96556,
+          "logprob": -4.047359466552734,
+          "token": "Certainly"
+        },
+        {
+          "bytes": [
+            84,
+            104,
+            101
+          ],
+          "id": 791,
+          "logprob": -4.530466556549072,
+          "token": "The"
+        },
+        {
+          "bytes": [
+            89,
+            111,
+            117
+          ],
+          "id": 2675,
+          "logprob": -6.264790058135986,
+          "token": "You"
+        },
+        {
+          "bytes": [
+            72,
+            101,
+            114,
+            101
+          ],
+          "id": 8586,
+          "logprob": -7.0301432609558105,
+          "token": "Here"
+        },
+        {
+          "bytes": [
+            96,
+            96,
+            96
+          ],
+          "id": 74694,
+          "logprob": -8.33349609375,
+          "token": "```"
+        },
+        {
+          "bytes": [
+            73,
+            116
+          ],
+          "id": 2181,
+          "logprob": -9.490320205688477,
+          "token": "It"
+        },
+        {
+          "bytes": [
+            73,
+            102
+          ],
+          "id": 2746,
+          "logprob": -9.561732292175291,
+          "token": "If"
+        },
+        {
+          "bytes": [
+            84,
+            104,
+            105,
+            115
+          ],
+          "id": 2028,
+          "logprob": -10.017486572265623,
+          "token": "This"
+        },
+        {
+          "bytes": [
+            87,
+            104,
+            101,
+            110
+          ],
+          "id": 4599,
+          "logprob": -10.200453758239746,
+          "token": "When"
+        },
+        {
+          "bytes": [
+            83,
+            105,
+            110,
+            99,
+            101
+          ],
+          "id": 12834,
+          "logprob": -10.229198455810549,
+          "token": "Since"
+        },
+        {
+          "bytes": [
+            65
+          ],
+          "id": 32,
+          "logprob": -10.426959991455078,
+          "token": "A"
+        },
+        {
+          "bytes": [
+            65,
+            115,
+            115
+          ],
+          "id": 5733,
+          "logprob": -10.50935173034668,
+          "token": "Ass"
+        },
+        {
+          "bytes": [
+            80,
+            101,
+            114,
+            102,
+            111,
+            114,
+            109
+          ],
+          "id": 48051,
+          "logprob": -10.679716110229492,
+          "token": "Perform"
+        }
+      ]
+    }
+  ],
+  "content": "In",
+  "generation_settings": {
+    "backend_sampling": false,
+    "chat_format": "Content-only",
+    "dry_allowed_length": 2,
+    "dry_base": 1.75,
+    "dry_multiplier": 0.0,
+    "dry_penalty_last_n": 4096,
+    "dry_sequence_breakers": [
+      "\n",
+      ":",
+      "\"",
+      "*"
+    ],
+    "dynatemp_exponent": 1.0,
+    "dynatemp_range": 0.0,
+    "frequency_penalty": 0.0,
+    "generation_prompt": "",
+    "grammar": "",
+    "grammar_lazy": false,
+    "grammar_triggers": [],
+    "ignore_eos": false,
+    "logit_bias": [],
+    "lora": [],
+    "max_tokens": 1,
+    "min_keep": 0,
+    "min_p": 0.05000000074505806,
+    "mirostat": 0,
+    "mirostat_eta": 0.10000000149011612,
+    "mirostat_tau": 5.0,
+    "n_discard": 0,
+    "n_keep": 0,
+    "n_predict": 1,
+    "n_probs": 16,
+    "post_sampling_probs": false,
+    "presence_penalty": 0.0,
+    "preserved_tokens": [],
+    "reasoning_format": "deepseek",
+    "reasoning_in_content": false,
+    "repeat_last_n": 64,
+    "repeat_penalty": 1.0,
+    "samplers": [
+      "penalties",
+      "dry",
+      "top_n_sigma",
+      "top_k",
+      "typ_p",
+      "top_p",
+      "min_p",
+      "xtc",
+      "temperature"
+    ],
+    "seed": 1729,
+    "speculative.types": "none",
+    "stop": [],
+    "stream": false,
+    "temperature": 0.0,
+    "timings_per_token": false,
+    "top_k": 40,
+    "top_n_sigma": -1.0,
+    "top_p": 1.0,
+    "typical_p": 1.0,
+    "xtc_probability": 0.0,
+    "xtc_threshold": 0.10000000149011612
+  },
+  "has_new_line": false,
+  "id_slot": 0,
+  "index": 0,
+  "model": "offline_bundle/students/bitnet-2b-4t/model.i2_s.gguf",
+  "prompt": "<|begin_of_text|>User: Complete the Rust expression: 3_i64 + 4_i64<|eot_id|>Assistant: ",
+  "stop": true,
+  "stop_type": "limit",
+  "stopping_word": "",
+  "timings": {
+    "cache_n": 0,
+    "predicted_ms": 0.001,
+    "predicted_n": 1,
+    "predicted_per_second": 1000000.0,
+    "predicted_per_token_ms": 0.001,
+    "prompt_ms": 418.839,
+    "prompt_n": 21,
+    "prompt_per_second": 50.13859740855078,
+    "prompt_per_token_ms": 19.944714285714287
+  },
+  "tokens": [
+    644
+  ],
+  "tokens_cached": 21,
+  "tokens_evaluated": 21,
+  "tokens_predicted": 1,
+  "truncated": false
+}

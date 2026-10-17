@@ -1,0 +1,6 @@
+{
+  "error": "teacher selection has not met its declared quality target; retained best available model and saved progress",
+  "observed_unix_ms": 1792137980522,
+  "promotion": "incumbent_retained",
+  "status": "FAILURE"
+}

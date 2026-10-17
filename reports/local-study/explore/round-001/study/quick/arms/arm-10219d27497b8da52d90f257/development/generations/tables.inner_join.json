@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "f5e2fbfe6ce8a272f596464c78697531aed9e823bae1baf1fb5191f6fd3dca8d",
+  "task_id": "tables.inner_join",
+  "source_id": "private-tables-v1",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input [left,right] has arrays of [key,value] integer rows, each side with unique keys. Return [key,left_value,right_value] for common keys in ascending key order.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[[[2,9],[1,4]],[[2,3],[3,8]]],\"expected\":[[2,9,3]]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let mut result = Vec::new();\n    let mut left = Vec::new();\n    let mut right = Vec::new();\n\n    for line in input.as_array() {\n        let mut row = Vec::new();\n        for item in line.as_array() {\n            row.push(item.as_i64().unwrap());\n        }\n        left.push(row);\n    }\n\n    for line in input.as_array() {\n        let mut row = Vec::new();\n        for item in line.as_array() {\n            row.push(item.as_i64().unwrap());\n        }\n        right.push(row);\n    }\n\n    let mut common_keys = Vec::new();\n    for (key, left_row) in left.iter().enumerate() {\n        for (key, right_row) in right.iter().enumerate() {\n            if left_row.iter().any(|&value| right_row.iter().any(|&value| value == value)) {\n                common_keys.push((key, left_row.iter().min().unwrap(), right_row.iter().min().unwrap()));\n            }\n        }\n    }\n\n    common_keys.sort_by(|&(k1, v1, v2)| (k1, v1, v2));\n\n    let mut result = Vec::new();\n    for (key, left_value, right_value) in common_keys {\n        result.push(vec![key, left_value, right_value]);\n    }\n\n    serde_json::Value::from(result)\n}\n```",
+    "checkpoint_id": "c3a099596213ac770ad59f644b194199b55cc5a9e499d80a414f6970fedf2ca1",
+    "finish_reason": "stop",
+    "input_tokens": 259,
+    "output_tokens": 316,
+    "elapsed_ms": 53128,
+    "complete": true
+  },
+  "model_error": null
+}

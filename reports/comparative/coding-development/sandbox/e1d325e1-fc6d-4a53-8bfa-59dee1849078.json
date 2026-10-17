@@ -1,0 +1,33 @@
+{
+  "run_id": "e1d325e1-fc6d-4a53-8bfa-59dee1849078",
+  "task_id": "dispatch.round_robin",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error: unknown start of token: `\n --> /candidate/main.rs:1:40\n  |\n1 | Here is a simple implementation of the `solve` function in Rust. This function sorts the input jobs in order of completion.\n  |                                        ^\n  |\nhelp: Unicode character '`' (Grave Accent) looks like ''' (Single Quote), but it is not\n  |\n1 - Here is a simple implementation of the `solve` function in Rust. This function sorts the input jobs in order of completion.\n1 + Here is a simple implementation of the 'solve` function in Rust. This function sorts the input jobs in order of completion.\n  |\n\nerror: unknown start of token: `\n --> /candidate/main.rs:1:46\n  |\n1 | Here is a simple implementation of the `solve` function in Rust. This function sorts the input jobs in order of completion.\n  |                                              ^\n  |\nhelp: Unicode character '`' (Grave Accent) looks like ''' (Single Quote), but it is not\n  |\n1 - Here is a simple implementation of the `solve` function in Rust. This function sorts the input jobs in order of completion.\n1 + Here is a simple implementation of the `solve' function in Rust. This function sorts the input jobs in order of completion.\n  |\n\nerror: unknown start of token: `\n --> /candidate/main.rs:3:1\n  |\n3 | ```rust\n  | ^^^\n  |\n  = note: character appears 2 more times\nhelp: Unicode character '`' (Grave Accent) looks like ''' (Single Quote), but it is not\n  |\n3 - ```rust\n3 + '''rust\n  |\n\nerror: unknown start of token: `\n  --> /candidate/main.rs:28:1\n   |\n28 | ```\n   | ^^^\n   |\n   = note: character appears 2 more times\nhelp: Unicode character '`' (Grave Accent) looks like ''' (Single Quote), but it is not\n   |\n28 - ```\n28 + '''\n   |\n\nerror: expected one of `!` or `::`, found `is`\n --> /candidate/main.rs:1:6\n  |\n1 | Here is a simple implementation of the `solve` function in Rust. This function sorts the input jobs in order of completion.\n  |      ^^ expected one of `!` or `::`\n\nerror: aborting due to 5 previous errors\n\n"
+  ],
+  "cases_total": 5,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "0bf995b5f69865792503015f6af52b457c861b679877956e939c2137ddb4a562",
+  "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+  "oracle_sha256": "a734f6d465714cbebb072790fedff161d2fc28cbb257b3d04cee0feaf8b5b5fe",
+  "code_sha256": "1449bb67c9bec73f61ab1dbbacca1b73d7b3bf6e71fbb4d198acd25c5e84274b",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:1",
+    "expected_image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/comparative/coding-development/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/comparative/coding-development/sandbox/e1d325e1-fc6d-4a53-8bfa-59dee1849078.audit.json",
+  "audit_sha256": "00da31f8fecd5433689c57fcd0751b0b32dabfb26fbe219414bdf02ad2a85239",
+  "failure": "compilation failed: error: unknown start of token: `\n --> /candidate/main.rs:1:40\n  |\n1 | Here is a simple implementation of the `solve` function in Rust. This function sorts the input jobs in order of completion.\n  |                                        ^\n  |\nhelp: Unicode character '`' (Grave Accent) looks like ''' (Single Quote), but it is not\n  |\n1 - Here is a simple implementation of the `solve` function in Rust. This function sorts the input jobs in order of completion.\n1 + Here is a simple implementation of the 'solve` function in Rust. This function sorts the input jobs in order of completion.\n  |\n\nerror: unknown start of token: `\n --> /candidate/main.rs:1:46\n  |\n1 | Here is a simple implementation of the `solve` function in Rust. This function sorts the input jobs in order of completion.\n  |                                              ^\n  |\nhelp: Unicode character '`' (Grave Accent) looks like ''' (Single Quote), but it is not\n  |\n1 - Here is a simple implementation of the `solve` function in Rust. This function sorts the input jobs in order of completion.\n1 + Here is a simple implementation of the `solve' function in Rust. This function sorts the input jobs in order of completion.\n  |\n\nerror: unknown start of token: `\n --> /candidate/main.rs:3:1\n  |\n3 | ```rust\n  | ^^^\n  |\n  = note: character appears 2 more times\nhelp: Unicode character '`' (Grave Accent) looks like ''' (Single Quote), but it is not\n  |\n3 - ```rust\n3 + '''rust\n  |\n\nerror: unknown start of token: `\n  --> /candidate/main.rs:28:1\n   |\n28 | ```\n   | ^^^\n   |\n   = note: character appears 2 more times\nhelp: Unicode character '`' (Grave Accent) looks like ''' (Single Quote), but it is not\n   |\n28 - ```\n28 + '''\n   |\n\nerror: expected one of `!` or `::`, found `is`\n --> /candidate/main.rs:1:6\n  |\n1 | Here is a simple implementation of the `solve` function in Rust. This function sorts the input jobs in order of completion.\n  |      ^^ expected one of `!` or `::`\n\nerror: aborting due to 5 previous errors\n\n",
+  "duration_ms": 6066,
+  "timeout_evidence": null
+}

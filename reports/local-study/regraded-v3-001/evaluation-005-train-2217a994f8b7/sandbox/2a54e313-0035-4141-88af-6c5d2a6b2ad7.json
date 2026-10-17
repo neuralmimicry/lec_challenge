@@ -1,0 +1,40 @@
+{
+  "run_id": "2a54e313-0035-4141-88af-6c5d2a6b2ad7",
+  "task_id": "ledger.differences",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error[E0369]: cannot subtract `Value` from `Value`\n   --> /candidate/main.rs:10:40\n    |\n 10 |         result.push(Value::from(arr[i] - arr[i - 1]));\n    |                                 ------ ^ ---------- Value\n    |                                 |\n    |                                 Value\n    |\nnote: `Value` does not implement `Sub`\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:116:1\n    |\n116 | pub enum Value {\n    | ^^^^^^^^^^^^^^ `Value` is defined in another crate\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0369`.\n"
+  ],
+  "cases_total": 14,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "1c6e42acff1939783a98c782cae29de14f51cbd50f5647c27696958b069bd0b9",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/regraded-v3-001/evaluation-005-train-2217a994f8b7/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/regraded-v3-001/evaluation-005-train-2217a994f8b7/sandbox/2a54e313-0035-4141-88af-6c5d2a6b2ad7.audit.json",
+  "audit_sha256": "50d37446c13144f05f899069daa2957302359ed32116f4f3d9fcfb47a1a1f043",
+  "failure": "compilation failed: error[E0369]: cannot subtract `Value` from `Value`\n   --> /candidate/main.rs:10:40\n    |\n 10 |         result.push(Value::from(arr[i] - arr[i - 1]));\n    |                                 ------ ^ ---------- Value\n    |                                 |\n    |                                 Value\n    |\nnote: `Value` does not implement `Sub`\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:116:1\n    |\n116 | pub enum Value {\n    | ^^^^^^^^^^^^^^ `Value` is defined in another crate\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0369`.\n",
+  "duration_ms": 17209,
+  "timeout_evidence": null,
+  "lifecycle_evidence": {
+    "receipt_path": "reports/local-study/regraded-v3-001/evaluation-005-train-2217a994f8b7/sandbox/2a54e313-0035-4141-88af-6c5d2a6b2ad7.lifecycle.json",
+    "receipt_sha256": "7472310b826f95a516432f7e44966ee1ea34ec94537426c487cc3b43a4bbd232"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "run_id": "ed194e4c-4a32-4b48-be68-a8b89d34f261",
+  "task_id": "bits.parity",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: warning: unused import: `serde_json::Value`\n --> /candidate/main.rs:1:5\n  |\n1 | use serde_json::Value;\n  |     ^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0599]: no method named `as_u32` found for enum `Value` in the current scope\n --> /candidate/main.rs:4:23\n  |\n4 |     let input = input.as_u32().unwrap();\n  |                       ^^^^^^\n  |\nhelp: there is a method `as_u64` with a similar name\n  |\n4 -     let input = input.as_u32().unwrap();\n4 +     let input = input.as_u64().unwrap();\n  |\n\nerror: aborting due to 1 previous error; 1 warning emitted\n\nFor more information about this error, try `rustc --explain E0599`.\n"
+  ],
+  "cases_total": 7,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "afcfc1f378ee796b1dfc64429c0d2a7f95cbff6337c555aeb8c4331912bc4745",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/regraded-v3-001/evaluation-003-train-f95238863522/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/regraded-v3-001/evaluation-003-train-f95238863522/sandbox/ed194e4c-4a32-4b48-be68-a8b89d34f261.audit.json",
+  "audit_sha256": "fd71e1f15f51106c12f3ee9abbcb888b48ff2f1e8b6d520d7bcf7567a181c8a3",
+  "failure": "compilation failed: warning: unused import: `serde_json::Value`\n --> /candidate/main.rs:1:5\n  |\n1 | use serde_json::Value;\n  |     ^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0599]: no method named `as_u32` found for enum `Value` in the current scope\n --> /candidate/main.rs:4:23\n  |\n4 |     let input = input.as_u32().unwrap();\n  |                       ^^^^^^\n  |\nhelp: there is a method `as_u64` with a similar name\n  |\n4 -     let input = input.as_u32().unwrap();\n4 +     let input = input.as_u64().unwrap();\n  |\n\nerror: aborting due to 1 previous error; 1 warning emitted\n\nFor more information about this error, try `rustc --explain E0599`.\n",
+  "duration_ms": 14547,
+  "timeout_evidence": null,
+  "lifecycle_evidence": {
+    "receipt_path": "reports/local-study/regraded-v3-001/evaluation-003-train-f95238863522/sandbox/ed194e4c-4a32-4b48-be68-a8b89d34f261.lifecycle.json",
+    "receipt_sha256": "b865ef22c763f432d55bdd99af7b109df79f764b66a58b3b7e46a7fa619371d3"
+  }
+}

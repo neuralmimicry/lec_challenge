@@ -1,0 +1,38 @@
+{
+  "model_id": "deepseek-coder-1_3b",
+  "task_id": "dispatch.finish_order",
+  "source_id": "private-dispatch-v1",
+  "specification_sha256": "bd65bbcd2943471a0fa07872b15464820b0d1c4b37db971d13f3b63850727773",
+  "seed": 1729,
+  "plan_sha256": "9aefcaf935435b296c63229638aad5a22a416ae171eda011a6812dd745667ea8",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an array of [arrival,duration], nonnegative integers. A single server processes input order, starting each job at max(previous finish,arrival). Return finish times.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[[0,3],[1,2],[8,1]],\"expected\":[3,5,9]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "Here is a simple implementation of the problem in Rust. This implementation assumes that the input is a vector of pairs of numbers, where the first number is the arrival time and the second number is the duration. It then calculates the finish time for each job and returns a vector of these finish times.\n\n```rust\nuse serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let mut jobs: Vec<(i64, i64)> = serde_json::from_str(&input).unwrap();\n    jobs.sort_by(|a, b| a.0.cmp(&b.0));\n\n    let mut finish_times: Vec<i64> = Vec::new();\n    let mut previous_finish = 0;\n\n    for job in jobs {\n        let finish = previous_finish + job.1;\n        finish_times.push(finish);\n        previous_finish = finish;\n    }\n\n    serde_json::to_string(&finish_times).unwrap()\n}\n```\n\nThis function first parses the input JSON into a vector of pairs of numbers. It then sorts this vector by the first number in each pair, which is the arrival time.\n\nNext, it creates an empty vector to store the finish times. It also initializes a variable to keep track of the previous finish time.\n\nThen, for each job in the sorted vector, it calculates the finish time as the sum of the previous finish time and the duration of the job. It then adds this finish time to the vector of finish times. It also updates the previous finish time to be the finish time of the current job.\n\nFinally, it converts the vector of finish times back into a JSON string and returns this string.\n\nPlease note that this function assumes that the input is a valid JSON array of pairs of numbers, where each pair consists of two numbers. If the input is not valid JSON, the function will panic.\n",
+    "checkpoint_id": "4ff570bf9a558d23c5cb4171bad00daf663be8282150cdb5769e0f6975b0007a",
+    "finish_reason": "stop",
+    "input_tokens": 323,
+    "output_tokens": 443,
+    "elapsed_ms": 31010,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/comparative/coding-development/deepseek-coder-1_3b/dispatch.finish_order.generation.json",
+    "sha256": "9da9b3d0dd104ecbef06603233c5900295345101d06472a7ee5f1cfd77e54472",
+    "bytes": 4071
+  },
+  "sandbox_report": {
+    "path": "reports/comparative/coding-development/sandbox/32c4fcd5-56de-4ab5-8e0d-8289469f1ae6.json",
+    "sha256": "5f95dad0bc2538fd0c718ba61f3d69684df153dc30291cafd8d3be980028eef0",
+    "bytes": 3026
+  },
+  "grading_error": null,
+  "success": false
+}

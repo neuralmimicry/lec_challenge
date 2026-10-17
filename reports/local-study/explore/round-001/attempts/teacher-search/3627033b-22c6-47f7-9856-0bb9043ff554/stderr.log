@@ -1,0 +1,30 @@
+teacher-search: iteration=2/6 candidate=deepseek-coder-6_7b-q4_k_m target=3 threshold=80.00% cost=unmeasured
+Hub hashing deepseek-coder-6.7b-instruct.Q4_K_M.gguf: 0/4083015904 bytes, 0.00 MiB/s, ETA unknown (publisher checksum pending)
+Hub hashing deepseek-coder-6.7b-instruct.Q4_K_M.gguf: 2208301056/4083015904 bytes, 140.10 MiB/s, ETA 00:00:13 (publisher checksum pending)
+teacher-search: reusing checksum-verified cached model=deepseek-coder-6_7b-q4_k_m (zero Hub requests)
+teacher-search: evaluating model=deepseek-coder-6_7b-q4_k_m runtime=RuntimeOptions { device: Cuda { ordinal: 0 }, dtype: F32 }; CUDA GPU NVIDIA GeForce RTX 2080 selected: estimated resident 5992472800 bytes fits guarded free VRAM 7089002906 bytes
+compare: verifying effective sandbox controls before local model evaluation
+Hub hashing deepseek-coder-6.7b-instruct.Q4_K_M.gguf: 0/4083015904 bytes, 0.00 MiB/s, ETA unknown (publisher checksum pending)
+Hub hashing deepseek-coder-6.7b-instruct.Q4_K_M.gguf: 2785017856/4083015904 bytes, 177.04 MiB/s, ETA 00:00:07 (publisher checksum pending)
+compare: 16 available CPU threads; 15 concurrent isolated graders; generation deadline 120s
+compare: loading TheBloke/deepseek-coder-6.7B-instruct-GGUF on requested device
+Hub hashing deepseek-coder-6.7b-instruct.Q4_K_M.gguf: 0/4083015904 bytes, 0.00 MiB/s, ETA unknown (publisher checksum pending)
+Hub hashing deepseek-coder-6.7b-instruct.Q4_K_M.gguf: 2810183680/4083015904 bytes, 178.64 MiB/s, ETA 00:00:07 (publisher checksum pending)
+compare: model=deepseek-coder-6_7b-q4_k_m task=money.parse seed=1729
+compare: model=deepseek-coder-6_7b-q4_k_m task=money.format seed=1729
+compare: model=deepseek-coder-6_7b-q4_k_m task=money.split seed=1729
+compare: model=deepseek-coder-6_7b-q4_k_m task=money.basket seed=1729
+compare: model=deepseek-coder-6_7b-q4_k_m task=dispatch.finish_order seed=1729
+compare: model=deepseek-coder-6_7b-q4_k_m task=dispatch.waiting seed=1729
+compare: model=deepseek-coder-6_7b-q4_k_m task=dispatch.round_robin seed=1729
+compare: model=deepseek-coder-6_7b-q4_k_m task=dispatch.priority seed=1729
+compare: model=deepseek-coder-6_7b-q4_k_m task=encoding.hex_encode seed=1729
+compare: model=deepseek-coder-6_7b-q4_k_m task=encoding.hex_decode seed=1729
+compare: model=deepseek-coder-6_7b-q4_k_m task=encoding.caesar seed=1729
+compare: model=deepseek-coder-6_7b-q4_k_m task=encoding.rot13 seed=1729
+compare: model=deepseek-coder-6_7b-q4_k_m task=tables.sort_rows seed=1729
+compare: model=deepseek-coder-6_7b-q4_k_m task=tables.last_by_key seed=1729
+compare: model=deepseek-coder-6_7b-q4_k_m task=tables.group_sums seed=1729
+compare: model=deepseek-coder-6_7b-q4_k_m task=tables.inner_join seed=1729
+teacher-search: result model=deepseek-coder-6_7b-q4_k_m passed=0/16 generation/infrastructure_errors=16 qualified=false
+FAILURE: teacher selection has not met its declared quality target; retained best available model and saved progress

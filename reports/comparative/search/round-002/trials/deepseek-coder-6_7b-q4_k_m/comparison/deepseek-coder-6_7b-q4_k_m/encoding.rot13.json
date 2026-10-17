@@ -1,0 +1,38 @@
+{
+  "model_id": "deepseek-coder-6_7b-q4_k_m",
+  "task_id": "encoding.rot13",
+  "source_id": "private-encoding-v1",
+  "specification_sha256": "56794b6c25031b0931d378f8f3955bc2d10c4ef04da0be851795e2ca9a832cfa",
+  "seed": 1729,
+  "plan_sha256": "79e25584f785f04f53b60d4cf3e4a730d2cf181ce11620a413bb1e0123bc1de2",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an ASCII string. Apply ROT13 to upper/lowercase letters and preserve other characters.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":\"Hello, Z!\",\"expected\":\"Uryyb, M!\"}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "Here is the Rust code that solves the problem:\n\n```rust\nuse serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let s = input.as_str().unwrap();\n    let rot13 = s.chars().map(|c| {\n        if c.is_ascii_alphabetic() {\n            let base = if c.is_lowercase() { b'a' } else { b'A' };\n            let c = ((c as u8 - base + 13) % 26) + base;\n            c as char\n        } else {\n            c\n        }\n    }).collect::<String>();\n\n    Value::String(rot13)\n}\n```\n\nThis function takes a `serde_json::Value` as input, which is expected to be a JSON string. It converts this string to a Rust `String`, applies the ROT13 cipher to each character, and then wraps the result back into a `serde_json::Value`.\n\nThe ROT13 cipher works by shifting each letter 13 places in the alphabet. For example, 'a' becomes 'n', 'b' becomes 'o', and so on. Non-alphabetic characters are left unchanged.\n\nPlease note that this code assumes that the input is always a valid JSON string. If the input could be something else, you should add error handling to deal with that.\n",
+    "checkpoint_id": "92da6238854f2fa902d8b2ad79d548536af1d3ab06821f323bd5bbcea2013276",
+    "finish_reason": "stop",
+    "input_tokens": 296,
+    "output_tokens": 339,
+    "elapsed_ms": 45168,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/comparative/search/round-002/trials/deepseek-coder-6_7b-q4_k_m/comparison/deepseek-coder-6_7b-q4_k_m/encoding.rot13.generation.json",
+    "sha256": "f5d2c72f327ea392e9ffface987ecc6bc918b5e1c81c53419a3644c18f3281cb",
+    "bytes": 4898
+  },
+  "sandbox_report": {
+    "path": "reports/comparative/search/round-002/trials/deepseek-coder-6_7b-q4_k_m/comparison/sandbox/33d7875d-1dcc-4da0-8635-9ff3b540ee1e.json",
+    "sha256": "454251b6d481edd519a6e3988630e49e7f894d9c177c97da56921baf2e05867e",
+    "bytes": 10152
+  },
+  "grading_error": null,
+  "success": false
+}

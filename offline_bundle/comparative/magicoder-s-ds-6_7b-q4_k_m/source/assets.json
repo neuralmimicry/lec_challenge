@@ -1,0 +1,16 @@
+{
+  "model_id": "ise-uiuc/Magicoder-S-DS-6.7B",
+  "revision": "b3ed7cb1578a3643ceaf2ebf996a3d8e85f75d8f",
+  "licence": "other",
+  "files": {
+    "LICENSE": "84d3a9a13e4f671c3f90087f33d6926b5621baa6711b315ee9f0113436e2d0e2",
+    "README.md": "f944a8a38f6073b1578f5aa07f8221fde6146a21267c6f641c8eadba44a59cf2",
+    "added_tokens.json": "423a96e0e9e3e0c0d8dc142bddd7b70cd100360980d3017920f358c9163375b4",
+    "config.json": "5420661967bb4aa7c4a3e8bc8ed5913dfc62e3e05bdcb01f2857f41070353187",
+    "generation_config.json": "1e88670fbb59572c8f60c85dcb429f04d611a3b9910c28b78163beb769090abb",
+    "special_tokens_map.json": "acb949a6d246354249847f5e1f0dabe04c258271eab55a6d6fac251d7af41075",
+    "tokenizer.json": "5ea7c1cf401382d953c8a56df1786cefa9446bc6aa168571870063da9ecc7e89",
+    "tokenizer.model": "45ccb9c8b6b561889acea59191d66986d314e7cbd6a78abc6e49b139ca91c1e6",
+    "tokenizer_config.json": "6dd970498d4ad0237c2f4025e0efbddb188733cca871d6f8dc7aff30409f76ba"
+  }
+}

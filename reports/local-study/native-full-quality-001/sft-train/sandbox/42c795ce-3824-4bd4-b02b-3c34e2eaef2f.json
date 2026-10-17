@@ -1,0 +1,34 @@
+{
+  "run_id": "42c795ce-3824-4bd4-b02b-3c34e2eaef2f",
+  "task_id": "paths.ancestors",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error[E0308]: mismatched types\n   --> /candidate/main.rs:27:18\n    |\n 15 |                     result.push(current_path.clone());\n    |                     ------      -------------------- this argument has type `std::string::String`...\n    |                     |\n    |                     ... which causes `result` to have type `Vec<std::string::String>`\n...\n 27 |     Value::Array(result)\n    |     ------------ ^^^^^^ expected `Vec<Value>`, found `Vec<String>`\n    |     |\n    |     arguments to this enum variant are incorrect\n    |\n    = note: expected struct `Vec<Value>`\n               found struct `Vec<std::string::String>`\nnote: tuple variant defined here\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:160:5\n    |\n160 |     Array(Vec<Value>),\n    |     ^^^^^\nhelp: try wrapping the expression in `serde_json::Value::String`\n    |\n 15 |                     result.push(serde_json::Value::String(current_path.clone()));\n    |                                 ++++++++++++++++++++++++++                    +\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0308`.\n"
+  ],
+  "cases_total": 5,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "4b2556745b303526f354ded7f2c473b77f6da0c99a77f0a493c7272a8d800aac",
+  "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "375b83e1393049312f091ff35b0a4661153b7c0b44966b6b6766ef0d6829280d",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "controller_version": 2,
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:1",
+    "expected_image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/native-full-quality-001/sft-train/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/native-full-quality-001/sft-train/sandbox/42c795ce-3824-4bd4-b02b-3c34e2eaef2f.audit.json",
+  "audit_sha256": "dd090511e836db87597917f2e27dd35a43ab7e047a265208971cf639eb3ba8d8",
+  "failure": "compilation failed: error[E0308]: mismatched types\n   --> /candidate/main.rs:27:18\n    |\n 15 |                     result.push(current_path.clone());\n    |                     ------      -------------------- this argument has type `std::string::String`...\n    |                     |\n    |                     ... which causes `result` to have type `Vec<std::string::String>`\n...\n 27 |     Value::Array(result)\n    |     ------------ ^^^^^^ expected `Vec<Value>`, found `Vec<String>`\n    |     |\n    |     arguments to this enum variant are incorrect\n    |\n    = note: expected struct `Vec<Value>`\n               found struct `Vec<std::string::String>`\nnote: tuple variant defined here\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:160:5\n    |\n160 |     Array(Vec<Value>),\n    |     ^^^^^\nhelp: try wrapping the expression in `serde_json::Value::String`\n    |\n 15 |                     result.push(serde_json::Value::String(current_path.clone()));\n    |                                 ++++++++++++++++++++++++++                    +\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0308`.\n",
+  "duration_ms": 8501,
+  "timeout_evidence": null
+}

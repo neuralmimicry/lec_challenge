@@ -1,0 +1,6 @@
+{
+  "error": "no recordings; offline replay is incomplete",
+  "observed_unix_ms": 1792159078193,
+  "promotion": "incumbent_retained",
+  "status": "FAILURE"
+}

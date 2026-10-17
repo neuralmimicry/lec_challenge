@@ -1,0 +1,39 @@
+{
+  "engine_sha256": "c7cdb4da458c47804bdb34d71ba51220216619dca401a7efae769cebc1065edf",
+  "input": {
+    "bytes": 166535,
+    "path": "reports/local-study/qwen7b-evidence/bundle.json",
+    "sha256": "d6899a4dff1b7c5180c006b38f9441f916eb7bda2f59df21df1f64784e8f1417"
+  },
+  "max_tokens": 256,
+  "maximum_tasks": 4,
+  "mode": "on_policy",
+  "schema_version": 1,
+  "seed": 1729,
+  "student_assets": {
+    "bytes": 788,
+    "path": "offline_bundle/base/assets.json",
+    "sha256": "54304e7f41519a4196674cba5e86593802f852b2b47882d6c19706f85f303ad4"
+  },
+  "student_checkpoint": {
+    "bytes": 13312,
+    "path": "reports/local-study/native-sft-resume-qa/interrupted/manifest.json",
+    "sha256": "7357ab1a056034aae272c25d7e59f570a2502de8bcf411926e8cb7acba271352"
+  },
+  "student_kind": "conventional_qwen_lora",
+  "student_runtime": {
+    "device": "cpu",
+    "dtype": "f32"
+  },
+  "teacher_ids": [
+    "qwen-coder-7b-q4_k_m"
+  ],
+  "teacher_runtime": {
+    "device": {
+      "cuda": {
+        "ordinal": 0
+      }
+    },
+    "dtype": "f32"
+  }
+}

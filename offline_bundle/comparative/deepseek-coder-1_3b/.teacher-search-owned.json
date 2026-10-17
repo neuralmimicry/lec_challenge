@@ -1,0 +1,7 @@
+{
+  "schema_version": 1,
+  "directory": "offline_bundle/comparative/deepseek-coder-1_3b",
+  "candidate_id": "deepseek-coder-1_3b",
+  "model_id": "deepseek-ai/deepseek-coder-1.3b-instruct",
+  "revision": "e063262dac8366fc1f28a4da0ff3c50ea66259ca"
+}

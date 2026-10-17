@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "0b0b9d0039da0867922749f2f76f43c30915c537c32a74f7c8e2f090a8148cea",
+  "task_id": "tables.last_by_key",
+  "source_id": "private-tables-v1",
+  "success": false,
+  "raw_generation": {
+    "path": "reports/local-study/native-full-quality-001/base-development/generations/tables.last_by_key.json",
+    "sha256": "aa9b7bdeb58110aa13382b2565bb15b65208dce4f861bedf1c8986a7d70cdee8",
+    "bytes": 2075
+  },
+  "sandbox_report": {
+    "path": "reports/local-study/native-full-quality-001/base-development/sandbox/03b28835-58aa-403d-b430-40e0060278ff.json",
+    "sha256": "166c29481f285790336cedc4436e369e9b1a068dae0c785e97091891c8e1f2a1",
+    "bytes": 2630
+  },
+  "grading_error": null
+}

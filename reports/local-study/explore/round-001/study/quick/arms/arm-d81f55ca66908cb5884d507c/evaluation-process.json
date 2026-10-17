@@ -1,0 +1,16 @@
+{
+  "engine": {
+    "bytes": 46867184,
+    "path": "state/engines/3f348bdfa71c49df5b5d0b7581ae9ad3114645127f99abbec9e4aac1064563bd/lec-distil",
+    "sha256": "3f348bdfa71c49df5b5d0b7581ae9ad3114645127f99abbec9e4aac1064563bd"
+  },
+  "evaluation_process_id": 1598598,
+  "evidence_kind": "actual_fresh_process_checkpoint_reload",
+  "schema_version": 1,
+  "training_artifact": {
+    "bytes": 1861,
+    "path": "reports/local-study/explore/round-001/study/quick/arms/arm-d81f55ca66908cb5884d507c/training-artifact.json",
+    "sha256": "421f2c4ae3ae05d8c56540ad52e87d88cd976dc3012308773e7cff2b6aadab57"
+  },
+  "training_process_id": 1597906
+}

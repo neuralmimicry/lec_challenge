@@ -1,0 +1,166 @@
+{
+  "config": {
+    "bytes": 2115,
+    "path": "config/teacher-search-qwen3.toml",
+    "sha256": "54b31abb9c0fbe4a125f2665d1d766982be6627b8c82fcebd72061bcb38e0fb1"
+  },
+  "container_started": false,
+  "diagnostic_executable": {
+    "bytes": 5053904,
+    "path": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/state/diagnostics/prepare-teacher-round-002",
+    "sha256": "4af8c4468af3aab24a3ccbfe63ca3a72acc04470665403396e3da656872b462e"
+  },
+  "diagnostic_source": {
+    "bytes": 5560,
+    "path": "state/diagnostics/prepare-teacher-round-002.rs",
+    "sha256": "841e3074bba62f708aa9a7e7616a1e7cda0814d66e9b2f3e411f98024e231a90"
+  },
+  "engine_bound": false,
+  "evidence_kind": "read_only_cached_teacher_followup_prerequisites",
+  "gpu_allocation_received": false,
+  "held_out_used": false,
+  "interpretation": "Two declared cached exploratory trials, original sixteen development tasks and separately frozen qualification if the primary threshold is met. Incomplete infrastructure is inconclusive; no teacher qualification, improvement or independent-API-provider evidence is claimed.",
+  "model_allocated": false,
+  "models": [
+    {
+      "assets": {
+        "bytes": 942,
+        "path": "offline_bundle/comparative/deepseek-coder-6_7b-q4_k_m/gguf-assets.json",
+        "sha256": "b46b1570e5e62e9d837d3f262c82f7d5c86e00c0697991da70ca7ca46ff7cc0d"
+      },
+      "id": "deepseek-coder-6_7b-q4_k_m",
+      "metadata_independently_rehashed": [
+        {
+          "bytes": 21322,
+          "path": "offline_bundle/comparative/deepseek-coder-6_7b-q4_k_m/README.md",
+          "sha256": "1338c05a5298c1fabc01232b3afcf97b30ffe4dd3d1ef4f3d7119e9ffa492666"
+        },
+        {
+          "bytes": 13760,
+          "path": "offline_bundle/comparative/deepseek-coder-6_7b-q4_k_m/source/LICENSE",
+          "sha256": "a3a0e9449cb691a12f4de1d03725fd41326614fdeaf5d80b28c51187da0bed0e"
+        },
+        {
+          "bytes": 3574,
+          "path": "offline_bundle/comparative/deepseek-coder-6_7b-q4_k_m/source/README.md",
+          "sha256": "c874c1b3458a13e73263baf38836ce280d3c557e399a6b0078c22d55f7cda98e"
+        },
+        {
+          "bytes": 760,
+          "path": "offline_bundle/comparative/deepseek-coder-6_7b-q4_k_m/source/config.json",
+          "sha256": "a3a2ce1a623b367d3799fb0c1e1ba12d5b8fa51a8e7abba14d10dd3739cd73e4"
+        },
+        {
+          "bytes": 119,
+          "path": "offline_bundle/comparative/deepseek-coder-6_7b-q4_k_m/source/generation_config.json",
+          "sha256": "186a63b420f66a03e95a035c488373361bb04833a9b83f4bdbaba70c5c816002"
+        },
+        {
+          "bytes": 1367962,
+          "path": "offline_bundle/comparative/deepseek-coder-6_7b-q4_k_m/source/tokenizer.json",
+          "sha256": "ef48ebdc8546c2d8092349d321f1d162de804a1c8900df2b615c7dc8b02ce141"
+        },
+        {
+          "bytes": 1868,
+          "path": "offline_bundle/comparative/deepseek-coder-6_7b-q4_k_m/source/tokenizer_config.json",
+          "sha256": "775f116ff1130a5b5bfc3cfdb594f9fcb5a5dc61d5a11ba92b2a7c078d66b7b7"
+        }
+      ],
+      "model_id": "TheBloke/deepseek-coder-6.7B-instruct-GGUF",
+      "new_download_required_by_cache_presence_check": false,
+      "revision": "9e221e6b41cb1bf1c5d8f9718e81e3dc781f7557",
+      "source_config": {
+        "bytes": 760,
+        "path": "offline_bundle/comparative/deepseek-coder-6_7b-q4_k_m/source/config.json",
+        "sha256": "a3a2ce1a623b367d3799fb0c1e1ba12d5b8fa51a8e7abba14d10dd3739cd73e4"
+      },
+      "weight": {
+        "bytes": 4083015904,
+        "path": "offline_bundle/comparative/deepseek-coder-6_7b-q4_k_m/deepseek-coder-6.7b-instruct.Q4_K_M.gguf",
+        "publisher_pinned_sha256": "92da6238854f2fa902d8b2ad79d548536af1d3ab06821f323bd5bbcea2013276",
+        "whole_weight_checksum_recomputed_by_this_prerequisite": false
+      }
+    },
+    {
+      "assets": {
+        "bytes": 1132,
+        "path": "offline_bundle/comparative/qwen3-4b-instruct-2507-q4_k_m/gguf-assets.json",
+        "sha256": "131d1ddb62d2c3182ffb48aa0616ceb9845bd19107acef85b76812a2d83e64f1"
+      },
+      "id": "qwen3-4b-instruct-2507-q4_k_m",
+      "metadata_independently_rehashed": [
+        {
+          "bytes": 13946,
+          "path": "offline_bundle/comparative/qwen3-4b-instruct-2507-q4_k_m/README.md",
+          "sha256": "139ebb15c2601ca66b0d2820127b1bfaf491b084a582f9fa08286ba7daeeea82"
+        },
+        {
+          "bytes": 11343,
+          "path": "offline_bundle/comparative/qwen3-4b-instruct-2507-q4_k_m/source/LICENSE",
+          "sha256": "832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e"
+        },
+        {
+          "bytes": 8168,
+          "path": "offline_bundle/comparative/qwen3-4b-instruct-2507-q4_k_m/source/README.md",
+          "sha256": "8e3dd0c3b5b11897cc71092ccfe517bb7a9783479baa3665aad73c8d1a2041cd"
+        },
+        {
+          "bytes": 727,
+          "path": "offline_bundle/comparative/qwen3-4b-instruct-2507-q4_k_m/source/config.json",
+          "sha256": "5beea1a4a34c62782bfb2f911c606741a3bab8f92d80a118fa053c28af12e8ba"
+        },
+        {
+          "bytes": 238,
+          "path": "offline_bundle/comparative/qwen3-4b-instruct-2507-q4_k_m/source/generation_config.json",
+          "sha256": "835fffe355c9438e7a25be099b3fccaa98350b83451f9fd2d99512e74f1ade48"
+        },
+        {
+          "bytes": 1671839,
+          "path": "offline_bundle/comparative/qwen3-4b-instruct-2507-q4_k_m/source/merges.txt",
+          "sha256": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3"
+        },
+        {
+          "bytes": 11422654,
+          "path": "offline_bundle/comparative/qwen3-4b-instruct-2507-q4_k_m/source/tokenizer.json",
+          "sha256": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4"
+        },
+        {
+          "bytes": 9377,
+          "path": "offline_bundle/comparative/qwen3-4b-instruct-2507-q4_k_m/source/tokenizer_config.json",
+          "sha256": "a62ff0a2472a0fa1b8eaabcb57c59b58afa42a22831dc141400b6e0cf2b65ce3"
+        },
+        {
+          "bytes": 2776833,
+          "path": "offline_bundle/comparative/qwen3-4b-instruct-2507-q4_k_m/source/vocab.json",
+          "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+        }
+      ],
+      "model_id": "bartowski/Qwen_Qwen3-4B-Instruct-2507-GGUF",
+      "new_download_required_by_cache_presence_check": false,
+      "revision": "ae44f08e1392f39c0e474af10c3ff8355c8b6688",
+      "source_config": {
+        "bytes": 727,
+        "path": "offline_bundle/comparative/qwen3-4b-instruct-2507-q4_k_m/source/config.json",
+        "sha256": "5beea1a4a34c62782bfb2f911c606741a3bab8f92d80a118fa053c28af12e8ba"
+      },
+      "weight": {
+        "bytes": 2497280736,
+        "path": "offline_bundle/comparative/qwen3-4b-instruct-2507-q4_k_m/Qwen_Qwen3-4B-Instruct-2507-Q4_K_M.gguf",
+        "publisher_pinned_sha256": "2fde00ce69dd4899c70d020845e2638353015bba0fdf161b3eb965f2bca4464e",
+        "whole_weight_checksum_recomputed_by_this_prerequisite": false
+      }
+    }
+  ],
+  "network_request_issued": false,
+  "old_round_modified": false,
+  "passed": true,
+  "promotable": false,
+  "prospective_output": "reports/comparative/search/round-002",
+  "required_before_dispatch": [
+    "Root-provided immutable CUDA engine after verification008, including policy3, Qwen3 and legacy-RoPE QA and exact JSON float round trips.",
+    "Root's content1536 acquisition completes and explicitly releases GPU/container ownership.",
+    "Fresh final protocol binds exact engine/config/CPU allocation/runtime and retains original round001 and rejected DeepSeek follow-up.",
+    "Actual application independently rehashes complete cached model weights and validates pinned source/config/licence before loading."
+  ],
+  "schema_version": 1
+}

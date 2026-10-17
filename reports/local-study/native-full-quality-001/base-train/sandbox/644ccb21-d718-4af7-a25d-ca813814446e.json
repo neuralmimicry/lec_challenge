@@ -1,0 +1,34 @@
+{
+  "run_id": "644ccb21-d718-4af7-a25d-ca813814446e",
+  "task_id": "text.slug",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: warning: unused import: `serde_json::Value`\n --> /candidate/main.rs:1:5\n  |\n1 | use serde_json::Value;\n  |     ^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0599]: no method named `chars` found for enum `Option<T>` in the current scope\n --> /candidate/main.rs:8:29\n  |\n8 |     for c in input.as_str().chars() {\n  |                             ^^^^^ method not found in `Option<&str>`\n  |\nnote: the method `chars` exists on the type `&str`\n --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/str/mod.rs:1079:4\nhelp: consider using `Option::expect` to unwrap the `&str` value, panicking if the value is an `Option::None`\n  |\n8 |     for c in input.as_str().expect(\"REASON\").chars() {\n  |                            +++++++++++++++++\n\nerror[E0599]: no variant, associated function, or constant named `from_str` found for enum `Value` in the current scope\n  --> /candidate/main.rs:27:24\n   |\n27 |     serde_json::Value::from_str(result).unwrap()\n   |                        ^^^^^^^^ variant, associated function, or constant not found in `Value`\n   |\n   = help: items from traits can only be used if the trait is in scope\nhelp: trait `FromStr` which provides `from_str` is implemented but not in scope; perhaps you want to import it\n   |\n 1 + use std::str::FromStr;\n   |\nhelp: there is an associated function `from` with a similar name\n   |\n27 -     serde_json::Value::from_str(result).unwrap()\n27 +     serde_json::Value::from(result).unwrap()\n   |\n\nerror: aborting due to 2 previous errors; 1 warning emitted\n\nFor more information about this error, try `rustc --explain E0599`.\n"
+  ],
+  "cases_total": 6,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "4b2556745b303526f354ded7f2c473b77f6da0c99a77f0a493c7272a8d800aac",
+  "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "35ea34090e032d24ff0d513f97df4de178dd4b4b3555d620d79242f5c86b836a",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "controller_version": 2,
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:1",
+    "expected_image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/native-full-quality-001/base-train/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/native-full-quality-001/base-train/sandbox/644ccb21-d718-4af7-a25d-ca813814446e.audit.json",
+  "audit_sha256": "8f4c919dacf7e0f37ed63a67b4022a07f7d5d5b93be07a84e41fea36a7ba0585",
+  "failure": "compilation failed: warning: unused import: `serde_json::Value`\n --> /candidate/main.rs:1:5\n  |\n1 | use serde_json::Value;\n  |     ^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0599]: no method named `chars` found for enum `Option<T>` in the current scope\n --> /candidate/main.rs:8:29\n  |\n8 |     for c in input.as_str().chars() {\n  |                             ^^^^^ method not found in `Option<&str>`\n  |\nnote: the method `chars` exists on the type `&str`\n --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/str/mod.rs:1079:4\nhelp: consider using `Option::expect` to unwrap the `&str` value, panicking if the value is an `Option::None`\n  |\n8 |     for c in input.as_str().expect(\"REASON\").chars() {\n  |                            +++++++++++++++++\n\nerror[E0599]: no variant, associated function, or constant named `from_str` found for enum `Value` in the current scope\n  --> /candidate/main.rs:27:24\n   |\n27 |     serde_json::Value::from_str(result).unwrap()\n   |                        ^^^^^^^^ variant, associated function, or constant not found in `Value`\n   |\n   = help: items from traits can only be used if the trait is in scope\nhelp: trait `FromStr` which provides `from_str` is implemented but not in scope; perhaps you want to import it\n   |\n 1 + use std::str::FromStr;\n   |\nhelp: there is an associated function `from` with a similar name\n   |\n27 -     serde_json::Value::from_str(result).unwrap()\n27 +     serde_json::Value::from(result).unwrap()\n   |\n\nerror: aborting due to 2 previous errors; 1 warning emitted\n\nFor more information about this error, try `rustc --explain E0599`.\n",
+  "duration_ms": 6594,
+  "timeout_evidence": null
+}

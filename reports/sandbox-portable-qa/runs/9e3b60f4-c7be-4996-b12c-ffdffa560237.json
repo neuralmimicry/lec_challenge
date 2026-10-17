@@ -1,0 +1,36 @@
+{
+  "run_id": "9e3b60f4-c7be-4996-b12c-ffdffa560237",
+  "task_id": "ledger.sum",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "expected 14 responses, observed 0"
+  ],
+  "cases_total": 14,
+  "cases_passed": 0,
+  "trace_complete": true,
+  "policy_sha256": "a476342070dbeab34857f25dcd6e4321d0b2cc9017db49a30c7904c1ad750e44",
+  "image_id": "edff3af23b630f90eb02e4f1830fd2eca68ce88301d96776c65d3696a76af8ce",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "89ef285e0c87561f4bf690280e93eecf09381d266097597d4b5e613ba84df2d7",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "policy_version": 2,
+    "controller_version": 2,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:2-x86_64",
+    "expected_image_id": "edff3af23b630f90eb02e4f1830fd2eca68ce88301d96776c65d3696a76af8ce",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/sandbox-portable-qa/runs"
+  },
+  "audit_events": [],
+  "audit_path": "reports/sandbox-portable-qa/runs/9e3b60f4-c7be-4996-b12c-ffdffa560237.audit.json",
+  "audit_sha256": "b667c6eb427859db756dacd3ca57c66a6154c70a69cbb8aeaa08bebaddec58f1",
+  "failure": "expected 14 responses, observed 0",
+  "duration_ms": 11248,
+  "timeout_evidence": null
+}

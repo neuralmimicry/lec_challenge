@@ -1,0 +1,40 @@
+{
+  "run_id": "66b46ab2-0be9-4b9d-b69c-8a87dc96f071",
+  "task_id": "dispatch.finish_order",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "candidate exit Some(101): \nthread 'main' (33) panicked at /candidate/main.rs:8:37:\ncalled `Option::unwrap()` on a `None` value\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n"
+  ],
+  "cases_total": 5,
+  "cases_passed": 0,
+  "trace_complete": true,
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "bf2c15e07cbd4b8a129912267591f927f530997c3ac19f8658d73cf427b7844e",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/explore/round-001/study/full/arms/arm-b1ee8c0e1c0ffe7465f83fe0/development/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/explore/round-001/study/full/arms/arm-b1ee8c0e1c0ffe7465f83fe0/development/sandbox/66b46ab2-0be9-4b9d-b69c-8a87dc96f071.audit.json",
+  "audit_sha256": "054f04cbf360f60697d0adbcc94e1527e8a51d0f1d20903c4ffcd634af098d98",
+  "failure": "candidate exit Some(101): \nthread 'main' (33) panicked at /candidate/main.rs:8:37:\ncalled `Option::unwrap()` on a `None` value\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n",
+  "duration_ms": 17404,
+  "timeout_evidence": null,
+  "lifecycle_evidence": {
+    "receipt_path": "reports/local-study/explore/round-001/study/full/arms/arm-b1ee8c0e1c0ffe7465f83fe0/development/sandbox/66b46ab2-0be9-4b9d-b69c-8a87dc96f071.lifecycle.json",
+    "receipt_sha256": "5f44a506ce3f924ece3e9251d3d9a26c625669925b50135af9ba7b3f5fe4f8ee"
+  }
+}

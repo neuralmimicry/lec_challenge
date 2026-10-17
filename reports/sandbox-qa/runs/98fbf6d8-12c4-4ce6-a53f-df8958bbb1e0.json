@@ -1,0 +1,230 @@
+{
+  "run_id": "98fbf6d8-12c4-4ce6-a53f-df8958bbb1e0",
+  "task_id": "ledger.sum",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "prohibited process attempt: syscall 88 target ",
+    "prohibited filesystem attempt: syscall 257 target /lib/../../proc/1/fd/1",
+    "prohibited process attempt: syscall 88 target ",
+    "prohibited filesystem attempt: syscall 257 target /lib/../../proc/1/fd/1",
+    "prohibited process attempt: syscall 88 target ",
+    "prohibited filesystem attempt: syscall 257 target /lib/../../proc/1/fd/1",
+    "prohibited process attempt: syscall 88 target ",
+    "prohibited filesystem attempt: syscall 257 target /lib/../../proc/1/fd/1",
+    "prohibited process attempt: syscall 88 target ",
+    "prohibited filesystem attempt: syscall 257 target /lib/../../proc/1/fd/1",
+    "prohibited process attempt: syscall 88 target ",
+    "prohibited filesystem attempt: syscall 257 target /lib/../../proc/1/fd/1",
+    "prohibited process attempt: syscall 88 target ",
+    "prohibited filesystem attempt: syscall 257 target /lib/../../proc/1/fd/1",
+    "prohibited process attempt: syscall 88 target ",
+    "prohibited filesystem attempt: syscall 257 target /lib/../../proc/1/fd/1",
+    "prohibited process attempt: syscall 88 target ",
+    "prohibited filesystem attempt: syscall 257 target /lib/../../proc/1/fd/1",
+    "prohibited process attempt: syscall 88 target ",
+    "prohibited filesystem attempt: syscall 257 target /lib/../../proc/1/fd/1",
+    "prohibited process attempt: syscall 88 target ",
+    "prohibited filesystem attempt: syscall 257 target /lib/../../proc/1/fd/1",
+    "prohibited process attempt: syscall 88 target ",
+    "prohibited filesystem attempt: syscall 257 target /lib/../../proc/1/fd/1",
+    "prohibited process attempt: syscall 88 target ",
+    "prohibited filesystem attempt: syscall 257 target /lib/../../proc/1/fd/1",
+    "prohibited process attempt: syscall 88 target ",
+    "prohibited filesystem attempt: syscall 257 target /lib/../../proc/1/fd/1"
+  ],
+  "cases_total": 14,
+  "cases_passed": 14,
+  "trace_complete": true,
+  "policy_sha256": "4b2556745b303526f354ded7f2c473b77f6da0c99a77f0a493c7272a8d800aac",
+  "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "7b263d820cfb8e2a5ec07edd47a98f769aa73171883f650a4e12e5315474933a",
+  "stdout_sha256": "1850c921c9d5c1f3f97ae5815e687394f0a1302e31fddde534ca6aebc203356e",
+  "sandbox_config": {
+    "controller_version": 2,
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:1",
+    "expected_image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/sandbox-qa/runs"
+  },
+  "audit_events": [
+    {
+      "syscall": 88,
+      "category": "process",
+      "target": "",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 257,
+      "category": "filesystem",
+      "target": "/lib/../../proc/1/fd/1",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 88,
+      "category": "process",
+      "target": "",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 257,
+      "category": "filesystem",
+      "target": "/lib/../../proc/1/fd/1",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 88,
+      "category": "process",
+      "target": "",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 257,
+      "category": "filesystem",
+      "target": "/lib/../../proc/1/fd/1",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 88,
+      "category": "process",
+      "target": "",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 257,
+      "category": "filesystem",
+      "target": "/lib/../../proc/1/fd/1",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 88,
+      "category": "process",
+      "target": "",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 257,
+      "category": "filesystem",
+      "target": "/lib/../../proc/1/fd/1",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 88,
+      "category": "process",
+      "target": "",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 257,
+      "category": "filesystem",
+      "target": "/lib/../../proc/1/fd/1",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 88,
+      "category": "process",
+      "target": "",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 257,
+      "category": "filesystem",
+      "target": "/lib/../../proc/1/fd/1",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 88,
+      "category": "process",
+      "target": "",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 257,
+      "category": "filesystem",
+      "target": "/lib/../../proc/1/fd/1",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 88,
+      "category": "process",
+      "target": "",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 257,
+      "category": "filesystem",
+      "target": "/lib/../../proc/1/fd/1",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 88,
+      "category": "process",
+      "target": "",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 257,
+      "category": "filesystem",
+      "target": "/lib/../../proc/1/fd/1",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 88,
+      "category": "process",
+      "target": "",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 257,
+      "category": "filesystem",
+      "target": "/lib/../../proc/1/fd/1",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 88,
+      "category": "process",
+      "target": "",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 257,
+      "category": "filesystem",
+      "target": "/lib/../../proc/1/fd/1",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 88,
+      "category": "process",
+      "target": "",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 257,
+      "category": "filesystem",
+      "target": "/lib/../../proc/1/fd/1",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 88,
+      "category": "process",
+      "target": "",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 257,
+      "category": "filesystem",
+      "target": "/lib/../../proc/1/fd/1",
+      "result": "denied:EPERM"
+    }
+  ],
+  "audit_path": "reports/sandbox-qa/runs/98fbf6d8-12c4-4ce6-a53f-df8958bbb1e0.audit.json",
+  "audit_sha256": "13ff876af38dffea4f1707013aa980d62c591252e1c7d9a6496a6ffdb4e3afea",
+  "failure": null,
+  "duration_ms": 12302,
+  "timeout_evidence": null
+}

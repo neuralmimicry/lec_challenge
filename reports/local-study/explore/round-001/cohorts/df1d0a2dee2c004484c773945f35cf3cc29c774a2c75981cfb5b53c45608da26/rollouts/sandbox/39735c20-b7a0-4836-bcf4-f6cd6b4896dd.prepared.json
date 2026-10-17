@@ -1,0 +1,46 @@
+{
+  "schema_version": 3,
+  "run_id": "67444d12-4398-4134-bdc7-4afc7254f97e",
+  "ownership_nonce": "6bac80ff-7565-4840-af11-a2b3c2d9343a",
+  "attempt_key": "39735c20-b7a0-4836-bcf4-f6cd6b4896dd",
+  "receipt_path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox/39735c20-b7a0-4836-bcf4-f6cd6b4896dd.prepared.json",
+  "report_path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox/67444d12-4398-4134-bdc7-4afc7254f97e.json",
+  "task": {
+    "id": "calendar.ordinal",
+    "source_id": "private-calendar-v1",
+    "lineage_id": "local-contract-pack-10",
+    "split": "train",
+    "specification": "Input is [year,month,day], a valid Gregorian date in years 1..9999. Return its one-based day of year.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "7825819d1c2b9472dc619b8957835300a5aa2b82b12403847d3da91be2974d81",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": [
+          2024,
+          3,
+          1
+        ],
+        "expected": 61
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "use serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let year = input[\"input\"][0].as_i64().unwrap();\n    let month = input[\"input\"][1].as_i64().unwrap();\n    let day = input[\"input\"][2].as_i64().unwrap();\n\n    let mut days_in_month = [0; 12];\n    days_in_month[0] = 31;\n    days_in_month[1] = 28;\n    days_in_month[2] = 31;\n    days_in_month[3] = 30;\n    days_in_month[4] = 31;\n    days_in_month[5] = 30;\n    days_in_month[6] = 31;\n    days_in_month[7] = 31;\n    days_in_month[8] = 30;\n    days_in_month[9] = 31;\n    days_in_month[10] = 30;\n    days_in_month[11] = 31;\n\n    if month == 2 {\n        if (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0) {\n            days_in_month[2] = 29;\n        }\n    }\n\n    let mut day_of_year = 0;\n    for i in 0..12 {\n        day_of_year += days_in_month[i];\n        if day_of_year > 365 {\n            day_of_year -= 365;\n            i += 1;\n        }\n    }\n\n    day_of_year += day;\n\n    serde_json::Value::Number(day_of_year)\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox"
+  },
+  "code_sha256": "634d9b764d2e0892626e68b02e90a387347ccb77967f25a5d3a8095f0261a113",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

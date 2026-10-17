@@ -1,0 +1,1 @@
+{"candidate_exit":0,"compile_ok":true,"events":[],"failure":null,"output":"\"aa:bb:00:12:34:ff\"\n\"00:00:00:00:00:00\"\n\"ff:ab:cd:ef:01:23\"\nnull\nnull\nnull\nnull\n","output_truncated":false,"schema_version":1,"stderr":"","stderr_truncated":false,"syscalls_observed":69,"trace_complete":true}

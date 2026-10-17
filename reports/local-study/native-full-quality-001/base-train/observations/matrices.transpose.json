@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "55c6614d90fbff0e580fd8fbfa9e06ce99715d8d0c78320e0fe70605545cc489",
+  "task_id": "matrices.transpose",
+  "source_id": "private-matrices-v1",
+  "success": false,
+  "raw_generation": {
+    "path": "reports/local-study/native-full-quality-001/base-train/generations/matrices.transpose.json",
+    "sha256": "278b61784f1b70a8099f9c8ec6b60fcb40dd37ce3127611cec5a0527af6d0811",
+    "bytes": 1932
+  },
+  "sandbox_report": {
+    "path": "reports/local-study/native-full-quality-001/base-train/sandbox/72283c55-0ee7-453a-adeb-c992663ae7c8.json",
+    "sha256": "025b5942b6182fa9c2246e437f25fe14d7f69d0d13a341cfdf51317863a98b97",
+    "bytes": 2645
+  },
+  "grading_error": null
+}

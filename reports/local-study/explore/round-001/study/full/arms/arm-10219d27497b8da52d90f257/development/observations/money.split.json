@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "4a9a9f574d803ba166ed2b6c53148e9e64617b9cc03c46c4b6950f86ca4d1fc8",
+  "task_id": "money.split",
+  "source_id": "private-money-v1",
+  "success": false,
+  "raw_generation": {
+    "path": "reports/local-study/explore/round-001/study/full/arms/arm-10219d27497b8da52d90f257/development/generations/money.split.json",
+    "sha256": "a6cbc990d92519690b1d4802397acb5b425ed309417925019c9429ed33d98e74",
+    "bytes": 2269
+  },
+  "sandbox_report": {
+    "path": "reports/local-study/explore/round-001/study/full/arms/arm-10219d27497b8da52d90f257/development/sandbox/1ddf7aa7-0d6e-49a0-a717-1f4f09e370aa.json",
+    "sha256": "3f794f3939c1900c86b2db64123e6579c086f1029dac6a73edd9d3a800ea4ee7",
+    "bytes": 3446
+  },
+  "grading_error": null
+}

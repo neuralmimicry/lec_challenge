@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "a52d044d05dc99f9af1879cdb69e7d80c4abc41b317440255f0ff27069084831",
+  "task_id": "sequences.interleave",
+  "source_id": "private-sequences-v1",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is [a,b], integer arrays. Alternate elements starting with a; append the remaining tail when one array ends. The returned array may contain up to 128 items.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[[1,2,3],[8,9]],\"expected\":[1,8,2,9,3]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let input = input.as_array().unwrap();\n    let a = input[0].as_array().unwrap();\n    let b = input[1].as_array().unwrap();\n    let mut result = Vec::new();\n    let mut i = 0;\n    let mut j = 0;\n    while i < a.len() && j < b.len() {\n        if a[i].as_i64().unwrap() < b[j].as_i64().unwrap() {\n            result.push(a[i].as_i64().unwrap());\n            i += 1;\n        } else {\n            result.push(b[j].as_i64().unwrap());\n            j += 1;\n        }\n    }\n    result.extend(a[i..].iter().cloned());\n    result.extend(b[j..].iter().cloned());\n    Value::Array(result)\n}\n```",
+    "checkpoint_id": "2217a994f8b74ded1d52f30ef7add2cb190578e3d108168a85d1409160ad88c3",
+    "finish_reason": "stop",
+    "input_tokens": 254,
+    "output_tokens": 196,
+    "elapsed_ms": 13908,
+    "complete": true
+  },
+  "model_error": null
+}

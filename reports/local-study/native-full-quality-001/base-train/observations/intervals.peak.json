@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "55c6614d90fbff0e580fd8fbfa9e06ce99715d8d0c78320e0fe70605545cc489",
+  "task_id": "intervals.peak",
+  "source_id": "private-intervals-v1",
+  "success": false,
+  "raw_generation": {
+    "path": "reports/local-study/native-full-quality-001/base-train/generations/intervals.peak.json",
+    "sha256": "3d95b337511ce9940069230fceb62be66dc7f214dddf834887c7fd1bd0a1170c",
+    "bytes": 2327
+  },
+  "sandbox_report": {
+    "path": "reports/local-study/native-full-quality-001/base-train/sandbox/07ad09f2-1d82-4c83-8df2-1b87ddd0667b.json",
+    "sha256": "eed16742bbd4aa7a9d203ac729090fb513419c7dc9ae100a603c4594f30f51c0",
+    "bytes": 3092
+  },
+  "grading_error": null
+}

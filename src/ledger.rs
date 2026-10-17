@@ -15,6 +15,8 @@ use std::{
 };
 
 mod recovery;
+mod token_budget;
+pub use token_budget::TokenBudgetLimits;
 
 pub fn sha256(bytes: &[u8]) -> String {
     hex::encode(Sha256::digest(bytes))
@@ -33,6 +35,8 @@ pub struct BudgetLimits {
     pub task_nanos: i64,
     pub provider_nanos: i64,
     pub model_nanos: i64,
+    #[serde(default)]
+    pub tokens: TokenBudgetLimits,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -48,6 +52,8 @@ pub struct Acquisition {
     pub request_json: String,
     pub price_json: String,
     pub reserved_nanos: i64,
+    #[serde(default)]
+    pub reserved_tokens: Option<u64>,
     pub replay: bool,
 }
 
@@ -72,10 +78,20 @@ pub enum Claim {
         requested_nanos: i64,
         limit_nanos: i64,
     },
+    TokenBudgetStopped {
+        scope: String,
+        used: u64,
+        requested: u64,
+        limit: u64,
+    },
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct CostRow {
+    #[serde(default)]
+    pub reserved_tokens: Option<u64>,
+    #[serde(default)]
+    pub token_upper_bound: Option<u64>,
     pub attempt_id: String,
     pub round_id: String,
     pub task_id: String,
@@ -233,6 +249,12 @@ impl Ledger {
               request_key TEXT, kind TEXT NOT NULL, detail TEXT NOT NULL);
             CREATE TABLE IF NOT EXISTS blocked_rounds (round_id TEXT PRIMARY KEY, reason TEXT NOT NULL);")?;
         conn.execute_batch("CREATE TABLE IF NOT EXISTS round_plans (round_id TEXT PRIMARY KEY,plan_json TEXT NOT NULL,plan_sha256 TEXT NOT NULL,declared_ms INTEGER NOT NULL);")?;
+        // A separate additive table preserves historical databases unchanged.
+        conn.execute_batch(
+            "CREATE TABLE IF NOT EXISTS token_reservations (
+            attempt_id TEXT PRIMARY KEY REFERENCES attempts(attempt_id),
+            reserved_tokens INTEGER NOT NULL CHECK(reserved_tokens >= 0));",
+        )?;
         Ok(ledger)
     }
 
@@ -452,6 +474,10 @@ impl Ledger {
                 });
             }
         }
+        if let Some(stop) = token_budget::check(&tx, acquisition, limits.tokens)? {
+            tx.commit()?;
+            return Ok(stop);
+        }
         let ordinal: u32 = tx.query_row(
             "SELECT COALESCE(MAX(ordinal),0)+1 FROM attempts WHERE request_key=?1",
             [&acquisition.request_key],
@@ -461,6 +487,14 @@ impl Ledger {
         tx.execute("INSERT INTO requests(request_key,state) VALUES (?1,'in_flight') ON CONFLICT(request_key) DO UPDATE SET state='in_flight'", [&acquisition.request_key])?;
         tx.execute("INSERT INTO attempts(attempt_id,request_key,ordinal,round_id,task_id,source_id,provider_id,business_id,model,model_revision,request_json,price_json,reserved_nanos,cost_lower_nanos,cost_upper_nanos,replay,state,started_ms) VALUES (?1,?2,?3,?4,?5,?6,?7,?8,?9,?10,?11,?12,?13,0,?13,?14,'in_flight',?15)",
           params![attempt_id, acquisition.request_key, ordinal, acquisition.round_id, acquisition.task_id, acquisition.source_id, acquisition.provider_id, acquisition.business_id, acquisition.model, acquisition.model_revision, acquisition.request_json, acquisition.price_json, acquisition.reserved_nanos, acquisition.replay, unix_millis()])?;
+        if let Some(tokens) = acquisition.reserved_tokens {
+            let tokens = i64::try_from(tokens)
+                .context("token reservation exceeds database integer range")?;
+            tx.execute(
+                "INSERT INTO token_reservations(attempt_id,reserved_tokens) VALUES (?1,?2)",
+                params![attempt_id, tokens],
+            )?;
+        }
         tx.commit()?;
         Ok(Claim::Reserved(AttemptClaim {
             attempt_id,
@@ -623,12 +657,20 @@ impl Ledger {
 
     pub fn costs(&self, round: Option<&str>) -> Result<Vec<CostRow>> {
         let conn = self.connection()?;
-        let mut statement=conn.prepare("SELECT attempt_id,round_id,task_id,provider_id,business_id,model,state,ordinal,cost_lower_nanos,cost_upper_nanos,replay,input_tokens,cached_input_tokens,output_tokens,reasoning_tokens,artifact_sha256,reason,request_key FROM attempts WHERE (?1 IS NULL OR round_id=?1) ORDER BY started_ms,attempt_id")?;
+        let mut statement=conn.prepare("SELECT attempt_id,round_id,task_id,provider_id,business_id,model,state,ordinal,cost_lower_nanos,cost_upper_nanos,replay,input_tokens,cached_input_tokens,output_tokens,reasoning_tokens,artifact_sha256,reason,request_key,(SELECT reserved_tokens FROM token_reservations t WHERE t.attempt_id=attempts.attempt_id) FROM attempts WHERE (?1 IS NULL OR round_id=?1) ORDER BY started_ms,attempt_id")?;
         let rows = statement.query_map([round], |r| {
             let low: i64 = r.get(8)?;
             let high: i64 = r.get(9)?;
             let replay: bool = r.get(10)?;
+            let reserved_tokens: Option<u64> = r.get(18)?;
+            let input: Option<u64> = r.get(11)?;
+            let output: Option<u64> = r.get(13)?;
             Ok(CostRow {
+                reserved_tokens,
+                token_upper_bound: input
+                    .zip(output)
+                    .and_then(|(a, b)| a.checked_add(b))
+                    .or(reserved_tokens),
                 attempt_id: r.get(0)?,
                 round_id: r.get(1)?,
                 task_id: r.get(2)?,
@@ -659,7 +701,7 @@ impl Ledger {
         let rows = self.costs(round)?;
         fs::create_dir_all(directory.as_ref())?;
         let mut csv = String::from(
-            "attempt_id,round_id,task_id,provider_id,business_id,model,state,ordinal,historical_lower_usd,historical_upper_usd,new_api_lower_usd,new_api_upper_usd,input_tokens,cached_input_tokens,output_tokens,reasoning_tokens\n",
+            "attempt_id,round_id,task_id,provider_id,business_id,model,state,ordinal,historical_lower_usd,historical_upper_usd,new_api_lower_usd,new_api_upper_usd,input_tokens,cached_input_tokens,output_tokens,reasoning_tokens,reserved_tokens,token_upper_bound\n",
         );
         let mut markdown = String::from(
             "# Acquisition costs\n\nGenerated from the durable attempt ledger. USD intervals retain unresolved billing; replay creates no new provider charge. CPU, training, storage and serving costs require separate measured resource records.\n\n| Task | Provider/model | State | Historical USD interval | New API USD interval |\n| --- | --- | --- | ---: | ---: |\n",
@@ -685,6 +727,12 @@ impl Ledger {
                     .unwrap_or_default(),
                 row.output_tokens.map(|x| x.to_string()).unwrap_or_default(),
                 row.reasoning_tokens
+                    .map(|x| x.to_string())
+                    .unwrap_or_default(),
+                row.reserved_tokens
+                    .map(|x| x.to_string())
+                    .unwrap_or_default(),
+                row.token_upper_bound
                     .map(|x| x.to_string())
                     .unwrap_or_default(),
             ];
@@ -744,6 +792,7 @@ mod tests {
             request_json: "{}".into(),
             price_json: "{}".into(),
             reserved_nanos: 60,
+            reserved_tokens: Some(60),
             replay: false,
         };
         (
@@ -755,6 +804,7 @@ mod tests {
                 task_nanos: 100,
                 provider_nanos: 100,
                 model_nanos: 100,
+                tokens: Default::default(),
             },
         )
     }
@@ -857,6 +907,156 @@ mod tests {
         let mut next = request;
         next.request_key = "next".into();
         assert!(ledger.claim_and_reserve(&next, limits).is_err());
+    }
+
+    #[test]
+    fn token_reservations_are_atomic_and_survive_failure_restart_and_unknown_usage() {
+        let (dir, ledger, request, mut limits) = setup();
+        limits.round_nanos = 10_000;
+        limits.task_nanos = 10_000;
+        limits.provider_nanos = 10_000;
+        limits.model_nanos = 10_000;
+        limits.tokens.round = Some(100);
+        let threads: Vec<_> = (0..8)
+            .map(|i| {
+                let ledger = ledger.clone();
+                let mut request = request.clone();
+                request.request_key = format!("token-fixture-{i}");
+                std::thread::spawn(move || ledger.claim_and_reserve(&request, limits).unwrap())
+            })
+            .collect();
+        let claims: Vec<_> = threads
+            .into_iter()
+            .map(|thread| thread.join().unwrap())
+            .collect();
+        assert_eq!(
+            claims
+                .iter()
+                .filter(|c| matches!(c, Claim::Reserved(_)))
+                .count(),
+            1
+        );
+        assert_eq!(
+            claims
+                .iter()
+                .filter(|c| matches!(c, Claim::TokenBudgetStopped { .. }))
+                .count(),
+            7
+        );
+        let row = ledger.costs(None).unwrap().remove(0);
+        // An explicit provider failure without usage still owes its full token cap.
+        ledger
+            .finish(
+                &row.attempt_id,
+                None,
+                false,
+                0,
+                60,
+                None,
+                Some("LABELLED failure without usage"),
+            )
+            .unwrap();
+        let restarted =
+            Ledger::open(dir.path().join("ledger.db"), dir.path().join("artifacts")).unwrap();
+        let mut next = request;
+        next.request_key = "next-token-fixture".into();
+        assert!(matches!(
+            restarted.claim_and_reserve(&next, limits).unwrap(),
+            Claim::TokenBudgetStopped { used: 60, .. }
+        ));
+        assert_eq!(
+            restarted.costs(None).unwrap()[0].token_upper_bound,
+            Some(60)
+        );
+    }
+
+    #[test]
+    fn known_usage_releases_token_headroom_but_legacy_unknown_liability_fails_closed() {
+        let (_dir, ledger, mut request, mut limits) = setup();
+        limits.round_nanos = 10_000;
+        limits.tokens.round = Some(100);
+        let Claim::Reserved(first) = ledger.claim_and_reserve(&request, limits).unwrap() else {
+            panic!()
+        };
+        ledger
+            .finish(
+                &first.attempt_id,
+                None,
+                false,
+                1,
+                1,
+                Some((10, 0, 20, 0)),
+                Some("LABELLED failed generation"),
+            )
+            .unwrap();
+        request.request_key = "second-token-fixture".into();
+        let Claim::Reserved(second) = ledger.claim_and_reserve(&request, limits).unwrap() else {
+            panic!()
+        };
+        ledger
+            .mark_unknown(&second.attempt_id, "LABELLED unknown remote acceptance")
+            .unwrap();
+        assert_eq!(ledger.costs(None).unwrap()[1].token_upper_bound, Some(60));
+
+        let (_dir, legacy, mut request, mut old_limits) = setup();
+        old_limits.round_nanos = 10_000;
+        old_limits.task_nanos = 10_000;
+        old_limits.provider_nanos = 10_000;
+        old_limits.model_nanos = 10_000;
+        request.reserved_tokens = None;
+        legacy.claim_and_reserve(&request, old_limits).unwrap();
+        old_limits.tokens.round = Some(100);
+        request.request_key = "bounded-follow-up".into();
+        request.reserved_tokens = Some(10);
+        assert!(
+            legacy
+                .claim_and_reserve(&request, old_limits)
+                .unwrap_err()
+                .to_string()
+                .contains("historical token liability is unknown")
+        );
+    }
+
+    #[test]
+    fn every_token_scope_includes_failed_and_in_flight_liabilities() {
+        for scope in ["round", "task", "provider", "model"] {
+            let (_dir, ledger, mut request, mut limits) = setup();
+            request.reserved_nanos = 0;
+            match scope {
+                "round" => limits.tokens.round = Some(100),
+                "task" => limits.tokens.task = Some(100),
+                "provider" => limits.tokens.provider = Some(100),
+                _ => limits.tokens.model = Some(100),
+            }
+            let Claim::Reserved(first) = ledger.claim_and_reserve(&request, limits).unwrap() else {
+                panic!()
+            };
+            ledger
+                .finish(
+                    &first.attempt_id,
+                    None,
+                    false,
+                    0,
+                    0,
+                    None,
+                    Some("LABELLED failed call with absent usage"),
+                )
+                .unwrap();
+            request.request_key = "next-scoped-fixture".into();
+            let Claim::TokenBudgetStopped { scope: stopped, .. } =
+                ledger.claim_and_reserve(&request, limits).unwrap()
+            else {
+                panic!("scope {scope} did not stop")
+            };
+            assert_eq!(stopped, scope);
+            if scope == "model" {
+                request.provider_id = "another-provider".into();
+                assert!(matches!(
+                    ledger.claim_and_reserve(&request, limits).unwrap(),
+                    Claim::Reserved(_)
+                ));
+            }
+        }
     }
 
     #[test]

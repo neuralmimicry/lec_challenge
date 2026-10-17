@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "initial_plan": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/stock.counts/student-plan.json",
+    "sha256": "542e3d8c373d911b12b7345cdd2ea467e3238de5b1f8409f6cd8fba6fc44b89e",
+    "bytes": 3871
+  },
+  "student_raw": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/stock.counts/student-raw.json",
+    "sha256": "26ab065783f1eb4e5973e54d364d9b8828a0bd28f02f37aadd76222fa1abdcc3",
+    "bytes": 2247
+  },
+  "student_grade": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox/aa458168-8857-4afb-9f03-2bdd4c52163e.json",
+    "sha256": "5e838cf5c4244e06f930b84c14a8b50d7b4e1ac983bc843423ec69640f4f80e2",
+    "bytes": 8492
+  },
+  "teacher_id": "qwen-coder-7b-q4_k_m",
+  "teacher_assets": {
+    "path": "offline_bundle/comparative/qwen-coder-7b-q4_k_m/gguf-assets.json",
+    "sha256": "606bfac02a103d208ccef73067cb6a4581e9b099e19bc9ed8e2021ebb1143114",
+    "bytes": 1206
+  },
+  "teacher_checkpoint": null,
+  "runtime": {
+    "device": {
+      "cuda": {
+        "ordinal": 0
+      }
+    },
+    "dtype": "f32"
+  },
+  "request": {
+    "prompt": "New task:\nWrite Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an array of ASCII strings. Return an object mapping every distinct string to its frequency.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[\"b\",\"a\",\"b\"],\"expected\":{\"a\":1,\"b\":2}}]\nActual frozen student candidate:\n```rust\nuse serde::{Deserialize, Serialize};\nuse std::collections::HashMap;\n\n#[derive(Deserialize, Serialize)]\npub struct Result {\n    pub frequency: HashMap<String, i64>,\n}\n\nfn solve(input: serde_json::Value) -> serde_json::Value {\n    let mut frequency = HashMap::new();\n    for line in input.as_array() {\n        let mut chars = line.as_str().chars().collect::<Vec<char>>();\n        let mut count = 0;\n        for c in chars {\n            count += c.to_digit(10).unwrap();\n        }\n        frequency.insert(chars.into_iter().collect::<String>(), count);\n    }\n    serde_json::Value::Object(frequency)\n}\n\nfn main() {\n    // Example usage\n    let input = serde_json::Value::Array(vec![\n        serde_json::Value::String(\"b\"),\n        serde_json::Value::String(\"a\"),\n        serde_json::Value::String(\"b\"),\n    ]);\n    let result = solve(input);\n    println!(\"{:?}\", result);\n}\n```\nActual trusted tool feedback:\n{\"bounded_diagnostic_untrusted_data\":\"compilation failed: error[E0428]: the name `main` is defined multiple times\\n  --> /candidate/main.rs:32:1\\n   |\\n22 | fn main() {\\n   | --------- previous definition of the value `main` here\\n...\\n32 | fn main() { let stdin = std::io::stdin(); for line in std::io::BufRead::lines(stdin.lock()) { let line = line.expect(\\\"input read\\\"); ...\\n   | ^^^^^^^^^ `main` redefined here\\n   |\\n   = note: `main` must be defined only once in the value namespace of this module\\n\\nerror[E0432]: unresolved import `serde`\\n --> /candidate/main.rs:1:5\\n  |\\n1 | use serde::{Deserialize, Serialize};\\n  |     ^^^^^ use of unresolved module or unlinked crate `serde`\\n  |\\n  = help: you might be missing a crate named `serde`\\n\\nerror[E0599]: no method named `as_str` found for reference `&Vec<Value>` in the current scope\\n  --> /candidate/main.rs:12:30\\n   |\\n12 |         let mut chars = line.as_str().chars().collect::<Vec<char>>();\\n   |                              ^^^^^^\\n   |\\nhelp: there is a method `as_ptr` with a similar name\\n   |\\n12 -         let mut chars = line.as_str().chars().collect::<Vec<char>>();\\n12 +         let mut chars = line.as_ptr().chars().collect::<Vec<char>>();\\n   |\\n\\nerror[E0308]: mismatched types\\n   --> /candidate/main.rs:25:35\\n    |\\n 25 |         serde_json::Value::String(\\\"b\\\"),\\n    |         ------------------------- ^^^ expected `String`, found `&str`\\n    |         |\\n    |         arguments to this enum variant are incorrect\\n    |\\nnote: tuple variant defined here\\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:151:5\\n    |\\n151 |     String(String),\\n    |     ^^^^^^\\nhelp: try using a conversion method\\n    |\\n 25 |         serde_json::Value::String(\\\"b\\\".to_string()),\\n    |                                      ++++++++++++\\n\\nerror[E0308]: mismatched types\\n   --> /candidate/main.rs:26:35\\n    |\\n 26 |         serde_json::Value::String(\\\"a\\\"),\\n    |         ------------------------- ^^^ expected `String`, found `&str`\\n    |         |\\n    |         arguments to this enum variant are incorrect\\n    |\\nnote: tuple variant defined here\\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:151:5\\n    |\\n151 |     String(String),\\n    |     ^^^^^^\\nhelp: try using a conversion method\\n    |\\n 26 |         serde_json::Value::String(\\\"a\\\".to_string()),\\n    |                                      ++++++++++++\\n\\nerror[E0308]: mismatched types\\n   --> /candidate/main.rs:27:35\\n    |\\n 27 |         serde_json::Value::String(\\\"b\\\"),\\n    |         ------------------------- ^^^ expected `String`, found `&str`\\n    |         |\\n    |         arguments to this enum variant are incorrect\\n    |\\nnote: tuple variant defined here\\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:151:5\\n    |\\n151 |     String(String),\\n    |     ^^^^^^\\nhelp: try using a conversion method\\n    |\\n 27 |         serde_json::Value::String(\\\"b\\\".to_string()),\\n    |                                      ++++++++++++\\n\\nerror: aborting due to 6 previous errors\\n\\nSome errors have detailed explanations: E0308, E0428, E0432, E0599.\\nFor more information about an error, try `rustc --explain E0308`.\\n\",\"cases_passed\":0,\"cases_total\":6,\"content_role\":\"compilation_feedback_only\",\"original_failure_is_not_a_success\":true,\"passed\":false,\"private_inputs_or_expected_outputs_exposed\":false,\"quarantined\":true,\"run_id\":\"aa458168-8857-4afb-9f03-2bdd4c52163e\",\"student_generation_complete\":true,\"tool\":\"trusted_container_grader\",\"trace_complete\":false}\nCritique and revise the candidate. Put any short explanation in Rust // comments and return complete compilable Rust source only. Do not invent tool results.",
+    "max_new_tokens": 768,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "supporting_sample_ids": []
+}

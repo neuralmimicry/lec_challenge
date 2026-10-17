@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "a5b39d544c85b76111246b8fda40c638ce104251a1c56368277fef8fe4033eb6",
+  "task_id": "calendar.ordinal",
+  "source_id": "private-calendar-v1",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is [year,month,day], a valid Gregorian date in years 1..9999. Return its one-based day of year.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[2024,3,1],\"expected\":61}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let year = input[\"input\"][0].as_i64().unwrap();\n    let month = input[\"input\"][1].as_i64().unwrap();\n    let day = input[\"input\"][2].as_i64().unwrap();\n    let mut days_in_month = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];\n    if month == 2 {\n        if (year % 4 == 0 && year % 100 != 0) || year % 400 == 0 {\n            days_in_month[1] = 29;\n        }\n    }\n    Value::from(days_in_month[month as usize] - day as i64 + 1)\n}\n```",
+    "checkpoint_id": "e2bcd135527659042304d936fa56c7240f6f96a43b9f81f2a888c38b7762a949",
+    "finish_reason": "stop",
+    "input_tokens": 238,
+    "output_tokens": 207,
+    "elapsed_ms": 9792,
+    "complete": true
+  },
+  "model_error": null
+}

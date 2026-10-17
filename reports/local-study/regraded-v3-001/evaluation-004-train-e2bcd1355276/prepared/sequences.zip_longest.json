@@ -1,0 +1,59 @@
+{
+  "schema_version": 3,
+  "run_id": "3a3e8d00-6a8b-4bf7-b2a3-25f74a960543",
+  "ownership_nonce": "fbbc82b6-6ff1-4113-86ff-329371d7a630",
+  "attempt_key": "362f4663a016fd8d99ba7cbe1c48bf18e00059939c94b9b846f921ce22d8009a",
+  "receipt_path": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/prepared/sequences.zip_longest.json",
+  "report_path": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/sandbox/3a3e8d00-6a8b-4bf7-b2a3-25f74a960543.json",
+  "task": {
+    "id": "sequences.zip_longest",
+    "source_id": "private-sequences-v1",
+    "lineage_id": "local-contract-pack-09",
+    "split": "train",
+    "specification": "Input is [a,b], integer arrays. Return pairs by position, using null for a missing side, up to the longer length.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "a9d6bd2f5f38db050ac9cf606215a931bc2dc2805e6f17584649e0452571128b",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": [
+          [
+            1,
+            2
+          ],
+          [
+            9
+          ]
+        ],
+        "expected": [
+          [
+            1,
+            9
+          ],
+          [
+            2,
+            null
+          ]
+        ]
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "use serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let arr1 = input.as_array().unwrap();\n    let arr2 = input.as_array().unwrap();\n    let n1 = arr1.len() as i64;\n    let n2 = arr2.len() as i64;\n    let mut result = Vec::new();\n    let mut i = 0;\n    let mut j = 0;\n    while i < n1 && j < n2 {\n        if arr1[i].as_i64().unwrap() < arr2[j].as_i64().unwrap() {\n            result.push(Some(arr1[i].as_i64().unwrap()));\n            i += 1;\n        } else {\n            result.push(None);\n            j += 1;\n        }\n    }\n    Value::Array(result.into_iter().map(|v| v.unwrap()).collect())\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/sandbox"
+  },
+  "code_sha256": "f2a690237bc1ba54d94e6c17026d224d93456ec9dd83cea3152576e7dd456afa",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

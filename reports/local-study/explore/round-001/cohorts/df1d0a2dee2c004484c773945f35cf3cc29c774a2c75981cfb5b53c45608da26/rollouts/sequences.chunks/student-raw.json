@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "evidence_kind": "actual_checkpoint_bound_rollout_generation",
+  "plan": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sequences.chunks/student-plan.json",
+    "sha256": "0217b2457a6f10897535552d4f9aeca5596f3d12cd008d85dec6ff3f0c09765a",
+    "bytes": 4165
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let values: Vec<i64> = input[\"values\"].as_array().unwrap().iter().map(|&x| x as i64).collect();\n    let size: usize = input[\"size\"].as_u64().unwrap();\n    let mut result = Vec::new();\n\n    for i in 0..values.len() {\n        if i + size <= values.len() {\n            result.extend(&values[i..i + size]);\n        }\n    }\n\n    serde_json::Value::Array(result)\n}\n```",
+    "checkpoint_id": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+    "finish_reason": "stop",
+    "input_tokens": 249,
+    "output_tokens": 132,
+    "elapsed_ms": 24863,
+    "complete": true
+  },
+  "generation_error": null,
+  "execution": {
+    "actual_device": "Cpu",
+    "actual_dtype": "F32",
+    "asset_lifetime_shared_lease": false,
+    "available_cpu_threads": 16,
+    "candle_cpu_threads": 16,
+    "checkpoint_id": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+    "context_cap": 4096,
+    "cpu_fallback": false,
+    "cuda_active": false,
+    "cuda_feature_compiled": true,
+    "engine": "native_rust_candle",
+    "model_id": "Qwen/Qwen2.5-Coder-0.5B-Instruct",
+    "quantisation": null,
+    "requested": {
+      "device": "cpu",
+      "dtype": "f32"
+    },
+    "revision": "ea3f2471cf1b1f0db85067f1ef93848e38e88c25",
+    "weight_format": "safetensors"
+  }
+}

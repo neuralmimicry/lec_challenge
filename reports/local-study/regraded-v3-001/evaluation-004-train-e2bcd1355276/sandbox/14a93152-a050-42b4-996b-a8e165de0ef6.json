@@ -1,0 +1,40 @@
+{
+  "run_id": "14a93152-a050-42b4-996b-a8e165de0ef6",
+  "task_id": "ledger.sum",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error[E0283]: type annotations needed\n --> /candidate/main.rs:5:9\n  |\n5 |     let sum = arr.iter().map(|x| x.as_i64().unwrap()).sum();\n  |         ^^^                                           --- type must be known at this point\n  |\n  = note: the type must implement `Sum<i64>`\nhelp: the trait `Sum` is implemented for `i64`\n --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/iter/traits/accum.rs:50:8\n ::: /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/iter/traits/accum.rs:206:0\n  |\n  = note: in this macro invocation\nnote: required by a bound in `std::iter::Iterator::sum`\n --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/iter/traits/iterator.rs:3665:4\n  = note: this error originates in the macro `integer_sum_product` (in Nightly builds, run with -Z macro-backtrace for more info)\nhelp: consider giving `sum` an explicit type, where the type for type parameter `S` is specified\n  |\n5 |     let sum: i64 = arr.iter().map(|x| x.as_i64().unwrap()).sum();\n  |            +++++\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0283`.\n"
+  ],
+  "cases_total": 14,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "87de5783233686c6d3a0bbefc368f3908e4d27d8f1aa3a7b16eb0056ff4d82bf",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/sandbox/14a93152-a050-42b4-996b-a8e165de0ef6.audit.json",
+  "audit_sha256": "5caad961a73dd3302113fb427b6383befdf2c0ef7f4702f3352c940a07b7eef8",
+  "failure": "compilation failed: error[E0283]: type annotations needed\n --> /candidate/main.rs:5:9\n  |\n5 |     let sum = arr.iter().map(|x| x.as_i64().unwrap()).sum();\n  |         ^^^                                           --- type must be known at this point\n  |\n  = note: the type must implement `Sum<i64>`\nhelp: the trait `Sum` is implemented for `i64`\n --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/iter/traits/accum.rs:50:8\n ::: /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/iter/traits/accum.rs:206:0\n  |\n  = note: in this macro invocation\nnote: required by a bound in `std::iter::Iterator::sum`\n --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/iter/traits/iterator.rs:3665:4\n  = note: this error originates in the macro `integer_sum_product` (in Nightly builds, run with -Z macro-backtrace for more info)\nhelp: consider giving `sum` an explicit type, where the type for type parameter `S` is specified\n  |\n5 |     let sum: i64 = arr.iter().map(|x| x.as_i64().unwrap()).sum();\n  |            +++++\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0283`.\n",
+  "duration_ms": 16131,
+  "timeout_evidence": null,
+  "lifecycle_evidence": {
+    "receipt_path": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/sandbox/14a93152-a050-42b4-996b-a8e165de0ef6.lifecycle.json",
+    "receipt_sha256": "222d1a0c4bb3cdf26ebabfdd8e7201388b1a60a4daed76eb8ffefcdbc8e36719"
+  }
+}

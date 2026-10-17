@@ -1,0 +1,33 @@
+{
+  "run_id": "aa31c9f2-52bc-405d-a008-3843c45fade8",
+  "task_id": "dispatch.round_robin",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error[E0529]: expected an array or slice, found `Vec<Value>`\n --> /candidate/main.rs:5:9\n  |\n5 |         [job1, job2, job3] => vec![job1, job2, job3],\n  |         ^^^^^^^^^^^^^^^^^^ pattern cannot match with input type `Vec<Value>`\n  |\nhelp: consider slicing here\n  |\n4 |     let jobs: Vec<i64> = match input[\"jobs\"].as_array().unwrap()[..] {\n  |                                                                 ++++\n\nerror[E0308]: mismatched types\n  --> /candidate/main.rs:29:28\n   |\n29 |         if current_turn >= quantum {\n   |            ------------    ^^^^^^^ expected `usize`, found `i64`\n   |            |\n   |            expected because this is `usize`\n   |\nhelp: you can convert an `i64` to a `usize` and panic if the converted value doesn't fit\n   |\n29 |         if current_turn >= quantum.try_into().unwrap() {\n   |                                   ++++++++++++++++++++\n\nerror: aborting due to 2 previous errors\n\nSome errors have detailed explanations: E0308, E0529.\nFor more information about an error, try `rustc --explain E0308`.\n"
+  ],
+  "cases_total": 5,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "0bf995b5f69865792503015f6af52b457c861b679877956e939c2137ddb4a562",
+  "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+  "oracle_sha256": "a734f6d465714cbebb072790fedff161d2fc28cbb257b3d04cee0feaf8b5b5fe",
+  "code_sha256": "02c6f6d3837d2d4ffff27e6b4d87cd664dcaeb7c869ea54e88c930c1ff788218",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:1",
+    "expected_image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/comparative/control-development/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/comparative/control-development/sandbox/aa31c9f2-52bc-405d-a008-3843c45fade8.audit.json",
+  "audit_sha256": "f8b3a5dd84b392895ba7db3950061d4216042fa84671ae2102f6793daa2d2dc1",
+  "failure": "compilation failed: error[E0529]: expected an array or slice, found `Vec<Value>`\n --> /candidate/main.rs:5:9\n  |\n5 |         [job1, job2, job3] => vec![job1, job2, job3],\n  |         ^^^^^^^^^^^^^^^^^^ pattern cannot match with input type `Vec<Value>`\n  |\nhelp: consider slicing here\n  |\n4 |     let jobs: Vec<i64> = match input[\"jobs\"].as_array().unwrap()[..] {\n  |                                                                 ++++\n\nerror[E0308]: mismatched types\n  --> /candidate/main.rs:29:28\n   |\n29 |         if current_turn >= quantum {\n   |            ------------    ^^^^^^^ expected `usize`, found `i64`\n   |            |\n   |            expected because this is `usize`\n   |\nhelp: you can convert an `i64` to a `usize` and panic if the converted value doesn't fit\n   |\n29 |         if current_turn >= quantum.try_into().unwrap() {\n   |                                   ++++++++++++++++++++\n\nerror: aborting due to 2 previous errors\n\nSome errors have detailed explanations: E0308, E0529.\nFor more information about an error, try `rustc --explain E0308`.\n",
+  "duration_ms": 9997,
+  "timeout_evidence": null
+}

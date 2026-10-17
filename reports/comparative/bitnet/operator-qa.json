@@ -1,0 +1,55 @@
+{
+  "adapter": {
+    "bytes": 616,
+    "path": "reports/comparative/bitnet/micro-adapter.safetensors",
+    "sha256": "a6a5095192bad062b5caa7d0d9942fa0ab50e9455ad7b3b41722676f8b37feda"
+  },
+  "assessment_training": false,
+  "changed_effective_weights": true,
+  "evidence_kind": "synthetic_micro_bitnet_qat_numerical_qa",
+  "final_effective": {
+    "changed_from_frozen_base": 57,
+    "nonzero": 91,
+    "sha256": "ba072b5392a0a51355afbb5185f6e1aefab0d8b9fcec9d54debf06e684f752ca",
+    "values": 96
+  },
+  "genuine_ternary_training": true,
+  "gradient_norms": [
+    0.00036953690592894656,
+    0.25955235282580363,
+    0.21774192030521644,
+    0.09816172417995922,
+    30.015396525565826,
+    15.946951612188778,
+    4.798538955030447,
+    3.6928503894200286
+  ],
+  "initial_effective": {
+    "changed_from_frozen_base": 0,
+    "nonzero": 65,
+    "sha256": "7d83783f5ea7d1d4677cd293cdc3a14254185f249d6f4bc12b5ea283c15653d8",
+    "values": 96
+  },
+  "limitations": [
+    "Numerical QA on tiny synthetic tensors; no provider outputs, pretrained-model adaptation, task learning or quality gain established.",
+    "Full-size official BitNet training requires a separate real evidence-bound worker run, resource measurement and changed effective trits."
+  ],
+  "losses": [
+    0.006256887689232826,
+    0.003801128128543496,
+    0.021208373829722404,
+    0.006762983277440071,
+    0.14995643496513367,
+    0.14995643496513367,
+    0.041384823620319366,
+    0.04064278304576874
+  ],
+  "official_full_base": false,
+  "optimiser": "normalised_sgd_step_length32",
+  "production_eligible": false,
+  "reloaded": true,
+  "schema_version": 1,
+  "steps": 8,
+  "synthetic_tensors": true,
+  "trit_codec_exact": true
+}

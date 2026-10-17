@@ -1,0 +1,10 @@
+
+running 3 tests
+test offline_oci_archive_round_trip ... ok
+test real_output_deadline_and_alias_defences ... ok
+test real_reference_candidates_across_all_splits_and_evidence_tampering ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 184.46s
+
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.33s
+     Running tests/sandbox_contract.rs (target/debug/deps/sandbox_contract-3a644bc93ec4a7a0)

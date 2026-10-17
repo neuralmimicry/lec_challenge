@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "448b2d86361801414c47e32433b6e0bce070909a486feaecc2fd744b94dca8f4",
+  "task_id": "encoding.caesar",
+  "source_id": "private-encoding-v1",
+  "success": false,
+  "raw_generation": {
+    "path": "reports/local-study/sft-adapter-development-c7c/generations/encoding.caesar.json",
+    "sha256": "58c02ef2ef3822272010d1ff8d5bce034ae7713b32d16b0638e2037cc3524842",
+    "bytes": 2114
+  },
+  "sandbox_report": {
+    "path": "reports/local-study/sft-adapter-development-c7c/sandbox/c0341454-2e4d-4b7d-8f29-bcb114605a00.json",
+    "sha256": "54bace9ebdef65939c772dd77e1e48b980ee3abfbc468924074a137d7cda17e9",
+    "bytes": 6902
+  },
+  "grading_error": null
+}

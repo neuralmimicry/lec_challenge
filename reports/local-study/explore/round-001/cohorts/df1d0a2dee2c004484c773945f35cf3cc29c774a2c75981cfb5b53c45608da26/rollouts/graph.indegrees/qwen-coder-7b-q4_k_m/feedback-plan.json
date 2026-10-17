@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "initial_plan": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/graph.indegrees/student-plan.json",
+    "sha256": "636b934b65f755c488859ec502a0f653e9eeadfdd68dc8ce891327f0c876f22f",
+    "bytes": 4160
+  },
+  "student_raw": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/graph.indegrees/student-raw.json",
+    "sha256": "b22d862d7f7081b27b2787ce7373dadc1278569192951e90be70c073d86be475",
+    "bytes": 1847
+  },
+  "student_grade": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox/267be0c3-e945-4211-a1ff-6d0bf667b5b1.json",
+    "sha256": "52af7b83f9a8a3641e04d5ed9f677ca15d10a1de3e7e48620150b290b09f3484",
+    "bytes": 9857
+  },
+  "teacher_id": "qwen-coder-7b-q4_k_m",
+  "teacher_assets": {
+    "path": "offline_bundle/comparative/qwen-coder-7b-q4_k_m/gguf-assets.json",
+    "sha256": "606bfac02a103d208ccef73067cb6a4581e9b099e19bc9ed8e2021ebb1143114",
+    "bytes": 1206
+  },
+  "teacher_checkpoint": null,
+  "runtime": {
+    "device": {
+      "cuda": {
+        "ordinal": 0
+      }
+    },
+    "dtype": "f32"
+  },
+  "request": {
+    "prompt": "New task:\nWrite Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input {n,edges} is a directed graph with unique edges on 0..n-1. Return indegree of each node in index order, including self-loops. Graph vertex counts are at most 64.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":{\"edges\":[[0,1],[1,2]],\"n\":4},\"expected\":[0,1,1,0]}]\nActual frozen student candidate:\n```rust\nuse serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let n = input[\"n\"].as_u64().unwrap();\n    let edges = input[\"edges\"].as_array().unwrap();\n    let mut indegree = vec![0; n];\n\n    for (i, edge) in edges.iter().enumerate() {\n        let src = edge[0] as u64;\n        let dst = edge[1] as u64;\n        indegree[src] += 1;\n        indegree[dst] += 1;\n    }\n\n    serde_json::Value::Object {\n        indegree: indegree.into_iter().collect(),\n    }\n}\n```\nActual trusted tool feedback:\n{\"bounded_diagnostic_untrusted_data\":\"compilation failed: warning: unused import: `serde_json::Value`\\n --> /candidate/main.rs:1:5\\n  |\\n1 | use serde_json::Value;\\n  |     ^^^^^^^^^^^^^^^^^\\n  |\\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\\n\\nerror[E0308]: mismatched types\\n --> /candidate/main.rs:6:32\\n  |\\n6 |     let mut indegree = vec![0; n];\\n  |                        --------^-\\n  |                        |       |\\n  |                        |       expected `usize`, found `u64`\\n  |                        arguments to this function are incorrect\\n  |\\nnote: function defined here\\n --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/alloc/src/vec/mod.rs:3772:7\\nhelp: you can convert a `u64` to a `usize` and panic if the converted value doesn't fit\\n  |\\n6 |     let mut indegree = vec![0; n.try_into().unwrap()];\\n  |                                 ++++++++++++++++++++\\n\\nerror[E0277]: the type `[{integer}]` cannot be indexed by `u64`\\n  --> /candidate/main.rs:11:18\\n   |\\n11 |         indegree[src] += 1;\\n   |                  ^^^ slice indices are of type `usize` or ranges of `usize`\\n   |\\n   = help: the trait `SliceIndex<[{integer}]>` is not implemented for `u64`\\nhelp: `usize` implements trait `SliceIndex<T>`\\n  --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/slice/index.rs:179:0\\n   |\\n   = note: `SliceIndex<[T]>`\\n  --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/bstr/traits.rs:197:0\\n   |\\n   = note: `SliceIndex<ByteStr>`\\n   = note: required for `Vec<{integer}>` to implement `std::ops::Index<u64>`\\n\\nerror[E0277]: the type `[{integer}]` cannot be indexed by `u64`\\n  --> /candidate/main.rs:12:18\\n   |\\n12 |         indegree[dst] += 1;\\n   |                  ^^^ slice indices are of type `usize` or ranges of `usize`\\n   |\\n   = help: the trait `SliceIndex<[{integer}]>` is not implemented for `u64`\\nhelp: `usize` implements trait `SliceIndex<T>`\\n  --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/slice/index.rs:179:0\\n   |\\n   = note: `SliceIndex<[T]>`\\n  --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/bstr/traits.rs:197:0\\n   |\\n   = note: `SliceIndex<ByteStr>`\\n   = note: required for `Vec<{integer}>` to implement `std::ops::Index<u64>`\\n\\nerror[E0559]: variant `Value::Object` has no field named `indegree`\\n   --> /candidate/main.rs:16:9\\n    |\\n 16 |         indegree: indegree.into_iter().collect(),\\n    |         ^^^^^^^^ field does not exist\\n    |\\n   ::: /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:175:5\\n    |\\n175 |     Object(Map<String, Value>),\\n    |     ------ `Value::Object` defined here\\n    |\\nhelp: `Value::Object` is a tuple variant, use the appropriate syntax\\n    |\\n 15 -     serde_json::Value::Object {\\n 16 -         indegree: indegree.into_iter().collect(),\\n 17 -     }\\n 15 +     serde_json::Value::Object(/* serde_json::Map<std::string::String, Value> */)\\n    |\\n\\nerror[E0605]: non-primitive cast: `Value` as `u64`\\n --> /candidate/main.rs:9:19\\n  |\\n9 |         let src = edge[0] as u64;\\n  |                   ^^^^^^^^^^^^^^ an `as` expression can be used to convert enum types to numeric types only if the enum type is unit-only or field-less\\n  |\\n  = note: see https://doc.rust-lang.org/reference/items/enumerations.html#casting for more information\\n\\nerror[E0605]: non-primitive cast: `Value` as `u64`\\n  --> /candidate/main.rs:10:19\\n   |\\n10 |         let dst = edge[1] as u64;\\n   |                   ^^^^^^^^^^^^^^ an `as` expression can be used to convert enum types to numeric types only if the enum type is unit-only or field-less\\n   |\\n   = note: see https://doc.rust-lang.org/reference/items/enumerations.html#casting for more information\\n\\nerror: aborting due to 6 previous errors; 1 warning emitted\\n\\nSome errors have detailed explanations: E0277, E0308, E0559, E0605.\\nFor more information about an error, try `rustc --explain E0277`.\\n\",\"cases_passed\":0,\"cases_total\":6,\"content_role\":\"compilation_feedback_only\",\"original_failure_is_not_a_success\":true,\"passed\":false,\"private_inputs_or_expected_outputs_exposed\":false,\"quarantined\":true,\"run_id\":\"267be0c3-e945-4211-a1ff-6d0bf667b5b1\",\"student_generation_complete\":true,\"tool\":\"trusted_container_grader\",\"trace_complete\":false}\nCritique and revise the candidate. Put any short explanation in Rust // comments and return complete compilable Rust source only. Do not invent tool results.",
+    "max_new_tokens": 768,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "supporting_sample_ids": []
+}

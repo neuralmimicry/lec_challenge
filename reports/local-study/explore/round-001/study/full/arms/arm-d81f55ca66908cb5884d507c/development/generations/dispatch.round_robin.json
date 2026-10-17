@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "1351e83f15e1c1e39add4277a3eeb9000a9112c2cd32b1ddc0c0e4d1fba24aa0",
+  "task_id": "dispatch.round_robin",
+  "source_id": "private-dispatch-v1",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input {jobs,quantum} has nonnegative integer work amounts and positive quantum. Cycle job indices, giving up to quantum work each turn; return indices in order of completion, initially zero-work jobs first in index order.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":{\"jobs\":[3,1,2],\"quantum\":2},\"expected\":[1,2,0]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\nfn solve(input: serde_json::Value) -> serde_json::Value {\n    let jobs: Vec<i64> = input[\"jobs\"].as_array().unwrap().iter().map(|job| job.as_i64()).collect();\n    let quantum: i64 = input[\"quantum\"].as_i64().unwrap();\n    let mut indices = Vec::new();\n    let mut work = jobs[0];\n    for _ in 0..quantum {\n        let next_index = (work + 1) % jobs.len();\n        indices.push(next_index);\n        work = jobs[next_index];\n    }\n    indices.sort_unstable();\n    indices.into_iter().map(|&index| serde_json::Value::from(index)).collect()\n}\n\nfn main() {\n    let input = serde_json::Value::from(\"{\\\"jobs\\\":[3,1,2],\"quantum\":2}\");\n    let output = solve(input);\n    println!(\"{:?}\", output);\n}\n```",
+    "checkpoint_id": "ea8a16e57b8fefe63b4bf3f891bdfb28009fccd0056d4cd5741953ada830fa20",
+    "finish_reason": "stop",
+    "input_tokens": 259,
+    "output_tokens": 207,
+    "elapsed_ms": 33553,
+    "complete": true
+  },
+  "model_error": null
+}

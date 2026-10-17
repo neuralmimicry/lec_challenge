@@ -1,0 +1,6 @@
+{
+  "error": "no provider is locally ready; inspect readiness_blockers in the check output; this command made no network request",
+  "observed_unix_ms": 1792170058549,
+  "promotion": "incumbent_retained",
+  "status": "FAILURE"
+}

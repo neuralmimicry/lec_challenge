@@ -1,0 +1,54 @@
+{
+  "schema_version": 3,
+  "run_id": "de967453-1bec-4cca-9c2a-9d6b4ae506b2",
+  "ownership_nonce": "ed4ff141-b91e-47dd-bd32-70cd3a0531a1",
+  "attempt_key": "41650390826f42d4e4295b742f22d206d0785f4d5c093288dc320be02790e7b7",
+  "receipt_path": "reports/local-study/regraded-v3-001/evaluation-003-train-f95238863522/prepared/matrices.diagonals.json",
+  "report_path": "reports/local-study/regraded-v3-001/evaluation-003-train-f95238863522/sandbox/de967453-1bec-4cca-9c2a-9d6b4ae506b2.json",
+  "task": {
+    "id": "matrices.diagonals",
+    "source_id": "private-matrices-v1",
+    "lineage_id": "local-contract-pack-06",
+    "split": "train",
+    "specification": "Input is a nonempty square integer matrix. Return [main diagonal sum,anti-diagonal sum]. A centre cell contributes once to each sum.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "72133e94b23f58060b66753478a3092920900b1a0faaf59f64c473d456fadd9d",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": [
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            4
+          ]
+        ],
+        "expected": [
+          5,
+          5
+        ]
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "use serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let mut sum_diagonal = 0;\n    let mut sum_anti_diagonal = 0;\n    let mut n = input.as_array().unwrap().len() as i64;\n\n    for i in 0..n {\n        for j in 0..n {\n            if i == j {\n                sum_diagonal += input[i as usize][j as usize];\n            } else if i == n - 1 - j {\n                sum_anti_diagonal += input[i as usize][j as usize];\n            }\n        }\n    }\n\n    serde_json::Value::Object(vec![\n        (String::from(\"sum_diagonal\"), serde_json::Value::Number(sum_diagonal)),\n        (String::from(\"sum_anti_diagonal\"), serde_json::Value::Number(sum_anti_diagonal)),\n    ])\n}\n\nfn main() {\n    let input = serde_json::Value::from(\"[[1,2],[3,4]]\");\n    let expected = serde_json::Value::from(\"[5,5]\");\n    assert_eq!(solve(input), expected);\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/regraded-v3-001/evaluation-003-train-f95238863522/sandbox"
+  },
+  "code_sha256": "76dda35d2997c0ecd99003241a3cc9e3c66d6e810e823332400b8461cc6c25ca",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

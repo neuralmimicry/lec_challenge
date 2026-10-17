@@ -1,0 +1,8 @@
+{
+  "launch_unix_ms": 1792134570854,
+  "owner_pid": 1146263,
+  "prepared_receipt": "reports/comparative/search/round-002/trials/deepseek-coder-6_7b-q4_k_m/comparison/sandbox/e95d0060-1127-4548-88f1-6abe91d1c2dd.prepared.json",
+  "prepared_sha256": "c35d2c36e66cf4b5661319615133f134c64ec512889b34b1f0f00f58fa45a1fa",
+  "run_id": "d96568b8-3ea1-4046-9b78-2776d15b2c9e",
+  "schema_version": 3
+}

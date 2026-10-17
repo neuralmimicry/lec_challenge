@@ -1,0 +1,40 @@
+{
+  "run_id": "c35894c0-1189-463c-b201-1d05c1229552",
+  "task_id": "stock.mode",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error[E0425]: cannot find value `item` in this scope\n  --> /candidate/main.rs:23:47\n   |\n23 |                 most_frequent = Value::String(item.as_str().unwrap());\n   |                                               ^^^^ not found in this scope\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0425`.\n"
+  ],
+  "cases_total": 6,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "f089a4dcf47f521bd6e41def67df9b2d215a5dc9b8eab330895524f58f9d43eb",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/sandbox/c35894c0-1189-463c-b201-1d05c1229552.audit.json",
+  "audit_sha256": "877d8994deed6d0b327991fb0f1bd877e8ea2095abd72e3a9179993bd1b1aa9b",
+  "failure": "compilation failed: error[E0425]: cannot find value `item` in this scope\n  --> /candidate/main.rs:23:47\n   |\n23 |                 most_frequent = Value::String(item.as_str().unwrap());\n   |                                               ^^^^ not found in this scope\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0425`.\n",
+  "duration_ms": 19186,
+  "timeout_evidence": null,
+  "lifecycle_evidence": {
+    "receipt_path": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/sandbox/c35894c0-1189-463c-b201-1d05c1229552.lifecycle.json",
+    "receipt_sha256": "f1e7bf889414601371d014d4de4e0b9f9e49fab000cb3386cebe96d12cc00970"
+  }
+}

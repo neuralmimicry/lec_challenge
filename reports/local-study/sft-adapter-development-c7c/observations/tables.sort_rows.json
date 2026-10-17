@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "448b2d86361801414c47e32433b6e0bce070909a486feaecc2fd744b94dca8f4",
+  "task_id": "tables.sort_rows",
+  "source_id": "private-tables-v1",
+  "success": false,
+  "raw_generation": {
+    "path": "reports/local-study/sft-adapter-development-c7c/generations/tables.sort_rows.json",
+    "sha256": "b9591d5344d77b8ac658167473e277e3984499531a16adb06a19ebf523dc055c",
+    "bytes": 2063
+  },
+  "sandbox_report": {
+    "path": "reports/local-study/sft-adapter-development-c7c/sandbox/579029cb-4726-4915-8f81-0003b9952932.json",
+    "sha256": "89639e9f1162c4d6497c58735c86788adfcdd64246beb59687c922c1a645533e",
+    "bytes": 5298
+  },
+  "grading_error": null
+}

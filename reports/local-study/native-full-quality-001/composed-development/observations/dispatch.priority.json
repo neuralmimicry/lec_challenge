@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "c35802c4a512b17d77dd16b2e6ab7d80bbfdd14fe0c7590863f05918afeae367",
+  "task_id": "dispatch.priority",
+  "source_id": "private-dispatch-v1",
+  "success": false,
+  "raw_generation": {
+    "path": "reports/local-study/native-full-quality-001/composed-development/generations/dispatch.priority.json",
+    "sha256": "fb68dd41e7ecb8250aea54b27977b4b172b89abb385e2e745ceca2b246191c5a",
+    "bytes": 2236
+  },
+  "sandbox_report": null,
+  "grading_error": "image inspection timeout: deadline has elapsed"
+}

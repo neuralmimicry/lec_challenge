@@ -1,0 +1,58 @@
+{
+  "freeze_sha256": "7a9651ebec03b215b0e30d49fa983611fbe12095080cc45020c54042f1aad46a",
+  "steps": 1,
+  "adapter": {
+    "path": "reports/local-study/native-composed-operator/step-000001/adapter.safetensors",
+    "sha256": "0f3014facef11f2760c65a7dce2dd219e81e09e92d3e12f536871d2135803a01",
+    "bytes": 551352
+  },
+  "optimizer": {
+    "path": "reports/local-study/native-composed-operator/step-000001/optimizer.safetensors",
+    "sha256": "d43e7325a3a3d060c3634d9690bdd8f5341604cbe7cdbfa11e74483ac309cf6c",
+    "bytes": 1103152
+  },
+  "initial_adapter_sha256": "595d2bf573776bdd779c6f5d67733e60848928e82de02946986ddb1abafc69dc",
+  "losses": [
+    0.8636103272438049
+  ],
+  "gradient_norms": [
+    1.0678220799056433
+  ],
+  "component_losses": [
+    {
+      "sequence_sft": 1.2542798519134521,
+      "soft_token_kl": 2.1646313667297363,
+      "hidden_feature": 0.03139670193195343,
+      "attention_relation": 0.004133554175496101
+    }
+  ],
+  "alignment_diagnostics": [
+    {
+      "padding_mass": {
+        "discarded_probability_mass": 0.0,
+        "semantic_tokens": 151665,
+        "semantics": "Full-head temperature normalisation; exact shared semantic IDs plus one mass-preserving residual bucket for every padding/unmapped ID. Physical padding identities are deliberately coarsened; no probability tail is discarded.",
+        "student_padding_tokens": 271,
+        "student_residual_probability_mean": 0.00020152804790996015,
+        "teacher_padding_tokens": 399,
+        "teacher_residual_probability_mean": 0.0006104444619268179,
+        "temperature": 2.0
+      },
+      "sample_id": "9a709fd0afa880d7d61490074636b6a836aa05da5d9a338a46aa8aca31efdce4",
+      "step": 1,
+      "teacher_id": "qwen-coder-7b-q4_k_m",
+      "vocabulary_alignment": {
+        "semantic_token_count": 151665,
+        "semantic_token_ids_sha256": "881076570c6bc70fa9691bdb6713645fc2848f0d42de838030b2e3ae2f34ab2e",
+        "semantics": "Identical defined semantic token IDs plus one residual category containing every padding output. Full original-head normalisation before coarsening; zero discarded probability mass. Per-temperature residual masses are recorded with each optimisation update.",
+        "student_logits_width": 151936,
+        "student_residual_token_count": 271,
+        "teacher_logits_width": 152064,
+        "teacher_residual_token_count": 399
+      }
+    }
+  ],
+  "sample_ids": [
+    "9a709fd0afa880d7d61490074636b6a836aa05da5d9a338a46aa8aca31efdce4"
+  ]
+}

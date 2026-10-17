@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "1c8417e29ab67fbe325c00e231236374fdda50f71928ab5f925ddb9ac6538038",
+  "task_id": "money.parse",
+  "source_id": "private-money-v1",
+  "success": false,
+  "raw_generation": {
+    "path": "reports/local-study/explore/round-001/study/full/arms/arm-b1ee8c0e1c0ffe7465f83fe0/development/generations/money.parse.json",
+    "sha256": "026a6800187b87b3fa9455e4fbcb23e14d53a9209e367c594c6863e4dda6d57e",
+    "bytes": 4484
+  },
+  "sandbox_report": null,
+  "grading_error": null
+}

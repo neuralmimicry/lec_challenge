@@ -1,0 +1,64 @@
+{
+  "schema_version": 3,
+  "run_id": "a681621f-fedd-4ad4-ad34-4559e40eb53d",
+  "ownership_nonce": "592c8d06-c70a-4709-b55c-f6ed753f77ca",
+  "attempt_key": "1c277751-e838-4e97-b00f-0b42c139b5d3",
+  "receipt_path": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison/sandbox/1c277751-e838-4e97-b00f-0b42c139b5d3.prepared.json",
+  "report_path": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison/sandbox/a681621f-fedd-4ad4-ad34-4559e40eb53d.json",
+  "task": {
+    "id": "tables.last_by_key",
+    "source_id": "private-tables-v1",
+    "lineage_id": "local-contract-pack-15",
+    "split": "development",
+    "specification": "Input is an array of [key,value] integer rows. Keep the last value per key and return [key,value] rows sorted by key.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "60d2667ffa0dcdb540f2de2f41533a9d0b6c027ee25be4adb993cda6f67122f7",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": [
+          [
+            2,
+            9
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "expected": [
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            3
+          ]
+        ]
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "use serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let mut map: std::collections::HashMap<i64, i64> = std::collections::HashMap::new();\n\n    if let Value::Array rows = input {\n        for row in rows {\n            if let Value::Array([key_val, value_val]) = row {\n                if let Some(key) = key_val.as_i64() {\n                    if let Some(value) = value_val.as_i64() {\n                        map.insert(key, value);\n                    }\n                }\n            }\n        }\n    }\n\n    let mut result: Vec<Vec<Value>> = map\n        .iter()\n        .map(|(k, v)| vec![k.into(), v.into()])\n        .collect();\n\n    result.sort_by_key(|row| row[0].as_i64().unwrap());\n\n    Value::Array(result.into_iter().map(|row| Value::Array(row)).collect())\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison/sandbox"
+  },
+  "code_sha256": "01ae2d9b05c015bfb4a09165bba0e2abdb71824eb937c78b16bf24e53171b749",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

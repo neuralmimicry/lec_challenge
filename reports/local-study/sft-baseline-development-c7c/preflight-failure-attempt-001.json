@@ -1,0 +1,6 @@
+{
+  "error": "host deadline terminated probe settings",
+  "observed_unix_ms": 1792083100592,
+  "promotion": "incumbent_retained",
+  "status": "FAILURE"
+}

@@ -1,0 +1,24 @@
+{
+  "exit_code": 0,
+  "request": {
+    "bytes": 3397,
+    "path": "reports/local-study/explore/round-001/attempts/development-selection/0f765f7a-d25b-4ccf-b64d-1a5143f88b21/request.json",
+    "sha256": "955dd8b651359d66cba9ae8cada3c27d5bba249105301685da7638fc277d05a4"
+  },
+  "schema_version": 1,
+  "stage": "development-selection",
+  "status": "process_completed",
+  "stderr": {
+    "bytes": 0,
+    "path": "reports/local-study/explore/round-001/attempts/development-selection/0f765f7a-d25b-4ccf-b64d-1a5143f88b21/stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "stderr_tee_error": null,
+  "stdout": {
+    "bytes": 4321,
+    "path": "reports/local-study/explore/round-001/attempts/development-selection/0f765f7a-d25b-4ccf-b64d-1a5143f88b21/stdout.log",
+    "sha256": "96df0343583ebb29eb5f94ab7090ebda87cf15bf2c77a5c135e1507b6110c1e9"
+  },
+  "success": true,
+  "wall_seconds": 33.117721816
+}

@@ -6,6 +6,13 @@ A native Rust implementation of the LEC Principal AI Engineer assessment: config
 
 ## Run
 
+Check the latest logs against the original assessment with
+`./run.sh assessment-audit`. This read-only command writes a new JSON/Markdown
+audit and exits nonzero for missing, invalid or unverified evidence. It makes no
+provider calls, runs no models and preserves caches. The [latest-log review](docs/assessment-latest-logs.md)
+explains the observed development results, incomplete original requirements and
+the corrected loss of a child sandbox-preflight error.
+
 The required assessment entry point is:
 
 ```sh
@@ -33,7 +40,93 @@ cargo build --locked --release
 cargo test --locked --offline
 ```
 
+Git checkouts build current sources for assessment commands instead of silently
+using an older bundled CPU executable. Exported source trees can request this
+with `LEC_BUILD_FROM_SOURCE=1`; extracted deliveries keep their prebuilt path.
+
 `bootstrap-online` downloads the checksum-pinned Apache-2.0 Qwen base and builds the sandbox image. It is separate from offline replay. A complete disconnected delivery also needs the binary, base/tokeniser, saved OCI image and real recordings; the source checkout alone is not that bundle.
+
+## API credentials and token budgets
+
+Native adapters support **OpenAI Codex through Responses**, **Google Gemini**
+(Developer API or GCP Vertex AI) and **Anthropic Claude through Messages**.
+The [provider setup guide](docs/api-providers.md) covers key creation, Vertex
+access tokens, exact endpoints, model selection, token caps, dollar budgets,
+retries, failover and offline replay. These general inference connections remain
+separate from permission to use outputs for assessment distillation.
+
+| API | Credential environment variable | Request output limit |
+| --- | --- | --- |
+| OpenAI Codex | `OPENAI_API_KEY` | `max_output_tokens`, including reasoning |
+| Gemini Developer API | `GEMINI_API_KEY` | `maxOutputTokens`; thinking disabled |
+| Gemini on GCP Vertex AI | `GOOGLE_CLOUD_ACCESS_TOKEN` | `maxOutputTokens`; thinking disabled |
+| Anthropic Claude | `ANTHROPIC_API_KEY` | `max_tokens` |
+
+`./run.sh provider-check` checks the shipped **disabled, unpriced, zero-budget
+template**. `credential_present: true` only confirms a usable environment value.
+Create the local file before referencing it in a request. `provider-init` needs
+no credentials or internet and never overwrites an existing file or buys tokens.
+Keep keys in the named environment variables, exported in the same shell; see
+the [credential instructions](docs/api-providers.md#openai-codex-through-responses).
+
+This complete Responses setup example uses `gpt-6.1-sol`, a coding-capable model
+listed in the [official OpenAI documentation](https://developers.openai.com/api/docs/models/gpt-6.1-sol)
+checked on 16 October 2026. Account access must still permit that exact model.
+Its input accounting ceiling of USD 2.50/million covers the documented cache-write
+rate; both input categories use that ceiling. Consequently, reported costs for
+this profile are conservative estimates; reconcile actual bills separately.
+Review the prices before use. For an available Codex-named model, supply its
+exact ID, revision policy and applicable prices instead.
+
+```sh
+./run.sh provider-init --config state/api-providers.local.toml \
+  --provider openai --model gpt-6.1-sol \
+  --model-revision 'provider alias gpt-6.1-sol; reviewed 2026-10-16; may change' \
+  --input-usd-per-million 2.50 --cached-input-usd-per-million 2.50 \
+  --output-usd-per-million 10 \
+  --price-source https://developers.openai.com/api/docs/models/gpt-6.1-sol \
+  --price-date 2026-10-16 --budget-usd 0.25 --token-budget 20000
+
+# Local validation only; exits nonzero until a route is locally ready.
+./run.sh provider-check --config state/api-providers.local.toml --require-ready
+
+# Explicit authority for a live request, after setting OPENAI_API_KEY:
+./run.sh provider-request --live --authorised-usd 0.25 \
+  --config state/api-providers.local.toml --provider openai \
+  --prompt 'Reply with a short greeting.' --max-output-tokens 2048
+```
+
+The generated file enables only the chosen provider, keeps output training
+disabled, and applies the chosen dollar/token ceiling to all four budget scopes.
+Its per-call limits are 8,192 input / 4,096 output tokens, with no automatic
+retry/failover purchase until you edit those settings. Setup rejects a budget
+that cannot cover a full reservation. Existing files are preserved; inspect/edit
+one already created or choose a different `--config` path. Use that same path for
+both checking and requesting. `locally_ready_for_live_request` does not test
+account access, internet connectivity or remaining ledger budget.
+The other disabled providers retain unresolved placeholders; they can stay
+disabled while you use the configured OpenAI route.
+
+The first source build can take several minutes; later invocations reuse Cargo's
+build. The 2,048-token greeting cap includes reasoning, so the visible greeting
+can be short. A 256-token cap may exhaust reasoning and fail as incomplete.
+Consumer subscriptions and unrelated personal access tokens do not supply API
+credentials. See the guide for Gemini/Vertex/Claude setup, granular budgets,
+offline replay and [error-specific remedies](docs/api-providers.md#troubleshooting).
+
+Missing credentials and definite connection failures use configured fallbacks.
+Rate limits and transient HTTP errors have bounded retries; uncertain acceptance
+retains its reservation and stops automatic purchases. Money and token limits
+are checked before dispatch. `--offline` uses verified recordings with no HTTP;
+missing evidence fails explicitly. Offline operation or undetectable internet
+connectivity preserves all caches and models. No live provider access is claimed
+by the local fixture tests.
+
+The earlier [provider verification record](reports/provider-api-qa/verification.json)
+retains 321 passing tests, five intentional ignores and corrected failures.
+Setup repair evidence is recorded separately in
+[reports/provider-setup-qa/verification.json](reports/provider-setup-qa/verification.json).
+Live account access requires its own successful recorded call.
 
 ## Review the implementation
 
@@ -54,7 +147,7 @@ The frozen [three-page design](docs/design.pdf), [editable design](docs/design.m
 
 ```sh
 # Real pinned base inference, independent of absent teacher credentials.
-./run.sh infer --prompt 'Write a Rust function adding two i64 values.' --max-tokens 128
+./run.sh infer --prompt 'Write a Rust function adding two i64 values.' --max-tokens 256
 
 # Actual base or adapter behind a bounded localhost endpoint.
 ./run.sh serve
@@ -160,7 +253,10 @@ passed all nine software checks, 293 ordinary tests and all three real container
 tests. The separately versioned V3 controller also passed actual portable and
 orchestrator-crash QA; earlier failed deadline reports remain unchanged.
 The [Qwen3 follow-up](docs/qwen3.md) adds a publisher-verified alternative and
-native architecture support; the fresh pinned engine is now executing its trial.
+native architecture support. Its completed offline CUDA/F32 trial passed
+**3/16** tasks with no generation/grading errors, below the declared target.
+The search retained the stronger 7B fallback and pruned Qwen3's 2.50 GB of
+unused weights while preserving provenance and observations.
 
 The [original-assessment audit](docs/assessment-audit.md) maps every design/build
 requirement, all nine drills and each submission item to code, observed evidence

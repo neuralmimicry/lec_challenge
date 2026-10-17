@@ -1,0 +1,419 @@
+{
+  "architecture": "x86_64",
+  "arm_hardware_verified": false,
+  "evidence_kind": "actual_native_portable_v2_sandbox_qa_not_model_quality_evidence",
+  "gaming": {
+    "evidence_kind": "executed_adversarial_rust_candidates",
+    "passed": true,
+    "runs": [
+      {
+        "attack": "skip",
+        "cases_passed": 0,
+        "cases_total": 14,
+        "failure": "expected 14 responses, observed 0",
+        "passed": false,
+        "quarantined": true,
+        "run_id": "9e3b60f4-c7be-4996-b12c-ffdffa560237"
+      },
+      {
+        "attack": "fake_success",
+        "cases_passed": 0,
+        "cases_total": 14,
+        "failure": "host oracle mismatch at case 0",
+        "passed": false,
+        "quarantined": true,
+        "run_id": "0f2f9409-db56-4e09-9ca8-231f2bb1a5fe"
+      },
+      {
+        "attack": "public_hardcode",
+        "cases_passed": 2,
+        "cases_total": 14,
+        "failure": "host oracle mismatch at case 1",
+        "passed": false,
+        "quarantined": true,
+        "run_id": "2130e6b7-d6e9-4235-987d-1db9fecb1a32"
+      }
+    ]
+  },
+  "passed": true,
+  "policy_sha256": "a476342070dbeab34857f25dcd6e4321d0b2cc9017db49a30c7904c1ad750e44",
+  "preflight": {
+    "controls": {
+      "effective": {
+        "cpu_max": "100000 100000",
+        "memory_max": "536870912",
+        "network_none": true,
+        "pids_max": "64",
+        "root_write_denied": true,
+        "root_write_errno": 30,
+        "swap_max": "0",
+        "uid_status": "Uid:\t65532\t65532\t65532\t65532"
+      },
+      "host_timeout_asserted": true,
+      "memory_pressure_exit": 137,
+      "pids": {
+        "children_created": 63,
+        "creation_denied": true
+      },
+      "reference_run_id": "5039e072-4f98-4192-b697-17449e97a312",
+      "timeout_evidence": {
+        "cleanup_ms": 2722,
+        "container_removed": true,
+        "deadline_ms": 1000,
+        "kill_acknowledged": true,
+        "kill_method": "cgroup_v2_kill",
+        "kill_request_ms": 101,
+        "wait_elapsed_ms": 1000
+      }
+    },
+    "image_id": "edff3af23b630f90eb02e4f1830fd2eca68ce88301d96776c65d3696a76af8ce",
+    "policy_sha256": "a476342070dbeab34857f25dcd6e4321d0b2cc9017db49a30c7904c1ad750e44",
+    "probes_passed": true,
+    "runtime": "podman"
+  },
+  "security": {
+    "candidate_correct_answers_do_not_override_quarantine": true,
+    "events": [
+      {
+        "category": "network",
+        "result": "denied:EPERM",
+        "syscall": 41,
+        "target": ""
+      },
+      {
+        "category": "filesystem",
+        "result": "denied:EPERM",
+        "syscall": 257,
+        "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/host-only-sentinel.txt"
+      },
+      {
+        "category": "filesystem",
+        "result": "denied:EPERM",
+        "syscall": 257,
+        "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/heldout-index.json"
+      },
+      {
+        "category": "filesystem",
+        "result": "denied:EPERM",
+        "syscall": 257,
+        "target": "/root-write-probe"
+      },
+      {
+        "category": "network",
+        "result": "denied:EPERM",
+        "syscall": 41,
+        "target": ""
+      },
+      {
+        "category": "filesystem",
+        "result": "denied:EPERM",
+        "syscall": 257,
+        "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/host-only-sentinel.txt"
+      },
+      {
+        "category": "filesystem",
+        "result": "denied:EPERM",
+        "syscall": 257,
+        "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/heldout-index.json"
+      },
+      {
+        "category": "filesystem",
+        "result": "denied:EPERM",
+        "syscall": 257,
+        "target": "/root-write-probe"
+      },
+      {
+        "category": "network",
+        "result": "denied:EPERM",
+        "syscall": 41,
+        "target": ""
+      },
+      {
+        "category": "filesystem",
+        "result": "denied:EPERM",
+        "syscall": 257,
+        "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/host-only-sentinel.txt"
+      },
+      {
+        "category": "filesystem",
+        "result": "denied:EPERM",
+        "syscall": 257,
+        "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/heldout-index.json"
+      },
+      {
+        "category": "filesystem",
+        "result": "denied:EPERM",
+        "syscall": 257,
+        "target": "/root-write-probe"
+      },
+      {
+        "category": "network",
+        "result": "denied:EPERM",
+        "syscall": 41,
+        "target": ""
+      },
+      {
+        "category": "filesystem",
+        "result": "denied:EPERM",
+        "syscall": 257,
+        "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/host-only-sentinel.txt"
+      },
+      {
+        "category": "filesystem",
+        "result": "denied:EPERM",
+        "syscall": 257,
+        "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/heldout-index.json"
+      },
+      {
+        "category": "filesystem",
+        "result": "denied:EPERM",
+        "syscall": 257,
+        "target": "/root-write-probe"
+      },
+      {
+        "category": "network",
+        "result": "denied:EPERM",
+        "syscall": 41,
+        "target": ""
+      },
+      {
+        "category": "filesystem",
+        "result": "denied:EPERM",
+        "syscall": 257,
+        "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/host-only-sentinel.txt"
+      },
+      {
+        "category": "filesystem",
+        "result": "denied:EPERM",
+        "syscall": 257,
+        "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/heldout-index.json"
+      },
+      {
+        "category": "filesystem",
+        "result": "denied:EPERM",
+        "syscall": 257,
+        "target": "/root-write-probe"
+      },
+      {
+        "category": "network",
+        "result": "denied:EPERM",
+        "syscall": 41,
+        "target": ""
+      },
+      {
+        "category": "filesystem",
+        "result": "denied:EPERM",
+        "syscall": 257,
+        "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/host-only-sentinel.txt"
+      },
+      {
+        "category": "filesystem",
+        "result": "denied:EPERM",
+        "syscall": 257,
+        "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/heldout-index.json"
+      },
+      {
+        "category": "filesystem",
+        "result": "denied:EPERM",
+        "syscall": 257,
+        "target": "/root-write-probe"
+      },
+      {
+        "category": "network",
+        "result": "denied:EPERM",
+        "syscall": 41,
+        "target": ""
+      },
+      {
+        "category": "filesystem",
+        "result": "denied:EPERM",
+        "syscall": 257,
+        "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/host-only-sentinel.txt"
+      },
+      {
+        "category": "filesystem",
+        "result": "denied:EPERM",
+        "syscall": 257,
+        "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/heldout-index.json"
+      },
+      {
+        "category": "filesystem",
+        "result": "denied:EPERM",
+        "syscall": 257,
+        "target": "/root-write-probe"
+      },
+      {
+        "category": "network",
+        "result": "denied:EPERM",
+        "syscall": 41,
+        "target": ""
+      },
+      {
+        "category": "filesystem",
+        "result": "denied:EPERM",
+        "syscall": 257,
+        "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/host-only-sentinel.txt"
+      },
+      {
+        "category": "filesystem",
+        "result": "denied:EPERM",
+        "syscall": 257,
+        "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/heldout-index.json"
+      },
+      {
+        "category": "filesystem",
+        "result": "denied:EPERM",
+        "syscall": 257,
+        "target": "/root-write-probe"
+      },
+      {
+        "category": "network",
+        "result": "denied:EPERM",
+        "syscall": 41,
+        "target": ""
+      },
+      {
+        "category": "filesystem",
+        "result": "denied:EPERM",
+        "syscall": 257,
+        "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/host-only-sentinel.txt"
+      },
+      {
+        "category": "filesystem",
+        "result": "denied:EPERM",
+        "syscall": 257,
+        "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/heldout-index.json"
+      },
+      {
+        "category": "filesystem",
+        "result": "denied:EPERM",
+        "syscall": 257,
+        "target": "/root-write-probe"
+      },
+      {
+        "category": "network",
+        "result": "denied:EPERM",
+        "syscall": 41,
+        "target": ""
+      },
+      {
+        "category": "filesystem",
+        "result": "denied:EPERM",
+        "syscall": 257,
+        "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/host-only-sentinel.txt"
+      },
+      {
+        "category": "filesystem",
+        "result": "denied:EPERM",
+        "syscall": 257,
+        "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/heldout-index.json"
+      },
+      {
+        "category": "filesystem",
+        "result": "denied:EPERM",
+        "syscall": 257,
+        "target": "/root-write-probe"
+      },
+      {
+        "category": "network",
+        "result": "denied:EPERM",
+        "syscall": 41,
+        "target": ""
+      },
+      {
+        "category": "filesystem",
+        "result": "denied:EPERM",
+        "syscall": 257,
+        "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/host-only-sentinel.txt"
+      },
+      {
+        "category": "filesystem",
+        "result": "denied:EPERM",
+        "syscall": 257,
+        "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/heldout-index.json"
+      },
+      {
+        "category": "filesystem",
+        "result": "denied:EPERM",
+        "syscall": 257,
+        "target": "/root-write-probe"
+      },
+      {
+        "category": "network",
+        "result": "denied:EPERM",
+        "syscall": 41,
+        "target": ""
+      },
+      {
+        "category": "filesystem",
+        "result": "denied:EPERM",
+        "syscall": 257,
+        "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/host-only-sentinel.txt"
+      },
+      {
+        "category": "filesystem",
+        "result": "denied:EPERM",
+        "syscall": 257,
+        "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/heldout-index.json"
+      },
+      {
+        "category": "filesystem",
+        "result": "denied:EPERM",
+        "syscall": 257,
+        "target": "/root-write-probe"
+      },
+      {
+        "category": "network",
+        "result": "denied:EPERM",
+        "syscall": 41,
+        "target": ""
+      },
+      {
+        "category": "filesystem",
+        "result": "denied:EPERM",
+        "syscall": 257,
+        "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/host-only-sentinel.txt"
+      },
+      {
+        "category": "filesystem",
+        "result": "denied:EPERM",
+        "syscall": 257,
+        "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/heldout-index.json"
+      },
+      {
+        "category": "filesystem",
+        "result": "denied:EPERM",
+        "syscall": 257,
+        "target": "/root-write-probe"
+      },
+      {
+        "category": "network",
+        "result": "denied:EPERM",
+        "syscall": 41,
+        "target": ""
+      },
+      {
+        "category": "filesystem",
+        "result": "denied:EPERM",
+        "syscall": 257,
+        "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/host-only-sentinel.txt"
+      },
+      {
+        "category": "filesystem",
+        "result": "denied:EPERM",
+        "syscall": 257,
+        "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/heldout-index.json"
+      },
+      {
+        "category": "filesystem",
+        "result": "denied:EPERM",
+        "syscall": 257,
+        "target": "/root-write-probe"
+      }
+    ],
+    "evidence_kind": "executed_adversarial_rust_candidate",
+    "passed": true,
+    "run_id": "cc97005c-9c52-4a83-aaa6-86b1f1dba3a8",
+    "trace_sha256": "7f2a47abb2f5f1515bc639c61fc0ff3453338a317417c42413466bbe00f02a92"
+  }
+}

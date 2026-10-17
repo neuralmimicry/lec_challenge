@@ -1,0 +1,81 @@
+{
+  "all_quality_comparisons_valid": false,
+  "build_receipt": {
+    "bytes": 2880,
+    "path": "state/diagnostics/study-comparison/build/receipt.json",
+    "sha256": "77aaabdc8b062edb098d0c00895065062f3760312b565638c065cc0ac3bb92ef"
+  },
+  "comparisons": [
+    {
+      "actual_runtime_matched": true,
+      "architecture": "conventional_qwen_lora",
+      "baseline": {
+        "bytes": 1603,
+        "path": "reports/local-study/sft-baseline-development-c7c/report.json",
+        "sha256": "890dc08b570dd6ce7b3a70e90406a194e85c91ff321d6ba4fb4c8e958989964a"
+      },
+      "baseline_checkpoint_id": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+      "baseline_errors": 0,
+      "baseline_generation_ms": 205491,
+      "baseline_inference_threads": 4,
+      "baseline_numerical_equivalence": {
+        "attachment": null,
+        "qualified": true,
+        "reasons": [],
+        "reconstructed": null,
+        "report": null,
+        "required": false,
+        "status": "not_required"
+      },
+      "baseline_output_tokens": 2234,
+      "baseline_passed": 0,
+      "baseline_source_macro_pass_rate": 0.0,
+      "candidate": {
+        "bytes": 1616,
+        "path": "reports/local-study/sft-adapter-development-c7c/report.json",
+        "sha256": "54ed67a7caa08146d24c3a7a89c8bbd4ad4083fe226d2626a8241995e35d1e11"
+      },
+      "candidate_checkpoint_id": "b8b51c10874c1609e36c1b15ab8f0c0709d645f397d1979f7e17b4aea472ba5a",
+      "candidate_errors": 7,
+      "candidate_generation_ms": 258315,
+      "candidate_inference_threads": 4,
+      "candidate_minus_baseline_percentage_points": null,
+      "candidate_numerical_equivalence": {
+        "attachment": null,
+        "qualified": true,
+        "reasons": [],
+        "reconstructed": null,
+        "report": null,
+        "required": false,
+        "status": "not_required"
+      },
+      "candidate_output_tokens": 2213,
+      "candidate_passed": 0,
+      "candidate_source_macro_pass_rate": 0.0,
+      "evidence_kind": "descriptive_matched_local_student_baseline_comparison",
+      "held_out_used": false,
+      "limitations": [
+        "Observed local train/development differences only; no confidence interval, significant win, learning guarantee or global optimum is inferred.",
+        "Generation time excludes loading, training and grading; different thread allocations are disclosed rather than treated as a fair speed comparison.",
+        "Any baseline/candidate generation or infrastructure failure prevents a model-quality improvement claim.",
+        "BitNet quality comparisons require independently reconstructed checkpoint-bound Rust/C++ numerical equivalence; missing, stale and failed receipts preserve descriptive scores but cannot establish improvement."
+      ],
+      "observed_score_delta_percentage_points": 0.0,
+      "planned_tasks": 16,
+      "positive_observed_delta": false,
+      "production_eligible": false,
+      "quality_comparison_valid": false,
+      "same_inference_thread_allocation": true,
+      "schema_version": 2,
+      "split": "development",
+      "timings_support_matched_resource_comparison": true
+    }
+  ],
+  "containers_started": false,
+  "evidence_kind": "independently_verified_descriptive_study_comparisons",
+  "held_out_used": false,
+  "inference_performed": false,
+  "production_eligible": false,
+  "schema_version": 1,
+  "status": "invalid_quality_comparison"
+}

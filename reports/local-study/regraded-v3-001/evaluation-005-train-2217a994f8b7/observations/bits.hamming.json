@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "regrade_plan_sha256": "c321d8059463124f5c671ef40d0ed51dad10e49b26e0a18aa6f2f45add5739a9",
+  "task_id": "bits.hamming",
+  "source_id": "private-bits-v1",
+  "original_plan": {
+    "path": "reports/local-study/native-full-quality-001/composed-train/plan.json",
+    "sha256": "a52d044d05dc99f9af1879cdb69e7d80c4abc41b317440255f0ff27069084831",
+    "bytes": 63656
+  },
+  "original_raw": {
+    "path": "reports/local-study/native-full-quality-001/composed-train/generations/bits.hamming.json",
+    "sha256": "66e28388f460c1795eaf3531a0bdb3d2259d52e486d6072136459967bdadee2a",
+    "bytes": 1863
+  },
+  "outcome": {
+    "kind": "graded",
+    "prepared": {
+      "path": "reports/local-study/regraded-v3-001/evaluation-005-train-2217a994f8b7/prepared/bits.hamming.json",
+      "sha256": "bb098d0da0f32434dcb54daddb5ee344c357a3e5d9d94718d43d5462806af030",
+      "bytes": 2721
+    },
+    "report": {
+      "path": "reports/local-study/regraded-v3-001/evaluation-005-train-2217a994f8b7/sandbox/63fd5c59-a269-44fa-9212-d720f8d6c9cd.json",
+      "sha256": "c90dfd70647c7a1b5261367759bbc8a1899344003feacbba61af850a7b03126b",
+      "bytes": 2145
+    },
+    "audit": {
+      "path": "reports/local-study/regraded-v3-001/evaluation-005-train-2217a994f8b7/sandbox/63fd5c59-a269-44fa-9212-d720f8d6c9cd.audit.json",
+      "sha256": "e666e3ef56db77e9f42350fe776f50016a0ffb3733f9e92557cb9175be566af2",
+      "bytes": 548
+    }
+  },
+  "success": false
+}

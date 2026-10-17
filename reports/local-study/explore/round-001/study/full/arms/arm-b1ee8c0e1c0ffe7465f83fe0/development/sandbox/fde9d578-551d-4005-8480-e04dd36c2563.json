@@ -1,0 +1,40 @@
+{
+  "run_id": "fde9d578-551d-4005-8480-e04dd36c2563",
+  "task_id": "encoding.hex_encode",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error[E0308]: mismatched types\n --> /candidate/main.rs:7:18\n  |\n7 |         hex.push(format!(\"{:x}\", byte).to_lowercase());\n  |             ---- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `char`, found `String`\n  |             |\n  |             arguments to this method are incorrect\n  |\nnote: method defined here\n --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/alloc/src/string.rs:1432:11\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0308`.\n"
+  ],
+  "cases_total": 5,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "9c601f7c30c8c22e6662bbd1137c93cb6cdfe6b669cfb14706242d8b1f5a9f7a",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/explore/round-001/study/full/arms/arm-b1ee8c0e1c0ffe7465f83fe0/development/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/explore/round-001/study/full/arms/arm-b1ee8c0e1c0ffe7465f83fe0/development/sandbox/fde9d578-551d-4005-8480-e04dd36c2563.audit.json",
+  "audit_sha256": "58191860884d45ab61047b43d2959bf1b2d0df97cf005b670254e6e6eb0eec7e",
+  "failure": "compilation failed: error[E0308]: mismatched types\n --> /candidate/main.rs:7:18\n  |\n7 |         hex.push(format!(\"{:x}\", byte).to_lowercase());\n  |             ---- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `char`, found `String`\n  |             |\n  |             arguments to this method are incorrect\n  |\nnote: method defined here\n --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/alloc/src/string.rs:1432:11\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0308`.\n",
+  "duration_ms": 14345,
+  "timeout_evidence": null,
+  "lifecycle_evidence": {
+    "receipt_path": "reports/local-study/explore/round-001/study/full/arms/arm-b1ee8c0e1c0ffe7465f83fe0/development/sandbox/fde9d578-551d-4005-8480-e04dd36c2563.lifecycle.json",
+    "receipt_sha256": "c42f6645f2131eb808c571140cda8dc28815dca719dcda02c2d932e38fb040bb"
+  }
+}

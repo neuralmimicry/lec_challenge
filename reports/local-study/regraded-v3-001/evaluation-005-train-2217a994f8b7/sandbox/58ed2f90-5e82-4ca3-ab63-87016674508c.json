@@ -1,0 +1,40 @@
+{
+  "run_id": "58ed2f90-5e82-4ca3-ab63-87016674508c",
+  "task_id": "stock.mode",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error[E0433]: cannot find type `HashMap` in this scope\n --> /candidate/main.rs:5:22\n  |\n5 |     let mut counts = HashMap::new();\n  |                      ^^^^^^^ use of undeclared type `HashMap`\n  |\nhelp: consider importing this struct\n  |\n1 + use std::collections::HashMap;\n  |\n\nerror[E0599]: no variant, associated function, or constant named `null` found for enum `Value` in the current scope\n   --> /candidate/main.rs:18:33\n    |\n 18 |     most_frequent.map_or(Value::null, |str_item| Value::String(str_item.to_string()))\n    |                                 ^^^^ variant, associated function, or constant not found in `Value`\n    |\nhelp: there is a method `as_null` with a similar name\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:746:5\n    |\n746 |     pub fn as_null(&self) -> Option<()> {\n    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nhelp: there is a variant with a similar name\n    |\n 18 -     most_frequent.map_or(Value::null, |str_item| Value::String(str_item.to_string()))\n 18 +     most_frequent.map_or(Value::Null, |str_item| Value::String(str_item.to_string()))\n    |\n\nerror: aborting due to 2 previous errors\n\nSome errors have detailed explanations: E0433, E0599.\nFor more information about an error, try `rustc --explain E0433`.\n"
+  ],
+  "cases_total": 6,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "c0bc0ce8d275076be823ef2e1a121828eb190e6c5bb3d220da70957b823997de",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/regraded-v3-001/evaluation-005-train-2217a994f8b7/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/regraded-v3-001/evaluation-005-train-2217a994f8b7/sandbox/58ed2f90-5e82-4ca3-ab63-87016674508c.audit.json",
+  "audit_sha256": "6d4c3a0723e2b3ae4be8ee13040d21d7cb70a6bcc94d8753a5279fc3560021f9",
+  "failure": "compilation failed: error[E0433]: cannot find type `HashMap` in this scope\n --> /candidate/main.rs:5:22\n  |\n5 |     let mut counts = HashMap::new();\n  |                      ^^^^^^^ use of undeclared type `HashMap`\n  |\nhelp: consider importing this struct\n  |\n1 + use std::collections::HashMap;\n  |\n\nerror[E0599]: no variant, associated function, or constant named `null` found for enum `Value` in the current scope\n   --> /candidate/main.rs:18:33\n    |\n 18 |     most_frequent.map_or(Value::null, |str_item| Value::String(str_item.to_string()))\n    |                                 ^^^^ variant, associated function, or constant not found in `Value`\n    |\nhelp: there is a method `as_null` with a similar name\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:746:5\n    |\n746 |     pub fn as_null(&self) -> Option<()> {\n    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nhelp: there is a variant with a similar name\n    |\n 18 -     most_frequent.map_or(Value::null, |str_item| Value::String(str_item.to_string()))\n 18 +     most_frequent.map_or(Value::Null, |str_item| Value::String(str_item.to_string()))\n    |\n\nerror: aborting due to 2 previous errors\n\nSome errors have detailed explanations: E0433, E0599.\nFor more information about an error, try `rustc --explain E0433`.\n",
+  "duration_ms": 14447,
+  "timeout_evidence": null,
+  "lifecycle_evidence": {
+    "receipt_path": "reports/local-study/regraded-v3-001/evaluation-005-train-2217a994f8b7/sandbox/58ed2f90-5e82-4ca3-ab63-87016674508c.lifecycle.json",
+    "receipt_sha256": "f0003a6e31062e4b64d6caa30cf61e3375fed0916acfd8341c8cba9ea0f772fc"
+  }
+}

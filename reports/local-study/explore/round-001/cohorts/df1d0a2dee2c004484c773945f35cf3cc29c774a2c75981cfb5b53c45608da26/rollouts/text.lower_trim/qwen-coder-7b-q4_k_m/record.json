@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "evidence_kind": "actual_checkpoint_bound_rollout_observation",
+  "teacher_id": "qwen-coder-7b-q4_k_m",
+  "plan": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/text.lower_trim/student-plan.json",
+    "sha256": "24033cb326b6b44576af6542002a62c5c6c35a734b28179c75ec962b0852cae1",
+    "bytes": 3845
+  },
+  "student_raw": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/text.lower_trim/student-raw.json",
+    "sha256": "a92d2ce9b47818ba321e670da9875b5dbb5841af0edc6d3da31de7a081d268af",
+    "bytes": 4879
+  },
+  "student_grade": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox/d0486213-ac3e-4a1b-bf96-f1062e5cd117.json",
+    "sha256": "665346b4072233e464c7b038d9dc7e001488ac72a63351aaf3cb2853c155ea3a",
+    "bytes": 3899
+  },
+  "student_content_eligibility": {
+    "policy": "verified_content_roles_v1",
+    "role": "excluded",
+    "report": {
+      "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox/d0486213-ac3e-4a1b-bf96-f1062e5cd117.json",
+      "sha256": "665346b4072233e464c7b038d9dc7e001488ac72a63351aaf3cb2853c155ea3a",
+      "bytes": 3899
+    },
+    "audit": {
+      "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox/d0486213-ac3e-4a1b-bf96-f1062e5cd117.audit.json",
+      "sha256": "9d3b96e7bda4bcac06eaac1592767b5132f361ef0e1dddbe4e2b72714ff4cfb8",
+      "bytes": 1299
+    },
+    "completion_sha256": "02f98b2b6e10394d5411ed97cb0a6128421682c3d961393af5c6c2f40dab38c8",
+    "generation_complete": false,
+    "original_quarantined": true,
+    "reason": "No independently verified permitted content role; retain the original failed/quarantined observation without feedback or training eligibility."
+  },
+  "feedback_plan": null,
+  "feedback_raw": null,
+  "feedback_grade": null,
+  "errors": [
+    "Unsafe/quarantined or empty student attempt cannot become a teacher-feedback prompt"
+  ],
+  "success": false
+}

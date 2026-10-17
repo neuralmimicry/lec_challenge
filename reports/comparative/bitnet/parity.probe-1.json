@@ -1,0 +1,276 @@
+{
+  "completion_probabilities": [
+    {
+      "bytes": [
+        84,
+        119,
+        111
+      ],
+      "id": 11874,
+      "logprob": -0.001387604745104909,
+      "token": "Two",
+      "top_logprobs": [
+        {
+          "bytes": [
+            84,
+            119,
+            111
+          ],
+          "id": 11874,
+          "logprob": -0.001387604745104909,
+          "token": "Two"
+        },
+        {
+          "bytes": [
+            84,
+            104,
+            101
+          ],
+          "id": 791,
+          "logprob": -7.404387474060059,
+          "token": "The"
+        },
+        {
+          "bytes": [
+            50
+          ],
+          "id": 17,
+          "logprob": -8.196404457092285,
+          "token": "2"
+        },
+        {
+          "bytes": [
+            84,
+            119
+          ],
+          "id": 23662,
+          "logprob": -8.410431861877441,
+          "token": "Tw"
+        },
+        {
+          "bytes": [
+            116,
+            119,
+            111
+          ],
+          "id": 20375,
+          "logprob": -9.698352813720703,
+          "token": "two"
+        },
+        {
+          "bytes": [
+            84,
+            104,
+            114,
+            101,
+            101
+          ],
+          "id": 20215,
+          "logprob": -9.991795539855955,
+          "token": "Three"
+        },
+        {
+          "bytes": [
+            70,
+            111,
+            117,
+            114
+          ],
+          "id": 28070,
+          "logprob": -10.236119270324709,
+          "token": "Four"
+        },
+        {
+          "bytes": [
+            84,
+            111
+          ],
+          "id": 1271,
+          "logprob": -10.403430938720703,
+          "token": "To"
+        },
+        {
+          "bytes": [
+            70,
+            105,
+            118,
+            101
+          ],
+          "id": 38120,
+          "logprob": -10.549139976501465,
+          "token": "Five"
+        },
+        {
+          "bytes": [
+            78,
+            105,
+            110,
+            101
+          ],
+          "id": 84429,
+          "logprob": -10.912150382995604,
+          "token": "Nine"
+        },
+        {
+          "bytes": [
+            83,
+            105,
+            120
+          ],
+          "id": 42560,
+          "logprob": -11.97325325012207,
+          "token": "Six"
+        },
+        {
+          "bytes": [
+            83,
+            101,
+            118,
+            101,
+            110
+          ],
+          "id": 60628,
+          "logprob": -12.070460319519045,
+          "token": "Seven"
+        },
+        {
+          "bytes": [
+            65,
+            115
+          ],
+          "id": 2170,
+          "logprob": -12.19800090789795,
+          "token": "As"
+        },
+        {
+          "bytes": [
+            83,
+            117,
+            114,
+            101
+          ],
+          "id": 40914,
+          "logprob": -12.37209415435791,
+          "token": "Sure"
+        },
+        {
+          "bytes": [
+            65,
+            110,
+            115,
+            119,
+            101,
+            114
+          ],
+          "id": 16533,
+          "logprob": -12.57364559173584,
+          "token": "Answer"
+        },
+        {
+          "bytes": [
+            65,
+            100,
+            100,
+            105,
+            110,
+            103
+          ],
+          "id": 33408,
+          "logprob": -12.632405281066896,
+          "token": "Adding"
+        }
+      ]
+    }
+  ],
+  "content": "Two",
+  "generation_settings": {
+    "backend_sampling": false,
+    "chat_format": "Content-only",
+    "dry_allowed_length": 2,
+    "dry_base": 1.75,
+    "dry_multiplier": 0.0,
+    "dry_penalty_last_n": 4096,
+    "dry_sequence_breakers": [
+      "\n",
+      ":",
+      "\"",
+      "*"
+    ],
+    "dynatemp_exponent": 1.0,
+    "dynatemp_range": 0.0,
+    "frequency_penalty": 0.0,
+    "generation_prompt": "",
+    "grammar": "",
+    "grammar_lazy": false,
+    "grammar_triggers": [],
+    "ignore_eos": false,
+    "logit_bias": [],
+    "lora": [],
+    "max_tokens": 1,
+    "min_keep": 0,
+    "min_p": 0.05000000074505806,
+    "mirostat": 0,
+    "mirostat_eta": 0.10000000149011612,
+    "mirostat_tau": 5.0,
+    "n_discard": 0,
+    "n_keep": 0,
+    "n_predict": 1,
+    "n_probs": 16,
+    "post_sampling_probs": false,
+    "presence_penalty": 0.0,
+    "preserved_tokens": [],
+    "reasoning_format": "deepseek",
+    "reasoning_in_content": false,
+    "repeat_last_n": 64,
+    "repeat_penalty": 1.0,
+    "samplers": [
+      "penalties",
+      "dry",
+      "top_n_sigma",
+      "top_k",
+      "typ_p",
+      "top_p",
+      "min_p",
+      "xtc",
+      "temperature"
+    ],
+    "seed": 1729,
+    "speculative.types": "none",
+    "stop": [],
+    "stream": false,
+    "temperature": 0.0,
+    "timings_per_token": false,
+    "top_k": 40,
+    "top_n_sigma": -1.0,
+    "top_p": 1.0,
+    "typical_p": 1.0,
+    "xtc_probability": 0.0,
+    "xtc_threshold": 0.10000000149011612
+  },
+  "has_new_line": false,
+  "id_slot": 0,
+  "index": 0,
+  "model": "offline_bundle/students/bitnet-2b-4t/model.i2_s.gguf",
+  "prompt": "<|begin_of_text|>User: What is two plus three? Answer briefly.<|eot_id|>Assistant: ",
+  "stop": true,
+  "stop_type": "limit",
+  "stopping_word": "",
+  "timings": {
+    "cache_n": 0,
+    "predicted_ms": 0.001,
+    "predicted_n": 1,
+    "predicted_per_second": 1000000.0,
+    "predicted_per_token_ms": 0.001,
+    "prompt_ms": 384.411,
+    "prompt_n": 16,
+    "prompt_per_second": 41.622117993501746,
+    "prompt_per_token_ms": 24.0256875
+  },
+  "tokens": [
+    11874
+  ],
+  "tokens_cached": 16,
+  "tokens_evaluated": 16,
+  "tokens_predicted": 1,
+  "truncated": false
+}

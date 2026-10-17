@@ -1,0 +1,63 @@
+{
+  "assets_sha256": "a6e1316c7e880375604e0ef88d3b51d366f332d0edaa973205ab5396d54675ec",
+  "endpoint": "http://127.0.0.1:8081",
+  "evidence_kind": "actual_existing_local_cuda_teacher_endpoint",
+  "generation": {
+    "checkpoint_id": "c1b9b30e907950516ba3c646bdf570d8084c25a6410a0cdca80cf04b11bc13a8",
+    "complete": true,
+    "completion": "```rust\nfn add(a: i64, b: i64) -> i64 {\n    a + b\n}\n```",
+    "elapsed_ms": 1618,
+    "finish_reason": "stop",
+    "input_tokens": 57,
+    "output_tokens": 29
+  },
+  "gpu_processes_csv": "638901, /home/pbisaacs/Developer/neuralmimicry/lec_challenge/target/cuda/release/lec-distil, 3598\n",
+  "health": {
+    "base_revision": "2e1fd397ee46e1388853d2af2c993145b0f1098a",
+    "checkpoint_id": "c1b9b30e907950516ba3c646bdf570d8084c25a6410a0cdca80cf04b11bc13a8",
+    "checksum_validated": true,
+    "execution": {
+      "actual_device": "Cuda { gpu_id: 0 }",
+      "actual_dtype": "F16",
+      "checkpoint_id": "c1b9b30e907950516ba3c646bdf570d8084c25a6410a0cdca80cf04b11bc13a8",
+      "context_cap": 2048,
+      "cpu_fallback": false,
+      "cuda_active": true,
+      "cuda_feature_compiled": true,
+      "engine": "native_rust_candle",
+      "model_id": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+      "requested": {
+        "device": {
+          "cuda": {
+            "ordinal": 0
+          }
+        },
+        "dtype": "f16"
+      },
+      "revision": "2e1fd397ee46e1388853d2af2c993145b0f1098a"
+    },
+    "healthy": true,
+    "immutable": true,
+    "inference_smoke_output": "In",
+    "model_id": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+    "production_eligible": false,
+    "smoke_elapsed_ms": 193,
+    "tokenizer_sha256": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539"
+  },
+  "limitation": "One live original-model endpoint smoke; no learning, held-out result or assessment provider completion is claimed.",
+  "observed_gpu_memory_mib": 3598,
+  "observed_unix_ms": 1792073416235,
+  "process_id": 638901,
+  "promotable": false,
+  "quality_assurance_passed": true,
+  "registry_sha256": "7be043f6221464476fd3dafd795867fad6b48ec8d25ba51844bc78c8443e8661",
+  "request": {
+    "max_new_tokens": 128,
+    "prompt": "Write a Rust function add(a: i64, b: i64) -> i64. Return only the complete function.",
+    "seed": 1701,
+    "temperature": 0.0,
+    "timeout_seconds": 120,
+    "top_p": 1.0
+  },
+  "schema_version": 1
+}

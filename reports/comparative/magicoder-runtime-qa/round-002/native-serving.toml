@@ -1,0 +1,5 @@
+address = "127.0.0.1:40235"
+queue_capacity = 1
+maximum_request_bytes = 32768
+maximum_output_tokens = 64
+timeout_seconds = 120

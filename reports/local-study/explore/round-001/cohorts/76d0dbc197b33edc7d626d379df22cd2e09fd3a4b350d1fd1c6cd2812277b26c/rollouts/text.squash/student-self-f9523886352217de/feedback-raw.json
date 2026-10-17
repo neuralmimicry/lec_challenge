@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "evidence_kind": "actual_checkpoint_bound_rollout_generation",
+  "plan": {
+    "path": "reports/local-study/explore/round-001/cohorts/76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c/rollouts/text.squash/student-self-f9523886352217de/feedback-plan.json",
+    "sha256": "b43c008f4eb9d85c53308bac3b08174446dfd8ad7feec535bfd6c1ed69274596",
+    "bytes": 5563
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let mut lines = input.as_str().split_whitespace().collect::<Vec<&str>>();\n    let mut result = String::new();\n    for line in lines {\n        let trimmed_line = line.trim();\n        if trimmed_line.is_empty() {\n            continue;\n        }\n        result.push(trimmed_line);\n        if !trimmed_line.ends_with('\\n') {\n            result.push(' ');\n        }\n    }\n    serde_json::Value::String(result)\n}\n```",
+    "checkpoint_id": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+    "finish_reason": "stop",
+    "input_tokens": 1011,
+    "output_tokens": 117,
+    "elapsed_ms": 4135,
+    "complete": true
+  },
+  "generation_error": null,
+  "execution": {
+    "actual_device": "Cuda { gpu_id: 0 }",
+    "actual_dtype": "F32",
+    "asset_lifetime_shared_lease": false,
+    "available_cpu_threads": 16,
+    "candle_cpu_threads": 16,
+    "checkpoint_id": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+    "context_cap": 4096,
+    "cpu_fallback": false,
+    "cuda_active": true,
+    "cuda_feature_compiled": true,
+    "engine": "native_rust_candle",
+    "model_id": "Qwen/Qwen2.5-Coder-0.5B-Instruct",
+    "quantisation": null,
+    "requested": {
+      "device": {
+        "cuda": {
+          "ordinal": 0
+        }
+      },
+      "dtype": "f32"
+    },
+    "revision": "ea3f2471cf1b1f0db85067f1ef93848e38e88c25",
+    "weight_format": "safetensors"
+  }
+}

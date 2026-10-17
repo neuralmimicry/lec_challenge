@@ -1,0 +1,38 @@
+{
+  "model_id": "deepseek-coder-1_3b",
+  "task_id": "encoding.hex_encode",
+  "source_id": "private-encoding-v1",
+  "specification_sha256": "dc43dce8ef138a6d990fb8d5450f3fed524046e2e019c18509d025f22b594956",
+  "seed": 1729,
+  "plan_sha256": "9aefcaf935435b296c63229638aad5a22a416ae171eda011a6812dd745667ea8",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an array of bytes (integers 0..255). Return concatenated two-digit lowercase hexadecimal.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[0,15,255],\"expected\":\"000fff\"}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "Here is a simple Rust function that converts an array of bytes to a two-digit lowercase hexadecimal string.\n\n```rust\nuse std::str::FromStr;\nuse serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let input: Vec<u8> = match input {\n        Value::Array(vec) => vec.into_iter().map(|x| x.as_u8()).collect(),\n        _ => panic!(\"Expected an array of bytes\"),\n    };\n\n    let hex_str: String = input.iter().map(|byte| format!(\"{:02x}\", byte)).collect();\n\n    Value::String(hex_str)\n}\n```\n\nThis function first checks if the input is an array of bytes. If it is, it converts each byte to a two-digit hexadecimal string and concatenates them. If the input is not an array of bytes, it panics.\n\nPlease note that this function assumes that the input is a single array of bytes. If the input can be a different format, you would need to modify the function accordingly.\n",
+    "checkpoint_id": "4ff570bf9a558d23c5cb4171bad00daf663be8282150cdb5769e0f6975b0007a",
+    "finish_reason": "stop",
+    "input_tokens": 306,
+    "output_tokens": 264,
+    "elapsed_ms": 14669,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/comparative/coding-development/deepseek-coder-1_3b/encoding.hex_encode.generation.json",
+    "sha256": "7bf933a4bffcd2d5a48e58c35eb193289b52b994ad556090f51bd7040ff48384",
+    "bytes": 3199
+  },
+  "sandbox_report": {
+    "path": "reports/comparative/coding-development/sandbox/ba2a7019-993e-4a54-ad88-a39be3a24643.json",
+    "sha256": "6621ecc2800198e48fdc863ec4a1986404ffd413fc590f3d1fdfd2652e5441f7",
+    "bytes": 2966
+  },
+  "grading_error": null,
+  "success": false
+}

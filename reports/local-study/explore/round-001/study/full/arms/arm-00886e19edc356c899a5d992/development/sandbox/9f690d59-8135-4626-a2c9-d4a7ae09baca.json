@@ -1,0 +1,40 @@
+{
+  "run_id": "9f690d59-8135-4626-a2c9-d4a7ae09baca",
+  "task_id": "encoding.rot13",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error[E0308]: `match` arms have incompatible types\n  --> /candidate/main.rs:11:42\n   |\n 9 |               let new_char = match c {\n   |  ____________________________-\n10 | |                 c if c.is_lowercase() => c.to_uppercase(),\n   | |                                          ---------------- this is found to be of type `ToUppercase`\n11 | |                 c if c.is_uppercase() => c.to_lowercase(),\n   | |                                          ^^^^^^^^^^^^^^^^ expected `ToUppercase`, found `ToLowercase`\n12 | |                 c if c.is_lowercase() => c.to_uppercase(),\n...  |\n17 | |                 _ => c,\n18 | |             };\n   | |_____________- `match` arms have incompatible types\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0308`.\n"
+  ],
+  "cases_total": 5,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "6cc5b954c77a7655f7b4b3b117996af8983a6a51b5353fb8a1b86bdf5c413af4",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/explore/round-001/study/full/arms/arm-00886e19edc356c899a5d992/development/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/explore/round-001/study/full/arms/arm-00886e19edc356c899a5d992/development/sandbox/9f690d59-8135-4626-a2c9-d4a7ae09baca.audit.json",
+  "audit_sha256": "c278ce08d85ae18d7fe07b9c3bfe15da24b8a67d91630a5291ab782d9f6ab9b7",
+  "failure": "compilation failed: error[E0308]: `match` arms have incompatible types\n  --> /candidate/main.rs:11:42\n   |\n 9 |               let new_char = match c {\n   |  ____________________________-\n10 | |                 c if c.is_lowercase() => c.to_uppercase(),\n   | |                                          ---------------- this is found to be of type `ToUppercase`\n11 | |                 c if c.is_uppercase() => c.to_lowercase(),\n   | |                                          ^^^^^^^^^^^^^^^^ expected `ToUppercase`, found `ToLowercase`\n12 | |                 c if c.is_lowercase() => c.to_uppercase(),\n...  |\n17 | |                 _ => c,\n18 | |             };\n   | |_____________- `match` arms have incompatible types\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0308`.\n",
+  "duration_ms": 15372,
+  "timeout_evidence": null,
+  "lifecycle_evidence": {
+    "receipt_path": "reports/local-study/explore/round-001/study/full/arms/arm-00886e19edc356c899a5d992/development/sandbox/9f690d59-8135-4626-a2c9-d4a7ae09baca.lifecycle.json",
+    "receipt_sha256": "b39110a92b6596039a04e5a4bb2fe90b4d83474ded17351b95d14347368b56cc"
+  }
+}

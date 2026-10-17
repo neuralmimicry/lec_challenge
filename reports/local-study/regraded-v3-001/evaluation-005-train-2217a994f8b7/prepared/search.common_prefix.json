@@ -1,0 +1,46 @@
+{
+  "schema_version": 3,
+  "run_id": "c9b2a274-bb54-4681-9d42-4f9d5cac7fda",
+  "ownership_nonce": "885f03a4-05c9-4aec-b754-7be8e181836b",
+  "attempt_key": "c1e363e78e535ec6340bfcc186bc04888e95c8fd379098910b763c5593117a07",
+  "receipt_path": "reports/local-study/regraded-v3-001/evaluation-005-train-2217a994f8b7/prepared/search.common_prefix.json",
+  "report_path": "reports/local-study/regraded-v3-001/evaluation-005-train-2217a994f8b7/sandbox/c9b2a274-bb54-4681-9d42-4f9d5cac7fda.json",
+  "task": {
+    "id": "search.common_prefix",
+    "source_id": "private-search-v1",
+    "lineage_id": "local-contract-pack-07",
+    "split": "train",
+    "specification": "Input is an array of ASCII strings. Return their longest common prefix, or the empty string for an empty array.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "9343cb90903c9c305f39df4b2b256603f701e8a07323b1bed98350aa757a4e15",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": [
+          "flower",
+          "flow",
+          "flight"
+        ],
+        "expected": "fl"
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "use serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let mut prefix = String::new();\n    let mut chars = input.as_array().unwrap();\n    while let Some(&item) = chars.next() {\n        if let Some(&s) = item.as_str() {\n            if prefix.is_empty() || s < prefix {\n                prefix = s.to_string();\n            }\n        } else {\n            break;\n        }\n    }\n    Value::String(prefix)\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/regraded-v3-001/evaluation-005-train-2217a994f8b7/sandbox"
+  },
+  "code_sha256": "6c310c7e4409efd2eab064947442f36d2df28485bb4eee58cbddcd9de29f56e5",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

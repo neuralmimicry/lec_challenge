@@ -1,0 +1,34 @@
+{
+  "run_id": "82bfbccc-ecba-4c07-9e8d-7e7d89c1b91a",
+  "task_id": "search.anagram",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error[E0433]: cannot find type `HashSet` in this scope\n --> /candidate/main.rs:7:21\n  |\n7 |     let mut set_a = HashSet::new();\n  |                     ^^^^^^^ use of undeclared type `HashSet`\n  |\nhelp: consider importing this struct\n  |\n1 + use std::collections::HashSet;\n  |\n\nerror[E0433]: cannot find type `HashSet` in this scope\n --> /candidate/main.rs:8:21\n  |\n8 |     let mut set_b = HashSet::new();\n  |                     ^^^^^^^ use of undeclared type `HashSet`\n  |\nhelp: consider importing this struct\n  |\n1 + use std::collections::HashSet;\n  |\n\nerror: aborting due to 2 previous errors\n\nFor more information about this error, try `rustc --explain E0433`.\n"
+  ],
+  "cases_total": 6,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "4b2556745b303526f354ded7f2c473b77f6da0c99a77f0a493c7272a8d800aac",
+  "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "9c3fda44dd4184d7b9c3126faf6d2074ce85d096063904e5347e3935877551be",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "controller_version": 2,
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:1",
+    "expected_image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/native-full-quality-001/composed-train/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/native-full-quality-001/composed-train/sandbox/82bfbccc-ecba-4c07-9e8d-7e7d89c1b91a.audit.json",
+  "audit_sha256": "f0ed82acfb3c44fd32f4fc1ad93619a826485534b8e550256b43b39edf548e38",
+  "failure": "compilation failed: error[E0433]: cannot find type `HashSet` in this scope\n --> /candidate/main.rs:7:21\n  |\n7 |     let mut set_a = HashSet::new();\n  |                     ^^^^^^^ use of undeclared type `HashSet`\n  |\nhelp: consider importing this struct\n  |\n1 + use std::collections::HashSet;\n  |\n\nerror[E0433]: cannot find type `HashSet` in this scope\n --> /candidate/main.rs:8:21\n  |\n8 |     let mut set_b = HashSet::new();\n  |                     ^^^^^^^ use of undeclared type `HashSet`\n  |\nhelp: consider importing this struct\n  |\n1 + use std::collections::HashSet;\n  |\n\nerror: aborting due to 2 previous errors\n\nFor more information about this error, try `rustc --explain E0433`.\n",
+  "duration_ms": 3927,
+  "timeout_evidence": null
+}

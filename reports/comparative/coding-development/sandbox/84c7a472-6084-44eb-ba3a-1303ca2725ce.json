@@ -1,0 +1,33 @@
+{
+  "run_id": "84c7a472-6084-44eb-ba3a-1303ca2725ce",
+  "task_id": "encoding.hex_decode",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: warning: unused import: `serde_json::Value`\n --> /candidate/main.rs:1:5\n  |\n1 | use serde_json::Value;\n  |     ^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0308]: mismatched types\n   --> /candidate/main.rs:18:30\n    |\n 10 |         bytes.push(byte);\n    |         -----      ---- this argument has type `u8`...\n    |         |\n    |         ... which causes `bytes` to have type `Vec<u8>`\n...\n 18 |     serde_json::Value::Array(bytes)\n    |     ------------------------ ^^^^^ expected `Vec<Value>`, found `Vec<u8>`\n    |     |\n    |     arguments to this enum variant are incorrect\n    |\n    = note: expected struct `Vec<Value>`\n               found struct `Vec<u8>`\nnote: tuple variant defined here\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:160:5\n    |\n160 |     Array(Vec<Value>),\n    |     ^^^^^\nhelp: call `Into::into` on this expression to convert `u8` into `Value`\n    |\n 10 |         bytes.push(byte.into());\n    |                        +++++++\n\nerror: aborting due to 1 previous error; 1 warning emitted\n\nFor more information about this error, try `rustc --explain E0308`.\n"
+  ],
+  "cases_total": 7,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "0bf995b5f69865792503015f6af52b457c861b679877956e939c2137ddb4a562",
+  "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+  "oracle_sha256": "a734f6d465714cbebb072790fedff161d2fc28cbb257b3d04cee0feaf8b5b5fe",
+  "code_sha256": "8006c49e8630370b5964899e832c190aba662cd49456be04d8656aa0915e8ec0",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:1",
+    "expected_image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/comparative/coding-development/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/comparative/coding-development/sandbox/84c7a472-6084-44eb-ba3a-1303ca2725ce.audit.json",
+  "audit_sha256": "3663aa59f7601437d02e3114bc947cb455f5f4489b5abd4e1b893727fe0005c3",
+  "failure": "compilation failed: warning: unused import: `serde_json::Value`\n --> /candidate/main.rs:1:5\n  |\n1 | use serde_json::Value;\n  |     ^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0308]: mismatched types\n   --> /candidate/main.rs:18:30\n    |\n 10 |         bytes.push(byte);\n    |         -----      ---- this argument has type `u8`...\n    |         |\n    |         ... which causes `bytes` to have type `Vec<u8>`\n...\n 18 |     serde_json::Value::Array(bytes)\n    |     ------------------------ ^^^^^ expected `Vec<Value>`, found `Vec<u8>`\n    |     |\n    |     arguments to this enum variant are incorrect\n    |\n    = note: expected struct `Vec<Value>`\n               found struct `Vec<u8>`\nnote: tuple variant defined here\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:160:5\n    |\n160 |     Array(Vec<Value>),\n    |     ^^^^^\nhelp: call `Into::into` on this expression to convert `u8` into `Value`\n    |\n 10 |         bytes.push(byte.into());\n    |                        +++++++\n\nerror: aborting due to 1 previous error; 1 warning emitted\n\nFor more information about this error, try `rustc --explain E0308`.\n",
+  "duration_ms": 11144,
+  "timeout_evidence": null
+}

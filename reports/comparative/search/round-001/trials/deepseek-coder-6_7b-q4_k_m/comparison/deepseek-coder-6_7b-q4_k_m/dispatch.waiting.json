@@ -1,0 +1,26 @@
+{
+  "model_id": "deepseek-coder-6_7b-q4_k_m",
+  "task_id": "dispatch.waiting",
+  "source_id": "private-dispatch-v1",
+  "specification_sha256": "779f79aab8092a883c5d3bb26675a6b8228a3ca11fe3e11a31e0316d053d0563",
+  "seed": 1729,
+  "plan_sha256": "7e8ac08343327333638e13a48db34cc069c251aad12e7848d71fd8942d83cc6f",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an array of [arrival,duration] processed in input order by one server, initially free at zero. Return total time jobs wait before service.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[[0,3],[1,2],[8,1]],\"expected\":2}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": null,
+  "generation_error": "model loading failed: GGUF/source rotary scaling differs",
+  "raw_generation": {
+    "path": "reports/comparative/search/round-001/trials/deepseek-coder-6_7b-q4_k_m/comparison/deepseek-coder-6_7b-q4_k_m/dispatch.waiting.generation.json",
+    "sha256": "65231207d458f23eee19a90040add6890b514fd521f49e1ab095a60f77dad541",
+    "bytes": 1620
+  },
+  "sandbox_report": null,
+  "grading_error": null,
+  "success": false
+}

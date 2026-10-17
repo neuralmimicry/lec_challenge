@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "0b0b9d0039da0867922749f2f76f43c30915c537c32a74f7c8e2f090a8148cea",
+  "task_id": "encoding.hex_encode",
+  "source_id": "private-encoding-v1",
+  "success": false,
+  "raw_generation": {
+    "path": "reports/local-study/native-full-quality-001/base-development/generations/encoding.hex_encode.json",
+    "sha256": "778cc28057b9bd51b8316afba51d75b7580d9e276f4ac94f53f551c0eb6dfce3",
+    "bytes": 1785
+  },
+  "sandbox_report": {
+    "path": "reports/local-study/native-full-quality-001/base-development/sandbox/8b272c50-5cb4-422b-b416-7ab19f88cf84.json",
+    "sha256": "413379ec415ab0ef093a320cb36e63b6971781cce23f1d875e7d6ab8b3cf3e14",
+    "bytes": 3964
+  },
+  "grading_error": null
+}

@@ -1,0 +1,25 @@
+{
+  "adapter": {
+    "bytes": 2009448,
+    "path": "reports/local-study/explore/round-001/study/quick/arms/arm-79f646f375756274bdaf0015/checkpoint/step-000003/adapter.safetensors",
+    "sha256": "be8d600bb03dab4f43457c6465e621d6bd0be306178c36ae19d75e36e262c534"
+  },
+  "effective_trits": {
+    "final": {
+      "changed_from_frozen_base": 0,
+      "nonzero": 135343019,
+      "sha256": "c4c7d893f70b848b82253c2336ebdf074c2a8ec17a8c56b4d31422a1cfea578a",
+      "values": 245760000
+    },
+    "initial": {
+      "changed_from_frozen_base": 0,
+      "nonzero": 135343019,
+      "sha256": "c4c7d893f70b848b82253c2336ebdf074c2a8ec17a8c56b4d31422a1cfea578a",
+      "values": 245760000
+    },
+    "semantics": "Actual ternary q/v forward lattice after STE QAT, including names and scales; distinct from latent adapter identity."
+  },
+  "reason": "Real latent optimiser updates crossed no additional ternary thresholds within the preregistered budget; this is not a successful adapted ternary checkpoint.",
+  "status": "blocked_no_discrete_ternary_update",
+  "steps": 3
+}

@@ -1,0 +1,48 @@
+{
+  "schema_version": 3,
+  "run_id": "27cc6d71-0d60-4599-a8e2-80a087ddda44",
+  "ownership_nonce": "c1429ec3-690b-4645-967d-c2c7f17a925f",
+  "attempt_key": "d267a4aeff606f3707ee9157fa23421837347a8b38e7a462e04741ebc5308be4",
+  "receipt_path": "reports/local-study/regraded-v3-001/evaluation-005-train-2217a994f8b7/prepared/search.occurrences.json",
+  "report_path": "reports/local-study/regraded-v3-001/evaluation-005-train-2217a994f8b7/sandbox/27cc6d71-0d60-4599-a8e2-80a087ddda44.json",
+  "task": {
+    "id": "search.occurrences",
+    "source_id": "private-search-v1",
+    "lineage_id": "local-contract-pack-07",
+    "split": "train",
+    "specification": "Input {text,pattern} contains ASCII strings with nonempty pattern. Return zero-based starting indices of every occurrence, including overlaps. The returned array may contain up to 256 items.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "b96bcc32161d3f470a03a9091c1e0c031f76339230175ae6e9623b852bc663cf",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": {
+          "pattern": "aba",
+          "text": "ababa"
+        },
+        "expected": [
+          0,
+          2
+        ]
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "use serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let text = input[\"text\"].as_str().unwrap();\n    let pattern = input[\"pattern\"].as_str().unwrap();\n    let mut result = Vec::new();\n    let mut start = 0;\n    let mut pos = 0;\n    while let Some(c) = text.chars().nth(pos) {\n        if c == pattern[pos] {\n            start += 1;\n            pos += 1;\n            if pos == pattern.len() {\n                result.push(start);\n                start = pos;\n            }\n        } else {\n            pos += 1;\n        }\n    }\n    Value::Array(result)\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/regraded-v3-001/evaluation-005-train-2217a994f8b7/sandbox"
+  },
+  "code_sha256": "fff2ae39623e698ff42b7430076112139d081bf04c4229ef9cbdd671d784b909",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

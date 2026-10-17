@@ -1,0 +1,40 @@
+{
+  "run_id": "ec492d92-3bf1-4158-9f10-a52f3e87e0ff",
+  "task_id": "ledger.bounds",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error[E0308]: mismatched types\n   --> /candidate/main.rs:21:41\n    |\n 21 |         Value::Array(vec![Value::Number(min.unwrap()), Value::Number(max.unwrap())])\n    |                           ------------- ^^^^^^^^^^^^ expected `Number`, found `i64`\n    |                           |\n    |                           arguments to this enum variant are incorrect\n    |\nnote: tuple variant defined here\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:142:5\n    |\n142 |     Number(Number),\n    |     ^^^^^^\nhelp: call `Into::into` on this expression to convert `i64` into `serde_json::Number`\n    |\n 21 |         Value::Array(vec![Value::Number(min.unwrap().into()), Value::Number(max.unwrap())])\n    |                                                     +++++++\n\nerror[E0308]: mismatched types\n   --> /candidate/main.rs:21:70\n    |\n 21 |         Value::Array(vec![Value::Number(min.unwrap()), Value::Number(max.unwrap())])\n    |                                                        ------------- ^^^^^^^^^^^^ expected `Number`, found `i64`\n    |                                                        |\n    |                                                        arguments to this enum variant are incorrect\n    |\nnote: tuple variant defined here\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:142:5\n    |\n142 |     Number(Number),\n    |     ^^^^^^\nhelp: call `Into::into` on this expression to convert `i64` into `serde_json::Number`\n    |\n 21 |         Value::Array(vec![Value::Number(min.unwrap()), Value::Number(max.unwrap().into())])\n    |                                                                                  +++++++\n\nerror: aborting due to 2 previous errors\n\nFor more information about this error, try `rustc --explain E0308`.\n"
+  ],
+  "cases_total": 14,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "9c3ff18582a1d818405811b5abad8fbc99b803fb19ffcdaf7c4504f9cc464dbf",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/regraded-v3-001/evaluation-005-train-2217a994f8b7/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/regraded-v3-001/evaluation-005-train-2217a994f8b7/sandbox/ec492d92-3bf1-4158-9f10-a52f3e87e0ff.audit.json",
+  "audit_sha256": "f93632d31e12ae8fa9f9ab5e4d4556f6bf802cec1171f3657cf0482642493925",
+  "failure": "compilation failed: error[E0308]: mismatched types\n   --> /candidate/main.rs:21:41\n    |\n 21 |         Value::Array(vec![Value::Number(min.unwrap()), Value::Number(max.unwrap())])\n    |                           ------------- ^^^^^^^^^^^^ expected `Number`, found `i64`\n    |                           |\n    |                           arguments to this enum variant are incorrect\n    |\nnote: tuple variant defined here\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:142:5\n    |\n142 |     Number(Number),\n    |     ^^^^^^\nhelp: call `Into::into` on this expression to convert `i64` into `serde_json::Number`\n    |\n 21 |         Value::Array(vec![Value::Number(min.unwrap().into()), Value::Number(max.unwrap())])\n    |                                                     +++++++\n\nerror[E0308]: mismatched types\n   --> /candidate/main.rs:21:70\n    |\n 21 |         Value::Array(vec![Value::Number(min.unwrap()), Value::Number(max.unwrap())])\n    |                                                        ------------- ^^^^^^^^^^^^ expected `Number`, found `i64`\n    |                                                        |\n    |                                                        arguments to this enum variant are incorrect\n    |\nnote: tuple variant defined here\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:142:5\n    |\n142 |     Number(Number),\n    |     ^^^^^^\nhelp: call `Into::into` on this expression to convert `i64` into `serde_json::Number`\n    |\n 21 |         Value::Array(vec![Value::Number(min.unwrap()), Value::Number(max.unwrap().into())])\n    |                                                                                  +++++++\n\nerror: aborting due to 2 previous errors\n\nFor more information about this error, try `rustc --explain E0308`.\n",
+  "duration_ms": 18148,
+  "timeout_evidence": null,
+  "lifecycle_evidence": {
+    "receipt_path": "reports/local-study/regraded-v3-001/evaluation-005-train-2217a994f8b7/sandbox/ec492d92-3bf1-4158-9f10-a52f3e87e0ff.lifecycle.json",
+    "receipt_sha256": "4b9b5e000df462d7231c61698797e5294736f36b71c275a88411ad26de858b15"
+  }
+}

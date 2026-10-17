@@ -1,0 +1,34 @@
+{
+  "run_id": "bec92038-17f7-4165-8220-5809effda503",
+  "task_id": "search.common_prefix",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: warning: unused import: `serde_json::Value`\n --> /candidate/main.rs:1:5\n  |\n1 | use serde_json::Value;\n  |     ^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0599]: no method named `as_str` found for reference `&Vec<Value>` in the current scope\n --> /candidate/main.rs:8:37\n  |\n8 |         let mut current_item = item.as_str().unwrap();\n  |                                     ^^^^^^\n  |\nhelp: there is a method `as_ptr` with a similar name\n  |\n8 -         let mut current_item = item.as_str().unwrap();\n8 +         let mut current_item = item.as_ptr().unwrap();\n  |\n\nerror[E0308]: mismatched types\n  --> /candidate/main.rs:15:5\n   |\n 3 | pub fn solve(input: serde_json::Value) -> serde_json::Value {\n   |                                           ----------------- expected `Value` because of return type\n...\n15 |     longest_prefix\n   |     ^^^^^^^^^^^^^^ expected `Value`, found `String`\n   |\nhelp: try wrapping the expression in `serde_json::Value::String`\n   |\n15 |     serde_json::Value::String(longest_prefix)\n   |     ++++++++++++++++++++++++++              +\n\nerror: aborting due to 2 previous errors; 1 warning emitted\n\nSome errors have detailed explanations: E0308, E0599.\nFor more information about an error, try `rustc --explain E0308`.\n"
+  ],
+  "cases_total": 7,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "4b2556745b303526f354ded7f2c473b77f6da0c99a77f0a493c7272a8d800aac",
+  "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "8fa5768928ca165c3eebdc306a4cd5530e8aa06029c839e71df508bb2b6520ea",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "controller_version": 2,
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:1",
+    "expected_image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/native-full-quality-001/base-train/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/native-full-quality-001/base-train/sandbox/bec92038-17f7-4165-8220-5809effda503.audit.json",
+  "audit_sha256": "f029b049eba0ead08dfae782b97a3d707e4da6773025bab383f561287bd79a9e",
+  "failure": "compilation failed: warning: unused import: `serde_json::Value`\n --> /candidate/main.rs:1:5\n  |\n1 | use serde_json::Value;\n  |     ^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0599]: no method named `as_str` found for reference `&Vec<Value>` in the current scope\n --> /candidate/main.rs:8:37\n  |\n8 |         let mut current_item = item.as_str().unwrap();\n  |                                     ^^^^^^\n  |\nhelp: there is a method `as_ptr` with a similar name\n  |\n8 -         let mut current_item = item.as_str().unwrap();\n8 +         let mut current_item = item.as_ptr().unwrap();\n  |\n\nerror[E0308]: mismatched types\n  --> /candidate/main.rs:15:5\n   |\n 3 | pub fn solve(input: serde_json::Value) -> serde_json::Value {\n   |                                           ----------------- expected `Value` because of return type\n...\n15 |     longest_prefix\n   |     ^^^^^^^^^^^^^^ expected `Value`, found `String`\n   |\nhelp: try wrapping the expression in `serde_json::Value::String`\n   |\n15 |     serde_json::Value::String(longest_prefix)\n   |     ++++++++++++++++++++++++++              +\n\nerror: aborting due to 2 previous errors; 1 warning emitted\n\nSome errors have detailed explanations: E0308, E0599.\nFor more information about an error, try `rustc --explain E0308`.\n",
+  "duration_ms": 12640,
+  "timeout_evidence": null
+}

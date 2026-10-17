@@ -1,0 +1,40 @@
+{
+  "run_id": "4bbcc3d6-dc3e-4eb6-ab9a-33ac66fc94f0",
+  "task_id": "tables.sort_rows",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: warning: unused import: `serde_json::Value`\n --> /candidate/main.rs:1:5\n  |\n1 | use serde_json::Value;\n  |     ^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0308]: mismatched types\n --> /candidate/main.rs:5:9\n  |\n5 |     for (key, value) in input.as_array().unwrap() {\n  |         ^^^^^^^^^^^^    ------------------------- this is an iterator with items of type `&Value`\n  |         |\n  |         expected `Value`, found `(_, _)`\n  |\n  = note: expected enum `Value`\n            found tuple `(_, _)`\n\nerror[E0308]: mismatched types\n  --> /candidate/main.rs:10:28\n   |\n10 |             a.as_str().cmp(b.as_str())\n   |                        --- ^^^^^^^^^^ expected `&Option<&str>`, found `Option<&str>`\n   |                        |\n   |                        arguments to this method are incorrect\n   |\n   = note: expected reference `&Option<&_>`\n                   found enum `Option<&_>`\nnote: method defined here\n  --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/cmp.rs:1012:7\nhelp: consider borrowing here\n   |\n10 |             a.as_str().cmp(&b.as_str())\n   |                            +\n\nerror[E0308]: mismatched types\n  --> /candidate/main.rs:12:28\n   |\n12 |             a.as_i64().cmp(b.as_i64())\n   |                        --- ^^^^^^^^^^ expected `&Option<i64>`, found `Option<i64>`\n   |                        |\n   |                        arguments to this method are incorrect\n   |\n   = note: expected reference `&Option<_>`\n                   found enum `Option<_>`\nnote: method defined here\n  --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/cmp.rs:1012:7\nhelp: consider borrowing here\n   |\n12 |             a.as_i64().cmp(&b.as_i64())\n   |                            +\n\nerror: aborting due to 3 previous errors; 1 warning emitted\n\nFor more information about this error, try `rustc --explain E0308`.\n"
+  ],
+  "cases_total": 5,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "59c0a71dc6345dec1e8e901655c0481c4029796bdff3bb470a3f4e40f144e07f",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/explore/round-001/study/quick/arms/arm-10219d27497b8da52d90f257/development/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/explore/round-001/study/quick/arms/arm-10219d27497b8da52d90f257/development/sandbox/4bbcc3d6-dc3e-4eb6-ab9a-33ac66fc94f0.audit.json",
+  "audit_sha256": "949e9bb63f58104c2576964118470c85844ccbb699b1f8bebf49032c93ea30d6",
+  "failure": "compilation failed: warning: unused import: `serde_json::Value`\n --> /candidate/main.rs:1:5\n  |\n1 | use serde_json::Value;\n  |     ^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0308]: mismatched types\n --> /candidate/main.rs:5:9\n  |\n5 |     for (key, value) in input.as_array().unwrap() {\n  |         ^^^^^^^^^^^^    ------------------------- this is an iterator with items of type `&Value`\n  |         |\n  |         expected `Value`, found `(_, _)`\n  |\n  = note: expected enum `Value`\n            found tuple `(_, _)`\n\nerror[E0308]: mismatched types\n  --> /candidate/main.rs:10:28\n   |\n10 |             a.as_str().cmp(b.as_str())\n   |                        --- ^^^^^^^^^^ expected `&Option<&str>`, found `Option<&str>`\n   |                        |\n   |                        arguments to this method are incorrect\n   |\n   = note: expected reference `&Option<&_>`\n                   found enum `Option<&_>`\nnote: method defined here\n  --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/cmp.rs:1012:7\nhelp: consider borrowing here\n   |\n10 |             a.as_str().cmp(&b.as_str())\n   |                            +\n\nerror[E0308]: mismatched types\n  --> /candidate/main.rs:12:28\n   |\n12 |             a.as_i64().cmp(b.as_i64())\n   |                        --- ^^^^^^^^^^ expected `&Option<i64>`, found `Option<i64>`\n   |                        |\n   |                        arguments to this method are incorrect\n   |\n   = note: expected reference `&Option<_>`\n                   found enum `Option<_>`\nnote: method defined here\n  --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/cmp.rs:1012:7\nhelp: consider borrowing here\n   |\n12 |             a.as_i64().cmp(&b.as_i64())\n   |                            +\n\nerror: aborting due to 3 previous errors; 1 warning emitted\n\nFor more information about this error, try `rustc --explain E0308`.\n",
+  "duration_ms": 14674,
+  "timeout_evidence": null,
+  "lifecycle_evidence": {
+    "receipt_path": "reports/local-study/explore/round-001/study/quick/arms/arm-10219d27497b8da52d90f257/development/sandbox/4bbcc3d6-dc3e-4eb6-ab9a-33ac66fc94f0.lifecycle.json",
+    "receipt_sha256": "8c450dbe2327a7c374613ae87cdc022703c809711a613b6c7a595d356a1da2da"
+  }
+}

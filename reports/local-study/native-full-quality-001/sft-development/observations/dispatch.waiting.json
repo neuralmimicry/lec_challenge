@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "0805ba5b12c7f6a3f7a46cf71c1c8db0aa8542d736a3dcd82b56da5f168b46c4",
+  "task_id": "dispatch.waiting",
+  "source_id": "private-dispatch-v1",
+  "success": false,
+  "raw_generation": {
+    "path": "reports/local-study/native-full-quality-001/sft-development/generations/dispatch.waiting.json",
+    "sha256": "c121e4942b282bb4ce87eea47d85c81c3291fc61ce0ccae87c8ca95133970af0",
+    "bytes": 2138
+  },
+  "sandbox_report": null,
+  "grading_error": "trusted grade rejected: trusted audit artifact missing: No such file or directory (os error 2)"
+}

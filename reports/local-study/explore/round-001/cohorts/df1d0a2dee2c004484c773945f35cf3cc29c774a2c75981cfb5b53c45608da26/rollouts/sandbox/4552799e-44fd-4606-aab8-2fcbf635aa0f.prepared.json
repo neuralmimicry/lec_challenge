@@ -1,0 +1,42 @@
+{
+  "schema_version": 3,
+  "run_id": "00c46ff5-3907-4c5d-9663-7cedf217ea35",
+  "ownership_nonce": "a229bd7c-4c0a-4d9e-b974-c2827ea862ea",
+  "attempt_key": "4552799e-44fd-4606-aab8-2fcbf635aa0f",
+  "receipt_path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox/4552799e-44fd-4606-aab8-2fcbf635aa0f.prepared.json",
+  "report_path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox/00c46ff5-3907-4c5d-9663-7cedf217ea35.json",
+  "task": {
+    "id": "paths.normalise",
+    "source_id": "private-paths-v1",
+    "lineage_id": "local-contract-pack-08",
+    "split": "train",
+    "specification": "Input is an absolute POSIX path string. Collapse repeated / and . components; .. removes a preceding component but cannot go above root. Return canonical absolute path without trailing / except root. No filesystem access.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "18f229c2211a3caac7ace4b6821c13b3ee7313bca287d160dbe91e025b736812",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": "/a//b/../c/./",
+        "expected": "/a/c"
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "use serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let mut path = input.to_string();\n    let mut last_component = None;\n\n    while let Some(segment) = path.split('/').next() {\n        if segment == \"..\" {\n            if let Some(last) = last_component {\n                path = format!(\"{}/{}\", last, segment);\n            } else {\n                path = format!(\"..{}\", segment);\n            }\n        } else {\n            last_component = Some(segment);\n        }\n    }\n\n    path\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox"
+  },
+  "code_sha256": "a81468314c4125c56497c546e0c310a5826f0d2ff7c24cc0971de4dd59034460",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

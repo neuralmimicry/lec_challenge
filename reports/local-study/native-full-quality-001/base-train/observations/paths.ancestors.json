@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "55c6614d90fbff0e580fd8fbfa9e06ce99715d8d0c78320e0fe70605545cc489",
+  "task_id": "paths.ancestors",
+  "source_id": "private-paths-v1",
+  "success": false,
+  "raw_generation": {
+    "path": "reports/local-study/native-full-quality-001/base-train/generations/paths.ancestors.json",
+    "sha256": "593c9bd036c41485d4e40b388289f17965b43eb72d85569b1aab1474721f981f",
+    "bytes": 2012
+  },
+  "sandbox_report": {
+    "path": "reports/local-study/native-full-quality-001/base-train/sandbox/d136270b-2882-4350-ae85-2df9145764d6.json",
+    "sha256": "219686192be969f2cb9cc8c81303cddb88ec22d8313ae622648d8a29dfc3c9f7",
+    "bytes": 4472
+  },
+  "grading_error": null
+}

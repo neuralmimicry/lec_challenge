@@ -1,0 +1,826 @@
+{
+  "actual_execution": {
+    "bytes": 666,
+    "path": "reports/local-study/native-full-quality-001/composed-train/execution.json",
+    "sha256": "a71b20638fc67a5699b2f9d1690c4bc7db83d5bd9cb24b0238125287d20c75aa"
+  },
+  "actual_plan": {
+    "bytes": 63656,
+    "path": "reports/local-study/native-full-quality-001/composed-train/plan.json",
+    "sha256": "a52d044d05dc99f9af1879cdb69e7d80c4abc41b317440255f0ff27069084831"
+  },
+  "checkpoint_binding": {
+    "bytes": 2704,
+    "path": "reports/local-study/native-full-quality-001/composed-checkpoint.json",
+    "sha256": "24dcda55a8d3a3a8fc88af2a07f9f89b61da9a794ae3ab7f68d5b296a9a76474"
+  },
+  "coding_passes": 6,
+  "evidence_kind": "independent_actual_quality_protocol_and_hash_audit",
+  "executable": {
+    "bytes": 5103744,
+    "path": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/state/diagnostics/audit-native-full-quality",
+    "sha256": "6e0fbe14c7cbde64038e82a143d71d413ca2a6d434c053731abc998aebf9fd75"
+  },
+  "generation_errors": 0,
+  "gnu_time": {
+    "bytes": 1173,
+    "path": "state/diagnostics/native-full-quality-composed-train.time.txt",
+    "sha256": "c13a2443c07b805809fd659a60f90c2ba08f2a655544a79542000911c3537656"
+  },
+  "grading_errors": 1,
+  "healthy_complete": false,
+  "held_out_used": false,
+  "label": "composed-train",
+  "observations": [
+    {
+      "generation_error": false,
+      "grading_error": false,
+      "observation": {
+        "bytes": 699,
+        "path": "reports/local-study/native-full-quality-001/composed-train/observations/ledger.sum.json",
+        "sha256": "e75b32262a3daa22b3d9e1ac97860c18a9182a98d71e74710790140ecbc5c1ae"
+      },
+      "raw_generation": {
+        "bytes": 1708,
+        "path": "reports/local-study/native-full-quality-001/composed-train/generations/ledger.sum.json",
+        "sha256": "011ab85f11d3de1b74e980255fedc15a913d5659649a2495804d08f833f4b1ca"
+      },
+      "success": false,
+      "task_id": "ledger.sum"
+    },
+    {
+      "generation_error": false,
+      "grading_error": false,
+      "observation": {
+        "bytes": 705,
+        "path": "reports/local-study/native-full-quality-001/composed-train/observations/ledger.prefix.json",
+        "sha256": "f38446d62ba599d52e7c32cc47d424c8226be2879772241586e97c17d0438377"
+      },
+      "raw_generation": {
+        "bytes": 1848,
+        "path": "reports/local-study/native-full-quality-001/composed-train/generations/ledger.prefix.json",
+        "sha256": "341827b5becd88943d7cb30090247aa295478f542cc323c9a389d6b77e122cdc"
+      },
+      "success": false,
+      "task_id": "ledger.prefix"
+    },
+    {
+      "generation_error": false,
+      "grading_error": false,
+      "observation": {
+        "bytes": 715,
+        "path": "reports/local-study/native-full-quality-001/composed-train/observations/ledger.differences.json",
+        "sha256": "ab4be93f1c5612cf18874daa167627f4109a3108b800f1236ec933bf2a39c843"
+      },
+      "raw_generation": {
+        "bytes": 1832,
+        "path": "reports/local-study/native-full-quality-001/composed-train/generations/ledger.differences.json",
+        "sha256": "0b01b9a63d9682d134dd826e1a8282e7f2eaba2247f866f7c2355ec8f459d753"
+      },
+      "success": false,
+      "task_id": "ledger.differences"
+    },
+    {
+      "generation_error": false,
+      "grading_error": false,
+      "observation": {
+        "bytes": 705,
+        "path": "reports/local-study/native-full-quality-001/composed-train/observations/ledger.bounds.json",
+        "sha256": "d5b531f91f36824ac9337ce6d68e568d8debc444d01e47166946f7d10a805b3b"
+      },
+      "raw_generation": {
+        "bytes": 2084,
+        "path": "reports/local-study/native-full-quality-001/composed-train/generations/ledger.bounds.json",
+        "sha256": "7d7391099b39926ade9d3df1b2ac7995c18e1767935210b5048e8c835d59c6af"
+      },
+      "success": false,
+      "task_id": "ledger.bounds"
+    },
+    {
+      "generation_error": false,
+      "grading_error": false,
+      "observation": {
+        "bytes": 702,
+        "path": "reports/local-study/native-full-quality-001/composed-train/observations/stock.counts.json",
+        "sha256": "e87c5cb54e99b85db0486ee7b1281d5f113f170b67d6ec4d1556061c0c599ec6"
+      },
+      "raw_generation": {
+        "bytes": 1950,
+        "path": "reports/local-study/native-full-quality-001/composed-train/generations/stock.counts.json",
+        "sha256": "5c2d0c464e724094855b41d1c035eaf7b268ca41fd47ce347b28aac15bf4f8c4"
+      },
+      "success": false,
+      "task_id": "stock.counts"
+    },
+    {
+      "generation_error": false,
+      "grading_error": false,
+      "observation": {
+        "bytes": 716,
+        "path": "reports/local-study/native-full-quality-001/composed-train/observations/stock.stable_unique.json",
+        "sha256": "b4c45cf4a41ecad82c31a387b64cfd74833c7711004b585e47abcd8bd9cde05a"
+      },
+      "raw_generation": {
+        "bytes": 1987,
+        "path": "reports/local-study/native-full-quality-001/composed-train/generations/stock.stable_unique.json",
+        "sha256": "9537f4e74a680340adb465b3f92572047e6a91d4f3efd9b004f5f7c6a47b8c4a"
+      },
+      "success": false,
+      "task_id": "stock.stable_unique"
+    },
+    {
+      "generation_error": false,
+      "grading_error": false,
+      "observation": {
+        "bytes": 710,
+        "path": "reports/local-study/native-full-quality-001/composed-train/observations/stock.duplicates.json",
+        "sha256": "84de219ff79415183378d91088b2df81b7de4af64e01d1599d318ba34f2085d5"
+      },
+      "raw_generation": {
+        "bytes": 2021,
+        "path": "reports/local-study/native-full-quality-001/composed-train/generations/stock.duplicates.json",
+        "sha256": "e27b2a91dda6ae3729eb4961d7508ce9c68a9d1b33b3bcf07f72cac328963968"
+      },
+      "success": false,
+      "task_id": "stock.duplicates"
+    },
+    {
+      "generation_error": false,
+      "grading_error": false,
+      "observation": {
+        "bytes": 698,
+        "path": "reports/local-study/native-full-quality-001/composed-train/observations/stock.mode.json",
+        "sha256": "84357e4a606147e8b990624118bd950c7c4ab0179b306e7445fa8cf93e2835df"
+      },
+      "raw_generation": {
+        "bytes": 2188,
+        "path": "reports/local-study/native-full-quality-001/composed-train/generations/stock.mode.json",
+        "sha256": "194af96d450be95c6a876d8279caa9242c38dd03f766b40b5c41fc5e386d517f"
+      },
+      "success": false,
+      "task_id": "stock.mode"
+    },
+    {
+      "generation_error": false,
+      "grading_error": false,
+      "observation": {
+        "bytes": 706,
+        "path": "reports/local-study/native-full-quality-001/composed-train/observations/text.lower_trim.json",
+        "sha256": "bace96b9d6a4e4db18acd88e382ae4d6923785b195f0ddb227cd6c25e931bbb7"
+      },
+      "raw_generation": {
+        "bytes": 1814,
+        "path": "reports/local-study/native-full-quality-001/composed-train/generations/text.lower_trim.json",
+        "sha256": "5026cc34feac365d9b8674829d10ca3db2b8c09e28c89fe4a55678c8ca51fbf0"
+      },
+      "success": true,
+      "task_id": "text.lower_trim"
+    },
+    {
+      "generation_error": false,
+      "grading_error": false,
+      "observation": {
+        "bytes": 699,
+        "path": "reports/local-study/native-full-quality-001/composed-train/observations/text.squash.json",
+        "sha256": "c3de862006806eeee778bc08817d2944719b5cd9db73ebb728ef052aeb39ddab"
+      },
+      "raw_generation": {
+        "bytes": 1772,
+        "path": "reports/local-study/native-full-quality-001/composed-train/generations/text.squash.json",
+        "sha256": "1863662acba5394f3a868bc7df88d8cb9355f06911b2d5c0b234690d355c8343"
+      },
+      "success": false,
+      "task_id": "text.squash"
+    },
+    {
+      "generation_error": false,
+      "grading_error": true,
+      "observation": {
+        "bytes": 562,
+        "path": "reports/local-study/native-full-quality-001/composed-train/observations/text.slug.json",
+        "sha256": "c7bb4f8f2659bcf12277ddeee98f83491cb94ac5c23bacd3054e2edbf8d880dd"
+      },
+      "raw_generation": {
+        "bytes": 2105,
+        "path": "reports/local-study/native-full-quality-001/composed-train/generations/text.slug.json",
+        "sha256": "d3a51ed09779af68319ec4a98dfaef37e7e9b39ed47c4adc0d0846cd9d6e2be2"
+      },
+      "success": false,
+      "task_id": "text.slug"
+    },
+    {
+      "generation_error": false,
+      "grading_error": false,
+      "observation": {
+        "bytes": 713,
+        "path": "reports/local-study/native-full-quality-001/composed-train/observations/text.reverse_words.json",
+        "sha256": "932d5d1ffd2c7c4ecab95f80e0f987184755a9c0f7234f2abcb1843c737237e1"
+      },
+      "raw_generation": {
+        "bytes": 1786,
+        "path": "reports/local-study/native-full-quality-001/composed-train/generations/text.reverse_words.json",
+        "sha256": "f211c1d6c6cfece52c76e02999043ba012b460e809aaeb77ceab41a009100bd8"
+      },
+      "success": false,
+      "task_id": "text.reverse_words"
+    },
+    {
+      "generation_error": false,
+      "grading_error": false,
+      "observation": {
+        "bytes": 712,
+        "path": "reports/local-study/native-full-quality-001/composed-train/observations/intervals.merge.json",
+        "sha256": "21423fd399c1c3adea98a3f1cf3ccda33334f9787297849e7ac3885a855e327d"
+      },
+      "raw_generation": {
+        "bytes": 2377,
+        "path": "reports/local-study/native-full-quality-001/composed-train/generations/intervals.merge.json",
+        "sha256": "0ec463fc24a15472f22cecd022f8337c5633096bad5fe33374c003d796caf63a"
+      },
+      "success": false,
+      "task_id": "intervals.merge"
+    },
+    {
+      "generation_error": false,
+      "grading_error": false,
+      "observation": {
+        "bytes": 718,
+        "path": "reports/local-study/native-full-quality-001/composed-train/observations/intervals.coverage.json",
+        "sha256": "b6874a1c0c27e1a2f33f47e9c6ed168f82919f3b3bd987f834eb2c1bb0d100f6"
+      },
+      "raw_generation": {
+        "bytes": 1938,
+        "path": "reports/local-study/native-full-quality-001/composed-train/generations/intervals.coverage.json",
+        "sha256": "a4c9e220c62053af9ecb1cd5d006649de9175eb3f6056514215a3b9c350b3bcb"
+      },
+      "success": false,
+      "task_id": "intervals.coverage"
+    },
+    {
+      "generation_error": false,
+      "grading_error": false,
+      "observation": {
+        "bytes": 723,
+        "path": "reports/local-study/native-full-quality-001/composed-train/observations/intervals.largest_gap.json",
+        "sha256": "5566b3838f25c5ff40d37edc2e690b8404c764323e0d612ded107967725e05cc"
+      },
+      "raw_generation": {
+        "bytes": 2639,
+        "path": "reports/local-study/native-full-quality-001/composed-train/generations/intervals.largest_gap.json",
+        "sha256": "6fe3a7fc73e6fd33a13915cf9422b598a5259a56953b932a3c7180cdc9ddb661"
+      },
+      "success": true,
+      "task_id": "intervals.largest_gap"
+    },
+    {
+      "generation_error": false,
+      "grading_error": false,
+      "observation": {
+        "bytes": 710,
+        "path": "reports/local-study/native-full-quality-001/composed-train/observations/intervals.peak.json",
+        "sha256": "9f02255e521dcd8b3daad844d2c107b9cca15b7fc29babfec893141e32f221cc"
+      },
+      "raw_generation": {
+        "bytes": 2147,
+        "path": "reports/local-study/native-full-quality-001/composed-train/generations/intervals.peak.json",
+        "sha256": "735906440c2d63062f31ff07b0a4784b66520b9765477d1b9112693548522df3"
+      },
+      "success": false,
+      "task_id": "intervals.peak"
+    },
+    {
+      "generation_error": false,
+      "grading_error": false,
+      "observation": {
+        "bytes": 708,
+        "path": "reports/local-study/native-full-quality-001/composed-train/observations/graph.reachable.json",
+        "sha256": "e92f9c87e5b55a75aac132f1bab91b6b513a32c3a38bc4417296b71c1b2bdeaf"
+      },
+      "raw_generation": {
+        "bytes": 2296,
+        "path": "reports/local-study/native-full-quality-001/composed-train/generations/graph.reachable.json",
+        "sha256": "6e61d81f78259d489826f9e2b3483ca357b53631c160875a7ced194d0a47b68a"
+      },
+      "success": false,
+      "task_id": "graph.reachable"
+    },
+    {
+      "generation_error": false,
+      "grading_error": false,
+      "observation": {
+        "bytes": 706,
+        "path": "reports/local-study/native-full-quality-001/composed-train/observations/graph.distance.json",
+        "sha256": "86847752778a7db9185c9912bef73cec303be74b25a7c486757c2f22b83ce56b"
+      },
+      "raw_generation": {
+        "bytes": 2275,
+        "path": "reports/local-study/native-full-quality-001/composed-train/generations/graph.distance.json",
+        "sha256": "4336abd3c3d097db61aa07a8d2a0ec478bd2380aff24a5a5bcce6b69ad3f7a85"
+      },
+      "success": false,
+      "task_id": "graph.distance"
+    },
+    {
+      "generation_error": false,
+      "grading_error": false,
+      "observation": {
+        "bytes": 708,
+        "path": "reports/local-study/native-full-quality-001/composed-train/observations/graph.indegrees.json",
+        "sha256": "36b436ef5b9bcc34375dc1f316ac7e6c7c7c5edb5761d73373a228a167da4624"
+      },
+      "raw_generation": {
+        "bytes": 2037,
+        "path": "reports/local-study/native-full-quality-001/composed-train/generations/graph.indegrees.json",
+        "sha256": "c585e9be076c5618bdc1a7231b58841a804a2056db2264f4d76916a0ca21ca3d"
+      },
+      "success": false,
+      "task_id": "graph.indegrees"
+    },
+    {
+      "generation_error": false,
+      "grading_error": false,
+      "observation": {
+        "bytes": 712,
+        "path": "reports/local-study/native-full-quality-001/composed-train/observations/graph.topological.json",
+        "sha256": "c6ec670733d6da32146a74aa2713ef20365101ad3b078e7aaa6e477b58005d9e"
+      },
+      "raw_generation": {
+        "bytes": 2559,
+        "path": "reports/local-study/native-full-quality-001/composed-train/generations/graph.topological.json",
+        "sha256": "780e429b15d7eb18c48258ce50190d28cd1000be4ef1a8009720c955eeb7f721"
+      },
+      "success": false,
+      "task_id": "graph.topological"
+    },
+    {
+      "generation_error": false,
+      "grading_error": false,
+      "observation": {
+        "bytes": 713,
+        "path": "reports/local-study/native-full-quality-001/composed-train/observations/validation.luhn.json",
+        "sha256": "677c7a7430abb64dcd78b051d85cede54988388118d63295dab888d99eafd717"
+      },
+      "raw_generation": {
+        "bytes": 2112,
+        "path": "reports/local-study/native-full-quality-001/composed-train/generations/validation.luhn.json",
+        "sha256": "aee57602ed1e5093ecd5341a5e17bf8eeffa887bc112ff37cf68636ff9d0bc1f"
+      },
+      "success": false,
+      "task_id": "validation.luhn"
+    },
+    {
+      "generation_error": false,
+      "grading_error": false,
+      "observation": {
+        "bytes": 713,
+        "path": "reports/local-study/native-full-quality-001/composed-train/observations/validation.ipv4.json",
+        "sha256": "415eb646885001b927e7e9dc49cedb0790228c879af7ba12e7239ee1c81b69e5"
+      },
+      "raw_generation": {
+        "bytes": 2184,
+        "path": "reports/local-study/native-full-quality-001/composed-train/generations/validation.ipv4.json",
+        "sha256": "c1f9f16a019c7af2e75c53226f685aa9c2ad4a0c2f21b87a46421caf55889dcd"
+      },
+      "success": false,
+      "task_id": "validation.ipv4"
+    },
+    {
+      "generation_error": false,
+      "grading_error": false,
+      "observation": {
+        "bytes": 721,
+        "path": "reports/local-study/native-full-quality-001/composed-train/observations/validation.brackets.json",
+        "sha256": "5106f394659310882e3b76d417d4a87039b8d8d67fcacd919ee36818a51954ea"
+      },
+      "raw_generation": {
+        "bytes": 2018,
+        "path": "reports/local-study/native-full-quality-001/composed-train/generations/validation.brackets.json",
+        "sha256": "0ce68f28012cca23fbcd1e07f96a3e4b05585fbdd4dd60b6f95bd08499ebd587"
+      },
+      "success": false,
+      "task_id": "validation.brackets"
+    },
+    {
+      "generation_error": false,
+      "grading_error": false,
+      "observation": {
+        "bytes": 725,
+        "path": "reports/local-study/native-full-quality-001/composed-train/observations/validation.identifier.json",
+        "sha256": "9b07af65170191a5b78f0f14822c06b67d7550b25ca30b1ca58178f72665fd69"
+      },
+      "raw_generation": {
+        "bytes": 1884,
+        "path": "reports/local-study/native-full-quality-001/composed-train/generations/validation.identifier.json",
+        "sha256": "fb455688b26b658464eb1fae7fda96575da21261381e0cd75c6b282c8db04824"
+      },
+      "success": false,
+      "task_id": "validation.identifier"
+    },
+    {
+      "generation_error": false,
+      "grading_error": false,
+      "observation": {
+        "bytes": 717,
+        "path": "reports/local-study/native-full-quality-001/composed-train/observations/matrices.transpose.json",
+        "sha256": "d6f7d8b29d4f93d2af1d4e14f262a49192a799022cfb1f8659e80fb93116e38e"
+      },
+      "raw_generation": {
+        "bytes": 1908,
+        "path": "reports/local-study/native-full-quality-001/composed-train/generations/matrices.transpose.json",
+        "sha256": "423854a405abc0d75effc546edd2f7f064b8b84b0d8407ddddacdfabd794be83"
+      },
+      "success": false,
+      "task_id": "matrices.transpose"
+    },
+    {
+      "generation_error": false,
+      "grading_error": false,
+      "observation": {
+        "bytes": 714,
+        "path": "reports/local-study/native-full-quality-001/composed-train/observations/matrices.row_sums.json",
+        "sha256": "3f1d759c8e9ed7358d289fd514506b850689b9f9688df386af6e48a7b182b8ab"
+      },
+      "raw_generation": {
+        "bytes": 1873,
+        "path": "reports/local-study/native-full-quality-001/composed-train/generations/matrices.row_sums.json",
+        "sha256": "72eee1c75a664d9274f50299fc64f62af1d51bf73e3958fe752b498247b23a4b"
+      },
+      "success": true,
+      "task_id": "matrices.row_sums"
+    },
+    {
+      "generation_error": false,
+      "grading_error": false,
+      "observation": {
+        "bytes": 711,
+        "path": "reports/local-study/native-full-quality-001/composed-train/observations/matrices.rotate.json",
+        "sha256": "8f2f18cb9b0c2fa57aaaf6962fd831a82d1768708ec2f88a0ad195e06792ea85"
+      },
+      "raw_generation": {
+        "bytes": 1952,
+        "path": "reports/local-study/native-full-quality-001/composed-train/generations/matrices.rotate.json",
+        "sha256": "5a85453c57149e7e19f0eedf3d0f2cc8236a30f22e44e5ebcc685afd27e4e099"
+      },
+      "success": false,
+      "task_id": "matrices.rotate"
+    },
+    {
+      "generation_error": false,
+      "grading_error": false,
+      "observation": {
+        "bytes": 717,
+        "path": "reports/local-study/native-full-quality-001/composed-train/observations/matrices.diagonals.json",
+        "sha256": "45314a77e8b7dabcd05ed28185e697e53541d273e99e8b561a98b2ca66f78ec9"
+      },
+      "raw_generation": {
+        "bytes": 2016,
+        "path": "reports/local-study/native-full-quality-001/composed-train/generations/matrices.diagonals.json",
+        "sha256": "e6c7e436809ff25447bd87be8e6d6e791acc03a8b65b9974053937907eef44a9"
+      },
+      "success": false,
+      "task_id": "matrices.diagonals"
+    },
+    {
+      "generation_error": false,
+      "grading_error": false,
+      "observation": {
+        "bytes": 715,
+        "path": "reports/local-study/native-full-quality-001/composed-train/observations/search.occurrences.json",
+        "sha256": "206a17b5c9cd123c3c08dd84fc5f1afe51fe9362714e432524f797c09bac4844"
+      },
+      "raw_generation": {
+        "bytes": 2206,
+        "path": "reports/local-study/native-full-quality-001/composed-train/generations/search.occurrences.json",
+        "sha256": "ff0abb6464795f08855e3458b6baf696edfc22e2ec3f354188083c126269da29"
+      },
+      "success": false,
+      "task_id": "search.occurrences"
+    },
+    {
+      "generation_error": false,
+      "grading_error": false,
+      "observation": {
+        "bytes": 719,
+        "path": "reports/local-study/native-full-quality-001/composed-train/observations/search.common_prefix.json",
+        "sha256": "e4712223f6a22c398153fbb8344e09a68c0474ad7b1ac6400d4ccec9b5c66b66"
+      },
+      "raw_generation": {
+        "bytes": 1959,
+        "path": "reports/local-study/native-full-quality-001/composed-train/generations/search.common_prefix.json",
+        "sha256": "d884dc628314b6fb0b4a57602f367a728a2fff0c34893e675ce0d352124d1d9b"
+      },
+      "success": false,
+      "task_id": "search.common_prefix"
+    },
+    {
+      "generation_error": false,
+      "grading_error": false,
+      "observation": {
+        "bytes": 701,
+        "path": "reports/local-study/native-full-quality-001/composed-train/observations/search.runs.json",
+        "sha256": "9e1735cec755e4bffa42932a9cf487b64084ba0081067eeede8ff8fa6916fd05"
+      },
+      "raw_generation": {
+        "bytes": 2314,
+        "path": "reports/local-study/native-full-quality-001/composed-train/generations/search.runs.json",
+        "sha256": "837b8cd73e2858ed15c2cbf01c8e7f65de636fe86f401dfbc5c847b26d028b94"
+      },
+      "success": false,
+      "task_id": "search.runs"
+    },
+    {
+      "generation_error": false,
+      "grading_error": false,
+      "observation": {
+        "bytes": 707,
+        "path": "reports/local-study/native-full-quality-001/composed-train/observations/search.anagram.json",
+        "sha256": "87e00d9b13b6fadb289fe911cb812c1d13607395007c6789c11dd98ffe84ba2e"
+      },
+      "raw_generation": {
+        "bytes": 2203,
+        "path": "reports/local-study/native-full-quality-001/composed-train/generations/search.anagram.json",
+        "sha256": "85b56826e9a655457c8d9efbaf6bd402cc76c9dbb6272c762df67465cd1efd41"
+      },
+      "success": false,
+      "task_id": "search.anagram"
+    },
+    {
+      "generation_error": false,
+      "grading_error": false,
+      "observation": {
+        "bytes": 708,
+        "path": "reports/local-study/native-full-quality-001/composed-train/observations/paths.normalise.json",
+        "sha256": "06f7b1ae738d0e6b221bebee919b85f39ece8b65db4adf5ff5592dc8e17576e0"
+      },
+      "raw_generation": {
+        "bytes": 2246,
+        "path": "reports/local-study/native-full-quality-001/composed-train/generations/paths.normalise.json",
+        "sha256": "464e49ef6bbadd7eaaa97d85eac65f39152b9aedf69175b219be0e4f117483bf"
+      },
+      "success": false,
+      "task_id": "paths.normalise"
+    },
+    {
+      "generation_error": false,
+      "grading_error": false,
+      "observation": {
+        "bytes": 706,
+        "path": "reports/local-study/native-full-quality-001/composed-train/observations/paths.basename.json",
+        "sha256": "b169b7f0bf870f26112b5712444e843365ac1dfdd58f3892f1196da419d6dd55"
+      },
+      "raw_generation": {
+        "bytes": 1752,
+        "path": "reports/local-study/native-full-quality-001/composed-train/generations/paths.basename.json",
+        "sha256": "0765a7167e7f512bca3ec7ce96976691efe86f56666f5c834697bac061b9ed91"
+      },
+      "success": false,
+      "task_id": "paths.basename"
+    },
+    {
+      "generation_error": false,
+      "grading_error": false,
+      "observation": {
+        "bytes": 708,
+        "path": "reports/local-study/native-full-quality-001/composed-train/observations/paths.extension.json",
+        "sha256": "f76d4f27a496cd135742755f1c0738584d5f4397cf706252bac675cada658519"
+      },
+      "raw_generation": {
+        "bytes": 1846,
+        "path": "reports/local-study/native-full-quality-001/composed-train/generations/paths.extension.json",
+        "sha256": "0b13d3578932f100cef95f862fcbc03456df71ef153ea133226de2ee2ec3d6c6"
+      },
+      "success": false,
+      "task_id": "paths.extension"
+    },
+    {
+      "generation_error": false,
+      "grading_error": false,
+      "observation": {
+        "bytes": 708,
+        "path": "reports/local-study/native-full-quality-001/composed-train/observations/paths.ancestors.json",
+        "sha256": "96d5dfe0536efa4d3a1f8f29a32e823930a993fc2ef92e3fdea2739aeee921ae"
+      },
+      "raw_generation": {
+        "bytes": 1955,
+        "path": "reports/local-study/native-full-quality-001/composed-train/generations/paths.ancestors.json",
+        "sha256": "d703d50a86c584c5de19fdbcaf2b050f9cb328d117d65153054185751ec89093"
+      },
+      "success": false,
+      "task_id": "paths.ancestors"
+    },
+    {
+      "generation_error": false,
+      "grading_error": false,
+      "observation": {
+        "bytes": 722,
+        "path": "reports/local-study/native-full-quality-001/composed-train/observations/sequences.interleave.json",
+        "sha256": "ce254e787a3e5761f8a034907f9e8b4a5824a798b5714a33a6ccce1de294bf2c"
+      },
+      "raw_generation": {
+        "bytes": 2239,
+        "path": "reports/local-study/native-full-quality-001/composed-train/generations/sequences.interleave.json",
+        "sha256": "11d776322464f7f849692d7a0ff8cee4de2e020191620f169bb6751f767d0647"
+      },
+      "success": false,
+      "task_id": "sequences.interleave"
+    },
+    {
+      "generation_error": false,
+      "grading_error": false,
+      "observation": {
+        "bytes": 724,
+        "path": "reports/local-study/native-full-quality-001/composed-train/observations/sequences.zip_longest.json",
+        "sha256": "9890207b2d821b66820b46ee386093a2742587300a17802c7617f31a65a1938c"
+      },
+      "raw_generation": {
+        "bytes": 2103,
+        "path": "reports/local-study/native-full-quality-001/composed-train/generations/sequences.zip_longest.json",
+        "sha256": "5b9df046885f2b033f1bc6c91cb8bd167587ae008b2b9ad6e5942e7e858273d8"
+      },
+      "success": false,
+      "task_id": "sequences.zip_longest"
+    },
+    {
+      "generation_error": false,
+      "grading_error": false,
+      "observation": {
+        "bytes": 714,
+        "path": "reports/local-study/native-full-quality-001/composed-train/observations/sequences.chunks.json",
+        "sha256": "15382cfa4815d8452e0ac9eca65c6cea70de51bddc9d5958a0253984dd188c01"
+      },
+      "raw_generation": {
+        "bytes": 2269,
+        "path": "reports/local-study/native-full-quality-001/composed-train/generations/sequences.chunks.json",
+        "sha256": "f2ffa55ba2e3b772cd81ade0182a20e3415e16ba1cd6f1a8a7d0b0dfa284ef0a"
+      },
+      "success": false,
+      "task_id": "sequences.chunks"
+    },
+    {
+      "generation_error": false,
+      "grading_error": false,
+      "observation": {
+        "bytes": 724,
+        "path": "reports/local-study/native-full-quality-001/composed-train/observations/sequences.move_zeroes.json",
+        "sha256": "e1c2c5eff8c733b7dfadeb97478de253367adfcf43f4ac680a757f644360d648"
+      },
+      "raw_generation": {
+        "bytes": 2248,
+        "path": "reports/local-study/native-full-quality-001/composed-train/generations/sequences.move_zeroes.json",
+        "sha256": "b920e7e4fb387a5ab127d51a0c91e1dc7dd6ca8aa83876c32c4f2bd7f1197d99"
+      },
+      "success": false,
+      "task_id": "sequences.move_zeroes"
+    },
+    {
+      "generation_error": false,
+      "grading_error": false,
+      "observation": {
+        "bytes": 706,
+        "path": "reports/local-study/native-full-quality-001/composed-train/observations/calendar.leap.json",
+        "sha256": "95cbabcea4fcf4cff55914dd3f96ea281df1633eaf674c7946bd70b32bf0ff8a"
+      },
+      "raw_generation": {
+        "bytes": 1840,
+        "path": "reports/local-study/native-full-quality-001/composed-train/generations/calendar.leap.json",
+        "sha256": "6f3e1a41ee85b1bac9b5b4fbea3b9ee131136046d9492190d6125efcd1bf161d"
+      },
+      "success": true,
+      "task_id": "calendar.leap"
+    },
+    {
+      "generation_error": false,
+      "grading_error": false,
+      "observation": {
+        "bytes": 719,
+        "path": "reports/local-study/native-full-quality-001/composed-train/observations/calendar.month_days.json",
+        "sha256": "9c4d925873b03861fdd75d64f0de431fd6b15884a7510f8b9c6f9e1ddb75ef37"
+      },
+      "raw_generation": {
+        "bytes": 2010,
+        "path": "reports/local-study/native-full-quality-001/composed-train/generations/calendar.month_days.json",
+        "sha256": "0f35c557860678e10e675d48141166d6d1a5e1e9f938a21679a3abf7b04de2a9"
+      },
+      "success": false,
+      "task_id": "calendar.month_days"
+    },
+    {
+      "generation_error": false,
+      "grading_error": false,
+      "observation": {
+        "bytes": 713,
+        "path": "reports/local-study/native-full-quality-001/composed-train/observations/calendar.ordinal.json",
+        "sha256": "46fd89b5231d06a32b1df1b2ab43ecc4844f65c2a04aed92658c08145e8a3987"
+      },
+      "raw_generation": {
+        "bytes": 2230,
+        "path": "reports/local-study/native-full-quality-001/composed-train/generations/calendar.ordinal.json",
+        "sha256": "194808ccab4981cccefa75764cc8e899801bbd215530bb0cdd80e9af8b8073cc"
+      },
+      "success": false,
+      "task_id": "calendar.ordinal"
+    },
+    {
+      "generation_error": false,
+      "grading_error": false,
+      "observation": {
+        "bytes": 719,
+        "path": "reports/local-study/native-full-quality-001/composed-train/observations/calendar.valid_date.json",
+        "sha256": "8d84f5787fdd730d9e9e25a17f125bd713dc07b5257a1d691a40f8c8331fef3a"
+      },
+      "raw_generation": {
+        "bytes": 2016,
+        "path": "reports/local-study/native-full-quality-001/composed-train/generations/calendar.valid_date.json",
+        "sha256": "502f6f3209f3c54f48faaa8bc20b84e78a0292f5753900a50484d320274c9b89"
+      },
+      "success": false,
+      "task_id": "calendar.valid_date"
+    },
+    {
+      "generation_error": false,
+      "grading_error": false,
+      "observation": {
+        "bytes": 702,
+        "path": "reports/local-study/native-full-quality-001/composed-train/observations/bits.popcount.json",
+        "sha256": "843abfba9773b67a3bc98f7471835f1fb8deb2fecb02842c02af36e76e586d10"
+      },
+      "raw_generation": {
+        "bytes": 1727,
+        "path": "reports/local-study/native-full-quality-001/composed-train/generations/bits.popcount.json",
+        "sha256": "2999e6bd149939a86771cec03238a49b2978b96405181e71fb403106cbd10eb9"
+      },
+      "success": true,
+      "task_id": "bits.popcount"
+    },
+    {
+      "generation_error": false,
+      "grading_error": false,
+      "observation": {
+        "bytes": 701,
+        "path": "reports/local-study/native-full-quality-001/composed-train/observations/bits.hamming.json",
+        "sha256": "c2be3a7f15d152fbabf118866c4b776ffe6433a19fbce27c521c04ce3b129e82"
+      },
+      "raw_generation": {
+        "bytes": 1863,
+        "path": "reports/local-study/native-full-quality-001/composed-train/generations/bits.hamming.json",
+        "sha256": "66e28388f460c1795eaf3531a0bdb3d2259d52e486d6072136459967bdadee2a"
+      },
+      "success": false,
+      "task_id": "bits.hamming"
+    },
+    {
+      "generation_error": false,
+      "grading_error": false,
+      "observation": {
+        "bytes": 698,
+        "path": "reports/local-study/native-full-quality-001/composed-train/observations/bits.parity.json",
+        "sha256": "25610ad44eabe6bf7974d0ee42db42d65318952cebb319f74a135f795e471b64"
+      },
+      "raw_generation": {
+        "bytes": 1669,
+        "path": "reports/local-study/native-full-quality-001/composed-train/generations/bits.parity.json",
+        "sha256": "de09485d59b87ca52171df172118b4f3355550b24557cd58abfc12fc1a67af2a"
+      },
+      "success": true,
+      "task_id": "bits.parity"
+    },
+    {
+      "generation_error": false,
+      "grading_error": false,
+      "observation": {
+        "bytes": 699,
+        "path": "reports/local-study/native-full-quality-001/composed-train/observations/bits.lowest.json",
+        "sha256": "2f94e3f7843c05bebb384fdc2a47e6e6c597d22a2fc5a9aefbdca0a1a97e2c75"
+      },
+      "raw_generation": {
+        "bytes": 1814,
+        "path": "reports/local-study/native-full-quality-001/composed-train/generations/bits.lowest.json",
+        "sha256": "37fbafdafa34f8418115700949e50096f33bfc9a7ac22aeb346bd3837f98e2ae"
+      },
+      "success": false,
+      "task_id": "bits.lowest"
+    }
+  ],
+  "observed": 48,
+  "passed": true,
+  "planned": 48,
+  "production_eligible": false,
+  "protocol": {
+    "bytes": 91361,
+    "path": "reports/local-study/native-full-quality-001/requested-protocol.json",
+    "sha256": "7696c3b8e50504e404a5bb069105bf7825111130eafd25ff163a740947d7643a"
+  },
+  "report": {
+    "bytes": 2549,
+    "path": "reports/local-study/native-full-quality-001/composed-train/report.json",
+    "sha256": "2ced7a64d4bc92027c97513c5a975b366573ed07e91c570f02fa8b90a156fb62"
+  },
+  "schema_version": 1,
+  "source": {
+    "bytes": 8114,
+    "path": "state/diagnostics/audit-native-full-quality.rs",
+    "sha256": "0c1bae670020ecfb72dcdc44bcf49a64844ffbce15d5e67a5818339675362e0c"
+  },
+  "trusted_grade_verifier": "separate current-build study_comparison helper",
+  "trusted_grades_reconstructed_by_this_wrapper": false
+}

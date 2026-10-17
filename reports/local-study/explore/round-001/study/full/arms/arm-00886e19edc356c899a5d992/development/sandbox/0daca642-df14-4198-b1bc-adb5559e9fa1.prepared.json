@@ -1,0 +1,59 @@
+{
+  "schema_version": 3,
+  "run_id": "cc26e9ad-6a86-42aa-8295-d683438b60c4",
+  "ownership_nonce": "d86942c5-8bc1-4ba8-904f-fc5bae6d0065",
+  "attempt_key": "0daca642-df14-4198-b1bc-adb5559e9fa1",
+  "receipt_path": "reports/local-study/explore/round-001/study/full/arms/arm-00886e19edc356c899a5d992/development/sandbox/0daca642-df14-4198-b1bc-adb5559e9fa1.prepared.json",
+  "report_path": "reports/local-study/explore/round-001/study/full/arms/arm-00886e19edc356c899a5d992/development/sandbox/cc26e9ad-6a86-42aa-8295-d683438b60c4.json",
+  "task": {
+    "id": "dispatch.finish_order",
+    "source_id": "private-dispatch-v1",
+    "lineage_id": "local-contract-pack-13",
+    "split": "development",
+    "specification": "Input is an array of [arrival,duration], nonnegative integers. A single server processes input order, starting each job at max(previous finish,arrival). Return finish times.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "bd65bbcd2943471a0fa07872b15464820b0d1c4b37db971d13f3b63850727773",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": [
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            8,
+            1
+          ]
+        ],
+        "expected": [
+          3,
+          5,
+          9
+        ]
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "use serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let input = input.as_array().unwrap();\n    let mut finish_times = Vec::new();\n    let mut current_finish = 0;\n    let mut previous_finish = 0;\n\n    for (arrival, duration) in input {\n        current_finish = current_finish.max(arrival);\n        finish_times.push(serde_json::Value::from(current_finish));\n        previous_finish = current_finish;\n    }\n\n    Value::Array(finish_times)\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/explore/round-001/study/full/arms/arm-00886e19edc356c899a5d992/development/sandbox"
+  },
+  "code_sha256": "d3db5840f14b354f38ff30a78d9e0a500b964f2be921bd00bf664cffe5356bb1",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

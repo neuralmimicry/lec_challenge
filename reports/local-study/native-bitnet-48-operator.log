@@ -1,0 +1,90 @@
+Hub hashing qwen2.5-coder-7b-instruct-q4_k_m.gguf: 0/4683073536 bytes, 0.00 MiB/s, ETA unknown (publisher checksum pending)
+Hub hashing qwen2.5-coder-7b-instruct-q4_k_m.gguf: 719323136/4683073536 bytes, 45.61 MiB/s, ETA 00:01:23 (publisher checksum pending)
+Hub hashing qwen2.5-coder-7b-instruct-q4_k_m.gguf: 1537212416/4683073536 bytes, 48.79 MiB/s, ETA 00:01:02 (publisher checksum pending)
+Hub hashing qwen2.5-coder-7b-instruct-q4_k_m.gguf: 2534408192/4683073536 bytes, 53.65 MiB/s, ETA 00:00:39 (publisher checksum pending)
+Hub hashing qwen2.5-coder-7b-instruct-q4_k_m.gguf: 3454009344/4683073536 bytes, 54.85 MiB/s, ETA 00:00:22 (publisher checksum pending)
+Hub hashing qwen2.5-coder-7b-instruct-q4_k_m.gguf: 4627365888/4683073536 bytes, 58.79 MiB/s, ETA 00:00:01 (publisher checksum pending)
+Hub hashing model.safetensors: 0/1178623988 bytes, 0.00 MiB/s, ETA unknown (publisher checksum pending)
+Hub hashing model.safetensors: 698351616/1178623988 bytes, 44.40 MiB/s, ETA 00:00:11 (publisher checksum pending)
+Hub hashing model.safetensors: 0/1178623988 bytes, 0.00 MiB/s, ETA unknown (publisher checksum pending)
+Hub hashing model.safetensors: 1058013184/1178623988 bytes, 67.24 MiB/s, ETA 00:00:02 (publisher checksum pending)
+BitNet loading official packed tensors on CPU F32; no GPU fallback
+BitNet decoded official ternary layer 1/30 on CPU
+BitNet decoded official ternary layer 2/30 on CPU
+BitNet decoded official ternary layer 3/30 on CPU
+BitNet decoded official ternary layer 4/30 on CPU
+BitNet decoded official ternary layer 5/30 on CPU
+BitNet decoded official ternary layer 6/30 on CPU
+BitNet decoded official ternary layer 7/30 on CPU
+BitNet decoded official ternary layer 8/30 on CPU
+BitNet decoded official ternary layer 9/30 on CPU
+BitNet decoded official ternary layer 10/30 on CPU
+BitNet decoded official ternary layer 11/30 on CPU
+BitNet decoded official ternary layer 12/30 on CPU
+BitNet decoded official ternary layer 13/30 on CPU
+BitNet decoded official ternary layer 14/30 on CPU
+BitNet decoded official ternary layer 15/30 on CPU
+BitNet decoded official ternary layer 16/30 on CPU
+BitNet decoded official ternary layer 17/30 on CPU
+BitNet decoded official ternary layer 18/30 on CPU
+BitNet decoded official ternary layer 19/30 on CPU
+BitNet decoded official ternary layer 20/30 on CPU
+BitNet decoded official ternary layer 21/30 on CPU
+BitNet decoded official ternary layer 22/30 on CPU
+BitNet decoded official ternary layer 23/30 on CPU
+BitNet decoded official ternary layer 24/30 on CPU
+BitNet decoded official ternary layer 25/30 on CPU
+BitNet decoded official ternary layer 26/30 on CPU
+BitNet decoded official ternary layer 27/30 on CPU
+BitNet decoded official ternary layer 28/30 on CPU
+BitNet decoded official ternary layer 29/30 on CPU
+BitNet decoded official ternary layer 30/30 on CPU
+distillation: durable update 1/48 loss=3.041338 gradient_norm=0.006902
+distillation: durable update 2/48 loss=3.340407 gradient_norm=0.036148
+distillation: durable update 3/48 loss=3.119143 gradient_norm=0.078817
+distillation: durable update 4/48 loss=3.225810 gradient_norm=0.150160
+distillation: durable update 5/48 loss=3.217395 gradient_norm=0.184756
+distillation: durable update 6/48 loss=3.455002 gradient_norm=0.271239
+distillation: durable update 7/48 loss=2.988520 gradient_norm=0.330489
+distillation: durable update 8/48 loss=3.365968 gradient_norm=0.410912
+distillation: durable update 9/48 loss=3.579442 gradient_norm=0.485466
+distillation: durable update 10/48 loss=3.041338 gradient_norm=0.539469
+distillation: durable update 11/48 loss=2.956075 gradient_norm=0.629188
+distillation: durable update 12/48 loss=2.956075 gradient_norm=0.707785
+distillation: durable update 13/48 loss=3.065903 gradient_norm=0.847689
+distillation: durable update 14/48 loss=2.956075 gradient_norm=0.871444
+distillation: durable update 15/48 loss=2.849349 gradient_norm=0.992392
+distillation: durable update 16/48 loss=3.365968 gradient_norm=1.057784
+distillation: durable update 17/48 loss=2.694418 gradient_norm=1.101863
+distillation: durable update 18/48 loss=3.571583 gradient_norm=1.221321
+distillation: durable update 19/48 loss=3.041338 gradient_norm=1.268982
+distillation: durable update 20/48 loss=3.340407 gradient_norm=1.422338
+distillation: durable update 21/48 loss=3.119143 gradient_norm=1.378217
+distillation: durable update 22/48 loss=3.225810 gradient_norm=1.636516
+distillation: durable update 23/48 loss=3.217395 gradient_norm=1.538025
+distillation: durable update 24/48 loss=3.455002 gradient_norm=1.791796
+distillation: durable update 25/48 loss=2.988520 gradient_norm=1.817712
+distillation: durable update 26/48 loss=3.365968 gradient_norm=1.984721
+distillation: durable update 27/48 loss=3.579442 gradient_norm=2.081652
+distillation: durable update 28/48 loss=3.041338 gradient_norm=2.066990
+distillation: durable update 29/48 loss=2.956075 gradient_norm=2.222334
+distillation: durable update 30/48 loss=2.956075 gradient_norm=2.315039
+distillation: durable update 31/48 loss=3.065903 gradient_norm=2.598497
+distillation: durable update 32/48 loss=2.956075 gradient_norm=2.502075
+distillation: durable update 33/48 loss=2.849349 gradient_norm=2.703813
+distillation: durable update 34/48 loss=3.365968 gradient_norm=2.743881
+distillation: durable update 35/48 loss=2.694418 gradient_norm=2.715617
+distillation: durable update 36/48 loss=3.571583 gradient_norm=2.895440
+distillation: durable update 37/48 loss=3.041338 gradient_norm=2.879155
+distillation: durable update 38/48 loss=3.340407 gradient_norm=3.113970
+distillation: durable update 39/48 loss=3.119143 gradient_norm=2.919806
+distillation: durable update 40/48 loss=3.225810 gradient_norm=3.359147
+distillation: durable update 41/48 loss=3.217395 gradient_norm=3.071639
+distillation: durable update 42/48 loss=3.455002 gradient_norm=3.489093
+distillation: durable update 43/48 loss=2.988520 gradient_norm=3.451962
+distillation: durable update 44/48 loss=3.365968 gradient_norm=3.697607
+distillation: durable update 45/48 loss=3.579442 gradient_norm=3.795249
+distillation: durable update 46/48 loss=3.041338 gradient_norm=3.683417
+distillation: durable update 47/48 loss=2.956075 gradient_norm=3.893249
+distillation: durable update 48/48 loss=2.956075 gradient_norm=3.984720
+Error: BitNet QAT changed latent adapters but no effective ternary weights; declared update budget exhausted, progress preserved

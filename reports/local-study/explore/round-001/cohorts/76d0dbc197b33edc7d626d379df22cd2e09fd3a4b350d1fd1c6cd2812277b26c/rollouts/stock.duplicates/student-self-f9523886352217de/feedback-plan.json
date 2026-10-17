@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "initial_plan": {
+    "path": "reports/local-study/explore/round-001/cohorts/76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c/rollouts/stock.duplicates/student-plan.json",
+    "sha256": "d06235b5ca7180ba67128215f0bc3aebc2a77ebf5958e010e8fd7881edf79741",
+    "bytes": 5210
+  },
+  "student_raw": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/stock.duplicates/student-raw.json",
+    "sha256": "505342fc81d9c0c8ac251a4e6d4d8f4d786f2d98b0f37e2f397bc1f6fef71b7c",
+    "bytes": 1794
+  },
+  "student_grade": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox/a3c786e3-9d97-481a-aab2-8bef3d13bf4a.json",
+    "sha256": "d3f4a6f767596e0e7c1a3799ef8cc03f56d59ef8132ffd2d1b06a4fb371a8d84",
+    "bytes": 3418
+  },
+  "teacher_id": "student-self-f9523886352217de",
+  "teacher_assets": {
+    "path": "offline_bundle/base/assets.json",
+    "sha256": "54304e7f41519a4196674cba5e86593802f852b2b47882d6c19706f85f303ad4",
+    "bytes": 788
+  },
+  "teacher_checkpoint": null,
+  "runtime": {
+    "device": {
+      "cuda": {
+        "ordinal": 0
+      }
+    },
+    "dtype": "f32"
+  },
+  "request": {
+    "prompt": "Verified different training contract: Input is an array of ASCII strings. Return the most frequent string, lexicographically smallest on ties; return null if empty.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nVerified solution:\n```rust\nuse serde_json::{Value, Map};\nuse std::collections::HashMap;\n\npub fn solve(input: Value) -> Value {\n    if let Value::Array(arr) = input {\n        if arr.is_empty() {\n            return Value::Null;\n        }\n\n        let mut counts = HashMap::new();\n        for item in arr {\n            if let Value::String(s) = item {\n                *counts.entry(s).or_insert(0) += 1;\n            }\n        }\n\n        let mut most_frequent: Option<&String> = None;\n        let mut max_count = 0;\n\n        for (s, &count) in counts.iter() {\n            if count > max_count || (count == max_count && most_frequent.map_or(true, |mf| s < mf)) {\n                most_frequent = Some(s);\n                max_count = count;\n            }\n        }\n\n        most_frequent.map_or(Value::Null, |s| Value::String(s.clone()))\n    } else {\n        Value::Null\n    }\n}\n```\nNew task:\nWrite Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an array of ASCII strings. Return distinct strings occurring at least twice, in lexicographic order.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[\"b\",\"a\",\"b\"],\"expected\":[\"b\"]}]\nActual frozen student candidate:\n```rust\nuse serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let mut seen = std::collections::HashSet::new();\n    let mut result = Vec::new();\n\n    for item in input.as_array() {\n        let str_item = item.as_str().unwrap();\n        if seen.contains(&str_item) {\n            result.push(str_item);\n        } else {\n            seen.insert(str_item);\n        }\n    }\n\n    serde_json::Value::Array(result)\n}\n```\nActual trusted tool feedback:\n{\"bounded_diagnostic_untrusted_data\":\"compilation failed: warning: unused import: `serde_json::Value`\\n --> /candidate/main.rs:1:5\\n  |\\n1 | use serde_json::Value;\\n  |     ^^^^^^^^^^^^^^^^^\\n  |\\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\\n\\nerror[E0599]: no method named `as_str` found for reference `&Vec<Value>` in the current scope\\n --> /candidate/main.rs:8:29\\n  |\\n8 |         let str_item = item.as_str().unwrap();\\n  |                             ^^^^^^\\n  |\\nhelp: there is a method `as_ptr` with a similar name\\n  |\\n8 -         let str_item = item.as_str().unwrap();\\n8 +         let str_item = item.as_ptr().unwrap();\\n  |\\n\\nerror: aborting due to 1 previous error; 1 warning emitted\\n\\nFor more information about this error, try `rustc --explain E0599`.\\n\",\"cases_passed\":0,\"cases_total\":6,\"content_role\":\"compilation_feedback_only\",\"original_failure_is_not_a_success\":true,\"passed\":false,\"private_inputs_or_expected_outputs_exposed\":false,\"quarantined\":true,\"run_id\":\"a3c786e3-9d97-481a-aab2-8bef3d13bf4a\",\"student_generation_complete\":true,\"tool\":\"trusted_container_grader\",\"trace_complete\":false}\nCritique and revise the candidate. Put any short explanation in Rust // comments and return complete compilable Rust source only. Do not invent tool results.",
+    "max_new_tokens": 768,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "supporting_sample_ids": [
+    "9f34cf373961913a3cf1067f1f2a71e0bef8368e1557d10e998cc099a00fab71"
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "run_id": "05f7ba73-3973-4e36-8c81-1c9b989b488e",
+  "task_id": "ledger.prefix",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: warning: unused import: `serde_json::Value`\n --> /candidate/main.rs:1:5\n  |\n1 | use serde_json::Value;\n  |     ^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0599]: no method named `as_i64` found for struct `Vec<Value>` in the current scope\n --> /candidate/main.rs:8:34\n  |\n8 |         if let Some(num) = value.as_i64() {\n  |                                  ^^^^^^ method not found in `Vec<Value>`\n\nerror[E0308]: mismatched types\n  --> /candidate/main.rs:14:5\n   |\n 3 | pub fn solve(input: serde_json::Value) -> serde_json::Value {\n   |                                           ----------------- expected `Value` because of return type\n...\n14 |     prefix_sums\n   |     ^^^^^^^^^^^ expected `Value`, found `Vec<{integer}>`\n   |\n   = note: expected enum `Value`\n            found struct `Vec<{integer}>`\n\nerror: aborting due to 2 previous errors; 1 warning emitted\n\nSome errors have detailed explanations: E0308, E0599.\nFor more information about an error, try `rustc --explain E0308`.\n"
+  ],
+  "cases_total": 14,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "4b2556745b303526f354ded7f2c473b77f6da0c99a77f0a493c7272a8d800aac",
+  "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "c9de0784fa9e2c947ad6f6fbcf9ed1aab9b8d7b85a0722db37e08b95f76a510f",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "controller_version": 2,
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:1",
+    "expected_image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/native-full-quality-001/base-train/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/native-full-quality-001/base-train/sandbox/05f7ba73-3973-4e36-8c81-1c9b989b488e.audit.json",
+  "audit_sha256": "b34b43388bf161e17eb4d5ce889a6bc405aca60a36a45d77bb9635962525fc5b",
+  "failure": "compilation failed: warning: unused import: `serde_json::Value`\n --> /candidate/main.rs:1:5\n  |\n1 | use serde_json::Value;\n  |     ^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0599]: no method named `as_i64` found for struct `Vec<Value>` in the current scope\n --> /candidate/main.rs:8:34\n  |\n8 |         if let Some(num) = value.as_i64() {\n  |                                  ^^^^^^ method not found in `Vec<Value>`\n\nerror[E0308]: mismatched types\n  --> /candidate/main.rs:14:5\n   |\n 3 | pub fn solve(input: serde_json::Value) -> serde_json::Value {\n   |                                           ----------------- expected `Value` because of return type\n...\n14 |     prefix_sums\n   |     ^^^^^^^^^^^ expected `Value`, found `Vec<{integer}>`\n   |\n   = note: expected enum `Value`\n            found struct `Vec<{integer}>`\n\nerror: aborting due to 2 previous errors; 1 warning emitted\n\nSome errors have detailed explanations: E0308, E0599.\nFor more information about an error, try `rustc --explain E0308`.\n",
+  "duration_ms": 19205,
+  "timeout_evidence": null
+}

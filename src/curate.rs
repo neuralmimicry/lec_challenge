@@ -1,7 +1,7 @@
 //! Fail-closed curation. Metadata is a claim; durable provider and controller
 //! artifacts are checked again immediately before training opens an optimiser.
 use crate::{
-    fleet::{Recording, parse_response},
+    fleet::{Recording, parse_recording},
     sandbox::SandboxReport,
     tasks::{self, HeldoutEntry, Split},
 };
@@ -281,7 +281,7 @@ fn validate_evidence(row: &TrainingRow, audit_root: Option<&Path>) -> Result<Ver
             .unwrap_or(false),
         "recorded request does not contain the canonical task prompt"
     );
-    let (code, _usage) = parse_response(&record.response)?;
+    let (code, _usage) = parse_recording(&record)?;
     let code = crate::evaluate::extract_code(&code);
     ensure!(
         code == row.code,

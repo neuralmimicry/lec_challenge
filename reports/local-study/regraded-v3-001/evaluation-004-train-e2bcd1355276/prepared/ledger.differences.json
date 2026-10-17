@@ -1,0 +1,49 @@
+{
+  "schema_version": 3,
+  "run_id": "720d658f-a08d-4093-81ec-c2e5802bf1cc",
+  "ownership_nonce": "5e5102e7-07de-40f0-8fab-13b67ebb77f9",
+  "attempt_key": "6274784bd9045dfebe8033941c2536cbc734b208d4f3e5a85a8052372842c7d9",
+  "receipt_path": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/prepared/ledger.differences.json",
+  "report_path": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/sandbox/720d658f-a08d-4093-81ec-c2e5802bf1cc.json",
+  "task": {
+    "id": "ledger.differences",
+    "source_id": "private-ledger-v1",
+    "lineage_id": "local-contract-pack-00",
+    "split": "train",
+    "specification": "Input is an integer array. Return each next value minus the previous value; lengths zero and one return [].\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "eec532ff42b6ece09d734d71ad931af24921a3641c17c1535a05d1f72bf3b80f",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": [
+          2,
+          -4,
+          8
+        ],
+        "expected": [
+          -6,
+          12
+        ]
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "use serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    if let Value::Array(arr) = input {\n        if arr.len() < 2 {\n            return Value::Array(vec![]);\n        }\n\n        let mut result = Vec::new();\n        let mut prev = 0;\n        for item in arr {\n            let num = item.as_i64().unwrap();\n            let diff = num - prev;\n            result.push(Value::Number(diff.into()));\n            prev = num;\n        }\n        Value::Array(result)\n    } else {\n        Value::Array(vec![])\n    }\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/sandbox"
+  },
+  "code_sha256": "bef14b1e5000931a5ffb6fbeff78d037ae73734f14c6c52bb838fda2eef022b7",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

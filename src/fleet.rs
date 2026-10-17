@@ -1,7 +1,6 @@
 //! Configurable, bounded teacher acquisition and exact offline replay.
 //!
-//! The HTTP adapter intentionally supports only ordinary chat completions: tools,
-//! search and uncapped reasoning cannot silently introduce another billable feature.
+//! Native text-only API adapters reject tools, search and uncapped reasoning.
 
 use crate::ledger::{Acquisition, BudgetLimits, Claim, Ledger, sha256, unix_millis};
 use anyhow::{Context, Result, bail, ensure};
@@ -21,16 +20,26 @@ use std::{
 };
 use tokio::sync::{Mutex, Semaphore};
 
+mod access;
 mod config;
 mod local_drills;
+mod protocol;
+#[cfg(test)]
+mod provider_tests;
 mod runner;
+mod setup;
+#[cfg(test)]
+mod setup_tests;
 #[cfg(test)]
 mod tests;
 mod transport;
 
+pub use access::*;
 pub use config::*;
 pub use local_drills::{drill_child, run_local_drills, run_recorded_drills};
+pub use protocol::*;
 pub use runner::*;
+pub use setup::*;
 pub use transport::*;
 
 fn valid_hash(hash: &str) -> bool {

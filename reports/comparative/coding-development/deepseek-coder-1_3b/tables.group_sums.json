@@ -1,0 +1,38 @@
+{
+  "model_id": "deepseek-coder-1_3b",
+  "task_id": "tables.group_sums",
+  "source_id": "private-tables-v1",
+  "specification_sha256": "783b75a94404c8e383623a9281b851d2ccf76f4a4e9832001b8703de0bf64172",
+  "seed": 1729,
+  "plan_sha256": "9aefcaf935435b296c63229638aad5a22a416ae171eda011a6812dd745667ea8",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an array of [key,value] integer rows. Sum values per key and return rows sorted by key.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[[2,9],[1,4],[2,3]],\"expected\":[[1,4],[2,12]]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "Here is the Rust code that solves the problem:\n\n```rust\nuse serde_json::Value;\nuse std::collections::HashMap;\nuse std::iter::FromIterator;\n\npub fn solve(input: Value) -> Value {\n    let mut map: HashMap<i32, i64> = HashMap::new();\n\n    for row in input.as_array() {\n        let key: i32 = row[0].to_i32().unwrap();\n        let value: i64 = row[1].to_i64().unwrap();\n\n        let count = map.entry(key).or_insert(0);\n        *count += value;\n    }\n\n    let mut result: Vec<Vec<i32>> = Vec::new();\n\n    for (key, count) in map.iter() {\n        result.push(vec![*key, *count]);\n    }\n\n    result.sort_by_key(|k| k[0]);\n\n    input.insert(\"result\", Value::from(result))\n}\n```\n\nThis code first creates a HashMap to store the sum of values for each key. It then iterates over the input array, adding the value for each key to the sum. Finally, it creates a new array to store the result, sorts it by key, and returns it.\n\nPlease note that this code assumes that the input is a JSON array of arrays, where each inner array contains two integers. The output is also a JSON array of arrays, where each inner array contains two integers.\n",
+    "checkpoint_id": "4ff570bf9a558d23c5cb4171bad00daf663be8282150cdb5769e0f6975b0007a",
+    "finish_reason": "stop",
+    "input_tokens": 311,
+    "output_tokens": 362,
+    "elapsed_ms": 20418,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/comparative/coding-development/deepseek-coder-1_3b/tables.group_sums.generation.json",
+    "sha256": "f79b164dddb6c7aeb049ca3dfca12be4499516888886c7e3226e6353a9d13227",
+    "bytes": 3472
+  },
+  "sandbox_report": {
+    "path": "reports/comparative/coding-development/sandbox/e9b477d7-53ce-4cc5-a02c-ac761c3e5afc.json",
+    "sha256": "d3c74ec56ee4378b1d3b6f6a787a0aef02b826b42c43252d875fd2fecdab2649",
+    "bytes": 2842
+  },
+  "grading_error": null,
+  "success": false
+}

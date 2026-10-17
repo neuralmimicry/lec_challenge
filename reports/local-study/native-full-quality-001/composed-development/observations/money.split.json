@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "c35802c4a512b17d77dd16b2e6ab7d80bbfdd14fe0c7590863f05918afeae367",
+  "task_id": "money.split",
+  "source_id": "private-money-v1",
+  "success": false,
+  "raw_generation": {
+    "path": "reports/local-study/native-full-quality-001/composed-development/generations/money.split.json",
+    "sha256": "9293a5a597d1412da191b516ea737a0bd8524102747ba5bef47f28dff1d37082",
+    "bytes": 1926
+  },
+  "sandbox_report": null,
+  "grading_error": "owned sandbox inspection deadline exceeded: deadline has elapsed"
+}

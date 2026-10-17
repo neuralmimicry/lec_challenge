@@ -1,0 +1,7 @@
+{
+  "schema_version": 1,
+  "directory": "offline_bundle/comparative/magicoder-s-ds-6_7b-q4_k_m",
+  "candidate_id": "magicoder-s-ds-6_7b-q4_k_m",
+  "model_id": "TheBloke/Magicoder-S-DS-6.7B-GGUF",
+  "revision": "d41a33f9393ebc06c6beb44b1ded091b6d19496c"
+}

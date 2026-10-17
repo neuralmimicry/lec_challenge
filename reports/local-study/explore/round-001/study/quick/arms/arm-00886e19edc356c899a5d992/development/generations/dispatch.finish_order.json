@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "ad3179b9d8963a4ea6569ce8e3d237a86f918c7c90dab491ecb677b31f70ae2d",
+  "task_id": "dispatch.finish_order",
+  "source_id": "private-dispatch-v1",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an array of [arrival,duration], nonnegative integers. A single server processes input order, starting each job at max(previous finish,arrival). Return finish times.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[[0,3],[1,2],[8,1]],\"expected\":[3,5,9]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let mut finish_times = Vec::new();\n    let mut current_finish = 0;\n\n    for line in input.as_array() {\n        let arrival = line[0].as_i64().unwrap();\n        let duration = line[1].as_i64().unwrap();\n\n        if current_finish + duration <= arrival {\n            current_finish = arrival;\n        } else {\n            finish_times.push(current_finish);\n            current_finish = arrival + duration;\n        }\n    }\n\n    finish_times.push(current_finish);\n\n    serde_json::Value::Array(finish_times)\n}\n```",
+    "checkpoint_id": "c4306fec2dde19803cd619a5813b63b0994ae0bf4d43ea90e9ff190655325b47",
+    "finish_reason": "stop",
+    "input_tokens": 250,
+    "output_tokens": 141,
+    "elapsed_ms": 21600,
+    "complete": true
+  },
+  "model_error": null
+}

@@ -1,5 +1,12 @@
 # Original assessment crosscheck
 
+The [latest-log review](assessment-latest-logs.md) records the newer exploration
+and API QA boundary. Run `./run.sh assessment-audit` for a new read-only,
+checksum-linked JSON/Markdown inspection; it does not rewrite this historical
+crosscheck or run the missing provider/training/held-out work. The latest parent
+rollout error hid a failed PID-control preflight; current source preserves that
+verified child cause instead of reducing it to a missing-file message.
+
 Audit date: 16 October 2026. Scope: the original LEC email, the implementation
 brief, the Rust implementation and retained execution evidence. The later local
 teacher/method/BitNet work is additional scope. It cannot replace missing
@@ -126,15 +133,20 @@ and cold resumption must still reconstruct content hashes. Filename-only or
 unchecked persistent memoisation would weaken the evidence contract and is not
 an acceptable performance fix. This optimisation is not implemented here.
 
-The non-blocking requirement is also only partially satisfied. Model compute,
-large verification phases and database work use dedicated/blocking workers,
-but some asynchronous collection paths still call synchronous durable artefact
-writes directly, including `teacher_evidence/variants.rs` policy/raw/record
-publication. Under slow journal commits, those calls can occupy an executor
-thread. Move the remaining filesystem/hash publication units onto bounded
-blocking workers, preserving atomic-write/fsync order and crash recovery, and
-verify responsiveness with an injected slow writer. This audit does not claim
-that every filesystem operation is already non-blocking.
+The non-blocking requirement remains partially satisfied. The follow-up fixes
+the identified content-collection path: policy/request preparation, raw
+generation publication, grade links, record verification and final bundle
+publication now use at most two admitted blocking workers per process. Workers
+retain their directory lease and admission permit through fsync even if the
+awaiter is cancelled. Completed generation and its raw write share one worker;
+the outer failure report retains the same ownership. The new isolated tests
+exercise executor responsiveness during a controlled slow writer, cancellation
+without premature unlock/admission, exact failed-generation reuse and a changed
+request's rejection without resampling. Schemas and durable dependency ordering
+remain unchanged; existing frozen experiments keep their original binaries.
+This closes that filesystem/hash publication gap, not every synchronous
+operation in the application. Other CLI/collector paths and native allocation
+destruction on cancellation still need their own latency/ownership review.
 
 1. The immutable four-role CUDA/SIMD build, all nine software verification
    checks, real container verification and local-student endpoint smoke have
@@ -164,6 +176,23 @@ Method catalogue coverage, executed arms, useful generalisation, a best tested
 combination and assessment promotion are separate claims. Neither a long list
 of methods nor a genuine ternary checkpoint establishes all of them.
 
+The follow-up audit also found stale executable dispatch: assessment commands
+in a source checkout preferred a historical bundled CPU binary after a version
+probe. The launcher now uses Cargo's current locked offline release build when
+`.git` exists, with an explicit source-build override for exported source trees.
+Extracted deliveries retain their prebuilt route. This fixes checkout dispatch,
+not packaging: copying an old `target/release` file is not proof of current-source
+build identity, and the study/native-engine dependency closure still needs a
+fresh inventory and relocation rehearsal.
+
+Gate reporting had two configuration gaps: fixed 95% confidence labels and an
+80% power label even when alpha/power target differed. New reports retain and
+render the actual settings, historical reports lacking confidence say so, and
+empty sensitivity grids fail. The default frozen rule and thresholds are
+unchanged. Complete gate artefact reconstruction now uses a blocking worker
+rather than occupying the async executor. These are software corrections, not
+new measured held-out or learning evidence.
+
 ## Later user requirements: additional gaps retained
 
 | Additional requirement | Implemented / observed | Remaining boundary |
@@ -171,8 +200,8 @@ of methods nor a genuine ternary checkpoint establishes all of them.
 | Rust and specialist agents | Responsibilities are in `agents/PLAN.md`; application, numerical training, evidence and QA are Rust. | Upstream BitNet C++ inference, NVIDIA compilation and ordinary operational/media tools are documented interoperability exceptions. |
 | Hugging Face access without storing credentials | Native checksum-pinned downloader accepts ephemeral input/environment; metadata and licences are retained. | The bounded source/metadata pattern scan passed; it is not a universal secret detector. Supplied access is not a paid API budget. |
 | Local GPU teacher hosting | Actual CUDA/F32 quantised teacher evaluation and CUDA/F16 dense endpoint checks exist, including driver allocations. | Explicit GPU failure never silently becomes CPU execution. Display allocations and free VRAM can change between guard and load. |
-| Replace low scores with alternatives and retain the best | Original six-candidate search and the next two declared trials have real retained results/progress, cache checks and qualification packs. | No teacher met the declared 80% rule on both packs. Qwen3 still needs inference after its preflight failure; an exhausted finite catalogue is not a high-performing fleet. |
-| Delete stale/unused/poor weights automatically | Owned-cache pruning reclaimed 20,140,487,248 logical bytes, retaining provenance/deletion authority and protecting active leases, bases and selected checkpoints. | Uncertain or interrupted trials are protected rather than silently classified as poor. General host/Hugging Face caches and checkpoint dependencies are not indiscriminately deleted. |
+| Replace low scores with alternatives and retain the best | Original six-candidate search and the next two declared trials have real retained results, cache checks and qualification packs. Qwen3 completed at 3/16 with zero generation/grading errors; Qwen Coder 7B remains the healthy 7/16 fallback. | No teacher met the declared 80% rule on both packs. DeepSeek's 0/16 retains one length-limited generation and remains inconclusive. An exhausted finite catalogue is not a high-performing fleet. |
+| Delete stale/unused/poor weights automatically | Earlier owned-cache pruning reclaimed 20,140,487,248 logical bytes; the completed Qwen3 trial reclaimed another 2,497,280,736. Provenance/deletion authority remain, and active leases, bases and selected checkpoints are protected. | Uncertain or interrupted trials are protected rather than silently classified as poor. General host/Hugging Face caches and checkpoint dependencies are not indiscriminately deleted. |
 | amd64/ARM64; variable GPU, RAM and CPU | CPU affinity/cgroup discovery, explicit SIMD profiles, CUDA driver fallback and memory guards are implemented; expanded-context dispatch was fixed and tested. | Actual hardware QA is Linux amd64/NVIDIA. ARM64 execution, Apple Metal and AMD ROCm execution are not verified/implemented; unsupported accelerators currently receive an explicit CPU decision. |
 | Disconnected operation and progress | Explicit offline performs no HTTP, including metadata; missing models are reported, not fabricated. Checksum/download/ETA and worker heartbeat output exist. | Pruned weights need exact authorised online rehydration for fresh inference. Existing observations remain readable offline. Disk-bound checksum/export/housekeeping work can dominate this host's progress. |
 | Distillation types/combinations and efficient parallel trials | Genuine SFT, token KL, hidden-feature and attention operators, composed updates, content/feedback eligibility, native optimiser recovery and a bounded scheduler exist. Actual full-context SFT/composed and second-seed rounds ran. | The complete catalogue has not been empirically exhausted. Content/trajectory/on-policy capabilities need complete real evidence; teacher-assistant architecture transfer is not implemented by the historical curriculum option. No globally best combination or useful generalisation gain is established. |

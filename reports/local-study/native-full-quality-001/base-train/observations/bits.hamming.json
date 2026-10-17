@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "55c6614d90fbff0e580fd8fbfa9e06ce99715d8d0c78320e0fe70605545cc489",
+  "task_id": "bits.hamming",
+  "source_id": "private-bits-v1",
+  "success": false,
+  "raw_generation": {
+    "path": "reports/local-study/native-full-quality-001/base-train/generations/bits.hamming.json",
+    "sha256": "53dd964a10dd34d88449e71552fa9a36d05bab73cc8e8dbfe856d654467eb820",
+    "bytes": 1723
+  },
+  "sandbox_report": {
+    "path": "reports/local-study/native-full-quality-001/base-train/sandbox/e0efbae8-c554-46dc-a28e-b6663f0f9b33.json",
+    "sha256": "307462722da349376e08175137c9bc5937046c6a6496b3ad08e4620c860319cd",
+    "bytes": 3777
+  },
+  "grading_error": null
+}

@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "evidence_kind": "actual_local_model_generation",
+  "recorded_unix_ms": 1792072650215,
+  "model_id": "deepseek-coder-1_3b",
+  "task_id": "money.format",
+  "source_id": "private-money-v1",
+  "specification_sha256": "9213c0114b6d1a6399d5db8ec1a7dcf0f9087c2d65b589e583ee9b1cba646aa9",
+  "seed": 1729,
+  "plan_sha256": "9aefcaf935435b296c63229638aad5a22a416ae171eda011a6812dd745667ea8",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is signed cents, magnitude <=100000000. Return pounds with optional minus and exactly two fractional digits.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":-1230,\"expected\":\"-12.30\"}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "Here is a simple implementation of the `solve` function in Rust. This function takes a `serde_json::Value` and returns a `serde_json::Value`. The function converts the signed integer to a string with pounds and optional minus. The function uses the `serde_json` crate to parse and serialize JSON values.\n\n```rust\nuse serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let input_i64 = input.as_i64().unwrap();\n    let sign = if input_i64 < 0 { \"-\" } else { \"\" };\n    let magnitude = input_i64.abs();\n    let pounds = format!(\"{:.2}\", magnitude as f64 / 100.0);\n    let mut output = Value::String(format!(\"{} {}\", sign, pounds));\n    output\n}\n```\n\nThis function works by first converting the input to an `i64`, which is the integer type that represents signed integers. It then determines the sign of the number and calculates the magnitude of the number. The magnitude is then converted to a string with two decimal places, and the sign is appended to the end of the string. The resulting string is then converted back to a `Value` using `Value::String`.\n\nPlease note that this function assumes that the input is a signed integer. If the input can be any number, you would need to add additional error checking to ensure that the input is a valid signed integer.\n",
+    "checkpoint_id": "4ff570bf9a558d23c5cb4171bad00daf663be8282150cdb5769e0f6975b0007a",
+    "finish_reason": "stop",
+    "input_tokens": 303,
+    "output_tokens": 344,
+    "elapsed_ms": 12739,
+    "complete": true
+  },
+  "generation_error": null,
+  "execution": {
+    "actual_device": "Cuda { gpu_id: 0 }",
+    "actual_dtype": "F16",
+    "checkpoint_id": "4ff570bf9a558d23c5cb4171bad00daf663be8282150cdb5769e0f6975b0007a",
+    "context_cap": 2048,
+    "cpu_fallback": false,
+    "cuda_active": true,
+    "cuda_feature_compiled": true,
+    "engine": "native_rust_candle",
+    "model_id": "deepseek-ai/deepseek-coder-1.3b-instruct",
+    "requested": {
+      "device": {
+        "cuda": {
+          "ordinal": 0
+        }
+      },
+      "dtype": "f16"
+    },
+    "revision": "e063262dac8366fc1f28a4da0ff3c50ea66259ca"
+  }
+}

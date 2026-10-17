@@ -1,0 +1,7 @@
+HTTP/1.1 504 Gateway Timeout
+content-type: application/json
+content-length: 153
+connection: close
+date: Thu, 15 Oct 2026 17:15:17 GMT
+
+{"error":"inference deadline exceeded; worker cancellation requested","checkpoint_id":"4b340a9d033091627273fa0f95a4d43b5fe95500c714f9d2f683fbe266c9bc52"}

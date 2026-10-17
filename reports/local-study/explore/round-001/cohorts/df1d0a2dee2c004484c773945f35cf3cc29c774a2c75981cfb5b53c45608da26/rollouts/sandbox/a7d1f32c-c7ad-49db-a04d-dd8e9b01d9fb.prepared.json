@@ -1,0 +1,59 @@
+{
+  "schema_version": 3,
+  "run_id": "267be0c3-e945-4211-a1ff-6d0bf667b5b1",
+  "ownership_nonce": "5c2ceb56-da0e-453f-839b-8bc091855c0d",
+  "attempt_key": "a7d1f32c-c7ad-49db-a04d-dd8e9b01d9fb",
+  "receipt_path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox/a7d1f32c-c7ad-49db-a04d-dd8e9b01d9fb.prepared.json",
+  "report_path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox/267be0c3-e945-4211-a1ff-6d0bf667b5b1.json",
+  "task": {
+    "id": "graph.indegrees",
+    "source_id": "private-graph-v1",
+    "lineage_id": "local-contract-pack-04",
+    "split": "train",
+    "specification": "Input {n,edges} is a directed graph with unique edges on 0..n-1. Return indegree of each node in index order, including self-loops. Graph vertex counts are at most 64.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "21e7e645614a85b9c7abc9af7e6eb8e29b948f79dbea5ef046c8c06bfc3b8dbd",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": {
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "n": 4
+        },
+        "expected": [
+          0,
+          1,
+          1,
+          0
+        ]
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "use serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let n = input[\"n\"].as_u64().unwrap();\n    let edges = input[\"edges\"].as_array().unwrap();\n    let mut indegree = vec![0; n];\n\n    for (i, edge) in edges.iter().enumerate() {\n        let src = edge[0] as u64;\n        let dst = edge[1] as u64;\n        indegree[src] += 1;\n        indegree[dst] += 1;\n    }\n\n    serde_json::Value::Object {\n        indegree: indegree.into_iter().collect(),\n    }\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox"
+  },
+  "code_sha256": "20998e0904fd9fecde535fc05a1f860c06da848bdf282ec8cc20acd8b1c4e555",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

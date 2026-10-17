@@ -1,0 +1,69 @@
+{
+  "schema_version": 3,
+  "run_id": "e0b4270c-ee57-4b30-91b3-5c661935e2e7",
+  "ownership_nonce": "bb3d6df1-c50b-453d-a58b-1fca83a7c393",
+  "attempt_key": "eaa65cae-db80-4f42-b46c-5fabfd4ae082",
+  "receipt_path": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison/sandbox/eaa65cae-db80-4f42-b46c-5fabfd4ae082.prepared.json",
+  "report_path": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison/sandbox/e0b4270c-ee57-4b30-91b3-5c661935e2e7.json",
+  "task": {
+    "id": "tables.inner_join",
+    "source_id": "private-tables-v1",
+    "lineage_id": "local-contract-pack-15",
+    "split": "development",
+    "specification": "Input [left,right] has arrays of [key,value] integer rows, each side with unique keys. Return [key,left_value,right_value] for common keys in ascending key order.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "369ef237ff250179b0b3e3c7af051af8aebc0329b6494d33af5f436c827ac699",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": [
+          [
+            [
+              2,
+              9
+            ],
+            [
+              1,
+              4
+            ]
+          ],
+          [
+            [
+              2,
+              3
+            ],
+            [
+              3,
+              8
+            ]
+          ]
+        ],
+        "expected": [
+          [
+            2,
+            9,
+            3
+          ]
+        ]
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "use serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let left: Vec<Value> = match input.get(\"left\") {\n        Some(v) => v.as_array().cloned().unwrap_or_default(),\n        None => return json!([[]]),\n    };\n\n    let right: Vec<Value> = match input.get(\"right\") {\n        Some(v) => v.as_array().cloned().unwrap_or_default(),\n        None => return json!([[]]),\n    };\n\n    let mut left_map: std::collections::HashMap<String, i64> = std::collections::HashMap::new();\n    let mut right_map: std::collections::HashMap<String, i64> = std::collections::HashMap::new();\n\n    for row in &left {\n        if let [key, value] = row.as_array().unwrap_or(&vec![]) {\n            if let Some(k) = key.as_str() {\n                if let Some(v) = value.as_i64() {\n                    left_map.insert(k.to_string(), v);\n                }\n            }\n        }\n    }\n\n    for row in &right {\n        if let [key, value] = row.as_array().unwrap_or(&vec![]) {\n            if let Some(k) = key.as_str() {\n                if let Some(v) = value.as_i64() {\n                    right_map.insert(k.to_string(), v);\n                }\n            }\n        }\n    }\n\n    let mut result = Vec::new();\n    let mut keys: Vec<String> = left_map.keys().cloned().collect();\n    keys.sort();\n\n    for key in keys {\n        if let Some(&left_val) = left_map.get(&key) {\n            if let Some(&right_val) = right_map.get(&key) {\n                result.push(json!([key, left_val, right_val]));\n            }\n        }\n    }\n\n    json!(result)\n}\n\nfn json<T>(value: T) -> Value\nwhere\n    T: serde::Serialize,\n{\n    serde_json::to_value(value).unwrap()\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison/sandbox"
+  },
+  "code_sha256": "db26c6f11e5a6b335f3e83fd08b57e55258aeda2afc9dd5715f833e285fd0dfd",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

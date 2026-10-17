@@ -1,0 +1,4 @@
+execution: Explicit CPU selected with 16 available threads and 33432109876 guarded RAM bytes; available CPU threads=16, usable RAM=33432109876 bytes
+Hub hashing magicoder-s-ds-6.7b.Q4_K_M.gguf: 0/4082886528 bytes, 0.00 MiB/s, ETA unknown (publisher checksum pending)
+Hub hashing magicoder-s-ds-6.7b.Q4_K_M.gguf: 2281701376/4082886528 bytes, 145.04 MiB/s, ETA 00:00:12 (publisher checksum pending)
+serving: immutable model listening at http://127.0.0.1:40235

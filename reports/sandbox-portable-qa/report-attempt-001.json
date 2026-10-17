@@ -1,0 +1,7 @@
+{
+  "architecture": "x86_64",
+  "arm_hardware_verified": false,
+  "evidence_kind": "incomplete_native_portable_v2_sandbox_qa",
+  "failure": "trusted audit/reference execution failed: Some(\"host wall-clock deadline exceeded; cleanup/kill evidence incomplete\")",
+  "passed": false
+}

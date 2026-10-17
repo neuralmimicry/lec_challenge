@@ -1,0 +1,38 @@
+{
+  "model_id": "deepseek-coder-1_3b",
+  "task_id": "tables.inner_join",
+  "source_id": "private-tables-v1",
+  "specification_sha256": "369ef237ff250179b0b3e3c7af051af8aebc0329b6494d33af5f436c827ac699",
+  "seed": 1729,
+  "plan_sha256": "9aefcaf935435b296c63229638aad5a22a416ae171eda011a6812dd745667ea8",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input [left,right] has arrays of [key,value] integer rows, each side with unique keys. Return [key,left_value,right_value] for common keys in ascending key order.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[[[2,9],[1,4]],[[2,3],[3,8]]],\"expected\":[[2,9,3]]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "Here is the Rust code that solves the problem:\n\n```rust\nuse serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let mut result = Vec::new();\n    let mut left = input.as_array().unwrap();\n    let mut right = input.as_array().unwrap();\n    left.sort_by_key(|k| k.as_i64().unwrap());\n    right.sort_by_key(|k| k.as_i64().unwrap());\n    let mut i = 0;\n    let mut j = 0;\n    while i < left.len() && j < right.len() {\n        let key = left[i].as_i64().unwrap();\n        let left_value = left[i].clone();\n        while j < right.len() && right[j].as_i64().unwrap() < key {\n            j += 1;\n        }\n        if j < right.len() && right[j].as_i64().unwrap() == key {\n            result.push(vec![key, left_value, right[j].clone()]);\n            j += 1;\n        }\n        i += 1;\n    }\n    result.into()\n}\n```\n\nThis function first sorts the arrays based on the keys. Then it iterates over the left array and for each key, it finds the corresponding value in the right array. If the key is found in the right array, it adds the key, left value, and right value to the result. The function returns the result.\n",
+    "checkpoint_id": "4ff570bf9a558d23c5cb4171bad00daf663be8282150cdb5769e0f6975b0007a",
+    "finish_reason": "stop",
+    "input_tokens": 335,
+    "output_tokens": 370,
+    "elapsed_ms": 20765,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/comparative/coding-development/deepseek-coder-1_3b/tables.inner_join.generation.json",
+    "sha256": "aa52ab27dbbce194430df52333230d5890b3c6f71552aca851c1b6f6a54ccb7d",
+    "bytes": 3525
+  },
+  "sandbox_report": {
+    "path": "reports/comparative/coding-development/sandbox/d3f8763c-1762-42f2-aac7-842afcc58c35.json",
+    "sha256": "582a0e1ca56249ecfab4ba10d06fc45592cc0959e31ef3b30fa3bafd42634f67",
+    "bytes": 2842
+  },
+  "grading_error": null,
+  "success": false
+}

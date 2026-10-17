@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "a52d044d05dc99f9af1879cdb69e7d80c4abc41b317440255f0ff27069084831",
+  "task_id": "sequences.move_zeroes",
+  "source_id": "private-sequences-v1",
+  "success": false,
+  "raw_generation": {
+    "path": "reports/local-study/native-full-quality-001/composed-train/generations/sequences.move_zeroes.json",
+    "sha256": "b920e7e4fb387a5ab127d51a0c91e1dc7dd6ca8aa83876c32c4f2bd7f1197d99",
+    "bytes": 2248
+  },
+  "sandbox_report": {
+    "path": "reports/local-study/native-full-quality-001/composed-train/sandbox/aa701dec-179e-406b-a7ee-080b974c7e3f.json",
+    "sha256": "22f83e528c74f19ee6cd1d9f8813a8cd49c868ca62d5a94654cb17d6203ad7da",
+    "bytes": 2075
+  },
+  "grading_error": null
+}

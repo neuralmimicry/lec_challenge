@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "initial_plan": {
+    "path": "reports/local-study/explore/round-001/cohorts/76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c/rollouts/text.slug/student-plan.json",
+    "sha256": "1d7edcf7730972e56a4d3e02ce091c5fe7fefa1bea338025220366d0f412723a",
+    "bytes": 5193
+  },
+  "student_raw": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/text.slug/student-raw.json",
+    "sha256": "fd33575e3688a293523070473f951dc9b96adc73a9bd9408305c4890c396ce7e",
+    "bytes": 2013
+  },
+  "student_grade": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox/bf249353-9a9f-4474-8332-32c89d3d8037.json",
+    "sha256": "4854e6b44e07494913cc8583be1e25ebe444f982632a813abdc507d8f9970451",
+    "bytes": 5313
+  },
+  "teacher_id": "student-self-f9523886352217de",
+  "teacher_assets": {
+    "path": "offline_bundle/base/assets.json",
+    "sha256": "54304e7f41519a4196674cba5e86593802f852b2b47882d6c19706f85f303ad4",
+    "bytes": 788
+  },
+  "teacher_checkpoint": null,
+  "runtime": {
+    "device": {
+      "cuda": {
+        "ordinal": 0
+      }
+    },
+    "dtype": "f32"
+  },
+  "request": {
+    "prompt": "Verified different training contract: Input is an ASCII string. Trim leading/trailing ASCII whitespace, then lowercase ASCII letters, preserving internal whitespace.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nVerified solution:\n```rust\nuse serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    match input {\n        Value::String(s) => {\n            let trimmed = s.trim();\n            let lowercased = trimmed.to_lowercase();\n            Value::String(lowercased)\n        },\n        _ => input,\n    }\n}\n```\nNew task:\nWrite Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an ASCII string. Lowercase letters; replace each maximal run of non-alphanumeric characters by one hyphen; remove edge hyphens.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":\" Hello, WORLD! \",\"expected\":\"hello-world\"}]\nActual frozen student candidate:\n```rust\nuse serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let mut result = String::new();\n    let mut current = String::new();\n    let mut max_run = 0;\n\n    for c in input.as_str().chars() {\n        if c.is_alphanumeric() {\n            current.push(c);\n            max_run += 1;\n        } else {\n            if max_run > 0 {\n                result.push('-');\n            }\n            result.push_str(&current);\n            current.clear();\n            max_run = 0;\n        }\n    }\n\n    if max_run > 0 {\n        result.push('-');\n    }\n    result.push_str(&current);\n\n    serde_json::Value::from_str(result).unwrap()\n}\n```\nActual trusted tool feedback:\n{\"bounded_diagnostic_untrusted_data\":\"compilation failed: warning: unused import: `serde_json::Value`\\n --> /candidate/main.rs:1:5\\n  |\\n1 | use serde_json::Value;\\n  |     ^^^^^^^^^^^^^^^^^\\n  |\\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\\n\\nerror[E0599]: no method named `chars` found for enum `Option<T>` in the current scope\\n --> /candidate/main.rs:8:29\\n  |\\n8 |     for c in input.as_str().chars() {\\n  |                             ^^^^^ method not found in `Option<&str>`\\n  |\\nnote: the method `chars` exists on the type `&str`\\n --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/str/mod.rs:1079:4\\nhelp: consider using `Option::expect` to unwrap the `&str` value, panicking if the value is an `Option::None`\\n  |\\n8 |     for c in input.as_str().expect(\\\"REASON\\\").chars() {\\n  |                            +++++++++++++++++\\n\\nerror[E0599]: no variant, associated function, or constant named `from_str` found for enum `Value` in the current scope\\n  --> /candidate/main.rs:27:24\\n   |\\n27 |     serde_json::Value::from_str(result).unwrap()\\n   |                        ^^^^^^^^ variant, associated function, or constant not found in `Value`\\n   |\\n   = help: items from traits can only be used if the trait is in scope\\nhelp: trait `FromStr` which provides `from_str` is implemented but not in scope; perhaps you want to import it\\n   |\\n 1 + use std::str::FromStr;\\n   |\\nhelp: there is an associated function `from` with a similar name\\n   |\\n27 -     serde_json::Value::from_str(result).unwrap()\\n27 +     serde_json::Value::from(result).unwrap()\\n   |\\n\\nerror: aborting due to 2 previous errors; 1 warning emitted\\n\\nFor more information about this error, try `rustc --explain E0599`.\\n\",\"cases_passed\":0,\"cases_total\":6,\"content_role\":\"compilation_feedback_only\",\"original_failure_is_not_a_success\":true,\"passed\":false,\"private_inputs_or_expected_outputs_exposed\":false,\"quarantined\":true,\"run_id\":\"bf249353-9a9f-4474-8332-32c89d3d8037\",\"student_generation_complete\":true,\"tool\":\"trusted_container_grader\",\"trace_complete\":false}\nCritique and revise the candidate. Put any short explanation in Rust // comments and return complete compilable Rust source only. Do not invent tool results.",
+    "max_new_tokens": 768,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "supporting_sample_ids": [
+    "ff06039fd8278f904a9e03151a5b46d0452d3c207474b4da9dd4b770fe9d6d26"
+  ]
+}

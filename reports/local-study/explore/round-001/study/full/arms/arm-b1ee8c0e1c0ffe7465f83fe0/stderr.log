@@ -1,0 +1,98 @@
+distillation: durable update 1/48 loss=2.179636 gradient_norm=9.728790
+distillation: durable update 2/48 loss=1.787256 gradient_norm=8.206367
+distillation: durable update 3/48 loss=1.769847 gradient_norm=8.581436
+distillation: durable update 4/48 loss=2.113735 gradient_norm=9.127580
+distillation: durable update 5/48 loss=2.180449 gradient_norm=8.418566
+distillation: durable update 6/48 loss=1.753999 gradient_norm=6.911338
+distillation: durable update 7/48 loss=1.887706 gradient_norm=8.144963
+distillation: durable update 8/48 loss=1.739217 gradient_norm=4.640456
+distillation: durable update 9/48 loss=1.498202 gradient_norm=4.940999
+distillation: durable update 10/48 loss=1.561928 gradient_norm=5.233810
+distillation: durable update 11/48 loss=1.352241 gradient_norm=3.229374
+distillation: durable update 12/48 loss=1.710808 gradient_norm=5.052936
+distillation: durable update 13/48 loss=1.432911 gradient_norm=4.805659
+distillation: durable update 14/48 loss=1.534464 gradient_norm=4.587000
+distillation: durable update 15/48 loss=0.984776 gradient_norm=3.790653
+distillation: durable update 16/48 loss=1.480371 gradient_norm=5.307098
+distillation: durable update 17/48 loss=1.550625 gradient_norm=5.470689
+distillation: durable update 18/48 loss=1.113699 gradient_norm=3.697655
+distillation: durable update 19/48 loss=0.998733 gradient_norm=3.344033
+distillation: durable update 20/48 loss=1.135720 gradient_norm=4.355197
+distillation: durable update 21/48 loss=1.319506 gradient_norm=3.905823
+distillation: durable update 22/48 loss=1.503370 gradient_norm=3.022429
+distillation: durable update 23/48 loss=1.243570 gradient_norm=3.989397
+distillation: durable update 24/48 loss=1.214792 gradient_norm=3.624325
+distillation: durable update 25/48 loss=1.393419 gradient_norm=3.698681
+distillation: durable update 26/48 loss=1.097508 gradient_norm=3.382047
+distillation: durable update 27/48 loss=1.157019 gradient_norm=4.401564
+distillation: durable update 28/48 loss=1.133848 gradient_norm=2.269782
+distillation: durable update 29/48 loss=1.373360 gradient_norm=3.382538
+distillation: durable update 30/48 loss=1.169230 gradient_norm=2.537276
+distillation: durable update 31/48 loss=1.297599 gradient_norm=3.970394
+distillation: durable update 32/48 loss=0.759473 gradient_norm=1.827075
+distillation: durable update 33/48 loss=1.257884 gradient_norm=4.112202
+distillation: durable update 34/48 loss=1.219311 gradient_norm=3.607716
+distillation: durable update 35/48 loss=0.910914 gradient_norm=3.094685
+distillation: durable update 36/48 loss=0.852238 gradient_norm=3.124682
+distillation: durable update 37/48 loss=1.013178 gradient_norm=4.963542
+distillation: durable update 38/48 loss=1.087485 gradient_norm=2.792838
+distillation: durable update 39/48 loss=1.294842 gradient_norm=2.599637
+distillation: durable update 40/48 loss=1.004376 gradient_norm=2.609040
+distillation: durable update 41/48 loss=0.978508 gradient_norm=2.656576
+distillation: durable update 42/48 loss=1.192419 gradient_norm=2.579761
+distillation: durable update 43/48 loss=0.934594 gradient_norm=2.937856
+distillation: durable update 44/48 loss=0.939885 gradient_norm=3.035534
+distillation: durable update 45/48 loss=1.005047 gradient_norm=2.261383
+distillation: durable update 46/48 loss=1.204142 gradient_norm=3.141352
+distillation: durable update 47/48 loss=1.007568 gradient_norm=2.309299
+distillation: durable update 48/48 loss=1.120988 gradient_norm=4.229302
+study: fresh-process checkpoint evaluation started, PID=1366097
+study-evaluate: verifying effective sandbox controls
+study-evaluate: frozen tasks=16 seed1729 max512; graders=1 inference_overlap=true
+study-evaluate: heartbeat model loading; completed=0/16
+study-evaluate: heartbeat model loading; completed=0/16
+study-evaluate: heartbeat model loading; completed=0/16
+study-evaluate: heartbeat generating money.parse completed=0/16
+study-evaluate: heartbeat generating money.parse completed=0/16
+study-evaluate: heartbeat generating money.parse completed=0/16
+study-evaluate: heartbeat generating money.parse completed=0/16
+study-evaluate: heartbeat generating money.parse completed=0/16
+study-evaluate: heartbeat generating money.parse completed=0/16
+study-evaluate: heartbeat generating money.parse completed=0/16
+study-evaluate: heartbeat generating money.parse completed=0/16
+study-evaluate: heartbeat generating money.parse completed=0/16
+study-evaluate: heartbeat generating money.format completed=0/16
+study-evaluate: heartbeat generating money.split completed=1/16
+study-evaluate: heartbeat generating money.split completed=1/16
+study-evaluate: heartbeat generating money.basket completed=2/16
+study-evaluate: heartbeat generating dispatch.finish_order completed=3/16
+study-evaluate: heartbeat generating dispatch.finish_order completed=3/16
+study-evaluate: heartbeat generating dispatch.waiting completed=4/16
+study-evaluate: heartbeat generating dispatch.waiting completed=4/16
+study-evaluate: heartbeat generating dispatch.round_robin completed=5/16
+study-evaluate: heartbeat generating dispatch.round_robin completed=5/16
+study-evaluate: heartbeat generating dispatch.round_robin completed=5/16
+study-evaluate: heartbeat generating dispatch.priority completed=6/16
+study-evaluate: heartbeat generating dispatch.priority completed=6/16
+study-evaluate: heartbeat generating encoding.hex_encode completed=7/16
+study-evaluate: heartbeat generating encoding.hex_decode completed=8/16
+study-evaluate: heartbeat generating encoding.hex_decode completed=8/16
+study-evaluate: heartbeat generating encoding.hex_decode completed=8/16
+study-evaluate: heartbeat generating encoding.caesar completed=9/16
+study-evaluate: heartbeat generating encoding.caesar completed=9/16
+study-evaluate: heartbeat generating encoding.rot13 completed=10/16
+study-evaluate: heartbeat generating encoding.rot13 completed=10/16
+study-evaluate: heartbeat generating tables.sort_rows completed=11/16
+study-evaluate: heartbeat generating tables.sort_rows completed=11/16
+study-evaluate: heartbeat generating tables.sort_rows completed=11/16
+study-evaluate: heartbeat generating tables.sort_rows completed=11/16
+study-evaluate: heartbeat generating tables.last_by_key completed=12/16
+study-evaluate: heartbeat generating tables.last_by_key completed=12/16
+study-evaluate: heartbeat generating tables.group_sums completed=13/16
+study-evaluate: heartbeat generating tables.group_sums completed=13/16
+study-evaluate: heartbeat generating tables.inner_join completed=14/16
+study-evaluate: heartbeat generating tables.inner_join completed=14/16
+study-evaluate: heartbeat generating tables.inner_join completed=14/16
+study-evaluate: heartbeat generating tables.inner_join completed=14/16
+study-evaluate: heartbeat grading; completed=15/16
+study-evaluate: heartbeat grading; completed=15/16

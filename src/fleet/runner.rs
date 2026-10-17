@@ -182,7 +182,16 @@ impl FleetRunner {
             if !provider.enabled {
                 continue;
             }
-            let mut prepared = prepare(provider, &request)?;
+            let mut prepared = match prepare(provider, &request) {
+                Ok(prepared) => prepared,
+                Err(error) => {
+                    let detail = format!("provider={id}; request unsupported: {error}");
+                    self.log(round, None, "provider_request_refused", &detail)
+                        .await?;
+                    failures.push(detail);
+                    continue;
+                }
+            };
             let ledger = self.ledger.clone();
             let key = prepared.request_key.clone();
             match tokio::task::spawn_blocking(move || ledger.lookup_request(&key)).await?? {
@@ -209,7 +218,18 @@ impl FleetRunner {
                 continue;
             }
             // No secret value crosses into the request identity, recording or ledger.
-            self.transport.preflight(&prepared)?;
+            if let Err(error) = self.transport.preflight(&prepared) {
+                let detail = format!("provider={id}; preflight refused: {error}");
+                self.log(
+                    round,
+                    Some(&prepared.request_key),
+                    "provider_unavailable",
+                    &detail,
+                )
+                .await?;
+                failures.push(detail);
+                continue;
+            }
             for retry in 0..=provider.retries {
                 let _permit = runtime.semaphore.acquire().await?;
                 if !runtime.available().await {
@@ -219,6 +239,19 @@ impl FleetRunner {
                     .input_token_upper_bound
                     .checked_add(request.generation.max_output_tokens)
                     .context("rate token overflow")?;
+                if tokens > provider.tokens_per_minute {
+                    let detail =
+                        format!("provider={id}; single request exceeds configured TPM allowance");
+                    self.log(
+                        round,
+                        Some(&prepared.request_key),
+                        "provider_request_refused",
+                        &detail,
+                    )
+                    .await?;
+                    failures.push(detail);
+                    break;
+                }
                 runtime.rate_limit(provider, tokens).await?;
                 // A sibling may have received Retry-After while this worker waited
                 // for the rate window. Do not dispatch using stale circuit state.
@@ -239,6 +272,7 @@ impl FleetRunner {
                         provider.price.as_ref().context("missing price")?,
                     )?,
                     reserved_nanos: prepared.reservation_nanos,
+                    reserved_tokens: Some(tokens),
                     replay: self.transport.is_replay(),
                 };
                 let ledger = self.ledger.clone();
@@ -271,6 +305,14 @@ impl FleetRunner {
                     } => bail!(
                         "BUDGET STOP {scope}: {used_nanos} + {requested_nanos} > {limit_nanos}; progress is durable"
                     ),
+                    Claim::TokenBudgetStopped {
+                        scope,
+                        used,
+                        requested,
+                        limit,
+                    } => bail!(
+                        "TOKEN BUDGET STOP {scope}: {used} + {requested} > {limit}; progress is durable"
+                    ),
                 };
                 prepared.attempt_ordinal = attempt.ordinal;
                 self.log(
@@ -298,6 +340,33 @@ impl FleetRunner {
                             "UNKNOWN: {reason}; reservation retained; automatic retry prohibited"
                         );
                     }
+                    Err(TransportFailure::BeforeDispatch(reason)) => {
+                        let ledger = self.ledger.clone();
+                        let attempt_id = attempt.attempt_id.clone();
+                        let detail = reason.clone();
+                        tokio::task::spawn_blocking(move || {
+                            ledger.finish(
+                                &attempt_id,
+                                None,
+                                false,
+                                0,
+                                0,
+                                Some((0, 0, 0, 0)),
+                                Some(&detail),
+                            )
+                        })
+                        .await??;
+                        self.log(
+                            round,
+                            Some(&prepared.request_key),
+                            "connection_unavailable",
+                            &format!("provider={id}; {reason}"),
+                        )
+                        .await?;
+                        failures.push(format!("provider={id}; {reason}"));
+                        runtime.outcome(provider, false).await;
+                        break;
+                    }
                     Err(error) => {
                         let ledger = self.ledger.clone();
                         let attempt_id = attempt.attempt_id.clone();
@@ -314,15 +383,23 @@ impl FleetRunner {
                 let ledger = self.ledger.clone();
                 let hash =
                     tokio::task::spawn_blocking(move || ledger.publish_artifact(&bytes)).await??;
-                let mut parsed = parse_response(&recording.response);
+                let mut parsed = parse_recording(&recording);
                 let usage = extract_usage(&recording.response).ok();
+                let invalid_usage = usage.is_none()
+                    && serde_json::from_str::<Value>(&recording.response.raw_body).is_ok_and(
+                        |body| body.get("usage").is_some() || body.get("usageMetadata").is_some(),
+                    );
                 let exceeded_bounds = usage.as_ref().is_some_and(|usage| {
                     usage.input_tokens > prepared.input_token_upper_bound
                         || usage.output_tokens > request.generation.max_output_tokens
+                        || (matches!(
+                            provider.api,
+                            ProviderApi::GeminiGenerateContent | ProviderApi::VertexGenerateContent
+                        ) && usage.reasoning_tokens != 0)
                 });
-                if exceeded_bounds {
+                if exceeded_bounds || invalid_usage {
                     parsed = Err(anyhow::anyhow!(
-                        "reported usage exceeded approved token bounds"
+                        "reported usage is invalid or exceeded approved token bounds"
                     ));
                 }
                 let cost = usage
@@ -358,14 +435,19 @@ impl FleetRunner {
                     )
                 })
                 .await??;
-                if exceeded_bounds {
+                if exceeded_bounds || invalid_usage {
                     let ledger = self.ledger.clone();
                     let round = round.to_owned();
                     tokio::task::spawn_blocking(move || {
-                        ledger.block_round(&round, "reported usage exceeded approved token bounds")
+                        ledger.block_round(
+                            &round,
+                            "reported usage invalid or exceeded approved token bounds",
+                        )
                     })
                     .await??;
-                    bail!("token bounds exceeded; round blocked for reconciliation");
+                    bail!(
+                        "usage invalid or token bounds exceeded; round blocked for reconciliation"
+                    );
                 }
                 if let Ok((code, usage)) = parsed {
                     ensure!(
@@ -400,9 +482,30 @@ impl FleetRunner {
                 )
                 .await?;
                 failures.push(detail);
-                let transient = status == 429 || status == 408 || status >= 500;
+                let permanent = matches!(status, 400 | 401 | 402 | 403 | 404 | 405 | 410 | 422)
+                    || serde_json::from_str::<Value>(&recording.response.raw_body)
+                        .ok()
+                        .and_then(|v| {
+                            v.pointer("/error/code")
+                                .and_then(Value::as_str)
+                                .map(str::to_owned)
+                        })
+                        .is_some_and(|c| {
+                            matches!(
+                                c.as_str(),
+                                "insufficient_quota" | "billing_hard_limit_reached"
+                            )
+                        });
+                if permanent {
+                    runtime
+                        .unavailable_until_reconciled
+                        .store(true, Ordering::Relaxed);
+                }
+                let transient = !permanent && (status == 429 || status == 408 || status >= 500);
                 runtime.outcome(provider, false).await;
-                if status == 429 {
+                if transient
+                    && (status == 429 || recording.response.headers.contains_key("retry-after"))
+                {
                     let delay = retry_delay(&recording.response, retry, &prepared.request_key);
                     runtime.defer(provider, delay).await;
                 }
@@ -466,7 +569,7 @@ impl FleetRunner {
         let mut matching = prepared.clone();
         matching.attempt_ordinal = recording.attempt_ordinal;
         recording.validate_for(&matching)?;
-        let (code, usage) = parse_response(&recording.response)?;
+        let (code, usage) = parse_recording(&recording)?;
         make_completion(
             prepared,
             &recording,
@@ -511,93 +614,13 @@ fn make_completion(
         historical_cost_nanos: record.price.cost(&evidence.usage)?,
         usage: evidence.usage,
         training_permission_decision_id: record.permission.decision_id.clone(),
-        training_permission_approved: record.permission.approved_for_output_training,
+        training_permission_approved: record.permission.approved_for_output_training
+            && prepared.provider.permission.approved_for_output_training
+            && !prepared.provider.inference_only,
         real_provider_recording: record.origin == "real_provider",
         replayed: evidence.replayed,
         cached: evidence.cached,
     })
-}
-
-pub fn extract_usage(response: &TransportResponse) -> Result<TokenUsage> {
-    let value: Value =
-        serde_json::from_str(&response.raw_body).context("malformed provider JSON")?;
-    let usage = value
-        .get("usage")
-        .context("provider response lacks usage; cost is uncertain")?;
-    let input = usage
-        .get("prompt_tokens")
-        .and_then(Value::as_u64)
-        .context("missing input token count")?;
-    let output = usage
-        .get("completion_tokens")
-        .and_then(Value::as_u64)
-        .context("missing billable output token count")?;
-    let cached = usage
-        .pointer("/prompt_tokens_details/cached_tokens")
-        .or_else(|| usage.get("prompt_cache_hit_tokens"))
-        .and_then(Value::as_u64)
-        .unwrap_or(0);
-    let reasoning = usage
-        .pointer("/completion_tokens_details/reasoning_tokens")
-        .and_then(Value::as_u64)
-        .unwrap_or(0);
-    ensure!(
-        cached <= input && reasoning <= output,
-        "inconsistent usage fields"
-    );
-    Ok(TokenUsage {
-        input_tokens: input,
-        cached_input_tokens: cached,
-        output_tokens: output,
-        reasoning_tokens: reasoning,
-    })
-}
-
-pub fn parse_response(response: &TransportResponse) -> Result<(String, TokenUsage)> {
-    ensure!(
-        (200..300).contains(&response.status),
-        "provider HTTP {}",
-        response.status
-    );
-    let body: Value =
-        serde_json::from_str(&response.raw_body).context("malformed provider JSON")?;
-    let choices = body
-        .get("choices")
-        .and_then(Value::as_array)
-        .context("missing choices")?;
-    ensure!(
-        choices.len() == 1,
-        "response must contain exactly one completion"
-    );
-    let choice = &choices[0];
-    ensure!(
-        choice.get("finish_reason").and_then(Value::as_str) == Some("stop"),
-        "truncated or non-stop generation"
-    );
-    ensure!(
-        choice
-            .pointer("/message/tool_calls")
-            .is_none_or(Value::is_null),
-        "tool completion prohibited"
-    );
-    let code = choice
-        .pointer("/message/content")
-        .and_then(Value::as_str)
-        .context("completion content must be text")?
-        .trim();
-    ensure!(!code.is_empty(), "empty completion is failure");
-    let code = strip_code_fence(code).to_owned();
-    ensure!(!code.trim().is_empty(), "empty code block is failure");
-    Ok((code, extract_usage(response)?))
-}
-
-fn strip_code_fence(text: &str) -> &str {
-    if !(text.starts_with("```") && text.ends_with("```")) {
-        return text;
-    }
-    text.find('\n')
-        .map(|newline| text[newline + 1..text.len() - 3].trim())
-        .unwrap_or(text)
 }
 
 fn retry_delay(response: &TransportResponse, retry: u32, key: &str) -> Duration {

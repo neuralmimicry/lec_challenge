@@ -1,0 +1,40 @@
+{
+  "run_id": "ded61a02-5279-4fde-963a-6104ea29d4ca",
+  "task_id": "graph.reachable",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error[E0308]: mismatched types\n   --> /candidate/main.rs:20:62\n    |\n 20 |     Value::Array(reachable.into_iter().map(|v| Value::Number(v as f64)).collect())\n    |                                                ------------- ^^^^^^^^ expected `Number`, found `f64`\n    |                                                |\n    |                                                arguments to this enum variant are incorrect\n    |\nnote: tuple variant defined here\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:142:5\n    |\n142 |     Number(Number),\n    |     ^^^^^^\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0308`.\n"
+  ],
+  "cases_total": 6,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "2cae22e90630161af04a4de88f1e214f75941a000c3cfb970846f46a74fc43b5",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/regraded-v3-001/evaluation-005-train-2217a994f8b7/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/regraded-v3-001/evaluation-005-train-2217a994f8b7/sandbox/ded61a02-5279-4fde-963a-6104ea29d4ca.audit.json",
+  "audit_sha256": "54aec309d15265764bc9de7628af04043284afc6d9b2a290ae43f75cbcba26c7",
+  "failure": "compilation failed: error[E0308]: mismatched types\n   --> /candidate/main.rs:20:62\n    |\n 20 |     Value::Array(reachable.into_iter().map(|v| Value::Number(v as f64)).collect())\n    |                                                ------------- ^^^^^^^^ expected `Number`, found `f64`\n    |                                                |\n    |                                                arguments to this enum variant are incorrect\n    |\nnote: tuple variant defined here\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:142:5\n    |\n142 |     Number(Number),\n    |     ^^^^^^\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0308`.\n",
+  "duration_ms": 17118,
+  "timeout_evidence": null,
+  "lifecycle_evidence": {
+    "receipt_path": "reports/local-study/regraded-v3-001/evaluation-005-train-2217a994f8b7/sandbox/ded61a02-5279-4fde-963a-6104ea29d4ca.lifecycle.json",
+    "receipt_sha256": "603ace58159ed2e757ceb4a698e42b1eec2742116ed6b8732d815959ae43bdff"
+  }
+}

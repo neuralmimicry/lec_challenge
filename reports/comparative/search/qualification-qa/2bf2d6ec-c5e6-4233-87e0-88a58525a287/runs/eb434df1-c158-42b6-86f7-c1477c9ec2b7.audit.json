@@ -1,0 +1,1 @@
+{"candidate_exit":0,"compile_ok":true,"events":[],"failure":null,"output":"{\"active\":true,\"rotations\":[1,2]}\n{\"active\":false,\"rotations\":[]}\n{\"active\":false,\"rotations\":[]}\n{\"active\":true,\"rotations\":[2,999]}\n","output_truncated":false,"schema_version":1,"stderr":"","stderr_truncated":false,"syscalls_observed":66,"trace_complete":true}

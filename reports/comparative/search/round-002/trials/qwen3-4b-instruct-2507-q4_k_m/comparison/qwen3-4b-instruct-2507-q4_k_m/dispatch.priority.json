@@ -1,0 +1,38 @@
+{
+  "model_id": "qwen3-4b-instruct-2507-q4_k_m",
+  "task_id": "dispatch.priority",
+  "source_id": "private-dispatch-v1",
+  "specification_sha256": "fe12d97428801ef000ddf3a459ad82ad8f7812a5fb888ab3e6b35444d33a7856",
+  "seed": 1729,
+  "plan_sha256": "6d343a1ee585d9daf2a7fbaea768580a60e310abaf7186964443ef83a9a1013d",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an array of [priority,id] integer pairs with unique ids. Return ids sorted by decreasing priority, with increasing id on ties.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[[2,7],[3,8],[2,1]],\"expected\":[8,1,7]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let mut pairs: Vec<(i64, i64)> = match input {\n        serde_json::Value::Array(arr) => {\n            let mut vec = Vec::with_capacity(arr.len());\n            for item in arr {\n                if let serde_json::Value::Array([priority, id]) = item {\n                    let priority = priority.as_i64().unwrap();\n                    let id = id.as_i64().unwrap();\n                    vec.push((priority, id));\n                }\n            }\n            vec\n        }\n        _ => return serde_json::json!([]),\n    };\n\n    // Sort by decreasing priority, then by increasing id on ties\n    pairs.sort_by(|a, b| {\n        if a.0 != b.0 {\n            b.0.cmp(&a.0)\n        } else {\n            a.1.cmp(&b.1)\n        }\n    });\n\n    // Extract ids in sorted order\n    let result: Vec<i64> = pairs.into_iter().map(|(_, id)| id).collect();\n\n    serde_json::json!(result)\n}\n```",
+    "checkpoint_id": "2fde00ce69dd4899c70d020845e2638353015bba0fdf161b3eb965f2bca4464e",
+    "finish_reason": "stop",
+    "input_tokens": 222,
+    "output_tokens": 243,
+    "elapsed_ms": 35907,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison/qwen3-4b-instruct-2507-q4_k_m/dispatch.priority.generation.json",
+    "sha256": "b4d231fcab386d58fb5eabb5518bb07e248f3fa0d2c9d1b91cc599a4e3fd21a6",
+    "bytes": 4817
+  },
+  "sandbox_report": {
+    "path": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison/sandbox/84017a97-4098-47bf-90d6-d8b5a832ace1.json",
+    "sha256": "3e7edaee48facfb765745fffc956bd26cbb32a8e5647b90868f7d1d6b115ab7d",
+    "bytes": 2632
+  },
+  "grading_error": null,
+  "success": false
+}

@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "831af43edd980b4afc1113f5109fb40a3a5767b92cac8d269a3ec39afb72cff6",
+  "task_id": "encoding.caesar",
+  "source_id": "private-encoding-v1",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input {text,shift} has ASCII text and integer shift. Rotate lowercase a..z only modulo 26; preserve all other characters.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":{\"shift\":3,\"text\":\"xyz A!\"},\"expected\":\"abc A!\"}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let text = input[\"text\"].as_str().unwrap_or(\"\");\n    let shift = input[\"shift\"].as_i64().unwrap_or(0);\n    let mut result = String::new();\n\n    for c in text.chars() {\n        if c.is_ascii_lowercase() {\n            let new_char = (c as u8 - b'a' + shift) % 26 + b'a';\n            result.push(new_char as char);\n        } else {\n            result.push(c);\n        }\n    }\n\n    serde_json::Value::String(result)\n}\n```",
+    "checkpoint_id": "a1b3dab3b462d634e40a3a4f47b48c68c8e1880040b1cf3b9201cac8bfd5b1d9",
+    "finish_reason": "stop",
+    "input_tokens": 237,
+    "output_tokens": 139,
+    "elapsed_ms": 24667,
+    "complete": true
+  },
+  "model_error": null
+}

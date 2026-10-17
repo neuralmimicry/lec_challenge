@@ -1,0 +1,46 @@
+{
+  "schema_version": 3,
+  "run_id": "0b018396-d92a-467b-9e93-06b264df3e53",
+  "ownership_nonce": "36a8d85f-8ce5-4361-a06e-a19227babb2c",
+  "attempt_key": "f89c1e9b-8c2a-471e-a990-9e3a43938d23",
+  "receipt_path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox/f89c1e9b-8c2a-471e-a990-9e3a43938d23.prepared.json",
+  "report_path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox/0b018396-d92a-467b-9e93-06b264df3e53.json",
+  "task": {
+    "id": "stock.mode",
+    "source_id": "private-stock-v1",
+    "lineage_id": "local-contract-pack-01",
+    "split": "train",
+    "specification": "Input is an array of ASCII strings. Return the most frequent string, lexicographically smallest on ties; return null if empty.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "18d7437798ad375b3313fa5799e1580a7e5b5dc626bea275dcc099954f281189",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": [
+          "b",
+          "a",
+          "b"
+        ],
+        "expected": "b"
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "use serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let mut counts = HashMap::new();\n    for item in input.as_array() {\n        let str_item = item.as_str().unwrap();\n        *counts.entry(str_item).or_insert(0) += 1;\n    }\n\n    let mut most_frequent = None;\n    let mut max_count = 0;\n\n    for (str_item, count) in counts {\n        if count > max_count {\n            max_count = count;\n            most_frequent = Some(str_item);\n        }\n    }\n\n    most_frequent\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox"
+  },
+  "code_sha256": "1a65487cbb43b231e002f9137fb1a9f8adbe751112727f7987a5ec18f2a7cf15",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

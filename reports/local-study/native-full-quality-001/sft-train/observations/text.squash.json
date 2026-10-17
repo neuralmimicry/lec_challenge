@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "a5b39d544c85b76111246b8fda40c638ce104251a1c56368277fef8fe4033eb6",
+  "task_id": "text.squash",
+  "source_id": "private-text-v1",
+  "success": false,
+  "raw_generation": {
+    "path": "reports/local-study/native-full-quality-001/sft-train/generations/text.squash.json",
+    "sha256": "9bc88df677f2db4020aecf826dcf9da8ea9f8ff21eb0f4f8412702897de54232",
+    "bytes": 1763
+  },
+  "sandbox_report": {
+    "path": "reports/local-study/native-full-quality-001/sft-train/sandbox/4132c98e-739b-43bb-8854-7ce59d4dda94.json",
+    "sha256": "648c99ac2b2485de95d521219caa20e214fbf000abb24eedd5103cc2266c402c",
+    "bytes": 2776
+  },
+  "grading_error": null
+}

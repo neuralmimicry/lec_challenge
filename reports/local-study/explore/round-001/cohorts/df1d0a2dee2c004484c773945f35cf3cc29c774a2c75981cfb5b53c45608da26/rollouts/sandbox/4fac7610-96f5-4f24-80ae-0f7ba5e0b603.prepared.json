@@ -1,0 +1,56 @@
+{
+  "schema_version": 3,
+  "run_id": "81a594d9-4884-42e0-890f-616277fb23df",
+  "ownership_nonce": "a6f9d234-98c6-47ce-99a5-f987e7dd5360",
+  "attempt_key": "4fac7610-96f5-4f24-80ae-0f7ba5e0b603",
+  "receipt_path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox/4fac7610-96f5-4f24-80ae-0f7ba5e0b603.prepared.json",
+  "report_path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox/81a594d9-4884-42e0-890f-616277fb23df.json",
+  "task": {
+    "id": "graph.distance",
+    "source_id": "private-graph-v1",
+    "lineage_id": "local-contract-pack-04",
+    "split": "train",
+    "specification": "Input {n,start,target,edges} is a directed unweighted graph, n>=1. Return shortest edge distance start->target, or -1 if unreachable. Graph vertex counts are at most 64.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "d0d3cdf321951e8e1e6913d95763ef957bf16751a85a1fda56eab10d4f51e473",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": {
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "n": 4,
+          "start": 0,
+          "target": 2
+        },
+        "expected": 2
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "use serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let n = input[\"n\"].as_u64().unwrap();\n    let start = input[\"start\"].as_u64().unwrap();\n    let target = input[\"target\"].as_u64().unwrap();\n    let edges = input[\"edges\"].as_array().unwrap();\n\n    let mut distances = vec![std::i64::MAX; n];\n    distances[start as usize] = 0;\n\n    for edge in edges {\n        let u = edge[0].as_u64().unwrap();\n        let v = edge[1].as_u64().unwrap();\n        let weight = edge[2].as_i64().unwrap();\n\n        if distances[u as usize] != std::i64::MAX && distances[v as usize] == std::i64::MAX {\n            distances[v as usize] = distances[u as usize] + weight;\n        }\n    }\n\n    if distances[target as usize] == std::i64::MAX {\n        serde_json::Value::Null\n    } else {\n        serde_json::Value::Number(distances[target as usize] as f64)\n    }\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox"
+  },
+  "code_sha256": "1a455d2639fad8b63152ea32b3a8c890fb6c2e7de2312cc29fc614ea8fe1331c",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

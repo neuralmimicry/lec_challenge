@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "1c8417e29ab67fbe325c00e231236374fdda50f71928ab5f925ddb9ac6538038",
+  "task_id": "encoding.hex_encode",
+  "source_id": "private-encoding-v1",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an array of bytes (integers 0..255). Return concatenated two-digit lowercase hexadecimal.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[0,15,255],\"expected\":\"000fff\"}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let bytes = input.as_array().unwrap().iter().map(|x| x.as_i64().unwrap()).collect();\n    let mut hex = String::new();\n    for &byte in bytes {\n        hex.push(format!(\"{:x}\", byte).to_lowercase());\n    }\n    Value::String(hex)\n}\n```",
+    "checkpoint_id": "294945edfa66bce11119c4ad89e9c8e55f443958b4c3e9fa0ca2d73f79b32c98",
+    "finish_reason": "stop",
+    "input_tokens": 232,
+    "output_tokens": 84,
+    "elapsed_ms": 14324,
+    "complete": true
+  },
+  "model_error": null
+}

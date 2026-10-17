@@ -1,0 +1,42 @@
+execution: Explicit CPU selected with 16 available threads and 48957659956 guarded RAM bytes; available CPU threads=16, usable RAM=48957659956 bytes
+study-evaluate: verifying effective sandbox controls
+study-evaluate: frozen tasks=16 seed1729 max512; graders=1 inference_overlap=true
+study-evaluate: heartbeat model loading; completed=0/16
+study-evaluate: heartbeat generating money.parse completed=0/16
+study-evaluate: heartbeat generating money.parse completed=0/16
+study-evaluate: heartbeat generating money.format completed=0/16
+study-evaluate: heartbeat generating money.format completed=0/16
+study-evaluate: heartbeat generating money.split completed=1/16
+study-evaluate: heartbeat generating money.split completed=1/16
+study-evaluate: heartbeat generating money.basket completed=2/16
+study-evaluate: heartbeat generating dispatch.finish_order completed=3/16
+study-evaluate: heartbeat generating dispatch.finish_order completed=3/16
+study-evaluate: heartbeat generating dispatch.finish_order completed=3/16
+study-evaluate: heartbeat generating dispatch.waiting completed=4/16
+study-evaluate: heartbeat generating dispatch.round_robin completed=5/16
+study-evaluate: heartbeat generating dispatch.round_robin completed=5/16
+study-evaluate: heartbeat generating dispatch.round_robin completed=5/16
+study-evaluate: heartbeat generating dispatch.priority completed=6/16
+study-evaluate: heartbeat generating dispatch.priority completed=6/16
+study-evaluate: heartbeat generating dispatch.priority completed=6/16
+study-evaluate: heartbeat generating encoding.hex_encode completed=7/16
+study-evaluate: heartbeat generating encoding.hex_decode completed=8/16
+study-evaluate: heartbeat generating encoding.hex_decode completed=8/16
+study-evaluate: heartbeat generating encoding.caesar completed=9/16
+study-evaluate: heartbeat generating encoding.caesar completed=9/16
+study-evaluate: heartbeat generating encoding.rot13 completed=10/16
+study-evaluate: heartbeat generating encoding.rot13 completed=10/16
+study-evaluate: heartbeat generating encoding.rot13 completed=10/16
+study-evaluate: heartbeat generating encoding.rot13 completed=10/16
+study-evaluate: heartbeat generating tables.sort_rows completed=11/16
+study-evaluate: heartbeat generating tables.sort_rows completed=11/16
+study-evaluate: heartbeat generating tables.last_by_key completed=12/16
+study-evaluate: heartbeat generating tables.last_by_key completed=12/16
+study-evaluate: heartbeat generating tables.group_sums completed=13/16
+study-evaluate: heartbeat generating tables.group_sums completed=13/16
+study-evaluate: heartbeat generating tables.inner_join completed=14/16
+study-evaluate: heartbeat generating tables.inner_join completed=14/16
+study-evaluate: heartbeat generating tables.inner_join completed=14/16
+study-evaluate: heartbeat generating tables.inner_join completed=14/16
+study-evaluate: heartbeat generating tables.inner_join completed=14/16
+study-evaluate: heartbeat grading; completed=15/16

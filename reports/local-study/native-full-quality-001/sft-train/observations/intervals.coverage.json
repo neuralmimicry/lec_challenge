@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "a5b39d544c85b76111246b8fda40c638ce104251a1c56368277fef8fe4033eb6",
+  "task_id": "intervals.coverage",
+  "source_id": "private-intervals-v1",
+  "success": false,
+  "raw_generation": {
+    "path": "reports/local-study/native-full-quality-001/sft-train/generations/intervals.coverage.json",
+    "sha256": "53602d114239a517aaf200c8f0d741732af7fb90558d27468d7b38bad5faa767",
+    "bytes": 2072
+  },
+  "sandbox_report": {
+    "path": "reports/local-study/native-full-quality-001/sft-train/sandbox/feb11807-9346-4609-a5bb-01648e64f131.json",
+    "sha256": "a5fdf963f7c478bb31fc1055d23cdac3a6d0560590020fb6e6405011a228556c",
+    "bytes": 1804
+  },
+  "grading_error": null
+}

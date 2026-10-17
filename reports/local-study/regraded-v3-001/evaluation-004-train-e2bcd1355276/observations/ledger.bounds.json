@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "regrade_plan_sha256": "6dec54f6f1b17e0fe00d8819e6aa0660c4b65a28b031555048a6667733366153",
+  "task_id": "ledger.bounds",
+  "source_id": "private-ledger-v1",
+  "original_plan": {
+    "path": "reports/local-study/native-full-quality-001/sft-train/plan.json",
+    "sha256": "a5b39d544c85b76111246b8fda40c638ce104251a1c56368277fef8fe4033eb6",
+    "bytes": 63636
+  },
+  "original_raw": {
+    "path": "reports/local-study/native-full-quality-001/sft-train/generations/ledger.bounds.json",
+    "sha256": "79f20b8c66cca74216a0ddfa90d506d264d3788dc0a63594f1616c7901673143",
+    "bytes": 2304
+  },
+  "outcome": {
+    "kind": "graded",
+    "prepared": {
+      "path": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/prepared/ledger.bounds.json",
+      "sha256": "6b9952e0961101fc6038fcf35831aa51ad4bacfc044555c9acda7f48b50f26aa",
+      "bytes": 3206
+    },
+    "report": {
+      "path": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/sandbox/f7b54100-77a8-4e11-9063-b7b00f98753f.json",
+      "sha256": "04e44efdbf004c9e9b139bac1cf86c578e6ea6383fef154fac4410a8c3a50846",
+      "bytes": 1722
+    },
+    "audit": {
+      "path": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/sandbox/f7b54100-77a8-4e11-9063-b7b00f98753f.audit.json",
+      "sha256": "19ed31720250581305636024ddd0a2d397ee456880c771d9a7242d5a0781cae3",
+      "bytes": 501
+    }
+  },
+  "success": true
+}

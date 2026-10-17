@@ -1,0 +1,19 @@
+{
+  "architecture": "x86_64",
+  "cuda_feature_compiled": false,
+  "evidence_kind": "actual_CUDA_driver_probe_without_management_utility",
+  "gpus": [
+    {
+      "backend": "cuda",
+      "compute_capability": "7.5",
+      "free_memory_bytes": 7755399168,
+      "name": "NVIDIA GeForce RTX 2080",
+      "ordinal": 0,
+      "total_memory_bytes": 8155561984
+    }
+  ],
+  "primary_context_active_after": 0,
+  "primary_context_active_before": 0,
+  "thread_context_restored": true,
+  "uses_nvidia_smi": false
+}

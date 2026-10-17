@@ -1,0 +1,18 @@
+{
+  "model_id": "Qwen/Qwen2.5-Coder-7B-Instruct-GGUF",
+  "revision": "13fb94bfda8c8cf22497dc57b78f391a9acb426a",
+  "licence": "apache-2.0",
+  "files": {
+    "LICENSE": "832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e",
+    "README.md": "a27f564dbb2763abe187c5596d7feb3fb1b2cb413a4f7ac61fc24d30ad0f8fc8",
+    "qwen2.5-coder-7b-instruct-q6_k.gguf": "46291ddea1bfb608fe63d9a1907eea6918bda87a7626593edc4bf97c5fd73f9d",
+    "source/LICENSE": "832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e",
+    "source/README.md": "3c090be37f829adc1e4cdb78733667437732541470430ab2cd785d7f0d460077",
+    "source/config.json": "c0242402ad6a13b331ea320feea8c7e3776ffb7a4eff0757b9cd667e116d9a28",
+    "source/generation_config.json": "1a628a5775bc69cde01c6749a531150ca4d3189652c618a174f7077923acf3b1",
+    "source/merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+    "source/tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+    "source/tokenizer_config.json": "959e7f1d9a1b7641a6d6ce05ca97b75c7894fcb66cbe5a040406458fb1128ee4",
+    "source/vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+  }
+}

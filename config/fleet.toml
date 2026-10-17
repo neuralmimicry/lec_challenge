@@ -8,6 +8,13 @@ round_nanos = 20000000000
 provider_nanos = 10000000000
 model_nanos = 10000000000
 
+# Cumulative input + billable output, including retries and unresolved liabilities.
+[budgets.tokens]
+round = 1000000
+task = 100000
+provider = 500000
+model = 500000
+
 [[providers]]
 id = "deepseek"
 business_id = "deepseek"

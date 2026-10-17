@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "4a9a9f574d803ba166ed2b6c53148e9e64617b9cc03c46c4b6950f86ca4d1fc8",
+  "task_id": "dispatch.finish_order",
+  "source_id": "private-dispatch-v1",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an array of [arrival,duration], nonnegative integers. A single server processes input order, starting each job at max(previous finish,arrival). Return finish times.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[[0,3],[1,2],[8,1]],\"expected\":[3,5,9]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\nfn solve(input: serde_json::Value) -> serde_json::Value {\n    let mut jobs = Vec::new();\n    for line in input.as_array() {\n        let arrival = line[0].as_i64().unwrap();\n        let duration = line[1].as_i64().unwrap();\n        jobs.push((arrival, duration));\n    }\n\n    jobs.sort_by_key(|&(arrival, _)| arrival);\n\n    let mut finish_times = Vec::new();\n    let mut current_finish = 0;\n    for job in jobs {\n        current_finish += job.1;\n        finish_times.push(current_finish);\n    }\n\n    finish_times.sort_unstable();\n    finish_times.reverse();\n\n    serde_json::Value::from(finish_times)\n}\n\nfn main() {\n    let input = serde_json::Value::from(\"{\\\"input\\\":[[0,3],[1,2],[8,1]],\\\"expected\\\":[3,5,9]}\");\n    let result = solve(input);\n    println!(\"{:?}\", result);\n}\n```",
+    "checkpoint_id": "c593e197161a62bf5d103260a2cd2f9aa79ab9d66eaa3d379df21a24c0d916c0",
+    "finish_reason": "stop",
+    "input_tokens": 250,
+    "output_tokens": 219,
+    "elapsed_ms": 38183,
+    "complete": true
+  },
+  "model_error": null
+}

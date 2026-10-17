@@ -1,0 +1,34 @@
+{
+  "run_id": "a54aff58-b8d8-4055-b68d-7eecf2a63995",
+  "task_id": "stock.mode",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error[E0433]: cannot find type `HashMap` in this scope\n --> /candidate/main.rs:5:22\n  |\n5 |     let mut counts = HashMap::new();\n  |                      ^^^^^^^ use of undeclared type `HashMap`\n  |\nhelp: consider importing this struct\n  |\n1 + use std::collections::HashMap;\n  |\n\nerror[E0599]: no variant, associated function, or constant named `null` found for enum `Value` in the current scope\n   --> /candidate/main.rs:18:33\n    |\n 18 |     most_frequent.map_or(Value::null, |str_item| Value::String(str_item.to_string()))\n    |                                 ^^^^ variant, associated function, or constant not found in `Value`\n    |\nhelp: there is a method `as_null` with a similar name\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:746:5\n    |\n746 |     pub fn as_null(&self) -> Option<()> {\n    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nhelp: there is a variant with a similar name\n    |\n 18 -     most_frequent.map_or(Value::null, |str_item| Value::String(str_item.to_string()))\n 18 +     most_frequent.map_or(Value::Null, |str_item| Value::String(str_item.to_string()))\n    |\n\nerror: aborting due to 2 previous errors\n\nSome errors have detailed explanations: E0433, E0599.\nFor more information about an error, try `rustc --explain E0433`.\n"
+  ],
+  "cases_total": 6,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "4b2556745b303526f354ded7f2c473b77f6da0c99a77f0a493c7272a8d800aac",
+  "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "c0bc0ce8d275076be823ef2e1a121828eb190e6c5bb3d220da70957b823997de",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "controller_version": 2,
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:1",
+    "expected_image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/native-full-quality-001/composed-train/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/native-full-quality-001/composed-train/sandbox/a54aff58-b8d8-4055-b68d-7eecf2a63995.audit.json",
+  "audit_sha256": "15301bc6aabbc13d930317d84ff557673f859fbb4780863ed0feba9f12846e5d",
+  "failure": "compilation failed: error[E0433]: cannot find type `HashMap` in this scope\n --> /candidate/main.rs:5:22\n  |\n5 |     let mut counts = HashMap::new();\n  |                      ^^^^^^^ use of undeclared type `HashMap`\n  |\nhelp: consider importing this struct\n  |\n1 + use std::collections::HashMap;\n  |\n\nerror[E0599]: no variant, associated function, or constant named `null` found for enum `Value` in the current scope\n   --> /candidate/main.rs:18:33\n    |\n 18 |     most_frequent.map_or(Value::null, |str_item| Value::String(str_item.to_string()))\n    |                                 ^^^^ variant, associated function, or constant not found in `Value`\n    |\nhelp: there is a method `as_null` with a similar name\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:746:5\n    |\n746 |     pub fn as_null(&self) -> Option<()> {\n    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nhelp: there is a variant with a similar name\n    |\n 18 -     most_frequent.map_or(Value::null, |str_item| Value::String(str_item.to_string()))\n 18 +     most_frequent.map_or(Value::Null, |str_item| Value::String(str_item.to_string()))\n    |\n\nerror: aborting due to 2 previous errors\n\nSome errors have detailed explanations: E0433, E0599.\nFor more information about an error, try `rustc --explain E0433`.\n",
+  "duration_ms": 10481,
+  "timeout_evidence": null
+}

@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "a5b39d544c85b76111246b8fda40c638ce104251a1c56368277fef8fe4033eb6",
+  "task_id": "ledger.bounds",
+  "source_id": "private-ledger-v1",
+  "success": true,
+  "raw_generation": {
+    "path": "reports/local-study/native-full-quality-001/sft-train/generations/ledger.bounds.json",
+    "sha256": "79f20b8c66cca74216a0ddfa90d506d264d3788dc0a63594f1616c7901673143",
+    "bytes": 2304
+  },
+  "sandbox_report": {
+    "path": "reports/local-study/native-full-quality-001/sft-train/sandbox/337d9c07-41ee-4504-bfb2-450d800fab04.json",
+    "sha256": "c3d7538d7811b0ab96346245f393ca940f76f3b1a7e21e7f693232e98e84ff1d",
+    "bytes": 1354
+  },
+  "grading_error": null
+}

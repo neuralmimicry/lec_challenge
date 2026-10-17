@@ -1,0 +1,40 @@
+{
+  "run_id": "190654f4-bd3b-46bc-9511-84c80310c909",
+  "task_id": "money.format",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error[E0428]: the name `main` is defined multiple times\n  --> /candidate/main.rs:23:1\n   |\n18 | fn main() {\n   | --------- previous definition of the value `main` here\n...\n23 | fn main() { let stdin = std::io::stdin(); for line in std::io::BufRead::lines(stdin.lock()) { let line = line.expect(\"input read\"); ...\n   | ^^^^^^^^^ `main` redefined here\n   |\n   = note: `main` must be defined only once in the value namespace of this module\n\nwarning: unused import: `serde_json::Value`\n --> /candidate/main.rs:1:5\n  |\n1 | use serde_json::Value;\n  |     ^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0308]: mismatched types\n --> /candidate/main.rs:7:5\n  |\n3 | fn solve(input: serde_json::Value) -> serde_json::Value {\n  |                                       ----------------- expected `Value` because of return type\n...\n7 |     rounded_pounds.to_string()\n  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `Value`, found `String`\n  |\nhelp: try wrapping the expression in `serde_json::Value::String`\n  |\n7 |     serde_json::Value::String(rounded_pounds.to_string())\n  |     ++++++++++++++++++++++++++                          +\n\nerror: aborting due to 2 previous errors; 1 warning emitted\n\nSome errors have detailed explanations: E0308, E0428.\nFor more information about an error, try `rustc --explain E0308`.\n"
+  ],
+  "cases_total": 6,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "9d8cec78071e7a2139a1cda57531b960dfb63e16d13d612ad8741b8affba6d91",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/explore/round-001/study/full/arms/arm-10219d27497b8da52d90f257/development/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/explore/round-001/study/full/arms/arm-10219d27497b8da52d90f257/development/sandbox/190654f4-bd3b-46bc-9511-84c80310c909.audit.json",
+  "audit_sha256": "ffe1ab7ea751948ed0684d7ed74b2f4f990b9a954a44278d509d92735cb83aaa",
+  "failure": "compilation failed: error[E0428]: the name `main` is defined multiple times\n  --> /candidate/main.rs:23:1\n   |\n18 | fn main() {\n   | --------- previous definition of the value `main` here\n...\n23 | fn main() { let stdin = std::io::stdin(); for line in std::io::BufRead::lines(stdin.lock()) { let line = line.expect(\"input read\"); ...\n   | ^^^^^^^^^ `main` redefined here\n   |\n   = note: `main` must be defined only once in the value namespace of this module\n\nwarning: unused import: `serde_json::Value`\n --> /candidate/main.rs:1:5\n  |\n1 | use serde_json::Value;\n  |     ^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0308]: mismatched types\n --> /candidate/main.rs:7:5\n  |\n3 | fn solve(input: serde_json::Value) -> serde_json::Value {\n  |                                       ----------------- expected `Value` because of return type\n...\n7 |     rounded_pounds.to_string()\n  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `Value`, found `String`\n  |\nhelp: try wrapping the expression in `serde_json::Value::String`\n  |\n7 |     serde_json::Value::String(rounded_pounds.to_string())\n  |     ++++++++++++++++++++++++++                          +\n\nerror: aborting due to 2 previous errors; 1 warning emitted\n\nSome errors have detailed explanations: E0308, E0428.\nFor more information about an error, try `rustc --explain E0308`.\n",
+  "duration_ms": 9756,
+  "timeout_evidence": null,
+  "lifecycle_evidence": {
+    "receipt_path": "reports/local-study/explore/round-001/study/full/arms/arm-10219d27497b8da52d90f257/development/sandbox/190654f4-bd3b-46bc-9511-84c80310c909.lifecycle.json",
+    "receipt_sha256": "eb7674e8e9c9ec20bfafda240e3d69bad02b96eee5293dbf96be26d01de92335"
+  }
+}

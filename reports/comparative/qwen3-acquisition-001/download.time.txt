@@ -1,0 +1,23 @@
+	Command being timed: "timeout --signal=TERM --kill-after=30s 3600s target/debug/examples/hub_gguf_assets --model bartowski/Qwen_Qwen3-4B-Instruct-2507-GGUF --revision ae44f08e1392f39c0e474af10c3ff8355c8b6688 --filename Qwen_Qwen3-4B-Instruct-2507-Q4_K_M.gguf --source-model Qwen/Qwen3-4B-Instruct-2507 --source-revision cdbee75f17c01a7cc42f958dc650907174af0554 --destination offline_bundle/comparative/qwen3-4b-instruct-2507-q4_k_m --sha256 2fde00ce69dd4899c70d020845e2638353015bba0fdf161b3eb965f2bca4464e --bytes 2497280736"
+	User time (seconds): 638.87
+	System time (seconds): 27.08
+	Percent of CPU this job got: 50%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 21:47.24
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 28932
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 5361
+	Voluntary context switches: 1035823
+	Involuntary context switches: 22746
+	Swaps: 0
+	File system inputs: 248
+	File system outputs: 9787360
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

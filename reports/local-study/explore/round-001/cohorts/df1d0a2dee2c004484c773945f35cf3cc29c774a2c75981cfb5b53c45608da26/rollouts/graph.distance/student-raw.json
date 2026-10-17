@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "evidence_kind": "actual_checkpoint_bound_rollout_generation",
+  "plan": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/graph.distance/student-plan.json",
+    "sha256": "b06fd91ba47deca3f045c313d557b5e9a874d8dc8bab812cb0663fe9059d0bd6",
+    "bytes": 4164
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let n = input[\"n\"].as_u64().unwrap();\n    let start = input[\"start\"].as_u64().unwrap();\n    let target = input[\"target\"].as_u64().unwrap();\n    let edges = input[\"edges\"].as_array().unwrap();\n\n    let mut distances = vec![std::i64::MAX; n];\n    distances[start as usize] = 0;\n\n    for edge in edges {\n        let u = edge[0].as_u64().unwrap();\n        let v = edge[1].as_u64().unwrap();\n        let weight = edge[2].as_i64().unwrap();\n\n        if distances[u as usize] != std::i64::MAX && distances[v as usize] == std::i64::MAX {\n            distances[v as usize] = distances[u as usize] + weight;\n        }\n    }\n\n    if distances[target as usize] == std::i64::MAX {\n        serde_json::Value::Null\n    } else {\n        serde_json::Value::Number(distances[target as usize] as f64)\n    }\n}\n```",
+    "checkpoint_id": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+    "finish_reason": "stop",
+    "input_tokens": 263,
+    "output_tokens": 260,
+    "elapsed_ms": 43101,
+    "complete": true
+  },
+  "generation_error": null,
+  "execution": {
+    "actual_device": "Cpu",
+    "actual_dtype": "F32",
+    "asset_lifetime_shared_lease": false,
+    "available_cpu_threads": 16,
+    "candle_cpu_threads": 16,
+    "checkpoint_id": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+    "context_cap": 4096,
+    "cpu_fallback": false,
+    "cuda_active": false,
+    "cuda_feature_compiled": true,
+    "engine": "native_rust_candle",
+    "model_id": "Qwen/Qwen2.5-Coder-0.5B-Instruct",
+    "quantisation": null,
+    "requested": {
+      "device": "cpu",
+      "dtype": "f32"
+    },
+    "revision": "ea3f2471cf1b1f0db85067f1ef93848e38e88c25",
+    "weight_format": "safetensors"
+  }
+}

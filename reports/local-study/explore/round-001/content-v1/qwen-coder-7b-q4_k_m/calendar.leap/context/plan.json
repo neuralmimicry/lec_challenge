@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "task_id": "calendar.leap",
+  "teacher_id": "qwen-coder-7b-q4_k_m",
+  "content": "context",
+  "request": {
+    "prompt": "A verified example from the same training source follows. It is a different task; implement only the new contract.\nExample contract: Input is [year,month] with year 1..9999 and month 1..12. Return Gregorian days in that month.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nExample solution:\n```rust\nuse serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let arr = input.as_array().unwrap();\n    let year = arr[0].as_i64().unwrap();\n    let month = arr[1].as_i64().unwrap();\n\n    let days_in_month = match month {\n        1 | 3 | 5 | 7 | 8 | 10 | 12 => 31,\n        4 | 6 | 9 | 11 => 30,\n        2 => {\n            if (year % 4 == 0 && year % 100 != 0) || year % 400 == 0 {\n                29\n            } else {\n                28\n            }\n        }\n        _ => 0,\n    };\n\n    Value::from(days_in_month)\n}\n```\nNew task:\nWrite Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is a Gregorian year integer in 1..9999. Return whether it is a leap year (divisible by four except centuries not divisible by 400).\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":2000,\"expected\":true}]",
+    "max_new_tokens": 768,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "runtime": {
+    "device": {
+      "cuda": {
+        "ordinal": 0
+      }
+    },
+    "dtype": "f32"
+  },
+  "teacher_assets": {
+    "path": "offline_bundle/comparative/qwen-coder-7b-q4_k_m/gguf-assets.json",
+    "sha256": "606bfac02a103d208ccef73067cb6a4581e9b099e19bc9ed8e2021ebb1143114",
+    "bytes": 1206
+  },
+  "supporting_sample_ids": [
+    "83cc42aa11a66d768d6f952f81812adff3032a39e39b89bfa188e7270ab75a62"
+  ],
+  "feedback_candidate": null,
+  "feedback_summary": null,
+  "sandbox": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/explore/round-001/content-v1/sandbox"
+  },
+  "preflight": {
+    "path": "reports/local-study/explore/round-001/content-v1/sandbox-preflight.json",
+    "sha256": "177e2ef21e36cbec4f692ca35960e457194cb5c74266c869808e60d56ead923d",
+    "bytes": 1287
+  },
+  "engine_binary_sha256": "3f348bdfa71c49df5b5d0b7581ae9ad3114645127f99abbec9e4aac1064563bd"
+}

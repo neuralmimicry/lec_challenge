@@ -1,0 +1,42 @@
+{
+  "schema_version": 3,
+  "run_id": "b7700cda-ece8-46c7-b959-53379eb9e93a",
+  "ownership_nonce": "ce7970af-8132-43aa-9234-f45d3a1352bf",
+  "attempt_key": "b34723bb164187e7695d725c39178a5fc651cd27bc2369c6e23c8cc977a6b5f0",
+  "receipt_path": "reports/local-study/regraded-v3-001/evaluation-003-train-f95238863522/prepared/bits.popcount.json",
+  "report_path": "reports/local-study/regraded-v3-001/evaluation-003-train-f95238863522/sandbox/b7700cda-ece8-46c7-b959-53379eb9e93a.json",
+  "task": {
+    "id": "bits.popcount",
+    "source_id": "private-bits-v1",
+    "lineage_id": "local-contract-pack-11",
+    "split": "train",
+    "specification": "Input is an integer in 0..4294967295. Return the number of set bits in its unsigned 32-bit representation.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "38bc072a09efefb50b68e96e08639755cc0d023898fb4367728e2e3ccd91979c",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": 13,
+        "expected": 3
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "use serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let num = input.as_i64().unwrap();\n    num.count_ones() as i64\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/regraded-v3-001/evaluation-003-train-f95238863522/sandbox"
+  },
+  "code_sha256": "28bb0c3b6e3b236e13d14007d9a9cc4b9149ed2e3cf49f5afa076550f41b8db8",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

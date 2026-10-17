@@ -1,0 +1,128 @@
+{
+  "config_path": "config/api-providers.toml",
+  "providers": [
+    {
+      "id": "openai",
+      "api": "openai_responses",
+      "enabled": false,
+      "model": "UNRESOLVED_CODEX_MODEL",
+      "model_revision": "UNRESOLVED_MODEL_REVISION_POLICY",
+      "api_key_environment": "OPENAI_API_KEY",
+      "credential_present": false,
+      "configuration_error": "model ID or revision policy is unresolved",
+      "locally_ready_for_live_request": false,
+      "readiness_blockers": [
+        "budgets.round_nanos must be positive for live requests",
+        "budgets.task_nanos must be positive for live requests",
+        "budgets.provider_nanos must be positive for live requests",
+        "budgets.model_nanos must be positive for live requests",
+        "budgets.tokens.round is zero; no tokens are allowed",
+        "budgets.tokens.task is zero; no tokens are allowed",
+        "budgets.tokens.provider is zero; no tokens are allowed",
+        "budgets.tokens.model is zero; no tokens are allowed",
+        "provider is disabled; enable only after reviewing model, prices and limits",
+        "model ID or revision policy is unresolved",
+        "missing reviewed price snapshot",
+        "export a valid OPENAI_API_KEY in the same shell"
+      ],
+      "training_eligible": false,
+      "network_contacted": false
+    },
+    {
+      "id": "gemini",
+      "api": "gemini_generate_content",
+      "enabled": false,
+      "model": "UNRESOLVED_GEMINI_MODEL",
+      "model_revision": "UNRESOLVED_MODEL_REVISION_POLICY",
+      "api_key_environment": "GEMINI_API_KEY",
+      "credential_present": false,
+      "configuration_error": "model ID or revision policy is unresolved",
+      "locally_ready_for_live_request": false,
+      "readiness_blockers": [
+        "budgets.round_nanos must be positive for live requests",
+        "budgets.task_nanos must be positive for live requests",
+        "budgets.provider_nanos must be positive for live requests",
+        "budgets.model_nanos must be positive for live requests",
+        "budgets.tokens.round is zero; no tokens are allowed",
+        "budgets.tokens.task is zero; no tokens are allowed",
+        "budgets.tokens.provider is zero; no tokens are allowed",
+        "budgets.tokens.model is zero; no tokens are allowed",
+        "provider is disabled; enable only after reviewing model, prices and limits",
+        "model ID or revision policy is unresolved",
+        "missing reviewed price snapshot",
+        "export a valid GEMINI_API_KEY in the same shell"
+      ],
+      "training_eligible": false,
+      "network_contacted": false
+    },
+    {
+      "id": "vertex",
+      "api": "vertex_generate_content",
+      "enabled": false,
+      "model": "UNRESOLVED_GEMINI_MODEL",
+      "model_revision": "UNRESOLVED_MODEL_REVISION_POLICY",
+      "api_key_environment": "GOOGLE_CLOUD_ACCESS_TOKEN",
+      "credential_present": false,
+      "configuration_error": "model ID or revision policy is unresolved",
+      "locally_ready_for_live_request": false,
+      "readiness_blockers": [
+        "budgets.round_nanos must be positive for live requests",
+        "budgets.task_nanos must be positive for live requests",
+        "budgets.provider_nanos must be positive for live requests",
+        "budgets.model_nanos must be positive for live requests",
+        "budgets.tokens.round is zero; no tokens are allowed",
+        "budgets.tokens.task is zero; no tokens are allowed",
+        "budgets.tokens.provider is zero; no tokens are allowed",
+        "budgets.tokens.model is zero; no tokens are allowed",
+        "provider is disabled; enable only after reviewing model, prices and limits",
+        "model ID or revision policy is unresolved",
+        "missing reviewed price snapshot",
+        "export a valid GOOGLE_CLOUD_ACCESS_TOKEN in the same shell"
+      ],
+      "training_eligible": false,
+      "network_contacted": false
+    },
+    {
+      "id": "claude",
+      "api": "anthropic_messages",
+      "enabled": false,
+      "model": "UNRESOLVED_CLAUDE_MODEL",
+      "model_revision": "UNRESOLVED_MODEL_REVISION_POLICY",
+      "api_key_environment": "ANTHROPIC_API_KEY",
+      "credential_present": false,
+      "configuration_error": "model ID or revision policy is unresolved",
+      "locally_ready_for_live_request": false,
+      "readiness_blockers": [
+        "budgets.round_nanos must be positive for live requests",
+        "budgets.task_nanos must be positive for live requests",
+        "budgets.provider_nanos must be positive for live requests",
+        "budgets.model_nanos must be positive for live requests",
+        "budgets.tokens.round is zero; no tokens are allowed",
+        "budgets.tokens.task is zero; no tokens are allowed",
+        "budgets.tokens.provider is zero; no tokens are allowed",
+        "budgets.tokens.model is zero; no tokens are allowed",
+        "provider is disabled; enable only after reviewing model, prices and limits",
+        "model ID or revision policy is unresolved",
+        "missing reviewed price snapshot",
+        "export a valid ANTHROPIC_API_KEY in the same shell"
+      ],
+      "training_eligible": false,
+      "network_contacted": false
+    }
+  ],
+  "budgets": {
+    "round_nanos": 0,
+    "task_nanos": 0,
+    "provider_nanos": 0,
+    "model_nanos": 0,
+    "tokens": {
+      "round": 0,
+      "task": 0,
+      "provider": 0,
+      "model": 0
+    }
+  },
+  "configuration_error": null,
+  "locally_ready_for_live_request": false,
+  "network_contacted": false
+}

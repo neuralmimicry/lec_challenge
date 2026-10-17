@@ -1,0 +1,49 @@
+{
+  "schema_version": 3,
+  "run_id": "a2d5c3a6-80be-4170-9e0b-b4b6ea5e6921",
+  "ownership_nonce": "e9421094-ca79-401c-837b-77e45a07b2b7",
+  "attempt_key": "4ad2cb3a65e50c0465bb55fbffe157b08c6fb3ef4d675f3378e99d1fd72cb33b",
+  "receipt_path": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/prepared/stock.counts.json",
+  "report_path": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/sandbox/a2d5c3a6-80be-4170-9e0b-b4b6ea5e6921.json",
+  "task": {
+    "id": "stock.counts",
+    "source_id": "private-stock-v1",
+    "lineage_id": "local-contract-pack-01",
+    "split": "train",
+    "specification": "Input is an array of ASCII strings. Return an object mapping every distinct string to its frequency.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "67d6f2208b9db54beec4f70c0505e23602bbc75a2816da8b3431011f8a9daedf",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": [
+          "b",
+          "a",
+          "b"
+        ],
+        "expected": {
+          "a": 1,
+          "b": 2
+        }
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "use serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let arr = input.as_array().unwrap();\n    let mut freq_map: std::collections::HashMap<String, i64> = std::collections::HashMap::new();\n\n    for item in arr {\n        let str_val = item.as_str().unwrap();\n        *freq_map.entry(str_val.to_string()).or_insert(0) += 1;\n    }\n\n    Value::Object(freq_map.into_iter().map(|(k, v)| (k.to_string(), Value::from(v))).collect())\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/sandbox"
+  },
+  "code_sha256": "03b1197b839cd53f9c58e6b6af463066dfa97eeae9e4641d642c0d8d7cb2faab",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

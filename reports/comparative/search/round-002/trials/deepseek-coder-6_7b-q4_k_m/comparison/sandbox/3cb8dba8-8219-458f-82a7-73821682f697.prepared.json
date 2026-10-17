@@ -1,0 +1,68 @@
+{
+  "schema_version": 3,
+  "run_id": "75c21d1e-4ebc-48f3-8470-29837e94ae68",
+  "ownership_nonce": "c5579f91-8892-448a-8b4f-4df5db5906f4",
+  "attempt_key": "3cb8dba8-8219-458f-82a7-73821682f697",
+  "receipt_path": "reports/comparative/search/round-002/trials/deepseek-coder-6_7b-q4_k_m/comparison/sandbox/3cb8dba8-8219-458f-82a7-73821682f697.prepared.json",
+  "report_path": "reports/comparative/search/round-002/trials/deepseek-coder-6_7b-q4_k_m/comparison/sandbox/75c21d1e-4ebc-48f3-8470-29837e94ae68.json",
+  "task": {
+    "id": "tables.sort_rows",
+    "source_id": "private-tables-v1",
+    "lineage_id": "local-contract-pack-15",
+    "split": "development",
+    "specification": "Input is an array of [key,value] integer rows. Sort ascending by key and then value; keep duplicates.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "df1fea127338d7c1399d9b922559c0782ff3fec80cb89b6d508a51249e019c1c",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": [
+          [
+            2,
+            9
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "expected": [
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            2,
+            9
+          ]
+        ]
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "Here is a Rust function that sorts a JSON array of key-value pairs in ascending order by key and then by value. This function uses the `serde_json` crate for JSON parsing and serialization.\n\n```rust\nuse serde_json::{Value, Result};\n\npub fn solve(input: Value) -> Value {\n    let mut arr: Vec<Value> = input.as_array().unwrap();\n    arr.sort_by_key(|k| {\n        let key = k.as_array().unwrap()[0].as_i64().unwrap();\n        (key, k.as_array().unwrap()[1].as_i64().unwrap())\n    });\n    Value::Array(arr)\n}\n```\n\nThis function works by first converting the input JSON array to a Rust `Vec<Value>`. It then sorts this vector using the `sort_by_key` method, which sorts the vector in ascending order based on the key-value pairs. The key is a tuple of the key and value, and the sorting is done first by the key and then by the value.\n\nFinally, the function converts the sorted vector back to a JSON array and returns it.\n\nPlease note that this function assumes that the input JSON array contains only arrays of two elements, where the first element is the key and the second element is the value. If this is not the case, the function may panic or return incorrect results.",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/comparative/search/round-002/trials/deepseek-coder-6_7b-q4_k_m/comparison/sandbox"
+  },
+  "code_sha256": "8e1500290fc44f8bd48f5c2b58277c38fe48502f6a44bf714f40b1c7c911bfb6",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

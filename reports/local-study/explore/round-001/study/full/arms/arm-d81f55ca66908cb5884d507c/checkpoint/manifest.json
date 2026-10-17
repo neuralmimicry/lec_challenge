@@ -1,0 +1,704 @@
+{
+  "schema_version": 1,
+  "evidence_kind": "verified_local_teacher_experimental_distillation",
+  "spec": {
+    "schema_version": 1,
+    "arm_id": "arm-d81f55ca66908cb5884d507c",
+    "student_base": "offline_bundle/base",
+    "student_kind": "conventional_qwen_lora",
+    "evidence_bundle": "reports/local-study/explore/round-001/content-v1/bundle.json",
+    "output": "reports/local-study/explore/round-001/study/full/arms/arm-d81f55ca66908cb5884d507c/checkpoint",
+    "seed": 1729,
+    "steps": 48,
+    "max_sequence_tokens": 512,
+    "sequence_policy": "reject_overlength",
+    "rank": 8,
+    "alpha": 16.0,
+    "learning_rate": 0.0002,
+    "temperature": 2.0,
+    "dpo_beta": 0.1,
+    "losses": [
+      {
+        "kind": "attention_relation",
+        "weight": 1.0
+      }
+    ],
+    "teacher_ids": [
+      "qwen-coder-7b-q4_k_m"
+    ],
+    "contents": [
+      "complete_sequence"
+    ],
+    "teacher_runtime": {
+      "device": {
+        "cuda": {
+          "ordinal": 0
+        }
+      },
+      "dtype": "f32"
+    },
+    "teacher_target_policy": "acquire",
+    "student_runtime": {
+      "device": "cpu",
+      "dtype": "f32"
+    },
+    "initial_checkpoint": null,
+    "data_policy": "offline",
+    "progressive": false,
+    "self_distillation": false
+  },
+  "freeze_sha256": "a7394511a9ba4dc64ead2d7ea3934b2ab4f62821bfed00585b0d3ec8b32a4edf",
+  "base_sha256": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+  "base_sha256_after": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+  "tokenizer_sha256": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+  "evidence_bundle": {
+    "path": "reports/local-study/explore/round-001/content-v1/bundle.json",
+    "sha256": "6256372fa9e690dbf230f5042904001db2bb1583b195015ddce53b0def40c8c6",
+    "bytes": 218818
+  },
+  "adapter": {
+    "rank": 8,
+    "alpha": 16.0
+  },
+  "adapter_sha256": "ea8a16e57b8fefe63b4bf3f891bdfb28009fccd0056d4cd5741953ada830fa20",
+  "optimizer_sha256": "aa9ebc91be53d8cc91e5e84585af27cc59633ecd8d9fe2098ab250b43fbc0feb",
+  "initial_adapter_sha256": "97f700bf02c1bd271edb8c743d5b28a3557d8617c8b68b143e88f5d87ed2cd76",
+  "initial_adapter": {
+    "path": "reports/local-study/explore/round-001/study/full/arms/arm-d81f55ca66908cb5884d507c/checkpoint/initial-adapter.safetensors",
+    "sha256": "97f700bf02c1bd271edb8c743d5b28a3557d8617c8b68b143e88f5d87ed2cd76",
+    "bytes": 2173504
+  },
+  "initial_checkpoint": null,
+  "dpo_reference": null,
+  "steps": 48,
+  "losses": [
+    0.004306495189666748,
+    0.0032459679059684277,
+    0.0035140595864504576,
+    0.004294927231967449,
+    0.002889370545744896,
+    0.00387334986589849,
+    0.002899088431149721,
+    0.0034006540663540363,
+    0.004033549688756466,
+    0.0025959527119994164,
+    0.002240318339318037,
+    0.003437324659898877,
+    0.0024480228312313557,
+    0.0020124365109950304,
+    0.0020688932854682207,
+    0.0036379857920110226,
+    0.0022871377877891064,
+    0.0030411267653107643,
+    0.0021271146833896637,
+    0.0024415841326117516,
+    0.0030769607983529568,
+    0.002178800757974386,
+    0.002997013973072171,
+    0.00238889642059803,
+    0.0024974115658551455,
+    0.003291568486019969,
+    0.001980394124984741,
+    0.0017718689050525427,
+    0.0024609637912362814,
+    0.0018402546411380172,
+    0.0015135598368942738,
+    0.0016782373422756791,
+    0.0031483278144150972,
+    0.0018164722714573145,
+    0.002604153472930193,
+    0.001721161650493741,
+    0.001955838408321142,
+    0.0024083617608994246,
+    0.0018642345676198602,
+    0.002391945570707321,
+    0.002084926934912801,
+    0.0020910727325826883,
+    0.002746937796473503,
+    0.001816784031689167,
+    0.00154392933472991,
+    0.0018129231175407767,
+    0.0014591760700568557,
+    0.001212328439578414
+  ],
+  "gradient_norms": [
+    0.009617112075915302,
+    0.007483612882833028,
+    0.007281775431620182,
+    0.007804853446469396,
+    0.0064836271324683606,
+    0.016704311718560873,
+    0.006929372471197173,
+    0.01377364269988948,
+    0.00647673681283655,
+    0.006191099774652439,
+    0.005770089844806101,
+    0.009713029327568082,
+    0.0053966579207316,
+    0.006361144161643662,
+    0.006847191990851065,
+    0.011613039737640581,
+    0.01802044934965575,
+    0.008426971843444315,
+    0.005752435445267621,
+    0.005040786403169107,
+    0.006213356042156688,
+    0.011567587316553822,
+    0.019813623335813296,
+    0.01794578046772825,
+    0.006567108274453051,
+    0.00976308026150919,
+    0.009897465389560175,
+    0.008986133172528641,
+    0.010120296108424897,
+    0.006018035332337089,
+    0.010816674364093606,
+    0.011063645550327052,
+    0.02009235193697182,
+    0.01833116423253883,
+    0.012735900768171913,
+    0.004850964821855398,
+    0.005123525813499315,
+    0.007495540115045981,
+    0.013421747339588688,
+    0.01131361000545199,
+    0.021628962932858667,
+    0.006659450056558774,
+    0.011714587256408228,
+    0.018390070527535402,
+    0.015951596900064594,
+    0.005746078618479283,
+    0.004890583005275698,
+    0.009198359685967637
+  ],
+  "component_losses": [
+    {
+      "attention_relation": 0.004306495189666748
+    },
+    {
+      "attention_relation": 0.0032459679059684277
+    },
+    {
+      "attention_relation": 0.0035140595864504576
+    },
+    {
+      "attention_relation": 0.004294927231967449
+    },
+    {
+      "attention_relation": 0.002889370545744896
+    },
+    {
+      "attention_relation": 0.00387334986589849
+    },
+    {
+      "attention_relation": 0.002899088431149721
+    },
+    {
+      "attention_relation": 0.0034006540663540363
+    },
+    {
+      "attention_relation": 0.004033549688756466
+    },
+    {
+      "attention_relation": 0.0025959527119994164
+    },
+    {
+      "attention_relation": 0.002240318339318037
+    },
+    {
+      "attention_relation": 0.003437324659898877
+    },
+    {
+      "attention_relation": 0.0024480228312313557
+    },
+    {
+      "attention_relation": 0.0020124365109950304
+    },
+    {
+      "attention_relation": 0.0020688932854682207
+    },
+    {
+      "attention_relation": 0.0036379857920110226
+    },
+    {
+      "attention_relation": 0.0022871377877891064
+    },
+    {
+      "attention_relation": 0.0030411267653107643
+    },
+    {
+      "attention_relation": 0.0021271146833896637
+    },
+    {
+      "attention_relation": 0.0024415841326117516
+    },
+    {
+      "attention_relation": 0.0030769607983529568
+    },
+    {
+      "attention_relation": 0.002178800757974386
+    },
+    {
+      "attention_relation": 0.002997013973072171
+    },
+    {
+      "attention_relation": 0.00238889642059803
+    },
+    {
+      "attention_relation": 0.0024974115658551455
+    },
+    {
+      "attention_relation": 0.003291568486019969
+    },
+    {
+      "attention_relation": 0.001980394124984741
+    },
+    {
+      "attention_relation": 0.0017718689050525427
+    },
+    {
+      "attention_relation": 0.0024609637912362814
+    },
+    {
+      "attention_relation": 0.0018402546411380172
+    },
+    {
+      "attention_relation": 0.0015135598368942738
+    },
+    {
+      "attention_relation": 0.0016782373422756791
+    },
+    {
+      "attention_relation": 0.0031483278144150972
+    },
+    {
+      "attention_relation": 0.0018164722714573145
+    },
+    {
+      "attention_relation": 0.002604153472930193
+    },
+    {
+      "attention_relation": 0.001721161650493741
+    },
+    {
+      "attention_relation": 0.001955838408321142
+    },
+    {
+      "attention_relation": 0.0024083617608994246
+    },
+    {
+      "attention_relation": 0.0018642345676198602
+    },
+    {
+      "attention_relation": 0.002391945570707321
+    },
+    {
+      "attention_relation": 0.002084926934912801
+    },
+    {
+      "attention_relation": 0.0020910727325826883
+    },
+    {
+      "attention_relation": 0.002746937796473503
+    },
+    {
+      "attention_relation": 0.001816784031689167
+    },
+    {
+      "attention_relation": 0.00154392933472991
+    },
+    {
+      "attention_relation": 0.0018129231175407767
+    },
+    {
+      "attention_relation": 0.0014591760700568557
+    },
+    {
+      "attention_relation": 0.001212328439578414
+    }
+  ],
+  "alignment_diagnostics": [],
+  "qat_effective_trits": null,
+  "sample_ids": [
+    "5b46a85ec5f9398290c023c26ef8cb662e6e4d19da293a71b2bcee316514f6b7",
+    "f23b74be49ae4fb9f5a42d58f33244ef0c157aa0e4afe342a565baa7e7493c91",
+    "12106a8bfb9356904186b558fd37127f1ee55e650cb57a6e843d8983be952bd0",
+    "279b6d10fb8f3e4f1d9e8b547e1207c9c65214b57d0270ab76e419d02e5165d2",
+    "9f34cf373961913a3cf1067f1f2a71e0bef8368e1557d10e998cc099a00fab71",
+    "d34031fab7990f9d5bb1ac0465e3173de67d17f95496ed535260f239f3c4bc90",
+    "b385fb6bb3931d6b39a919d387b625b8e5c0db4506f12df96b46489b5f340498",
+    "83cc42aa11a66d768d6f952f81812adff3032a39e39b89bfa188e7270ab75a62",
+    "be57ee99f53e14a44a210dee5a0a227fbee04ea80f1c914f14447c3db087cded",
+    "6f54a188344a4c4834c5a9bfe0969e33003547ea371fbf2ba03a4e5fd88d6e07",
+    "21748f9f3a9dec33f5c19fb7179ecdada908a2b27e6486b333f8a379f57d93bb",
+    "5dedbab9841301331ad4a8a4ef9d893e994c7abd27be5b97777071860da49a35",
+    "2d22b678d0bb8aadd704350c150da710a8be0fe59dc30172accfbbb0b25f792b",
+    "e89aa62fc9a189c19a13370ba9410f99991e685167f68b4f7ce97f6a4c78f965",
+    "ff06039fd8278f904a9e03151a5b46d0452d3c207474b4da9dd4b770fe9d6d26",
+    "9a709fd0afa880d7d61490074636b6a836aa05da5d9a338a46aa8aca31efdce4",
+    "60cad86431ce13f24f3525d348b75936b4659f22832705f61513e6920d3c0913",
+    "5b46a85ec5f9398290c023c26ef8cb662e6e4d19da293a71b2bcee316514f6b7",
+    "f23b74be49ae4fb9f5a42d58f33244ef0c157aa0e4afe342a565baa7e7493c91",
+    "12106a8bfb9356904186b558fd37127f1ee55e650cb57a6e843d8983be952bd0",
+    "279b6d10fb8f3e4f1d9e8b547e1207c9c65214b57d0270ab76e419d02e5165d2",
+    "9f34cf373961913a3cf1067f1f2a71e0bef8368e1557d10e998cc099a00fab71",
+    "d34031fab7990f9d5bb1ac0465e3173de67d17f95496ed535260f239f3c4bc90",
+    "b385fb6bb3931d6b39a919d387b625b8e5c0db4506f12df96b46489b5f340498",
+    "83cc42aa11a66d768d6f952f81812adff3032a39e39b89bfa188e7270ab75a62",
+    "be57ee99f53e14a44a210dee5a0a227fbee04ea80f1c914f14447c3db087cded",
+    "6f54a188344a4c4834c5a9bfe0969e33003547ea371fbf2ba03a4e5fd88d6e07",
+    "21748f9f3a9dec33f5c19fb7179ecdada908a2b27e6486b333f8a379f57d93bb",
+    "5dedbab9841301331ad4a8a4ef9d893e994c7abd27be5b97777071860da49a35",
+    "2d22b678d0bb8aadd704350c150da710a8be0fe59dc30172accfbbb0b25f792b",
+    "e89aa62fc9a189c19a13370ba9410f99991e685167f68b4f7ce97f6a4c78f965",
+    "ff06039fd8278f904a9e03151a5b46d0452d3c207474b4da9dd4b770fe9d6d26",
+    "9a709fd0afa880d7d61490074636b6a836aa05da5d9a338a46aa8aca31efdce4",
+    "60cad86431ce13f24f3525d348b75936b4659f22832705f61513e6920d3c0913",
+    "5b46a85ec5f9398290c023c26ef8cb662e6e4d19da293a71b2bcee316514f6b7",
+    "f23b74be49ae4fb9f5a42d58f33244ef0c157aa0e4afe342a565baa7e7493c91",
+    "12106a8bfb9356904186b558fd37127f1ee55e650cb57a6e843d8983be952bd0",
+    "279b6d10fb8f3e4f1d9e8b547e1207c9c65214b57d0270ab76e419d02e5165d2",
+    "9f34cf373961913a3cf1067f1f2a71e0bef8368e1557d10e998cc099a00fab71",
+    "d34031fab7990f9d5bb1ac0465e3173de67d17f95496ed535260f239f3c4bc90",
+    "b385fb6bb3931d6b39a919d387b625b8e5c0db4506f12df96b46489b5f340498",
+    "83cc42aa11a66d768d6f952f81812adff3032a39e39b89bfa188e7270ab75a62",
+    "be57ee99f53e14a44a210dee5a0a227fbee04ea80f1c914f14447c3db087cded",
+    "6f54a188344a4c4834c5a9bfe0969e33003547ea371fbf2ba03a4e5fd88d6e07",
+    "21748f9f3a9dec33f5c19fb7179ecdada908a2b27e6486b333f8a379f57d93bb",
+    "5dedbab9841301331ad4a8a4ef9d893e994c7abd27be5b97777071860da49a35",
+    "2d22b678d0bb8aadd704350c150da710a8be0fe59dc30172accfbbb0b25f792b",
+    "e89aa62fc9a189c19a13370ba9410f99991e685167f68b4f7ce97f6a4c78f965"
+  ],
+  "realised_update_counts": {
+    "content/complete_sequence": 48,
+    "teacher/qwen-coder-7b-q4_k_m": 48
+  },
+  "trace_records": [
+    {
+      "path": "offline_bundle/distillation-traces/c748451370492c050d04637922643c88309e33e17012b6af8722613f694c978a.json",
+      "sha256": "f15021e666dd679332e629bb08ef89fdfde8c8a2e117d3940aa1edddd6adbfa9",
+      "bytes": 8301
+    },
+    {
+      "path": "offline_bundle/distillation-traces/53571044014773632849db02d9ac9c85e4162cd84fe74678507d9c6a61658e05.json",
+      "sha256": "048caba9d580078795955fcf1ebe75fe6a33371b1750e1684641e2f22bfd6d35",
+      "bytes": 5261
+    },
+    {
+      "path": "offline_bundle/distillation-traces/ff21756cd6fef2f26faa12ff228baf2df19d7ca613e16576bab0e9cc9e01addb.json",
+      "sha256": "b6bd4d20b314c4f46f0cac1dcaba5c59886abc47a2bff3a4b801916e703097bb",
+      "bytes": 5897
+    },
+    {
+      "path": "offline_bundle/distillation-traces/164d34f02f1f14bb4dc2024d7b9677c2cc950d8393a4a5f069683488337abd4c.json",
+      "sha256": "578f78eaac64c94e60ff3f73fdced16bbaf4acee3fc89f49a143cc39ebe4962f",
+      "bytes": 4989
+    },
+    {
+      "path": "offline_bundle/distillation-traces/fc21f601c4916385a310c674e66a61c9d90c79bfe1ec57ff3ea27eea4f4d9b1a.json",
+      "sha256": "a376822b0de3a9331097de2f4833127d04a5a110319586767d645416f0e02f92",
+      "bytes": 7025
+    },
+    {
+      "path": "offline_bundle/distillation-traces/d34243f4d5cbe392435f0653cab2802be11e812f12a3126cfc5a98d05c302747.json",
+      "sha256": "f1ff29e3eb919f12d05a6f0028484b2b99af44cb0dc7a523c00aa0777ba2a3c3",
+      "bytes": 4728
+    },
+    {
+      "path": "offline_bundle/distillation-traces/dbeb0e88f070d64d05c0ee2e5c22972e038c9b5cccbc86f4fa87f5f89d8b0039.json",
+      "sha256": "e19ccf3c67c19e86d2fdc87aeffeb07c6fc203bbf36007fe92a9fcc1c142fab8",
+      "bytes": 6894
+    },
+    {
+      "path": "offline_bundle/distillation-traces/7614e9fd9e9266e79e85b8254ca8f19cac9b2c40f784d95e55ff01de77ca12dd.json",
+      "sha256": "8a2305a2de1aa31469fd2984f3d7553472331e2b2711641c341e94d123b253fa",
+      "bytes": 7086
+    },
+    {
+      "path": "offline_bundle/distillation-traces/ed3e53f3b9717e4035dcc26cf7795727ac0132322477b30be12a4293f83827c7.json",
+      "sha256": "b3ba81c3a13241bd89f8c085e9331091d755e38f9be4dc2e3821bd4b735c9e4b",
+      "bytes": 7158
+    },
+    {
+      "path": "offline_bundle/distillation-traces/2f77341c30c1757982606232114a8b272d8666876f1b658f99be1885063c7c88.json",
+      "sha256": "f960bc6e4771098fe415caa4994678daa584ec51d967ac2ad8af231f62834eb4",
+      "bytes": 7021
+    },
+    {
+      "path": "offline_bundle/distillation-traces/4888793d258317ecdf04b45ff223277bacd0d9b36d5a5478f340e9663ab8a01e.json",
+      "sha256": "8009a41b263d7653b34af987b43a2bea6b899c454e6438d2d1bb9340ccc1712c",
+      "bytes": 7721
+    },
+    {
+      "path": "offline_bundle/distillation-traces/8b2cab82db5adaead40fb88fee078c01ad322239c3ec2eeaa96a48feeb7deccb.json",
+      "sha256": "e199d4033ca833281521fc6774dddb3c2efdd4283cbe53c5ddc4ed64775c229e",
+      "bytes": 6538
+    },
+    {
+      "path": "offline_bundle/distillation-traces/bb2b40528a737a4d1a1b80f4e187ed7514e9fec93a2e448bbe967b9bfdf84d94.json",
+      "sha256": "b09212b5334744d24db546ca2f1dd67ca21b6707700326dbad1ef370e51d9daa",
+      "bytes": 5790
+    },
+    {
+      "path": "offline_bundle/distillation-traces/54a72221f7cc34480a262bcef79256c100ed2551a895adcf3b6c9253184bf27d.json",
+      "sha256": "b555c14180d84425896a834c64441bed74fb4d4157d844687c40b3b24c382537",
+      "bytes": 5058
+    },
+    {
+      "path": "offline_bundle/distillation-traces/8b1f15a6240d00525a5acec203aba9398270461f83a39442a89d39b762b0a492.json",
+      "sha256": "e6da4183bfb18ea9fa11cc9cc02a62a0abe516057aae23d6b0b037b25a024396",
+      "bytes": 5788
+    },
+    {
+      "path": "offline_bundle/distillation-traces/0ebbe827dedd19c4e00837a2dcba1f6ad4bd27683109739cafc8c1141df67f16.json",
+      "sha256": "58e9b9320f1216c181f3447478d823fc6f51a697e89e21a7b200d22c3636443f",
+      "bytes": 5588
+    },
+    {
+      "path": "offline_bundle/distillation-traces/16b708b7240a3e8bd130279e72a6aa0abf3c48b3d7bc9ba3f0835054db7dbb04.json",
+      "sha256": "44c5e2d06336aacab3e811b4fc1248b2fda0f18115f608c1dcc68c8ddfa41ade",
+      "bytes": 4465
+    }
+  ],
+  "teacher_rights": [
+    {
+      "assets": {
+        "bytes": 1206,
+        "path": "offline_bundle/comparative/qwen-coder-7b-q4_k_m/gguf-assets.json",
+        "sha256": "606bfac02a103d208ccef73067cb6a4581e9b099e19bc9ed8e2021ebb1143114"
+      },
+      "capabilities": {
+        "attention": {
+          "artefacts": [],
+          "available": false,
+          "reason": "Not recorded: require actual causal attention matrices and declared head mapping",
+          "supported": true
+        },
+        "complete_sequences": {
+          "artefacts": [
+            {
+              "bytes": 4160,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/bits.hamming.generation.json",
+              "sha256": "19172d7b4c738dac55e7dc508eeeea43bbd27a824b54d1cd20a7d257e9f03d0c"
+            },
+            {
+              "bytes": 4023,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/bits.popcount.generation.json",
+              "sha256": "580efb002272a51f28c13547f99fd1b12627b078a43a0d4dcf3b7ae3212a82e9"
+            },
+            {
+              "bytes": 4078,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/calendar.leap.generation.json",
+              "sha256": "1ddc8215a1627afee40421627b1a8bcbcb9da3994f595e0645de4f5babb1186a"
+            },
+            {
+              "bytes": 4327,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/calendar.month_days.generation.json",
+              "sha256": "dd6cf8aad9bb5927dd348e169d71b45bf1866edbdcb252458b95ca740709520a"
+            },
+            {
+              "bytes": 4524,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/calendar.ordinal.generation.json",
+              "sha256": "06c36a2f6080a85452632e489e07afe357df6a9fa00e33e4a3b52bff8c333e6b"
+            },
+            {
+              "bytes": 4291,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/graph.indegrees.generation.json",
+              "sha256": "88c9bcad44eb92e454e4841dffd5cc281edd3722e7dc76cf7f43e301568984e7"
+            },
+            {
+              "bytes": 4853,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/intervals.coverage.generation.json",
+              "sha256": "99a1c524d6f042a1842ed25778ae33ec9240b053b5a63addfb777a94ec5904d9"
+            },
+            {
+              "bytes": 4468,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/intervals.peak.generation.json",
+              "sha256": "32bd9858cddc772409654bc7aed2fadd6d58e25088966e50400430a1d612ae2a"
+            },
+            {
+              "bytes": 4618,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/ledger.bounds.generation.json",
+              "sha256": "c029ffe946a0cb28c8dee81560093c198540df081b2d39cc50f4c2e2eaf78c93"
+            },
+            {
+              "bytes": 4347,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/ledger.prefix.generation.json",
+              "sha256": "b525f34b6fc4d10be932ac48de97fb17eae958bbd651c9e26dc78ac07152749e"
+            },
+            {
+              "bytes": 4078,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/ledger.sum.generation.json",
+              "sha256": "6f3d4bba8600110d5989ff6b79c4dbeb0b5c4506b4e5e456f91c6b04dedba773"
+            },
+            {
+              "bytes": 4553,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/matrices.diagonals.generation.json",
+              "sha256": "f4f91c4bc8e21777e536532b67191bfb3d995720dcc4a5d2991278f07ac4dade"
+            },
+            {
+              "bytes": 4397,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/matrices.rotate.generation.json",
+              "sha256": "979fdab750ffd71c3c4db9704589d6ed167a72ec5ce73db0e4a690c5f6b951e2"
+            },
+            {
+              "bytes": 4228,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/paths.basename.generation.json",
+              "sha256": "f36bacb2143af3429a30fb69a0613cd660c1747735b92dbd012d10f31bc05230"
+            },
+            {
+              "bytes": 4354,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/search.runs.generation.json",
+              "sha256": "5d4d8a7d851490bf4e2b910ac532b0286b45f6e4d888474a9e23b5a980b99a74"
+            },
+            {
+              "bytes": 4692,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/stock.mode.generation.json",
+              "sha256": "cbd509dbfada7161d8f5d39465101e6ecb9d7a8c8517dff743f3cc5fe317ee3c"
+            },
+            {
+              "bytes": 4113,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/text.lower_trim.generation.json",
+              "sha256": "18c986ab02ef8587e9bfcef5a240cc768b6a2b95f917c183d1ebcba73e71dabb"
+            },
+            {
+              "bytes": 4565,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/validation.brackets.generation.json",
+              "sha256": "dfd9cf6ef938865e8b564079016bfaee11aaf943a5a00b0c6c7543f010b3d54d"
+            }
+          ],
+          "available": true,
+          "reason": "Complete, nonempty generations passed every trusted container case",
+          "supported": true
+        },
+        "context": {
+          "artefacts": [],
+          "available": false,
+          "reason": "No generation with pinned additional train-only context",
+          "supported": true
+        },
+        "hidden_states": {
+          "artefacts": [],
+          "available": false,
+          "reason": "Not recorded: require actual layer states and declared dimensional projection",
+          "supported": true
+        },
+        "logits": {
+          "artefacts": [],
+          "available": false,
+          "reason": "Not recorded: a native teacher-forced worker must produce and bind actual token logits; KL also requires tokeniser alignment",
+          "supported": true
+        },
+        "on_policy": {
+          "artefacts": [],
+          "available": false,
+          "reason": "No checkpoint-bound student rollout plus teacher feedback and regrading",
+          "supported": true
+        },
+        "preferences": {
+          "artefacts": [],
+          "available": false,
+          "reason": "No safe same-task verified positive/negative pair",
+          "supported": true
+        },
+        "process": {
+          "artefacts": [
+            {
+              "bytes": 862,
+              "path": "reports/local-study/explore/round-001/content-v1/qwen-coder-7b-q4_k_m/ledger.bounds/process/record.json",
+              "sha256": "6a231bc66eb7b365e0cb1f108a85bad831774e07aa7db00f37340e954dc92c31"
+            },
+            {
+              "bytes": 874,
+              "path": "reports/local-study/explore/round-001/content-v1/qwen-coder-7b-q4_k_m/stock.stable_unique/process/record.json",
+              "sha256": "c9581b58aab08bd5e28f884a4fb713718f15871627447d15723e57a4eb586b6f"
+            },
+            {
+              "bytes": 874,
+              "path": "reports/local-study/explore/round-001/content-v1/qwen-coder-7b-q4_k_m/validation.brackets/process/record.json",
+              "sha256": "00a9d45c744076353ad7087b9f85b408b2c324b1acc1bba4df68157f2b5b0065"
+            },
+            {
+              "bytes": 860,
+              "path": "reports/local-study/explore/round-001/content-v1/qwen-coder-7b-q4_k_m/bits.hamming/process/record.json",
+              "sha256": "426d00c894088d5c3fee02e7419e6c36aa366c4df22c05fc45735f6c8c4b4629"
+            }
+          ],
+          "available": true,
+          "reason": "Actual additional generation, frozen train-only context/feedback and verified final solution; generated comments do not prove faithful internal reasoning",
+          "supported": true
+        },
+        "self_distillation": {
+          "artefacts": [],
+          "available": false,
+          "reason": "No original student-checkpoint teacher outputs; supervised teacher rows cannot be relabelled",
+          "supported": true
+        },
+        "student_tokeniser_sha256": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+        "tokeniser_aligned": true,
+        "tokeniser_sha256": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+        "tool_trajectories": {
+          "artefacts": [],
+          "available": false,
+          "reason": "A sandbox grade alone is not a teacher feedback/revision trajectory",
+          "supported": true
+        }
+      },
+      "id": "qwen-coder-7b-q4_k_m",
+      "model": {
+        "architecture": "qwen2",
+        "developer_id": "alibaba-qwen",
+        "directory": "offline_bundle/comparative/qwen-coder-7b-q4_k_m",
+        "id": "qwen-coder-7b-q4_k_m",
+        "licence": "Apache-2.0",
+        "model_id": "Qwen/Qwen2.5-Coder-7B-Instruct-GGUF",
+        "revision": "13fb94bfda8c8cf22497dc57b78f391a9acb426a",
+        "role": "coding_teacher",
+        "weight_format": "gguf"
+      },
+      "rights": {
+        "eligible": true,
+        "inherited_restrictions": [
+          "Retain original model licence, copyright notices and attribution; no ownership guarantee for independently reproduced code."
+        ],
+        "licence": "apache-2.0",
+        "licence_artefacts": [
+          {
+            "bytes": 11343,
+            "path": "offline_bundle/comparative/qwen-coder-7b-q4_k_m/source/LICENSE",
+            "sha256": "832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e"
+          },
+          {
+            "bytes": 6392,
+            "path": "offline_bundle/comparative/qwen-coder-7b-q4_k_m/source/README.md",
+            "sha256": "3c090be37f829adc1e4cdb78733667437732541470430ab2cd785d7f0d460077"
+          }
+        ],
+        "reasoning": "Explicit recognised original model licence and publisher-verified local assets, subject to preserved licence obligations",
+        "scope": "local open-weight output adaptation only; no API terms inferred"
+      }
+    }
+  ],
+  "student_execution": {
+    "actual_device": "Cpu",
+    "actual_dtype": "F32",
+    "available_cpu_threads": 16,
+    "candle_cpu_threads": 7,
+    "cpu_fallback": false,
+    "cuda_active": false,
+    "engine": "native_rust_candle",
+    "student_backend": "conventional_qwen_lora",
+    "ternary_quantisation_during_every_forward": false,
+    "trainable_adapter_tensors": 96
+  },
+  "reloaded": true,
+  "production_eligible": false,
+  "elapsed_seconds": 357.882038117,
+  "limitations": [
+    "48 tasks from 12 locally authored train source groups; no held-out or development data enters training.",
+    "Local model developers do not count as independent paid API provider businesses.",
+    "No learning, promotion, cash saving or teacher trace is inferred from this bundle alone.",
+    "Process, contextual revision, teacher-feedback trajectories, on-policy and self-distillation require additional genuine generation evidence.",
+    "Exploratory local-teacher adaptation; no independent API-provider or held-out promotion claim. Reload is a fresh model instance inside the worker; external evaluation must reload in its own process."
+  ]
+}

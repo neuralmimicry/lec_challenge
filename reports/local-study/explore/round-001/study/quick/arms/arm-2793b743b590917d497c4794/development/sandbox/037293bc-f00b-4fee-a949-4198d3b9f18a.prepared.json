@@ -1,0 +1,49 @@
+{
+  "schema_version": 3,
+  "run_id": "d07f8434-ae3a-4eff-a936-912f0c33dfd4",
+  "ownership_nonce": "7fde8c2e-101d-49c5-aaea-5f33c7038787",
+  "attempt_key": "037293bc-f00b-4fee-a949-4198d3b9f18a",
+  "receipt_path": "reports/local-study/explore/round-001/study/quick/arms/arm-2793b743b590917d497c4794/development/sandbox/037293bc-f00b-4fee-a949-4198d3b9f18a.prepared.json",
+  "report_path": "reports/local-study/explore/round-001/study/quick/arms/arm-2793b743b590917d497c4794/development/sandbox/d07f8434-ae3a-4eff-a936-912f0c33dfd4.json",
+  "task": {
+    "id": "money.split",
+    "source_id": "private-money-v1",
+    "lineage_id": "local-contract-pack-12",
+    "split": "development",
+    "specification": "Input [cents,n] has nonnegative cents and n>=1. Split into n integer shares differing by at most one, with larger shares first. The number of shares is at most 64.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "639498c83f5e053773149696cb44aea438f77b20c7b0e571d728085fde4db87b",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": [
+          10,
+          3
+        ],
+        "expected": [
+          4,
+          3,
+          3
+        ]
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "use serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let cents = input.as_i64().unwrap();\n    let n = input.as_i64().unwrap();\n    let mut shares = Vec::new();\n\n    for _ in 0..n {\n        let share = cents / (n as i64);\n        shares.push(share);\n        cents -= share;\n    }\n\n    shares.sort_unstable();\n    shares.into_iter().map(|share| serde_json::Value::from(share)).collect()\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/explore/round-001/study/quick/arms/arm-2793b743b590917d497c4794/development/sandbox"
+  },
+  "code_sha256": "c0e5850157f9dad3a673524783c33daab0c50143115003048905dc16eeec1031",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

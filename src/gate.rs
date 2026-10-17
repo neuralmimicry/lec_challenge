@@ -87,6 +87,10 @@ pub struct GateReport {
     pub effect: Option<f64>,
     pub incumbent_rate: Option<f64>,
     pub candidate_rate: Option<f64>,
+    /// Older reports did not retain alpha. Do not infer their confidence from
+    /// today's configuration when rendering historical evidence.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub confidence_level: Option<f64>,
     pub t_interval: Option<Interval>,
     pub source_bootstrap_interval: Option<Interval>,
     pub source_effects: BTreeMap<String, f64>,
@@ -105,6 +109,7 @@ impl GateReport {
             effect: None,
             incumbent_rate: None,
             candidate_rate: None,
+            confidence_level: (cfg.alpha > 0.0 && cfg.alpha < 0.5).then_some(1.0 - cfg.alpha),
             t_interval: None,
             source_bootstrap_interval: None,
             source_effects: BTreeMap::new(),
@@ -131,8 +136,12 @@ impl GateReport {
             })
             .unwrap_or_else(|| "unavailable".into())
         };
+        let confidence = self
+            .confidence_level
+            .map(|v| format!("{:.2}%", 100.0 * v))
+            .unwrap_or_else(|| "confidence not retained in historical report".into());
         format!(
-            "# Promotion evaluation\n\nDecision: **{:?}**\n\n{}\n\nEvidence: {}. Incumbent: {}; candidate: {}; difference: {}.\n\n95% source t interval: {}. Source bootstrap: {}. Ship margin: {:.2} points.\n\n{} sources; {} tasks; {} paired observations. Seeds do not increase the independent source count.\n\n{}\n",
+            "# Promotion evaluation\n\nDecision: **{:?}**\n\n{}\n\nEvidence: {}. Incumbent: {}; candidate: {}; difference: {}.\n\nSource t interval ({confidence}): {}. Source bootstrap ({confidence}): {}. Ship margin: {:.2} points.\n\n{} sources; {} tasks; {} paired observations. Seeds do not increase the independent source count.\n\n{}\n",
             self.decision,
             self.reason,
             self.evidence_kind,
@@ -248,6 +257,7 @@ pub fn decide(
             effect: Some(effect),
             incumbent_rate: Some(incumbent),
             candidate_rate: Some(candidate),
+            confidence_level: Some(1.0 - cfg.alpha),
             t_interval: Some(t_interval),
             source_bootstrap_interval: Some(boot),
             source_effects: effects,
@@ -327,13 +337,14 @@ pub struct PowerReport {
 impl PowerReport {
     pub fn markdown(&self) -> String {
         let mut md = format!(
-            "# Gate detectability sensitivity\n\nSimulation only; no learning result. {} source clusters, {} tasks per source and {} shared decoding repeats. {} trials per point; {} bootstrap resamples; simulation seed {}. The source sharing construction has the stated pairwise intraclass correlation.\n\n| Assumed discordance / source correlation | Smallest tested effect at estimated 80% power |\n| --- | ---: |\n",
+            "# Gate detectability sensitivity\n\nSimulation only; no learning result. {} source clusters, {} tasks per source and {} shared decoding repeats. {} trials per point; {} bootstrap resamples; simulation seed {}. The source sharing construction has the stated pairwise intraclass correlation.\n\n| Assumed discordance / source correlation | Smallest tested effect at estimated {:.2}% power |\n| --- | ---: |\n",
             self.sources,
             self.tasks_per_source,
             self.decoding_repeats,
             self.trials,
             self.gate_configuration.bootstrap_trials,
-            self.seed
+            self.seed,
+            100.0 * self.gate_configuration.power_target
         );
         for (assumption, mde) in &self.mde_by_assumption {
             md.push_str(&format!(
@@ -428,6 +439,10 @@ pub fn simulate_power(
         !effects.is_empty() && effects.windows(2).all(|w| w[0] < w[1]),
         "tested effects must be strictly increasing to identify the smallest tested detectable effect"
     );
+    ensure!(
+        !discordances.is_empty() && !correlations.is_empty(),
+        "detectability requires discordance and source-correlation assumptions"
+    );
     let mut rng = ChaCha8Rng::seed_from_u64(cfg.power_seed);
     let mut points = Vec::new();
     let mut mdes = BTreeMap::new();
@@ -492,7 +507,22 @@ pub fn simulate_power(
             mdes.insert(format!("discordance={q:.2}, correlation={rho:.2}"), mde);
         }
     }
-    Ok(PowerReport{evidence_kind:"simulation_assumptions_not_measured_learning".into(),gate_configuration:cfg.clone(),tested_effects:effects.to_vec(),seed:cfg.power_seed,trials:cfg.power_trials,sources,tasks_per_source,decoding_repeats:cfg.evaluation_seeds.len(),points,mde_by_assumption:mdes,interpretation:"MDE is the first tested effect reaching 80% power, not an interpolated precision claim; null means MDE above tested range or unachievable at the specified discordance. Includes the exact reported t/bootstrap/slice gate configuration, with maximally shared seed outcomes; reduced settings are diagnostic, not the final predeclared MDE. Task/source dependence assumptions require development calibration and sensitivity review.".into()})
+    Ok(PowerReport {
+        evidence_kind: "simulation_assumptions_not_measured_learning".into(),
+        gate_configuration: cfg.clone(),
+        tested_effects: effects.to_vec(),
+        seed: cfg.power_seed,
+        trials: cfg.power_trials,
+        sources,
+        tasks_per_source,
+        decoding_repeats: cfg.evaluation_seeds.len(),
+        points,
+        mde_by_assumption: mdes,
+        interpretation: format!(
+            "MDE is the first tested effect reaching {:.2}% power, not an interpolated precision claim; null means MDE above tested range or unachievable at the specified discordance. Includes the exact reported t/bootstrap/slice gate configuration, with maximally shared seed outcomes; reduced settings are diagnostic, not the final predeclared MDE. Task/source dependence assumptions require development calibration and sensitivity review.",
+            100.0 * cfg.power_target
+        ),
+    })
 }
 
 #[cfg(test)]

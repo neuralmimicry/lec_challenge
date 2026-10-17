@@ -1,0 +1,1 @@
+{"error":"cannot create /home/pbisaacs/Developer/neuralmimicry/lec_challenge/state/api-providers.local.toml; existing files are never overwritten; inspect that file or choose another --config path: failed to persist temporary file: File exists (os error 17): File exists (os error 17)","observed_unix_ms":1792170059002,"promotion":"incumbent_retained","status":"FAILURE"}

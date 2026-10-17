@@ -1,0 +1,101 @@
+student rollout collection: cached local weights only; explicit offline=false; frozen-student batch then offline updates
+execution: CUDA GPU NVIDIA GeForce RTX 2080 selected: estimated resident 6538528768 bytes fits guarded free VRAM 6872891392 bytes; available CPU threads=16, usable RAM=42905693389 bytes
+student rollout task=ledger.sum complete=true
+student rollout task=ledger.prefix complete=true
+student rollout task=ledger.differences complete=true
+student rollout task=ledger.bounds complete=true
+student rollout task=stock.counts complete=true
+student rollout task=stock.stable_unique complete=true
+student rollout task=stock.duplicates complete=true
+student rollout task=stock.mode complete=true
+student rollout task=text.lower_trim complete=false
+student rollout task=text.squash complete=true
+student rollout task=text.slug complete=true
+student rollout task=text.reverse_words complete=true
+student rollout task=intervals.merge complete=true
+student rollout task=intervals.coverage complete=true
+student rollout task=intervals.largest_gap complete=true
+student rollout task=intervals.peak complete=true
+student rollout task=graph.reachable complete=true
+student rollout task=graph.distance complete=true
+student rollout task=graph.indegrees complete=true
+student rollout task=graph.topological complete=true
+student rollout task=validation.luhn complete=true
+student rollout task=validation.ipv4 complete=true
+student rollout task=validation.brackets complete=true
+student rollout task=validation.identifier complete=true
+student rollout task=matrices.transpose complete=true
+student rollout task=matrices.row_sums complete=true
+student rollout task=matrices.rotate complete=true
+student rollout task=matrices.diagonals complete=true
+student rollout task=search.occurrences complete=true
+student rollout task=search.common_prefix complete=true
+student rollout task=search.runs complete=true
+student rollout task=search.anagram complete=true
+student rollout task=paths.normalise complete=true
+student rollout task=paths.basename complete=true
+student rollout task=paths.extension complete=false
+student rollout task=paths.ancestors complete=true
+student rollout task=sequences.interleave complete=true
+student rollout task=sequences.zip_longest complete=true
+student rollout task=sequences.chunks complete=true
+student rollout task=sequences.move_zeroes complete=true
+student rollout task=calendar.leap complete=true
+student rollout task=calendar.month_days complete=true
+student rollout task=calendar.ordinal complete=true
+student rollout task=calendar.valid_date complete=true
+student rollout task=bits.popcount complete=true
+student rollout task=bits.hamming complete=true
+student rollout task=bits.parity complete=true
+student rollout task=bits.lowest complete=true
+Hub hashing qwen2.5-coder-7b-instruct-q4_k_m.gguf: 0/4683073536 bytes, 0.00 MiB/s, ETA unknown (publisher checksum pending)
+Hub hashing qwen2.5-coder-7b-instruct-q4_k_m.gguf: 2486173696/4683073536 bytes, 158.03 MiB/s, ETA 00:00:14 (publisher checksum pending)
+rollout revision mode=OnPolicy teacher=qwen-coder-7b-q4_k_m task=ledger.sum accepted=false
+rollout revision mode=OnPolicy teacher=qwen-coder-7b-q4_k_m task=ledger.prefix accepted=false
+rollout revision mode=OnPolicy teacher=qwen-coder-7b-q4_k_m task=ledger.differences accepted=false
+rollout revision mode=OnPolicy teacher=qwen-coder-7b-q4_k_m task=ledger.bounds accepted=false
+rollout revision mode=OnPolicy teacher=qwen-coder-7b-q4_k_m task=stock.counts accepted=false
+rollout revision mode=OnPolicy teacher=qwen-coder-7b-q4_k_m task=stock.stable_unique accepted=false
+rollout revision mode=OnPolicy teacher=qwen-coder-7b-q4_k_m task=stock.duplicates accepted=false
+rollout revision mode=OnPolicy teacher=qwen-coder-7b-q4_k_m task=stock.mode accepted=false
+rollout revision mode=OnPolicy teacher=qwen-coder-7b-q4_k_m task=text.lower_trim accepted=false
+rollout revision mode=OnPolicy teacher=qwen-coder-7b-q4_k_m task=text.squash accepted=false
+rollout revision mode=OnPolicy teacher=qwen-coder-7b-q4_k_m task=text.slug accepted=false
+rollout revision mode=OnPolicy teacher=qwen-coder-7b-q4_k_m task=text.reverse_words accepted=false
+rollout revision mode=OnPolicy teacher=qwen-coder-7b-q4_k_m task=intervals.merge accepted=false
+rollout revision mode=OnPolicy teacher=qwen-coder-7b-q4_k_m task=intervals.coverage accepted=false
+rollout revision mode=OnPolicy teacher=qwen-coder-7b-q4_k_m task=intervals.largest_gap accepted=false
+rollout revision mode=OnPolicy teacher=qwen-coder-7b-q4_k_m task=intervals.peak accepted=false
+rollout revision mode=OnPolicy teacher=qwen-coder-7b-q4_k_m task=graph.reachable accepted=false
+rollout revision mode=OnPolicy teacher=qwen-coder-7b-q4_k_m task=graph.distance accepted=false
+rollout revision mode=OnPolicy teacher=qwen-coder-7b-q4_k_m task=graph.indegrees accepted=false
+rollout revision mode=OnPolicy teacher=qwen-coder-7b-q4_k_m task=graph.topological accepted=false
+rollout revision mode=OnPolicy teacher=qwen-coder-7b-q4_k_m task=validation.luhn accepted=false
+rollout revision mode=OnPolicy teacher=qwen-coder-7b-q4_k_m task=validation.ipv4 accepted=false
+rollout revision mode=OnPolicy teacher=qwen-coder-7b-q4_k_m task=validation.brackets accepted=false
+rollout revision mode=OnPolicy teacher=qwen-coder-7b-q4_k_m task=validation.identifier accepted=false
+rollout revision mode=OnPolicy teacher=qwen-coder-7b-q4_k_m task=matrices.transpose accepted=false
+rollout revision mode=OnPolicy teacher=qwen-coder-7b-q4_k_m task=matrices.row_sums accepted=false
+rollout revision mode=OnPolicy teacher=qwen-coder-7b-q4_k_m task=matrices.rotate accepted=false
+rollout revision mode=OnPolicy teacher=qwen-coder-7b-q4_k_m task=matrices.diagonals accepted=false
+rollout revision mode=OnPolicy teacher=qwen-coder-7b-q4_k_m task=search.occurrences accepted=false
+rollout revision mode=OnPolicy teacher=qwen-coder-7b-q4_k_m task=search.common_prefix accepted=false
+rollout revision mode=OnPolicy teacher=qwen-coder-7b-q4_k_m task=search.runs accepted=false
+rollout revision mode=OnPolicy teacher=qwen-coder-7b-q4_k_m task=search.anagram accepted=false
+rollout revision mode=OnPolicy teacher=qwen-coder-7b-q4_k_m task=paths.normalise accepted=false
+rollout revision mode=OnPolicy teacher=qwen-coder-7b-q4_k_m task=paths.basename accepted=false
+rollout revision mode=OnPolicy teacher=qwen-coder-7b-q4_k_m task=paths.extension accepted=false
+rollout revision mode=OnPolicy teacher=qwen-coder-7b-q4_k_m task=paths.ancestors accepted=false
+rollout revision mode=OnPolicy teacher=qwen-coder-7b-q4_k_m task=sequences.interleave accepted=false
+rollout revision mode=OnPolicy teacher=qwen-coder-7b-q4_k_m task=sequences.zip_longest accepted=false
+rollout revision mode=OnPolicy teacher=qwen-coder-7b-q4_k_m task=sequences.chunks accepted=false
+rollout revision mode=OnPolicy teacher=qwen-coder-7b-q4_k_m task=sequences.move_zeroes accepted=false
+rollout revision mode=OnPolicy teacher=qwen-coder-7b-q4_k_m task=calendar.leap accepted=false
+rollout revision mode=OnPolicy teacher=qwen-coder-7b-q4_k_m task=calendar.month_days accepted=false
+rollout revision mode=OnPolicy teacher=qwen-coder-7b-q4_k_m task=calendar.ordinal accepted=false
+rollout revision mode=OnPolicy teacher=qwen-coder-7b-q4_k_m task=calendar.valid_date accepted=false
+rollout revision mode=OnPolicy teacher=qwen-coder-7b-q4_k_m task=bits.popcount accepted=false
+rollout revision mode=OnPolicy teacher=qwen-coder-7b-q4_k_m task=bits.hamming accepted=false
+rollout revision mode=OnPolicy teacher=qwen-coder-7b-q4_k_m task=bits.parity accepted=false
+rollout revision mode=OnPolicy teacher=qwen-coder-7b-q4_k_m task=bits.lowest accepted=false
+FAILURE: student rollout collection is incomplete or failed; original observations and valid partial evidence were retained

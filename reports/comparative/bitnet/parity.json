@@ -1,0 +1,389 @@
+{
+  "checkpoint_id": "8143ae115ed6babe5e5ada8fb8c5b769d8f417802b2db042ad98b4f7ed73975b",
+  "cpp_execution": {
+    "actual_device": "Cpu",
+    "actual_dtype": "F32",
+    "architecture": "bitnet",
+    "checkpoint_id": "8143ae115ed6babe5e5ada8fb8c5b769d8f417802b2db042ad98b4f7ed73975b",
+    "context_tokens": 4096,
+    "cpu_fallback": false,
+    "cpu_mask": null,
+    "cpu_threads": 4,
+    "cuda_active": false,
+    "engine": "pinned_bitnet_cpp_supervised_by_rust",
+    "engine_manifest": {
+      "bytes": 6170,
+      "path": "state/engines/bitnet-build/engine-manifest.json",
+      "sha256": "082535c5bf64d14c718a50a4829ba52f00f9f251f013df79d422862f3b056a2e"
+    },
+    "evaluation_only": true,
+    "gguf": {
+      "bytes": 1843959008,
+      "path": "offline_bundle/students/bitnet-2b-4t/model.i2_s.gguf",
+      "sha256": "2e097b3dda58f8308b03c8b62cce7cb8767470aafb7400e5f169c108b86c75a7"
+    },
+    "inherited_affinity": "0-15",
+    "kv_cache": true,
+    "lifetime_supervision": "persistent_native_owner_thread_linux_pdeathsig_sigkill_parent_pid_race_check",
+    "log": "reports/comparative/bitnet/engine-runs/f2f05fd2-3b0b-45d5-a1bd-c2a8b414126c.log",
+    "model_id": "microsoft/bitnet-b1.58-2B-4T",
+    "native_server_pid": 766305,
+    "original_tokeniser_parity_verified": true,
+    "production_eligible": false,
+    "requested": {
+      "device": "cpu",
+      "dtype": "f32"
+    },
+    "revision": "04c3b9ad9361b824064a1f25ea60a8be9599b127"
+  },
+  "declared_maximum_absolute_log_probability_error": 0.1,
+  "evidence_kind": "actual_original_bitnet_rust_i2s_numerical_parity",
+  "limitations": [
+    "Three synthetic numerical prompts cannot establish coding quality or universal kernel equivalence.",
+    "A different model/adapter, engine patch, precision or export requires its own validation."
+  ],
+  "observations": [
+    {
+      "input_tokens": 14,
+      "maximum_absolute_log_probability_error": 0.36657142639160156,
+      "native_top_token": 9906,
+      "native_top_tokens": [
+        {
+          "absolute_error": 0.00004663364961743355,
+          "id": 9906,
+          "native_log_probability": -0.0041528623551130295,
+          "rust_log_probability": -0.004199496004730463
+        },
+        {
+          "absolute_error": 0.009459495544433594,
+          "id": 13347,
+          "native_log_probability": -5.706082820892334,
+          "rust_log_probability": -5.6966233253479
+        },
+        {
+          "absolute_error": 0.0009775161743172944,
+          "id": 15571,
+          "native_log_probability": -7.59369707107544,
+          "rust_log_probability": -7.592719554901123
+        },
+        {
+          "absolute_error": 0.02117633819580078,
+          "id": 1,
+          "native_log_probability": -8.923083305358887,
+          "rust_log_probability": -8.901906967163086
+        },
+        {
+          "absolute_error": 0.017927169799804688,
+          "id": 92886,
+          "native_log_probability": -10.051100730895996,
+          "rust_log_probability": -10.0690279006958
+        },
+        {
+          "absolute_error": 0.10856056213378906,
+          "id": 15339,
+          "native_log_probability": -10.138065338134766,
+          "rust_log_probability": -10.029504776000977
+        },
+        {
+          "absolute_error": 0.026162147521972656,
+          "id": 40,
+          "native_log_probability": -10.633136749267578,
+          "rust_log_probability": -10.65929889678955
+        },
+        {
+          "absolute_error": 0.16710567474365234,
+          "id": 82681,
+          "native_log_probability": -10.877850532531738,
+          "rust_log_probability": -10.710744857788086
+        },
+        {
+          "absolute_error": 0.13118457794189453,
+          "id": 4438,
+          "native_log_probability": -11.311983108520508,
+          "rust_log_probability": -11.180798530578613
+        },
+        {
+          "absolute_error": 0.062164306640625,
+          "id": 19182,
+          "native_log_probability": -11.38060474395752,
+          "rust_log_probability": -11.318440437316895
+        },
+        {
+          "absolute_error": 0.015134811401367188,
+          "id": 46078,
+          "native_log_probability": -11.431467056274414,
+          "rust_log_probability": -11.446601867675781
+        },
+        {
+          "absolute_error": 0.2814302444458008,
+          "id": 40914,
+          "native_log_probability": -12.17302131652832,
+          "rust_log_probability": -11.89159107208252
+        },
+        {
+          "absolute_error": 0.09187126159667969,
+          "id": 13359,
+          "native_log_probability": -13.128735542297363,
+          "rust_log_probability": -13.036864280700684
+        },
+        {
+          "absolute_error": 0.05482292175292969,
+          "id": 14262,
+          "native_log_probability": -13.155688285827637,
+          "rust_log_probability": -13.100865364074707
+        },
+        {
+          "absolute_error": 0.36657142639160156,
+          "id": 22691,
+          "native_log_probability": -13.317782402038574,
+          "rust_log_probability": -13.684353828430176
+        },
+        {
+          "absolute_error": 0.033515930175779474,
+          "id": 12174,
+          "native_log_probability": -13.694046974182127,
+          "rust_log_probability": -13.660531044006348
+        }
+      ],
+      "passed": false,
+      "prompt": "Say hello in one short sentence.",
+      "rust_top_token": 9906,
+      "top_prediction_equal": true
+    },
+    {
+      "input_tokens": 16,
+      "maximum_absolute_log_probability_error": 0.47077465057373225,
+      "native_top_token": 11874,
+      "native_top_tokens": [
+        {
+          "absolute_error": 0.00015163247007876635,
+          "id": 11874,
+          "native_log_probability": -0.001387604745104909,
+          "rust_log_probability": -0.0015392372151836753
+        },
+        {
+          "absolute_error": 0.13573932647705078,
+          "id": 791,
+          "native_log_probability": -7.404387474060059,
+          "rust_log_probability": -7.268648147583008
+        },
+        {
+          "absolute_error": 0.3692903518676758,
+          "id": 17,
+          "native_log_probability": -8.196404457092285,
+          "rust_log_probability": -7.827114105224609
+        },
+        {
+          "absolute_error": 0.16720104217529297,
+          "id": 23662,
+          "native_log_probability": -8.410431861877441,
+          "rust_log_probability": -8.577632904052734
+        },
+        {
+          "absolute_error": 0.011392593383789062,
+          "id": 20375,
+          "native_log_probability": -9.698352813720703,
+          "rust_log_probability": -9.686960220336914
+        },
+        {
+          "absolute_error": 0.47077465057373225,
+          "id": 20215,
+          "native_log_probability": -9.991795539855955,
+          "rust_log_probability": -10.462570190429688
+        },
+        {
+          "absolute_error": 0.31820774078368963,
+          "id": 28070,
+          "native_log_probability": -10.236119270324709,
+          "rust_log_probability": -10.554327011108398
+        },
+        {
+          "absolute_error": 0.16716384887695312,
+          "id": 1271,
+          "native_log_probability": -10.403430938720703,
+          "rust_log_probability": -10.23626708984375
+        },
+        {
+          "absolute_error": 0.3939857482910156,
+          "id": 38120,
+          "native_log_probability": -10.549139976501465,
+          "rust_log_probability": -10.94312572479248
+        },
+        {
+          "absolute_error": 0.2702541351318377,
+          "id": 84429,
+          "native_log_probability": -10.912150382995604,
+          "rust_log_probability": -11.182404518127441
+        },
+        {
+          "absolute_error": 0.1976642608642578,
+          "id": 42560,
+          "native_log_probability": -11.97325325012207,
+          "rust_log_probability": -12.170917510986328
+        },
+        {
+          "absolute_error": 0.4628734588623029,
+          "id": 60628,
+          "native_log_probability": -12.070460319519045,
+          "rust_log_probability": -12.533333778381348
+        },
+        {
+          "absolute_error": 0.3271512985229492,
+          "id": 2170,
+          "native_log_probability": -12.19800090789795,
+          "rust_log_probability": -11.870849609375
+        },
+        {
+          "absolute_error": 0.1639852523803711,
+          "id": 40914,
+          "native_log_probability": -12.37209415435791,
+          "rust_log_probability": -12.208108901977539
+        },
+        {
+          "absolute_error": 0.1496734619140625,
+          "id": 16533,
+          "native_log_probability": -12.57364559173584,
+          "rust_log_probability": -12.723319053649902
+        },
+        {
+          "absolute_error": 0.4326963424682635,
+          "id": 33408,
+          "native_log_probability": -12.632405281066896,
+          "rust_log_probability": -12.199708938598633
+        }
+      ],
+      "passed": false,
+      "prompt": "What is two plus three? Answer briefly.",
+      "rust_top_token": 11874,
+      "top_prediction_equal": true
+    },
+    {
+      "input_tokens": 21,
+      "maximum_absolute_log_probability_error": 0.27985334396362305,
+      "native_top_token": 644,
+      "native_top_tokens": [
+        {
+          "absolute_error": 0.04115694761276245,
+          "id": 644,
+          "native_log_probability": -0.3397791385650635,
+          "rust_log_probability": -0.3809360861778259
+        },
+        {
+          "absolute_error": 0.0008600950241088867,
+          "id": 1271,
+          "native_log_probability": -1.7141917943954468,
+          "rust_log_probability": -1.713331699371338
+        },
+        {
+          "absolute_error": 0.2771594524383545,
+          "id": 40914,
+          "native_log_probability": -2.5769712924957275,
+          "rust_log_probability": -2.299811840057373
+        },
+        {
+          "absolute_error": 0.27985334396362305,
+          "id": 96556,
+          "native_log_probability": -4.047359466552734,
+          "rust_log_probability": -3.7675061225891113
+        },
+        {
+          "absolute_error": 0.18526649475097656,
+          "id": 791,
+          "native_log_probability": -4.530466556549072,
+          "rust_log_probability": -4.715733051300049
+        },
+        {
+          "absolute_error": 0.163360595703125,
+          "id": 2675,
+          "native_log_probability": -6.264790058135986,
+          "rust_log_probability": -6.101429462432861
+        },
+        {
+          "absolute_error": 0.18079566955566406,
+          "id": 8586,
+          "native_log_probability": -7.0301432609558105,
+          "rust_log_probability": -6.8493475914001465
+        },
+        {
+          "absolute_error": 0.08694076538085938,
+          "id": 74694,
+          "native_log_probability": -8.33349609375,
+          "rust_log_probability": -8.42043685913086
+        },
+        {
+          "absolute_error": 0.032955169677734375,
+          "id": 2181,
+          "native_log_probability": -9.490320205688477,
+          "rust_log_probability": -9.457365036010742
+        },
+        {
+          "absolute_error": 0.036176681518556464,
+          "id": 2746,
+          "native_log_probability": -9.561732292175291,
+          "rust_log_probability": -9.597908973693848
+        },
+        {
+          "absolute_error": 0.20665931701660334,
+          "id": 2028,
+          "native_log_probability": -10.017486572265623,
+          "rust_log_probability": -10.224145889282227
+        },
+        {
+          "absolute_error": 0.1789541244506836,
+          "id": 4599,
+          "native_log_probability": -10.200453758239746,
+          "rust_log_probability": -10.37940788269043
+        },
+        {
+          "absolute_error": 0.17499637603759588,
+          "id": 12834,
+          "native_log_probability": -10.229198455810549,
+          "rust_log_probability": -10.404194831848145
+        },
+        {
+          "absolute_error": 0.21138954162597656,
+          "id": 32,
+          "native_log_probability": -10.426959991455078,
+          "rust_log_probability": -10.215570449829102
+        },
+        {
+          "absolute_error": 0.11307144165039062,
+          "id": 5733,
+          "native_log_probability": -10.50935173034668,
+          "rust_log_probability": -10.62242317199707
+        },
+        {
+          "absolute_error": 0.0572357177734375,
+          "id": 48051,
+          "native_log_probability": -10.679716110229492,
+          "rust_log_probability": -10.622480392456055
+        }
+      ],
+      "passed": false,
+      "prompt": "Complete the Rust expression: 3_i64 + 4_i64",
+      "rust_top_token": 644,
+      "top_prediction_equal": true
+    }
+  ],
+  "passed": false,
+  "production_eligible": false,
+  "quality_evaluation": false,
+  "rust_execution": {
+    "activation_forward": "symmetric_per_token_int8_ties_even_ste",
+    "actual_device": "Cpu",
+    "actual_dtype": "F32",
+    "architecture": "bitnet",
+    "checkpoint_directory": null,
+    "checkpoint_id": "8143ae115ed6babe5e5ada8fb8c5b769d8f417802b2db042ad98b4f7ed73975b",
+    "cpu_fallback": false,
+    "cuda_active": false,
+    "decoding_cache": "none_full_prefix_recomputed",
+    "engine": "native_rust_candle",
+    "evaluation_only": true,
+    "model_id": "microsoft/bitnet-b1.58-2B-4T",
+    "production_eligible": false,
+    "revision": "04c3b9ad9361b824064a1f25ea60a8be9599b127",
+    "weight_forward": "official_fixed_scale_ternary_effective_qat"
+  },
+  "schema_version": 1
+}

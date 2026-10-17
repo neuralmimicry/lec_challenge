@@ -1,0 +1,8 @@
+warning: no usable GPU found, --gpu-layers option will be ignored
+warning: one possible reason is that llama.cpp was compiled without GPU support
+warning: consult docs/build.md for compilation instructions
+0.00.442.067 I srv    load_model: loading model 'offline_bundle/comparative/magicoder-s-ds-6_7b-q4_k_m/magicoder-s-ds-6.7b.Q4_K_M.gguf'
+0.00.502.530 E llama_model_load: error loading model: error loading model vocabulary: unknown tokenizer: 'deepseek_coder'
+0.00.502.539 E llama_model_load_from_file_impl: failed to load model
+0.00.502.546 E cmn  common_init_: failed to load model 'offline_bundle/comparative/magicoder-s-ds-6_7b-q4_k_m/magicoder-s-ds-6.7b.Q4_K_M.gguf'
+0.00.502.552 E srv    load_model: failed to load model, 'offline_bundle/comparative/magicoder-s-ds-6_7b-q4_k_m/magicoder-s-ds-6.7b.Q4_K_M.gguf'

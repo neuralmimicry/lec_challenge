@@ -339,7 +339,19 @@ async fn collect(context: &mut ContextState, cohort: &Cohort) -> Result<(PathBuf
         }
         process_ok = process::stage(context, "rollout-evidence", &cohort.engine, args).await?;
     }
-    let report = read(&output.join("rollout-report.json"))?;
+    let receipt = context
+        .state
+        .events
+        .iter()
+        .rev()
+        .find(|event| event["stage"] == "rollout-evidence")
+        .and_then(|event| serde_json::from_value::<Artefact>(event["attempt"].clone()).ok());
+    let root = context.root.clone();
+    let report_path = output.join("rollout-report.json");
+    let report = tokio::task::spawn_blocking(move || {
+        process::required_report(&root, &report_path, process_ok, receipt.as_ref())
+    })
+    .await??;
     ensure!(
         report["schema_version"] == 2
             && report["student_checkpoint_sha256"] == cohort.initial_weight_sha256,

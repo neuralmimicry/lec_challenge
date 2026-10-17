@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "arm_id": "arm-2793b743b590917d497c4794",
+  "checkpoint": "reports/local-study/explore/round-001/study/quick/arms/arm-2793b743b590917d497c4794/checkpoint",
+  "manifest": {
+    "path": "reports/local-study/explore/round-001/study/quick/arms/arm-2793b743b590917d497c4794/checkpoint/manifest.json",
+    "sha256": "dc0eb6a7b86ee15857f1cd7f9351b40d7309a6be6d3d20c857e5ded29d3b1ee7",
+    "bytes": 15419
+  },
+  "adapter_sha256": "ae6e22bf858359186e261fd41d5c180cb020bf79d29fccc2dbb611ea12dc4870",
+  "base_sha256": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+  "evidence_bundle_sha256": "6256372fa9e690dbf230f5042904001db2bb1583b195015ddce53b0def40c8c6",
+  "steps": 3,
+  "losses": [
+    0.031682029366493225,
+    0.031261928379535675,
+    0.03194489702582359
+  ],
+  "gradient_norms": [
+    0.005901904839004416,
+    0.006467377951661479,
+    0.005527408411088556
+  ],
+  "changed_adapter": true,
+  "reloaded": true,
+  "production_eligible": false,
+  "limitations": [
+    "48 tasks from 12 locally authored train source groups; no held-out or development data enters training.",
+    "Local model developers do not count as independent paid API provider businesses.",
+    "No learning, promotion, cash saving or teacher trace is inferred from this bundle alone.",
+    "Process, contextual revision, teacher-feedback trajectories, on-policy and self-distillation require additional genuine generation evidence.",
+    "Exploratory local-teacher adaptation; no independent API-provider or held-out promotion claim. Reload is a fresh model instance inside the worker; external evaluation must reload in its own process.",
+    "Declared assistant-token windows exercise actual operators and optimiser updates; omitted context/targets are recorded in freeze.json and these quick arms do not establish task learning."
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "model_id": "TheBloke/deepseek-coder-6.7B-instruct-GGUF",
+  "revision": "9e221e6b41cb1bf1c5d8f9718e81e3dc781f7557",
+  "licence": "other",
+  "files": {
+    "README.md": "1338c05a5298c1fabc01232b3afcf97b30ffe4dd3d1ef4f3d7119e9ffa492666",
+    "deepseek-coder-6.7b-instruct.Q4_K_M.gguf": "92da6238854f2fa902d8b2ad79d548536af1d3ab06821f323bd5bbcea2013276",
+    "source/LICENSE": "a3a0e9449cb691a12f4de1d03725fd41326614fdeaf5d80b28c51187da0bed0e",
+    "source/README.md": "c874c1b3458a13e73263baf38836ce280d3c557e399a6b0078c22d55f7cda98e",
+    "source/config.json": "a3a2ce1a623b367d3799fb0c1e1ba12d5b8fa51a8e7abba14d10dd3739cd73e4",
+    "source/generation_config.json": "186a63b420f66a03e95a035c488373361bb04833a9b83f4bdbaba70c5c816002",
+    "source/tokenizer.json": "ef48ebdc8546c2d8092349d321f1d162de804a1c8900df2b615c7dc8b02ce141",
+    "source/tokenizer_config.json": "775f116ff1130a5b5bfc3cfdb594f9fcb5a5dc61d5a11ba92b2a7c078d66b7b7"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "55c6614d90fbff0e580fd8fbfa9e06ce99715d8d0c78320e0fe70605545cc489",
+  "task_id": "matrices.rotate",
+  "source_id": "private-matrices-v1",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is a rectangular integer matrix with at least one row and column. Return the matrix rotated clockwise by 90 degrees.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[[1,2,3],[4,5,6]],\"expected\":[[4,1],[5,2],[6,3]]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\n/// Rotates a 2D integer matrix 90 degrees clockwise.\n///\n/// # Examples\n///\n/// ```\n/// assert_eq!(rotate_matrix(vec![vec![1, 2, 3], vec![4, 5, 6]]), vec![vec![4, 1], vec![5, 2], vec![6, 3]]);\n/// ```\nfn rotate_matrix(input: serde_json::Value) -> serde_json::Value {\n    let mut result = Vec::new();\n    for row in input.as_array() {\n        let mut row = row.as_array();\n        if row.len() != input.len() {\n            panic!(\"Input matrix must be square\");\n        }\n        for col in 0..row.len() {\n            result.push(row[row.len() - 1 - col]);\n        }\n    }\n    serde_json::Value::Object(result)\n}\n\nfn main() {\n    // Example usage\n    let input = serde_json::Value::Object(vec![\n        (String::from(\"input\"), serde_json::Value::Array(vec![\n            serde_json::Value::Array(vec![1, 2, 3]),\n            serde_json::Value::Array(vec![4, 5, 6]),\n        ])),\n    ]);\n    let expected = serde_json::Value::Object(vec![\n        (String::from(\"expected\"), serde_json::Value::Array(vec![\n            serde_json::Value::Array(vec![4, 1]),\n            serde_json::Value::Array(vec![5, 2]),\n            serde_json::Value::Array(vec![6, 3]),\n        ])),\n    ]);\n    assert_eq!(rotate_matrix(input), expected);\n}\n```",
+    "checkpoint_id": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+    "finish_reason": "stop",
+    "input_tokens": 247,
+    "output_tokens": 351,
+    "elapsed_ms": 16737,
+    "complete": true
+  },
+  "model_error": null
+}

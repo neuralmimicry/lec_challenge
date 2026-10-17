@@ -1,0 +1,19 @@
+{
+  "engine_bytes": 26539496,
+  "engine_sha256": "5db09c632f6ffccc636bdfec2f693af102bf5327ce7510bc593ebe7089c9c126",
+  "evidence_kind": "immutable_native_distillation_helper_launch_contract",
+  "executable": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/state/engines/5db09c632f6ffccc636bdfec2f693af102bf5327ce7510bc593ebe7089c9c126/lec-distil",
+  "numerical_threads": {
+    "effective_candle_threads": 4,
+    "effective_rayon_threads": 4,
+    "environment": {
+      "LEC_STUDY_CPU_THREADS": "5",
+      "MKL_NUM_THREADS": "4",
+      "OMP_NUM_THREADS": "4",
+      "RAYON_NUM_THREADS": "4"
+    },
+    "linux_cpu_affinity": "4-11"
+  },
+  "production_eligible": false,
+  "schema_version": 1
+}

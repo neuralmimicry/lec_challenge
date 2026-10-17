@@ -1,0 +1,17 @@
+
+running 3 tests
+test offline_oci_archive_round_trip ... ok
+test real_output_deadline_and_alias_defences ... FAILED
+test real_reference_candidates_across_all_splits_and_evidence_tampering ... ok
+
+failures:
+
+failures:
+    real_output_deadline_and_alias_defences
+
+test result: FAILED. 2 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 250.78s
+
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.39s
+     Running tests/sandbox_contract.rs (target/debug/deps/sandbox_contract-83ad793f7f4f36a7)
+Error: bounded SIGKILL/removal was not observed
+error: test failed, to rerun pass `--test sandbox_contract`

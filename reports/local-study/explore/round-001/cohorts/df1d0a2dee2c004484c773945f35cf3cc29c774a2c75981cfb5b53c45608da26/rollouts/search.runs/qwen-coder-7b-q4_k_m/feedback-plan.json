@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "initial_plan": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/search.runs/student-plan.json",
+    "sha256": "c02ae35d5def86a15129b18a3f45607b6a6b16c1a428d25878a01739f2a69868",
+    "bytes": 4171
+  },
+  "student_raw": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/search.runs/student-raw.json",
+    "sha256": "11cc20e8ef6da638ff95facdcc78d8756d2d37590fe013918bf4c2f90af9f474",
+    "bytes": 2020
+  },
+  "student_grade": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox/f8f84bbd-1530-4e9f-817f-622600c43245.json",
+    "sha256": "97525001d45bff85e710a11bbe741d35fbd22fc2e26916b8a80aaf5750f9d4ce",
+    "bytes": 7781
+  },
+  "teacher_id": "qwen-coder-7b-q4_k_m",
+  "teacher_assets": {
+    "path": "offline_bundle/comparative/qwen-coder-7b-q4_k_m/gguf-assets.json",
+    "sha256": "606bfac02a103d208ccef73067cb6a4581e9b099e19bc9ed8e2021ebb1143114",
+    "bytes": 1206
+  },
+  "teacher_checkpoint": null,
+  "runtime": {
+    "device": {
+      "cuda": {
+        "ordinal": 0
+      }
+    },
+    "dtype": "f32"
+  },
+  "request": {
+    "prompt": "New task:\nWrite Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an ASCII string. Return consecutive character runs as [[one-character string,count],...]. Empty input returns []. The returned array may contain up to 256 items.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":\"aaabbcaa\",\"expected\":[[\"a\",3],[\"b\",2],[\"c\",1],[\"a\",2]]}]\nActual frozen student candidate:\n```rust\nuse serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let mut result = Vec::new();\n    let mut current_run = Vec::new();\n    let mut count = 0;\n\n    for c in input.as_str().chars() {\n        if c == '\\n' || c == '\\r' || c == '\\t' || c == '\\f' || c == ' ' {\n            if !current_run.is_empty() {\n                result.push(current_run);\n                current_run.clear();\n            }\n            count = 0;\n        } else {\n            current_run.push(c);\n            count += 1;\n        }\n    }\n\n    if !current_run.is_empty() {\n        result.push(current_run);\n    }\n\n    serde_json::Value::Array(result)\n}\n```\nActual trusted tool feedback:\n{\"bounded_diagnostic_untrusted_data\":\"compilation failed: error: unknown character escape: `f`\\n --> /candidate/main.rs:9:58\\n  |\\n9 |         if c == '\\\\n' || c == '\\\\r' || c == '\\\\t' || c == '\\\\f' || c == ' ' {\\n  |                                                          ^ unknown character escape\\n  |\\n  = help: for more information, visit <https://doc.rust-lang.org/reference/tokens.html#literals>\\nhelp: if you meant to write a literal backslash (perhaps escaping in a regular expression), consider a raw string literal\\n  |\\n9 -         if c == '\\\\n' || c == '\\\\r' || c == '\\\\t' || c == '\\\\f' || c == ' ' {\\n9 +         if c == '\\\\n' || c == '\\\\r' || c == '\\\\t' || c == r\\\"\\\\f\\\" || c == ' ' {\\n  |\\nhelp: if you meant to write a form feed, use a hex escape\\n  |\\n9 -         if c == '\\\\n' || c == '\\\\r' || c == '\\\\t' || c == '\\\\f' || c == ' ' {\\n9 +         if c == '\\\\n' || c == '\\\\r' || c == '\\\\t' || c == '\\\\x0C' || c == ' ' {\\n  |\\n\\nwarning: unused import: `serde_json::Value`\\n --> /candidate/main.rs:1:5\\n  |\\n1 | use serde_json::Value;\\n  |     ^^^^^^^^^^^^^^^^^\\n  |\\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\\n\\nerror[E0599]: no method named `chars` found for enum `Option<T>` in the current scope\\n --> /candidate/main.rs:8:29\\n  |\\n8 |     for c in input.as_str().chars() {\\n  |                             ^^^^^ method not found in `Option<&str>`\\n  |\\nnote: the method `chars` exists on the type `&str`\\n --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/str/mod.rs:1079:4\\nhelp: consider using `Option::expect` to unwrap the `&str` value, panicking if the value is an `Option::None`\\n  |\\n8 |     for c in input.as_str().expect(\\\"REASON\\\").chars() {\\n  |                            +++++++++++++++++\\n\\nerror[E0308]: mismatched types\\n   --> /candidate/main.rs:25:30\\n    |\\n 11 |                 result.push(current_run);\\n    |                 ------      ----------- this argument has type `Vec<_>`...\\n    |                 |\\n    |                 ... which causes `result` to have type `Vec<Vec<_>>`\\n...\\n 25 |     serde_json::Value::Array(result)\\n    |     ------------------------ ^^^^^^ expected `Vec<Value>`, found `Vec<Vec<_>>`\\n    |     |\\n    |     arguments to this enum variant are incorrect\\n    |\\n    = note: expected struct `Vec<Value>`\\n               found struct `Vec<Vec<_>>`\\nnote: tuple variant defined here\\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:160:5\\n    |\\n160 |     Array(Vec<Value>),\\n    |     ^^^^^\\nhelp: try wrapping the expression in `serde_json::Value::Array`\\n    |\\n 11 |                 result.push(serde_json::Value::Array(current_run));\\n    |                             +++++++++++++++++++++++++           +\\n\\nerror: aborting due to 3 previous errors; 1 warning emitted\\n\\nSome errors have detailed explanations: E0308, E0599.\\nFor more information about an error, try `rustc --explain E0308`.\\n\",\"cases_passed\":0,\"cases_total\":6,\"content_role\":\"compilation_feedback_only\",\"original_failure_is_not_a_success\":true,\"passed\":false,\"private_inputs_or_expected_outputs_exposed\":false,\"quarantined\":true,\"run_id\":\"f8f84bbd-1530-4e9f-817f-622600c43245\",\"student_generation_complete\":true,\"tool\":\"trusted_container_grader\",\"trace_complete\":false}\nCritique and revise the candidate. Put any short explanation in Rust // comments and return complete compilable Rust source only. Do not invent tool results.",
+    "max_new_tokens": 768,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "supporting_sample_ids": []
+}

@@ -1,0 +1,8 @@
+{
+  "launch_unix_ms": 1792137157653,
+  "owner_pid": 1146431,
+  "prepared_receipt": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/prepared/text.lower_trim.json",
+  "prepared_sha256": "a44330a33470e1b7c35896e0ba7ca9e2e469cd94ae114d47045339394d5462d6",
+  "run_id": "65da80f0-f974-4d14-84c9-a3c7f7268456",
+  "schema_version": 3
+}

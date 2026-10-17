@@ -1,0 +1,85 @@
+{
+  "cached_artefacts": {
+    "reports/local-study/study-evaluation-resume-qa/round-001/evaluation/execution-attempts/fc630221-b771-4d65-bdc9-4c94ac31fc13.json": {
+      "bytes": 667,
+      "path": "reports/local-study/study-evaluation-resume-qa/round-001/evaluation/execution-attempts/fc630221-b771-4d65-bdc9-4c94ac31fc13.json",
+      "sha256": "991903873e10fe56e7b405e461fceba6baa2ea6aea5120a93461f364db9d045c"
+    },
+    "reports/local-study/study-evaluation-resume-qa/round-001/evaluation/execution.json": {
+      "bytes": 667,
+      "path": "reports/local-study/study-evaluation-resume-qa/round-001/evaluation/execution.json",
+      "sha256": "991903873e10fe56e7b405e461fceba6baa2ea6aea5120a93461f364db9d045c"
+    },
+    "reports/local-study/study-evaluation-resume-qa/round-001/evaluation/generations/money.format.json": {
+      "bytes": 1828,
+      "path": "reports/local-study/study-evaluation-resume-qa/round-001/evaluation/generations/money.format.json",
+      "sha256": "b9414a2536f455855ebda4623d2de7f221a839d10bff795312b47bc3d2ad040c"
+    },
+    "reports/local-study/study-evaluation-resume-qa/round-001/evaluation/generations/money.parse.json": {
+      "bytes": 2021,
+      "path": "reports/local-study/study-evaluation-resume-qa/round-001/evaluation/generations/money.parse.json",
+      "sha256": "14ee4b2f152406ae9a599543727528028774a18e0176899305eff11ff1319ba7"
+    },
+    "reports/local-study/study-evaluation-resume-qa/round-001/evaluation/launch-engine.json": {
+      "bytes": 2876,
+      "path": "reports/local-study/study-evaluation-resume-qa/round-001/evaluation/launch-engine.json",
+      "sha256": "3374c96aff41cf0f56e067e53bc3975ff57494aca405ef2d38acc6b29ba80801"
+    },
+    "reports/local-study/study-evaluation-resume-qa/round-001/evaluation/observations/money.parse.json": {
+      "bytes": 718,
+      "path": "reports/local-study/study-evaluation-resume-qa/round-001/evaluation/observations/money.parse.json",
+      "sha256": "99f5cd701184eb08c1b5d572702b13ab23dc195b554210bdd294c8be437a4bc9"
+    },
+    "reports/local-study/study-evaluation-resume-qa/round-001/evaluation/plan.json": {
+      "bytes": 23999,
+      "path": "reports/local-study/study-evaluation-resume-qa/round-001/evaluation/plan.json",
+      "sha256": "b04a4729bb3b68f65c9d18df57142e7901ebed367d528f3d0262f6cb2be3a6f6"
+    },
+    "reports/local-study/study-evaluation-resume-qa/round-001/evaluation/sandbox-preflight.json": {
+      "bytes": 988,
+      "path": "reports/local-study/study-evaluation-resume-qa/round-001/evaluation/sandbox-preflight.json",
+      "sha256": "e93aaea1d4f6ac47d0e89938dc21ace493ea70aaa314173f45cf23d736008935"
+    },
+    "reports/local-study/study-evaluation-resume-qa/round-001/evaluation/sandbox/725e7d3c-7016-47ac-b6f6-d72a6b0a986d.audit.json": {
+      "bytes": 1604,
+      "path": "reports/local-study/study-evaluation-resume-qa/round-001/evaluation/sandbox/725e7d3c-7016-47ac-b6f6-d72a6b0a986d.audit.json",
+      "sha256": "87c52cee25acef8d903c06108046c9e34cc4435fb429a8a4fce9e44c279a709d"
+    },
+    "reports/local-study/study-evaluation-resume-qa/round-001/evaluation/sandbox/725e7d3c-7016-47ac-b6f6-d72a6b0a986d.json": {
+      "bytes": 4331,
+      "path": "reports/local-study/study-evaluation-resume-qa/round-001/evaluation/sandbox/725e7d3c-7016-47ac-b6f6-d72a6b0a986d.json",
+      "sha256": "eacacf93bbf0284b81c9ac1d7a6b5f071d96efa191edd776e35223fdd2b2195b"
+    }
+  },
+  "complete_report_existed": false,
+  "completed_grade": {
+    "anchor_kind": "verified_compilation_failure_verdict",
+    "candidate_passed": false,
+    "observation": {
+      "bytes": 718,
+      "path": "reports/local-study/study-evaluation-resume-qa/round-001/evaluation/observations/money.parse.json",
+      "sha256": "99f5cd701184eb08c1b5d572702b13ab23dc195b554210bdd294c8be437a4bc9"
+    },
+    "quarantined": true,
+    "raw_generation": {
+      "bytes": 2021,
+      "path": "reports/local-study/study-evaluation-resume-qa/round-001/evaluation/generations/money.parse.json",
+      "sha256": "14ee4b2f152406ae9a599543727528028774a18e0176899305eff11ff1319ba7"
+    },
+    "sandbox_audit": {
+      "bytes": 1604,
+      "path": "reports/local-study/study-evaluation-resume-qa/round-001/evaluation/sandbox/725e7d3c-7016-47ac-b6f6-d72a6b0a986d.audit.json",
+      "sha256": "87c52cee25acef8d903c06108046c9e34cc4435fb429a8a4fce9e44c279a709d"
+    },
+    "sandbox_report": {
+      "bytes": 4331,
+      "path": "reports/local-study/study-evaluation-resume-qa/round-001/evaluation/sandbox/725e7d3c-7016-47ac-b6f6-d72a6b0a986d.json",
+      "sha256": "eacacf93bbf0284b81c9ac1d7a6b5f071d96efa191edd776e35223fdd2b2195b"
+    },
+    "task_id": "money.parse",
+    "training_eligibility_inferred": false
+  },
+  "exit_signal": 9,
+  "owned_pid": 948238,
+  "schema_version": 1
+}

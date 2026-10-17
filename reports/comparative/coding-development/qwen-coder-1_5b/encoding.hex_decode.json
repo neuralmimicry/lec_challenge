@@ -1,0 +1,38 @@
+{
+  "model_id": "qwen-coder-1_5b",
+  "task_id": "encoding.hex_decode",
+  "source_id": "private-encoding-v1",
+  "specification_sha256": "535cec08e7ca750ff6426c55df5e10382b5d98dd2b972889c664a544c49c2a87",
+  "seed": 1729,
+  "plan_sha256": "9aefcaf935435b296c63229638aad5a22a416ae171eda011a6812dd745667ea8",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an ASCII string. Decode even-length hexadecimal accepting upper/lowercase; return byte array, or null for invalid digits or odd length. The returned array may contain up to 128 items.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":\"00aF\",\"expected\":[0,175]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::{Value, from_str};\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let hex_str = match input.as_str() {\n        Some(s) => s,\n        None => return serde_json::Value::Null,\n    };\n\n    if hex_str.len() % 2 != 0 {\n        return serde_json::Value::Null;\n    }\n\n    let mut bytes = Vec::new();\n    for i in (0..hex_str.len()).step_by(2) {\n        let byte = u8::from_str_radix(&hex_str[i..i + 2], 16).unwrap();\n        bytes.push(byte);\n    }\n\n    serde_json::Value::from(bytes)\n}\n```",
+    "checkpoint_id": "c1b9b30e907950516ba3c646bdf570d8084c25a6410a0cdca80cf04b11bc13a8",
+    "finish_reason": "stop",
+    "input_tokens": 248,
+    "output_tokens": 154,
+    "elapsed_ms": 7885,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/comparative/coding-development/qwen-coder-1_5b/encoding.hex_decode.generation.json",
+    "sha256": "b6d326bcd3779ce432ec3d4358a348cf7f1c77621e32c9523805112d8c295632",
+    "bytes": 2926
+  },
+  "sandbox_report": {
+    "path": "reports/comparative/coding-development/sandbox/d3b13454-cddf-4a20-ac80-49089584ea53.json",
+    "sha256": "b0284e4cbb5c4e427bcc461728aa8252b110f0f81e257c77ee23cd9fc279182f",
+    "bytes": 1803
+  },
+  "grading_error": null,
+  "success": false
+}

@@ -1,0 +1,36 @@
+{
+  "engine_sha256": "3f348bdfa71c49df5b5d0b7581ae9ad3114645127f99abbec9e4aac1064563bd",
+  "input": {
+    "bytes": 218818,
+    "path": "reports/local-study/explore/round-001/content-v1/bundle.json",
+    "sha256": "6256372fa9e690dbf230f5042904001db2bb1583b195015ddce53b0def40c8c6"
+  },
+  "max_tokens": 768,
+  "maximum_tasks": 48,
+  "mode": "on_policy",
+  "reused_student_policy": null,
+  "schema_version": 1,
+  "seed": 1729,
+  "student_assets": {
+    "bytes": 788,
+    "path": "offline_bundle/base/assets.json",
+    "sha256": "54304e7f41519a4196674cba5e86593802f852b2b47882d6c19706f85f303ad4"
+  },
+  "student_checkpoint": null,
+  "student_kind": "conventional_qwen_lora",
+  "student_runtime": {
+    "device": "cpu",
+    "dtype": "f32"
+  },
+  "teacher_ids": [
+    "qwen-coder-7b-q4_k_m"
+  ],
+  "teacher_runtime": {
+    "device": {
+      "cuda": {
+        "ordinal": 0
+      }
+    },
+    "dtype": "f32"
+  }
+}

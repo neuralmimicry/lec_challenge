@@ -1,0 +1,116 @@
+Hub hashing qwen2.5-coder-7b-instruct-q4_k_m.gguf: 0/4683073536 bytes, 0.00 MiB/s, ETA unknown (publisher checksum pending)
+Hub hashing qwen2.5-coder-7b-instruct-q4_k_m.gguf: 2660237312/4683073536 bytes, 169.13 MiB/s, ETA 00:00:12 (publisher checksum pending)
+distillation: cached native teacher trace qwen-coder-7b-q4_k_m / 12106a8bfb9356904186b558fd37127f1ee55e650cb57a6e843d8983be952bd0
+distillation: cached native teacher trace qwen-coder-7b-q4_k_m / 21748f9f3a9dec33f5c19fb7179ecdada908a2b27e6486b333f8a379f57d93bb
+distillation: cached native teacher trace qwen-coder-7b-q4_k_m / 279b6d10fb8f3e4f1d9e8b547e1207c9c65214b57d0270ab76e419d02e5165d2
+distillation: cached native teacher trace qwen-coder-7b-q4_k_m / 2d22b678d0bb8aadd704350c150da710a8be0fe59dc30172accfbbb0b25f792b
+distillation: cached native teacher trace qwen-coder-7b-q4_k_m / 5b46a85ec5f9398290c023c26ef8cb662e6e4d19da293a71b2bcee316514f6b7
+distillation: cached native teacher trace qwen-coder-7b-q4_k_m / 5dedbab9841301331ad4a8a4ef9d893e994c7abd27be5b97777071860da49a35
+distillation: cached native teacher trace qwen-coder-7b-q4_k_m / 60cad86431ce13f24f3525d348b75936b4659f22832705f61513e6920d3c0913
+distillation: cached native teacher trace qwen-coder-7b-q4_k_m / 6f54a188344a4c4834c5a9bfe0969e33003547ea371fbf2ba03a4e5fd88d6e07
+distillation: cached native teacher trace qwen-coder-7b-q4_k_m / 83cc42aa11a66d768d6f952f81812adff3032a39e39b89bfa188e7270ab75a62
+distillation: cached native teacher trace qwen-coder-7b-q4_k_m / 9a709fd0afa880d7d61490074636b6a836aa05da5d9a338a46aa8aca31efdce4
+distillation: cached native teacher trace qwen-coder-7b-q4_k_m / 9f34cf373961913a3cf1067f1f2a71e0bef8368e1557d10e998cc099a00fab71
+distillation: cached native teacher trace qwen-coder-7b-q4_k_m / b385fb6bb3931d6b39a919d387b625b8e5c0db4506f12df96b46489b5f340498
+distillation: cached native teacher trace qwen-coder-7b-q4_k_m / be57ee99f53e14a44a210dee5a0a227fbee04ea80f1c914f14447c3db087cded
+distillation: cached native teacher trace qwen-coder-7b-q4_k_m / d34031fab7990f9d5bb1ac0465e3173de67d17f95496ed535260f239f3c4bc90
+distillation: cached native teacher trace qwen-coder-7b-q4_k_m / e89aa62fc9a189c19a13370ba9410f99991e685167f68b4f7ce97f6a4c78f965
+distillation: cached native teacher trace qwen-coder-7b-q4_k_m / f23b74be49ae4fb9f5a42d58f33244ef0c157aa0e4afe342a565baa7e7493c91
+distillation: cached native teacher trace qwen-coder-7b-q4_k_m / ff06039fd8278f904a9e03151a5b46d0452d3c207474b4da9dd4b770fe9d6d26
+distillation: durable update 1/48 loss=1.964313 gradient_norm=9.078025
+distillation: durable update 2/48 loss=2.701554 gradient_norm=11.830458
+distillation: durable update 3/48 loss=2.253189 gradient_norm=9.306618
+distillation: durable update 4/48 loss=2.134596 gradient_norm=9.274653
+distillation: durable update 5/48 loss=1.580836 gradient_norm=5.210010
+distillation: durable update 6/48 loss=1.400404 gradient_norm=4.971508
+distillation: durable update 7/48 loss=1.749830 gradient_norm=5.927919
+distillation: durable update 8/48 loss=1.043335 gradient_norm=4.156770
+distillation: durable update 9/48 loss=1.400131 gradient_norm=3.406863
+distillation: durable update 10/48 loss=1.313866 gradient_norm=3.773254
+distillation: durable update 11/48 loss=1.775158 gradient_norm=4.030931
+distillation: durable update 12/48 loss=1.365922 gradient_norm=4.629330
+distillation: durable update 13/48 loss=1.490423 gradient_norm=4.776176
+distillation: durable update 14/48 loss=1.609472 gradient_norm=7.261361
+distillation: durable update 15/48 loss=1.738740 gradient_norm=6.857976
+distillation: durable update 16/48 loss=1.534440 gradient_norm=5.319958
+distillation: durable update 17/48 loss=1.476921 gradient_norm=5.417039
+distillation: durable update 18/48 loss=1.013057 gradient_norm=3.729572
+distillation: durable update 19/48 loss=1.466856 gradient_norm=3.068354
+distillation: durable update 20/48 loss=1.346801 gradient_norm=3.816125
+distillation: durable update 21/48 loss=1.226210 gradient_norm=3.815554
+distillation: durable update 22/48 loss=1.203649 gradient_norm=2.286120
+distillation: durable update 23/48 loss=1.080305 gradient_norm=2.863134
+distillation: durable update 24/48 loss=1.361754 gradient_norm=4.302508
+distillation: durable update 25/48 loss=0.813183 gradient_norm=2.212900
+distillation: durable update 26/48 loss=1.188686 gradient_norm=2.574180
+distillation: durable update 27/48 loss=1.024413 gradient_norm=2.691663
+distillation: durable update 28/48 loss=1.456055 gradient_norm=3.269803
+distillation: durable update 29/48 loss=1.053585 gradient_norm=3.288900
+distillation: durable update 30/48 loss=1.148691 gradient_norm=3.463627
+distillation: durable update 31/48 loss=1.132462 gradient_norm=3.079432
+distillation: durable update 32/48 loss=1.378327 gradient_norm=3.914950
+distillation: durable update 33/48 loss=1.222194 gradient_norm=3.290978
+distillation: durable update 34/48 loss=1.286437 gradient_norm=4.625232
+distillation: durable update 35/48 loss=0.858255 gradient_norm=3.025756
+distillation: durable update 36/48 loss=1.288917 gradient_norm=3.526632
+distillation: durable update 37/48 loss=1.106459 gradient_norm=2.973200
+distillation: durable update 38/48 loss=0.974029 gradient_norm=2.995080
+distillation: durable update 39/48 loss=1.056621 gradient_norm=2.399984
+distillation: durable update 40/48 loss=0.944481 gradient_norm=3.684084
+distillation: durable update 41/48 loss=1.164272 gradient_norm=3.424131
+distillation: durable update 42/48 loss=0.685354 gradient_norm=1.516134
+distillation: durable update 43/48 loss=1.030136 gradient_norm=2.093297
+distillation: durable update 44/48 loss=0.835149 gradient_norm=1.986970
+distillation: durable update 45/48 loss=1.297924 gradient_norm=3.002269
+distillation: durable update 46/48 loss=0.938316 gradient_norm=3.494871
+distillation: durable update 47/48 loss=0.970056 gradient_norm=3.012573
+distillation: durable update 48/48 loss=0.947642 gradient_norm=2.284840
+study: fresh-process checkpoint evaluation started, PID=1347066
+study-evaluate: verifying effective sandbox controls
+Sandbox recovered owned run lec-4217eba7-dbd2-407c-9569-e0223c8b2807 after verified original-owner death
+study-evaluate: frozen tasks=16 seed1729 max512; graders=1 inference_overlap=true
+study-evaluate: heartbeat model loading; completed=0/16
+study-evaluate: heartbeat model loading; completed=0/16
+study-evaluate: heartbeat model loading; completed=0/16
+study-evaluate: heartbeat generating money.parse completed=0/16
+study-evaluate: heartbeat generating money.parse completed=0/16
+study-evaluate: heartbeat generating money.parse completed=0/16
+study-evaluate: heartbeat generating money.parse completed=0/16
+study-evaluate: heartbeat generating money.parse completed=0/16
+study-evaluate: heartbeat generating money.format completed=0/16
+study-evaluate: heartbeat generating money.split completed=1/16
+study-evaluate: heartbeat generating money.split completed=1/16
+study-evaluate: heartbeat generating money.basket completed=2/16
+study-evaluate: heartbeat generating money.basket completed=2/16
+study-evaluate: heartbeat generating dispatch.finish_order completed=3/16
+study-evaluate: heartbeat generating dispatch.finish_order completed=3/16
+study-evaluate: heartbeat generating dispatch.waiting completed=4/16
+study-evaluate: heartbeat generating dispatch.round_robin completed=5/16
+study-evaluate: heartbeat generating dispatch.round_robin completed=5/16
+study-evaluate: heartbeat generating dispatch.round_robin completed=5/16
+study-evaluate: heartbeat generating dispatch.priority completed=6/16
+study-evaluate: heartbeat generating dispatch.priority completed=6/16
+study-evaluate: heartbeat generating dispatch.priority completed=6/16
+study-evaluate: heartbeat generating encoding.hex_encode completed=7/16
+study-evaluate: heartbeat generating encoding.hex_decode completed=8/16
+study-evaluate: heartbeat generating encoding.hex_decode completed=8/16
+study-evaluate: heartbeat generating encoding.caesar completed=9/16
+study-evaluate: heartbeat generating encoding.caesar completed=9/16
+study-evaluate: heartbeat generating encoding.rot13 completed=10/16
+study-evaluate: heartbeat generating encoding.rot13 completed=10/16
+study-evaluate: heartbeat generating encoding.rot13 completed=10/16
+study-evaluate: heartbeat generating encoding.rot13 completed=10/16
+study-evaluate: heartbeat generating tables.sort_rows completed=11/16
+study-evaluate: heartbeat generating tables.sort_rows completed=11/16
+study-evaluate: heartbeat generating tables.sort_rows completed=11/16
+study-evaluate: heartbeat generating tables.last_by_key completed=12/16
+study-evaluate: heartbeat generating tables.last_by_key completed=12/16
+study-evaluate: heartbeat generating tables.last_by_key completed=12/16
+study-evaluate: heartbeat generating tables.group_sums completed=13/16
+study-evaluate: heartbeat generating tables.group_sums completed=13/16
+study-evaluate: heartbeat generating tables.group_sums completed=13/16
+study-evaluate: heartbeat generating tables.inner_join completed=14/16
+study-evaluate: heartbeat generating tables.inner_join completed=14/16
+study-evaluate: heartbeat generating tables.inner_join completed=14/16
+study-evaluate: heartbeat grading; completed=15/16
+study-evaluate: heartbeat grading; completed=15/16

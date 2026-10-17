@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "51e2a803f86359125c31f16c1d0da7fc35ac18527b51f85f956f4872bf05792e",
+  "task_id": "encoding.caesar",
+  "source_id": "private-encoding-v1",
+  "success": false,
+  "raw_generation": {
+    "path": "reports/local-study/explore/round-001/baselines/ternary_bitnet/generations/encoding.caesar.json",
+    "sha256": "0e17c6c8e0cac15ccc8edee74018dd41920c41ed8d9bbb66bac7b555b9c47132",
+    "bytes": 1368
+  },
+  "sandbox_report": null,
+  "grading_error": null
+}

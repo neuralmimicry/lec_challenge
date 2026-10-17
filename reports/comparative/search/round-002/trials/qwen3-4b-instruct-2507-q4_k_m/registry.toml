@@ -1,0 +1,12 @@
+schema_version = 1
+
+[[models]]
+id = "qwen3-4b-instruct-2507-q4_k_m"
+model_id = "bartowski/Qwen_Qwen3-4B-Instruct-2507-GGUF"
+revision = "ae44f08e1392f39c0e474af10c3ff8355c8b6688"
+directory = "offline_bundle/comparative/qwen3-4b-instruct-2507-q4_k_m"
+architecture = "qwen3"
+role = "coding_teacher"
+licence = "Apache-2.0"
+developer_id = "alibaba-qwen"
+weight_format = "gguf"

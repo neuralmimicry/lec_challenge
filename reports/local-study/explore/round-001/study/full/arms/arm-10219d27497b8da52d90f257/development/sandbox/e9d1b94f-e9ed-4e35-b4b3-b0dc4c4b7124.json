@@ -1,0 +1,40 @@
+{
+  "run_id": "e9d1b94f-e9ed-4e35-b4b3-b0dc4c4b7124",
+  "task_id": "money.basket",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error: unexpected closing delimiter: `}`\n  --> /candidate/main.rs:18:1\n   |\n14 | fn main() {\n   |           - the nearest open delimiter\n15 |     let input = serde_json::json!([[\"120\",2],[99,3]],\"expected\":537]);\n   |                                  -                                 -- missing open `(` for this delimiter\n   |                                  |                                 |\n   |                                  the nearest open delimiter        missing open `[` for this delimiter\n...\n18 | }\n   | ^ unexpected closing delimiter\n\nerror: aborting due to 1 previous error\n\n"
+  ],
+  "cases_total": 5,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "f04e9b225db02120f245470db0fbccd8c363cc03dd9e2c152b827354cb7ed22b",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/explore/round-001/study/full/arms/arm-10219d27497b8da52d90f257/development/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/explore/round-001/study/full/arms/arm-10219d27497b8da52d90f257/development/sandbox/e9d1b94f-e9ed-4e35-b4b3-b0dc4c4b7124.audit.json",
+  "audit_sha256": "67e8bfb0b05904b3b21a804619cbd16f2af17c0fd1c0fdbf5e95fb99182e9301",
+  "failure": "compilation failed: error: unexpected closing delimiter: `}`\n  --> /candidate/main.rs:18:1\n   |\n14 | fn main() {\n   |           - the nearest open delimiter\n15 |     let input = serde_json::json!([[\"120\",2],[99,3]],\"expected\":537]);\n   |                                  -                                 -- missing open `(` for this delimiter\n   |                                  |                                 |\n   |                                  the nearest open delimiter        missing open `[` for this delimiter\n...\n18 | }\n   | ^ unexpected closing delimiter\n\nerror: aborting due to 1 previous error\n\n",
+  "duration_ms": 14518,
+  "timeout_evidence": null,
+  "lifecycle_evidence": {
+    "receipt_path": "reports/local-study/explore/round-001/study/full/arms/arm-10219d27497b8da52d90f257/development/sandbox/e9d1b94f-e9ed-4e35-b4b3-b0dc4c4b7124.lifecycle.json",
+    "receipt_sha256": "619d42fd9ea37461eb73bf6cf959ff61544742e6a558a286995d23f5a65617c7"
+  }
+}

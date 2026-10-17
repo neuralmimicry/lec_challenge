@@ -1,0 +1,70 @@
+{
+  "model_id": "Qwen/Qwen2.5-Coder-14B-Instruct",
+  "revision": "aedcc2d42b622764e023cf882b6652e646b95671",
+  "files": {
+    "LICENSE": {
+      "filename": "LICENSE",
+      "bytes": 11343,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "6634c8cc3133b3848ec74b9f275acaaa1ea618ab"
+      }
+    },
+    "README.md": {
+      "filename": "README.md",
+      "bytes": 6397,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "0d7fe07895cdde3f41e154ad17a8212719ceb005"
+      }
+    },
+    "config.json": {
+      "filename": "config.json",
+      "bytes": 663,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "a8fa5a907f7430a47d831eb28dbd69e6f6fd061d"
+      }
+    },
+    "generation_config.json": {
+      "filename": "generation_config.json",
+      "bytes": 243,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "c28f9c697cbc09f047434efec57556505af31111"
+      }
+    },
+    "merges.txt": {
+      "filename": "merges.txt",
+      "bytes": 1671839,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "20024bfe7c83998e9aeaf98a0cd6a2ce6306c2f0"
+      }
+    },
+    "tokenizer.json": {
+      "filename": "tokenizer.json",
+      "bytes": 7031645,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "443909a61d429dff23010e5bddd28ff530edda00"
+      }
+    },
+    "tokenizer_config.json": {
+      "filename": "tokenizer_config.json",
+      "bytes": 7305,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "acee076f49bf3c0298e15de0909d1da7b392f0c3"
+      }
+    },
+    "vocab.json": {
+      "filename": "vocab.json",
+      "bytes": 2776833,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "4783fe10ac3adce15ac8f358ef5462739852c569"
+      }
+    }
+  }
+}

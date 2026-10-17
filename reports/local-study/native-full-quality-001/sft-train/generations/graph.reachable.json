@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "a5b39d544c85b76111246b8fda40c638ce104251a1c56368277fef8fe4033eb6",
+  "task_id": "graph.reachable",
+  "source_id": "private-graph-v1",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input {n,start,edges} describes a directed graph on 0..n-1, n>=1, edges unique [from,to]. Return all nodes reachable from start, including start, sorted ascending. Graph vertex counts are at most 64.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":{\"edges\":[[0,1],[1,2]],\"n\":4,\"start\":0},\"expected\":[0,1,2]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let n = input[\"n\"].as_u64().unwrap();\n    let start = input[\"start\"].as_u64().unwrap();\n    let edges = input[\"edges\"].as_array().unwrap();\n    let mut graph = vec![vec![]; n];\n    for edge in edges {\n        let from = edge[0].as_u64().unwrap();\n        let to = edge[1].as_u64().unwrap();\n        graph[from].push(to);\n    }\n\n    let mut queue = vec![start];\n    let mut result = vec![];\n    while let Some(node) = queue.pop() {\n        result.push(node);\n        for neighbor in &graph[node] {\n            queue.push(neighbor);\n        }\n    }\n\n    Value::Array(result.into_iter().map(|v| Value::Number(v.into())).collect())\n}\n```",
+    "checkpoint_id": "e2bcd135527659042304d936fa56c7240f6f96a43b9f81f2a888c38b7762a949",
+    "finish_reason": "stop",
+    "input_tokens": 273,
+    "output_tokens": 194,
+    "elapsed_ms": 9001,
+    "complete": true
+  },
+  "model_error": null
+}

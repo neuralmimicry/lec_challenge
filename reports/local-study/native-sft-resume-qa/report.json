@@ -1,0 +1,30 @@
+{
+  "committed_adapter": {
+    "bytes": 551352,
+    "path": "reports/local-study/native-sft-resume-qa/interrupted/step-000001/adapter.safetensors",
+    "sha256": "bfa5bb4355352170e5411c9586233ac3b7c5c1e4521c5d21e5b809f750f20448"
+  },
+  "committed_files_unchanged": true,
+  "committed_optimizer": {
+    "bytes": 1103152,
+    "path": "reports/local-study/native-sft-resume-qa/interrupted/step-000001/optimizer.safetensors",
+    "sha256": "2340b0747a4c75203eddce9d8d9de97c09621559a549723dd675359ed5079266"
+  },
+  "completed_steps": 3,
+  "engine_sha256": "af675af8e54beb9ddc672d13bb860aec4175d7071b43fe9345af8c4ba9bbf182",
+  "evidence_kind": "actual_native_distillation_sigkill_resume_qa",
+  "final_adapter_tensors_bit_identical": 96,
+  "final_optimizer_tensors_bit_identical": 192,
+  "fresh_process_reload": {
+    "bytes": 1338,
+    "path": "reports/local-study/native-sft-resume-qa/fresh-process-reload.json",
+    "sha256": "9a49390263219a4a0d4077c642718a4ef4ce96000629971994a91f7b6c052d6b"
+  },
+  "interrupted_after_steps": 1,
+  "killed_status": "signal: 9 (SIGKILL)",
+  "limitation": "Local-teacher operator screening; no independent provider or held-out learning claim.",
+  "losses_gradients_order_bit_identical": true,
+  "production_eligible": false,
+  "schema_version": 1,
+  "success": true
+}

@@ -1,0 +1,33 @@
+{
+  "run_id": "2dd7496b-38ed-4ecb-94f7-eac2de9b3db2",
+  "task_id": "tables.sort_rows",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error[E0599]: no method named `sort_unstable_by_key` found for enum `Value` in the current scope\n --> /candidate/main.rs:9:18\n  |\n9 |         row_copy.sort_unstable_by_key(|x| (x[0], x[1]));\n  |                  ^^^^^^^^^^^^^^^^^^^^ method not found in `Value`\n  |\nnote: the method `sort_unstable_by_key` exists on the type `Vec<Value>`\n --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/slice/mod.rs:3255:4\n\nerror[E0599]: no method named `sort_unstable_by_key` found for enum `Value` in the current scope\n  --> /candidate/main.rs:20:22\n   |\n20 |         row_copy_int.sort_unstable_by_key(|x| x[0]);\n   |                      ^^^^^^^^^^^^^^^^^^^^ method not found in `Value`\n   |\nnote: the method `sort_unstable_by_key` exists on the type `Vec<Value>`\n  --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/slice/mod.rs:3255:4\n\nerror: aborting due to 2 previous errors\n\nFor more information about this error, try `rustc --explain E0599`.\n"
+  ],
+  "cases_total": 5,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "0bf995b5f69865792503015f6af52b457c861b679877956e939c2137ddb4a562",
+  "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+  "oracle_sha256": "a734f6d465714cbebb072790fedff161d2fc28cbb257b3d04cee0feaf8b5b5fe",
+  "code_sha256": "0b7a13fb2ae6b12af1e348e37adc0f331a869643a9791a24c8d81792e0288a1b",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:1",
+    "expected_image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/comparative/control-development/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/comparative/control-development/sandbox/2dd7496b-38ed-4ecb-94f7-eac2de9b3db2.audit.json",
+  "audit_sha256": "2038e1e0bd4dd3008034fc5230b191209f0040909334b6ef6003e07e5c85f63e",
+  "failure": "compilation failed: error[E0599]: no method named `sort_unstable_by_key` found for enum `Value` in the current scope\n --> /candidate/main.rs:9:18\n  |\n9 |         row_copy.sort_unstable_by_key(|x| (x[0], x[1]));\n  |                  ^^^^^^^^^^^^^^^^^^^^ method not found in `Value`\n  |\nnote: the method `sort_unstable_by_key` exists on the type `Vec<Value>`\n --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/slice/mod.rs:3255:4\n\nerror[E0599]: no method named `sort_unstable_by_key` found for enum `Value` in the current scope\n  --> /candidate/main.rs:20:22\n   |\n20 |         row_copy_int.sort_unstable_by_key(|x| x[0]);\n   |                      ^^^^^^^^^^^^^^^^^^^^ method not found in `Value`\n   |\nnote: the method `sort_unstable_by_key` exists on the type `Vec<Value>`\n  --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/slice/mod.rs:3255:4\n\nerror: aborting due to 2 previous errors\n\nFor more information about this error, try `rustc --explain E0599`.\n",
+  "duration_ms": 5386,
+  "timeout_evidence": null
+}

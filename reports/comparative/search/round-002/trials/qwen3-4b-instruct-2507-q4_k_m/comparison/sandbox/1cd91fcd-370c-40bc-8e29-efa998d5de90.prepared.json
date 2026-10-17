@@ -1,0 +1,45 @@
+{
+  "schema_version": 3,
+  "run_id": "d4eb0b85-ea55-4950-88f2-f48d71d0f947",
+  "ownership_nonce": "d526e413-49a9-44ed-9c19-42bf1846bb4e",
+  "attempt_key": "1cd91fcd-370c-40bc-8e29-efa998d5de90",
+  "receipt_path": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison/sandbox/1cd91fcd-370c-40bc-8e29-efa998d5de90.prepared.json",
+  "report_path": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison/sandbox/d4eb0b85-ea55-4950-88f2-f48d71d0f947.json",
+  "task": {
+    "id": "encoding.hex_decode",
+    "source_id": "private-encoding-v1",
+    "lineage_id": "local-contract-pack-14",
+    "split": "development",
+    "specification": "Input is an ASCII string. Decode even-length hexadecimal accepting upper/lowercase; return byte array, or null for invalid digits or odd length. The returned array may contain up to 128 items.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "535cec08e7ca750ff6426c55df5e10382b5d98dd2b972889c664a544c49c2a87",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": "00aF",
+        "expected": [
+          0,
+          175
+        ]
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "pub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let s = input.as_str().unwrap_or(\"\");\n    let mut result = Vec::new();\n    \n    if s.is_empty() {\n        return serde_json::json!(null);\n    }\n    \n    let mut i = 0;\n    while i < s.len() {\n        if !('0'..='9').contains(&s[i]) && !('a'..='f').contains(&s[i]) && !('A'..='F').contains(&s[i]) {\n            return serde_json::json!(null);\n        }\n        if i + 1 < s.len() && !('0'..='9').contains(&s[i + 1]) && !('a'..='f').contains(&s[i + 1]) && !('A'..='F').contains(&s[i + 1]) {\n            return serde_json::json!(null);\n        }\n        i += 1;\n    }\n    \n    if s.len() % 2 != 0 {\n        return serde_json::json!(null);\n    }\n    \n    for i in (0..s.len()).step_by(2) {\n        let high = match s[i] {\n            '0'..='9' => s[i] as u8 - b'0',\n            'a'..='f' => s[i] as u8 - b'a' + 10,\n            'A'..='F' => s[i] as u8 - b'A' + 10,\n            _ => return serde_json::json!(null),\n        };\n        let low = match s[i + 1] {\n            '0'..='9' => s[i + 1] as u8 - b'0',\n            'a'..='f' => s[i + 1] as u8 - b'a' + 10,\n            'A'..='F' => s[i + 1] as u8 - b'A' + 10,\n            _ => return serde_json::json!(null),\n        };\n        result.push((high << 4 | low) as u8 as i64);\n    }\n    \n    serde_json::json!(result)\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison/sandbox"
+  },
+  "code_sha256": "a10a34c1481340b5156dc42837ad1f44be285513d82a7e1029d9d9813cc9609f",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

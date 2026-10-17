@@ -1,0 +1,15 @@
+{
+  "model_id": "Qwen/Qwen2.5-Coder-14B-Instruct",
+  "revision": "aedcc2d42b622764e023cf882b6652e646b95671",
+  "licence": "apache-2.0",
+  "files": {
+    "LICENSE": "832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e",
+    "README.md": "2bb69760ec931f9adbe560e95b5b9848dc35198508825547ffdc19934fc6f261",
+    "config.json": "9051fe83840dcd3a0f7e9f5b3372fc3927419eb56983273eac2dc635a5da7eae",
+    "generation_config.json": "fdaccbcb02f3e1e7914ccb0f69ebe899071ffd27cf825166d823163e156870f2",
+    "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+    "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+    "tokenizer_config.json": "959e7f1d9a1b7641a6d6ce05ca97b75c7894fcb66cbe5a040406458fb1128ee4",
+    "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+  }
+}

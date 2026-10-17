@@ -1,0 +1,28 @@
+{
+  "complete": true,
+  "completion": {
+    "attempt_id": "4a99abc4-3cd4-4c07-b1c1-49440f05ce08",
+    "business_id": "openai",
+    "cached": true,
+    "code": "Hi there!",
+    "historical_cost_nanos": 137500,
+    "model": "gpt-6.1-sol",
+    "model_revision": "provider alias gpt-6.1-sol; reviewed 2026-10-16; may change",
+    "provider_id": "openai",
+    "real_provider_recording": true,
+    "replayed": false,
+    "request_key": "c86b977252855e3718312ce81adb93c49d8a7028686ea51d051b557e57f2df6d",
+    "response_artifact_sha256": "d91b39fd456b7a5a7473a835a704cb04adde113440fb22a34a6561a6cbdf7d8e",
+    "source_id": "operator-inference",
+    "specification_sha256": "e30277f296c1c5dc12252b9eab92c82880f5c1cf699fbfbbc10ee25de17b1368",
+    "task_id": "operator-e30277f296c1c5dc12252b9eab92c82880f5c1cf699fbfbbc10ee25de17b1368",
+    "training_permission_approved": false,
+    "training_permission_decision_id": "INFERENCE_ONLY_NO_TRAINING_CLEARANCE",
+    "usage": {
+      "cached_input_tokens": 0,
+      "input_tokens": 27,
+      "output_tokens": 7,
+      "reasoning_tokens": 0
+    }
+  }
+}

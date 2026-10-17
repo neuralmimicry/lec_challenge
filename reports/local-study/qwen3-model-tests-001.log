@@ -1,0 +1,45 @@
+   Compiling lec-distil v0.1.0 (/home/pbisaacs/Developer/neuralmimicry/lec_challenge)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 1m 22s
+     Running unittests src/lib.rs (target/debug/deps/lec_distil-5c552d14ca9c7a48)
+
+running 24 tests
+test model::asset_lease::tests::an_unwound_load_releases_its_shared_lease ... ok
+test model::asset_lease::tests::a_symlink_cannot_redirect_the_lock_descriptor ... ok
+test model::asset_lease::tests::concurrent_readers_block_pruning_until_the_final_runtime_lease_drops ... ok
+test model::quantised::tests::memory_plan_accounts_for_embedding_expansion_and_quadratic_attention ... ok
+test model::tests::chat_template_plain_message_branch ... ok
+test model::qwen3_tests::legacy_configuration_omits_new_dimension_and_preserves_its_serialised_contract ... ok
+test model::quantised::tests::requested_context_cannot_exceed_the_quantised_publishers_contract ... ok
+test model::quantised::tests::gguf_metadata_cannot_override_original_architecture_or_tensor_dimensions ... ok
+test model::quantised::tests::gguf_vocabulary_and_termination_cannot_override_the_original_tokeniser ... ok
+test model::tests::original_llama_configuration_rejects_invalid_dimensions_and_semantics ... ok
+test model::tests::original_deepseek_template_and_eos_preserve_family_contract ... ok
+test model::tests::explicit_device_selection_never_silently_falls_back ... ok
+test model::tests::deterministic_sampling_and_rejection ... ok
+test model::tests::original_chat_rendering_bounds_output_and_computation ... ok
+test model::tests::finite_float16_queries_cannot_overflow_attention_scores_before_scaling ... ok
+test model::qwen3_tests::original_qwen3_non_thinking_template_and_multiple_eos_are_preserved ... ok
+test model::qwen3_tests::qwen3_requires_correct_head_norms_and_expanded_projection_shapes ... ok
+test model::quantised::tests::qwen3_gguf_rejects_missing_norms_and_mismatched_explicit_head_widths ... ok
+test model::tests::frozen_projection_matches_generic_forward_and_input_gradient ... ok
+test model::quantised::tests::qwen3_gguf_matches_its_dequantised_dense_tensors_with_expanded_heads ... FAILED
+test model::qwen3_tests::asymmetric_qwen3_matches_independent_scalar_attention_and_cached_decoding ... ok
+test model::quantised::tests::real_quantised_tensor_round_trip_runs_the_shared_cpu_transformer ... ok
+test model::qwen3_tests::qwen3_explicit_width_retains_real_adapter_gradients_and_frozen_head_norms ... ok
+test model::tests::full_qwen_architecture_backpropagates_and_preserves_frozen_base ... ok
+
+failures:
+
+---- model::quantised::tests::qwen3_gguf_matches_its_dequantised_dense_tensors_with_expanded_heads stdout ----
+
+thread 'model::quantised::tests::qwen3_gguf_matches_its_dequantised_dense_tensors_with_expanded_heads' (956357) panicked at src/model/quantised.rs:779:9:
+Qwen3 dense/GGUF layouts differ: 0.0032777376
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    model::quantised::tests::qwen3_gguf_matches_its_dequantised_dense_tensors_with_expanded_heads
+
+test result: FAILED. 23 passed; 1 failed; 0 ignored; 0 measured; 229 filtered out; finished in 0.05s
+
+error: test failed, to rerun pass `--lib`

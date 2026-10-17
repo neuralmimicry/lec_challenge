@@ -1,0 +1,499 @@
+{
+  "cohorts": [
+    {
+      "assets": {
+        "bytes": 788,
+        "path": "offline_bundle/base/assets.json",
+        "sha256": "54304e7f41519a4196674cba5e86593802f852b2b47882d6c19706f85f303ad4"
+      },
+      "available": true,
+      "base": "offline_bundle/base",
+      "engine": {
+        "bytes": 46867184,
+        "cpu_build": {
+          "build": {
+            "architecture": "x86_64",
+            "cargo_features": [
+              "cuda"
+            ],
+            "cargo_lock_sha256": "bd62f0019341d1a6432ba9153fefdfda757ac26856dc5da297995462176742bb",
+            "encoded_rustflags": "-C\u001ftarget-cpu=generic\u001f-C\u001fdebug-assertions=no\u001f-C\u001fpanic=unwind\u001f-C\u001ftarget-feature=+avx2,+fma,+f16c",
+            "profile": "avx2-fma-f16c",
+            "protocol": "explicit_cpu_simd_build_v1",
+            "required_features": [
+              "avx",
+              "avx2",
+              "f16c",
+              "fma"
+            ],
+            "resolved_rustc": {
+              "bytes": 645952,
+              "executable": "/home/pbisaacs/.rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/rustc",
+              "sha256": "859254978c0a0402c32f949f6de0d99aee73be8d15f45aac00ae1448aac51e74"
+            },
+            "rustc_cfg": [
+              "panic=\"unwind\"",
+              "target_abi=\"\"",
+              "target_arch=\"x86_64\"",
+              "target_endian=\"little\"",
+              "target_env=\"gnu\"",
+              "target_family=\"unix\"",
+              "target_feature=\"avx\"",
+              "target_feature=\"avx2\"",
+              "target_feature=\"f16c\"",
+              "target_feature=\"fma\"",
+              "target_feature=\"sse\"",
+              "target_feature=\"sse2\"",
+              "target_feature=\"sse3\"",
+              "target_feature=\"sse4.1\"",
+              "target_feature=\"sse4.2\"",
+              "target_feature=\"ssse3\"",
+              "target_has_atomic=\"16\"",
+              "target_has_atomic=\"32\"",
+              "target_has_atomic=\"64\"",
+              "target_has_atomic=\"8\"",
+              "target_has_atomic=\"ptr\"",
+              "target_has_atomic_primitive_alignment=\"16\"",
+              "target_has_atomic_primitive_alignment=\"32\"",
+              "target_has_atomic_primitive_alignment=\"64\"",
+              "target_has_atomic_primitive_alignment=\"8\"",
+              "target_has_atomic_primitive_alignment=\"ptr\"",
+              "target_os=\"linux\"",
+              "target_pointer_width=\"64\"",
+              "target_vendor=\"unknown\"",
+              "unix"
+            ],
+            "rustc_version_verbose": "rustc 1.98.1 (48a229cea 2026-09-01)\nbinary: rustc\ncommit-hash: 48a229ceaefd4985c50990b14116b6d856af0985\ncommit-date: 2026-09-01\nhost: x86_64-unknown-linux-gnu\nrelease: 1.98.1\nLLVM version: 22.1.8\n",
+            "rustflags": [
+              "-C",
+              "target-cpu=generic",
+              "-C",
+              "debug-assertions=no",
+              "-C",
+              "panic=unwind",
+              "-C",
+              "target-feature=+avx2,+fma,+f16c"
+            ],
+            "schema_version": 1,
+            "target_triple": "x86_64-unknown-linux-gnu"
+          },
+          "executable_bytes": 46867184,
+          "executable_sha256": "3f348bdfa71c49df5b5d0b7581ae9ad3114645127f99abbec9e4aac1064563bd"
+        },
+        "path": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/state/engines/3f348bdfa71c49df5b5d0b7581ae9ad3114645127f99abbec9e4aac1064563bd/lec-distil",
+        "sha256": "3f348bdfa71c49df5b5d0b7581ae9ad3114645127f99abbec9e4aac1064563bd"
+      },
+      "initial_weight_sha256": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+      "input_bundle": {
+        "bytes": 218818,
+        "path": "reports/local-study/explore/round-001/content-v1/bundle.json",
+        "sha256": "6256372fa9e690dbf230f5042904001db2bb1583b195015ddce53b0def40c8c6"
+      },
+      "key": "df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26",
+      "max_tokens": 768,
+      "maximum_tasks": 48,
+      "mode": "on_policy",
+      "numerical_equivalence": null,
+      "reason": "Frozen unadapted student cohort with verified training/reload and resource capability; actual new corrections and independent regrades determine organiser availability.",
+      "reuse_student_attempts_from": null,
+      "seed": 1729,
+      "source_config": {
+        "bytes": 1590,
+        "path": "config/distillation-study.toml",
+        "sha256": "a3712f1135dd5471c80aecc2f91b99742355e3fb01720465833d2b63a8e2b5ba"
+      },
+      "student": "conventional_qwen_lora",
+      "student_runtime": {
+        "device": "cpu",
+        "dtype": "f32"
+      },
+      "teacher_runtime": {
+        "device": {
+          "cuda": {
+            "ordinal": 0
+          }
+        },
+        "dtype": "f32"
+      },
+      "teachers": [
+        "qwen-coder-7b-q4_k_m"
+      ]
+    },
+    {
+      "assets": {
+        "bytes": 788,
+        "path": "offline_bundle/base/assets.json",
+        "sha256": "54304e7f41519a4196674cba5e86593802f852b2b47882d6c19706f85f303ad4"
+      },
+      "available": true,
+      "base": "offline_bundle/base",
+      "engine": {
+        "bytes": 46867184,
+        "cpu_build": {
+          "build": {
+            "architecture": "x86_64",
+            "cargo_features": [
+              "cuda"
+            ],
+            "cargo_lock_sha256": "bd62f0019341d1a6432ba9153fefdfda757ac26856dc5da297995462176742bb",
+            "encoded_rustflags": "-C\u001ftarget-cpu=generic\u001f-C\u001fdebug-assertions=no\u001f-C\u001fpanic=unwind\u001f-C\u001ftarget-feature=+avx2,+fma,+f16c",
+            "profile": "avx2-fma-f16c",
+            "protocol": "explicit_cpu_simd_build_v1",
+            "required_features": [
+              "avx",
+              "avx2",
+              "f16c",
+              "fma"
+            ],
+            "resolved_rustc": {
+              "bytes": 645952,
+              "executable": "/home/pbisaacs/.rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/rustc",
+              "sha256": "859254978c0a0402c32f949f6de0d99aee73be8d15f45aac00ae1448aac51e74"
+            },
+            "rustc_cfg": [
+              "panic=\"unwind\"",
+              "target_abi=\"\"",
+              "target_arch=\"x86_64\"",
+              "target_endian=\"little\"",
+              "target_env=\"gnu\"",
+              "target_family=\"unix\"",
+              "target_feature=\"avx\"",
+              "target_feature=\"avx2\"",
+              "target_feature=\"f16c\"",
+              "target_feature=\"fma\"",
+              "target_feature=\"sse\"",
+              "target_feature=\"sse2\"",
+              "target_feature=\"sse3\"",
+              "target_feature=\"sse4.1\"",
+              "target_feature=\"sse4.2\"",
+              "target_feature=\"ssse3\"",
+              "target_has_atomic=\"16\"",
+              "target_has_atomic=\"32\"",
+              "target_has_atomic=\"64\"",
+              "target_has_atomic=\"8\"",
+              "target_has_atomic=\"ptr\"",
+              "target_has_atomic_primitive_alignment=\"16\"",
+              "target_has_atomic_primitive_alignment=\"32\"",
+              "target_has_atomic_primitive_alignment=\"64\"",
+              "target_has_atomic_primitive_alignment=\"8\"",
+              "target_has_atomic_primitive_alignment=\"ptr\"",
+              "target_os=\"linux\"",
+              "target_pointer_width=\"64\"",
+              "target_vendor=\"unknown\"",
+              "unix"
+            ],
+            "rustc_version_verbose": "rustc 1.98.1 (48a229cea 2026-09-01)\nbinary: rustc\ncommit-hash: 48a229ceaefd4985c50990b14116b6d856af0985\ncommit-date: 2026-09-01\nhost: x86_64-unknown-linux-gnu\nrelease: 1.98.1\nLLVM version: 22.1.8\n",
+            "rustflags": [
+              "-C",
+              "target-cpu=generic",
+              "-C",
+              "debug-assertions=no",
+              "-C",
+              "panic=unwind",
+              "-C",
+              "target-feature=+avx2,+fma,+f16c"
+            ],
+            "schema_version": 1,
+            "target_triple": "x86_64-unknown-linux-gnu"
+          },
+          "executable_bytes": 46867184,
+          "executable_sha256": "3f348bdfa71c49df5b5d0b7581ae9ad3114645127f99abbec9e4aac1064563bd"
+        },
+        "path": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/state/engines/3f348bdfa71c49df5b5d0b7581ae9ad3114645127f99abbec9e4aac1064563bd/lec-distil",
+        "sha256": "3f348bdfa71c49df5b5d0b7581ae9ad3114645127f99abbec9e4aac1064563bd"
+      },
+      "initial_weight_sha256": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+      "input_bundle": {
+        "bytes": 218818,
+        "path": "reports/local-study/explore/round-001/content-v1/bundle.json",
+        "sha256": "6256372fa9e690dbf230f5042904001db2bb1583b195015ddce53b0def40c8c6"
+      },
+      "key": "76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c",
+      "max_tokens": 768,
+      "maximum_tasks": 48,
+      "mode": "self_distillation",
+      "numerical_equivalence": null,
+      "reason": "Frozen unadapted student cohort with verified training/reload and resource capability; actual new corrections and independent regrades determine organiser availability.",
+      "reuse_student_attempts_from": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts",
+      "seed": 1729,
+      "source_config": {
+        "bytes": 1590,
+        "path": "config/distillation-study.toml",
+        "sha256": "a3712f1135dd5471c80aecc2f91b99742355e3fb01720465833d2b63a8e2b5ba"
+      },
+      "student": "conventional_qwen_lora",
+      "student_runtime": {
+        "device": "cpu",
+        "dtype": "f32"
+      },
+      "teacher_runtime": {
+        "device": {
+          "cuda": {
+            "ordinal": 0
+          }
+        },
+        "dtype": "f32"
+      },
+      "teachers": []
+    },
+    {
+      "assets": {
+        "bytes": 875,
+        "path": "offline_bundle/students/bitnet-2b-4t/assets.json",
+        "sha256": "15bd66c0b1b9528e88a3db9b4be88518410ac0ce56dc7d51c7fa651dd1e9a37a"
+      },
+      "available": false,
+      "base": "offline_bundle/students/bitnet-2b-4t",
+      "engine": {
+        "bytes": 46867184,
+        "cpu_build": {
+          "build": {
+            "architecture": "x86_64",
+            "cargo_features": [
+              "cuda"
+            ],
+            "cargo_lock_sha256": "bd62f0019341d1a6432ba9153fefdfda757ac26856dc5da297995462176742bb",
+            "encoded_rustflags": "-C\u001ftarget-cpu=generic\u001f-C\u001fdebug-assertions=no\u001f-C\u001fpanic=unwind\u001f-C\u001ftarget-feature=+avx2,+fma,+f16c",
+            "profile": "avx2-fma-f16c",
+            "protocol": "explicit_cpu_simd_build_v1",
+            "required_features": [
+              "avx",
+              "avx2",
+              "f16c",
+              "fma"
+            ],
+            "resolved_rustc": {
+              "bytes": 645952,
+              "executable": "/home/pbisaacs/.rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/rustc",
+              "sha256": "859254978c0a0402c32f949f6de0d99aee73be8d15f45aac00ae1448aac51e74"
+            },
+            "rustc_cfg": [
+              "panic=\"unwind\"",
+              "target_abi=\"\"",
+              "target_arch=\"x86_64\"",
+              "target_endian=\"little\"",
+              "target_env=\"gnu\"",
+              "target_family=\"unix\"",
+              "target_feature=\"avx\"",
+              "target_feature=\"avx2\"",
+              "target_feature=\"f16c\"",
+              "target_feature=\"fma\"",
+              "target_feature=\"sse\"",
+              "target_feature=\"sse2\"",
+              "target_feature=\"sse3\"",
+              "target_feature=\"sse4.1\"",
+              "target_feature=\"sse4.2\"",
+              "target_feature=\"ssse3\"",
+              "target_has_atomic=\"16\"",
+              "target_has_atomic=\"32\"",
+              "target_has_atomic=\"64\"",
+              "target_has_atomic=\"8\"",
+              "target_has_atomic=\"ptr\"",
+              "target_has_atomic_primitive_alignment=\"16\"",
+              "target_has_atomic_primitive_alignment=\"32\"",
+              "target_has_atomic_primitive_alignment=\"64\"",
+              "target_has_atomic_primitive_alignment=\"8\"",
+              "target_has_atomic_primitive_alignment=\"ptr\"",
+              "target_os=\"linux\"",
+              "target_pointer_width=\"64\"",
+              "target_vendor=\"unknown\"",
+              "unix"
+            ],
+            "rustc_version_verbose": "rustc 1.98.1 (48a229cea 2026-09-01)\nbinary: rustc\ncommit-hash: 48a229ceaefd4985c50990b14116b6d856af0985\ncommit-date: 2026-09-01\nhost: x86_64-unknown-linux-gnu\nrelease: 1.98.1\nLLVM version: 22.1.8\n",
+            "rustflags": [
+              "-C",
+              "target-cpu=generic",
+              "-C",
+              "debug-assertions=no",
+              "-C",
+              "panic=unwind",
+              "-C",
+              "target-feature=+avx2,+fma,+f16c"
+            ],
+            "schema_version": 1,
+            "target_triple": "x86_64-unknown-linux-gnu"
+          },
+          "executable_bytes": 46867184,
+          "executable_sha256": "3f348bdfa71c49df5b5d0b7581ae9ad3114645127f99abbec9e4aac1064563bd"
+        },
+        "path": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/state/engines/3f348bdfa71c49df5b5d0b7581ae9ad3114645127f99abbec9e4aac1064563bd/lec-distil",
+        "sha256": "3f348bdfa71c49df5b5d0b7581ae9ad3114645127f99abbec9e4aac1064563bd"
+      },
+      "initial_weight_sha256": "8143ae115ed6babe5e5ada8fb8c5b769d8f417802b2db042ad98b4f7ed73975b",
+      "input_bundle": {
+        "bytes": 218818,
+        "path": "reports/local-study/explore/round-001/content-v1/bundle.json",
+        "sha256": "6256372fa9e690dbf230f5042904001db2bb1583b195015ddce53b0def40c8c6"
+      },
+      "key": "80685aaf0d52d284fb992d3519c2815ee9f8afc096600939f2f12e08a29b6403",
+      "max_tokens": 768,
+      "maximum_tasks": 48,
+      "mode": "on_policy",
+      "numerical_equivalence": {
+        "attachment": null,
+        "qualified": false,
+        "reasons": [
+          "schema-2 numerical equivalence receipt is missing"
+        ],
+        "reconstructed": null,
+        "report": null,
+        "required": true,
+        "status": "unavailable"
+      },
+      "reason": "Automatic BitNet cohort unavailable. Strict exact-base numerical equivalence unavailable: schema-2 numerical equivalence receipt is missing; configured resource profile fits=true; training/reload capability=true/true. Micro-model QAT cannot waive strict base equivalence.",
+      "reuse_student_attempts_from": null,
+      "seed": 1729,
+      "source_config": {
+        "bytes": 1590,
+        "path": "config/distillation-study.toml",
+        "sha256": "a3712f1135dd5471c80aecc2f91b99742355e3fb01720465833d2b63a8e2b5ba"
+      },
+      "student": "ternary_bitnet",
+      "student_runtime": {
+        "device": "cpu",
+        "dtype": "f32"
+      },
+      "teacher_runtime": {
+        "device": {
+          "cuda": {
+            "ordinal": 0
+          }
+        },
+        "dtype": "f32"
+      },
+      "teachers": [
+        "qwen-coder-7b-q4_k_m"
+      ]
+    },
+    {
+      "assets": {
+        "bytes": 875,
+        "path": "offline_bundle/students/bitnet-2b-4t/assets.json",
+        "sha256": "15bd66c0b1b9528e88a3db9b4be88518410ac0ce56dc7d51c7fa651dd1e9a37a"
+      },
+      "available": false,
+      "base": "offline_bundle/students/bitnet-2b-4t",
+      "engine": {
+        "bytes": 46867184,
+        "cpu_build": {
+          "build": {
+            "architecture": "x86_64",
+            "cargo_features": [
+              "cuda"
+            ],
+            "cargo_lock_sha256": "bd62f0019341d1a6432ba9153fefdfda757ac26856dc5da297995462176742bb",
+            "encoded_rustflags": "-C\u001ftarget-cpu=generic\u001f-C\u001fdebug-assertions=no\u001f-C\u001fpanic=unwind\u001f-C\u001ftarget-feature=+avx2,+fma,+f16c",
+            "profile": "avx2-fma-f16c",
+            "protocol": "explicit_cpu_simd_build_v1",
+            "required_features": [
+              "avx",
+              "avx2",
+              "f16c",
+              "fma"
+            ],
+            "resolved_rustc": {
+              "bytes": 645952,
+              "executable": "/home/pbisaacs/.rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/rustc",
+              "sha256": "859254978c0a0402c32f949f6de0d99aee73be8d15f45aac00ae1448aac51e74"
+            },
+            "rustc_cfg": [
+              "panic=\"unwind\"",
+              "target_abi=\"\"",
+              "target_arch=\"x86_64\"",
+              "target_endian=\"little\"",
+              "target_env=\"gnu\"",
+              "target_family=\"unix\"",
+              "target_feature=\"avx\"",
+              "target_feature=\"avx2\"",
+              "target_feature=\"f16c\"",
+              "target_feature=\"fma\"",
+              "target_feature=\"sse\"",
+              "target_feature=\"sse2\"",
+              "target_feature=\"sse3\"",
+              "target_feature=\"sse4.1\"",
+              "target_feature=\"sse4.2\"",
+              "target_feature=\"ssse3\"",
+              "target_has_atomic=\"16\"",
+              "target_has_atomic=\"32\"",
+              "target_has_atomic=\"64\"",
+              "target_has_atomic=\"8\"",
+              "target_has_atomic=\"ptr\"",
+              "target_has_atomic_primitive_alignment=\"16\"",
+              "target_has_atomic_primitive_alignment=\"32\"",
+              "target_has_atomic_primitive_alignment=\"64\"",
+              "target_has_atomic_primitive_alignment=\"8\"",
+              "target_has_atomic_primitive_alignment=\"ptr\"",
+              "target_os=\"linux\"",
+              "target_pointer_width=\"64\"",
+              "target_vendor=\"unknown\"",
+              "unix"
+            ],
+            "rustc_version_verbose": "rustc 1.98.1 (48a229cea 2026-09-01)\nbinary: rustc\ncommit-hash: 48a229ceaefd4985c50990b14116b6d856af0985\ncommit-date: 2026-09-01\nhost: x86_64-unknown-linux-gnu\nrelease: 1.98.1\nLLVM version: 22.1.8\n",
+            "rustflags": [
+              "-C",
+              "target-cpu=generic",
+              "-C",
+              "debug-assertions=no",
+              "-C",
+              "panic=unwind",
+              "-C",
+              "target-feature=+avx2,+fma,+f16c"
+            ],
+            "schema_version": 1,
+            "target_triple": "x86_64-unknown-linux-gnu"
+          },
+          "executable_bytes": 46867184,
+          "executable_sha256": "3f348bdfa71c49df5b5d0b7581ae9ad3114645127f99abbec9e4aac1064563bd"
+        },
+        "path": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/state/engines/3f348bdfa71c49df5b5d0b7581ae9ad3114645127f99abbec9e4aac1064563bd/lec-distil",
+        "sha256": "3f348bdfa71c49df5b5d0b7581ae9ad3114645127f99abbec9e4aac1064563bd"
+      },
+      "initial_weight_sha256": "8143ae115ed6babe5e5ada8fb8c5b769d8f417802b2db042ad98b4f7ed73975b",
+      "input_bundle": {
+        "bytes": 218818,
+        "path": "reports/local-study/explore/round-001/content-v1/bundle.json",
+        "sha256": "6256372fa9e690dbf230f5042904001db2bb1583b195015ddce53b0def40c8c6"
+      },
+      "key": "f333309af0e0f77a4212e7b36c0ef9e9aaa6a490815b615a1ae47b06d8d0f4a3",
+      "max_tokens": 768,
+      "maximum_tasks": 48,
+      "mode": "self_distillation",
+      "numerical_equivalence": {
+        "attachment": null,
+        "qualified": false,
+        "reasons": [
+          "schema-2 numerical equivalence receipt is missing"
+        ],
+        "reconstructed": null,
+        "report": null,
+        "required": true,
+        "status": "unavailable"
+      },
+      "reason": "Automatic BitNet cohort unavailable. Strict exact-base numerical equivalence unavailable: schema-2 numerical equivalence receipt is missing; configured resource profile fits=true; training/reload capability=true/true. Micro-model QAT cannot waive strict base equivalence.",
+      "reuse_student_attempts_from": "reports/local-study/explore/round-001/cohorts/80685aaf0d52d284fb992d3519c2815ee9f8afc096600939f2f12e08a29b6403/rollouts",
+      "seed": 1729,
+      "source_config": {
+        "bytes": 1590,
+        "path": "config/distillation-study.toml",
+        "sha256": "a3712f1135dd5471c80aecc2f91b99742355e3fb01720465833d2b63a8e2b5ba"
+      },
+      "student": "ternary_bitnet",
+      "student_runtime": {
+        "device": "cpu",
+        "dtype": "f32"
+      },
+      "teacher_runtime": {
+        "device": "cpu",
+        "dtype": "f32"
+      },
+      "teachers": []
+    }
+  ],
+  "combined_external_and_self_teacher": "queued: requires independently verified same-cohort record composition; different origins are never merged",
+  "coverage": "Finite base-initial cohorts, separate mode studies. Adapted-initial cohorts and arbitrary tool selection are not inferred. Each cohort shares the original invocation wall budget.",
+  "evidence_kind": "frozen_isolated_student_rollout_cohort_catalogue",
+  "held_out_used": false,
+  "production_eligible": false,
+  "schema_version": 1,
+  "unavailable_students": []
+}

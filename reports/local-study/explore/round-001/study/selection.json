@@ -1,0 +1,105 @@
+{
+  "evidence_kind": "verified_development_only_study_selection",
+  "excluded_from_ranking": [],
+  "held_out_used": false,
+  "limitations": [
+    "Best tested in the executed local development catalogue; queued and unavailable arms have not been compared.",
+    "Quick assistant-window screening is an operator experiment, not evidence of general learning.",
+    "Four jointly authored development sources, repeated selection and one decoding seed cannot establish a significant improvement or global optimum.",
+    "Generation timings exclude model loading and grading; local energy and amortised cash costs are unmeasured.",
+    "Full-fidelity training and the independent sealed promotion gate remain separate work."
+  ],
+  "production_eligible": false,
+  "quick_output": "reports/local-study/explore/round-001/study/quick",
+  "ranking": [
+    {
+      "mean_summed_generation_ms": 392960.0,
+      "method_group": "459f8e35f31c11e9614e7b5cf4df3eb84f4f3cf11828008aa80532f3c654636a",
+      "observed_arm_ids": [
+        "arm-00886e19edc356c899a5d992"
+      ],
+      "observed_training_seeds": 1,
+      "source_macro_pass_rate": 0.0
+    },
+    {
+      "mean_summed_generation_ms": 399563.0,
+      "method_group": "af9693cabbde33d50e846acd7ddaadf6cf94a540d9cc81d61e34a876c171794b",
+      "observed_arm_ids": [
+        "arm-10219d27497b8da52d90f257"
+      ],
+      "observed_training_seeds": 1,
+      "source_macro_pass_rate": 0.0
+    }
+  ],
+  "ranking_inputs": [
+    {
+      "arm_id": "arm-00886e19edc356c899a5d992",
+      "development_evaluation": {
+        "bytes": 1603,
+        "path": "reports/local-study/explore/round-001/study/quick/arms/arm-00886e19edc356c899a5d992/development/report.json",
+        "sha256": "703154645c34671674d1b9bffde0bfbf8d6d6436c55e5fe050d7b8afb67f6d70"
+      },
+      "numerical_equivalence": {
+        "attachment": null,
+        "qualified": true,
+        "reasons": [],
+        "reconstructed": null,
+        "report": null,
+        "required": false,
+        "status": "not_required"
+      },
+      "outcome": {
+        "bytes": 2585,
+        "path": "reports/local-study/explore/round-001/study/quick/arms/arm-00886e19edc356c899a5d992/outcome.json",
+        "sha256": "4eb93e024607cd0bb9747378fadc81861d9ec8fbed51d95ba9e6bea0f2f1f710"
+      },
+      "ranking_eligible": true,
+      "source_macro_pass_rate": 0.0,
+      "summed_generation_ms": 392960.0,
+      "worker_wall_seconds": 603.769336759
+    },
+    {
+      "arm_id": "arm-10219d27497b8da52d90f257",
+      "development_evaluation": {
+        "bytes": 1603,
+        "path": "reports/local-study/explore/round-001/study/quick/arms/arm-10219d27497b8da52d90f257/development/report.json",
+        "sha256": "658b5670e29bd043e88661a14c2e37ae5d2200516c55ac072d70ce05d903971c"
+      },
+      "numerical_equivalence": {
+        "attachment": null,
+        "qualified": true,
+        "reasons": [],
+        "reconstructed": null,
+        "report": null,
+        "required": false,
+        "status": "not_required"
+      },
+      "outcome": {
+        "bytes": 2601,
+        "path": "reports/local-study/explore/round-001/study/quick/arms/arm-10219d27497b8da52d90f257/outcome.json",
+        "sha256": "b4b8027e89a7a547f5726a3d160cef176a57913af84c9d9e1ee3e6bab4373ee6"
+      },
+      "ranking_eligible": true,
+      "source_macro_pass_rate": 0.0,
+      "summed_generation_ms": 399563.0,
+      "worker_wall_seconds": 598.290238605
+    }
+  ],
+  "schema_version": 2,
+  "selected_arms": [
+    "arm-00886e19edc356c899a5d992",
+    "arm-10219d27497b8da52d90f257",
+    "arm-b1ee8c0e1c0ffe7465f83fe0",
+    "arm-d81f55ca66908cb5884d507c"
+  ],
+  "selection_available": true,
+  "selection_rule": "Exclude BitNet without independently reconstructed checkpoint-bound schema-2 numerical parity; retain its descriptive score. Average source-macro development success within qualified method groups across every observed training seed; break ties by lower measured generation time, then group hash. Freeze every applicable preregistered seed of selected groups within the full trial cap.",
+  "status": "selected",
+  "study_plan": {
+    "bytes": 7698784,
+    "path": "reports/local-study/explore/round-001/study/plan.json",
+    "sha256": "4b52fff04fe6a793004027f2c0b99fbaa99efbd51fce16022553e61463c3744d"
+  },
+  "top_groups": 2,
+  "unavailable_reasons": []
+}

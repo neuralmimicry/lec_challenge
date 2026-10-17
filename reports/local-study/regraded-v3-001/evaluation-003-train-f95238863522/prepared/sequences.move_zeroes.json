@@ -1,0 +1,54 @@
+{
+  "schema_version": 3,
+  "run_id": "bf515a57-a2f3-45b9-898c-b9cecb657e15",
+  "ownership_nonce": "b826b577-db82-4d03-ad2e-aa70e5df768e",
+  "attempt_key": "7b232f059df109c8cdb219a0c8ab5c67ebcb04d0ab3afa302d6e3fe7313d8148",
+  "receipt_path": "reports/local-study/regraded-v3-001/evaluation-003-train-f95238863522/prepared/sequences.move_zeroes.json",
+  "report_path": "reports/local-study/regraded-v3-001/evaluation-003-train-f95238863522/sandbox/bf515a57-a2f3-45b9-898c-b9cecb657e15.json",
+  "task": {
+    "id": "sequences.move_zeroes",
+    "source_id": "private-sequences-v1",
+    "lineage_id": "local-contract-pack-09",
+    "split": "train",
+    "specification": "Input is an integer array. Move all zeros to the end, preserving the order of nonzero elements and the length.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "c0192d6be07fd2a4459e0f3353f4aece08cfb58e400e462f45e61de5ed548e13",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": [
+          0,
+          1,
+          0,
+          -2,
+          3
+        ],
+        "expected": [
+          1,
+          -2,
+          3,
+          0,
+          0
+        ]
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "use serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let mut result = Vec::new();\n    let mut zero_count = 0;\n\n    for &item in input.as_array() {\n        if item.is_u64() {\n            result.push(item);\n        } else if item.is_null() {\n            zero_count += 1;\n        } else {\n            result.push(item);\n        }\n    }\n\n    let mut zero_index = 0;\n    for i in 0..result.len() {\n        if result[i].is_u64() {\n            result[i] = zero_index as u64;\n            zero_index += 1;\n        }\n    }\n\n    serde_json::Value::Array(result)\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/regraded-v3-001/evaluation-003-train-f95238863522/sandbox"
+  },
+  "code_sha256": "76e695d7c60240c68a0e5eff4ff0880eb4a8fb270a30bb0ec9e3f5056845205b",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

@@ -1,0 +1,8 @@
+{
+  "report": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox/a3c786e3-9d97-481a-aab2-8bef3d13bf4a.json",
+    "sha256": "d3f4a6f767596e0e7c1a3799ef8cc03f56d59ef8132ffd2d1b06a4fb371a8d84",
+    "bytes": 3418
+  },
+  "error": null
+}

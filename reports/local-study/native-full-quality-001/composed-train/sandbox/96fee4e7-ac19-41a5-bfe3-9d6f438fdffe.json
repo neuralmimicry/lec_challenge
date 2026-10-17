@@ -1,0 +1,34 @@
+{
+  "run_id": "96fee4e7-ac19-41a5-bfe3-9d6f438fdffe",
+  "task_id": "stock.duplicates",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error[E0308]: mismatched types\n  --> /candidate/main.rs:10:16\n   |\n10 |         if let Some(str_item) = str_item {\n   |                ^^^^^^^^^^^^^^   -------- this expression has type `&str`\n   |                |\n   |                expected `str`, found `Option<_>`\n   |\n   = note: expected type `str`\n              found enum `Option<_>`\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0308`.\n"
+  ],
+  "cases_total": 6,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "4b2556745b303526f354ded7f2c473b77f6da0c99a77f0a493c7272a8d800aac",
+  "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "604fea739462fc422f5d673feea34ff4a6b99447d7debcc102266278869e9d1a",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "controller_version": 2,
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:1",
+    "expected_image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/native-full-quality-001/composed-train/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/native-full-quality-001/composed-train/sandbox/96fee4e7-ac19-41a5-bfe3-9d6f438fdffe.audit.json",
+  "audit_sha256": "47832f642ec09612bbed865ac1f7ea10f104a4e4cc391e935d0d408fd6f8bf49",
+  "failure": "compilation failed: error[E0308]: mismatched types\n  --> /candidate/main.rs:10:16\n   |\n10 |         if let Some(str_item) = str_item {\n   |                ^^^^^^^^^^^^^^   -------- this expression has type `&str`\n   |                |\n   |                expected `str`, found `Option<_>`\n   |\n   = note: expected type `str`\n              found enum `Option<_>`\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0308`.\n",
+  "duration_ms": 5187,
+  "timeout_evidence": null
+}

@@ -1,0 +1,68 @@
+{
+  "schema_version": 3,
+  "run_id": "6bce207e-1e1d-44bf-9bea-e4c1151f5a49",
+  "ownership_nonce": "f19a296e-ea33-408d-9215-c233cf003e68",
+  "attempt_key": "2c71e64b-010f-4300-9776-94aa5f44b4aa",
+  "receipt_path": "reports/local-study/explore/round-001/study/full/arms/arm-d81f55ca66908cb5884d507c/development/sandbox/2c71e64b-010f-4300-9776-94aa5f44b4aa.prepared.json",
+  "report_path": "reports/local-study/explore/round-001/study/full/arms/arm-d81f55ca66908cb5884d507c/development/sandbox/6bce207e-1e1d-44bf-9bea-e4c1151f5a49.json",
+  "task": {
+    "id": "tables.sort_rows",
+    "source_id": "private-tables-v1",
+    "lineage_id": "local-contract-pack-15",
+    "split": "development",
+    "specification": "Input is an array of [key,value] integer rows. Sort ascending by key and then value; keep duplicates.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "df1fea127338d7c1399d9b922559c0782ff3fec80cb89b6d508a51249e019c1c",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": [
+          [
+            2,
+            9
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            3
+          ]
+        ],
+        "expected": [
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            3
+          ],
+          [
+            2,
+            9
+          ]
+        ]
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "```rust\nuse serde_json::Value;\n\nfn solve(input: serde_json::Value) -> serde_json::Value {\n    let mut sorted_data = Vec::new();\n    for row in input.as_array() {\n        let key = row[0].as_i64().unwrap();\n        let value = row[1].as_i64().unwrap();\n        sorted_data.push((key, value));\n    }\n\n    sorted_data.sort_unstable_by(|a, b| (a.0, a.1));\n    sorted_data.into_iter().map(|(k, v)| serde_json::Value::from((k, v))).collect()\n}\n\nfn main() {\n    let input = serde_json::Value::from(\"[[2,9],[1,4],[2,3]]\");\n    let expected = serde_json::Value::from(\"[[1,4],[2,3],[2,9]]\");\n    assert_eq!(solve(input), expected);\n}\n```\n\nThis Rust code defines a function `solve` that takes a JSON array of rows, sorts them based on the key and value, and returns the sorted array as a JSON value. The `main` function demonstrates how to use this function with a sample input and expected output.",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/explore/round-001/study/full/arms/arm-d81f55ca66908cb5884d507c/development/sandbox"
+  },
+  "code_sha256": "6bea6c92f905bc02213031074a9a1b5ab7b507721aec011067e2b6056dc739c2",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

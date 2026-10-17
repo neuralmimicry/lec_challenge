@@ -1,0 +1,18 @@
+
+running 3 tests
+test offline_oci_archive_round_trip ... ok
+test real_output_deadline_and_alias_defences ... ok
+test real_reference_candidates_across_all_splits_and_evidence_tampering ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 224.39s
+
+    Blocking waiting for file lock on build directory
+   Compiling ring v0.17.14
+   Compiling rustls v0.23.46
+   Compiling rustls-webpki v0.103.15
+   Compiling tokio-rustls v0.26.6
+   Compiling hyper-rustls v0.27.10
+   Compiling reqwest v0.12.28
+   Compiling lec-distil v0.1.0 (/home/pbisaacs/Developer/neuralmimicry/lec_challenge)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 1m 07s
+     Running tests/sandbox_contract.rs (target/debug/deps/sandbox_contract-83ad793f7f4f36a7)

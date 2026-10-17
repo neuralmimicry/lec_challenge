@@ -1,0 +1,40 @@
+{
+  "run_id": "cd23d72f-28cb-4f78-b2df-68c42832efbd",
+  "task_id": "search.occurrences",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: warning: unused import: `serde_json::Value`\n --> /candidate/main.rs:1:5\n  |\n1 | use serde_json::Value;\n  |     ^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0277]: the size for values of type `str` cannot be known at compilation time\n --> /candidate/main.rs:9:22\n  |\n9 |         if let Some(&text) = value.as_str() {\n  |                      ^^^^ doesn't have a size known at compile-time\n  |\n  = help: the trait `Sized` is not implemented for `str`\n  = note: all local variables must have a statically known size\n\nerror[E0277]: can't compare `str` with `&str`\n  --> /candidate/main.rs:10:21\n   |\n10 |             if text == pattern {\n   |                     ^^ no implementation for `str == &str`\n   |\n   = help: the trait `PartialEq<&str>` is not implemented for `str`\nhelp: consider dereferencing here\n   |\n10 |             if text == *pattern {\n   |                        +\n\nerror[E0308]: mismatched types\n   --> /candidate/main.rs:17:30\n    |\n 11 |                 result.push(current_index);\n    |                 ------      ------------- this argument has type `usize`...\n    |                 |\n    |                 ... which causes `result` to have type `Vec<usize>`\n...\n 17 |     serde_json::Value::Array(result)\n    |     ------------------------ ^^^^^^ expected `Vec<Value>`, found `Vec<usize>`\n    |     |\n    |     arguments to this enum variant are incorrect\n    |\n    = note: expected struct `Vec<Value>`\n               found struct `Vec<usize>`\nnote: tuple variant defined here\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:160:5\n    |\n160 |     Array(Vec<Value>),\n    |     ^^^^^\nhelp: call `Into::into` on this expression to convert `usize` into `Value`\n    |\n 11 |                 result.push(current_index.into());\n    |                                          +++++++\n\nerror: aborting due to 3 previous errors; 1 warning emitted\n\nSome errors have detailed explanations: E0277, E0308.\nFor more information about an error, try `rustc --explain E0277`.\n"
+  ],
+  "cases_total": 6,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "f8bfaf0d32215674109cafc3a91b3d9663467af7ff889907c2fec8887e6da533",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/regraded-v3-001/evaluation-003-train-f95238863522/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/regraded-v3-001/evaluation-003-train-f95238863522/sandbox/cd23d72f-28cb-4f78-b2df-68c42832efbd.audit.json",
+  "audit_sha256": "82a66c6f3672bc4a0541b6fa1b491bb5d9c020fcb6657edac287a063a30e198f",
+  "failure": "compilation failed: warning: unused import: `serde_json::Value`\n --> /candidate/main.rs:1:5\n  |\n1 | use serde_json::Value;\n  |     ^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0277]: the size for values of type `str` cannot be known at compilation time\n --> /candidate/main.rs:9:22\n  |\n9 |         if let Some(&text) = value.as_str() {\n  |                      ^^^^ doesn't have a size known at compile-time\n  |\n  = help: the trait `Sized` is not implemented for `str`\n  = note: all local variables must have a statically known size\n\nerror[E0277]: can't compare `str` with `&str`\n  --> /candidate/main.rs:10:21\n   |\n10 |             if text == pattern {\n   |                     ^^ no implementation for `str == &str`\n   |\n   = help: the trait `PartialEq<&str>` is not implemented for `str`\nhelp: consider dereferencing here\n   |\n10 |             if text == *pattern {\n   |                        +\n\nerror[E0308]: mismatched types\n   --> /candidate/main.rs:17:30\n    |\n 11 |                 result.push(current_index);\n    |                 ------      ------------- this argument has type `usize`...\n    |                 |\n    |                 ... which causes `result` to have type `Vec<usize>`\n...\n 17 |     serde_json::Value::Array(result)\n    |     ------------------------ ^^^^^^ expected `Vec<Value>`, found `Vec<usize>`\n    |     |\n    |     arguments to this enum variant are incorrect\n    |\n    = note: expected struct `Vec<Value>`\n               found struct `Vec<usize>`\nnote: tuple variant defined here\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:160:5\n    |\n160 |     Array(Vec<Value>),\n    |     ^^^^^\nhelp: call `Into::into` on this expression to convert `usize` into `Value`\n    |\n 11 |                 result.push(current_index.into());\n    |                                          +++++++\n\nerror: aborting due to 3 previous errors; 1 warning emitted\n\nSome errors have detailed explanations: E0277, E0308.\nFor more information about an error, try `rustc --explain E0277`.\n",
+  "duration_ms": 19668,
+  "timeout_evidence": null,
+  "lifecycle_evidence": {
+    "receipt_path": "reports/local-study/regraded-v3-001/evaluation-003-train-f95238863522/sandbox/cd23d72f-28cb-4f78-b2df-68c42832efbd.lifecycle.json",
+    "receipt_sha256": "9e92400c75e60b830604b555c677c38cc49d95e5f3e3691adde3fc0d2b32c9fa"
+  }
+}

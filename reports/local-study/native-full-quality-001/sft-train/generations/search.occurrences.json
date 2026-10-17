@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "a5b39d544c85b76111246b8fda40c638ce104251a1c56368277fef8fe4033eb6",
+  "task_id": "search.occurrences",
+  "source_id": "private-search-v1",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input {text,pattern} contains ASCII strings with nonempty pattern. Return zero-based starting indices of every occurrence, including overlaps. The returned array may contain up to 256 items.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":{\"pattern\":\"aba\",\"text\":\"ababa\"},\"expected\":[0,2]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let text = input[\"text\"].as_str().unwrap();\n    let pattern = input[\"pattern\"].as_str().unwrap();\n    let mut result = Vec::new();\n    let mut start = 0;\n    let mut pos = 0;\n    while let Some(c) = text.chars().nth(pos) {\n        if c == pattern.chars().nth(pos).unwrap() {\n            pos += 1;\n            if pos == pattern.len() {\n                result.push(start);\n                start = pos;\n            }\n        } else {\n            pos = 0;\n        }\n    }\n    Value::Array(result.into_iter().map(|i| Value::Number(i as f64)).collect())\n}\n```",
+    "checkpoint_id": "e2bcd135527659042304d936fa56c7240f6f96a43b9f81f2a888c38b7762a949",
+    "finish_reason": "stop",
+    "input_tokens": 247,
+    "output_tokens": 162,
+    "elapsed_ms": 8506,
+    "complete": true
+  },
+  "model_error": null
+}

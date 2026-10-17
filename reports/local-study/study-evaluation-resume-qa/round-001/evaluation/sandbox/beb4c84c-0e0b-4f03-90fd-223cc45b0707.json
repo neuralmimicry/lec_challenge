@@ -1,0 +1,34 @@
+{
+  "run_id": "beb4c84c-0e0b-4f03-90fd-223cc45b0707",
+  "task_id": "dispatch.round_robin",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: warning: unused import: `serde_json::Value`\n --> /candidate/main.rs:1:5\n  |\n1 | use serde_json::Value;\n  |     ^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0599]: no method named `as_integer` found for enum `Value` in the current scope\n --> /candidate/main.rs:6:29\n  |\n6 |     let mut quantum = input.as_integer().unwrap();\n  |                             ^^^^^^^^^^\n  |\nhelp: there is a method `as_str` with a similar name\n  |\n6 -     let mut quantum = input.as_integer().unwrap();\n6 +     let mut quantum = input.as_str().unwrap();\n  |\n\nerror[E0308]: mismatched types\n   --> /candidate/main.rs:28:30\n    |\n 10 |             indices.push(index as i64);\n    |             -------      ------------ this argument has type `i64`...\n    |             |\n    |             ... which causes `indices` to have type `Vec<i64>`\n...\n 28 |     serde_json::Value::Array(indices)\n    |     ------------------------ ^^^^^^^ expected `Vec<Value>`, found `Vec<i64>`\n    |     |\n    |     arguments to this enum variant are incorrect\n    |\n    = note: expected struct `Vec<Value>`\n               found struct `Vec<i64>`\nnote: tuple variant defined here\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:160:5\n    |\n160 |     Array(Vec<Value>),\n    |     ^^^^^\nhelp: call `Into::into` on this expression to convert `i64` into `Value`\n    |\n 10 |             indices.push((index as i64).into());\n    |                          +            ++++++++\n\nerror: aborting due to 2 previous errors; 1 warning emitted\n\nSome errors have detailed explanations: E0308, E0599.\nFor more information about an error, try `rustc --explain E0308`.\n"
+  ],
+  "cases_total": 5,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "4b2556745b303526f354ded7f2c473b77f6da0c99a77f0a493c7272a8d800aac",
+  "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "6ef61f785559ec759aeb1860e268225d3522892e71862174180c3c8675fc850e",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "controller_version": 2,
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:1",
+    "expected_image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/study-evaluation-resume-qa/round-001/evaluation/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/study-evaluation-resume-qa/round-001/evaluation/sandbox/beb4c84c-0e0b-4f03-90fd-223cc45b0707.audit.json",
+  "audit_sha256": "c265f537b94a02e4d28d0f8916e45a6d1e52754a962d1795fdd7fb370d60ee33",
+  "failure": "compilation failed: warning: unused import: `serde_json::Value`\n --> /candidate/main.rs:1:5\n  |\n1 | use serde_json::Value;\n  |     ^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0599]: no method named `as_integer` found for enum `Value` in the current scope\n --> /candidate/main.rs:6:29\n  |\n6 |     let mut quantum = input.as_integer().unwrap();\n  |                             ^^^^^^^^^^\n  |\nhelp: there is a method `as_str` with a similar name\n  |\n6 -     let mut quantum = input.as_integer().unwrap();\n6 +     let mut quantum = input.as_str().unwrap();\n  |\n\nerror[E0308]: mismatched types\n   --> /candidate/main.rs:28:30\n    |\n 10 |             indices.push(index as i64);\n    |             -------      ------------ this argument has type `i64`...\n    |             |\n    |             ... which causes `indices` to have type `Vec<i64>`\n...\n 28 |     serde_json::Value::Array(indices)\n    |     ------------------------ ^^^^^^^ expected `Vec<Value>`, found `Vec<i64>`\n    |     |\n    |     arguments to this enum variant are incorrect\n    |\n    = note: expected struct `Vec<Value>`\n               found struct `Vec<i64>`\nnote: tuple variant defined here\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:160:5\n    |\n160 |     Array(Vec<Value>),\n    |     ^^^^^\nhelp: call `Into::into` on this expression to convert `i64` into `Value`\n    |\n 10 |             indices.push((index as i64).into());\n    |                          +            ++++++++\n\nerror: aborting due to 2 previous errors; 1 warning emitted\n\nSome errors have detailed explanations: E0308, E0599.\nFor more information about an error, try `rustc --explain E0308`.\n",
+  "duration_ms": 16077,
+  "timeout_evidence": null
+}

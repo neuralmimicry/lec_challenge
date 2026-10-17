@@ -1,0 +1,42 @@
+{
+  "schema_version": 3,
+  "run_id": "7d1a430c-2608-4b68-a940-e261131239eb",
+  "ownership_nonce": "f968b03b-afcf-44d3-8b11-27e66620bca4",
+  "attempt_key": "27f525ed-7912-4f1c-97fa-20232567ad42",
+  "receipt_path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox/27f525ed-7912-4f1c-97fa-20232567ad42.prepared.json",
+  "report_path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox/7d1a430c-2608-4b68-a940-e261131239eb.json",
+  "task": {
+    "id": "paths.basename",
+    "source_id": "private-paths-v1",
+    "lineage_id": "local-contract-pack-08",
+    "split": "train",
+    "specification": "Input is an absolute POSIX path. Ignore trailing slashes; return the last nonempty raw component, or / for root. Do not resolve . or ...\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "812cc46c866bb5250f1267527587c4967061612883928c558ba8257a3624c018",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": "/a/b///",
+        "expected": "b"
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "use serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let path = input.as_str().unwrap_or_default();\n    let last_nonempty_raw_component = path\n        .split('/')\n        .last()\n        .map(|s| s.trim_end())\n        .unwrap_or_default();\n\n    if last_nonempty_raw_component.is_empty() {\n        \"/\".to_string()\n    } else {\n        last_nonempty_raw_component.to_string()\n    }\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox"
+  },
+  "code_sha256": "d226914add126b63c6d4c8be22867e87cc67a5c12c4bae59636a4b9411f78a20",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

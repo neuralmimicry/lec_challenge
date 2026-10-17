@@ -1,0 +1,2 @@
+FAILURE: live request requires explicit --authorised-usd
+{"error":"live request requires explicit --authorised-usd","observed_unix_ms":1792159065035,"promotion":"incumbent_retained","status":"FAILURE"}

@@ -1,0 +1,45 @@
+{
+  "schema_version": 3,
+  "run_id": "5a58b793-ddb3-4b4f-8c77-0356ca8b0502",
+  "ownership_nonce": "50ba2ada-c75f-4189-8601-c159596964e5",
+  "attempt_key": "b294e47582f087f51d6c882d338872b4d8a762babfc061926b667fcbe0bae357",
+  "receipt_path": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/prepared/bits.hamming.json",
+  "report_path": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/sandbox/5a58b793-ddb3-4b4f-8c77-0356ca8b0502.json",
+  "task": {
+    "id": "bits.hamming",
+    "source_id": "private-bits-v1",
+    "lineage_id": "local-contract-pack-11",
+    "split": "train",
+    "specification": "Input is [a,b], unsigned 32-bit integers. Return the number of differing bit positions.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "bc18825458e0ecd82619effc2fd97273fe6364866bea7b19ecdfdb5d23d6facf",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": [
+          9,
+          3
+        ],
+        "expected": 2
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "use serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let arr = input.as_array().unwrap();\n    let a = arr[0].as_u64().unwrap();\n    let b = arr[1].as_u64().unwrap();\n    let mut count = 0;\n    let mut x = a;\n    let mut y = b;\n    while x != 0 || y != 0 {\n        if x & 1 != y & 1 {\n            count += 1;\n        }\n        x >>= 1;\n        y >>= 1;\n    }\n    Value::from(count)\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/sandbox"
+  },
+  "code_sha256": "dce717f18f489d1138ec27ad423f06ae0e2c5b204bb2c38ee2a27a35c3ea52fa",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

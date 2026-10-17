@@ -1,0 +1,48 @@
+{
+  "schema_version": 3,
+  "run_id": "8eb5c858-2df4-41e0-b5ec-14e385e175b3",
+  "ownership_nonce": "197c03df-11bd-45e0-a954-f1c8e108116e",
+  "attempt_key": "18525fd9-42c0-4181-a577-53d6d1e9b96f",
+  "receipt_path": "reports/local-study/explore/round-001/content-v1/sandbox/18525fd9-42c0-4181-a577-53d6d1e9b96f.prepared.json",
+  "report_path": "reports/local-study/explore/round-001/content-v1/sandbox/8eb5c858-2df4-41e0-b5ec-14e385e175b3.json",
+  "task": {
+    "id": "stock.duplicates",
+    "source_id": "private-stock-v1",
+    "lineage_id": "local-contract-pack-01",
+    "split": "train",
+    "specification": "Input is an array of ASCII strings. Return distinct strings occurring at least twice, in lexicographic order.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "b3064f30c0245a1c1f478d943d569572b652bbde228f5d6b7404403481015751",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": [
+          "b",
+          "a",
+          "b"
+        ],
+        "expected": [
+          "b"
+        ]
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "// Plan:\n// 1. Parse the input JSON array of strings.\n// 2. Use a HashMap to count occurrences of each string.\n// 3. Filter out strings that occur less than twice.\n// 4. Sort the remaining strings lexicographically.\n// 5. Convert the result back to a JSON array and return.\n\nuse serde_json::{Value, json};\n\npub fn solve(input: Value) -> Value {\n    // Step 1: Parse the input JSON array of strings.\n    let strings: Vec<String> = match input {\n        Value::Array(arr) => arr.into_iter().filter_map(|v| v.as_str().map(String::from)).collect(),\n        _ => Vec::new(),\n    };\n\n    // Step 2: Use a HashMap to count occurrences of each string.\n    use std::collections::HashMap;\n    let mut counts = HashMap::new();\n    for s in &strings {\n        *counts.entry(s).or_insert(0) += 1;\n    }\n\n    // Step 3: Filter out strings that occur less than twice.\n    let mut result: Vec<String> = counts.into_iter()\n        .filter(|&(_, count)| count >= 2)\n        .map(|(s, _)| s)\n        .collect();\n\n    // Step 4: Sort the remaining strings lexicographically.\n    result.sort_unstable();\n\n    // Step 5: Convert the result back to a JSON array and return.\n    json!(result)\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/explore/round-001/content-v1/sandbox"
+  },
+  "code_sha256": "cff260a337243cb2c345123a4c4ba88489b6df42b85af5469b6e7599191bed5d",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

@@ -1,0 +1,43 @@
+{
+  "comparison": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison",
+  "generation_policy": "Existing raw results, including failures, are never resampled by retrying infrastructure.",
+  "kind": "attempt_failed_before_retry",
+  "recorded_unix_ms": 1792136887914,
+  "resources": {
+    "bytes": 2145,
+    "path": "reports/comparative/search/round-002/attempts/qwen3-4b-instruct-2507-q4_k_m/1fd2c1b1-3728-4d0f-b831-e0137880fa07.resources.json",
+    "sha256": "acc18e7d66a3ac7310fce4f0da8576be8387da5c6a927a276f3bf952475e18f6"
+  },
+  "runtime": {
+    "device": {
+      "cuda": {
+        "ordinal": 0
+      }
+    },
+    "dtype": "f32"
+  },
+  "schema_version": 1,
+  "trial": {
+    "comparison": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison",
+    "directory": "offline_bundle/comparative/qwen3-4b-instruct-2507-q4_k_m",
+    "elapsed_seconds": 190.715329249,
+    "errors": 0,
+    "id": "qwen3-4b-instruct-2507-q4_k_m",
+    "imported": false,
+    "model_id": "bartowski/Qwen_Qwen3-4B-Instruct-2507-GGUF",
+    "passed": null,
+    "planned": 16,
+    "pruned": false,
+    "qualification_comparison": null,
+    "qualification_errors": null,
+    "qualification_passed": null,
+    "qualification_report": null,
+    "qualified": false,
+    "reason": "host deadline terminated probe settings",
+    "report": null,
+    "revision": "ae44f08e1392f39c0e474af10c3ff8355c8b6688",
+    "role": "coding_teacher",
+    "source_model_id": "Qwen/Qwen3-4B-Instruct-2507",
+    "status": "evaluation_incomplete"
+  }
+}

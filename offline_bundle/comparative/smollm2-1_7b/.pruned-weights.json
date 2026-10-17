@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "candidate_id": "smollm2-1_7b",
+  "model_id": "HuggingFaceTB/SmolLM2-1.7B-Instruct",
+  "revision": "31b70e2e869a7173562077fd711b654946d38674",
+  "directory": "offline_bundle/comparative/smollm2-1_7b",
+  "manifest_filename": "assets.json",
+  "manifest_sha256": "1676070e4c4b9b22d4adf9f1cfa83fbf4a5d99b527c02ae9883b6f82bb37b4ff",
+  "created_unix_ms": 1792077184264,
+  "removal_state": "completed",
+  "removed_weights": [
+    {
+      "filename": "model.safetensors",
+      "sha256": "f55217be716b6a997b97b9d8d7eb6fad02e00858f5010ec24f64603c3a98a0e8",
+      "bytes": 3422777952
+    }
+  ]
+}

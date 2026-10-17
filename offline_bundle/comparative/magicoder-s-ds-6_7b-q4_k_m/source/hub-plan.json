@@ -1,0 +1,78 @@
+{
+  "model_id": "ise-uiuc/Magicoder-S-DS-6.7B",
+  "revision": "b3ed7cb1578a3643ceaf2ebf996a3d8e85f75d8f",
+  "files": {
+    "LICENSE": {
+      "filename": "LICENSE",
+      "bytes": 13750,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "18742eb20561aa70ba78efd74295771f76ac25ae"
+      }
+    },
+    "README.md": {
+      "filename": "README.md",
+      "bytes": 4578,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "da88769944aed47ba052bb35e6014ef63df861a6"
+      }
+    },
+    "added_tokens.json": {
+      "filename": "added_tokens.json",
+      "bytes": 458,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "08d77431d4b1bc63a27a920f697ca328c7156b2b"
+      }
+    },
+    "config.json": {
+      "filename": "config.json",
+      "bytes": 742,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "0ab4309467c11a3b4351da3e47610b41016f9f88"
+      }
+    },
+    "generation_config.json": {
+      "filename": "generation_config.json",
+      "bytes": 124,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "044edaf8c54caf5f8c78d53d991d2bcb1e665c3e"
+      }
+    },
+    "special_tokens_map.json": {
+      "filename": "special_tokens_map.json",
+      "bytes": 482,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "5ff8f57b46ed9d045d6a786cc8e89e79c0005742"
+      }
+    },
+    "tokenizer.json": {
+      "filename": "tokenizer.json",
+      "bytes": 1368830,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "0a667f9a0a6fd585202c83fb5c0bfda68e1ea858"
+      }
+    },
+    "tokenizer.model": {
+      "filename": "tokenizer.model",
+      "bytes": 500058,
+      "publisher_identity": {
+        "kind": "lfs_sha256",
+        "digest": "45ccb9c8b6b561889acea59191d66986d314e7cbd6a78abc6e49b139ca91c1e6"
+      }
+    },
+    "tokenizer_config.json": {
+      "filename": "tokenizer_config.json",
+      "bytes": 4871,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "f9f6ff142e15132f1b113e3027a898952cefdf12"
+      }
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "model_id": "qwen-coder-1_5b",
+  "task_id": "money.parse",
+  "source_id": "private-money-v1",
+  "specification_sha256": "d2e4ee5432fb3996c6eaa9004d032f82e2ebfcb2f8df8fd10fd99bfbced5ddef",
+  "seed": 1729,
+  "plan_sha256": "9aefcaf935435b296c63229638aad5a22a416ae171eda011a6812dd745667ea8",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an ASCII decimal monetary string. Accept optional leading minus, one or more digits, and optional dot followed by exactly two digits. Return signed cents, or null for invalid syntax; magnitudes <=1000000 pounds.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":\"-12.30\",\"expected\":-1230}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::{Value, from_str};\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    if let Ok(num) = from_str::<f64>(&input.to_string()) {\n        if num >= -1000000.0 && num <= 1000000.0 {\n            let cents = (num * 100.0).round() as i64;\n            serde_json::Value::Number(cents.into())\n        } else {\n            serde_json::Value::Null\n        }\n    } else {\n        serde_json::Value::Null\n    }\n}\n```",
+    "checkpoint_id": "c1b9b30e907950516ba3c646bdf570d8084c25a6410a0cdca80cf04b11bc13a8",
+    "finish_reason": "stop",
+    "input_tokens": 255,
+    "output_tokens": 137,
+    "elapsed_ms": 5681,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/comparative/coding-development/qwen-coder-1_5b/money.parse.generation.json",
+    "sha256": "18859ae6615a53b9c87e630bf971f95a178f8f602f1726d82ba546f14e5717eb",
+    "bytes": 2852
+  },
+  "sandbox_report": {
+    "path": "reports/comparative/coding-development/sandbox/2ee80f9a-eb0b-41f6-aa6b-4d50b575b292.json",
+    "sha256": "72a80280a3a5136162322b793bba8b5820f449a031495e57f0af2cc0f9b26475",
+    "bytes": 1359
+  },
+  "grading_error": null,
+  "success": false
+}

@@ -1,0 +1,52 @@
+Hub hashing qwen2.5-coder-7b-instruct-q4_k_m.gguf: 0/4683073536 bytes, 0.00 MiB/s, ETA unknown (publisher checksum pending)
+Hub hashing qwen2.5-coder-7b-instruct-q4_k_m.gguf: 2569011200/4683073536 bytes, 163.30 MiB/s, ETA 00:00:13 (publisher checksum pending)
+distillation: cached native teacher trace qwen-coder-7b-q4_k_m / 007d46e195641168b53b75b926e86dcd1f47ff1aa86ad41979389538e452eb50
+distillation: cached native teacher trace qwen-coder-7b-q4_k_m / 3b10013684dbd8659582890d5ac6656dec762958c889e99b8acec91656ac6474
+distillation: cached native teacher trace qwen-coder-7b-q4_k_m / 6dc94731e5e95193143a54b255e77fbbd4c1827da4c9b1f9866d6e94f0b7d6f1
+distillation: durable update 1/3 loss=0.032018 gradient_norm=0.008731
+distillation: durable update 2/3 loss=0.031624 gradient_norm=0.009739
+distillation: durable update 3/3 loss=0.031837 gradient_norm=0.009428
+study: fresh-process checkpoint evaluation started, PID=1586986
+study-evaluate: verifying effective sandbox controls
+study-evaluate: frozen tasks=16 seed1729 max512; graders=1 inference_overlap=true
+study-evaluate: heartbeat model loading; completed=0/16
+study-evaluate: heartbeat model loading; completed=0/16
+study-evaluate: heartbeat generating money.parse completed=0/16
+study-evaluate: heartbeat generating money.parse completed=0/16
+study-evaluate: heartbeat generating money.format completed=0/16
+study-evaluate: heartbeat generating money.format completed=0/16
+study-evaluate: heartbeat generating money.split completed=1/16
+study-evaluate: heartbeat generating money.split completed=1/16
+study-evaluate: heartbeat generating money.basket completed=2/16
+study-evaluate: heartbeat generating money.basket completed=2/16
+study-evaluate: heartbeat generating dispatch.finish_order completed=3/16
+study-evaluate: heartbeat generating dispatch.finish_order completed=3/16
+study-evaluate: heartbeat generating dispatch.waiting completed=4/16
+study-evaluate: heartbeat generating dispatch.round_robin completed=5/16
+study-evaluate: heartbeat generating dispatch.round_robin completed=5/16
+study-evaluate: heartbeat generating dispatch.round_robin completed=5/16
+study-evaluate: heartbeat generating dispatch.priority completed=6/16
+study-evaluate: heartbeat generating dispatch.priority completed=6/16
+study-evaluate: heartbeat generating encoding.hex_encode completed=7/16
+study-evaluate: heartbeat generating encoding.hex_encode completed=7/16
+study-evaluate: heartbeat generating encoding.hex_decode completed=8/16
+study-evaluate: heartbeat generating encoding.hex_decode completed=8/16
+study-evaluate: heartbeat generating encoding.caesar completed=9/16
+study-evaluate: heartbeat generating encoding.caesar completed=9/16
+study-evaluate: heartbeat generating encoding.rot13 completed=10/16
+study-evaluate: heartbeat generating encoding.rot13 completed=10/16
+study-evaluate: heartbeat generating encoding.rot13 completed=10/16
+study-evaluate: heartbeat generating tables.sort_rows completed=11/16
+study-evaluate: heartbeat generating tables.sort_rows completed=11/16
+study-evaluate: heartbeat generating tables.sort_rows completed=11/16
+study-evaluate: heartbeat generating tables.last_by_key completed=12/16
+study-evaluate: heartbeat generating tables.last_by_key completed=12/16
+study-evaluate: heartbeat generating tables.group_sums completed=13/16
+study-evaluate: heartbeat generating tables.group_sums completed=13/16
+study-evaluate: heartbeat generating tables.inner_join completed=14/16
+study-evaluate: heartbeat generating tables.inner_join completed=14/16
+study-evaluate: heartbeat generating tables.inner_join completed=14/16
+study-evaluate: heartbeat generating tables.inner_join completed=14/16
+study-evaluate: heartbeat generating tables.inner_join completed=14/16
+study-evaluate: heartbeat generating tables.inner_join completed=14/16
+study-evaluate: heartbeat grading; completed=15/16

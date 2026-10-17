@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "regrade_plan_sha256": "db41cc8e16bc2c0a434bb31a9f326dffbc17094eba18e0489c23539f03e657bd",
+  "task_id": "encoding.rot13",
+  "source_id": "private-encoding-v1",
+  "original_plan": {
+    "path": "reports/local-study/native-full-quality-001/sft-development/plan.json",
+    "sha256": "0805ba5b12c7f6a3f7a46cf71c1c8db0aa8542d736a3dcd82b56da5f168b46c4",
+    "bytes": 23984
+  },
+  "original_raw": {
+    "path": "reports/local-study/native-full-quality-001/sft-development/generations/encoding.rot13.json",
+    "sha256": "3dbe5c8212a202c376bffbc1d2a373fb408d203473f9f9cc9558c7b8e99f70d8",
+    "bytes": 2046
+  },
+  "outcome": {
+    "kind": "graded",
+    "prepared": {
+      "path": "reports/local-study/regraded-v3-001/evaluation-001-development-e2bcd1355276/prepared/encoding.rot13.json",
+      "sha256": "6626133fe75a77d7435726ba3f6475297b59568f8c6bb290eb45b5fdbec580e7",
+      "bytes": 2896
+    },
+    "report": {
+      "path": "reports/local-study/regraded-v3-001/evaluation-001-development-e2bcd1355276/sandbox/902b5f1b-555a-4522-9b4d-3150b6f6eed0.json",
+      "sha256": "60b8ec550df63e5c624fb463e447b1f0fa0b16b09621323757795134d75934c5",
+      "bytes": 3222
+    },
+    "audit": {
+      "path": "reports/local-study/regraded-v3-001/evaluation-001-development-e2bcd1355276/sandbox/902b5f1b-555a-4522-9b4d-3150b6f6eed0.audit.json",
+      "sha256": "1c338de51191feb0fceb9295622132374738f991d4bcceb2984aa6379a2d302b",
+      "bytes": 1029
+    }
+  },
+  "success": false
+}

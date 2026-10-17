@@ -1,0 +1,36 @@
+   Compiling lec-distil v0.1.0 (/home/pbisaacs/Developer/neuralmimicry/lec_challenge)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 33.50s
+     Running `target/debug/examples/verify_project reports/local-study/verification-010`
+verification: START format
+verification: PASSED format 2.12s
+verification: START clippy
+verification: FAILED clippy 34.02s
+verification: START unit
+verification: PASSED unit 178.53s
+verification: START launcher_recovery
+verification: PASSED launcher_recovery 29.38s
+verification: START diagnostic_lifecycle
+verification: PASSED diagnostic_lifecycle 2.90s
+verification: START numerical_helper_launch
+verification: PASSED numerical_helper_launch 2.32s
+verification: START training_seed_audit
+verification: PASSED training_seed_audit 2.38s
+verification: START original_tokeniser
+verification: PASSED original_tokeniser 35.07s
+verification: START real_container_qa
+verification: PASSED real_container_qa 194.41s
+{
+  "assessment_complete": false,
+  "checks_passed": 8,
+  "checks_total": 9,
+  "dependency_notices_complete": false,
+  "original_notice_gaps": 1,
+  "report": {
+    "bytes": 45085,
+    "path": "reports/local-study/verification-010/verification.json",
+    "sha256": "8aa8a9f27fbcd00c90212ae9fcf09308bb1ec37a1d7b54c8677b5d9b97a84064"
+  },
+  "software_checks_passed": false,
+  "source_inputs_unchanged": false
+}
+Error: one or more local QA steps failed

@@ -1,0 +1,5 @@
+error: the argument '--offline' cannot be used with '--authorised-usd <AUTHORISED_USD>'
+
+Usage: lec-distil provider-request --provider <PROVIDER> --prompt <PROMPT> <--offline|--live>
+
+For more information, try '--help'.

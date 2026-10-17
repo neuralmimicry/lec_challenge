@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "initial_plan": {
+    "path": "reports/local-study/explore/round-001/cohorts/76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c/rollouts/text.squash/student-plan.json",
+    "sha256": "25c5e96dff23025ccd63a7cf4ac601d0e88703c9e832fa1a5a97fa26688887e1",
+    "bytes": 5141
+  },
+  "student_raw": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/text.squash/student-raw.json",
+    "sha256": "eed691b43c729b641cb9d176f44ae74d8baa550fca8bcb9550d5a6cb99fb61ae",
+    "bytes": 1851
+  },
+  "student_grade": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox/3231c916-2638-4658-a3eb-08acecb4a3bc.json",
+    "sha256": "f0f1c188c5992b4bc3bf9809d68aafb842fe2e1c631a1f4d49b626010742eb04",
+    "bytes": 4103
+  },
+  "teacher_id": "student-self-f9523886352217de",
+  "teacher_assets": {
+    "path": "offline_bundle/base/assets.json",
+    "sha256": "54304e7f41519a4196674cba5e86593802f852b2b47882d6c19706f85f303ad4",
+    "bytes": 788
+  },
+  "teacher_checkpoint": null,
+  "runtime": {
+    "device": {
+      "cuda": {
+        "ordinal": 0
+      }
+    },
+    "dtype": "f32"
+  },
+  "request": {
+    "prompt": "Verified different training contract: Input is an ASCII string. Trim leading/trailing ASCII whitespace, then lowercase ASCII letters, preserving internal whitespace.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nVerified solution:\n```rust\nuse serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    match input {\n        Value::String(s) => {\n            let trimmed = s.trim();\n            let lowercased = trimmed.to_lowercase();\n            Value::String(lowercased)\n        },\n        _ => input,\n    }\n}\n```\nNew task:\nWrite Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an ASCII string. Split on ASCII whitespace and join words with one space, removing edge whitespace.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":\"  Hi\\t THERE \\n\",\"expected\":\"Hi THERE\"}]\nActual frozen student candidate:\n```rust\nuse serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let mut lines = input.as_str().split_whitespace().collect::<Vec<&str>>();\n    let mut result = String::new();\n    for line in lines {\n        let trimmed_line = line.trim();\n        if trimmed_line.is_empty() {\n            continue;\n        }\n        result.push(trimmed_line);\n        if !trimmed_line.ends_with('\\n') {\n            result.push(' ');\n        }\n    }\n    serde_json::Value::String(result)\n}\n```\nActual trusted tool feedback:\n{\"bounded_diagnostic_untrusted_data\":\"compilation failed: warning: unused import: `serde_json::Value`\\n --> /candidate/main.rs:1:5\\n  |\\n1 | use serde_json::Value;\\n  |     ^^^^^^^^^^^^^^^^^\\n  |\\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\\n\\nerror[E0599]: no method named `split_whitespace` found for enum `Option<T>` in the current scope\\n --> /candidate/main.rs:4:36\\n  |\\n4 |     let mut lines = input.as_str().split_whitespace().collect::<Vec<&str>>();\\n  |                                    ^^^^^^^^^^^^^^^^ method not found in `Option<&str>`\\n  |\\nnote: the method `split_whitespace` exists on the type `&str`\\n --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/str/mod.rs:1211:4\\nhelp: consider using `Option::expect` to unwrap the `&str` value, panicking if the value is an `Option::None`\\n  |\\n4 |     let mut lines = input.as_str().expect(\\\"REASON\\\").split_whitespace().collect::<Vec<&str>>();\\n  |                                   +++++++++++++++++\\n\\nerror: aborting due to 1 previous error; 1 warning emitted\\n\\nFor more information about this error, try `rustc --explain E0599`.\\n\",\"cases_passed\":0,\"cases_total\":6,\"content_role\":\"compilation_feedback_only\",\"original_failure_is_not_a_success\":true,\"passed\":false,\"private_inputs_or_expected_outputs_exposed\":false,\"quarantined\":true,\"run_id\":\"3231c916-2638-4658-a3eb-08acecb4a3bc\",\"student_generation_complete\":true,\"tool\":\"trusted_container_grader\",\"trace_complete\":false}\nCritique and revise the candidate. Put any short explanation in Rust // comments and return complete compilable Rust source only. Do not invent tool results.",
+    "max_new_tokens": 768,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "supporting_sample_ids": [
+    "ff06039fd8278f904a9e03151a5b46d0452d3c207474b4da9dd4b770fe9d6d26"
+  ]
+}

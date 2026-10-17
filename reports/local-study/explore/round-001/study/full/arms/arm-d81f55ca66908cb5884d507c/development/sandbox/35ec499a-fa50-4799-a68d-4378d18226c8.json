@@ -1,0 +1,40 @@
+{
+  "run_id": "35ec499a-fa50-4799-a68d-4378d18226c8",
+  "task_id": "money.basket",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error[E0428]: the name `main` is defined multiple times\n  --> /candidate/main.rs:19:1\n   |\n14 | fn main() {\n   | --------- previous definition of the value `main` here\n...\n19 | fn main() { let stdin = std::io::stdin(); for line in std::io::BufRead::lines(stdin.lock()) { let line = line.expect(\"input read\"); ...\n   | ^^^^^^^^^ `main` redefined here\n   |\n   = note: `main` must be defined only once in the value namespace of this module\n\nwarning: unused import: `serde_json::Value`\n --> /candidate/main.rs:1:5\n  |\n1 | use serde_json::Value;\n  |     ^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0308]: mismatched types\n --> /candidate/main.rs:4:32\n  |\n4 |     let input: Vec<Vec<i64>> = input.as_array().unwrap();\n  |                -------------   ^^^^^^^^^^^^^^^^^^^^^^^^^ expected `Vec<Vec<i64>>`, found `&Vec<Value>`\n  |                |\n  |                expected due to this\n  |\n  = note: expected struct `Vec<Vec<i64>>`\n          found reference `&Vec<Value>`\n\nerror: aborting due to 2 previous errors; 1 warning emitted\n\nSome errors have detailed explanations: E0308, E0428.\nFor more information about an error, try `rustc --explain E0308`.\n"
+  ],
+  "cases_total": 5,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "bf67bafed1564c2d0f7d7c4e6be328e2fda9ce891e4af7adf5164a03ce20c0c1",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/explore/round-001/study/full/arms/arm-d81f55ca66908cb5884d507c/development/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/explore/round-001/study/full/arms/arm-d81f55ca66908cb5884d507c/development/sandbox/35ec499a-fa50-4799-a68d-4378d18226c8.audit.json",
+  "audit_sha256": "d930fc9306e2836ac9a2434b99f0f5abb2c7eb13623ca89026442b1913f23672",
+  "failure": "compilation failed: error[E0428]: the name `main` is defined multiple times\n  --> /candidate/main.rs:19:1\n   |\n14 | fn main() {\n   | --------- previous definition of the value `main` here\n...\n19 | fn main() { let stdin = std::io::stdin(); for line in std::io::BufRead::lines(stdin.lock()) { let line = line.expect(\"input read\"); ...\n   | ^^^^^^^^^ `main` redefined here\n   |\n   = note: `main` must be defined only once in the value namespace of this module\n\nwarning: unused import: `serde_json::Value`\n --> /candidate/main.rs:1:5\n  |\n1 | use serde_json::Value;\n  |     ^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0308]: mismatched types\n --> /candidate/main.rs:4:32\n  |\n4 |     let input: Vec<Vec<i64>> = input.as_array().unwrap();\n  |                -------------   ^^^^^^^^^^^^^^^^^^^^^^^^^ expected `Vec<Vec<i64>>`, found `&Vec<Value>`\n  |                |\n  |                expected due to this\n  |\n  = note: expected struct `Vec<Vec<i64>>`\n          found reference `&Vec<Value>`\n\nerror: aborting due to 2 previous errors; 1 warning emitted\n\nSome errors have detailed explanations: E0308, E0428.\nFor more information about an error, try `rustc --explain E0308`.\n",
+  "duration_ms": 13812,
+  "timeout_evidence": null,
+  "lifecycle_evidence": {
+    "receipt_path": "reports/local-study/explore/round-001/study/full/arms/arm-d81f55ca66908cb5884d507c/development/sandbox/35ec499a-fa50-4799-a68d-4378d18226c8.lifecycle.json",
+    "receipt_sha256": "a9ee42637dc22ad3c24d9c21a4f8b9ed6d37d4edfce6f7286730b07883f01850"
+  }
+}

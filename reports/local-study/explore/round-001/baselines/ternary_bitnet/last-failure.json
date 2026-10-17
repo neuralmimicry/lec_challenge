@@ -1,0 +1,6 @@
+{
+  "error": "local checkpoint evaluation has generation/infrastructure errors; observations retained",
+  "observed_unix_ms": 1792148856546,
+  "promotion": "incumbent_retained",
+  "status": "FAILURE"
+}

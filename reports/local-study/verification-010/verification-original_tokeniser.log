@@ -1,0 +1,33 @@
+
+running 1 test
+test train::tests::original_tokenizer_masks_prompt_and_preserves_assistant_eos ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 285 filtered out; finished in 1.48s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 16 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 3 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 3 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 3 filtered out; finished in 0.00s
+
+   Compiling lec-distil v0.1.0 (/home/pbisaacs/Developer/neuralmimicry/lec_challenge)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 33.21s
+     Running unittests src/lib.rs (target/debug/deps/lec_distil-ad74e58875deb58a)
+     Running unittests src/main.rs (target/debug/deps/lec_distil-513a8a77e7fb1460)
+     Running tests/gate_reporting.rs (target/debug/deps/gate_reporting-4b9301c1b8828548)
+     Running tests/run_launcher.rs (target/debug/deps/run_launcher-060fb57745373ff3)
+     Running tests/sandbox_contract.rs (target/debug/deps/sandbox_contract-3a644bc93ec4a7a0)

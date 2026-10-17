@@ -1,0 +1,42 @@
+{
+  "schema_version": 3,
+  "run_id": "c0babaff-df28-48d0-8a36-2ae9b6cd0a27",
+  "ownership_nonce": "474f7416-4708-47f8-90ab-7013966d4f00",
+  "attempt_key": "867654813dee3e7bbb64eacd20773f920ce523dbf93e3b656d59b15b98d31230",
+  "receipt_path": "reports/local-study/regraded-v3-001/evaluation-005-train-2217a994f8b7/prepared/validation.identifier.json",
+  "report_path": "reports/local-study/regraded-v3-001/evaluation-005-train-2217a994f8b7/sandbox/c0babaff-df28-48d0-8a36-2ae9b6cd0a27.json",
+  "task": {
+    "id": "validation.identifier",
+    "source_id": "private-validation-v1",
+    "lineage_id": "local-contract-pack-05",
+    "split": "train",
+    "specification": "Input is an ASCII string. Return whether it matches [A-Za-z_][A-Za-z0-9_]*. Do not reject language keywords.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "73a1daad33d404320785be889b5ca7e55a71f6754e64401370bc9d4786a282b2",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": "_name2",
+        "expected": true
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "use serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let str_input = input.as_str().unwrap();\n    let mut chars = str_input.chars();\n    let mut is_valid = true;\n    while let Some(c) = chars.next() {\n        if !c.is_alphabetic() && c != '_' && c != '_' {\n            is_valid = false;\n            break;\n        }\n    }\n    Value::Bool(is_valid)\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/regraded-v3-001/evaluation-005-train-2217a994f8b7/sandbox"
+  },
+  "code_sha256": "f6d982d7433cac34650f8959657bdc5c8a800f8ac5e7456691f537d1f643c638",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

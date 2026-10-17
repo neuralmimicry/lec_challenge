@@ -1,0 +1,34 @@
+{
+  "run_id": "25fda7f6-9517-46ce-857b-c5dc68d607c8",
+  "task_id": "ledger.sum",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error[E0283]: type annotations needed\n --> /candidate/main.rs:5:9\n  |\n5 |     let sum = numbers.iter().sum();\n  |         ^^^                  --- type must be known at this point\n  |\n  = note: the type must implement `Sum<&i64>`\n  = help: the following types implement trait `Sum<A>`:\n            `Duration` implements `Sum<&'a Duration>`\n            `Duration` implements `Sum`\n            `Option<T>` implements `Sum<Option<U>>`\n            `Result<T, E>` implements `Sum<Result<U, E>>`\n            `Saturating<u128>` implements `Sum<&'a Saturating<u128>>`\n            `Saturating<u128>` implements `Sum`\n            `Saturating<u16>` implements `Sum<&'a Saturating<u16>>`\n            `Saturating<u16>` implements `Sum`\n          and 88 others\nnote: required by a bound in `std::iter::Iterator::sum`\n --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/iter/traits/iterator.rs:3665:4\nhelp: consider giving `sum` an explicit type\n  |\n5 |     let sum: /* Type */ = numbers.iter().sum();\n  |            ++++++++++++\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0283`.\n"
+  ],
+  "cases_total": 14,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "4b2556745b303526f354ded7f2c473b77f6da0c99a77f0a493c7272a8d800aac",
+  "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "a369673f8e1a5469d17121d1cf9a96be07e2a5e692e22f30b4dc83f369a71807",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "controller_version": 2,
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:1",
+    "expected_image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/native-full-quality-001/composed-train/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/native-full-quality-001/composed-train/sandbox/25fda7f6-9517-46ce-857b-c5dc68d607c8.audit.json",
+  "audit_sha256": "1ea5d8ab0997cf9a4f4759df0022882196d1b18ed1ca9ef789330e42e27d9acc",
+  "failure": "compilation failed: error[E0283]: type annotations needed\n --> /candidate/main.rs:5:9\n  |\n5 |     let sum = numbers.iter().sum();\n  |         ^^^                  --- type must be known at this point\n  |\n  = note: the type must implement `Sum<&i64>`\n  = help: the following types implement trait `Sum<A>`:\n            `Duration` implements `Sum<&'a Duration>`\n            `Duration` implements `Sum`\n            `Option<T>` implements `Sum<Option<U>>`\n            `Result<T, E>` implements `Sum<Result<U, E>>`\n            `Saturating<u128>` implements `Sum<&'a Saturating<u128>>`\n            `Saturating<u128>` implements `Sum`\n            `Saturating<u16>` implements `Sum<&'a Saturating<u16>>`\n            `Saturating<u16>` implements `Sum`\n          and 88 others\nnote: required by a bound in `std::iter::Iterator::sum`\n --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/iter/traits/iterator.rs:3665:4\nhelp: consider giving `sum` an explicit type\n  |\n5 |     let sum: /* Type */ = numbers.iter().sum();\n  |            ++++++++++++\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0283`.\n",
+  "duration_ms": 9819,
+  "timeout_evidence": null
+}

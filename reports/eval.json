@@ -4,6 +4,7 @@
   "effect": null,
   "incumbent_rate": null,
   "candidate_rate": null,
+  "confidence_level": 0.95,
   "t_interval": null,
   "source_bootstrap_interval": null,
   "source_effects": {},

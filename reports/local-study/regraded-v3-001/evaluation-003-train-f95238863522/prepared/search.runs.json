@@ -1,0 +1,59 @@
+{
+  "schema_version": 3,
+  "run_id": "eeaa6860-ee47-4510-95ae-cc492fbe907d",
+  "ownership_nonce": "cd82bf46-7f08-428a-81bc-924ac7d29e7a",
+  "attempt_key": "22eac18243f8c94aa7a153db8c7582c51ecafb5292c9e6b09366b7ab5522a906",
+  "receipt_path": "reports/local-study/regraded-v3-001/evaluation-003-train-f95238863522/prepared/search.runs.json",
+  "report_path": "reports/local-study/regraded-v3-001/evaluation-003-train-f95238863522/sandbox/eeaa6860-ee47-4510-95ae-cc492fbe907d.json",
+  "task": {
+    "id": "search.runs",
+    "source_id": "private-search-v1",
+    "lineage_id": "local-contract-pack-07",
+    "split": "train",
+    "specification": "Input is an ASCII string. Return consecutive character runs as [[one-character string,count],...]. Empty input returns []. The returned array may contain up to 256 items.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "dbb8477209c10ba8812a0e12150493df5a3d0bc8b47a09bdb29dec82f2f3a6b9",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": "aaabbcaa",
+        "expected": [
+          [
+            "a",
+            3
+          ],
+          [
+            "b",
+            2
+          ],
+          [
+            "c",
+            1
+          ],
+          [
+            "a",
+            2
+          ]
+        ]
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "use serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let mut result = Vec::new();\n    let mut current_run = Vec::new();\n    let mut count = 0;\n\n    for c in input.as_str().chars() {\n        if c == '\\n' || c == '\\r' || c == '\\t' || c == '\\f' || c == ' ' {\n            if !current_run.is_empty() {\n                result.push(current_run);\n                current_run.clear();\n            }\n            count = 0;\n        } else {\n            current_run.push(c);\n            count += 1;\n        }\n    }\n\n    if !current_run.is_empty() {\n        result.push(current_run);\n    }\n\n    serde_json::Value::Array(result)\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/regraded-v3-001/evaluation-003-train-f95238863522/sandbox"
+  },
+  "code_sha256": "e7a47f6479e9419846b262dfa8d111885b477cccc945defa69b9c1fb06b9bb6a",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

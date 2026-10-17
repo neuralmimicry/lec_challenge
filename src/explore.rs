@@ -23,6 +23,7 @@ mod cohorts;
 mod process;
 mod selection;
 mod workflow;
+pub(crate) use process::required_report as read_required_stage_report;
 pub use workflow::run;
 
 #[derive(Clone, Debug, Serialize, Deserialize)]

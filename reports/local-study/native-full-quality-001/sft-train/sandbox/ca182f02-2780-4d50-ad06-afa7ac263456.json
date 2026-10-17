@@ -1,0 +1,34 @@
+{
+  "run_id": "ca182f02-2780-4d50-ad06-afa7ac263456",
+  "task_id": "paths.normalise",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error: character literal may only contain one codepoint\n  --> /candidate/main.rs:21:24\n   |\n21 |         } else if c == '..' {\n   |                        ^^^^\n   |\nhelp: if you meant to write a string literal, use double quotes\n   |\n21 -         } else if c == '..' {\n21 +         } else if c == \"..\" {\n   |\n\nerror: aborting due to 1 previous error\n\n"
+  ],
+  "cases_total": 6,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "4b2556745b303526f354ded7f2c473b77f6da0c99a77f0a493c7272a8d800aac",
+  "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "72fd219cfec4172545449c2e6ec0586e49334688e9e449cdea9f8c6338ed8619",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "controller_version": 2,
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:1",
+    "expected_image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/native-full-quality-001/sft-train/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/native-full-quality-001/sft-train/sandbox/ca182f02-2780-4d50-ad06-afa7ac263456.audit.json",
+  "audit_sha256": "2ac0ac09b1e205c5fbaa4adf62dd3b4c3dfced7d6a922db64d4053e8e017252e",
+  "failure": "compilation failed: error: character literal may only contain one codepoint\n  --> /candidate/main.rs:21:24\n   |\n21 |         } else if c == '..' {\n   |                        ^^^^\n   |\nhelp: if you meant to write a string literal, use double quotes\n   |\n21 -         } else if c == '..' {\n21 +         } else if c == \"..\" {\n   |\n\nerror: aborting due to 1 previous error\n\n",
+  "duration_ms": 4753,
+  "timeout_evidence": null
+}

@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "1c8417e29ab67fbe325c00e231236374fdda50f71928ab5f925ddb9ac6538038",
+  "task_id": "encoding.caesar",
+  "source_id": "private-encoding-v1",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input {text,shift} has ASCII text and integer shift. Rotate lowercase a..z only modulo 26; preserve all other characters.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":{\"shift\":3,\"text\":\"xyz A!\"},\"expected\":\"abc A!\"}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let text = input.as_str().unwrap();\n    let shift = input.as_i64().unwrap();\n    let mut result = String::new();\n    for c in text.chars() {\n        if c.is_lowercase() {\n            let ascii = c as u8;\n            let new_ascii = (ascii as u8 + shift) % 26;\n            result.push((new_ascii as char).to_string());\n        } else {\n            result.push(c);\n        }\n    }\n    Value::String(result)\n}\n```",
+    "checkpoint_id": "294945edfa66bce11119c4ad89e9c8e55f443958b4c3e9fa0ca2d73f79b32c98",
+    "finish_reason": "stop",
+    "input_tokens": 237,
+    "output_tokens": 125,
+    "elapsed_ms": 20964,
+    "complete": true
+  },
+  "model_error": null
+}

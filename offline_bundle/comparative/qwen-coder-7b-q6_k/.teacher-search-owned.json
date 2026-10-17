@@ -1,0 +1,7 @@
+{
+  "schema_version": 1,
+  "directory": "offline_bundle/comparative/qwen-coder-7b-q6_k",
+  "candidate_id": "qwen-coder-7b-q6_k",
+  "model_id": "Qwen/Qwen2.5-Coder-7B-Instruct-GGUF",
+  "revision": "13fb94bfda8c8cf22497dc57b78f391a9acb426a"
+}

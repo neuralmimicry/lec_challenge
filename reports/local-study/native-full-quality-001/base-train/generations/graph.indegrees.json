@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "55c6614d90fbff0e580fd8fbfa9e06ce99715d8d0c78320e0fe70605545cc489",
+  "task_id": "graph.indegrees",
+  "source_id": "private-graph-v1",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input {n,edges} is a directed graph with unique edges on 0..n-1. Return indegree of each node in index order, including self-loops. Graph vertex counts are at most 64.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":{\"edges\":[[0,1],[1,2]],\"n\":4},\"expected\":[0,1,1,0]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let n = input[\"n\"].as_u64().unwrap();\n    let edges = input[\"edges\"].as_array().unwrap();\n    let mut indegree = vec![0; n];\n\n    for (i, edge) in edges.iter().enumerate() {\n        let src = edge[0] as u64;\n        let dst = edge[1] as u64;\n        indegree[src] += 1;\n        indegree[dst] += 1;\n    }\n\n    serde_json::Value::Object {\n        indegree: indegree.into_iter().collect(),\n    }\n}\n```",
+    "checkpoint_id": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+    "finish_reason": "stop",
+    "input_tokens": 265,
+    "output_tokens": 149,
+    "elapsed_ms": 6301,
+    "complete": true
+  },
+  "model_error": null
+}

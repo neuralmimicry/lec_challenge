@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "evidence_kind": "actual_checkpoint_bound_rollout_observation",
+  "teacher_id": "qwen-coder-7b-q4_k_m",
+  "plan": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/paths.normalise/student-plan.json",
+    "sha256": "363ff317be6e49b0fa77fd36013fd566aa8a27cc86e48f779f06741003b684f1",
+    "bytes": 4025
+  },
+  "student_raw": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/paths.normalise/student-raw.json",
+    "sha256": "53227f44b21dfdc1beff11112c8306d5f472a58a86ede38eaa47aac7aaee18f1",
+    "bytes": 1888
+  },
+  "student_grade": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox/00c46ff5-3907-4c5d-9663-7cedf217ea35.json",
+    "sha256": "59d2d7cccf3fd8efb78bcb0bcc3ee95365c95ac7d9bfab89e85d525e46b169b0",
+    "bytes": 3573
+  },
+  "student_content_eligibility": {
+    "policy": "verified_content_roles_v1",
+    "role": "compilation_feedback_only",
+    "report": {
+      "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox/00c46ff5-3907-4c5d-9663-7cedf217ea35.json",
+      "sha256": "59d2d7cccf3fd8efb78bcb0bcc3ee95365c95ac7d9bfab89e85d525e46b169b0",
+      "bytes": 3573
+    },
+    "audit": {
+      "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox/00c46ff5-3907-4c5d-9663-7cedf217ea35.audit.json",
+      "sha256": "d636b2fd2a955a91a79f5ec29fc2b499a243ce914846c819417c5e096df50672",
+      "bytes": 1137
+    },
+    "completion_sha256": "c0207cb6bc526bae8619fc8db63235ee5967358f81cd2829208a3fe1ad940844",
+    "generation_complete": true,
+    "original_quarantined": true,
+    "reason": "Trusted compiler failure with no candidate execution or audit event. Bounded original text may be shown as untrusted correction context; it is never a positive or DPO negative."
+  },
+  "feedback_plan": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/paths.normalise/qwen-coder-7b-q4_k_m/feedback-plan.json",
+    "sha256": "0ebc95db333922915150b37f5d1dec3526bd5eb2480817477cc599d7783c87ff",
+    "bytes": 4571
+  },
+  "feedback_raw": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/paths.normalise/qwen-coder-7b-q4_k_m/feedback-raw.json",
+    "sha256": "018792390f1f5f1073a4b9b93e90168f9ee8f2231bcb22ecfd666daa7ff792be",
+    "bytes": 2542
+  },
+  "feedback_grade": null,
+  "errors": [
+    "No student/corrective output; this observation is a failure"
+  ],
+  "success": false
+}

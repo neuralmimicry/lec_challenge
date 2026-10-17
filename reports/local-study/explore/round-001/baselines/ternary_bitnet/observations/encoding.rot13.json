@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "51e2a803f86359125c31f16c1d0da7fc35ac18527b51f85f956f4872bf05792e",
+  "task_id": "encoding.rot13",
+  "source_id": "private-encoding-v1",
+  "success": false,
+  "raw_generation": {
+    "path": "reports/local-study/explore/round-001/baselines/ternary_bitnet/generations/encoding.rot13.json",
+    "sha256": "ea72e78e9b41b069b5054babc86547e784b04b1a0bf5975675bcfd76d9cbe21c",
+    "bytes": 1324
+  },
+  "sandbox_report": null,
+  "grading_error": null
+}

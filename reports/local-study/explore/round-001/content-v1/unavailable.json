@@ -1,0 +1,104 @@
+[
+  {
+    "content": "tool_trajectory",
+    "reason": "no safe original teacher candidate for a real feedback trajectory",
+    "task": "stock.counts",
+    "teacher": "qwen-coder-7b-q4_k_m"
+  },
+  {
+    "content": "context",
+    "reason": "no verified same-source training example for contextual generation",
+    "task": "stock.mode",
+    "teacher": "qwen-coder-7b-q4_k_m"
+  },
+  {
+    "content": "context",
+    "reason": "no verified same-source training example for contextual generation",
+    "task": "text.lower_trim",
+    "teacher": "qwen-coder-7b-q4_k_m"
+  },
+  {
+    "content": "tool_trajectory",
+    "reason": "no safe original teacher candidate for a real feedback trajectory",
+    "task": "intervals.merge",
+    "teacher": "qwen-coder-7b-q4_k_m"
+  },
+  {
+    "content": "context",
+    "reason": "no verified same-source training example for contextual generation",
+    "task": "graph.indegrees",
+    "teacher": "qwen-coder-7b-q4_k_m"
+  },
+  {
+    "content": "context",
+    "reason": "no verified same-source training example for contextual generation",
+    "task": "validation.brackets",
+    "teacher": "qwen-coder-7b-q4_k_m"
+  },
+  {
+    "content": "context",
+    "reason": "no verified same-source training example for contextual generation",
+    "task": "search.runs",
+    "teacher": "qwen-coder-7b-q4_k_m"
+  },
+  {
+    "content": "context",
+    "reason": "no verified same-source training example for contextual generation",
+    "task": "paths.basename",
+    "teacher": "qwen-coder-7b-q4_k_m"
+  },
+  {
+    "content": "tool_trajectory",
+    "reason": "no safe original teacher candidate for a real feedback trajectory",
+    "task": "paths.extension",
+    "teacher": "qwen-coder-7b-q4_k_m"
+  },
+  {
+    "content": "context",
+    "reason": "no verified same-source training example for contextual generation",
+    "task": "sequences.interleave",
+    "teacher": "qwen-coder-7b-q4_k_m"
+  },
+  {
+    "content": "tool_trajectory",
+    "reason": "no safe original teacher candidate for a real feedback trajectory",
+    "task": "sequences.interleave",
+    "teacher": "qwen-coder-7b-q4_k_m"
+  },
+  {
+    "content": "context",
+    "reason": "no verified same-source training example for contextual generation",
+    "task": "sequences.zip_longest",
+    "teacher": "qwen-coder-7b-q4_k_m"
+  },
+  {
+    "content": "tool_trajectory",
+    "reason": "no safe original teacher candidate for a real feedback trajectory",
+    "task": "sequences.zip_longest",
+    "teacher": "qwen-coder-7b-q4_k_m"
+  },
+  {
+    "content": "context",
+    "reason": "no verified same-source training example for contextual generation",
+    "task": "sequences.chunks",
+    "teacher": "qwen-coder-7b-q4_k_m"
+  },
+  {
+    "content": "context",
+    "reason": "no verified same-source training example for contextual generation",
+    "task": "sequences.move_zeroes",
+    "teacher": "qwen-coder-7b-q4_k_m"
+  },
+  {
+    "content": "tool_trajectory",
+    "reason": "no safe original teacher candidate for a real feedback trajectory",
+    "task": "bits.parity",
+    "teacher": "qwen-coder-7b-q4_k_m"
+  },
+  {
+    "content": "tool_trajectory",
+    "reason": "no safe original teacher candidate for a real feedback trajectory",
+    "task": "bits.lowest",
+    "teacher": "qwen-coder-7b-q4_k_m"
+  }
+]

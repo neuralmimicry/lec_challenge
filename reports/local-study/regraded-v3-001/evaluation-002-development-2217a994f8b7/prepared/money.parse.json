@@ -1,0 +1,42 @@
+{
+  "schema_version": 3,
+  "run_id": "c9b455a0-5510-497c-8029-97d717e1905d",
+  "ownership_nonce": "3b30f5cf-928e-4291-b7aa-c027331213d5",
+  "attempt_key": "0842fbe6c87606e4d219df8f027c805230342d19104b90add0f3fe463da99716",
+  "receipt_path": "reports/local-study/regraded-v3-001/evaluation-002-development-2217a994f8b7/prepared/money.parse.json",
+  "report_path": "reports/local-study/regraded-v3-001/evaluation-002-development-2217a994f8b7/sandbox/c9b455a0-5510-497c-8029-97d717e1905d.json",
+  "task": {
+    "id": "money.parse",
+    "source_id": "private-money-v1",
+    "lineage_id": "local-contract-pack-12",
+    "split": "development",
+    "specification": "Input is an ASCII decimal monetary string. Accept optional leading minus, one or more digits, and optional dot followed by exactly two digits. Return signed cents, or null for invalid syntax; magnitudes <=1000000 pounds.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "d2e4ee5432fb3996c6eaa9004d032f82e2ebfcb2f8df8fd10fd99bfbced5ddef",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": "-12.30",
+        "expected": -1230
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "use serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let str_input = input.as_str().unwrap();\n    let mut parts = str_input.split('.');\n    let mut cents = 0;\n    let mut sign = 1;\n    let mut number = 0;\n\n    if parts.len() == 1 {\n        let num_str = parts[0].to_string();\n        if num_str.starts_with('-') {\n            sign = -1;\n            num_str = num_str[1..].to_string();\n        }\n        for c in num_str.chars() {\n            if c.is_digit(10) {\n                let digit = c.to_digit(10).unwrap();\n                cents = cents * 10 + digit;\n            }\n        }\n    } else if parts.len() == 2 {\n        let num_str = parts[0].to_string();\n        let num_str = parts[1].to_string();\n        if num_str.starts_with('-') {\n            sign = -1;\n            num_str = num_str[1..].to_string();\n        }\n        for c in num_str.chars() {\n            if c.is_digit(10) {\n                let digit = c.to_digit(10).unwrap();\n                cents = cents * 10 + digit;\n            }\n        }\n    } else {\n        return Value::Null;\n    }\n\n    Value::Number(serde_json::Number::from(cents * sign))\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/regraded-v3-001/evaluation-002-development-2217a994f8b7/sandbox"
+  },
+  "code_sha256": "beccb56e1dd7abc5027d473777507dd5acf44e1b3383f508da1fc7cd8b743b31",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

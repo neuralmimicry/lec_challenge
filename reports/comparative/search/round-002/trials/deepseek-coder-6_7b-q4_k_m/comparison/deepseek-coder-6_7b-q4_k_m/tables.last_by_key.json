@@ -1,0 +1,38 @@
+{
+  "model_id": "deepseek-coder-6_7b-q4_k_m",
+  "task_id": "tables.last_by_key",
+  "source_id": "private-tables-v1",
+  "specification_sha256": "60d2667ffa0dcdb540f2de2f41533a9d0b6c027ee25be4adb993cda6f67122f7",
+  "seed": 1729,
+  "plan_sha256": "79e25584f785f04f53b60d4cf3e4a730d2cf181ce11620a413bb1e0123bc1de2",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an array of [key,value] integer rows. Keep the last value per key and return [key,value] rows sorted by key.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[[2,9],[1,4],[2,3]],\"expected\":[[1,4],[2,3]]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "Here is a Rust function that solves the problem. This function uses the `serde_json` crate for JSON parsing and serialization. It assumes that the input is a JSON array of JSON arrays, where each inner array has two elements: a key and a value. The function keeps the last value per key and returns the [key,value] rows sorted by key.\n\n```rust\nuse serde_json::Value;\nuse std::collections::BTreeMap;\n\npub fn solve(input: Value) -> Value {\n    let mut map = BTreeMap::new();\n    let input_array = input.as_array().unwrap();\n    for item in input_array {\n        let item = item.as_array().unwrap();\n        let key = item[0].as_i64().unwrap();\n        let value = item[1].clone();\n        map.insert(key, value);\n    }\n    let mut output_array = Value::Array(Vec::new());\n    for (key, value) in map {\n        output_array.push(Value::Array(vec![Value::Number(Value::from(key).unwrap()), value]));\n    }\n    Value::Array(output_array)\n}\n```\n\nThis function works by first creating a `BTreeMap` to keep track of the last value for each key. It then iterates over the input array, inserting each key-value pair into the map. Finally, it creates an output array by iterating over the map and pushing each key-value pair into the output array. The output array is then converted to a `Value` and returned.\n\nPlease note that this function assumes that the input is always valid and that the keys and values are always integers. If this is not the case, you will need to add error handling code to deal with invalid inputs.\n",
+    "checkpoint_id": "92da6238854f2fa902d8b2ad79d548536af1d3ab06821f323bd5bbcea2013276",
+    "finish_reason": "stop",
+    "input_tokens": 317,
+    "output_tokens": 416,
+    "elapsed_ms": 53775,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/comparative/search/round-002/trials/deepseek-coder-6_7b-q4_k_m/comparison/deepseek-coder-6_7b-q4_k_m/tables.last_by_key.generation.json",
+    "sha256": "ff00ac72a121c1838e63d0ad89176738d9da30351814c02bb1514b0c84b9321c",
+    "bytes": 5381
+  },
+  "sandbox_report": {
+    "path": "reports/comparative/search/round-002/trials/deepseek-coder-6_7b-q4_k_m/comparison/sandbox/31f6c702-69e4-4801-b9eb-11e855f849af.json",
+    "sha256": "b7db13a690ed364836ffdec4ab43224dc194450f2d14c4d4091589ea155de435",
+    "bytes": 10142
+  },
+  "grading_error": null,
+  "success": false
+}

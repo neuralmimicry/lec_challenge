@@ -1,0 +1,22 @@
+{
+  "model_id": "bartowski/Qwen2.5-7B-Instruct-GGUF",
+  "revision": "8911e8a47f92bac19d6f5c64a2e2095bd2f7d031",
+  "files": {
+    "Qwen2.5-7B-Instruct-Q4_K_M.gguf": {
+      "filename": "Qwen2.5-7B-Instruct-Q4_K_M.gguf",
+      "bytes": 4683074240,
+      "publisher_identity": {
+        "kind": "lfs_sha256",
+        "digest": "65b8fcd92af6b4fefa935c625d1ac27ea29dcb6ee14589c55a8f115ceaaa1423"
+      }
+    },
+    "README.md": {
+      "filename": "README.md",
+      "bytes": 10166,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "8dda58698c5f4313ef0ed93cdf4e48c87eab8b05"
+      }
+    }
+  }
+}

@@ -1,0 +1,7 @@
+execution: CUDA GPU NVIDIA GeForce RTX 2080 selected: estimated resident 2781502016 bytes fits guarded free VRAM 7082396877 bytes; available CPU threads=16, usable RAM=34414848820 bytes
+study-evaluate: verifying effective sandbox controls
+study-evaluate: frozen tasks=16 seed1729 max512; graders=3 inference_overlap=true
+study-evaluate: heartbeat model loading; completed=0/16
+study-evaluate: heartbeat model loading; completed=0/16
+study-evaluate: heartbeat generating money.parse completed=0/16
+study-evaluate: heartbeat generating money.format completed=0/16

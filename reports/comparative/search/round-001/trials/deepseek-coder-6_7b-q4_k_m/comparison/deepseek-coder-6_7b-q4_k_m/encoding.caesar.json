@@ -1,0 +1,26 @@
+{
+  "model_id": "deepseek-coder-6_7b-q4_k_m",
+  "task_id": "encoding.caesar",
+  "source_id": "private-encoding-v1",
+  "specification_sha256": "6d5a2e4829f195b5e54e08b45300ecba1a3b178763b2ee6e7a9c90c50c633efa",
+  "seed": 1729,
+  "plan_sha256": "7e8ac08343327333638e13a48db34cc069c251aad12e7848d71fd8942d83cc6f",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input {text,shift} has ASCII text and integer shift. Rotate lowercase a..z only modulo 26; preserve all other characters.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":{\"shift\":3,\"text\":\"xyz A!\"},\"expected\":\"abc A!\"}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": null,
+  "generation_error": "model loading failed: GGUF/source rotary scaling differs",
+  "raw_generation": {
+    "path": "reports/comparative/search/round-001/trials/deepseek-coder-6_7b-q4_k_m/comparison/deepseek-coder-6_7b-q4_k_m/encoding.caesar.generation.json",
+    "sha256": "a02e8f5e1ffcacc6809c87bf454c307ad75386eabb6f4a5c8caa850f22769c84",
+    "bytes": 1616
+  },
+  "sandbox_report": null,
+  "grading_error": null,
+  "success": false
+}

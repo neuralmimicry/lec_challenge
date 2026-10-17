@@ -1,0 +1,6 @@
+{
+  "error": "fleet exhausted without a valid completion: provider=openai; HTTP=401; reason=provider HTTP 401",
+  "observed_unix_ms": 1792170349617,
+  "promotion": "incumbent_retained",
+  "status": "FAILURE"
+}

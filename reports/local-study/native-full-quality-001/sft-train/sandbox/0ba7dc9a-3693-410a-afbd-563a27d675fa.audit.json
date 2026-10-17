@@ -1,0 +1,1 @@
+{"candidate_exit":0,"compile_ok":true,"events":[],"failure":null,"output":"\" Hello-,- WORLD-!- \"\n\"\"\n\" -\\t-\\n-\\r\"\n\"A----B-_-_C- 123\"\n\"UPPER- lower\"\n\"a-\\u000bb-\\fc\"\n","output_truncated":false,"schema_version":1,"stderr":"","stderr_truncated":false,"syscalls_observed":68,"trace_complete":true}

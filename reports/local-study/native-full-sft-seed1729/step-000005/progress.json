@@ -1,0 +1,54 @@
+{
+  "freeze_sha256": "26a469a3b6d9311d9df716a60f60a1dab9c13f581607b60f94678b441a908842",
+  "steps": 5,
+  "adapter": {
+    "path": "reports/local-study/native-full-sft-seed1729/step-000005/adapter.safetensors",
+    "sha256": "72dcf32a04a5d7b734ddbbecf3c737d4bfa9bdae289162801ada4c4a3ff2d91d",
+    "bytes": 2173504
+  },
+  "optimizer": {
+    "path": "reports/local-study/native-full-sft-seed1729/step-000005/optimizer.safetensors",
+    "sha256": "3d220dc39fe04e30d7944b4155a011b46281856dba15fa24bcb636276ec8cfc2",
+    "bytes": 4347480
+  },
+  "initial_adapter_sha256": "97f700bf02c1bd271edb8c743d5b28a3557d8617c8b68b143e88f5d87ed2cd76",
+  "losses": [
+    0.30095919966697693,
+    0.3961876332759857,
+    0.3554884195327759,
+    0.37027207016944885,
+    0.3611921966075897
+  ],
+  "gradient_norms": [
+    1.8930055037172029,
+    2.1845483911931978,
+    1.4369010748160724,
+    1.8336945121204642,
+    1.4200529642856285
+  ],
+  "component_losses": [
+    {
+      "sequence_sft": 0.30095919966697693
+    },
+    {
+      "sequence_sft": 0.3961876332759857
+    },
+    {
+      "sequence_sft": 0.3554884195327759
+    },
+    {
+      "sequence_sft": 0.37027207016944885
+    },
+    {
+      "sequence_sft": 0.3611921966075897
+    }
+  ],
+  "alignment_diagnostics": [],
+  "sample_ids": [
+    "5b46a85ec5f9398290c023c26ef8cb662e6e4d19da293a71b2bcee316514f6b7",
+    "f23b74be49ae4fb9f5a42d58f33244ef0c157aa0e4afe342a565baa7e7493c91",
+    "12106a8bfb9356904186b558fd37127f1ee55e650cb57a6e843d8983be952bd0",
+    "279b6d10fb8f3e4f1d9e8b547e1207c9c65214b57d0270ab76e419d02e5165d2",
+    "9f34cf373961913a3cf1067f1f2a71e0bef8368e1557d10e998cc099a00fab71"
+  ]
+}

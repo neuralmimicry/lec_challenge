@@ -1,0 +1,38 @@
+{
+  "model_id": "qwen3-4b-instruct-2507-q4_k_m",
+  "task_id": "tables.last_by_key",
+  "source_id": "private-tables-v1",
+  "specification_sha256": "60d2667ffa0dcdb540f2de2f41533a9d0b6c027ee25be4adb993cda6f67122f7",
+  "seed": 1729,
+  "plan_sha256": "6d343a1ee585d9daf2a7fbaea768580a60e310abaf7186964443ef83a9a1013d",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an array of [key,value] integer rows. Keep the last value per key and return [key,value] rows sorted by key.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[[2,9],[1,4],[2,3]],\"expected\":[[1,4],[2,3]]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let mut map: std::collections::HashMap<i64, i64> = std::collections::HashMap::new();\n\n    if let Value::Array rows = input {\n        for row in rows {\n            if let Value::Array([key_val, value_val]) = row {\n                if let Some(key) = key_val.as_i64() {\n                    if let Some(value) = value_val.as_i64() {\n                        map.insert(key, value);\n                    }\n                }\n            }\n        }\n    }\n\n    let mut result: Vec<Vec<Value>> = map\n        .iter()\n        .map(|(k, v)| vec![k.into(), v.into()])\n        .collect();\n\n    result.sort_by_key(|row| row[0].as_i64().unwrap());\n\n    Value::Array(result.into_iter().map(|row| Value::Array(row)).collect())\n}\n```",
+    "checkpoint_id": "2fde00ce69dd4899c70d020845e2638353015bba0fdf161b3eb965f2bca4464e",
+    "finish_reason": "stop",
+    "input_tokens": 226,
+    "output_tokens": 202,
+    "elapsed_ms": 29219,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison/qwen3-4b-instruct-2507-q4_k_m/tables.last_by_key.generation.json",
+    "sha256": "ef92d9c1d4c1c65224648e2cf35e8a9d419acf66823777e77d992fde25736e83",
+    "bytes": 4644
+  },
+  "sandbox_report": {
+    "path": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison/sandbox/a681621f-fedd-4ad4-ad34-4559e40eb53d.json",
+    "sha256": "b23993398206e569a6074fefa457c0beeb75df2dca96e1b89ee1eec568eb5a79",
+    "bytes": 2385
+  },
+  "grading_error": null,
+  "success": false
+}

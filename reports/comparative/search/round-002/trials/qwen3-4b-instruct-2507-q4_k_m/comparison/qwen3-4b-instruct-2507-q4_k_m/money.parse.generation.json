@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "evidence_kind": "actual_local_model_generation",
+  "recorded_unix_ms": 1792137282474,
+  "model_id": "qwen3-4b-instruct-2507-q4_k_m",
+  "task_id": "money.parse",
+  "source_id": "private-money-v1",
+  "specification_sha256": "d2e4ee5432fb3996c6eaa9004d032f82e2ebfcb2f8df8fd10fd99bfbced5ddef",
+  "seed": 1729,
+  "plan_sha256": "6d343a1ee585d9daf2a7fbaea768580a60e310abaf7186964443ef83a9a1013d",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an ASCII decimal monetary string. Accept optional leading minus, one or more digits, and optional dot followed by exactly two digits. Return signed cents, or null for invalid syntax; magnitudes <=1000000 pounds.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":\"-12.30\",\"expected\":-1230}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let s: String = match input {\n        Value::String(s) => s,\n        _ => return Value::Null,\n    };\n\n    let mut chars = s.chars().peekable();\n    let mut sign = 1;\n    let mut digits = Vec::new();\n    let mut decimal_found = false;\n\n    while let Some(c) = chars.next() {\n        if c == '-' {\n            if sign == 1 {\n                sign = -1;\n            }\n        } else if c == '+' {\n            // Ignore leading plus\n        } else if c == '.' {\n            if decimal_found {\n                return Value::Null;\n            }\n            decimal_found = true;\n        } else if c.is_ascii_digit() {\n            digits.push(c);\n        } else {\n            break;\n        }\n    }\n\n    if digits.is_empty() {\n        return Value::Null;\n    }\n\n    let mut integer_part: i64 = 0;\n    let mut fractional_part: i64 = 0;\n\n    for c in digits.iter() {\n        integer_part = integer_part * 10 + (c.to_digit(10).unwrap() as i64);\n    }\n\n    if decimal_found {\n        let mut frac_digits = Vec::new();\n        while let Some(c) = chars.next() {\n            if c == '.' {\n                continue;\n            } else if c.is_ascii_digit() {\n                frac_digits.push(c);\n            } else {\n                break;\n            }\n        }\n\n        if frac_digits.len() != 2 {\n            return Value::Null;\n        }\n\n        fractional_part = frac_digits\n            .iter()\n            .map(|c| c.to_digit(10).unwrap() as i64)\n            .fold(0, |acc, d| acc * 10 + d);\n    }\n\n    let total_cents = sign * (integer_part * 100 + fractional_part);\n\n    // Check magnitude limit: <= 1000000 pounds = 100000000 cents\n    if total_cents.abs() > 100_000_000 {\n        return Value::Null;\n    }\n\n    Value::Number(serde_json::Number::from(total_cents))\n}\n```",
+    "checkpoint_id": "2fde00ce69dd4899c70d020845e2638353015bba0fdf161b3eb965f2bca4464e",
+    "finish_reason": "stop",
+    "input_tokens": 234,
+    "output_tokens": 486,
+    "elapsed_ms": 30595,
+    "complete": true
+  },
+  "generation_error": null,
+  "execution": {
+    "actual_device": "Cuda { gpu_id: 0 }",
+    "actual_dtype": "F32",
+    "asset_lifetime_shared_lease": true,
+    "available_cpu_threads": 16,
+    "candle_cpu_threads": 4,
+    "checkpoint_id": "2fde00ce69dd4899c70d020845e2638353015bba0fdf161b3eb965f2bca4464e",
+    "context_cap": 1024,
+    "cpu_fallback": false,
+    "cuda_active": true,
+    "cuda_feature_compiled": true,
+    "engine": "native_rust_candle",
+    "model_id": "bartowski/Qwen_Qwen3-4B-Instruct-2507-GGUF",
+    "quantisation": {
+      "all_weights_dequantised": false,
+      "embedding_precision": "F16",
+      "format": "gguf",
+      "hybrid_cpu_offload": false,
+      "kv_precision": "F32",
+      "matrix_backend": "native_candle_QMatMul",
+      "memory_estimate": {
+        "activation_workspace_bytes": 140509184,
+        "assumptions": "Full quantised weights on the selected device; embedding expanded to GPU float16 or CPU float32; float32 activations/KV/attention; no hybrid offload. Driver/allocator/workspace behaviour may require additional headroom.",
+        "attention_score_bytes": 134217728,
+        "conservative_total_bytes": 4120345312,
+        "context_tokens": 1024,
+        "dense_embedding_bytes": 777912320,
+        "kv_cache_bytes": 301989888,
+        "quantised_file_bytes": 2497280736,
+        "runtime_reserve_bytes": 268435456
+      },
+      "original_source_model_id": "Qwen/Qwen3-4B-Instruct-2507",
+      "original_source_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+      "quantised_publisher_model_id": "bartowski/Qwen_Qwen3-4B-Instruct-2507-GGUF",
+      "quantised_publisher_revision": "ae44f08e1392f39c0e474af10c3ff8355c8b6688",
+      "tensor_types": {
+        "F32": 145,
+        "Q4K": 216,
+        "Q6K": 37
+      },
+      "weight_sha256": "2fde00ce69dd4899c70d020845e2638353015bba0fdf161b3eb965f2bca4464e"
+    },
+    "requested": {
+      "device": {
+        "cuda": {
+          "ordinal": 0
+        }
+      },
+      "dtype": "f32"
+    },
+    "revision": "ae44f08e1392f39c0e474af10c3ff8355c8b6688",
+    "weight_format": "gguf"
+  }
+}

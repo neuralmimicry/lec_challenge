@@ -1,0 +1,45 @@
+{
+  "schema_version": 3,
+  "run_id": "8f93d042-d3a6-43e1-a7d2-bb432d163b8b",
+  "ownership_nonce": "c877e806-ca47-4820-bea8-828e8dfb4849",
+  "attempt_key": "c27e4e89cd307a22b63c9f7067e2b8e39da7205a1d8524663cc6751f33332961",
+  "receipt_path": "reports/local-study/regraded-v3-001/evaluation-002-development-2217a994f8b7/prepared/encoding.hex_decode.json",
+  "report_path": "reports/local-study/regraded-v3-001/evaluation-002-development-2217a994f8b7/sandbox/8f93d042-d3a6-43e1-a7d2-bb432d163b8b.json",
+  "task": {
+    "id": "encoding.hex_decode",
+    "source_id": "private-encoding-v1",
+    "lineage_id": "local-contract-pack-14",
+    "split": "development",
+    "specification": "Input is an ASCII string. Decode even-length hexadecimal accepting upper/lowercase; return byte array, or null for invalid digits or odd length. The returned array may contain up to 128 items.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "535cec08e7ca750ff6426c55df5e10382b5d98dd2b972889c664a544c49c2a87",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": "00aF",
+        "expected": [
+          0,
+          175
+        ]
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "use serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let str_input = input.as_str().unwrap();\n    let mut bytes = Vec::new();\n    let mut i = 0;\n    while i < str_input.len() {\n        let hex_char = str_input.chars().nth(i).unwrap();\n        let digit = match hex_char {\n            '0' => 0,\n            '1' => 1,\n            '2' => 2,\n            '3' => 3,\n            '4' => 4,\n            '5' => 5,\n            '6' => 6,\n            '7' => 7,\n            '8' => 8,\n            '9' => 9,\n            'A' => 10,\n            'B' => 11,\n            'C' => 12,\n            'D' => 13,\n            'E' => 14,\n            'F' => 15,\n            _ => 0,\n        };\n        if digit == 0 {\n            return Value::Null;\n        }\n        bytes.push(digit as i64);\n        i += 1;\n    }\n    Value::Array(bytes)\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/regraded-v3-001/evaluation-002-development-2217a994f8b7/sandbox"
+  },
+  "code_sha256": "04f3382c75e4405047593b85ce85a821834c810c0062fcb4160f763190179aea",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

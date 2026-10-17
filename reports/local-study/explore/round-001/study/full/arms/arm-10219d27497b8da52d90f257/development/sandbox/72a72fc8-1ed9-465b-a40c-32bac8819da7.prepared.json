@@ -1,0 +1,69 @@
+{
+  "schema_version": 3,
+  "run_id": "7cb982e6-3c3a-40a8-a088-3b345d6def53",
+  "ownership_nonce": "f50b1ca6-40f5-4a67-9b26-d071f83e11c2",
+  "attempt_key": "72a72fc8-1ed9-465b-a40c-32bac8819da7",
+  "receipt_path": "reports/local-study/explore/round-001/study/full/arms/arm-10219d27497b8da52d90f257/development/sandbox/72a72fc8-1ed9-465b-a40c-32bac8819da7.prepared.json",
+  "report_path": "reports/local-study/explore/round-001/study/full/arms/arm-10219d27497b8da52d90f257/development/sandbox/7cb982e6-3c3a-40a8-a088-3b345d6def53.json",
+  "task": {
+    "id": "tables.inner_join",
+    "source_id": "private-tables-v1",
+    "lineage_id": "local-contract-pack-15",
+    "split": "development",
+    "specification": "Input [left,right] has arrays of [key,value] integer rows, each side with unique keys. Return [key,left_value,right_value] for common keys in ascending key order.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "369ef237ff250179b0b3e3c7af051af8aebc0329b6494d33af5f436c827ac699",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": [
+          [
+            [
+              2,
+              9
+            ],
+            [
+              1,
+              4
+            ]
+          ],
+          [
+            [
+              2,
+              3
+            ],
+            [
+              3,
+              8
+            ]
+          ]
+        ],
+        "expected": [
+          [
+            2,
+            9,
+            3
+          ]
+        ]
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "```rust\nuse serde_json::Value;\n\nfn solve(input: serde_json::Value) -> serde_json::Value {\n    let mut result = Vec::new();\n    for line in input.as_array() {\n        let left = line.as_array();\n        let right = line.as_array();\n        let mut common_keys = Vec::new();\n        for key in left.iter() {\n            for value in right.iter() {\n                if key == value {\n                    common_keys.push(key);\n                }\n            }\n        }\n        common_keys.sort_unstable();\n        result.push(vec![key, left[0], right[0]]);\n    }\n    result\n}\n\nfn main() {\n    // Example usage\n    let input = serde_json::Value::from(\"{\\\"input\\\":[[[2,9],[1,4]],[[2,3],[3,8]]],\"expected\":[[2,9,3]]}]\");\n    let output = solve(input);\n    println!(\"{:?}\", output);\n}\n```\n\nThis Rust code defines a function `solve` that takes a JSON input and returns a JSON output. The function iterates over each line in the input, checks for common keys, and returns the result in the specified format.",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/explore/round-001/study/full/arms/arm-10219d27497b8da52d90f257/development/sandbox"
+  },
+  "code_sha256": "70be5c98f59f7c08d8cb204fef4dffde490f39d4edfc077e252e51c73e180cba",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

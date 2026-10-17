@@ -1,0 +1,40 @@
+{
+  "run_id": "8bca6f35-41d3-4868-9950-41dfa166ad65",
+  "task_id": "graph.reachable",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error[E0308]: mismatched types\n --> /candidate/main.rs:7:34\n  |\n7 |     let mut graph = vec![vec![]; n];\n  |                     -------------^-\n  |                     |            |\n  |                     |            expected `usize`, found `u64`\n  |                     arguments to this function are incorrect\n  |\nnote: function defined here\n --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/alloc/src/vec/mod.rs:3772:7\nhelp: you can convert a `u64` to a `usize` and panic if the converted value doesn't fit\n  |\n7 |     let mut graph = vec![vec![]; n.try_into().unwrap()];\n  |                                   ++++++++++++++++++++\n\nerror[E0277]: the type `[Vec<_>]` cannot be indexed by `u64`\n  --> /candidate/main.rs:11:15\n   |\n11 |         graph[from].push(to);\n   |               ^^^^ slice indices are of type `usize` or ranges of `usize`\n   |\n   = help: the trait `SliceIndex<[Vec<_>]>` is not implemented for `u64`\nhelp: `usize` implements trait `SliceIndex<T>`\n  --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/slice/index.rs:179:0\n   |\n   = note: `SliceIndex<[T]>`\n  --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/bstr/traits.rs:197:0\n   |\n   = note: `SliceIndex<ByteStr>`\n   = note: required for `Vec<Vec<_>>` to implement `std::ops::Index<u64>`\n\nerror[E0277]: the type `[Vec<_>]` cannot be indexed by `u64`\n  --> /candidate/main.rs:18:32\n   |\n18 |         for neighbor in &graph[node] {\n   |                                ^^^^ slice indices are of type `usize` or ranges of `usize`\n   |\n   = help: the trait `SliceIndex<[Vec<_>]>` is not implemented for `u64`\nhelp: `usize` implements trait `SliceIndex<T>`\n  --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/slice/index.rs:179:0\n   |\n   = note: `SliceIndex<[T]>`\n  --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/bstr/traits.rs:197:0\n   |\n   = note: `SliceIndex<ByteStr>`\n   = note: required for `Vec<Vec<_>>` to implement `std::ops::Index<u64>`\n\nerror: aborting due to 3 previous errors\n\nSome errors have detailed explanations: E0277, E0308.\nFor more information about an error, try `rustc --explain E0277`.\n"
+  ],
+  "cases_total": 6,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "4121ba1a97b56d02b5a1b1f7c2e5f8c39379b90ec7ac72e3ad5694a5cf9440e4",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/sandbox/8bca6f35-41d3-4868-9950-41dfa166ad65.audit.json",
+  "audit_sha256": "2f8ea972050b294170404b2eb5b2228a7e3eb54413b0a4c11e471772062fc614",
+  "failure": "compilation failed: error[E0308]: mismatched types\n --> /candidate/main.rs:7:34\n  |\n7 |     let mut graph = vec![vec![]; n];\n  |                     -------------^-\n  |                     |            |\n  |                     |            expected `usize`, found `u64`\n  |                     arguments to this function are incorrect\n  |\nnote: function defined here\n --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/alloc/src/vec/mod.rs:3772:7\nhelp: you can convert a `u64` to a `usize` and panic if the converted value doesn't fit\n  |\n7 |     let mut graph = vec![vec![]; n.try_into().unwrap()];\n  |                                   ++++++++++++++++++++\n\nerror[E0277]: the type `[Vec<_>]` cannot be indexed by `u64`\n  --> /candidate/main.rs:11:15\n   |\n11 |         graph[from].push(to);\n   |               ^^^^ slice indices are of type `usize` or ranges of `usize`\n   |\n   = help: the trait `SliceIndex<[Vec<_>]>` is not implemented for `u64`\nhelp: `usize` implements trait `SliceIndex<T>`\n  --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/slice/index.rs:179:0\n   |\n   = note: `SliceIndex<[T]>`\n  --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/bstr/traits.rs:197:0\n   |\n   = note: `SliceIndex<ByteStr>`\n   = note: required for `Vec<Vec<_>>` to implement `std::ops::Index<u64>`\n\nerror[E0277]: the type `[Vec<_>]` cannot be indexed by `u64`\n  --> /candidate/main.rs:18:32\n   |\n18 |         for neighbor in &graph[node] {\n   |                                ^^^^ slice indices are of type `usize` or ranges of `usize`\n   |\n   = help: the trait `SliceIndex<[Vec<_>]>` is not implemented for `u64`\nhelp: `usize` implements trait `SliceIndex<T>`\n  --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/slice/index.rs:179:0\n   |\n   = note: `SliceIndex<[T]>`\n  --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/bstr/traits.rs:197:0\n   |\n   = note: `SliceIndex<ByteStr>`\n   = note: required for `Vec<Vec<_>>` to implement `std::ops::Index<u64>`\n\nerror: aborting due to 3 previous errors\n\nSome errors have detailed explanations: E0277, E0308.\nFor more information about an error, try `rustc --explain E0277`.\n",
+  "duration_ms": 20692,
+  "timeout_evidence": null,
+  "lifecycle_evidence": {
+    "receipt_path": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/sandbox/8bca6f35-41d3-4868-9950-41dfa166ad65.lifecycle.json",
+    "receipt_sha256": "05b1171d0b5cea59ea07233adac0137bf6471367b4cc8d95b66c9b529b61919f"
+  }
+}

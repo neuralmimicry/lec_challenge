@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "a5b39d544c85b76111246b8fda40c638ce104251a1c56368277fef8fe4033eb6",
+  "task_id": "stock.counts",
+  "source_id": "private-stock-v1",
+  "success": true,
+  "raw_generation": {
+    "path": "reports/local-study/native-full-quality-001/sft-train/generations/stock.counts.json",
+    "sha256": "ec691a9c059bb3097c063f7b3a700c0f3e7f10bb194e45f3df4b1151720bbce3",
+    "bytes": 1959
+  },
+  "sandbox_report": {
+    "path": "reports/local-study/native-full-quality-001/sft-train/sandbox/a5bb530b-3ef8-4914-9fd2-54118e7c05a7.json",
+    "sha256": "3e05c31a3f37c9830f89bebba471c4a17b89bc49e0cc17012140cdb5996d825a",
+    "bytes": 1352
+  },
+  "grading_error": null
+}

@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "51e2a803f86359125c31f16c1d0da7fc35ac18527b51f85f956f4872bf05792e",
+  "task_id": "tables.last_by_key",
+  "source_id": "private-tables-v1",
+  "success": false,
+  "raw_generation": {
+    "path": "reports/local-study/explore/round-001/baselines/ternary_bitnet/generations/tables.last_by_key.json",
+    "sha256": "0f16d04a5bcb7a23a8185be85e640d1b14dcee381b853efa9544d956dac87f4f",
+    "bytes": 1354
+  },
+  "sandbox_report": null,
+  "grading_error": null
+}

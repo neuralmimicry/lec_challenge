@@ -1,0 +1,55 @@
+{
+  "schema_version": 3,
+  "run_id": "4a6024d7-0194-4cc7-b784-d613c3594287",
+  "ownership_nonce": "22b8ad9c-74fe-4a98-bd05-708a28f488f8",
+  "attempt_key": "0dc68a24-0ed2-4aa0-9874-a7616a2910cf",
+  "receipt_path": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison/sandbox/0dc68a24-0ed2-4aa0-9874-a7616a2910cf.prepared.json",
+  "report_path": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison/sandbox/4a6024d7-0194-4cc7-b784-d613c3594287.json",
+  "task": {
+    "id": "dispatch.waiting",
+    "source_id": "private-dispatch-v1",
+    "lineage_id": "local-contract-pack-13",
+    "split": "development",
+    "specification": "Input is an array of [arrival,duration] processed in input order by one server, initially free at zero. Return total time jobs wait before service.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "779f79aab8092a883c5d3bb26675a6b8228a3ca11fe3e11a31e0316d053d0563",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": [
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            8,
+            1
+          ]
+        ],
+        "expected": 2
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "pub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let mut arrival_times = input.as_array().unwrap();\n    let mut total_wait = 0i64;\n    let mut current_time = 0i64;\n\n    for item in arrival_times {\n        let arr = item.as_array().unwrap();\n        let arrival = arr[0].as_i64().unwrap();\n        let duration = arr[1].as_i64().unwrap();\n\n        // The job arrives at `arrival`, and service starts at `max(arrival, current_time)`\n        let start_time = current_time.max(arrival);\n        let wait_time = start_time - arrival;\n        total_wait += wait_time;\n\n        // Update current time to when service finishes\n        current_time = start_time + duration;\n    }\n\n    serde_json::json!(total_wait)\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison/sandbox"
+  },
+  "code_sha256": "41317e8bef576da33d68edfd3fa512df4d2b5ee6e7610311f4882fd402d52d87",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

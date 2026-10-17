@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "task_id": "intervals.merge",
+  "teacher_id": "qwen-coder-7b-q4_k_m",
+  "content": "context",
+  "request": {
+    "prompt": "A verified example from the same training source follows. It is a different task; implement only the new contract.\nExample contract: Input is an array of integer half-open intervals [start,end], start<end. Return total length of their union.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nExample solution:\n```rust\nuse serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let intervals: Vec<(i64, i64)> = input.as_array().unwrap()\n        .iter()\n        .map(|v| (v[0].as_i64().unwrap(), v[1].as_i64().unwrap()))\n        .collect();\n\n    let mut intervals = intervals;\n    intervals.sort_by_key(|&(start, _)| start);\n\n    let mut total_length = 0;\n    let mut current_interval = None;\n\n    for &(start, end) in &intervals {\n        match current_interval {\n            None => current_interval = Some((start, end)),\n            Some((current_start, current_end)) => {\n                if start < current_end {\n                    current_interval = Some((current_start, end.max(current_end)));\n                } else {\n                    total_length += current_end - current_start;\n                    current_interval = Some((start, end));\n                }\n            }\n        }\n    }\n\n    if let Some((start, end)) = current_interval {\n        total_length += end - start;\n    }\n\n    Value::from(total_length)\n}\n```\nNew task:\nWrite Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an array of [start,end] integer half-open intervals with start<end. Sort and merge overlapping or touching intervals; return sorted disjoint intervals.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[[3,5],[1,3],[8,9]],\"expected\":[[1,5],[8,9]]}]",
+    "max_new_tokens": 768,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "runtime": {
+    "device": {
+      "cuda": {
+        "ordinal": 0
+      }
+    },
+    "dtype": "f32"
+  },
+  "teacher_assets": {
+    "path": "offline_bundle/comparative/qwen-coder-7b-q4_k_m/gguf-assets.json",
+    "sha256": "606bfac02a103d208ccef73067cb6a4581e9b099e19bc9ed8e2021ebb1143114",
+    "bytes": 1206
+  },
+  "supporting_sample_ids": [
+    "12106a8bfb9356904186b558fd37127f1ee55e650cb57a6e843d8983be952bd0"
+  ],
+  "feedback_candidate": null,
+  "feedback_summary": null,
+  "sandbox": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/explore/round-001/content-v1/sandbox"
+  },
+  "preflight": {
+    "path": "reports/local-study/explore/round-001/content-v1/sandbox-preflight.json",
+    "sha256": "177e2ef21e36cbec4f692ca35960e457194cb5c74266c869808e60d56ead923d",
+    "bytes": 1287
+  },
+  "engine_binary_sha256": "3f348bdfa71c49df5b5d0b7581ae9ad3114645127f99abbec9e4aac1064563bd"
+}

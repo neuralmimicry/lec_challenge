@@ -1,0 +1,69 @@
+{
+  "schema_version": 3,
+  "run_id": "c7b03469-6673-418e-80db-929badd57e4f",
+  "ownership_nonce": "ef8fd900-c3f6-4a83-b4f8-236ef2509198",
+  "attempt_key": "23e34ee61c49c50932e7bded74eda6c525eace14c8fbcb9c9a6d9cf76bee095d",
+  "receipt_path": "reports/local-study/regraded-v3-001/evaluation-001-development-e2bcd1355276/prepared/tables.inner_join.json",
+  "report_path": "reports/local-study/regraded-v3-001/evaluation-001-development-e2bcd1355276/sandbox/c7b03469-6673-418e-80db-929badd57e4f.json",
+  "task": {
+    "id": "tables.inner_join",
+    "source_id": "private-tables-v1",
+    "lineage_id": "local-contract-pack-15",
+    "split": "development",
+    "specification": "Input [left,right] has arrays of [key,value] integer rows, each side with unique keys. Return [key,left_value,right_value] for common keys in ascending key order.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "369ef237ff250179b0b3e3c7af051af8aebc0329b6494d33af5f436c827ac699",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": [
+          [
+            [
+              2,
+              9
+            ],
+            [
+              1,
+              4
+            ]
+          ],
+          [
+            [
+              2,
+              3
+            ],
+            [
+              3,
+              8
+            ]
+          ]
+        ],
+        "expected": [
+          [
+            2,
+            9,
+            3
+          ]
+        ]
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "use serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let arr1 = input.as_array().unwrap();\n    let arr2 = input.as_array().unwrap();\n    let mut result = Vec::new();\n    let mut left = 0;\n    let mut right = 0;\n\n    while left < arr1.len() && right < arr2.len() {\n        let key1 = arr1[left].as_i64().unwrap();\n        let key2 = arr2[right].as_i64().unwrap();\n        if key1 == key2 {\n            result.push(Value::from((key1, arr1[left].as_i64().unwrap(), arr2[right].as_i64().unwrap())));\n            left += 1;\n            right += 1;\n        } else if key1 < key2 {\n            left += 1;\n        } else {\n            right += 1;\n        }\n    }\n\n    Value::from(result)\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/regraded-v3-001/evaluation-001-development-e2bcd1355276/sandbox"
+  },
+  "code_sha256": "e7f98ab8621fbd7e11feed6a7db141b37896e855152d26d7e60faba9d70d87a3",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

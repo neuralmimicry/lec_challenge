@@ -1,0 +1,34 @@
+{
+  "run_id": "2a9edddd-8cb2-4cbe-913f-d8d10e3d05d6",
+  "task_id": "money.split",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error[E0599]: no variant, associated function, or constant named `new_array` found for enum `Value` in the current scope\n --> /candidate/main.rs:7:29\n  |\n7 |     let mut result = Value::new_array();\n  |                             ^^^^^^^^^ variant, associated function, or constant not found in `Value`\n  |\nhelp: there is a method `as_array` with a similar name\n  |\n7 -     let mut result = Value::new_array();\n7 +     let mut result = Value::as_array();\n  |\n\nerror[E0599]: no variant, associated function, or constant named `new_array` found for enum `Value` in the current scope\n  --> /candidate/main.rs:10:32\n   |\n10 |         let mut share = Value::new_array();\n   |                                ^^^^^^^^^ variant, associated function, or constant not found in `Value`\n   |\nhelp: there is a method `as_array` with a similar name\n   |\n10 -         let mut share = Value::new_array();\n10 +         let mut share = Value::as_array();\n   |\n\nerror[E0599]: no variant, associated function, or constant named `new_i64` found for enum `Value` in the current scope\n  --> /candidate/main.rs:12:30\n   |\n12 |             let num = Value::new_i64(count);\n   |                              ^^^^^^^ variant, associated function, or constant not found in `Value`\n\nerror: aborting due to 3 previous errors\n\nFor more information about this error, try `rustc --explain E0599`.\n"
+  ],
+  "cases_total": 5,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "4b2556745b303526f354ded7f2c473b77f6da0c99a77f0a493c7272a8d800aac",
+  "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "d6c3e82b7ca3ce8cbd1f7b9aac065d1349160f43ed92f407992b22a625a376ca",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "controller_version": 2,
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:1",
+    "expected_image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/native-full-quality-001/sft-development/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/native-full-quality-001/sft-development/sandbox/2a9edddd-8cb2-4cbe-913f-d8d10e3d05d6.audit.json",
+  "audit_sha256": "6d2e2560a038163d9099e29e011168c5feee365082ce5ee3ac1601f7b29e7e55",
+  "failure": "compilation failed: error[E0599]: no variant, associated function, or constant named `new_array` found for enum `Value` in the current scope\n --> /candidate/main.rs:7:29\n  |\n7 |     let mut result = Value::new_array();\n  |                             ^^^^^^^^^ variant, associated function, or constant not found in `Value`\n  |\nhelp: there is a method `as_array` with a similar name\n  |\n7 -     let mut result = Value::new_array();\n7 +     let mut result = Value::as_array();\n  |\n\nerror[E0599]: no variant, associated function, or constant named `new_array` found for enum `Value` in the current scope\n  --> /candidate/main.rs:10:32\n   |\n10 |         let mut share = Value::new_array();\n   |                                ^^^^^^^^^ variant, associated function, or constant not found in `Value`\n   |\nhelp: there is a method `as_array` with a similar name\n   |\n10 -         let mut share = Value::new_array();\n10 +         let mut share = Value::as_array();\n   |\n\nerror[E0599]: no variant, associated function, or constant named `new_i64` found for enum `Value` in the current scope\n  --> /candidate/main.rs:12:30\n   |\n12 |             let num = Value::new_i64(count);\n   |                              ^^^^^^^ variant, associated function, or constant not found in `Value`\n\nerror: aborting due to 3 previous errors\n\nFor more information about this error, try `rustc --explain E0599`.\n",
+  "duration_ms": 19881,
+  "timeout_evidence": null
+}

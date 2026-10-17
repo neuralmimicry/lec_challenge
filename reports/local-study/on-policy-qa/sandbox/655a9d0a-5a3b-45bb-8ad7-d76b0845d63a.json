@@ -1,0 +1,33 @@
+{
+  "run_id": "655a9d0a-5a3b-45bb-8ad7-d76b0845d63a",
+  "task_id": "ledger.bounds",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: warning: unused import: `serde_json::Value`\n --> /candidate/main.rs:1:5\n  |\n1 | use serde_json::Value;\n  |     ^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0277]: the trait bound `&Vec<Value>: Default` is not satisfied\n --> /candidate/main.rs:4:44\n  |\n4 |     let input: Vec<i64> = input.as_array().unwrap_or_default();\n  |                                            ^^^^^^^^^^^^^^^^^ the trait `Default` is not implemented for `&Vec<Value>`\n  |\nhelp: the trait `Default` is implemented for `Vec<T>`\n --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/alloc/src/vec/mod.rs:4366:0\nnote: required by a bound in `Option::<T>::unwrap_or_default`\n --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/option.rs:1091:4\n\nerror[E0308]: mismatched types\n --> /candidate/main.rs:4:27\n  |\n4 |     let input: Vec<i64> = input.as_array().unwrap_or_default();\n  |                --------   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `Vec<i64>`, found `&Vec<Value>`\n  |                |\n  |                expected due to this\n  |\n  = note: expected struct `Vec<i64>`\n          found reference `&Vec<Value>`\n\nerror[E0308]: mismatched types\n  --> /candidate/main.rs:12:35\n   |\n12 |     serde_json::Value::Array(vec![min, max])\n   |                                   ^^^ expected `Value`, found `&i64`\n\nerror: aborting due to 3 previous errors; 1 warning emitted\n\nSome errors have detailed explanations: E0277, E0308.\nFor more information about an error, try `rustc --explain E0277`.\n"
+  ],
+  "cases_total": 14,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "0bf995b5f69865792503015f6af52b457c861b679877956e939c2137ddb4a562",
+  "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "cc535b66217de58f5713646886179982ae5b9cf464ed58145a0d1271d78c18f7",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:1",
+    "expected_image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/on-policy-qa/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/on-policy-qa/sandbox/655a9d0a-5a3b-45bb-8ad7-d76b0845d63a.audit.json",
+  "audit_sha256": "ad543c88039da0d3ec1eb35b24ef4b2bc94d609d2f958a6d8849d7e011a11f9b",
+  "failure": "compilation failed: warning: unused import: `serde_json::Value`\n --> /candidate/main.rs:1:5\n  |\n1 | use serde_json::Value;\n  |     ^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0277]: the trait bound `&Vec<Value>: Default` is not satisfied\n --> /candidate/main.rs:4:44\n  |\n4 |     let input: Vec<i64> = input.as_array().unwrap_or_default();\n  |                                            ^^^^^^^^^^^^^^^^^ the trait `Default` is not implemented for `&Vec<Value>`\n  |\nhelp: the trait `Default` is implemented for `Vec<T>`\n --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/alloc/src/vec/mod.rs:4366:0\nnote: required by a bound in `Option::<T>::unwrap_or_default`\n --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/option.rs:1091:4\n\nerror[E0308]: mismatched types\n --> /candidate/main.rs:4:27\n  |\n4 |     let input: Vec<i64> = input.as_array().unwrap_or_default();\n  |                --------   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `Vec<i64>`, found `&Vec<Value>`\n  |                |\n  |                expected due to this\n  |\n  = note: expected struct `Vec<i64>`\n          found reference `&Vec<Value>`\n\nerror[E0308]: mismatched types\n  --> /candidate/main.rs:12:35\n   |\n12 |     serde_json::Value::Array(vec![min, max])\n   |                                   ^^^ expected `Value`, found `&i64`\n\nerror: aborting due to 3 previous errors; 1 warning emitted\n\nSome errors have detailed explanations: E0277, E0308.\nFor more information about an error, try `rustc --explain E0277`.\n",
+  "duration_ms": 6030,
+  "timeout_evidence": null
+}

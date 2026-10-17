@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "initial_plan": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/ledger.sum/student-plan.json",
+    "sha256": "ecaeae34cdfccaecd9bcfd7474272d686bbd9cf02936ec8f578b57169adb0797",
+    "bytes": 3793
+  },
+  "student_raw": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/ledger.sum/student-raw.json",
+    "sha256": "bd154fee0046a9ba9409683e2eba9639325d5d61cc0a276fadfb8027478e265c",
+    "bytes": 1527
+  },
+  "student_grade": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox/1c9c328c-62e2-4860-8618-85146a5aca8a.json",
+    "sha256": "a3b2a06e3919daadb6ad46fb9e36c419d47af3098377cdccdf6c6d2ab2f48020",
+    "bytes": 6251
+  },
+  "teacher_id": "qwen-coder-7b-q4_k_m",
+  "teacher_assets": {
+    "path": "offline_bundle/comparative/qwen-coder-7b-q4_k_m/gguf-assets.json",
+    "sha256": "606bfac02a103d208ccef73067cb6a4581e9b099e19bc9ed8e2021ebb1143114",
+    "bytes": 1206
+  },
+  "teacher_checkpoint": null,
+  "runtime": {
+    "device": {
+      "cuda": {
+        "ordinal": 0
+      }
+    },
+    "dtype": "f32"
+  },
+  "request": {
+    "prompt": "New task:\nWrite Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an array of integers in [-10000,10000], length <=64. Return its sum; the empty sum is zero.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[2,-4,8],\"expected\":6}]\nActual frozen student candidate:\n```rust\nuse serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let sum = input.as_array().iter().map(|&x| x as i64).sum();\n    serde_json::Value::Number(sum)\n}\n```\nActual trusted tool feedback:\n{\"bounded_diagnostic_untrusted_data\":\"compilation failed: warning: unused import: `serde_json::Value`\\n --> /candidate/main.rs:1:5\\n  |\\n1 | use serde_json::Value;\\n  |     ^^^^^^^^^^^^^^^^^\\n  |\\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\\n\\nerror[E0277]: a value of type `serde_json::Number` cannot be made by summing an iterator over elements of type `i64`\\n --> /candidate/main.rs:4:58\\n  |\\n4 |     let sum = input.as_array().iter().map(|&x| x as i64).sum();\\n  |                                                          ^^^ value of type `serde_json::Number` cannot be made by summing a `std::iter::Iterator<Item=i64>`\\n  |\\n  = help: the trait `Sum<i64>` is not implemented for `serde_json::Number`\\nhelp: the trait `Sum` is implemented for `i64`\\n --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/iter/traits/accum.rs:50:8\\n ::: /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/iter/traits/accum.rs:206:0\\n  |\\n  = note: in this macro invocation\\nnote: the method call chain might not have had the expected associated types\\n --> /candidate/main.rs:4:39\\n  |\\n4 |     let sum = input.as_array().iter().map(|&x| x as i64).sum();\\n  |               -----            ------ ^^^^^^^^^^^^^^^^^^ `Iterator::Item` changed to `i64` here\\n  |               |                |\\n  |               |                `Iterator::Item` is `&&Vec<Value>` here\\n  |               this expression has type `Value`\\nnote: required by a bound in `std::iter::Iterator::sum`\\n --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/iter/traits/iterator.rs:3665:4\\n  = note: this error originates in the macro `integer_sum_product` (in Nightly builds, run with -Z macro-backtrace for more info)\\n\\nerror[E0606]: casting `&Vec<Value>` as `i64` is invalid\\n --> /candidate/main.rs:4:48\\n  |\\n4 |     let sum = input.as_array().iter().map(|&x| x as i64).sum();\\n  |                                                ^^^^^^^^\\n  |\\n  = help: cast through a raw pointer first\\n\\nerror: aborting due to 2 previous errors; 1 warning emitted\\n\\nSome errors have detailed explanations: E0277, E0606.\\nFor more information about an error, try `rustc --explain E0277`.\\n\",\"cases_passed\":0,\"cases_total\":14,\"content_role\":\"compilation_feedback_only\",\"original_failure_is_not_a_success\":true,\"passed\":false,\"private_inputs_or_expected_outputs_exposed\":false,\"quarantined\":true,\"run_id\":\"1c9c328c-62e2-4860-8618-85146a5aca8a\",\"student_generation_complete\":true,\"tool\":\"trusted_container_grader\",\"trace_complete\":false}\nCritique and revise the candidate. Put any short explanation in Rust // comments and return complete compilable Rust source only. Do not invent tool results.",
+    "max_new_tokens": 768,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "supporting_sample_ids": []
+}

@@ -1,0 +1,294 @@
+{
+  "schema_version": 1,
+  "model_id": "microsoft/bitnet-b1.58-2B-4T",
+  "requested_revision": "04c3b9ad9361b824064a1f25ea60a8be9599b127",
+  "revision": "04c3b9ad9361b824064a1f25ea60a8be9599b127",
+  "licence": "mit",
+  "licence_files": [
+    "LICENSE"
+  ],
+  "licence_evidence": "Original pinned repository licence document(s) and model-card metadata retained",
+  "recorded_unix_seconds": 1792077571,
+  "metadata_url": "https://huggingface.co/api/models/microsoft/bitnet-b1.58-2B-4T/revision/04c3b9ad9361b824064a1f25ea60a8be9599b127?blobs=true",
+  "metadata_sha256": "4322d0edcd472eb96f0d4433a3d774d99ab216cb255cc3d3db8ca92a6ecc34dd",
+  "metadata": {
+    "_id": "67fddfa9a7fe1f21ec1d3026",
+    "author": "microsoft",
+    "cardData": {
+      "language": [
+        "en"
+      ],
+      "library_name": "transformers",
+      "license": "mit",
+      "license_link": "https://huggingface.co/microsoft/bitnet-b1.58-2B-4T/blob/main/LICENSE",
+      "pipeline_tag": "text-generation",
+      "tags": [
+        "chat",
+        "bitnet",
+        "text-generation",
+        "large-language-model"
+      ]
+    },
+    "config": {
+      "architectures": [
+        "BitNetForCausalLM"
+      ],
+      "auto_map": {
+        "AutoConfig": "configuration_bitnet.BitNetConfig",
+        "AutoModelForCausalLM": "modeling_bitnet.BitNetForCausalLM"
+      },
+      "model_type": "bitnet",
+      "quantization_config": {
+        "quant_method": "bitnet"
+      },
+      "tokenizer_config": {
+        "bos_token": "<|begin_of_text|>",
+        "chat_template": "{% set loop_messages = messages %}{% for message in loop_messages %}{% set content = message['role'] | capitalize + ': '+ message['content'] | trim + '<|eot_id|>' %}{{ content }}{% endfor %}{% if add_generation_prompt %}{{ 'Assistant: ' }}{% endif %}",
+        "eos_token": "<|eot_id|>"
+      }
+    },
+    "createdAt": "2025-04-15T04:25:13.000Z",
+    "disabled": false,
+    "downloads": 18491,
+    "gated": false,
+    "id": "microsoft/bitnet-b1.58-2B-4T",
+    "lastModified": "2025-12-17T18:13:05.000Z",
+    "library_name": "transformers",
+    "likes": 1504,
+    "model-index": null,
+    "modelId": "microsoft/bitnet-b1.58-2B-4T",
+    "pipeline_tag": "text-generation",
+    "private": false,
+    "safetensors": {
+      "parameters": {
+        "BF16": 328775890,
+        "U8": 521011200
+      },
+      "total": 849787090
+    },
+    "sha": "04c3b9ad9361b824064a1f25ea60a8be9599b127",
+    "siblings": [
+      {
+        "blobId": "a6344aac8c09253b3b630fb776ae94478aa0275b",
+        "rfilename": ".gitattributes",
+        "size": 1519
+      },
+      {
+        "blobId": "48ea6616b5b8581df3401872996cecf1f8b08a0d",
+        "rfilename": "LICENSE",
+        "size": 1073
+      },
+      {
+        "blobId": "34bf8c6fb3024fc9195a7ee0dce583ce8af4bf65",
+        "rfilename": "README.md",
+        "size": 9647
+      },
+      {
+        "blobId": "4acf191af5817ad7534d03d3ca8a45a8d4f4a82a",
+        "rfilename": "config.json",
+        "size": 844
+      },
+      {
+        "blobId": "156c5705d7cf1e2f11a27e62f673c4576af7aa19",
+        "rfilename": "data_summary_card.md",
+        "size": 3861
+      },
+      {
+        "blobId": "650ab2390d65b8182f2599fe7a0f2014eec3f38b",
+        "rfilename": "generation_config.json",
+        "size": 199
+      },
+      {
+        "blobId": "ac3e8158831d2ba3358009e703645f9d87ff71d6",
+        "lfs": {
+          "pointerSize": 135,
+          "sha256": "8143ae115ed6babe5e5ada8fb8c5b769d8f417802b2db042ad98b4f7ed73975b",
+          "size": 1178623988
+        },
+        "rfilename": "model.safetensors",
+        "size": 1178623988
+      },
+      {
+        "blobId": "d8cd5076496dbe4be2320312abc10adc43097b81",
+        "rfilename": "special_tokens_map.json",
+        "size": 73
+      },
+      {
+        "blobId": "b197f72effb9d5ed16ee0f5663e11e4cfac2ba62",
+        "rfilename": "tokenizer.json",
+        "size": 9085698
+      },
+      {
+        "blobId": "d54415c89774937967b9baac420d12455ff6e267",
+        "rfilename": "tokenizer_config.json",
+        "size": 50834
+      }
+    ],
+    "spaces": [
+      "suayptalha/Chat-with-Bitnet-b1.58-2B-4T",
+      "aizip-dev/SLM-RAG-Arena",
+      "Tonic/Native_1-bit_LLM",
+      "kimhyunwoo/bitnet",
+      "CPater/nwo-agent-graph",
+      "kunkun8888666/Bitnet-b1.58-2B-4T",
+      "K00B404/Bitnet-b1.58-2B-4T",
+      "wop/Chat-with-Bitnet-b1.58-2B-4T",
+      "Lonnie1214/Chat-with-Bitnet-b1.58-2B-4TMay",
+      "aaurelions/bitnet-space",
+      "Skandan/bitnet-b1.58-2B-4T",
+      "shukdevdatta123/Multilingual-Translation-Tool",
+      "openfree/Multilingual-Translation-Tool",
+      "huchiahsi/Chat-with-Bitnet-b1.58-2B-4T",
+      "privateuserh/AIAGENTSChat",
+      "SombreroCat/Chat121",
+      "Copain22/Cafe-Chatbot",
+      "mike23415/Gm-ai",
+      "fnaval/Chat-with-Bitnet-b1.58-2B-4T",
+      "ztbit753/itnet-chatbot",
+      "88ggg/NEOGG",
+      "Pavanb/address_extractor",
+      "Voldermort/sample",
+      "WANGLueze/wangl",
+      "JamesDio/Scisum",
+      "JamesDio/Scisumpdf",
+      "torVik/Bitnet-b1.58-2B-4T_inference",
+      "reserted1/qna",
+      "FrancisT25/QA-new",
+      "melancholic-ksm/BitNet_b1.58",
+      "albertchristopher/SimpleQA",
+      "albertchristopher/bitnet-summarizer",
+      "albertchristopher/text_summarizer",
+      "canerkonuk/Microsoft-bitnet-b1.58-2B-4T-Demo",
+      "arhuggingface/Chat-with-Bitnet-b1.58-2B-4T",
+      "Vishwas1/bitnet_cpu_assistant",
+      "arhuggingface/bitnet",
+      "yassineopneclaw/Chat-with-Bitnet-b1.58-2B-4T",
+      "knoxel/bitnet-b158-cpu-explorer",
+      "knoxel/bitnet-cpp-explorer",
+      "KELIN45/APEX_BRAIN_A",
+      "cinemaestlk/subai",
+      "PeetPedro/1bit-llm-mesh",
+      "craigzifunzi/speciss-ai-agent"
+    ],
+    "tags": [
+      "transformers",
+      "safetensors",
+      "bitnet",
+      "text-generation",
+      "chat",
+      "large-language-model",
+      "conversational",
+      "custom_code",
+      "en",
+      "arxiv:2504.12285",
+      "license:mit",
+      "endpoints_compatible",
+      "8-bit",
+      "deploy:azure",
+      "region:us"
+    ],
+    "transformersInfo": {
+      "auto_model": "AutoModelForCausalLM",
+      "pipeline_tag": "text-generation",
+      "processor": "AutoTokenizer"
+    },
+    "usedStorage": 6684507356,
+    "widgetData": [
+      {
+        "text": "Hi, what can you help me with?"
+      },
+      {
+        "text": "What is 84 * 3 / 2?"
+      },
+      {
+        "text": "Tell me an interesting fact about the universe!"
+      },
+      {
+        "text": "Explain quantum computing in simple terms."
+      }
+    ]
+  },
+  "files": {
+    "LICENSE": {
+      "filename": "LICENSE",
+      "bytes": 1073,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "48ea6616b5b8581df3401872996cecf1f8b08a0d"
+      },
+      "canonical_url": "https://huggingface.co/microsoft/bitnet-b1.58-2B-4T/resolve/04c3b9ad9361b824064a1f25ea60a8be9599b127/LICENSE",
+      "sha256": "646f8936b8ddcd14e13e578ff6857e368780b0d1a4f6066bee89211923a373e2"
+    },
+    "README.md": {
+      "filename": "README.md",
+      "bytes": 9647,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "34bf8c6fb3024fc9195a7ee0dce583ce8af4bf65"
+      },
+      "canonical_url": "https://huggingface.co/microsoft/bitnet-b1.58-2B-4T/resolve/04c3b9ad9361b824064a1f25ea60a8be9599b127/README.md",
+      "sha256": "d945337057d24807958449cadead36fb57bf38ab259f3dc8d75c07e2fe7188c2"
+    },
+    "config.json": {
+      "filename": "config.json",
+      "bytes": 844,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "4acf191af5817ad7534d03d3ca8a45a8d4f4a82a"
+      },
+      "canonical_url": "https://huggingface.co/microsoft/bitnet-b1.58-2B-4T/resolve/04c3b9ad9361b824064a1f25ea60a8be9599b127/config.json",
+      "sha256": "2b43e80788972e6d53967b01ac3609d7df23cf0aabb0c866e51be694a59c1149"
+    },
+    "generation_config.json": {
+      "filename": "generation_config.json",
+      "bytes": 199,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "650ab2390d65b8182f2599fe7a0f2014eec3f38b"
+      },
+      "canonical_url": "https://huggingface.co/microsoft/bitnet-b1.58-2B-4T/resolve/04c3b9ad9361b824064a1f25ea60a8be9599b127/generation_config.json",
+      "sha256": "af34a37cd006fd230106fcefc6bfdc1f775503aee05a80c174ccc5c6594f7054"
+    },
+    "model.safetensors": {
+      "filename": "model.safetensors",
+      "bytes": 1178623988,
+      "publisher_identity": {
+        "kind": "lfs_sha256",
+        "digest": "8143ae115ed6babe5e5ada8fb8c5b769d8f417802b2db042ad98b4f7ed73975b"
+      },
+      "canonical_url": "https://huggingface.co/microsoft/bitnet-b1.58-2B-4T/resolve/04c3b9ad9361b824064a1f25ea60a8be9599b127/model.safetensors",
+      "sha256": "8143ae115ed6babe5e5ada8fb8c5b769d8f417802b2db042ad98b4f7ed73975b"
+    },
+    "special_tokens_map.json": {
+      "filename": "special_tokens_map.json",
+      "bytes": 73,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "d8cd5076496dbe4be2320312abc10adc43097b81"
+      },
+      "canonical_url": "https://huggingface.co/microsoft/bitnet-b1.58-2B-4T/resolve/04c3b9ad9361b824064a1f25ea60a8be9599b127/special_tokens_map.json",
+      "sha256": "462d91939dbc37178aa5a3eae7068d1990ccc92e09f288cc71f42cdf139d69cc"
+    },
+    "tokenizer.json": {
+      "filename": "tokenizer.json",
+      "bytes": 9085698,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "b197f72effb9d5ed16ee0f5663e11e4cfac2ba62"
+      },
+      "canonical_url": "https://huggingface.co/microsoft/bitnet-b1.58-2B-4T/resolve/04c3b9ad9361b824064a1f25ea60a8be9599b127/tokenizer.json",
+      "sha256": "e134af98b985517b4f068e3755ae90d4e9cd2d45d328325dc503f1c6b2d06cc7"
+    },
+    "tokenizer_config.json": {
+      "filename": "tokenizer_config.json",
+      "bytes": 50834,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "d54415c89774937967b9baac420d12455ff6e267"
+      },
+      "canonical_url": "https://huggingface.co/microsoft/bitnet-b1.58-2B-4T/resolve/04c3b9ad9361b824064a1f25ea60a8be9599b127/tokenizer_config.json",
+      "sha256": "d27b698683435b0b0dd544a591a30196b2b63f5fd4c8c64b9060a84dc185386f"
+    }
+  },
+  "authentication_policy": "Optional bearer applied to initial HTTPS huggingface.co request only; all redirects strip authentication; no token persisted"
+}

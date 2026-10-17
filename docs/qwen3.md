@@ -6,8 +6,8 @@ qualified teacher. The separate follow-up configuration is
 original search and its historical executable, retains the measured Qwen Coder
 7B fallback for current studies, and declares two new trials: the existing
 DeepSeek 6.7B asset with verified legacy metadata support, and Qwen3 4B Instruct
-2507. These are pending trials until their actual reports exist. Metadata and
-downloaded weights are not quality results.
+2507. Both trials now have retained observations, described below. Metadata and
+downloaded weights alone are not quality results.
 
 Qwen3 uses an explicit attention head width. For this pinned model the residual
 width is 2,560, query width is 32 × 128 = 4,096, and key/value width is
@@ -48,5 +48,24 @@ The native Rust downloader checks actual bytes and retains original licence,
 card, tokeniser and manifests. Public API metadata snapshots are under
 `docs/comparative-models/provenance/qwen3-4b-instruct-2507/`; progress and the
 eventual acquisition receipt belong to `reports/comparative/qwen3-acquisition-001/`.
-No token is stored. Live download progress, not this prepared documentation,
-determines whether the model is available offline.
+No token is stored. Live download and pruning receipts determine whether the
+model is currently available offline.
+
+## Measured follow-up — 16 October 2026
+
+The [frozen follow-up](../reports/comparative/search/round-002/report.json)
+completed in explicitly offline mode, preserving the first Qwen3 preflight
+failure and resuming only unfinished work. Actual CUDA/F32 generation measured
+Qwen3 at **3/16** with zero generation/grading errors. DeepSeek measured
+**0/16** but retained one length-limited generation, making its quality ranking
+inconclusive. Neither reached the declared 80% rule on the original development
+pack; no fresh-pack qualification or assessment held-out access occurred.
+
+The search retained the healthy **7/16** Qwen Coder 7B fallback and protected the
+inconclusive DeepSeek trial. Owned-cache pruning removed Qwen3's
+**2,497,280,736 logical weight bytes** after its healthy below-threshold result,
+retaining metadata, licences, deletion authority and all observations. New
+Qwen3 inference while disconnected therefore requires its absent weights and
+fails explicitly; existing observations remain readable. Fresh rehydration
+needs an explicit online invocation. There is no qualified teacher fleet,
+student-improvement claim or SHIP decision.

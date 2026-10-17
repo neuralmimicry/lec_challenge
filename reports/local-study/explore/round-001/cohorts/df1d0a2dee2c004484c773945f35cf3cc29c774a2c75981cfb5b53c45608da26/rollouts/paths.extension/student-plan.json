@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "mode": "on_policy",
+  "task": {
+    "id": "paths.extension",
+    "source_id": "private-paths-v1",
+    "lineage_id": "local-contract-pack-08",
+    "split": "train",
+    "specification": "Input is a filename without /. Return lowercase ASCII suffix after the final dot, except a sole leading dot or a trailing dot yields empty string.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "629749893ccb6a2be4be300d8ab31de43188730d25576696d11327e879417b90",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": "archive.TAR.GZ",
+        "expected": "gz"
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "input_bundle": {
+    "path": "reports/local-study/explore/round-001/content-v1/bundle.json",
+    "sha256": "6256372fa9e690dbf230f5042904001db2bb1583b195015ddce53b0def40c8c6",
+    "bytes": 218818
+  },
+  "student_base": "offline_bundle/base",
+  "student_kind": "conventional_qwen_lora",
+  "student_assets": {
+    "path": "offline_bundle/base/assets.json",
+    "sha256": "54304e7f41519a4196674cba5e86593802f852b2b47882d6c19706f85f303ad4",
+    "bytes": 788
+  },
+  "student_checkpoint": null,
+  "student_identity": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+  "student_runtime": {
+    "device": "cpu",
+    "dtype": "f32"
+  },
+  "student_request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is a filename without /. Return lowercase ASCII suffix after the final dot, except a sole leading dot or a trailing dot yields empty string.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":\"archive.TAR.GZ\",\"expected\":\"gz\"}]",
+    "max_new_tokens": 768,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "sandbox": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox"
+  },
+  "preflight": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox-preflight.json",
+    "sha256": "722e549ba0c9e4a0e9bf9d4d36da4c19b6fc8f4a51dbb71a74abd015cb67656d",
+    "bytes": 1358
+  },
+  "engine_sha256": "3f348bdfa71c49df5b5d0b7581ae9ad3114645127f99abbec9e4aac1064563bd",
+  "content_role_policy": "verified_content_roles_v1"
+}

@@ -1,0 +1,40 @@
+{
+  "run_id": "88d3425d-8d0f-4ab1-a902-53309fdff252",
+  "task_id": "dispatch.priority",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: warning: unused import: `serde_json::Value`\n --> /candidate/main.rs:1:5\n  |\n1 | use serde_json::Value;\n  |     ^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0308]: mismatched types\n --> /candidate/main.rs:8:16\n  |\n8 |         .map(|&(priority, id)| (priority, id))\n  |               -^^^^^^^^^^^^^^\n  |               ||\n  |               |expected `Value`, found `(_, _)`\n  |               expected due to this\n  |\n  = note: expected enum `Value`\n            found tuple `(_, _)`\n\nerror: aborting due to 1 previous error; 1 warning emitted\n\nFor more information about this error, try `rustc --explain E0308`.\n"
+  ],
+  "cases_total": 5,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "78e096efa7c4461210abc772077d00f7de616fca54ba5904697a3c37e65876a1",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/explore/round-001/study/quick/arms/arm-00886e19edc356c899a5d992/development/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/explore/round-001/study/quick/arms/arm-00886e19edc356c899a5d992/development/sandbox/88d3425d-8d0f-4ab1-a902-53309fdff252.audit.json",
+  "audit_sha256": "2a4785645077c0863c631d66852acaa6718dd257394f5ec78d6a03d2ef705743",
+  "failure": "compilation failed: warning: unused import: `serde_json::Value`\n --> /candidate/main.rs:1:5\n  |\n1 | use serde_json::Value;\n  |     ^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0308]: mismatched types\n --> /candidate/main.rs:8:16\n  |\n8 |         .map(|&(priority, id)| (priority, id))\n  |               -^^^^^^^^^^^^^^\n  |               ||\n  |               |expected `Value`, found `(_, _)`\n  |               expected due to this\n  |\n  = note: expected enum `Value`\n            found tuple `(_, _)`\n\nerror: aborting due to 1 previous error; 1 warning emitted\n\nFor more information about this error, try `rustc --explain E0308`.\n",
+  "duration_ms": 13548,
+  "timeout_evidence": null,
+  "lifecycle_evidence": {
+    "receipt_path": "reports/local-study/explore/round-001/study/quick/arms/arm-00886e19edc356c899a5d992/development/sandbox/88d3425d-8d0f-4ab1-a902-53309fdff252.lifecycle.json",
+    "receipt_sha256": "7de27dd0d698f758b6ef219a312b9dd554e6a58ab35864360861eaba4d3a97a8"
+  }
+}

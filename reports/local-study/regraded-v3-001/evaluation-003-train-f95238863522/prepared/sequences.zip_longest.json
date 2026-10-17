@@ -1,0 +1,59 @@
+{
+  "schema_version": 3,
+  "run_id": "04a967ee-35db-47aa-8e0a-0c3a6ec94d12",
+  "ownership_nonce": "dda90be0-5aa4-4af7-b304-163314164d0c",
+  "attempt_key": "c8de7b183c6f3545fecab02300ddc8553a4d3958f7fc87e485c26576b613fa89",
+  "receipt_path": "reports/local-study/regraded-v3-001/evaluation-003-train-f95238863522/prepared/sequences.zip_longest.json",
+  "report_path": "reports/local-study/regraded-v3-001/evaluation-003-train-f95238863522/sandbox/04a967ee-35db-47aa-8e0a-0c3a6ec94d12.json",
+  "task": {
+    "id": "sequences.zip_longest",
+    "source_id": "private-sequences-v1",
+    "lineage_id": "local-contract-pack-09",
+    "split": "train",
+    "specification": "Input is [a,b], integer arrays. Return pairs by position, using null for a missing side, up to the longer length.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "a9d6bd2f5f38db050ac9cf606215a931bc2dc2805e6f17584649e0452571128b",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": [
+          [
+            1,
+            2
+          ],
+          [
+            9
+          ]
+        ],
+        "expected": [
+          [
+            1,
+            9
+          ],
+          [
+            2,
+            null
+          ]
+        ]
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "use serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let mut result = Vec::new();\n    let mut a = input.as_array().unwrap();\n    let mut b = input.as_array().unwrap();\n\n    for (i, &a_val) in a.iter().enumerate() {\n        if let Some(&b_val) = b.iter().nth(i) {\n            result.push(vec![a_val, b_val]);\n        } else {\n            result.push(vec![a_val, null]);\n        }\n    }\n\n    serde_json::Value::Array(result)\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/regraded-v3-001/evaluation-003-train-f95238863522/sandbox"
+  },
+  "code_sha256": "35506aa095c598d356589b1f54161a7e79afca0617e4b452b9afd10484284d9d",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

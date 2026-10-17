@@ -1,0 +1,24 @@
+{
+  "exit_code": 1,
+  "request": {
+    "bytes": 652,
+    "path": "reports/local-study/explore/round-001/attempts/teacher-search/3627033b-22c6-47f7-9856-0bb9043ff554/request.json",
+    "sha256": "5f93c96589f8d12b1f04ef728931ce3adbc600c84e8a50a74244a6f0b1f966cc"
+  },
+  "schema_version": 1,
+  "stage": "teacher-search",
+  "status": "process_failed",
+  "stderr": {
+    "bytes": 2924,
+    "path": "reports/local-study/explore/round-001/attempts/teacher-search/3627033b-22c6-47f7-9856-0bb9043ff554/stderr.log",
+    "sha256": "7f5f655fe49aa9359bd73db3ad7cbfbdf7cbb08fa894f2815ad0f888531ea70a"
+  },
+  "stderr_tee_error": null,
+  "stdout": {
+    "bytes": 22698,
+    "path": "reports/local-study/explore/round-001/attempts/teacher-search/3627033b-22c6-47f7-9856-0bb9043ff554/stdout.log",
+    "sha256": "2cb46d5c5b35a55de71a11a79309b2ae4ce5b25232f4aa233e9916c2fa239e09"
+  },
+  "success": false,
+  "wall_seconds": 108.798730626
+}

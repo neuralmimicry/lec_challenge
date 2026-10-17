@@ -1,0 +1,40 @@
+{
+  "run_id": "1c863735-4d8f-47fc-bad9-8ce79ddbcaa9",
+  "task_id": "calendar.valid_date",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "candidate exit Some(101): \nthread 'main' (31) panicked at /candidate/main.rs:4:39:\ncalled `Option::unwrap()` on a `None` value\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n"
+  ],
+  "cases_total": 8,
+  "cases_passed": 0,
+  "trace_complete": true,
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "3087e0e58a4392d97d10160b7bcc8540631dc08de0f493e18d50cfc1c2c0af32",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/regraded-v3-001/evaluation-003-train-f95238863522/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/regraded-v3-001/evaluation-003-train-f95238863522/sandbox/1c863735-4d8f-47fc-bad9-8ce79ddbcaa9.audit.json",
+  "audit_sha256": "507f3cb90c88c10a90b922d314d8aea6b2b5553d90a677cc68c1082633340084",
+  "failure": "candidate exit Some(101): \nthread 'main' (31) panicked at /candidate/main.rs:4:39:\ncalled `Option::unwrap()` on a `None` value\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n",
+  "duration_ms": 13910,
+  "timeout_evidence": null,
+  "lifecycle_evidence": {
+    "receipt_path": "reports/local-study/regraded-v3-001/evaluation-003-train-f95238863522/sandbox/1c863735-4d8f-47fc-bad9-8ce79ddbcaa9.lifecycle.json",
+    "receipt_sha256": "23930cafc6e9ec13133a590af781b66164bbe70845392b320b7c7ae5229ede22"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "a52d044d05dc99f9af1879cdb69e7d80c4abc41b317440255f0ff27069084831",
+  "task_id": "graph.topological",
+  "source_id": "private-graph-v1",
+  "success": false,
+  "raw_generation": {
+    "path": "reports/local-study/native-full-quality-001/composed-train/generations/graph.topological.json",
+    "sha256": "780e429b15d7eb18c48258ce50190d28cd1000be4ef1a8009720c955eeb7f721",
+    "bytes": 2559
+  },
+  "sandbox_report": {
+    "path": "reports/local-study/native-full-quality-001/composed-train/sandbox/61478ee5-8bc1-46ed-a744-1e8b4183dac0.json",
+    "sha256": "68550205a8471aac0f9e683e3a9ada3865e75a7be916dfc3aef767e4a42120cc",
+    "bytes": 8629
+  },
+  "grading_error": null
+}

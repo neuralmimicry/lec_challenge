@@ -1,0 +1,336 @@
+{
+  "schema_version": 1,
+  "model_id": "ise-uiuc/Magicoder-S-DS-6.7B",
+  "requested_revision": "b3ed7cb1578a3643ceaf2ebf996a3d8e85f75d8f",
+  "revision": "b3ed7cb1578a3643ceaf2ebf996a3d8e85f75d8f",
+  "licence": "other",
+  "licence_files": [
+    "LICENSE"
+  ],
+  "licence_evidence": "Original pinned repository licence document(s) and model-card metadata retained",
+  "recorded_unix_seconds": 1792079628,
+  "metadata_url": "https://huggingface.co/api/models/ise-uiuc/Magicoder-S-DS-6.7B/revision/b3ed7cb1578a3643ceaf2ebf996a3d8e85f75d8f?blobs=true",
+  "metadata_sha256": "ed2e4bbbb9aba1a104ffcb844bb564c4d6d087dc3c38c7e13d615964af899d16",
+  "metadata": {
+    "_id": "656cd8f3b4020389020599e3",
+    "author": "ise-uiuc",
+    "cardData": {
+      "datasets": [
+        "ise-uiuc/Magicoder-OSS-Instruct-75K",
+        "ise-uiuc/Magicoder-Evol-Instruct-110K"
+      ],
+      "library_name": "transformers",
+      "license": "other",
+      "license_name": "deepseek",
+      "pipeline_tag": "text-generation"
+    },
+    "config": {
+      "architectures": [
+        "LlamaForCausalLM"
+      ],
+      "model_type": "llama",
+      "tokenizer_config": {
+        "bos_token": "<｜begin▁of▁sentence｜>",
+        "chat_template": "{{bos_token}}{{'You are an exceptionally intelligent coding assistant that consistently delivers accurate and reliable responses to user instructions.\n\n'}}\n{%- for message in messages %}\n    {%- if message['role'] == 'system' %}\n        {{ raise_exception('System messages are not allowed in this template.') }}\n    {%- else %}\n        {%- if message['role'] == 'user' %}\n{{'@@ Instruction\n' + message['content'] + '\n\n'}}\n        {%- else %}\n{{'@@ Response\n' + message['content'] + eos_token + '\n\n'}}\n        {%- endif %}\n    {%- endif %}\n{%- endfor %}\n{{'@@ Response\n'}}",
+        "eos_token": "<｜end▁of▁sentence｜>",
+        "pad_token": "<｜end▁of▁sentence｜>",
+        "unk_token": null,
+        "use_default_system_prompt": false
+      }
+    },
+    "createdAt": "2023-12-03T19:37:23.000Z",
+    "disabled": false,
+    "downloads": 4611,
+    "gated": false,
+    "id": "ise-uiuc/Magicoder-S-DS-6.7B",
+    "lastModified": "2024-03-06T07:40:23.000Z",
+    "library_name": "transformers",
+    "likes": 208,
+    "model-index": null,
+    "modelId": "ise-uiuc/Magicoder-S-DS-6.7B",
+    "pipeline_tag": "text-generation",
+    "private": false,
+    "safetensors": {
+      "parameters": {
+        "F32": 6740512768
+      },
+      "total": 6740512768
+    },
+    "sha": "b3ed7cb1578a3643ceaf2ebf996a3d8e85f75d8f",
+    "siblings": [
+      {
+        "blobId": "a6344aac8c09253b3b630fb776ae94478aa0275b",
+        "rfilename": ".gitattributes",
+        "size": 1519
+      },
+      {
+        "blobId": "18742eb20561aa70ba78efd74295771f76ac25ae",
+        "rfilename": "LICENSE",
+        "size": 13750
+      },
+      {
+        "blobId": "da88769944aed47ba052bb35e6014ef63df861a6",
+        "rfilename": "README.md",
+        "size": 4578
+      },
+      {
+        "blobId": "08d77431d4b1bc63a27a920f697ca328c7156b2b",
+        "rfilename": "added_tokens.json",
+        "size": 458
+      },
+      {
+        "blobId": "94f4256b0755b6bb5a50611bc2b933724ee7d83f",
+        "rfilename": "assets/overview.svg",
+        "size": 265916
+      },
+      {
+        "blobId": "faec2d0cf559928f0efb35c70e992a8648c15ad1",
+        "rfilename": "assets/result.png",
+        "size": 170667
+      },
+      {
+        "blobId": "0ab4309467c11a3b4351da3e47610b41016f9f88",
+        "rfilename": "config.json",
+        "size": 742
+      },
+      {
+        "blobId": "044edaf8c54caf5f8c78d53d991d2bcb1e665c3e",
+        "rfilename": "generation_config.json",
+        "size": 124
+      },
+      {
+        "blobId": "ff73fb32355e2a234129c43dfe58e5aeb7d6a156",
+        "lfs": {
+          "pointerSize": 135,
+          "sha256": "f0aa9176721014753ab7f10465fb4db7600d3899a2ff487ac86b04bceb3efb40",
+          "size": 4844590720
+        },
+        "rfilename": "model-00001-of-00006.safetensors",
+        "size": 4844590720
+      },
+      {
+        "blobId": "9f8b75d800f0fb1b7cf55b7522373c792bc8cd7a",
+        "lfs": {
+          "pointerSize": 135,
+          "sha256": "5356ff52d006111e9d07823e461d5205152ff56131359724c269e267ae4b80f1",
+          "size": 4857206856
+        },
+        "rfilename": "model-00002-of-00006.safetensors",
+        "size": 4857206856
+      },
+      {
+        "blobId": "72517b91375c8fe9dd3980f1de1ed7ad73d069c2",
+        "lfs": {
+          "pointerSize": 135,
+          "sha256": "1be051467308146b7196444cfd57b44ac0967537a31518e014e5d6a42469c0a0",
+          "size": 4857206904
+        },
+        "rfilename": "model-00003-of-00006.safetensors",
+        "size": 4857206904
+      },
+      {
+        "blobId": "adb9c50232131509e6e482674e87ffc5508893cd",
+        "lfs": {
+          "pointerSize": 135,
+          "sha256": "775447e165690964578dd9f6c8ca5f94169831e40f52b8ff667f3997b947f79a",
+          "size": 4857206904
+        },
+        "rfilename": "model-00004-of-00006.safetensors",
+        "size": 4857206904
+      },
+      {
+        "blobId": "0506fe8c0dc17af9762ac1329f33de7fa32163b0",
+        "lfs": {
+          "pointerSize": 135,
+          "sha256": "dda91b47771c4916315456eafff657a172f576ed4163d191fa014d77efda8331",
+          "size": 4857206904
+        },
+        "rfilename": "model-00005-of-00006.safetensors",
+        "size": 4857206904
+      },
+      {
+        "blobId": "6494f1140be5a3150b98569d9d77f66a151cb9c3",
+        "lfs": {
+          "pointerSize": 135,
+          "sha256": "5cb977be9484f101d0329643889c1cfa7d4863d2bcb0b1ebc93d74aa00dffcb6",
+          "size": 2688666416
+        },
+        "rfilename": "model-00006-of-00006.safetensors",
+        "size": 2688666416
+      },
+      {
+        "blobId": "178e79fbffc73d2f16e8eaab9667491e80f6ba15",
+        "rfilename": "model.safetensors.index.json",
+        "size": 23950
+      },
+      {
+        "blobId": "5ff8f57b46ed9d045d6a786cc8e89e79c0005742",
+        "rfilename": "special_tokens_map.json",
+        "size": 482
+      },
+      {
+        "blobId": "0a667f9a0a6fd585202c83fb5c0bfda68e1ea858",
+        "rfilename": "tokenizer.json",
+        "size": 1368830
+      },
+      {
+        "blobId": "f6722e8b170230ebdd4c0f5f2ce03f219be536d4",
+        "lfs": {
+          "pointerSize": 131,
+          "sha256": "45ccb9c8b6b561889acea59191d66986d314e7cbd6a78abc6e49b139ca91c1e6",
+          "size": 500058
+        },
+        "rfilename": "tokenizer.model",
+        "size": 500058
+      },
+      {
+        "blobId": "f9f6ff142e15132f1b113e3027a898952cefdf12",
+        "rfilename": "tokenizer_config.json",
+        "size": 4871
+      }
+    ],
+    "spaces": [
+      "ise-uiuc/Magicoder-S-DS-6.7B",
+      "PeepDaSlan9/ise-uiuc-Magicoder-S-DS-6.7B",
+      "AISafety/Magicoder",
+      "danteGPT/ise-uiuc-Magicoder-S-DS-6.7B",
+      "sirishai/ise-uiuc-Magicoder-S-DS-6.7B",
+      "slepikov/ise-uiuc-Magicoder-S-DS-6.7B",
+      "elghafiani/Magicoder-CL-7B",
+      "DoubleTechnologies/ise-uiuc-Magicoder-S-DS-6.7B",
+      "helenai/dataset-token-distribution",
+      "Rajut/CdGrt",
+      "Rajut/CodeGeneration",
+      "senthil3226w/sample"
+    ],
+    "tags": [
+      "transformers",
+      "safetensors",
+      "llama",
+      "text-generation",
+      "conversational",
+      "dataset:ise-uiuc/Magicoder-OSS-Instruct-75K",
+      "dataset:ise-uiuc/Magicoder-Evol-Instruct-110K",
+      "arxiv:2312.02120",
+      "arxiv:2305.06161",
+      "license:other",
+      "text-generation-inference",
+      "endpoints_compatible",
+      "deploy:azure",
+      "region:us"
+    ],
+    "transformersInfo": {
+      "auto_model": "AutoModelForCausalLM",
+      "pipeline_tag": "text-generation",
+      "processor": "AutoTokenizer"
+    },
+    "usedStorage": 53396185298,
+    "widgetData": [
+      {
+        "text": "Hi, what can you help me with?"
+      },
+      {
+        "text": "What is 84 * 3 / 2?"
+      },
+      {
+        "text": "Tell me an interesting fact about the universe!"
+      },
+      {
+        "text": "Explain quantum computing in simple terms."
+      }
+    ]
+  },
+  "files": {
+    "LICENSE": {
+      "filename": "LICENSE",
+      "bytes": 13750,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "18742eb20561aa70ba78efd74295771f76ac25ae"
+      },
+      "canonical_url": "https://huggingface.co/ise-uiuc/Magicoder-S-DS-6.7B/resolve/b3ed7cb1578a3643ceaf2ebf996a3d8e85f75d8f/LICENSE",
+      "sha256": "84d3a9a13e4f671c3f90087f33d6926b5621baa6711b315ee9f0113436e2d0e2"
+    },
+    "README.md": {
+      "filename": "README.md",
+      "bytes": 4578,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "da88769944aed47ba052bb35e6014ef63df861a6"
+      },
+      "canonical_url": "https://huggingface.co/ise-uiuc/Magicoder-S-DS-6.7B/resolve/b3ed7cb1578a3643ceaf2ebf996a3d8e85f75d8f/README.md",
+      "sha256": "f944a8a38f6073b1578f5aa07f8221fde6146a21267c6f641c8eadba44a59cf2"
+    },
+    "added_tokens.json": {
+      "filename": "added_tokens.json",
+      "bytes": 458,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "08d77431d4b1bc63a27a920f697ca328c7156b2b"
+      },
+      "canonical_url": "https://huggingface.co/ise-uiuc/Magicoder-S-DS-6.7B/resolve/b3ed7cb1578a3643ceaf2ebf996a3d8e85f75d8f/added_tokens.json",
+      "sha256": "423a96e0e9e3e0c0d8dc142bddd7b70cd100360980d3017920f358c9163375b4"
+    },
+    "config.json": {
+      "filename": "config.json",
+      "bytes": 742,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "0ab4309467c11a3b4351da3e47610b41016f9f88"
+      },
+      "canonical_url": "https://huggingface.co/ise-uiuc/Magicoder-S-DS-6.7B/resolve/b3ed7cb1578a3643ceaf2ebf996a3d8e85f75d8f/config.json",
+      "sha256": "5420661967bb4aa7c4a3e8bc8ed5913dfc62e3e05bdcb01f2857f41070353187"
+    },
+    "generation_config.json": {
+      "filename": "generation_config.json",
+      "bytes": 124,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "044edaf8c54caf5f8c78d53d991d2bcb1e665c3e"
+      },
+      "canonical_url": "https://huggingface.co/ise-uiuc/Magicoder-S-DS-6.7B/resolve/b3ed7cb1578a3643ceaf2ebf996a3d8e85f75d8f/generation_config.json",
+      "sha256": "1e88670fbb59572c8f60c85dcb429f04d611a3b9910c28b78163beb769090abb"
+    },
+    "special_tokens_map.json": {
+      "filename": "special_tokens_map.json",
+      "bytes": 482,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "5ff8f57b46ed9d045d6a786cc8e89e79c0005742"
+      },
+      "canonical_url": "https://huggingface.co/ise-uiuc/Magicoder-S-DS-6.7B/resolve/b3ed7cb1578a3643ceaf2ebf996a3d8e85f75d8f/special_tokens_map.json",
+      "sha256": "acb949a6d246354249847f5e1f0dabe04c258271eab55a6d6fac251d7af41075"
+    },
+    "tokenizer.json": {
+      "filename": "tokenizer.json",
+      "bytes": 1368830,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "0a667f9a0a6fd585202c83fb5c0bfda68e1ea858"
+      },
+      "canonical_url": "https://huggingface.co/ise-uiuc/Magicoder-S-DS-6.7B/resolve/b3ed7cb1578a3643ceaf2ebf996a3d8e85f75d8f/tokenizer.json",
+      "sha256": "5ea7c1cf401382d953c8a56df1786cefa9446bc6aa168571870063da9ecc7e89"
+    },
+    "tokenizer.model": {
+      "filename": "tokenizer.model",
+      "bytes": 500058,
+      "publisher_identity": {
+        "kind": "lfs_sha256",
+        "digest": "45ccb9c8b6b561889acea59191d66986d314e7cbd6a78abc6e49b139ca91c1e6"
+      },
+      "canonical_url": "https://huggingface.co/ise-uiuc/Magicoder-S-DS-6.7B/resolve/b3ed7cb1578a3643ceaf2ebf996a3d8e85f75d8f/tokenizer.model",
+      "sha256": "45ccb9c8b6b561889acea59191d66986d314e7cbd6a78abc6e49b139ca91c1e6"
+    },
+    "tokenizer_config.json": {
+      "filename": "tokenizer_config.json",
+      "bytes": 4871,
+      "publisher_identity": {
+        "kind": "git_blob_sha1",
+        "digest": "f9f6ff142e15132f1b113e3027a898952cefdf12"
+      },
+      "canonical_url": "https://huggingface.co/ise-uiuc/Magicoder-S-DS-6.7B/resolve/b3ed7cb1578a3643ceaf2ebf996a3d8e85f75d8f/tokenizer_config.json",
+      "sha256": "6dd970498d4ad0237c2f4025e0efbddb188733cca871d6f8dc7aff30409f76ba"
+    }
+  },
+  "authentication_policy": "Optional bearer applied to initial HTTPS huggingface.co request only; all redirects strip authentication; no token persisted"
+}

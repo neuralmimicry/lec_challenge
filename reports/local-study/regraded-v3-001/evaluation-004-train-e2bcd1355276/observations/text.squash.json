@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "regrade_plan_sha256": "6dec54f6f1b17e0fe00d8819e6aa0660c4b65a28b031555048a6667733366153",
+  "task_id": "text.squash",
+  "source_id": "private-text-v1",
+  "original_plan": {
+    "path": "reports/local-study/native-full-quality-001/sft-train/plan.json",
+    "sha256": "a5b39d544c85b76111246b8fda40c638ce104251a1c56368277fef8fe4033eb6",
+    "bytes": 63636
+  },
+  "original_raw": {
+    "path": "reports/local-study/native-full-quality-001/sft-train/generations/text.squash.json",
+    "sha256": "9bc88df677f2db4020aecf826dcf9da8ea9f8ff21eb0f4f8412702897de54232",
+    "bytes": 1763
+  },
+  "outcome": {
+    "kind": "graded",
+    "prepared": {
+      "path": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/prepared/text.squash.json",
+      "sha256": "5bfa27285ae540b4f0a5d129f8619b6ec2b5a7133e5fc9967a3e9b1a00b90984",
+      "bytes": 2585
+    },
+    "report": {
+      "path": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/sandbox/daac2642-bb2a-4b70-a0d8-257ffecc6e0c.json",
+      "sha256": "1bc3fa8ff8ea7db981243b29feeed147670451725048818bee2f8f00bffe8ee7",
+      "bytes": 3143
+    },
+    "audit": {
+      "path": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/sandbox/daac2642-bb2a-4b70-a0d8-257ffecc6e0c.audit.json",
+      "sha256": "1efeb47e5c218452dec2a73b6d465e5f1d012215512d841c6e87df7799178d69",
+      "bytes": 999
+    }
+  },
+  "success": false
+}

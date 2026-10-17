@@ -1,0 +1,38 @@
+{
+  "model_id": "deepseek-coder-6_7b-q4_k_m",
+  "task_id": "money.split",
+  "source_id": "private-money-v1",
+  "specification_sha256": "639498c83f5e053773149696cb44aea438f77b20c7b0e571d728085fde4db87b",
+  "seed": 1729,
+  "plan_sha256": "79e25584f785f04f53b60d4cf3e4a730d2cf181ce11620a413bb1e0123bc1de2",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input [cents,n] has nonnegative cents and n>=1. Split into n integer shares differing by at most one, with larger shares first. The number of shares is at most 64.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[10,3],\"expected\":[4,3,3]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "Here is the Rust code that solves the problem:\n\n```rust\nuse serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let mut data: Vec<i64> = input.as_array().unwrap();\n    let cents = data.remove(0);\n    let n = data.remove(0) as usize;\n\n    let mut shares: Vec<i64> = vec![0; n];\n    let mut remaining = cents;\n\n    for i in 0..n {\n        let share = remaining / (n - i);\n        let remainder = remaining % (n - i);\n        shares[i] = share;\n        remaining -= share;\n        if remainder == 0 {\n            break;\n        }\n    }\n\n    for i in (0..n).rev() {\n        if shares[i] - shares[i - 1] > 1 {\n            shares[i] -= 1;\n            shares[i - 1] += 1;\n            remaining += 1;\n        }\n    }\n\n    let mut result: Vec<i64> = vec![0; n];\n    result[0] = shares[0];\n    for i in 1..n {\n        result[i] = result[i - 1] + shares[i];\n    }\n\n    Value::from(result)\n}\n```\n\nThis code takes in a JSON array with two elements: the first being the total cents and the second being the number of shares. It then calculates the shares such that the largest share is as close as possible to the total cents divided by the number of shares. If there is a remainder, it distributes it among the smaller shares starting from the smallest. The function returns a JSON array with the calculated shares.\n",
+    "checkpoint_id": "92da6238854f2fa902d8b2ad79d548536af1d3ab06821f323bd5bbcea2013276",
+    "finish_reason": "stop",
+    "input_tokens": 319,
+    "output_tokens": 416,
+    "elapsed_ms": 12557,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/comparative/search/round-002/trials/deepseek-coder-6_7b-q4_k_m/comparison/deepseek-coder-6_7b-q4_k_m/money.split.generation.json",
+    "sha256": "e54efde30c5a2690d1c71a54ae4f8ade315481692229aee462b00d13e51734e4",
+    "bytes": 5214
+  },
+  "sandbox_report": {
+    "path": "reports/comparative/search/round-002/trials/deepseek-coder-6_7b-q4_k_m/comparison/sandbox/55b6d8a6-efaf-47c9-8014-e6f845684769.json",
+    "sha256": "d52ca38bdf712d1bff3de01c5d019a9fcd741bcc8a161e92d65fb63f06c9936f",
+    "bytes": 3299
+  },
+  "grading_error": null,
+  "success": false
+}

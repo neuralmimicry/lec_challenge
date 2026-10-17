@@ -1,0 +1,6 @@
+{
+  "eligible_complete_samples": 17,
+  "passed": true,
+  "quality_evaluation": false,
+  "report": "reports/local-study/native-full-sft-seed-audit-001.json"
+}

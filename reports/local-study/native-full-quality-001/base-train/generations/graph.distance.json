@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "55c6614d90fbff0e580fd8fbfa9e06ce99715d8d0c78320e0fe70605545cc489",
+  "task_id": "graph.distance",
+  "source_id": "private-graph-v1",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input {n,start,target,edges} is a directed unweighted graph, n>=1. Return shortest edge distance start->target, or -1 if unreachable. Graph vertex counts are at most 64.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":{\"edges\":[[0,1],[1,2]],\"n\":4,\"start\":0,\"target\":2},\"expected\":2}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let n = input[\"n\"].as_u64().unwrap();\n    let start = input[\"start\"].as_u64().unwrap();\n    let target = input[\"target\"].as_u64().unwrap();\n    let edges = input[\"edges\"].as_array().unwrap();\n\n    let mut distances = vec![std::i64::MAX; n];\n    distances[start as usize] = 0;\n\n    for edge in edges {\n        let u = edge[0].as_u64().unwrap();\n        let v = edge[1].as_u64().unwrap();\n        let weight = edge[2].as_i64().unwrap();\n\n        if distances[u as usize] != std::i64::MAX && distances[v as usize] == std::i64::MAX {\n            distances[v as usize] = distances[u as usize] + weight;\n        }\n    }\n\n    if distances[target as usize] == std::i64::MAX {\n        serde_json::Value::Null\n    } else {\n        serde_json::Value::Number(distances[target as usize] as f64)\n    }\n}\n```",
+    "checkpoint_id": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+    "finish_reason": "stop",
+    "input_tokens": 263,
+    "output_tokens": 260,
+    "elapsed_ms": 9974,
+    "complete": true
+  },
+  "model_error": null
+}

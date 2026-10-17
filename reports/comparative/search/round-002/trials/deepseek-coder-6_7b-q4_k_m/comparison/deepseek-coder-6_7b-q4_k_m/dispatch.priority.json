@@ -1,0 +1,38 @@
+{
+  "model_id": "deepseek-coder-6_7b-q4_k_m",
+  "task_id": "dispatch.priority",
+  "source_id": "private-dispatch-v1",
+  "specification_sha256": "fe12d97428801ef000ddf3a459ad82ad8f7812a5fb888ab3e6b35444d33a7856",
+  "seed": 1729,
+  "plan_sha256": "79e25584f785f04f53b60d4cf3e4a730d2cf181ce11620a413bb1e0123bc1de2",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an array of [priority,id] integer pairs with unique ids. Return ids sorted by decreasing priority, with increasing id on ties.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[[2,7],[3,8],[2,1]],\"expected\":[8,1,7]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "Here is the Rust code that solves the problem:\n\n```rust\nuse serde_json::Value;\nuse serde_json::Error;\n\npub fn solve(input: Value) -> Result<Value, Error> {\n    let mut data: Vec<(i64, i64)> = input.as_array()?\n        .iter()\n        .map(|item| {\n            let array = item.as_array()?;\n            (array[0].as_i64()?, array[1].as_i64()?)\n        })\n        .collect();\n\n    data.sort_by_key(|k| (-k.0, k.1));\n\n    let result: Vec<Value> = data.iter().map(|(_, id)| Value::Number(serde_json::Number::from(*id))).collect();\n\n    Ok(Value::Array(result))\n}\n```\n\nThis function takes a `serde_json::Value` as input, which is expected to be an array of arrays of two numbers. It converts these into tuples of `i64`, sorts them by the first element in descending order, and then by the second element in ascending order. It then converts these back into `serde_json::Value`s and returns them as an array.\n\nPlease note that this code assumes that the input is always valid and does not handle any potential errors. In a production environment, you would want to add error handling to ensure that the input is always valid and handle any potential errors that may occur.\n",
+    "checkpoint_id": "92da6238854f2fa902d8b2ad79d548536af1d3ab06821f323bd5bbcea2013276",
+    "finish_reason": "stop",
+    "input_tokens": 315,
+    "output_tokens": 362,
+    "elapsed_ms": 40873,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/comparative/search/round-002/trials/deepseek-coder-6_7b-q4_k_m/comparison/deepseek-coder-6_7b-q4_k_m/dispatch.priority.generation.json",
+    "sha256": "d33bcf2c2c62bdbc9537705f04e8477e35a8372be8770a454ee9ce32f54529d0",
+    "bytes": 5046
+  },
+  "sandbox_report": {
+    "path": "reports/comparative/search/round-002/trials/deepseek-coder-6_7b-q4_k_m/comparison/sandbox/5c9027f6-dc78-4fbe-98ec-d412f6dded8f.json",
+    "sha256": "17a87b0b46dfaced9aa8682463210195d313fe7243630c5c73814f1e04678f00",
+    "bytes": 10141
+  },
+  "grading_error": null,
+  "success": false
+}

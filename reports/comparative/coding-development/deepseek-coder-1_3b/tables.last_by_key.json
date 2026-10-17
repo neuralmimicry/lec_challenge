@@ -1,0 +1,38 @@
+{
+  "model_id": "deepseek-coder-1_3b",
+  "task_id": "tables.last_by_key",
+  "source_id": "private-tables-v1",
+  "specification_sha256": "60d2667ffa0dcdb540f2de2f41533a9d0b6c027ee25be4adb993cda6f67122f7",
+  "seed": 1729,
+  "plan_sha256": "9aefcaf935435b296c63229638aad5a22a416ae171eda011a6812dd745667ea8",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an array of [key,value] integer rows. Keep the last value per key and return [key,value] rows sorted by key.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[[2,9],[1,4],[2,3]],\"expected\":[[1,4],[2,3]]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "Here is the Rust code that solves the problem:\n\n```rust\nuse serde_json::Value;\nuse std::collections::HashMap;\nuse std::cmp::Ordering;\n\npub fn solve(input: Value) -> Value {\n    let mut map: HashMap<i32, i32> = HashMap::new();\n\n    for item in input.as_array() {\n        let key = item[0].as_i32().unwrap();\n        let value = item[1].as_i32().unwrap();\n\n        let current_value = map.get(&key);\n        let new_value = match current_value {\n            Some(v) => *v + value,\n            None => value,\n        };\n\n        map.insert(key, new_value);\n    }\n\n    let mut result: Vec<Vec<Value>> = Vec::new();\n\n    for (key, value) in map.iter() {\n        let vec: Vec<Value> = vec![value.clone(), key.clone()];\n        result.push(vec);\n    }\n\n    result.sort_by(|a, b| a[0].cmp(&b[0]).then_with(|| a[1].cmp(&b[1])));\n\n    result.into()\n}\n```\n\nThis code first reads the input JSON array and stores the keys and values in a HashMap. Then it creates a new array to store the result. It iterates over the HashMap and adds the key-value pairs to the result array. Finally, it sorts the result array by the key and returns it.\n",
+    "checkpoint_id": "4ff570bf9a558d23c5cb4171bad00daf663be8282150cdb5769e0f6975b0007a",
+    "finish_reason": "stop",
+    "input_tokens": 317,
+    "output_tokens": 385,
+    "elapsed_ms": 28129,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/comparative/coding-development/deepseek-coder-1_3b/tables.last_by_key.generation.json",
+    "sha256": "b418d038784b6146c6cb3d71567bbdcda3c5b9d70136949cf3defa2ee7b40b90",
+    "bytes": 3492
+  },
+  "sandbox_report": {
+    "path": "reports/comparative/coding-development/sandbox/16750fd6-7688-42d9-a0bf-38bf5b6d0089.json",
+    "sha256": "f923edf0012775fb3184c32d7d5b08fe609a8881df20893b73f8626f5fa118d9",
+    "bytes": 2843
+  },
+  "grading_error": null,
+  "success": false
+}

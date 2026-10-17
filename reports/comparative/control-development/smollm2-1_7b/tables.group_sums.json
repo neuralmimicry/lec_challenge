@@ -1,0 +1,38 @@
+{
+  "model_id": "smollm2-1_7b",
+  "task_id": "tables.group_sums",
+  "source_id": "private-tables-v1",
+  "specification_sha256": "783b75a94404c8e383623a9281b851d2ccf76f4a4e9832001b8703de0bf64172",
+  "seed": 1729,
+  "plan_sha256": "b2e46b0f4ac46ecbb1b6568e9669ef5157b8a6343802f749cfac8ae999e29d88",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an array of [key,value] integer rows. Sum values per key and return rows sorted by key.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[[2,9],[1,4],[2,3]],\"expected\":[[1,4],[2,12]]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::json;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let mut result = json!({});\n\n    for row in input.as_array().unwrap() {\n        let mut sum = 0;\n        for (key, value) in row.as_array().unwrap().iter() {\n            sum += value.as_i64().unwrap();\n        }\n\n        result = json!({\n            \"key\": key,\n            \"value\": sum\n        }).into();\n    }\n\n    result = json!({\n        \"rows\": result\n    }).into();\n\n    result\n}\n```",
+    "checkpoint_id": "f55217be716b6a997b97b9d8d7eb6fad02e00858f5010ec24f64603c3a98a0e8",
+    "finish_reason": "stop",
+    "input_tokens": 262,
+    "output_tokens": 147,
+    "elapsed_ms": 10479,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/comparative/control-development/smollm2-1_7b/tables.group_sums.generation.json",
+    "sha256": "ccafb5614a8af77248ccea6a70997c23eda6e45ddd8a6a2b0e1d7bfc55b33f82",
+    "bytes": 2814
+  },
+  "sandbox_report": {
+    "path": "reports/comparative/control-development/sandbox/296e3935-bc89-479a-a5b6-419e544c850e.json",
+    "sha256": "2ed56ac78f677546b87e21c7cc078b3bd39b998dbe3bd55f5814d22913309370",
+    "bytes": 2812
+  },
+  "grading_error": null,
+  "success": false
+}

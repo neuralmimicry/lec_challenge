@@ -1,0 +1,59 @@
+{
+  "schema_version": 3,
+  "run_id": "8bca6f35-41d3-4868-9950-41dfa166ad65",
+  "ownership_nonce": "885d69ae-5ed3-4bf5-84de-aacc33f52987",
+  "attempt_key": "309cbfedca0703976a18b5ba01ecfa2f389ed922a7e340e54603cd1f70552a7c",
+  "receipt_path": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/prepared/graph.reachable.json",
+  "report_path": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/sandbox/8bca6f35-41d3-4868-9950-41dfa166ad65.json",
+  "task": {
+    "id": "graph.reachable",
+    "source_id": "private-graph-v1",
+    "lineage_id": "local-contract-pack-04",
+    "split": "train",
+    "specification": "Input {n,start,edges} describes a directed graph on 0..n-1, n>=1, edges unique [from,to]. Return all nodes reachable from start, including start, sorted ascending. Graph vertex counts are at most 64.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "428a5ed65c2c135f64714d3d04da661d2e593883777823a68182b5622c480267",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": {
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "n": 4,
+          "start": 0
+        },
+        "expected": [
+          0,
+          1,
+          2
+        ]
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "use serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let n = input[\"n\"].as_u64().unwrap();\n    let start = input[\"start\"].as_u64().unwrap();\n    let edges = input[\"edges\"].as_array().unwrap();\n    let mut graph = vec![vec![]; n];\n    for edge in edges {\n        let from = edge[0].as_u64().unwrap();\n        let to = edge[1].as_u64().unwrap();\n        graph[from].push(to);\n    }\n\n    let mut queue = vec![start];\n    let mut result = vec![];\n    while let Some(node) = queue.pop() {\n        result.push(node);\n        for neighbor in &graph[node] {\n            queue.push(neighbor);\n        }\n    }\n\n    Value::Array(result.into_iter().map(|v| Value::Number(v.into())).collect())\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/sandbox"
+  },
+  "code_sha256": "4121ba1a97b56d02b5a1b1f7c2e5f8c39379b90ec7ac72e3ad5694a5cf9440e4",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "initial_plan": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/graph.topological/student-plan.json",
+    "sha256": "5b97ab26720d50e335051ee9d667b4ca9302dcd73bfa0af546616bd59200ab8a",
+    "bytes": 4194
+  },
+  "student_raw": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/graph.topological/student-raw.json",
+    "sha256": "5db0235f107d6647485939d314e79d9392ed3be9be77bbc24dcbe37a31dd7449",
+    "bytes": 2157
+  },
+  "student_grade": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox/4cab7b1b-a1b5-441c-a7a0-de5e9ebb0935.json",
+    "sha256": "c53cc95764d43368db4ef726a37ae12670b2f881e4f92b18f8ce8d7cdceb928d",
+    "bytes": 6667
+  },
+  "teacher_id": "qwen-coder-7b-q4_k_m",
+  "teacher_assets": {
+    "path": "offline_bundle/comparative/qwen-coder-7b-q4_k_m/gguf-assets.json",
+    "sha256": "606bfac02a103d208ccef73067cb6a4581e9b099e19bc9ed8e2021ebb1143114",
+    "bytes": 1206
+  },
+  "teacher_checkpoint": null,
+  "runtime": {
+    "device": {
+      "cuda": {
+        "ordinal": 0
+      }
+    },
+    "dtype": "f32"
+  },
+  "request": {
+    "prompt": "New task:\nWrite Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input {n,edges} is a directed graph. Repeatedly remove the smallest currently zero-indegree node. Return that topological order, or null if cyclic. Graph vertex counts are at most 64.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":{\"edges\":[[0,1],[1,2]],\"n\":4},\"expected\":[0,1,2,3]}]\nActual frozen student candidate:\n```rust\nuse serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let mut graph = serde_json::from_str(&input)?;\n    let mut queue = Vec::new();\n    let mut visited = Vec::new();\n\n    for (u, v) in &graph[\"edges\"] {\n        if v == 0 {\n            queue.push(u);\n        }\n    }\n\n    while let Some(u) = queue.pop() {\n        visited.push(u);\n        for &v in &graph[u][\"edges\"] {\n            if !visited.contains(&v) {\n                queue.push(v);\n            }\n        }\n    }\n\n    if visited.len() != graph[\"n\"] {\n        return serde_json::Value::Null;\n    }\n\n    let mut result = Vec::new();\n    for i in 0..graph[\"n\"] {\n        if !visited.contains(&i) {\n            result.push(i);\n        }\n    }\n\n    serde_json::Value::Array(result)\n}\n```\nActual trusted tool feedback:\n{\"bounded_diagnostic_untrusted_data\":\"compilation failed: warning: unused import: `serde_json::Value`\\n --> /candidate/main.rs:1:5\\n  |\\n1 | use serde_json::Value;\\n  |     ^^^^^^^^^^^^^^^^^\\n  |\\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\\n\\nerror[E0308]: mismatched types\\n    --> /candidate/main.rs:4:42\\n     |\\n   4 |     let mut graph = serde_json::from_str(&input)?;\\n     |                     -------------------- ^^^^^^ expected `&str`, found `&Value`\\n     |                     |\\n     |                     arguments to this function are incorrect\\n     |\\n     = note: expected reference `&str`\\n                found reference `&Value`\\nnote: function defined here\\n    --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/de.rs:2699:8\\n     |\\n2699 | pub fn from_str<'a, T>(s: &'a str) -> Result<T>\\n     |        ^^^^^^^^\\n\\nerror[E0277]: the `?` operator can only be used in a function that returns `Result` or `Option` (or another type that implements `FromResidual`)\\n --> /candidate/main.rs:4:49\\n  |\\n3 | pub fn solve(input: serde_json::Value) -> serde_json::Value {\\n  | ----------------------------------------------------------- this function should return `Result` or `Option` to accept `?`\\n4 |     let mut graph = serde_json::from_str(&input)?;\\n  |                                                 ^ cannot use the `?` operator in a function that returns `Value`\\n\\nerror[E0308]: mismatched types\\n   --> /candidate/main.rs:34:30\\n    |\\n 30 |             result.push(i);\\n    |             ------      - this argument has type `{integer}`...\\n    |             |\\n    |             ... which causes `result` to have type `Vec<{integer}>`\\n...\\n 34 |     serde_json::Value::Array(result)\\n    |     ------------------------ ^^^^^^ expected `Vec<Value>`, found `Vec<{integer}>`\\n    |     |\\n    |     arguments to this enum variant are incorrect\\n    |\\n    = note: expected struct `Vec<Value>`\\n               found struct `Vec<{integer}>`\\nnote: tuple variant defined here\\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:160:5\\n    |\\n160 |     Array(Vec<Value>),\\n    |     ^^^^^\\n\\nerror: aborting due to 3 previous errors; 1 warning emitted\\n\\nSome errors have detailed explanations: E0277, E0308.\\nFor more information about an error, try `rustc --explain E0277`.\\n\",\"cases_passed\":0,\"cases_total\":6,\"content_role\":\"compilation_feedback_only\",\"original_failure_is_not_a_success\":true,\"passed\":false,\"private_inputs_or_expected_outputs_exposed\":false,\"quarantined\":true,\"run_id\":\"4cab7b1b-a1b5-441c-a7a0-de5e9ebb0935\",\"student_generation_complete\":true,\"tool\":\"trusted_container_grader\",\"trace_complete\":false}\nCritique and revise the candidate. Put any short explanation in Rust // comments and return complete compilable Rust source only. Do not invent tool results.",
+    "max_new_tokens": 768,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "supporting_sample_ids": []
+}

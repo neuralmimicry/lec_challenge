@@ -1,0 +1,40 @@
+{
+  "run_id": "3be167d2-d0fa-4b5f-a068-be400ba6582e",
+  "task_id": "tables.last_by_key",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error[E0277]: can't compare `Option<i64>` with `i64`\n  --> /candidate/main.rs:12:27\n   |\n12 |             if last_value == value {\n   |                           ^^ no implementation for `Option<i64> == i64`\n   |\nhelp: the trait `PartialEq<i64>` is not implemented for `Option<i64>`\n      but trait `PartialEq<Option<i64>>` is implemented for it\n  --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/option.rs:2434:0\n   = help: for that trait implementation, expected `Option<i64>`, found `i64`\n\nerror[E0308]: mismatched types\n  --> /candidate/main.rs:20:31\n   |\n20 |             last_value = Some(value);\n   |                          ---- ^^^^^ expected `Option<i64>`, found `i64`\n   |                          |\n   |                          arguments to this enum variant are incorrect\n   |\n   = note: expected enum `Option<i64>`\n              found type `i64`\nhelp: the type constructed contains `i64` due to the type of the argument passed\n  --> /candidate/main.rs:20:26\n   |\n20 |             last_value = Some(value);\n   |                          ^^^^^-----^\n   |                               |\n   |                               this argument influences the type of `Some`\nnote: tuple variant defined here\n  --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/option.rs:606:4\nhelp: try wrapping the expression in `Some`\n   |\n20 |             last_value = Some(Some(value));\n   |                               +++++     +\n\nerror: aborting due to 2 previous errors\n\nSome errors have detailed explanations: E0277, E0308.\nFor more information about an error, try `rustc --explain E0277`.\n"
+  ],
+  "cases_total": 5,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "4c9c1614ef5923b0ab0340044720f7ce1ade56bc23459cf6711fa1436e0dd035",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/regraded-v3-001/evaluation-002-development-2217a994f8b7/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/regraded-v3-001/evaluation-002-development-2217a994f8b7/sandbox/3be167d2-d0fa-4b5f-a068-be400ba6582e.audit.json",
+  "audit_sha256": "40b087e11038c34d726c41d9b3222692c150087195fed423dcc63b9c56d6e81f",
+  "failure": "compilation failed: error[E0277]: can't compare `Option<i64>` with `i64`\n  --> /candidate/main.rs:12:27\n   |\n12 |             if last_value == value {\n   |                           ^^ no implementation for `Option<i64> == i64`\n   |\nhelp: the trait `PartialEq<i64>` is not implemented for `Option<i64>`\n      but trait `PartialEq<Option<i64>>` is implemented for it\n  --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/option.rs:2434:0\n   = help: for that trait implementation, expected `Option<i64>`, found `i64`\n\nerror[E0308]: mismatched types\n  --> /candidate/main.rs:20:31\n   |\n20 |             last_value = Some(value);\n   |                          ---- ^^^^^ expected `Option<i64>`, found `i64`\n   |                          |\n   |                          arguments to this enum variant are incorrect\n   |\n   = note: expected enum `Option<i64>`\n              found type `i64`\nhelp: the type constructed contains `i64` due to the type of the argument passed\n  --> /candidate/main.rs:20:26\n   |\n20 |             last_value = Some(value);\n   |                          ^^^^^-----^\n   |                               |\n   |                               this argument influences the type of `Some`\nnote: tuple variant defined here\n  --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/option.rs:606:4\nhelp: try wrapping the expression in `Some`\n   |\n20 |             last_value = Some(Some(value));\n   |                               +++++     +\n\nerror: aborting due to 2 previous errors\n\nSome errors have detailed explanations: E0277, E0308.\nFor more information about an error, try `rustc --explain E0277`.\n",
+  "duration_ms": 24317,
+  "timeout_evidence": null,
+  "lifecycle_evidence": {
+    "receipt_path": "reports/local-study/regraded-v3-001/evaluation-002-development-2217a994f8b7/sandbox/3be167d2-d0fa-4b5f-a068-be400ba6582e.lifecycle.json",
+    "receipt_sha256": "852d8fe347089c74d43f78ce6673f6704735fbc8512938047e3b8128d1c03aef"
+  }
+}

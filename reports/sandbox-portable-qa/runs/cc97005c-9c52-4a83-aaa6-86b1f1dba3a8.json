@@ -1,0 +1,428 @@
+{
+  "run_id": "cc97005c-9c52-4a83-aaa6-86b1f1dba3a8",
+  "task_id": "ledger.sum",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "prohibited network attempt: syscall 41 target ",
+    "prohibited filesystem attempt: syscall 257 target /home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/host-only-sentinel.txt",
+    "prohibited filesystem attempt: syscall 257 target /home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/heldout-index.json",
+    "prohibited filesystem attempt: syscall 257 target /root-write-probe",
+    "prohibited network attempt: syscall 41 target ",
+    "prohibited filesystem attempt: syscall 257 target /home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/host-only-sentinel.txt",
+    "prohibited filesystem attempt: syscall 257 target /home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/heldout-index.json",
+    "prohibited filesystem attempt: syscall 257 target /root-write-probe",
+    "prohibited network attempt: syscall 41 target ",
+    "prohibited filesystem attempt: syscall 257 target /home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/host-only-sentinel.txt",
+    "prohibited filesystem attempt: syscall 257 target /home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/heldout-index.json",
+    "prohibited filesystem attempt: syscall 257 target /root-write-probe",
+    "prohibited network attempt: syscall 41 target ",
+    "prohibited filesystem attempt: syscall 257 target /home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/host-only-sentinel.txt",
+    "prohibited filesystem attempt: syscall 257 target /home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/heldout-index.json",
+    "prohibited filesystem attempt: syscall 257 target /root-write-probe",
+    "prohibited network attempt: syscall 41 target ",
+    "prohibited filesystem attempt: syscall 257 target /home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/host-only-sentinel.txt",
+    "prohibited filesystem attempt: syscall 257 target /home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/heldout-index.json",
+    "prohibited filesystem attempt: syscall 257 target /root-write-probe",
+    "prohibited network attempt: syscall 41 target ",
+    "prohibited filesystem attempt: syscall 257 target /home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/host-only-sentinel.txt",
+    "prohibited filesystem attempt: syscall 257 target /home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/heldout-index.json",
+    "prohibited filesystem attempt: syscall 257 target /root-write-probe",
+    "prohibited network attempt: syscall 41 target ",
+    "prohibited filesystem attempt: syscall 257 target /home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/host-only-sentinel.txt",
+    "prohibited filesystem attempt: syscall 257 target /home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/heldout-index.json",
+    "prohibited filesystem attempt: syscall 257 target /root-write-probe",
+    "prohibited network attempt: syscall 41 target ",
+    "prohibited filesystem attempt: syscall 257 target /home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/host-only-sentinel.txt",
+    "prohibited filesystem attempt: syscall 257 target /home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/heldout-index.json",
+    "prohibited filesystem attempt: syscall 257 target /root-write-probe",
+    "prohibited network attempt: syscall 41 target ",
+    "prohibited filesystem attempt: syscall 257 target /home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/host-only-sentinel.txt",
+    "prohibited filesystem attempt: syscall 257 target /home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/heldout-index.json",
+    "prohibited filesystem attempt: syscall 257 target /root-write-probe",
+    "prohibited network attempt: syscall 41 target ",
+    "prohibited filesystem attempt: syscall 257 target /home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/host-only-sentinel.txt",
+    "prohibited filesystem attempt: syscall 257 target /home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/heldout-index.json",
+    "prohibited filesystem attempt: syscall 257 target /root-write-probe",
+    "prohibited network attempt: syscall 41 target ",
+    "prohibited filesystem attempt: syscall 257 target /home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/host-only-sentinel.txt",
+    "prohibited filesystem attempt: syscall 257 target /home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/heldout-index.json",
+    "prohibited filesystem attempt: syscall 257 target /root-write-probe",
+    "prohibited network attempt: syscall 41 target ",
+    "prohibited filesystem attempt: syscall 257 target /home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/host-only-sentinel.txt",
+    "prohibited filesystem attempt: syscall 257 target /home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/heldout-index.json",
+    "prohibited filesystem attempt: syscall 257 target /root-write-probe",
+    "prohibited network attempt: syscall 41 target ",
+    "prohibited filesystem attempt: syscall 257 target /home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/host-only-sentinel.txt",
+    "prohibited filesystem attempt: syscall 257 target /home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/heldout-index.json",
+    "prohibited filesystem attempt: syscall 257 target /root-write-probe",
+    "prohibited network attempt: syscall 41 target ",
+    "prohibited filesystem attempt: syscall 257 target /home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/host-only-sentinel.txt",
+    "prohibited filesystem attempt: syscall 257 target /home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/heldout-index.json",
+    "prohibited filesystem attempt: syscall 257 target /root-write-probe"
+  ],
+  "cases_total": 14,
+  "cases_passed": 14,
+  "trace_complete": true,
+  "policy_sha256": "a476342070dbeab34857f25dcd6e4321d0b2cc9017db49a30c7904c1ad750e44",
+  "image_id": "edff3af23b630f90eb02e4f1830fd2eca68ce88301d96776c65d3696a76af8ce",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "891317e0b809876be4aae9dbb9705295be08bb7dcbd0d81efaa6e0be0a597afc",
+  "stdout_sha256": "1850c921c9d5c1f3f97ae5815e687394f0a1302e31fddde534ca6aebc203356e",
+  "sandbox_config": {
+    "policy_version": 2,
+    "controller_version": 2,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:2-x86_64",
+    "expected_image_id": "edff3af23b630f90eb02e4f1830fd2eca68ce88301d96776c65d3696a76af8ce",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/sandbox-portable-qa/runs"
+  },
+  "audit_events": [
+    {
+      "syscall": 41,
+      "category": "network",
+      "target": "",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 257,
+      "category": "filesystem",
+      "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/host-only-sentinel.txt",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 257,
+      "category": "filesystem",
+      "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/heldout-index.json",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 257,
+      "category": "filesystem",
+      "target": "/root-write-probe",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 41,
+      "category": "network",
+      "target": "",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 257,
+      "category": "filesystem",
+      "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/host-only-sentinel.txt",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 257,
+      "category": "filesystem",
+      "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/heldout-index.json",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 257,
+      "category": "filesystem",
+      "target": "/root-write-probe",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 41,
+      "category": "network",
+      "target": "",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 257,
+      "category": "filesystem",
+      "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/host-only-sentinel.txt",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 257,
+      "category": "filesystem",
+      "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/heldout-index.json",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 257,
+      "category": "filesystem",
+      "target": "/root-write-probe",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 41,
+      "category": "network",
+      "target": "",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 257,
+      "category": "filesystem",
+      "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/host-only-sentinel.txt",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 257,
+      "category": "filesystem",
+      "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/heldout-index.json",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 257,
+      "category": "filesystem",
+      "target": "/root-write-probe",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 41,
+      "category": "network",
+      "target": "",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 257,
+      "category": "filesystem",
+      "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/host-only-sentinel.txt",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 257,
+      "category": "filesystem",
+      "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/heldout-index.json",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 257,
+      "category": "filesystem",
+      "target": "/root-write-probe",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 41,
+      "category": "network",
+      "target": "",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 257,
+      "category": "filesystem",
+      "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/host-only-sentinel.txt",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 257,
+      "category": "filesystem",
+      "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/heldout-index.json",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 257,
+      "category": "filesystem",
+      "target": "/root-write-probe",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 41,
+      "category": "network",
+      "target": "",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 257,
+      "category": "filesystem",
+      "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/host-only-sentinel.txt",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 257,
+      "category": "filesystem",
+      "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/heldout-index.json",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 257,
+      "category": "filesystem",
+      "target": "/root-write-probe",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 41,
+      "category": "network",
+      "target": "",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 257,
+      "category": "filesystem",
+      "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/host-only-sentinel.txt",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 257,
+      "category": "filesystem",
+      "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/heldout-index.json",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 257,
+      "category": "filesystem",
+      "target": "/root-write-probe",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 41,
+      "category": "network",
+      "target": "",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 257,
+      "category": "filesystem",
+      "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/host-only-sentinel.txt",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 257,
+      "category": "filesystem",
+      "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/heldout-index.json",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 257,
+      "category": "filesystem",
+      "target": "/root-write-probe",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 41,
+      "category": "network",
+      "target": "",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 257,
+      "category": "filesystem",
+      "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/host-only-sentinel.txt",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 257,
+      "category": "filesystem",
+      "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/heldout-index.json",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 257,
+      "category": "filesystem",
+      "target": "/root-write-probe",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 41,
+      "category": "network",
+      "target": "",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 257,
+      "category": "filesystem",
+      "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/host-only-sentinel.txt",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 257,
+      "category": "filesystem",
+      "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/heldout-index.json",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 257,
+      "category": "filesystem",
+      "target": "/root-write-probe",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 41,
+      "category": "network",
+      "target": "",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 257,
+      "category": "filesystem",
+      "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/host-only-sentinel.txt",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 257,
+      "category": "filesystem",
+      "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/heldout-index.json",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 257,
+      "category": "filesystem",
+      "target": "/root-write-probe",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 41,
+      "category": "network",
+      "target": "",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 257,
+      "category": "filesystem",
+      "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/host-only-sentinel.txt",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 257,
+      "category": "filesystem",
+      "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/heldout-index.json",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 257,
+      "category": "filesystem",
+      "target": "/root-write-probe",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 41,
+      "category": "network",
+      "target": "",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 257,
+      "category": "filesystem",
+      "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/host-only-sentinel.txt",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 257,
+      "category": "filesystem",
+      "target": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/grader_private/heldout-index.json",
+      "result": "denied:EPERM"
+    },
+    {
+      "syscall": 257,
+      "category": "filesystem",
+      "target": "/root-write-probe",
+      "result": "denied:EPERM"
+    }
+  ],
+  "audit_path": "reports/sandbox-portable-qa/runs/cc97005c-9c52-4a83-aaa6-86b1f1dba3a8.audit.json",
+  "audit_sha256": "7f2a47abb2f5f1515bc639c61fc0ff3453338a317417c42413466bbe00f02a92",
+  "failure": null,
+  "duration_ms": 5458,
+  "timeout_evidence": null
+}

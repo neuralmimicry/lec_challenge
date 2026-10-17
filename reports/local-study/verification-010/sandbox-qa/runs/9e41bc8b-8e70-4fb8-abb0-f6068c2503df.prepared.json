@@ -1,0 +1,60 @@
+{
+  "schema_version": 3,
+  "run_id": "36ceab8f-41ee-412a-9d2f-403645dc21c6",
+  "ownership_nonce": "288be01e-ca05-4bbf-ab2f-7236a7b3971c",
+  "attempt_key": "9e41bc8b-8e70-4fb8-abb0-f6068c2503df",
+  "receipt_path": "reports/local-study/verification-010/sandbox-qa/runs/9e41bc8b-8e70-4fb8-abb0-f6068c2503df.prepared.json",
+  "report_path": "reports/local-study/verification-010/sandbox-qa/runs/36ceab8f-41ee-412a-9d2f-403645dc21c6.json",
+  "task": {
+    "id": "geometry.box",
+    "source_id": "private-geometry-v1",
+    "lineage_id": "local-contract-pack-16",
+    "split": "held_out",
+    "specification": "Input is an array of integer [x,y] points. Return [min_x,min_y,max_x,max_y], or null when empty.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "4c9903b5930302cf7e6463f3739d9027f932c1b65a58c8d674ed2e61bcc339d0",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": [
+          [
+            2,
+            3
+          ],
+          [
+            -1,
+            7
+          ],
+          [
+            4,
+            0
+          ]
+        ],
+        "expected": [
+          -1,
+          0,
+          4,
+          7
+        ]
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "pub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let points = input.as_array().expect(\"point array\");\n    if points.is_empty() {\n        return serde_json::Value::Null;\n    }\n    let xs: Vec<i64> = points.iter().map(|p| p[0].as_i64().expect(\"x\")).collect();\n    let ys: Vec<i64> = points.iter().map(|p| p[1].as_i64().expect(\"y\")).collect();\n    serde_json::json!([\n        xs.iter().min(),\n        ys.iter().min(),\n        xs.iter().max(),\n        ys.iter().max()\n    ])\n}\n",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/verification-010/sandbox-qa/runs"
+  },
+  "code_sha256": "e09f8693d826a46779dde9fef2896aaac609f6e279967d2346cf4f1031744c9a",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

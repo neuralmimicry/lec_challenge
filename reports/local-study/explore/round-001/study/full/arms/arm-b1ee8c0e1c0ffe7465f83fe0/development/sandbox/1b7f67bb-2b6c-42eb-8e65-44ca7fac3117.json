@@ -1,0 +1,40 @@
+{
+  "run_id": "1b7f67bb-2b6c-42eb-8e65-44ca7fac3117",
+  "task_id": "dispatch.round_robin",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error[E0308]: mismatched types\n   --> /candidate/main.rs:24:18\n    |\n 18 |             indices.push(current_index as i64);\n    |             -------      -------------------- this argument has type `i64`...\n    |             |\n    |             ... which causes `indices` to have type `Vec<i64>`\n...\n 24 |     Value::Array(indices)\n    |     ------------ ^^^^^^^ expected `Vec<Value>`, found `Vec<i64>`\n    |     |\n    |     arguments to this enum variant are incorrect\n    |\n    = note: expected struct `Vec<Value>`\n               found struct `Vec<i64>`\nnote: tuple variant defined here\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:160:5\n    |\n160 |     Array(Vec<Value>),\n    |     ^^^^^\nhelp: call `Into::into` on this expression to convert `i64` into `Value`\n    |\n 18 |             indices.push((current_index as i64).into());\n    |                          +                    ++++++++\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0308`.\n"
+  ],
+  "cases_total": 5,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "47ade2e5ff944177e576baed69894b35bc806c5b1a37af5e6c9238af2c335f2c",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/explore/round-001/study/full/arms/arm-b1ee8c0e1c0ffe7465f83fe0/development/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/explore/round-001/study/full/arms/arm-b1ee8c0e1c0ffe7465f83fe0/development/sandbox/1b7f67bb-2b6c-42eb-8e65-44ca7fac3117.audit.json",
+  "audit_sha256": "3f5cf1a0249a57c45d208bd399470333a0fab841e09a34d2790ae6b3525eb84f",
+  "failure": "compilation failed: error[E0308]: mismatched types\n   --> /candidate/main.rs:24:18\n    |\n 18 |             indices.push(current_index as i64);\n    |             -------      -------------------- this argument has type `i64`...\n    |             |\n    |             ... which causes `indices` to have type `Vec<i64>`\n...\n 24 |     Value::Array(indices)\n    |     ------------ ^^^^^^^ expected `Vec<Value>`, found `Vec<i64>`\n    |     |\n    |     arguments to this enum variant are incorrect\n    |\n    = note: expected struct `Vec<Value>`\n               found struct `Vec<i64>`\nnote: tuple variant defined here\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:160:5\n    |\n160 |     Array(Vec<Value>),\n    |     ^^^^^\nhelp: call `Into::into` on this expression to convert `i64` into `Value`\n    |\n 18 |             indices.push((current_index as i64).into());\n    |                          +                    ++++++++\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0308`.\n",
+  "duration_ms": 13879,
+  "timeout_evidence": null,
+  "lifecycle_evidence": {
+    "receipt_path": "reports/local-study/explore/round-001/study/full/arms/arm-b1ee8c0e1c0ffe7465f83fe0/development/sandbox/1b7f67bb-2b6c-42eb-8e65-44ca7fac3117.lifecycle.json",
+    "receipt_sha256": "adf9eb1930874cc4dd6746121872334951143d0899d9400e0dce34bb5f84e8cd"
+  }
+}

@@ -1,0 +1,151 @@
+{
+  "assessment_complete": false,
+  "dependency_notices_complete": false,
+  "evidence_rule": "Passing software QA does not replace missing dependency grants, real provider recordings, approved data, assessment checkpoints or measured held-out learning.",
+  "local_quality_checks_passed": false,
+  "notice_gap_details": [
+    "bindgen_cuda-0.1.6"
+  ],
+  "observed_unix_ms": 1792087607186,
+  "original_notice_gaps": 1,
+  "project_skill_validated": true,
+  "resolved_dependency_packages": 350,
+  "schema_version": 1,
+  "software_checks_passed": true,
+  "steps": [
+    {
+      "command": [
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "elapsed_seconds": 3.153124886,
+      "evidence": {
+        "bytes": 0,
+        "path": "reports/local-study/verification-003/verification-format.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "exit_code": 0,
+      "name": "format",
+      "success": true
+    },
+    {
+      "command": [
+        "clippy",
+        "--locked",
+        "--offline",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "elapsed_seconds": 66.683543545,
+      "evidence": {
+        "bytes": 351,
+        "path": "reports/local-study/verification-003/verification-clippy.log",
+        "sha256": "f60dca01ac161588d8654edcd7ae73329264c84bff6336143bf27aff5d992ff2"
+      },
+      "exit_code": 0,
+      "name": "clippy",
+      "success": true
+    },
+    {
+      "command": [
+        "test",
+        "--locked",
+        "--offline"
+      ],
+      "elapsed_seconds": 410.509099253,
+      "evidence": {
+        "bytes": 24948,
+        "path": "reports/local-study/verification-003/verification-unit.log",
+        "sha256": "493569ddf6725c493fccd234251997ef61398f3945eb52a47c48f87a4405f13e"
+      },
+      "exit_code": 0,
+      "name": "unit",
+      "success": true
+    },
+    {
+      "command": [
+        "test",
+        "--locked",
+        "--offline",
+        "--example",
+        "platform_launch"
+      ],
+      "elapsed_seconds": 10.932839077,
+      "evidence": {
+        "bytes": 1131,
+        "path": "reports/local-study/verification-003/verification-launcher_recovery.log",
+        "sha256": "3660bad52a2c640ce7f89551c6145abcb51f10c8a9937922a01b62339f8a30e5"
+      },
+      "exit_code": 0,
+      "name": "launcher_recovery",
+      "success": true
+    },
+    {
+      "command": [
+        "test",
+        "--locked",
+        "--offline",
+        "--example",
+        "quantised_prefix_qa"
+      ],
+      "elapsed_seconds": 5.956034294,
+      "evidence": {
+        "bytes": 461,
+        "path": "reports/local-study/verification-003/verification-diagnostic_lifecycle.log",
+        "sha256": "4aebcd2f5d7f2d18972dfa4f6ec904eaab3f1087167fcf9d50e51ee73b49730a"
+      },
+      "exit_code": 0,
+      "name": "diagnostic_lifecycle",
+      "success": true
+    },
+    {
+      "command": [
+        "test",
+        "--locked",
+        "--offline",
+        "original_tokenizer_masks_prompt_and_preserves_assistant_eos",
+        "--",
+        "--ignored"
+      ],
+      "elapsed_seconds": 5.59005559,
+      "evidence": {
+        "bytes": 758,
+        "path": "reports/local-study/verification-003/verification-original_tokeniser.log",
+        "sha256": "fa3531fa4f7d7cdcfc4c580ea32103a0fa6ffcb8cdcb5243812699fe890b47ac"
+      },
+      "exit_code": 0,
+      "name": "original_tokeniser",
+      "success": true
+    },
+    {
+      "command": [
+        "test",
+        "--locked",
+        "--offline",
+        "--test",
+        "sandbox_contract",
+        "--",
+        "--ignored",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "elapsed_seconds": 212.929042041,
+      "evidence": {
+        "bytes": 665,
+        "path": "reports/local-study/verification-003/verification-real_container_qa.log",
+        "sha256": "e4f283f41e519ac4feef75839938f79fb5275f2385fb40219e0ae45d91c3690f"
+      },
+      "exit_code": 0,
+      "name": "real_container_qa",
+      "success": true
+    }
+  ],
+  "validated_project_skills": [
+    "rust-distillation-evidence",
+    "rust-distillation-study"
+  ]
+}

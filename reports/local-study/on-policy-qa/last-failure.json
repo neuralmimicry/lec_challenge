@@ -1,0 +1,6 @@
+{
+  "error": "trusted audit artifact missing: No such file or directory (os error 2)",
+  "observed_unix_ms": 1792083478542,
+  "promotion": "incumbent_retained",
+  "status": "FAILURE"
+}

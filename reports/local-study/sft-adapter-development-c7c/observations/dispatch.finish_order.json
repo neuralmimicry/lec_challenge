@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "448b2d86361801414c47e32433b6e0bce070909a486feaecc2fd744b94dca8f4",
+  "task_id": "dispatch.finish_order",
+  "source_id": "private-dispatch-v1",
+  "success": false,
+  "raw_generation": {
+    "path": "reports/local-study/sft-adapter-development-c7c/generations/dispatch.finish_order.json",
+    "sha256": "62c30237f6ded2bf394298b31ed7fcaa18382db26c01bcb5f60c61189047a6a3",
+    "bytes": 2078
+  },
+  "sandbox_report": {
+    "path": "reports/local-study/sft-adapter-development-c7c/sandbox/578ea023-4a33-40a1-b1c4-baa710828188.json",
+    "sha256": "aff7d631c86c86ee8a025debf8263f9272ee677333eaf73c0da4a68da3b01b98",
+    "bytes": 4520
+  },
+  "grading_error": null
+}

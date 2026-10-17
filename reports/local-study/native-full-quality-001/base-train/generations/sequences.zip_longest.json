@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "55c6614d90fbff0e580fd8fbfa9e06ce99715d8d0c78320e0fe70605545cc489",
+  "task_id": "sequences.zip_longest",
+  "source_id": "private-sequences-v1",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is [a,b], integer arrays. Return pairs by position, using null for a missing side, up to the longer length.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[[1,2],[9]],\"expected\":[[1,9],[2,null]]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let mut result = Vec::new();\n    let mut a = input.as_array().unwrap();\n    let mut b = input.as_array().unwrap();\n\n    for (i, &a_val) in a.iter().enumerate() {\n        if let Some(&b_val) = b.iter().nth(i) {\n            result.push(vec![a_val, b_val]);\n        } else {\n            result.push(vec![a_val, null]);\n        }\n    }\n\n    serde_json::Value::Array(result)\n}\n```",
+    "checkpoint_id": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+    "finish_reason": "stop",
+    "input_tokens": 238,
+    "output_tokens": 128,
+    "elapsed_ms": 6517,
+    "complete": true
+  },
+  "model_error": null
+}

@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "23183bfa90e4ec5f088260cbb0cdffc7321925e65ff2284b1086e4b85cbdf13e",
+  "task_id": "tables.sort_rows",
+  "source_id": "private-tables-v1",
+  "success": true,
+  "raw_generation": {
+    "path": "reports/local-study/explore/round-001/study/full/arms/arm-00886e19edc356c899a5d992/development/generations/tables.sort_rows.json",
+    "sha256": "a1c220747a8298bf3b8ea0113dd3eb8f0e1ca58a35f8de0c6a4269e0425b8312",
+    "bytes": 2148
+  },
+  "sandbox_report": {
+    "path": "reports/local-study/explore/round-001/study/full/arms/arm-00886e19edc356c899a5d992/development/sandbox/fc1c9f8d-09b5-43ac-acb1-1bcb7e5e214f.json",
+    "sha256": "f872f53448941a09735d98e7cbce187ff093d8bed7676bbaa6aae4f36de2f4d2",
+    "bytes": 1798
+  },
+  "grading_error": null
+}

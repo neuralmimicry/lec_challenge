@@ -1,0 +1,53 @@
+{
+  "evidence_kind": "independent_read_only_report_reconstruction_and_json_round_trip_diagnosis",
+  "model_allocated": false,
+  "original_reports_changed": false,
+  "quality_claim": false,
+  "reports": [
+    {
+      "arm": "base",
+      "differences": [],
+      "same_crate_float_round_trip": {
+        "bitwise_equal": true,
+        "encoded_utf8": "0.0",
+        "input": 0.0,
+        "input_bits": 0,
+        "reparsed": 0.0,
+        "reparsed_bits": 0
+      }
+    },
+    {
+      "arm": "sft",
+      "differences": [
+        {
+          "computed_f64_bits": 4597424619607381333,
+          "field": "pass_rate",
+          "recomputed_from_all_artefacts": 0.22916666666666666,
+          "recorded_after_parse": 0.22916666666666663,
+          "recorded_f64_bits": 4597424619607381332
+        }
+      ],
+      "same_crate_float_round_trip": {
+        "bitwise_equal": false,
+        "encoded_utf8": "0.22916666666666666",
+        "input": 0.22916666666666666,
+        "input_bits": 4597424619607381333,
+        "reparsed": 0.22916666666666663,
+        "reparsed_bits": 4597424619607381332
+      }
+    },
+    {
+      "arm": "composed",
+      "differences": [],
+      "same_crate_float_round_trip": {
+        "bitwise_equal": true,
+        "encoded_utf8": "0.125",
+        "input": 0.125,
+        "input_bits": 4593671619917905920,
+        "reparsed": 0.125,
+        "reparsed_bits": 4593671619917905920
+      }
+    }
+  ],
+  "schema_version": 1
+}

@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "a52d044d05dc99f9af1879cdb69e7d80c4abc41b317440255f0ff27069084831",
+  "task_id": "matrices.diagonals",
+  "source_id": "private-matrices-v1",
+  "success": false,
+  "raw_generation": {
+    "path": "reports/local-study/native-full-quality-001/composed-train/generations/matrices.diagonals.json",
+    "sha256": "e6c7e436809ff25447bd87be8e6d6e791acc03a8b65b9974053937907eef44a9",
+    "bytes": 2016
+  },
+  "sandbox_report": {
+    "path": "reports/local-study/native-full-quality-001/composed-train/sandbox/b83570fd-12bb-4031-9a88-dadd57c74c27.json",
+    "sha256": "aff6391467d330db1d4a882a7c5025f81b9f71cd708be152bddf7f0b118e2999",
+    "bytes": 4755
+  },
+  "grading_error": null
+}

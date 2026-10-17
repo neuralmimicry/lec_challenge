@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "evidence_kind": "local_original_assessment_audit_and_failure_logging_qa",
+  "date": "2026-10-16",
+  "original_request_satisfied": false,
+  "paid_api_calls": 0,
+  "new_training_runs": 0,
+  "new_held_out_generations": 0,
+  "model_or_cache_pruning": false,
+  "source_fingerprints": "source-sha256.txt",
+  "checks": [
+    {
+      "command": "cargo test --locked --offline",
+      "exit_code": 0,
+      "passed": 327,
+      "failed": 0,
+      "ignored": 5,
+      "log": "tests.log",
+      "groups": [
+        {"target": "library", "passed": 304, "ignored": 2},
+        {"target": "binary", "passed": 17, "ignored": 0},
+        {"target": "gate_reporting", "passed": 3, "ignored": 0},
+        {"target": "run_launcher", "passed": 3, "ignored": 0},
+        {"target": "sandbox_contract", "passed": 0, "ignored": 3},
+        {"target": "documentation", "passed": 0, "ignored": 0}
+      ]
+    },
+    {
+      "command": "cargo clippy --locked --offline --all-targets -- -D warnings",
+      "exit_code": 0,
+      "log": "clippy.log"
+    },
+    {"command": "cargo fmt --all --check", "exit_code": 0},
+    {"command": "git diff --check", "exit_code": 0},
+    {"command": "sha256sum --check docs/DESIGN_SHA256SUMS", "exit_code": 0},
+    {"command": "pdfinfo docs/design.pdf", "exit_code": 0, "pages": 3}
+  ],
+  "audit_execution": {
+    "command": "target/debug/lec-distil assessment-audit --output reports/assessment-audit/latest-log-review-002",
+    "exit_code": 1,
+    "interpretation": "Expected nonzero result: missing and unverified original assessment evidence remains incomplete.",
+    "report": "../latest-log-review-002/audit.json",
+    "verified_requirements": 1,
+    "historical_observations": 7,
+    "incomplete_requirements": 13,
+    "invalid_requirements": 0,
+    "reconstructed_failed_child_receipts": 2,
+    "reconstructed_missing_report_cause": "host deadline terminated probe pids"
+  },
+  "credential_checks": {
+    "original_roster": "../provider-check-original-roster-001.json",
+    "additional_apis": "../provider-check-additional-apis-001.json",
+    "all_seven_configured_environment_credentials_present": false,
+    "all_seven_configured_environment_credentials_absent": true,
+    "network_contacted": false
+  },
+  "design_freeze": {
+    "commit": "74eba150f766a0d93c2a8ad18066daac562314cf",
+    "commit_timestamp": "2026-10-15T09:30:44+01:00",
+    "application_source_in_freeze_commit": false,
+    "frozen_markdown_pdf_acceptance_hashes_match": true
+  },
+  "limitations": [
+    "The audit distinguishes historical observations from independently reconstructed evidence and assigns no subjective assessment score.",
+    "The failed PID-control preflight remains a failure; diagnostic recovery does not establish repaired kernel enforcement.",
+    "Three real training-cleared provider businesses, explicit spending authority, their recorded outputs and the downstream original assessment evidence remain absent.",
+    "Five ignored tests require separate CUDA-driver, original-tokeniser or OCI/container QA; no new full sandbox, model-learning or delivery rehearsal is claimed."
+  ]
+}

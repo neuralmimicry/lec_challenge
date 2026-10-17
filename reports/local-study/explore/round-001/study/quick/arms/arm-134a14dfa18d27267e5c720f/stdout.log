@@ -1,0 +1,111 @@
+{
+  "architecture": "conventional_qwen_lora",
+  "checkpoint_id": "e6713df8c19665188e2394befaacf4e15837cc9064066d38776cc59662c8e9e7",
+  "coverage_complete": true,
+  "evidence_kind": "actual_local_study_checkpoint_evaluation",
+  "healthy_complete": true,
+  "held_out_used": false,
+  "infrastructure_or_generation_errors": 0,
+  "input_tokens": 3902,
+  "limitations": [
+    "Local train/development measurement only; no learning or promotion claim.",
+    "One fixed evaluation seed and jointly authored source groups do not establish general superiority.",
+    "Generation time excludes loading, hashing and grading; overlapping work is not serial wall time.",
+    "Every failed, empty, truncated or missing output remains in the planned denominator."
+  ],
+  "max_new_tokens": 512,
+  "observed": 16,
+  "output_tokens": 2225,
+  "pass_rate": 0.0,
+  "passed": 0,
+  "per_source": [
+    {
+      "observed": 4,
+      "pass_rate": 0.0,
+      "passed": 0,
+      "source_id": "private-dispatch-v1"
+    },
+    {
+      "observed": 4,
+      "pass_rate": 0.0,
+      "passed": 0,
+      "source_id": "private-encoding-v1"
+    },
+    {
+      "observed": 4,
+      "pass_rate": 0.0,
+      "passed": 0,
+      "source_id": "private-money-v1"
+    },
+    {
+      "observed": 4,
+      "pass_rate": 0.0,
+      "passed": 0,
+      "source_id": "private-tables-v1"
+    }
+  ],
+  "plan_sha256": "6f81ce6c90b973fbca1a9a9d8169d16b348cccd876cc23d386de6d65b7dba8dd",
+  "planned": 16,
+  "production_eligible": false,
+  "schema_version": 1,
+  "seed": 1729,
+  "split": "development",
+  "status": "complete",
+  "summed_generation_ms": 365169
+}
+{
+  "schema_version": 1,
+  "arm_id": "arm-134a14dfa18d27267e5c720f",
+  "request_sha256": "1ace60be87fc01b866e9d064d165f1a5828eeed67c593f1b1899541bab06b572",
+  "training_artifact": {
+    "path": "reports/local-study/explore/round-001/study/quick/arms/arm-134a14dfa18d27267e5c720f/training-artifact.json",
+    "sha256": "fa79e265c2ddb0da37424235611bb45e58f9500480fbd5b1cf3d6c430365980a",
+    "bytes": 1858
+  },
+  "checkpoint_artifacts": [
+    {
+      "path": "reports/local-study/explore/round-001/study/quick/arms/arm-134a14dfa18d27267e5c720f/checkpoint/manifest.json",
+      "sha256": "3f0a4f78e3df7aa47219a7f1ab0ac7e8e842e4c6691016d7fe5365ac7ed6772d",
+      "bytes": 15421
+    },
+    {
+      "path": "reports/local-study/explore/round-001/study/quick/arms/arm-134a14dfa18d27267e5c720f/checkpoint/adapter.safetensors",
+      "sha256": "e6713df8c19665188e2394befaacf4e15837cc9064066d38776cc59662c8e9e7",
+      "bytes": 551352
+    }
+  ],
+  "checkpoint_changed": true,
+  "checkpoint_reloaded": true,
+  "completed_steps": 3,
+  "finite_losses": [
+    0.032017722725868225,
+    0.031624116003513336,
+    0.031837254762649536
+  ],
+  "finite_gradient_norms": [
+    0.008731178353543673,
+    0.009738786068498964,
+    0.009427987974038713
+  ],
+  "train_evaluation": null,
+  "development_evaluation": {
+    "path": "reports/local-study/explore/round-001/study/quick/arms/arm-134a14dfa18d27267e5c720f/development/report.json",
+    "sha256": "40407ce193c1f02c18cb2ee003a5bcfbc765235541bbe23ed33a4f6511027cf3",
+    "bytes": 1603
+  },
+  "measured_costs": {
+    "cost_per_point_usd": null,
+    "electricity_usd": null,
+    "hardware_amortisation_usd": null,
+    "local_worker_wall_seconds": 588.448796607,
+    "new_remote_api_spend_usd": "0"
+  },
+  "limitations": [
+    "48 tasks from 12 locally authored train source groups; no held-out or development data enters training.",
+    "Local model developers do not count as independent paid API provider businesses.",
+    "No learning, promotion, cash saving or teacher trace is inferred from this bundle alone.",
+    "Process, contextual revision, teacher-feedback trajectories, on-policy and self-distillation require additional genuine generation evidence.",
+    "Exploratory local-teacher adaptation; no independent API-provider or held-out promotion claim. Reload is a fresh model instance inside the worker; external evaluation must reload in its own process.",
+    "Declared assistant-token windows exercise actual operators and optimiser updates; omitted context/targets are recorded in freeze.json and these quick arms do not establish task learning."
+  ]
+}

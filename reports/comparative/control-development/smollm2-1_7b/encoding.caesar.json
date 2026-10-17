@@ -1,0 +1,38 @@
+{
+  "model_id": "smollm2-1_7b",
+  "task_id": "encoding.caesar",
+  "source_id": "private-encoding-v1",
+  "specification_sha256": "6d5a2e4829f195b5e54e08b45300ecba1a3b178763b2ee6e7a9c90c50c633efa",
+  "seed": 1729,
+  "plan_sha256": "b2e46b0f4ac46ecbb1b6568e9669ef5157b8a6343802f749cfac8ae999e29d88",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input {text,shift} has ASCII text and integer shift. Rotate lowercase a..z only modulo 26; preserve all other characters.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":{\"shift\":3,\"text\":\"xyz A!\"},\"expected\":\"abc A!\"}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::json;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let text = input[\"text\"].as_str().unwrap();\n    let shift = input[\"shift\"].as_i64().unwrap();\n\n    let mut result = String::new();\n\n    for c in text.chars() {\n        let ascii_val = c as u32;\n        let shifted_ascii_val = (ascii_val + shift) % 26;\n\n        let shifted_char = (shifted_ascii_val - 97 + 26) as char;\n\n        result.push(shifted_char);\n    }\n\n    json!({\n        \"text\": result,\n        \"shift\": shift\n    })\n}\n```",
+    "checkpoint_id": "f55217be716b6a997b97b9d8d7eb6fad02e00858f5010ec24f64603c3a98a0e8",
+    "finish_reason": "stop",
+    "input_tokens": 260,
+    "output_tokens": 176,
+    "elapsed_ms": 10745,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/comparative/control-development/smollm2-1_7b/encoding.caesar.generation.json",
+    "sha256": "1a43e0200e808d860c1ff5ab14bbe2e8c2e7932b54681c1631a5996afb4994b8",
+    "bytes": 2894
+  },
+  "sandbox_report": {
+    "path": "reports/comparative/control-development/sandbox/95517f8e-4d0a-446d-9ca8-d5d17a5e88f8.json",
+    "sha256": "c2489316bd0e4a15cda93d4936c9a07b13f716b1eddb283fe4e596da4a07acab",
+    "bytes": 5412
+  },
+  "grading_error": null,
+  "success": false
+}

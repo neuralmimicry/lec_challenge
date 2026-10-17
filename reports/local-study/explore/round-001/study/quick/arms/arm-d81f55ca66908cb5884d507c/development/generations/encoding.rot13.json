@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "831af43edd980b4afc1113f5109fb40a3a5767b92cac8d269a3ec39afb72cff6",
+  "task_id": "encoding.rot13",
+  "source_id": "private-encoding-v1",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an ASCII string. Apply ROT13 to upper/lowercase letters and preserve other characters.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":\"Hello, Z!\",\"expected\":\"Uryyb, M!\"}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\n/// Rotates each letter in the input string by 13 positions in the alphabet.\n/// Non-alphabetic characters remain unchanged.\n/// \n/// # Examples\n/// \n/// ```\n/// assert_eq!(solve(String::from(\"Hello, Z!\")), String::from(\"Uryyb, M!\"));\n/// ```\nfn solve(input: serde_json::Value) -> serde_json::Value {\n    input.to_string().chars()\n        .map(|c| {\n            if c.is_alphabetic() {\n                let offset = if c.is_uppercase() { 65 } else { 97 };\n                (c as u8 + 13 - offset) as char\n            } else {\n                c\n            }\n        })\n        .collect()\n}\n\nfn main() {\n    // Example usage\n    let input = serde_json::Value::from(\"Hello, Z!\");\n    let expected = serde_json::Value::from(\"Uryyb, M!\");\n    assert_eq!(solve(input), expected);\n}\n```",
+    "checkpoint_id": "a1b3dab3b462d634e40a3a4f47b48c68c8e1880040b1cf3b9201cac8bfd5b1d9",
+    "finish_reason": "stop",
+    "input_tokens": 227,
+    "output_tokens": 216,
+    "elapsed_ms": 37038,
+    "complete": true
+  },
+  "model_error": null
+}

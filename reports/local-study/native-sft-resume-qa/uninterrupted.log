@@ -1,0 +1,44 @@
+Hub hashing qwen2.5-coder-7b-instruct-q4_k_m.gguf: 0/4683073536 bytes, 0.00 MiB/s, ETA unknown (publisher checksum pending)
+Hub hashing qwen2.5-coder-7b-instruct-q4_k_m.gguf: 1715470336/4683073536 bytes, 109.01 MiB/s, ETA 00:00:26 (publisher checksum pending)
+Hub hashing qwen2.5-coder-7b-instruct-q4_k_m.gguf: 3679453184/4683073536 bytes, 116.88 MiB/s, ETA 00:00:09 (publisher checksum pending)
+distillation: durable update 1/3 loss=1.254280 gradient_norm=2.461904
+distillation: durable update 2/3 loss=1.491738 gradient_norm=2.432890
+distillation: durable update 3/3 loss=1.405596 gradient_norm=2.299175
+Hub hashing qwen2.5-coder-7b-instruct-q4_k_m.gguf: 0/4683073536 bytes, 0.00 MiB/s, ETA unknown (publisher checksum pending)
+Hub hashing qwen2.5-coder-7b-instruct-q4_k_m.gguf: 1875902464/4683073536 bytes, 119.26 MiB/s, ETA 00:00:23 (publisher checksum pending)
+Hub hashing qwen2.5-coder-7b-instruct-q4_k_m.gguf: 3562012672/4683073536 bytes, 113.19 MiB/s, ETA 00:00:10 (publisher checksum pending)
+{
+  "schema_version": 1,
+  "arm_id": "native_sft_operator_qa",
+  "checkpoint": "reports/local-study/native-sft-resume-qa/uninterrupted",
+  "manifest": {
+    "path": "reports/local-study/native-sft-resume-qa/uninterrupted/manifest.json",
+    "sha256": "63ad6ff34e9c89e2d80ef23f494a3a5cba9843050098bae20b40e674fb933609",
+    "bytes": 13312
+  },
+  "adapter_sha256": "b8b51c10874c1609e36c1b15ab8f0c0709d645f397d1979f7e17b4aea472ba5a",
+  "base_sha256": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+  "evidence_bundle_sha256": "d6899a4dff1b7c5180c006b38f9441f916eb7bda2f59df21df1f64784e8f1417",
+  "steps": 3,
+  "losses": [
+    1.2542798519134521,
+    1.4917376041412354,
+    1.4055960178375244
+  ],
+  "gradient_norms": [
+    2.461904497661891,
+    2.4328899311679035,
+    2.2991750314118593
+  ],
+  "changed_adapter": true,
+  "reloaded": true,
+  "production_eligible": false,
+  "limitations": [
+    "48 tasks from 12 locally authored train source groups; no held-out or development data enters training.",
+    "Local model developers do not count as independent paid API provider businesses.",
+    "No learning, promotion, cash saving or teacher trace is inferred from this bundle alone.",
+    "Process, contextual revision, teacher-feedback trajectories, on-policy and self-distillation require additional genuine generation evidence.",
+    "Exploratory local-teacher adaptation; no independent API-provider or held-out promotion claim. Reload is a fresh model instance inside the worker; external evaluation must reload in its own process.",
+    "Declared assistant-token windows exercise actual operators and optimiser updates; omitted context/targets are recorded in freeze.json and these quick arms do not establish task learning."
+  ]
+}

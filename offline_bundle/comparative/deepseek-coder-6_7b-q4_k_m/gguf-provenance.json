@@ -1,0 +1,635 @@
+{
+  "schema_version": 1,
+  "model_id": "TheBloke/deepseek-coder-6.7B-instruct-GGUF",
+  "revision": "9e221e6b41cb1bf1c5d8f9718e81e3dc781f7557",
+  "licence": "other",
+  "filename": "deepseek-coder-6.7b-instruct.Q4_K_M.gguf",
+  "file_sha256": "92da6238854f2fa902d8b2ad79d548536af1d3ab06821f323bd5bbcea2013276",
+  "file_bytes": 4083015904,
+  "assets": {
+    "model_id": "TheBloke/deepseek-coder-6.7B-instruct-GGUF",
+    "revision": "9e221e6b41cb1bf1c5d8f9718e81e3dc781f7557",
+    "licence": "other",
+    "files": {
+      "README.md": "1338c05a5298c1fabc01232b3afcf97b30ffe4dd3d1ef4f3d7119e9ffa492666",
+      "deepseek-coder-6.7b-instruct.Q4_K_M.gguf": "92da6238854f2fa902d8b2ad79d548536af1d3ab06821f323bd5bbcea2013276",
+      "source/LICENSE": "a3a0e9449cb691a12f4de1d03725fd41326614fdeaf5d80b28c51187da0bed0e",
+      "source/README.md": "c874c1b3458a13e73263baf38836ce280d3c557e399a6b0078c22d55f7cda98e",
+      "source/config.json": "a3a2ce1a623b367d3799fb0c1e1ba12d5b8fa51a8e7abba14d10dd3739cd73e4",
+      "source/generation_config.json": "186a63b420f66a03e95a035c488373361bb04833a9b83f4bdbaba70c5c816002",
+      "source/tokenizer.json": "ef48ebdc8546c2d8092349d321f1d162de804a1c8900df2b615c7dc8b02ce141",
+      "source/tokenizer_config.json": "775f116ff1130a5b5bfc3cfdb594f9fcb5a5dc61d5a11ba92b2a7c078d66b7b7"
+    }
+  },
+  "quantisation": {
+    "schema_version": 1,
+    "model_id": "TheBloke/deepseek-coder-6.7B-instruct-GGUF",
+    "requested_revision": "9e221e6b41cb1bf1c5d8f9718e81e3dc781f7557",
+    "revision": "9e221e6b41cb1bf1c5d8f9718e81e3dc781f7557",
+    "licence": "other",
+    "licence_files": [],
+    "licence_evidence": "Original source licence retained in the independently pinned source bundle; quantisation repository model-card declarations retained separately",
+    "recorded_unix_seconds": 1792079408,
+    "metadata_url": "https://huggingface.co/api/models/TheBloke/deepseek-coder-6.7B-instruct-GGUF/revision/9e221e6b41cb1bf1c5d8f9718e81e3dc781f7557?blobs=true",
+    "metadata_sha256": "66ee855bc43ad587b68077642d488982725895b1ff5ae13eb9d3e9f817cc6a0e",
+    "metadata": {
+      "_id": "65479a438767484a0548595b",
+      "author": "TheBloke",
+      "cardData": {
+        "base_model": "deepseek-ai/deepseek-coder-6.7b-instruct",
+        "inference": false,
+        "license": "other",
+        "license_link": "LICENSE",
+        "license_name": "deepseek",
+        "model_creator": "DeepSeek",
+        "model_name": "Deepseek Coder 6.7B Instruct",
+        "model_type": "deepseek",
+        "prompt_template": "You are an AI programming assistant, utilizing the Deepseek Coder model, developed by Deepseek Company, and you only answer questions related to computer science. For politically sensitive questions, security and privacy issues, and other non-computer science questions, you will refuse to answer.\n### Instruction:\n{prompt}\n### Response:\n",
+        "quantized_by": "TheBloke"
+      },
+      "config": {
+        "model_type": "deepseek"
+      },
+      "createdAt": "2023-11-05T13:36:03.000Z",
+      "disabled": false,
+      "downloads": 40735,
+      "gated": false,
+      "gguf": {
+        "architecture": "llama",
+        "bos_token": "<｜begin▁of▁sentence｜>",
+        "context_length": 16384,
+        "eos_token": "<|EOT|>",
+        "total": 6740512768,
+        "totalFileSize": 2827706592
+      },
+      "id": "TheBloke/deepseek-coder-6.7B-instruct-GGUF",
+      "lastModified": "2023-11-05T16:43:41.000Z",
+      "library_name": "transformers",
+      "likes": 250,
+      "model-index": null,
+      "modelId": "TheBloke/deepseek-coder-6.7B-instruct-GGUF",
+      "private": false,
+      "sha": "9e221e6b41cb1bf1c5d8f9718e81e3dc781f7557",
+      "siblings": [
+        {
+          "blobId": "e761cd35f10691b6cee81bb175b5f312cc74b97a",
+          "rfilename": ".gitattributes",
+          "size": 2433
+        },
+        {
+          "blobId": "54c389cb50b3f32c924d922046797bfbd43d5611",
+          "rfilename": "README.md",
+          "size": 21322
+        },
+        {
+          "blobId": "a770c44de33628ff769cae6b62f8c84c1e1d2e6a",
+          "rfilename": "config.json",
+          "size": 32
+        },
+        {
+          "blobId": "2af648acc9befd72cf272effd58869cbe74703c2",
+          "lfs": {
+            "pointerSize": 135,
+            "sha256": "56447b37bd7c606c081d9b216b69c6cd77db6b473721b709a7b21ed4606e4960",
+            "size": 2827706592
+          },
+          "rfilename": "deepseek-coder-6.7b-instruct.Q2_K.gguf",
+          "size": 2827706592
+        },
+        {
+          "blobId": "f2f036785fcabada6643d6c05bc06771915558f0",
+          "lfs": {
+            "pointerSize": 135,
+            "sha256": "9e3f820f623d5177ae4b7334cb6a8bfe8c562d7a088722dbd5a1f889845f462e",
+            "size": 3598983392
+          },
+          "rfilename": "deepseek-coder-6.7b-instruct.Q3_K_L.gguf",
+          "size": 3598983392
+        },
+        {
+          "blobId": "6a293d175d58d4aa585db48b10b78bada253a01a",
+          "lfs": {
+            "pointerSize": 135,
+            "sha256": "6c841fde94b9103c92e875c9ab0ebeeb624b0709b2410c3bd942c80cd635117f",
+            "size": 3299877088
+          },
+          "rfilename": "deepseek-coder-6.7b-instruct.Q3_K_M.gguf",
+          "size": 3299877088
+        },
+        {
+          "blobId": "29df8c7b2952654355252400db21bf00f0f70851",
+          "lfs": {
+            "pointerSize": 135,
+            "sha256": "176ed1c984911dfb1707e85e4f56b8ab6986f21eec9fc7d6a31d5e3cce141e52",
+            "size": 2950176992
+          },
+          "rfilename": "deepseek-coder-6.7b-instruct.Q3_K_S.gguf",
+          "size": 2950176992
+        },
+        {
+          "blobId": "992c0acbb576cd5284a403e3d797deb6957511d5",
+          "lfs": {
+            "pointerSize": 135,
+            "sha256": "0c7cf89d9b2dc8671bfade603181aaa18b3dfd93e1b6a2c569a9807c65d4d438",
+            "size": 3827818720
+          },
+          "rfilename": "deepseek-coder-6.7b-instruct.Q4_0.gguf",
+          "size": 3827818720
+        },
+        {
+          "blobId": "0a10b6cf236027c327c0a6aac9b9a5d9f08bc314",
+          "lfs": {
+            "pointerSize": 135,
+            "sha256": "92da6238854f2fa902d8b2ad79d548536af1d3ab06821f323bd5bbcea2013276",
+            "size": 4083015904
+          },
+          "rfilename": "deepseek-coder-6.7b-instruct.Q4_K_M.gguf",
+          "size": 4083015904
+        },
+        {
+          "blobId": "0b1f80926a6510c39d09d17525fceb489dd90683",
+          "lfs": {
+            "pointerSize": 135,
+            "sha256": "d5d4b757645ce359a52d25584d29f1ff0d89580075edc35d87a20b89e65a5313",
+            "size": 3858751712
+          },
+          "rfilename": "deepseek-coder-6.7b-instruct.Q4_K_S.gguf",
+          "size": 3858751712
+        },
+        {
+          "blobId": "9fafd1203fad5ea6902454f2393e5809ed2ee41e",
+          "lfs": {
+            "pointerSize": 135,
+            "sha256": "1973cf0d90a90b26d2dff10d978744c038028ccb9d93a32ed415cf96416d50fd",
+            "size": 4653834464
+          },
+          "rfilename": "deepseek-coder-6.7b-instruct.Q5_0.gguf",
+          "size": 4653834464
+        },
+        {
+          "blobId": "3709e70086ef2ad946f94c0179cef6fadb0a9e1b",
+          "lfs": {
+            "pointerSize": 135,
+            "sha256": "0976ee1707fc97b142d7266a9a501893ea6f320e8a8227aa1f04bcab74a5f556",
+            "size": 4785299680
+          },
+          "rfilename": "deepseek-coder-6.7b-instruct.Q5_K_M.gguf",
+          "size": 4785299680
+        },
+        {
+          "blobId": "459af615359db7ff9e1fbc54033732c22fba5636",
+          "lfs": {
+            "pointerSize": 135,
+            "sha256": "1362c06f3036b4c4994bd8497ecbc0b487acb67e568b4addb4b17fc1e863f688",
+            "size": 4653834464
+          },
+          "rfilename": "deepseek-coder-6.7b-instruct.Q5_K_S.gguf",
+          "size": 4653834464
+        },
+        {
+          "blobId": "4d2da6eb72fc1727feb1cad9987afe9d97569a24",
+          "lfs": {
+            "pointerSize": 135,
+            "sha256": "113fba500e4feb1313ce80d72cf381330b51460d265a7719bba626d6a461f9eb",
+            "size": 5531476192
+          },
+          "rfilename": "deepseek-coder-6.7b-instruct.Q6_K.gguf",
+          "size": 5531476192
+        },
+        {
+          "blobId": "bed40e897691a2400111a914553e68732f269b82",
+          "lfs": {
+            "pointerSize": 135,
+            "sha256": "02cd6ce7ccec670cf6d3dd147932f13e584f9e964d5a3297a74b401b658471ae",
+            "size": 7163879648
+          },
+          "rfilename": "deepseek-coder-6.7b-instruct.Q8_0.gguf",
+          "size": 7163879648
+        }
+      ],
+      "spaces": [
+        "ResearchEngineering/AGI",
+        "free-gpt/deepseek-coder-67B",
+        "mj23978/deepseek-coder-6.7B-instruct-GGUF",
+        "ahmed000000000/deepseek-coder-6.7B-instruct-GGUF",
+        "Xeltron-cloud/VexaAI_DeepSeek-Coder-6.7B-Instruct_API",
+        "Alok8383/My-AI-Coder",
+        "Mmossad2124/sast-recon-agent"
+      ],
+      "tags": [
+        "transformers",
+        "gguf",
+        "deepseek",
+        "base_model:deepseek-ai/deepseek-coder-6.7b-instruct",
+        "base_model:quantized:deepseek-ai/deepseek-coder-6.7b-instruct",
+        "license:other",
+        "region:us"
+      ],
+      "transformersInfo": {
+        "auto_model": "AutoModel"
+      },
+      "usedStorage": 153703964544
+    },
+    "files": {
+      "README.md": {
+        "filename": "README.md",
+        "bytes": 21322,
+        "publisher_identity": {
+          "kind": "git_blob_sha1",
+          "digest": "54c389cb50b3f32c924d922046797bfbd43d5611"
+        },
+        "canonical_url": "https://huggingface.co/TheBloke/deepseek-coder-6.7B-instruct-GGUF/resolve/9e221e6b41cb1bf1c5d8f9718e81e3dc781f7557/README.md",
+        "sha256": "1338c05a5298c1fabc01232b3afcf97b30ffe4dd3d1ef4f3d7119e9ffa492666"
+      },
+      "deepseek-coder-6.7b-instruct.Q4_K_M.gguf": {
+        "filename": "deepseek-coder-6.7b-instruct.Q4_K_M.gguf",
+        "bytes": 4083015904,
+        "publisher_identity": {
+          "kind": "lfs_sha256",
+          "digest": "92da6238854f2fa902d8b2ad79d548536af1d3ab06821f323bd5bbcea2013276"
+        },
+        "canonical_url": "https://huggingface.co/TheBloke/deepseek-coder-6.7B-instruct-GGUF/resolve/9e221e6b41cb1bf1c5d8f9718e81e3dc781f7557/deepseek-coder-6.7b-instruct.Q4_K_M.gguf",
+        "sha256": "92da6238854f2fa902d8b2ad79d548536af1d3ab06821f323bd5bbcea2013276"
+      }
+    },
+    "authentication_policy": "Optional bearer applied to initial HTTPS huggingface.co request only; all redirects strip authentication; no token persisted"
+  },
+  "source_assets": {
+    "directory": "source",
+    "manifest": {
+      "model_id": "deepseek-ai/deepseek-coder-6.7b-instruct",
+      "revision": "e5d64addd26a6a1db0f9b863abf6ee3141936807",
+      "licence": "other",
+      "files": {
+        "LICENSE": "a3a0e9449cb691a12f4de1d03725fd41326614fdeaf5d80b28c51187da0bed0e",
+        "README.md": "c874c1b3458a13e73263baf38836ce280d3c557e399a6b0078c22d55f7cda98e",
+        "config.json": "a3a2ce1a623b367d3799fb0c1e1ba12d5b8fa51a8e7abba14d10dd3739cd73e4",
+        "generation_config.json": "186a63b420f66a03e95a035c488373361bb04833a9b83f4bdbaba70c5c816002",
+        "tokenizer.json": "ef48ebdc8546c2d8092349d321f1d162de804a1c8900df2b615c7dc8b02ce141",
+        "tokenizer_config.json": "775f116ff1130a5b5bfc3cfdb594f9fcb5a5dc61d5a11ba92b2a7c078d66b7b7"
+      }
+    },
+    "provenance": {
+      "schema_version": 1,
+      "model_id": "deepseek-ai/deepseek-coder-6.7b-instruct",
+      "requested_revision": "e5d64addd26a6a1db0f9b863abf6ee3141936807",
+      "revision": "e5d64addd26a6a1db0f9b863abf6ee3141936807",
+      "licence": "other",
+      "licence_files": [
+        "LICENSE"
+      ],
+      "licence_evidence": "Original pinned repository licence document(s) and model-card metadata retained",
+      "recorded_unix_seconds": 1792077736,
+      "metadata_url": "https://huggingface.co/api/models/deepseek-ai/deepseek-coder-6.7b-instruct/revision/e5d64addd26a6a1db0f9b863abf6ee3141936807?blobs=true",
+      "metadata_sha256": "45a5ce2bcc5aaa2cad08b603eeb46319f48dbdfa549e8dacac6a761a9d9c81fd",
+      "metadata": {
+        "_id": "653e3b904a52f10eaf646821",
+        "author": "deepseek-ai",
+        "cardData": {
+          "license": "other",
+          "license_link": "LICENSE",
+          "license_name": "deepseek"
+        },
+        "config": {
+          "architectures": [
+            "LlamaForCausalLM"
+          ],
+          "model_type": "llama",
+          "tokenizer_config": {
+            "bos_token": {
+              "__type": "AddedToken",
+              "content": "<｜begin▁of▁sentence｜>",
+              "lstrip": false,
+              "normalized": true,
+              "rstrip": false,
+              "single_word": false
+            },
+            "chat_template": "{% if not add_generation_prompt is defined %}\n{% set add_generation_prompt = false %}\n{% endif %}\n{%- set ns = namespace(found=false) -%}\n{%- for message in messages -%}\n    {%- if message['role'] == 'system' -%}\n        {%- set ns.found = true -%}\n    {%- endif -%}\n{%- endfor -%}\n{{bos_token}}{%- if not ns.found -%}\n{{'You are an AI programming assistant, utilizing the Deepseek Coder model, developed by Deepseek Company, and you only answer questions related to computer science. For politically sensitive questions, security and privacy issues, and other non-computer science questions, you will refuse to answer\\n'}}\n{%- endif %}\n{%- for message in messages %}\n    {%- if message['role'] == 'system' %}\n{{ message['content'] }}\n    {%- else %}\n        {%- if message['role'] == 'user' %}\n{{'### Instruction:\\n' + message['content'] + '\\n'}}\n        {%- else %}\n{{'### Response:\\n' + message['content'] + '\\n<|EOT|>\\n'}}\n        {%- endif %}\n    {%- endif %}\n{%- endfor %}\n{% if add_generation_prompt %}\n{{'### Response:'}}\n{% endif %}",
+            "eos_token": {
+              "__type": "AddedToken",
+              "content": "<|EOT|>",
+              "lstrip": false,
+              "normalized": true,
+              "rstrip": false,
+              "single_word": false
+            },
+            "pad_token": {
+              "__type": "AddedToken",
+              "content": "<｜end▁of▁sentence｜>",
+              "lstrip": false,
+              "normalized": true,
+              "rstrip": false,
+              "single_word": false
+            },
+            "unk_token": null
+          }
+        },
+        "createdAt": "2023-10-29T11:01:36.000Z",
+        "disabled": false,
+        "downloads": 41777,
+        "gated": false,
+        "id": "deepseek-ai/deepseek-coder-6.7b-instruct",
+        "lastModified": "2024-02-02T03:02:26.000Z",
+        "library_name": "transformers",
+        "likes": 525,
+        "model-index": null,
+        "modelId": "deepseek-ai/deepseek-coder-6.7b-instruct",
+        "pipeline_tag": "text-generation",
+        "private": false,
+        "safetensors": {
+          "parameters": {
+            "BF16": 6740512768
+          },
+          "total": 6740512768
+        },
+        "sha": "e5d64addd26a6a1db0f9b863abf6ee3141936807",
+        "siblings": [
+          {
+            "blobId": "a6344aac8c09253b3b630fb776ae94478aa0275b",
+            "rfilename": ".gitattributes",
+            "size": 1519
+          },
+          {
+            "blobId": "9489e95c444dd3a396ec884bfd8afa719e59160f",
+            "rfilename": "LICENSE",
+            "size": 13760
+          },
+          {
+            "blobId": "35cd85041e4732de591a5485e5721c0d54e97536",
+            "rfilename": "README.md",
+            "size": 3574
+          },
+          {
+            "blobId": "0acc4f7c68fd725bc672e67f81363cad2438294d",
+            "rfilename": "config.json",
+            "size": 760
+          },
+          {
+            "blobId": "19a930a8e7a08b1d002e8fa317438423b61fff22",
+            "rfilename": "generation_config.json",
+            "size": 119
+          },
+          {
+            "blobId": "dc3560a089610e3835d5f4f35fedbcd412e580ac",
+            "lfs": {
+              "pointerSize": 135,
+              "sha256": "ef55ffa04c8de3943c858cbcf7143b9803b3aa608337352ca5cd329f8a208bb6",
+              "size": 9978667672
+            },
+            "rfilename": "model-00001-of-00002.safetensors",
+            "size": 9978667672
+          },
+          {
+            "blobId": "0e32c347aaca2fa30b26beea20c394232d560d37",
+            "lfs": {
+              "pointerSize": 135,
+              "sha256": "d4d48eb2dce70933437b29d3f39b10a8820d629f936554209578e8119d5f5b2f",
+              "size": 3502391696
+            },
+            "rfilename": "model-00002-of-00002.safetensors",
+            "size": 3502391696
+          },
+          {
+            "blobId": "d4338e87a01134a05058c25623116fb6678a90c7",
+            "rfilename": "model.safetensors.index.json",
+            "size": 25125
+          },
+          {
+            "blobId": "99dbbf695d52306720f26353f5e961109128e0fd",
+            "lfs": {
+              "pointerSize": 135,
+              "sha256": "c2d75c419c6a86602710e347ac09bdc899299c1f1c6b06e542c7588ca69bf603",
+              "size": 9978720282
+            },
+            "rfilename": "pytorch_model-00001-of-00002.bin",
+            "size": 9978720282
+          },
+          {
+            "blobId": "d94a50a7ad4305c4546d0529c0e789623e5b2653",
+            "lfs": {
+              "pointerSize": 135,
+              "sha256": "7544ec56f13952b201d7dc1e438093fc555b441bad520b1fb2e3a87b46fad7be",
+              "size": 3502408963
+            },
+            "rfilename": "pytorch_model-00002-of-00002.bin",
+            "size": 3502408963
+          },
+          {
+            "blobId": "03ed4bdaa9d6707eefe2678470686f040dea73c9",
+            "rfilename": "pytorch_model.bin.index.json",
+            "size": 23950
+          },
+          {
+            "blobId": "0dfa4268afc2cf45515dec553772d7ca79f79762",
+            "rfilename": "tokenizer.json",
+            "size": 1367962
+          },
+          {
+            "blobId": "68f6f5bd3350366399a8c53d32a602c825390806",
+            "rfilename": "tokenizer_config.json",
+            "size": 1868
+          }
+        ],
+        "spaces": [
+          "bigcode/bigcode-models-leaderboard",
+          "Vokturz/can-it-run-llm",
+          "aquanode/gpu-vram-calculator",
+          "qingxu98/gpt-academic",
+          "KBaba7/Quant",
+          "HPAI-BSC/TuRTLe-Leaderboard",
+          "FallnAI/Quantize-HF-Models",
+          "bhaskartripathi/LLM_Quantization",
+          "openfree/LLM_Quantization",
+          "Justinrune/LLaMA-Factory",
+          "ruslanmv/convert_to_gguf",
+          "seawolf2357/LLM_Quantization",
+          "AFischer1985/AI-RAG-Interface-to-Hub",
+          "yhavinga/dutch-tokenizer-arena",
+          "LFades/deepseek-ai-deepseek-coder-6.7b-instruct",
+          "awacke1/Deepseek-HPC-GPU-KEDA",
+          "officialhimanshu595/llama-factory",
+          "atlasas/bigcode-models-leaderboard",
+          "totolook/Quant",
+          "K00B404/LLM_Quantization",
+          "minhdang/deepseek-v2-lite",
+          "Speedofmastery/orynxml-backend",
+          "hzwluoye/gpt-academic",
+          "justest/GPT-Academic-with-B3n-AI",
+          "zjuzjw/gpt-academic",
+          "Yuan2006/gpt-academic-siliconflow-free",
+          "free-gpt/deepseek-coder-67B",
+          "Zainulabideenali/Zainova_AI",
+          "justinphuongle/ds",
+          "raihan-ck/deepseek",
+          "Ka3ka3/hospital-code-reviewer",
+          "Xlnk/Quantize-HF-Models",
+          "exploitz3r0bbd/Quantize-HF-Models",
+          "Oss11/Quantize-HF-Models",
+          "Mahindra2525/Ta",
+          "DJ-Goanna-Coding/citadel-agentic-swarm",
+          "Tomoniai/Deepseek-Coder-Chat",
+          "Fr0NiX/deepseek-ai-deepseek-coder-6.7b-instruct",
+          "mj23978/deepseek-coder-6.7B-instruct-GGUF",
+          "willdas/deepseek-coder-7b-instruct",
+          "ahmed000000000/deepseek-coder-6.7B-instruct-GGUF",
+          "darren1231/gpt-academic_2",
+          "DuanSuKa/gpt-academic2",
+          "BuzzHr/gpt-academic002",
+          "xiaohua1011/gpt-academic",
+          "awqwqwq/deepseek-coder-7b-instruct",
+          "durukan/gptacademic",
+          "SincoMao/test",
+          "zhaomuqing/gpt-academic",
+          "zhlinh/gpt-academic",
+          "forever-yu/gpt-academic",
+          "BuzzHr/gpt-academic001",
+          "jonclegg/deepseek-ai-deepseek-coder-6.7b-instruct",
+          "adminstr/gpt-academic",
+          "iblfe/test",
+          "awacke1/deepseek-ai-deepseek-coder-6.7b-instruct",
+          "JACK-Chen/gpt-academic-private",
+          "new-ames/gpt-academic-Joy",
+          "CaiRou-Huang/gpt-academic-test",
+          "kuxian/gpt-academic",
+          "Ayndpa/gpt-academic",
+          "leong001/gpt-academic",
+          "basit123796/deepsake-ai",
+          "JerryYin777/gpt-academic-hust",
+          "yl5545/gpt-academic",
+          "everr/gpt-academicrrrr",
+          "Cyburger/die",
+          "adj7354/space-demo",
+          "smith8/gpt1",
+          "oncehere/gpt-academic",
+          "AFischer1985/Advanced-RAG-Demo",
+          "oneapi/gpt-academic",
+          "justseemore/gpt-academic",
+          "Rong233/gpt-academic-for-Jiang",
+          "abing0215/gpt-academic-final",
+          "amber0628h/gpt-academic",
+          "viod/gpt-academic",
+          "Kartik2503/cost-estimator",
+          "li0808/gpt-academic",
+          "srijansengupta/deepseek-coder-7b-instruct",
+          "Liyu910228/gpt-academic",
+          "caodan/xueshugpt",
+          "saluq/FFSteel",
+          "zhou005/gpt-academic2",
+          "saluq/FFSteel2",
+          "szdavidxiong/gpt-academic2",
+          "Harrison3/gpt-academic",
+          "onlyyoufabian/gpt-academic",
+          "behindeu/gpt-academic",
+          "Chuanming/gpt-academic",
+          "eastsheng/gpt_academic",
+          "pns2574/demo",
+          "zhou005/gpt-academic",
+          "stack86/gpt-academic",
+          "Alanxxk/gpt-academic",
+          "BLDC888/gpt-academic72",
+          "xiaohua1011/gpt-academicc",
+          "AhmedMagdy7/can-it-run-llm",
+          "hf5566/gpt-academic",
+          "leexiaoyao/gpt-academic222"
+        ],
+        "tags": [
+          "transformers",
+          "pytorch",
+          "safetensors",
+          "llama",
+          "text-generation",
+          "conversational",
+          "license:other",
+          "text-generation-inference",
+          "endpoints_compatible",
+          "deploy:azure",
+          "region:us"
+        ],
+        "transformersInfo": {
+          "auto_model": "AutoModelForCausalLM",
+          "pipeline_tag": "text-generation",
+          "processor": "AutoTokenizer"
+        },
+        "usedStorage": 26962188613,
+        "widgetData": [
+          {
+            "text": "Hi, what can you help me with?"
+          },
+          {
+            "text": "What is 84 * 3 / 2?"
+          },
+          {
+            "text": "Tell me an interesting fact about the universe!"
+          },
+          {
+            "text": "Explain quantum computing in simple terms."
+          }
+        ]
+      },
+      "files": {
+        "LICENSE": {
+          "filename": "LICENSE",
+          "bytes": 13760,
+          "publisher_identity": {
+            "kind": "git_blob_sha1",
+            "digest": "9489e95c444dd3a396ec884bfd8afa719e59160f"
+          },
+          "canonical_url": "https://huggingface.co/deepseek-ai/deepseek-coder-6.7b-instruct/resolve/e5d64addd26a6a1db0f9b863abf6ee3141936807/LICENSE",
+          "sha256": "a3a0e9449cb691a12f4de1d03725fd41326614fdeaf5d80b28c51187da0bed0e"
+        },
+        "README.md": {
+          "filename": "README.md",
+          "bytes": 3574,
+          "publisher_identity": {
+            "kind": "git_blob_sha1",
+            "digest": "35cd85041e4732de591a5485e5721c0d54e97536"
+          },
+          "canonical_url": "https://huggingface.co/deepseek-ai/deepseek-coder-6.7b-instruct/resolve/e5d64addd26a6a1db0f9b863abf6ee3141936807/README.md",
+          "sha256": "c874c1b3458a13e73263baf38836ce280d3c557e399a6b0078c22d55f7cda98e"
+        },
+        "config.json": {
+          "filename": "config.json",
+          "bytes": 760,
+          "publisher_identity": {
+            "kind": "git_blob_sha1",
+            "digest": "0acc4f7c68fd725bc672e67f81363cad2438294d"
+          },
+          "canonical_url": "https://huggingface.co/deepseek-ai/deepseek-coder-6.7b-instruct/resolve/e5d64addd26a6a1db0f9b863abf6ee3141936807/config.json",
+          "sha256": "a3a2ce1a623b367d3799fb0c1e1ba12d5b8fa51a8e7abba14d10dd3739cd73e4"
+        },
+        "generation_config.json": {
+          "filename": "generation_config.json",
+          "bytes": 119,
+          "publisher_identity": {
+            "kind": "git_blob_sha1",
+            "digest": "19a930a8e7a08b1d002e8fa317438423b61fff22"
+          },
+          "canonical_url": "https://huggingface.co/deepseek-ai/deepseek-coder-6.7b-instruct/resolve/e5d64addd26a6a1db0f9b863abf6ee3141936807/generation_config.json",
+          "sha256": "186a63b420f66a03e95a035c488373361bb04833a9b83f4bdbaba70c5c816002"
+        },
+        "tokenizer.json": {
+          "filename": "tokenizer.json",
+          "bytes": 1367962,
+          "publisher_identity": {
+            "kind": "git_blob_sha1",
+            "digest": "0dfa4268afc2cf45515dec553772d7ca79f79762"
+          },
+          "canonical_url": "https://huggingface.co/deepseek-ai/deepseek-coder-6.7b-instruct/resolve/e5d64addd26a6a1db0f9b863abf6ee3141936807/tokenizer.json",
+          "sha256": "ef48ebdc8546c2d8092349d321f1d162de804a1c8900df2b615c7dc8b02ce141"
+        },
+        "tokenizer_config.json": {
+          "filename": "tokenizer_config.json",
+          "bytes": 1868,
+          "publisher_identity": {
+            "kind": "git_blob_sha1",
+            "digest": "68f6f5bd3350366399a8c53d32a602c825390806"
+          },
+          "canonical_url": "https://huggingface.co/deepseek-ai/deepseek-coder-6.7b-instruct/resolve/e5d64addd26a6a1db0f9b863abf6ee3141936807/tokenizer_config.json",
+          "sha256": "775f116ff1130a5b5bfc3cfdb594f9fcb5a5dc61d5a11ba92b2a7c078d66b7b7"
+        }
+      },
+      "authentication_policy": "Optional bearer applied to initial HTTPS huggingface.co request only; all redirects strip authentication; no token persisted"
+    }
+  },
+  "source_binding": "Explicit original-source repository and immutable commit; original config/tokeniser/template/licence independently hash-verified. This records provenance, not proof that quantisation preserves every floating-point tensor."
+}

@@ -1,0 +1,59 @@
+{
+  "schema_version": 3,
+  "run_id": "6febb502-4838-42d4-89b6-9adeab915be3",
+  "ownership_nonce": "cb837736-4e98-4e8a-890f-1ac405910d96",
+  "attempt_key": "1c25932b-ad4d-4fe4-b493-d2a2cdfa5dfe",
+  "receipt_path": "reports/comparative/search/round-002/trials/deepseek-coder-6_7b-q4_k_m/comparison/sandbox/1c25932b-ad4d-4fe4-b493-d2a2cdfa5dfe.prepared.json",
+  "report_path": "reports/comparative/search/round-002/trials/deepseek-coder-6_7b-q4_k_m/comparison/sandbox/6febb502-4838-42d4-89b6-9adeab915be3.json",
+  "task": {
+    "id": "dispatch.finish_order",
+    "source_id": "private-dispatch-v1",
+    "lineage_id": "local-contract-pack-13",
+    "split": "development",
+    "specification": "Input is an array of [arrival,duration], nonnegative integers. A single server processes input order, starting each job at max(previous finish,arrival). Return finish times.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "bd65bbcd2943471a0fa07872b15464820b0d1c4b37db971d13f3b63850727773",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": [
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            2
+          ],
+          [
+            8,
+            1
+          ]
+        ],
+        "expected": [
+          3,
+          5,
+          9
+        ]
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "Here is the Rust code that solves the problem:\n\n```rust\nuse serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let mut jobs = Vec::new();\n    for value in input.as_array().unwrap() {\n        let job: Vec<i64> = value.as_array().unwrap().iter().map(|v| v.as_i64().unwrap()).collect();\n        jobs.push(job);\n    }\n\n    jobs.sort_by(|a, b| a[0].cmp(&b[0]));\n\n    let mut finish_times = Vec::new();\n    let mut current_time = 0;\n    for job in jobs {\n        current_time = std::cmp::max(current_time, job[0]);\n        current_time += job[1];\n        finish_times.push(current_time);\n    }\n\n    let finish_times: Value = serde_json::to_value(finish_times).unwrap();\n    finish_times\n}\n```\n\nThis function first parses the input JSON array into a vector of vectors of i64. It then sorts the jobs by their arrival time. It then iterates over the jobs, updating the current time to be the maximum of the current time and the job's arrival time, adds the job's duration to the current time, and pushes the new current time onto the finish times vector. Finally, it converts the finish times vector back into a JSON value and returns it.",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/comparative/search/round-002/trials/deepseek-coder-6_7b-q4_k_m/comparison/sandbox"
+  },
+  "code_sha256": "c22e69a24782fdc7c4d14972b43327b068c2029eb55474bf2d38e45154515227",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

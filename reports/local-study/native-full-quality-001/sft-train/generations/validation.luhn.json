@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "a5b39d544c85b76111246b8fda40c638ce104251a1c56368277fef8fe4033eb6",
+  "task_id": "validation.luhn",
+  "source_id": "private-validation-v1",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an ASCII string. Return true iff it contains at least two decimal digits, no other characters, and passes the Luhn checksum (rightmost digit undoubled).\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":\"79927398713\",\"expected\":true}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let s = input.as_str().unwrap();\n    let mut num = 0;\n    let mut has_digit = false;\n    for c in s.chars() {\n        if c.is_digit(10) {\n            num = num * 10 + c.to_digit(10).unwrap() as i64;\n            has_digit = true;\n        }\n    }\n    if !has_digit {\n        return Value::Bool(false);\n    }\n    let mut sum = 0;\n    let mut has_odd = false;\n    for c in s.chars().rev() {\n        if c.is_digit(10) {\n            sum += c.to_digit(10).unwrap() as i64;\n            has_odd = true;\n        }\n    }\n    if !has_odd {\n        return Value::Bool(false);\n    }\n    let mut doubled = num;\n    while doubled > 0 {\n        let digit = doubled % 10;\n        doubled /= 10;\n        if digit % 2 == 0 {\n            sum += digit;\n        } else {\n            sum -= digit;\n        }\n    }\n    Value::Bool(sum % 10 == 0)\n}\n```",
+    "checkpoint_id": "e2bcd135527659042304d936fa56c7240f6f96a43b9f81f2a888c38b7762a949",
+    "finish_reason": "stop",
+    "input_tokens": 243,
+    "output_tokens": 263,
+    "elapsed_ms": 11366,
+    "complete": true
+  },
+  "model_error": null
+}

@@ -1,0 +1,40 @@
+{
+  "run_id": "d9a8cc73-ea04-49a4-8767-293030ab7445",
+  "task_id": "stock.duplicates",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error[E0599]: no method named `as_str` found for reference `&Vec<Value>` in the current scope\n --> /candidate/main.rs:8:29\n  |\n8 |         let str_item = item.as_str().unwrap();\n  |                             ^^^^^^\n  |\nhelp: there is a method `as_ptr` with a similar name\n  |\n8 -         let str_item = item.as_str().unwrap();\n8 +         let str_item = item.as_ptr().unwrap();\n  |\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0599`.\n"
+  ],
+  "cases_total": 6,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "b98560fb4b373a1093b9ead942eabbb1793bd1f62bbc580eaf17ec46a8426af2",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/explore/round-001/cohorts/76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c/rollouts/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/explore/round-001/cohorts/76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c/rollouts/sandbox/d9a8cc73-ea04-49a4-8767-293030ab7445.audit.json",
+  "audit_sha256": "82fc98b7a0d0df34b2a853be473c66a3bd134f9ce4e9779e314837f330637b39",
+  "failure": "compilation failed: error[E0599]: no method named `as_str` found for reference `&Vec<Value>` in the current scope\n --> /candidate/main.rs:8:29\n  |\n8 |         let str_item = item.as_str().unwrap();\n  |                             ^^^^^^\n  |\nhelp: there is a method `as_ptr` with a similar name\n  |\n8 -         let str_item = item.as_str().unwrap();\n8 +         let str_item = item.as_ptr().unwrap();\n  |\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0599`.\n",
+  "duration_ms": 14137,
+  "timeout_evidence": null,
+  "lifecycle_evidence": {
+    "receipt_path": "reports/local-study/explore/round-001/cohorts/76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c/rollouts/sandbox/d9a8cc73-ea04-49a4-8767-293030ab7445.lifecycle.json",
+    "receipt_sha256": "6a526d03a4368e6d2ae7a74b44d7c95a5170daaac7175d6b8d70c38ad699d690"
+  }
+}

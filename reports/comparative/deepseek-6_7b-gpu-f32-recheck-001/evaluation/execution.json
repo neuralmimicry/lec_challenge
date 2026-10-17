@@ -1,0 +1,69 @@
+[
+  {
+    "actual_execution": null,
+    "after_loading": {
+      "compute_processes": {
+        "csv": "955252, state/engines/f5d2f2f520f0c7a69186163c33bd28207c37414fb3cdae0499c169957a846944/lec-distil, 114\n",
+        "observed_unix_ms": 1792103327031
+      },
+      "gpu": {
+        "csv": "0, NVIDIA GeForce RTX 2080, 595.91.07, 8192, 248, 18\n",
+        "observed_unix_ms": 1792103327009
+      }
+    },
+    "before_loading": {
+      "compute_processes": {
+        "csv": "",
+        "observed_unix_ms": 1792103295227
+      },
+      "gpu": {
+        "csv": "0, NVIDIA GeForce RTX 2080, 595.91.07, 8192, 132, 18\n",
+        "observed_unix_ms": 1792103295192
+      }
+    },
+    "event": "model_loading",
+    "loading_error": "model loading failed: GGUF/source rotary scaling differs",
+    "model": "deepseek-coder-6_7b-q4_k_m",
+    "plan_sha256": "c0eb6b9a6ac62bd4f1c35803db2f748b8cdf1ac7607088924c2c80518e92289b",
+    "requested_runtime": {
+      "device": {
+        "cuda": {
+          "ordinal": 0
+        }
+      },
+      "dtype": "f32"
+    }
+  },
+  {
+    "actual_execution": null,
+    "after_generation": {
+      "compute_processes": {
+        "csv": "955252, state/engines/f5d2f2f520f0c7a69186163c33bd28207c37414fb3cdae0499c169957a846944/lec-distil, 114\n",
+        "observed_unix_ms": 1792103330103
+      },
+      "gpu": {
+        "csv": "0, NVIDIA GeForce RTX 2080, 595.91.07, 8192, 248, 2\n",
+        "observed_unix_ms": 1792103330080
+      }
+    },
+    "event": "model_generation_complete",
+    "model": "deepseek-coder-6_7b-q4_k_m",
+    "plan_sha256": "c0eb6b9a6ac62bd4f1c35803db2f748b8cdf1ac7607088924c2c80518e92289b"
+  },
+  {
+    "after_release": {
+      "compute_processes": {
+        "csv": "955252, state/engines/f5d2f2f520f0c7a69186163c33bd28207c37414fb3cdae0499c169957a846944/lec-distil, 114\n",
+        "observed_unix_ms": 1792103330520
+      },
+      "gpu": {
+        "csv": "0, NVIDIA GeForce RTX 2080, 595.91.07, 8192, 248, 2\n",
+        "observed_unix_ms": 1792103330497
+      }
+    },
+    "event": "model_released",
+    "model": "deepseek-coder-6_7b-q4_k_m",
+    "plan_sha256": "c0eb6b9a6ac62bd4f1c35803db2f748b8cdf1ac7607088924c2c80518e92289b",
+    "synchronized_before_release": false
+  }
+]

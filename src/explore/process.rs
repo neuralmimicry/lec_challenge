@@ -7,6 +7,55 @@ use tokio::{
     process::Command,
 };
 
+/// A missing downstream report must not conceal the child's original failure.
+/// Call on a blocking worker: receipt verification may hash a substantial log.
+pub(crate) fn required_report(
+    root: &Path,
+    path: &Path,
+    process_ok: bool,
+    attempt: Option<&Artefact>,
+) -> Result<Value> {
+    match fs::read(path) {
+        Ok(bytes) => serde_json::from_slice(&bytes)
+            .with_context(|| format!("invalid required stage report {}", path.display())),
+        Err(error) if error.kind() == std::io::ErrorKind::NotFound => {
+            let Some(attempt) = attempt else {
+                anyhow::bail!(
+                    "required report {} is absent; process_success={process_ok}; no durable attempt receipt",
+                    path.display()
+                );
+            };
+            let receipt: Value = serde_json::from_slice(&fs::read(attempt.verify(root)?)?)?;
+            let stderr: Artefact = serde_json::from_value(receipt["stderr"].clone())?;
+            let stderr_path = stderr.verify(root)?;
+            use std::io::{Read, Seek, SeekFrom};
+            let mut file = fs::File::open(&stderr_path)?;
+            file.seek(SeekFrom::End(-(stderr.bytes.min(8192) as i64)))?;
+            let mut bytes = Vec::new();
+            file.take(8192).read_to_end(&mut bytes)?;
+            let tail = String::from_utf8_lossy(&bytes);
+            let cause = tail
+                .lines()
+                .rev()
+                .find_map(|line| line.strip_prefix("FAILURE: "))
+                .unwrap_or("child emitted no structured failure line")
+                .chars()
+                .take(1024)
+                .collect::<String>();
+            anyhow::bail!(
+                "required report {} is absent; process_success={process_ok}; exit_code={}; child failure: {cause}; attempt={}; stderr={}",
+                path.display(),
+                receipt["exit_code"],
+                attempt.path.display(),
+                stderr.path.display()
+            );
+        }
+        Err(error) => {
+            Err(error).with_context(|| format!("read required stage report {}", path.display()))
+        }
+    }
+}
+
 /// Fixed-size chunks also bound a child's unbroken or very long log lines.
 /// Persist bytes before forwarding them, then sync before publishing a receipt.
 async fn tee<R: AsyncRead + Unpin, W: AsyncWrite + Unpin>(
@@ -252,6 +301,46 @@ pub(super) async fn stage_with_cpu(
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn missing_report_retains_verified_child_failure_and_rejects_changed_logs() {
+        let root = tempfile::tempdir().unwrap();
+        let mut log = "é".repeat(5000);
+        log.push_str("\nFAILURE: host deadline terminated probe pids\n");
+        artefact::atomic_write(&root.path().join("stderr.log"), log.as_bytes()).unwrap();
+        let stderr = Artefact::capture(root.path(), "stderr.log").unwrap();
+        artefact::write_json(
+            &root.path().join("result.json"),
+            &json!({"success":false,"exit_code":1,"stderr":stderr}),
+        )
+        .unwrap();
+        let receipt = Artefact::capture(root.path(), "result.json").unwrap();
+        let path = root.path().join("missing-report.json");
+        let error = required_report(root.path(), &path, false, Some(&receipt)).unwrap_err();
+        assert!(
+            error
+                .to_string()
+                .contains("host deadline terminated probe pids")
+        );
+        assert!(error.to_string().contains("exit_code=1"));
+        assert!(error.to_string().contains("result.json"));
+        artefact::atomic_write(&root.path().join("stderr.log"), b"forged replacement log").unwrap();
+        assert!(
+            !required_report(root.path(), &path, false, Some(&receipt))
+                .unwrap_err()
+                .to_string()
+                .contains("forged replacement")
+        );
+    }
+
+    #[test]
+    fn successful_process_with_no_output_is_still_an_error() {
+        let root = tempfile::tempdir().unwrap();
+        let error =
+            required_report(root.path(), &root.path().join("absent.json"), true, None).unwrap_err();
+        assert!(error.to_string().contains("process_success=true"));
+        assert!(!root.path().join("absent.json").exists());
+    }
+
     #[tokio::test]
     async fn long_unbroken_stderr_is_preserved_in_bounded_chunks() {
         let tmp = tempfile::tempdir().unwrap();

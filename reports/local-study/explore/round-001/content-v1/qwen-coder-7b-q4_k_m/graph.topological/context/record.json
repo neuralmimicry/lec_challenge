@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "evidence_kind": "actual_local_teacher_content_observation",
+  "plan": {
+    "path": "reports/local-study/explore/round-001/content-v1/qwen-coder-7b-q4_k_m/graph.topological/context/plan.json",
+    "sha256": "c6eff93e1aee3b70a7fe13a0a24e3654b8aacad975047a5e860a29ba18ddcfad",
+    "bytes": 3566
+  },
+  "raw_generation": {
+    "path": "reports/local-study/explore/round-001/content-v1/qwen-coder-7b-q4_k_m/graph.topological/context/raw-generation.json",
+    "sha256": "ef1dedef0f1e790a428cc56f23fe740494c433a84a3db2928b4d2d12d788dac6",
+    "bytes": 2469
+  },
+  "sandbox_report": null,
+  "grading_error": null,
+  "success": false
+}

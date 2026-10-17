@@ -1,0 +1,33 @@
+{
+  "run_id": "0f58bc4d-0e9d-4187-a127-eb678960ca2e",
+  "task_id": "tables.group_sums",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error[E0368]: binary assignment operation `+=` cannot be applied to type `serde_json::Number`\n  --> /candidate/main.rs:9:9\n   |\n 9 |         *map.entry(Number::from(key)).or_insert(Number::from(0)) += Number::from(value);\n   |         --------------------------------------------------------^^^^^^^^^^^^^^^^^^^^^^^\n   |         |\n   |         cannot use `+=` on type `serde_json::Number`\n   |\nnote: `serde_json::Number` does not implement `AddAssign`\n  --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/number.rs:22:1\n   |\n22 | pub struct Number {\n   | ^^^^^^^^^^^^^^^^^ `serde_json::Number` is defined in another crate\n\nerror[E0599]: `serde_json::Number` is not an iterator\n  --> /candidate/main.rs:13:32\n   |\n13 |     entries.sort_by(|a, b| a.0.cmp(&b.0));\n   |                                ^^^ `serde_json::Number` is not an iterator\n   |\n  ::: /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/number.rs:22:1\n   |\n22 | pub struct Number {\n   | ----------------- doesn't satisfy `serde_json::Number: Iterator`\n   |\n   = note: the following trait bounds were not satisfied:\n           `serde_json::Number: Iterator`\n           which is required by `&mut serde_json::Number: Iterator`\n\nerror: aborting due to 2 previous errors\n\nSome errors have detailed explanations: E0368, E0599.\nFor more information about an error, try `rustc --explain E0368`.\n"
+  ],
+  "cases_total": 5,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "0bf995b5f69865792503015f6af52b457c861b679877956e939c2137ddb4a562",
+  "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+  "oracle_sha256": "a734f6d465714cbebb072790fedff161d2fc28cbb257b3d04cee0feaf8b5b5fe",
+  "code_sha256": "5b9074f9e402b732582ebf513fdb6543e5b876fac613dab1c49acb515903c492",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:1",
+    "expected_image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/comparative/coding-development/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/comparative/coding-development/sandbox/0f58bc4d-0e9d-4187-a127-eb678960ca2e.audit.json",
+  "audit_sha256": "f9ab5ffe190ff41e6b1ad52d32e84914f61e8177d5a5534066a68b7ed538c390",
+  "failure": "compilation failed: error[E0368]: binary assignment operation `+=` cannot be applied to type `serde_json::Number`\n  --> /candidate/main.rs:9:9\n   |\n 9 |         *map.entry(Number::from(key)).or_insert(Number::from(0)) += Number::from(value);\n   |         --------------------------------------------------------^^^^^^^^^^^^^^^^^^^^^^^\n   |         |\n   |         cannot use `+=` on type `serde_json::Number`\n   |\nnote: `serde_json::Number` does not implement `AddAssign`\n  --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/number.rs:22:1\n   |\n22 | pub struct Number {\n   | ^^^^^^^^^^^^^^^^^ `serde_json::Number` is defined in another crate\n\nerror[E0599]: `serde_json::Number` is not an iterator\n  --> /candidate/main.rs:13:32\n   |\n13 |     entries.sort_by(|a, b| a.0.cmp(&b.0));\n   |                                ^^^ `serde_json::Number` is not an iterator\n   |\n  ::: /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/number.rs:22:1\n   |\n22 | pub struct Number {\n   | ----------------- doesn't satisfy `serde_json::Number: Iterator`\n   |\n   = note: the following trait bounds were not satisfied:\n           `serde_json::Number: Iterator`\n           which is required by `&mut serde_json::Number: Iterator`\n\nerror: aborting due to 2 previous errors\n\nSome errors have detailed explanations: E0368, E0599.\nFor more information about an error, try `rustc --explain E0368`.\n",
+  "duration_ms": 5076,
+  "timeout_evidence": null
+}

@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "448b2d86361801414c47e32433b6e0bce070909a486feaecc2fd744b94dca8f4",
+  "task_id": "dispatch.round_robin",
+  "source_id": "private-dispatch-v1",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input {jobs,quantum} has nonnegative integer work amounts and positive quantum. Cycle job indices, giving up to quantum work each turn; return indices in order of completion, initially zero-work jobs first in index order.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":{\"jobs\":[3,1,2],\"quantum\":2},\"expected\":[1,2,0]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let jobs = input.as_array().unwrap();\n    let quantum = input.as_i64().unwrap();\n\n    let mut indices = Vec::new();\n    let mut current_work = 0;\n\n    for (index, job) in jobs.iter().enumerate() {\n        let job_value = job.as_i64().unwrap();\n        if job_value > 0 {\n            current_work += job_value;\n            indices.push(index);\n        }\n    }\n\n    indices.sort_unstable_by(|a, b| current_work.cmp(&indices[b]));\n\n    serde_json::Value::Array(indices)\n}\n```",
+    "checkpoint_id": "b8b51c10874c1609e36c1b15ab8f0c0709d645f397d1979f7e17b4aea472ba5a",
+    "finish_reason": "stop",
+    "input_tokens": 259,
+    "output_tokens": 146,
+    "elapsed_ms": 33046,
+    "complete": true
+  },
+  "model_error": null
+}

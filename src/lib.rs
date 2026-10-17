@@ -1,5 +1,6 @@
 //! Native Rust distillation components. Evidence remains distinct from fixtures.
 pub mod artefact;
+pub mod assessment;
 pub mod bitnet;
 pub mod comparative;
 pub mod cost;

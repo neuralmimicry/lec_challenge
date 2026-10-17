@@ -1,0 +1,38 @@
+{
+  "model_id": "qwen3-4b-instruct-2507-q4_k_m",
+  "task_id": "encoding.caesar",
+  "source_id": "private-encoding-v1",
+  "specification_sha256": "6d5a2e4829f195b5e54e08b45300ecba1a3b178763b2ee6e7a9c90c50c633efa",
+  "seed": 1729,
+  "plan_sha256": "6d343a1ee585d9daf2a7fbaea768580a60e310abaf7186964443ef83a9a1013d",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input {text,shift} has ASCII text and integer shift. Rotate lowercase a..z only modulo 26; preserve all other characters.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":{\"shift\":3,\"text\":\"xyz A!\"},\"expected\":\"abc A!\"}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let input_map = input.as_object().expect(\"Input must be an object\");\n    let shift = input_map\n        .get(\"shift\")\n        .and_then(|v| v.as_i64())\n        .expect(\"Input must have a 'shift' field\");\n    let text = input_map\n        .get(\"text\")\n        .and_then(|v| v.as_str())\n        .expect(\"Input must have a 'text' field\");\n\n    let mut result = String::new();\n    for c in text.chars() {\n        if c >= 'a' && c <= 'z' {\n            let shifted = ((c as u8 - b'a' + shift as u8) % 26) as u8;\n            result.push((b'a' + shifted) as char);\n        } else {\n            result.push(c);\n        }\n    }\n\n    serde_json::json!(result)\n}\n```",
+    "checkpoint_id": "2fde00ce69dd4899c70d020845e2638353015bba0fdf161b3eb965f2bca4464e",
+    "finish_reason": "stop",
+    "input_tokens": 216,
+    "output_tokens": 207,
+    "elapsed_ms": 34026,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison/qwen3-4b-instruct-2507-q4_k_m/encoding.caesar.generation.json",
+    "sha256": "6a8ce6014891a3ccb81fb923fff3f0e1136cf94fe237e5ec431b329bc4e8b5e1",
+    "bytes": 4604
+  },
+  "sandbox_report": {
+    "path": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison/sandbox/b8f51031-689b-4fa0-9416-c80f7a749a5d.json",
+    "sha256": "2fc5646c01542a93aa08e4df88b5bcdab8d75ba463e6d48c075f99c920d26335",
+    "bytes": 1835
+  },
+  "grading_error": null,
+  "success": false
+}

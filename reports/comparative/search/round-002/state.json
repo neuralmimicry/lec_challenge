@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "freeze_sha256": "5f4582556afb85e0800e33b591585b19bdcbe7c4b48f115a2b934bae61f15597",
+  "initialised": true,
+  "trials": [
+    {
+      "id": "qwen-coder-7b-q4_k_m",
+      "model_id": "Qwen/Qwen2.5-Coder-7B-Instruct-GGUF",
+      "source_model_id": "Qwen/Qwen2.5-Coder-7B-Instruct-GGUF",
+      "revision": "13fb94bfda8c8cf22497dc57b78f391a9acb426a",
+      "directory": "offline_bundle/comparative/qwen-coder-7b-q4_k_m",
+      "role": "coding_teacher",
+      "status": "verified_initial_comparison",
+      "passed": 7,
+      "planned": 16,
+      "errors": 0,
+      "qualified": false,
+      "qualification_comparison": null,
+      "qualification_report": null,
+      "qualification_passed": null,
+      "qualification_errors": null,
+      "comparison": "reports/comparative/search/round-001/trials/qwen-coder-7b-q4_k_m/comparison",
+      "report": {
+        "path": "reports/comparative/search/round-001/trials/qwen-coder-7b-q4_k_m/comparison/report.json",
+        "sha256": "6f43b8184d872bb1e397f9a5d5f66bf27251b9f50ad2e26f3f122d90cf83696b",
+        "bytes": 1122
+      },
+      "reason": null,
+      "elapsed_seconds": null,
+      "imported": true,
+      "pruned": false
+    },
+    {
+      "id": "deepseek-coder-6_7b-q4_k_m",
+      "model_id": "TheBloke/deepseek-coder-6.7B-instruct-GGUF",
+      "source_model_id": "deepseek-ai/deepseek-coder-6.7b-instruct",
+      "revision": "9e221e6b41cb1bf1c5d8f9718e81e3dc781f7557",
+      "directory": "offline_bundle/comparative/deepseek-coder-6_7b-q4_k_m",
+      "role": "coding_teacher",
+      "status": "complete_with_errors_inconclusive",
+      "passed": 0,
+      "planned": 16,
+      "errors": 1,
+      "qualified": false,
+      "qualification_comparison": null,
+      "qualification_report": null,
+      "qualification_passed": null,
+      "qualification_errors": null,
+      "comparison": "reports/comparative/search/round-002/trials/deepseek-coder-6_7b-q4_k_m/comparison",
+      "report": {
+        "path": "reports/comparative/search/round-002/trials/deepseek-coder-6_7b-q4_k_m/comparison/report.json",
+        "sha256": "8dc979c2197c789386cdb84f2baeecf0a99173d7f7f8c367ea972cbfff8fe0b8",
+        "bytes": 1132
+      },
+      "reason": "CUDA GPU NVIDIA GeForce RTX 2080 selected: estimated resident 5992472800 bytes fits guarded free VRAM 6806831104 bytes",
+      "elapsed_seconds": 1082.900303683,
+      "imported": false,
+      "pruned": false
+    },
+    {
+      "id": "qwen3-4b-instruct-2507-q4_k_m",
+      "model_id": "bartowski/Qwen_Qwen3-4B-Instruct-2507-GGUF",
+      "source_model_id": "Qwen/Qwen3-4B-Instruct-2507",
+      "revision": "ae44f08e1392f39c0e474af10c3ff8355c8b6688",
+      "directory": "offline_bundle/comparative/qwen3-4b-instruct-2507-q4_k_m",
+      "role": "coding_teacher",
+      "status": "verified_below_threshold",
+      "passed": 3,
+      "planned": 16,
+      "errors": 0,
+      "qualified": false,
+      "qualification_comparison": null,
+      "qualification_report": null,
+      "qualification_passed": null,
+      "qualification_errors": null,
+      "comparison": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison",
+      "report": {
+        "path": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison/report.json",
+        "sha256": "dd434d210435f79d03181e7e124143d3e4a8dd1f04fe062effd7fc166b142215",
+        "bytes": 1138
+      },
+      "reason": "CUDA GPU NVIDIA GeForce RTX 2080 selected: estimated resident 4120345312 bytes fits guarded free VRAM 6831367783 bytes",
+      "elapsed_seconds": 1000.673505095,
+      "imported": false,
+      "pruned": true
+    }
+  ],
+  "download_bytes_reserved": 0,
+  "cached_only": true,
+  "connectivity_reason": "Explicit offline mode: cached/downloaded models only; zero HTTP requests",
+  "events": [
+    {
+      "candidate": "qwen3-4b-instruct-2507-q4_k_m",
+      "evidence": {
+        "bytes": 1563,
+        "path": "reports/comparative/search/round-002/attempts/qwen3-4b-instruct-2507-q4_k_m/1fd2c1b1-3728-4d0f-b831-e0137880fa07.json",
+        "sha256": "953d82532a715e485ea531f6c55495e2417cd91b826b0d4cfc0d0e6ef7ba9472"
+      },
+      "kind": "attempt_failed_before_retry",
+      "recorded_unix_ms": 1792136888810
+    },
+    {
+      "evidence": {
+        "allocated_bytes_removed": 2497286144,
+        "candidate_id": "qwen3-4b-instruct-2507-q4_k_m",
+        "directory": "offline_bundle/comparative/qwen3-4b-instruct-2507-q4_k_m",
+        "dry_run": false,
+        "files": [
+          "offline_bundle/comparative/qwen3-4b-instruct-2507-q4_k_m/Qwen_Qwen3-4B-Instruct-2507-Q4_K_M.gguf"
+        ],
+        "metadata_preserved": true,
+        "planned_bytes": 2497280736,
+        "reclaimed_bytes": 2497280736,
+        "retained_files": [
+          "offline_bundle/comparative/qwen3-4b-instruct-2507-q4_k_m/.hub-download.lock",
+          "offline_bundle/comparative/qwen3-4b-instruct-2507-q4_k_m/.teacher-search-owned.json",
+          "offline_bundle/comparative/qwen3-4b-instruct-2507-q4_k_m/README.md",
+          "offline_bundle/comparative/qwen3-4b-instruct-2507-q4_k_m/gguf-assets.json",
+          "offline_bundle/comparative/qwen3-4b-instruct-2507-q4_k_m/gguf-hub-metadata.json",
+          "offline_bundle/comparative/qwen3-4b-instruct-2507-q4_k_m/gguf-plan.json",
+          "offline_bundle/comparative/qwen3-4b-instruct-2507-q4_k_m/gguf-provenance.json",
+          "offline_bundle/comparative/qwen3-4b-instruct-2507-q4_k_m/source/LICENSE",
+          "offline_bundle/comparative/qwen3-4b-instruct-2507-q4_k_m/source/README.md",
+          "offline_bundle/comparative/qwen3-4b-instruct-2507-q4_k_m/source/assets.json",
+          "offline_bundle/comparative/qwen3-4b-instruct-2507-q4_k_m/source/config.json",
+          "offline_bundle/comparative/qwen3-4b-instruct-2507-q4_k_m/source/generation_config.json",
+          "offline_bundle/comparative/qwen3-4b-instruct-2507-q4_k_m/source/hub-metadata.json",
+          "offline_bundle/comparative/qwen3-4b-instruct-2507-q4_k_m/source/hub-plan.json",
+          "offline_bundle/comparative/qwen3-4b-instruct-2507-q4_k_m/source/hub-provenance.json",
+          "offline_bundle/comparative/qwen3-4b-instruct-2507-q4_k_m/source/merges.txt",
+          "offline_bundle/comparative/qwen3-4b-instruct-2507-q4_k_m/source/tokenizer.json",
+          "offline_bundle/comparative/qwen3-4b-instruct-2507-q4_k_m/source/tokenizer_config.json",
+          "offline_bundle/comparative/qwen3-4b-instruct-2507-q4_k_m/source/vocab.json"
+        ]
+      },
+      "kind": "pruned_scored_inactive_model"
+    }
+  ]
+}

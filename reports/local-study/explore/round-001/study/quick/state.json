@@ -1,0 +1,449 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "4b52fff04fe6a793004027f2c0b99fbaa99efbd51fce16022553e61463c3744d",
+  "engine": {
+    "executable": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/state/engines/3f348bdfa71c49df5b5d0b7581ae9ad3114645127f99abbec9e4aac1064563bd/lec-distil",
+    "sha256": "3f348bdfa71c49df5b5d0b7581ae9ad3114645127f99abbec9e4aac1064563bd",
+    "bytes": 46867184,
+    "arguments": [
+      "distillation-arm-worker"
+    ],
+    "cpu_build": {
+      "build": {
+        "schema_version": 1,
+        "protocol": "explicit_cpu_simd_build_v1",
+        "architecture": "x86_64",
+        "profile": "avx2-fma-f16c",
+        "target_triple": "x86_64-unknown-linux-gnu",
+        "required_features": [
+          "avx",
+          "avx2",
+          "f16c",
+          "fma"
+        ],
+        "rustflags": [
+          "-C",
+          "target-cpu=generic",
+          "-C",
+          "debug-assertions=no",
+          "-C",
+          "panic=unwind",
+          "-C",
+          "target-feature=+avx2,+fma,+f16c"
+        ],
+        "encoded_rustflags": "-C\u001ftarget-cpu=generic\u001f-C\u001fdebug-assertions=no\u001f-C\u001fpanic=unwind\u001f-C\u001ftarget-feature=+avx2,+fma,+f16c",
+        "rustc_version_verbose": "rustc 1.98.1 (48a229cea 2026-09-01)\nbinary: rustc\ncommit-hash: 48a229ceaefd4985c50990b14116b6d856af0985\ncommit-date: 2026-09-01\nhost: x86_64-unknown-linux-gnu\nrelease: 1.98.1\nLLVM version: 22.1.8\n",
+        "rustc_cfg": [
+          "panic=\"unwind\"",
+          "target_abi=\"\"",
+          "target_arch=\"x86_64\"",
+          "target_endian=\"little\"",
+          "target_env=\"gnu\"",
+          "target_family=\"unix\"",
+          "target_feature=\"avx\"",
+          "target_feature=\"avx2\"",
+          "target_feature=\"f16c\"",
+          "target_feature=\"fma\"",
+          "target_feature=\"sse\"",
+          "target_feature=\"sse2\"",
+          "target_feature=\"sse3\"",
+          "target_feature=\"sse4.1\"",
+          "target_feature=\"sse4.2\"",
+          "target_feature=\"ssse3\"",
+          "target_has_atomic=\"16\"",
+          "target_has_atomic=\"32\"",
+          "target_has_atomic=\"64\"",
+          "target_has_atomic=\"8\"",
+          "target_has_atomic=\"ptr\"",
+          "target_has_atomic_primitive_alignment=\"16\"",
+          "target_has_atomic_primitive_alignment=\"32\"",
+          "target_has_atomic_primitive_alignment=\"64\"",
+          "target_has_atomic_primitive_alignment=\"8\"",
+          "target_has_atomic_primitive_alignment=\"ptr\"",
+          "target_os=\"linux\"",
+          "target_pointer_width=\"64\"",
+          "target_vendor=\"unknown\"",
+          "unix"
+        ],
+        "cargo_lock_sha256": "bd62f0019341d1a6432ba9153fefdfda757ac26856dc5da297995462176742bb",
+        "cargo_features": [
+          "cuda"
+        ],
+        "resolved_rustc": {
+          "executable": "/home/pbisaacs/.rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/rustc",
+          "sha256": "859254978c0a0402c32f949f6de0d99aee73be8d15f45aac00ae1448aac51e74",
+          "bytes": 645952
+        }
+      },
+      "executable_sha256": "3f348bdfa71c49df5b5d0b7581ae9ad3114645127f99abbec9e4aac1064563bd",
+      "executable_bytes": 46867184
+    }
+  },
+  "fidelity": "quick",
+  "selected_arms": [
+    "arm-00886e19edc356c899a5d992",
+    "arm-10219d27497b8da52d90f257",
+    "arm-3028a5aca5b8c80b3def6618",
+    "arm-62a00141a349715002f468e5",
+    "arm-79f646f375756274bdaf0015",
+    "arm-134a14dfa18d27267e5c720f",
+    "arm-d81f55ca66908cb5884d507c",
+    "arm-2793b743b590917d497c4794",
+    "arm-b5c1964d2b49d0b0089f6f23",
+    "arm-b1ee8c0e1c0ffe7465f83fe0",
+    "arm-847339aa0a30649540064132",
+    "arm-e0f1e899df5266bf075ca1f0",
+    "arm-a0e91154cb3afca7a98dca8a",
+    "arm-e4c04a32d1c678bdd7183354",
+    "arm-989bab1aa424fef5a34fdc98",
+    "arm-04541766c8addf1579c15fb1",
+    "arm-e3c36df2275a0125ab210b76",
+    "arm-d1e60792e1b570718672cd65",
+    "arm-28820cc9ffa9fb0b093a2c6f",
+    "arm-ea25d756a3c986b23bf198a5",
+    "arm-99704c072523f04c50b6dd34",
+    "arm-880437ac150b754b9d0a5f0d",
+    "arm-b9458440ab0f5cea00cb9681",
+    "arm-0cd2436e88eca3234881043d"
+  ],
+  "selection_evidence": null,
+  "offline": false,
+  "trials": {
+    "arm-00886e19edc356c899a5d992": {
+      "id": "arm-00886e19edc356c899a5d992",
+      "status": "completed_real_training",
+      "attempts": 1,
+      "request": {
+        "path": "reports/local-study/explore/round-001/study/quick/arms/arm-00886e19edc356c899a5d992/request.json",
+        "sha256": "34117c908c37703aa0881464d2bee6c9b65178fc803c5f66a93497e9c8da51f3",
+        "bytes": 16668
+      },
+      "outcome": {
+        "path": "reports/local-study/explore/round-001/study/quick/arms/arm-00886e19edc356c899a5d992/outcome.json",
+        "sha256": "4eb93e024607cd0bb9747378fadc81861d9ec8fbed51d95ba9e6bea0f2f1f710",
+        "bytes": 2585
+      },
+      "reason": null,
+      "exit_code": 0,
+      "elapsed_seconds": 603.769336759
+    },
+    "arm-10219d27497b8da52d90f257": {
+      "id": "arm-10219d27497b8da52d90f257",
+      "status": "completed_real_training",
+      "attempts": 1,
+      "request": {
+        "path": "reports/local-study/explore/round-001/study/quick/arms/arm-10219d27497b8da52d90f257/request.json",
+        "sha256": "47a41cd46392e06f09764d0bd05c60e2aad81ec6ffe220b753444287eca0d9f6",
+        "bytes": 16673
+      },
+      "outcome": {
+        "path": "reports/local-study/explore/round-001/study/quick/arms/arm-10219d27497b8da52d90f257/outcome.json",
+        "sha256": "b4b8027e89a7a547f5726a3d160cef176a57913af84c9d9e1ee3e6bab4373ee6",
+        "bytes": 2601
+      },
+      "reason": null,
+      "exit_code": 0,
+      "elapsed_seconds": 598.290238605
+    },
+    "arm-134a14dfa18d27267e5c720f": {
+      "id": "arm-134a14dfa18d27267e5c720f",
+      "status": "completed_real_training",
+      "attempts": 1,
+      "request": {
+        "path": "reports/local-study/explore/round-001/study/quick/arms/arm-134a14dfa18d27267e5c720f/request.json",
+        "sha256": "1ace60be87fc01b866e9d064d165f1a5828eeed67c593f1b1899541bab06b572",
+        "bytes": 16690
+      },
+      "outcome": {
+        "path": "reports/local-study/explore/round-001/study/quick/arms/arm-134a14dfa18d27267e5c720f/outcome.json",
+        "sha256": "da368cb11c2ee8dafc0e541c5de5348ca0e7e04e6566da37f06757e9d81349ed",
+        "bytes": 2599
+      },
+      "reason": null,
+      "exit_code": 0,
+      "elapsed_seconds": 596.352397099
+    },
+    "arm-2793b743b590917d497c4794": {
+      "id": "arm-2793b743b590917d497c4794",
+      "status": "interrupted_progress_saved",
+      "attempts": 1,
+      "request": {
+        "path": "reports/local-study/explore/round-001/study/quick/arms/arm-2793b743b590917d497c4794/request.json",
+        "sha256": "b17c5dc7e228bbf9cdc0abc348b497575f1f60914f54238cc7b74d709c656a2c",
+        "bytes": 16690
+      },
+      "outcome": null,
+      "reason": "study worker was interrupted or reached its time budget; validated optimiser progress is retained",
+      "exit_code": null,
+      "elapsed_seconds": 305.276589172
+    },
+    "arm-3028a5aca5b8c80b3def6618": {
+      "id": "arm-3028a5aca5b8c80b3def6618",
+      "status": "failed",
+      "attempts": 1,
+      "request": {
+        "path": "reports/local-study/explore/round-001/study/quick/arms/arm-3028a5aca5b8c80b3def6618/request.json",
+        "sha256": "d89dc85a13db62f87d09ac0d4ae26ca81ccaff73ddfe226264a1aaf7aa5ad5db",
+        "bytes": 16666
+      },
+      "outcome": null,
+      "reason": "study worker failed with exit code Some(1); see retained stderr.log",
+      "exit_code": 1,
+      "elapsed_seconds": 108.67009202
+    },
+    "arm-62a00141a349715002f468e5": {
+      "id": "arm-62a00141a349715002f468e5",
+      "status": "completed_real_training",
+      "attempts": 2,
+      "request": {
+        "path": "reports/local-study/explore/round-001/study/quick/arms/arm-62a00141a349715002f468e5/request.json",
+        "sha256": "39f6bb78e278abd62d0e3360aafbcffda3308fd143cc70bf7bb974a1c7836c58",
+        "bytes": 16669
+      },
+      "outcome": {
+        "path": "reports/local-study/explore/round-001/study/quick/arms/arm-62a00141a349715002f468e5/outcome.json",
+        "sha256": "7bfc64beefeb82a12fe64237f97200ded6b6f251ce3e54fc26c63f569d2cd5d8",
+        "bytes": 2598
+      },
+      "reason": null,
+      "exit_code": 0,
+      "elapsed_seconds": 216.565930238
+    },
+    "arm-79f646f375756274bdaf0015": {
+      "id": "arm-79f646f375756274bdaf0015",
+      "status": "failed",
+      "attempts": 1,
+      "request": {
+        "path": "reports/local-study/explore/round-001/study/quick/arms/arm-79f646f375756274bdaf0015/request.json",
+        "sha256": "61a85d9dadb97b0fcd7389370274382308f2224f8e2043ae1af7c36cea79447d",
+        "bytes": 16651
+      },
+      "outcome": null,
+      "reason": "study worker failed with exit code Some(1); see retained stderr.log",
+      "exit_code": 1,
+      "elapsed_seconds": 92.554249344
+    },
+    "arm-d81f55ca66908cb5884d507c": {
+      "id": "arm-d81f55ca66908cb5884d507c",
+      "status": "completed_real_training",
+      "attempts": 1,
+      "request": {
+        "path": "reports/local-study/explore/round-001/study/quick/arms/arm-d81f55ca66908cb5884d507c/request.json",
+        "sha256": "025276e96851e2beef9bd7e444c14fa7eed9f59534e3869a628619d29c64e4f5",
+        "bytes": 16673
+      },
+      "outcome": {
+        "path": "reports/local-study/explore/round-001/study/quick/arms/arm-d81f55ca66908cb5884d507c/outcome.json",
+        "sha256": "af604d972e43f7da1e85fbf0045365322fa6b12077fa505e4a1c49b910f1ab58",
+        "bytes": 2602
+      },
+      "reason": null,
+      "exit_code": 0,
+      "elapsed_seconds": 583.701986779
+    }
+  },
+  "reserved_training_steps": 24,
+  "worker_wall_seconds": 3590.2831459,
+  "events": [
+    {
+      "arm_id": "arm-00886e19edc356c899a5d992",
+      "kind": "worker_resources_reserved_before_spawn",
+      "resources": {
+        "cpu_threads": 4,
+        "ram_bytes": 8589934592,
+        "vram_bytes": 6538528768
+      },
+      "steps": 3
+    },
+    {
+      "arm_id": "arm-00886e19edc356c899a5d992",
+      "attempt": 1,
+      "elapsed_seconds": 603.769336759,
+      "exit_code": 0,
+      "kind": "worker_attempt_finished",
+      "outcome": {
+        "bytes": 2585,
+        "path": "reports/local-study/explore/round-001/study/quick/arms/arm-00886e19edc356c899a5d992/outcome.json",
+        "sha256": "4eb93e024607cd0bb9747378fadc81861d9ec8fbed51d95ba9e6bea0f2f1f710"
+      },
+      "reason": null,
+      "status": "completed_real_training"
+    },
+    {
+      "arm_id": "arm-10219d27497b8da52d90f257",
+      "kind": "worker_resources_reserved_before_spawn",
+      "resources": {
+        "cpu_threads": 4,
+        "ram_bytes": 8589934592,
+        "vram_bytes": 6538528768
+      },
+      "steps": 3
+    },
+    {
+      "arm_id": "arm-10219d27497b8da52d90f257",
+      "attempt": 1,
+      "elapsed_seconds": 598.290238605,
+      "exit_code": 0,
+      "kind": "worker_attempt_finished",
+      "outcome": {
+        "bytes": 2601,
+        "path": "reports/local-study/explore/round-001/study/quick/arms/arm-10219d27497b8da52d90f257/outcome.json",
+        "sha256": "b4b8027e89a7a547f5726a3d160cef176a57913af84c9d9e1ee3e6bab4373ee6"
+      },
+      "reason": null,
+      "status": "completed_real_training"
+    },
+    {
+      "arm_id": "arm-3028a5aca5b8c80b3def6618",
+      "kind": "worker_resources_reserved_before_spawn",
+      "resources": {
+        "cpu_threads": 16,
+        "ram_bytes": 25769803776,
+        "vram_bytes": 6538528768
+      },
+      "steps": 3
+    },
+    {
+      "arm_id": "arm-3028a5aca5b8c80b3def6618",
+      "attempt": 1,
+      "elapsed_seconds": 108.67009202,
+      "exit_code": 1,
+      "kind": "worker_attempt_finished",
+      "outcome": null,
+      "reason": "study worker failed with exit code Some(1); see retained stderr.log",
+      "status": "failed"
+    },
+    {
+      "arm_id": "arm-62a00141a349715002f468e5",
+      "kind": "worker_resources_reserved_before_spawn",
+      "resources": {
+        "cpu_threads": 4,
+        "ram_bytes": 8589934592,
+        "vram_bytes": 6538528768
+      },
+      "steps": 3
+    },
+    {
+      "arm_id": "arm-62a00141a349715002f468e5",
+      "attempt": 1,
+      "elapsed_seconds": 485.102325884,
+      "exit_code": null,
+      "kind": "worker_attempt_finished",
+      "outcome": null,
+      "reason": "study worker was interrupted or reached its time budget; validated optimiser progress is retained",
+      "status": "interrupted_progress_saved"
+    },
+    {
+      "arm_id": "arm-62a00141a349715002f468e5",
+      "kind": "worker_resources_reserved_before_spawn",
+      "resources": {
+        "cpu_threads": 4,
+        "ram_bytes": 8589934592,
+        "vram_bytes": 6538528768
+      },
+      "steps": 3
+    },
+    {
+      "arm_id": "arm-62a00141a349715002f468e5",
+      "attempt": 2,
+      "elapsed_seconds": 216.565930238,
+      "exit_code": 0,
+      "kind": "worker_attempt_finished",
+      "outcome": {
+        "bytes": 2598,
+        "path": "reports/local-study/explore/round-001/study/quick/arms/arm-62a00141a349715002f468e5/outcome.json",
+        "sha256": "7bfc64beefeb82a12fe64237f97200ded6b6f251ce3e54fc26c63f569d2cd5d8"
+      },
+      "reason": null,
+      "status": "completed_real_training"
+    },
+    {
+      "arm_id": "arm-79f646f375756274bdaf0015",
+      "kind": "worker_resources_reserved_before_spawn",
+      "resources": {
+        "cpu_threads": 16,
+        "ram_bytes": 25769803776,
+        "vram_bytes": 0
+      },
+      "steps": 3
+    },
+    {
+      "arm_id": "arm-79f646f375756274bdaf0015",
+      "attempt": 1,
+      "elapsed_seconds": 92.554249344,
+      "exit_code": 1,
+      "kind": "worker_attempt_finished",
+      "outcome": null,
+      "reason": "study worker failed with exit code Some(1); see retained stderr.log",
+      "status": "failed"
+    },
+    {
+      "arm_id": "arm-134a14dfa18d27267e5c720f",
+      "kind": "worker_resources_reserved_before_spawn",
+      "resources": {
+        "cpu_threads": 4,
+        "ram_bytes": 8589934592,
+        "vram_bytes": 6538528768
+      },
+      "steps": 3
+    },
+    {
+      "arm_id": "arm-134a14dfa18d27267e5c720f",
+      "attempt": 1,
+      "elapsed_seconds": 596.352397099,
+      "exit_code": 0,
+      "kind": "worker_attempt_finished",
+      "outcome": {
+        "bytes": 2599,
+        "path": "reports/local-study/explore/round-001/study/quick/arms/arm-134a14dfa18d27267e5c720f/outcome.json",
+        "sha256": "da368cb11c2ee8dafc0e541c5de5348ca0e7e04e6566da37f06757e9d81349ed"
+      },
+      "reason": null,
+      "status": "completed_real_training"
+    },
+    {
+      "arm_id": "arm-d81f55ca66908cb5884d507c",
+      "kind": "worker_resources_reserved_before_spawn",
+      "resources": {
+        "cpu_threads": 4,
+        "ram_bytes": 8589934592,
+        "vram_bytes": 6538528768
+      },
+      "steps": 3
+    },
+    {
+      "arm_id": "arm-d81f55ca66908cb5884d507c",
+      "attempt": 1,
+      "elapsed_seconds": 583.701986779,
+      "exit_code": 0,
+      "kind": "worker_attempt_finished",
+      "outcome": {
+        "bytes": 2602,
+        "path": "reports/local-study/explore/round-001/study/quick/arms/arm-d81f55ca66908cb5884d507c/outcome.json",
+        "sha256": "af604d972e43f7da1e85fbf0045365322fa6b12077fa505e4a1c49b910f1ab58"
+      },
+      "reason": null,
+      "status": "completed_real_training"
+    },
+    {
+      "arm_id": "arm-2793b743b590917d497c4794",
+      "kind": "worker_resources_reserved_before_spawn",
+      "resources": {
+        "cpu_threads": 4,
+        "ram_bytes": 8589934592,
+        "vram_bytes": 6538528768
+      },
+      "steps": 3
+    },
+    {
+      "arm_id": "arm-2793b743b590917d497c4794",
+      "attempt": 1,
+      "elapsed_seconds": 305.276589172,
+      "exit_code": null,
+      "kind": "worker_attempt_finished",
+      "outcome": null,
+      "reason": "study worker was interrupted or reached its time budget; validated optimiser progress is retained",
+      "status": "interrupted_progress_saved"
+    }
+  ]
+}

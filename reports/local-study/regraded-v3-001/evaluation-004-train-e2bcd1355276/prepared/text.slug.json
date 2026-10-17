@@ -1,0 +1,42 @@
+{
+  "schema_version": 3,
+  "run_id": "a94b9212-84a2-491b-81c2-b289be0759a7",
+  "ownership_nonce": "d4d5fd45-7ba4-4e4e-8769-52b7fcda6cce",
+  "attempt_key": "2e1e1f690a5cb1533eef8538977572f52c95cd6524b9924d505b2125baea4768",
+  "receipt_path": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/prepared/text.slug.json",
+  "report_path": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/sandbox/a94b9212-84a2-491b-81c2-b289be0759a7.json",
+  "task": {
+    "id": "text.slug",
+    "source_id": "private-text-v1",
+    "lineage_id": "local-contract-pack-02",
+    "split": "train",
+    "specification": "Input is an ASCII string. Lowercase letters; replace each maximal run of non-alphanumeric characters by one hyphen; remove edge hyphens.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "f1a14e02ce03c5f547e5ad26b9aacddad2ecae4b6799ccb18700ebd7f03e18f3",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": " Hello, WORLD! ",
+        "expected": "hello-world"
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "use serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let s = input.as_str().unwrap();\n    let mut result = String::new();\n    let mut chars = s.chars().peekable();\n\n    while let Some(c) = chars.next() {\n        if c.is_alphanumeric() {\n            result.push(c);\n        } else {\n            if !result.is_empty() {\n                result.push('-');\n            }\n            result.push(c);\n        }\n    }\n\n    Value::String(result)\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/sandbox"
+  },
+  "code_sha256": "65ba03975b2cca38b7d45f52573bfe1aaefdb650a13b24d8856ba5fd24902d84",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

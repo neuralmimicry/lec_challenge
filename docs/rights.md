@@ -14,7 +14,16 @@ The retrieved DeepSeek clause reads: “Subject to your compliance to applicable
 
 Together's retrieved text explicitly states: “Such models may come with their own terms and conditions. It is your responsibility to comply with the terms and conditions of those models. In case of any conflict between this Agreement and such terms, the model terms govern.” Neither output ownership nor zero data retention removes this requirement.
 
-No Anthropic or Gemini provider is enabled. Their restrictions cited in the original pre-build sources have not been independently re-snapshotted in this implementation because neither is a proposed acquisition route. A gateway cannot grant permission absent from an underlying provider/model contract.
+OpenAI Codex, Gemini (Developer API and GCP Vertex AI) and Anthropic Claude now
+have native connectivity adapters and disabled templates for **general inference**;
+see [credential and budget setup](api-providers.md). These templates use
+`inference_only = true` and `approved_for_output_training = false`. They do not
+clear any provider's output-training restrictions. Their account-specific terms
+have not been re-snapshotted or approved for distillation in this follow-up. A
+gateway cannot grant permission absent from an underlying provider/model contract.
+Assessment collection excludes inference-only providers, including fallback
+routes, and the curator still requires verified training permission. Enabling
+an API connection alone cannot change these checks.
 
 The fleet configuration deliberately has **no price snapshots** and **no approved permission decision**. Placeholder model identifiers are unresolved, not assertions of current availability. Before enabling a provider, record its actual account/product contract, selected model's licence, live model ID/revision policy, source document hashes, decision author/date/scope, price schedule and full billable output-token semantics. Obtain an explicit spending cap separately. Any ambiguity keeps it disabled; unresolved outputs cannot enter training.
 

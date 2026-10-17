@@ -1,1 +1,2 @@
-serving: immutable model listening at http://127.0.0.1:42419
+execution: Automatic CPU selected: no compiled, available CUDA device has sufficient free VRAM; 16 threads and 47997153690 guarded RAM bytes available; available CPU threads=16, usable RAM=47997153690 bytes
+serving: immutable model listening at http://127.0.0.1:35133

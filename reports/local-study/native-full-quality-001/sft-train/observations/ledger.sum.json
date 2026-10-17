@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "a5b39d544c85b76111246b8fda40c638ce104251a1c56368277fef8fe4033eb6",
+  "task_id": "ledger.sum",
+  "source_id": "private-ledger-v1",
+  "success": false,
+  "raw_generation": {
+    "path": "reports/local-study/native-full-quality-001/sft-train/generations/ledger.sum.json",
+    "sha256": "89d813b8dea092349cc5efec7a226ba0a286b07825cb5144222e8c735ea43a98",
+    "bytes": 1673
+  },
+  "sandbox_report": {
+    "path": "reports/local-study/native-full-quality-001/sft-train/sandbox/d5196481-3356-4eae-9a0f-22dd4dc18511.json",
+    "sha256": "445854ee51bd5bb13d696428d444103bf5ab14ce5455be168c2e77f1c04bf90e",
+    "bytes": 3739
+  },
+  "grading_error": null
+}

@@ -1,0 +1,40 @@
+{
+  "run_id": "bb1b4083-2c1d-4217-81b2-04fe9e4a5594",
+  "task_id": "text.squash",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error[E0282]: type annotations needed\n --> /candidate/main.rs:5:9\n  |\n5 |     let words = input_str.split_whitespace().map(|word| word.to_string()).collect();\n  |         ^^^^^\n6 |     let result = words.join(\" \");\n  |                  ----- type must be known at this point\n  |\nhelp: consider giving `words` an explicit type\n  |\n5 |     let words: Vec<_> = input_str.split_whitespace().map(|word| word.to_string()).collect();\n  |              ++++++++\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0282`.\n"
+  ],
+  "cases_total": 6,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "8f5756058f758c69b51a393ae4abcb09546597b7dfbf2813fed44fdc2129ea22",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/regraded-v3-001/evaluation-005-train-2217a994f8b7/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/regraded-v3-001/evaluation-005-train-2217a994f8b7/sandbox/bb1b4083-2c1d-4217-81b2-04fe9e4a5594.audit.json",
+  "audit_sha256": "1e2ad2cccccd978e65983ddd11355ad979153b33d1f44ca416e4d5b3f69b4d84",
+  "failure": "compilation failed: error[E0282]: type annotations needed\n --> /candidate/main.rs:5:9\n  |\n5 |     let words = input_str.split_whitespace().map(|word| word.to_string()).collect();\n  |         ^^^^^\n6 |     let result = words.join(\" \");\n  |                  ----- type must be known at this point\n  |\nhelp: consider giving `words` an explicit type\n  |\n5 |     let words: Vec<_> = input_str.split_whitespace().map(|word| word.to_string()).collect();\n  |              ++++++++\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0282`.\n",
+  "duration_ms": 24594,
+  "timeout_evidence": null,
+  "lifecycle_evidence": {
+    "receipt_path": "reports/local-study/regraded-v3-001/evaluation-005-train-2217a994f8b7/sandbox/bb1b4083-2c1d-4217-81b2-04fe9e4a5594.lifecycle.json",
+    "receipt_sha256": "3084fadca6d1e686c70434934c24916b27c46a1aa733f692d408fd463f50edb1"
+  }
+}

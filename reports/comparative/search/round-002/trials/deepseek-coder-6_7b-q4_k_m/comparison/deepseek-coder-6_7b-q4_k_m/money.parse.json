@@ -1,0 +1,38 @@
+{
+  "model_id": "deepseek-coder-6_7b-q4_k_m",
+  "task_id": "money.parse",
+  "source_id": "private-money-v1",
+  "specification_sha256": "d2e4ee5432fb3996c6eaa9004d032f82e2ebfcb2f8df8fd10fd99bfbced5ddef",
+  "seed": 1729,
+  "plan_sha256": "79e25584f785f04f53b60d4cf3e4a730d2cf181ce11620a413bb1e0123bc1de2",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an ASCII decimal monetary string. Accept optional leading minus, one or more digits, and optional dot followed by exactly two digits. Return signed cents, or null for invalid syntax; magnitudes <=1000000 pounds.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":\"-12.30\",\"expected\":-1230}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "Here is the Rust code that solves the problem:\n\n```rust\nuse serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let input_str = input.as_str().unwrap();\n    let mut cents: i64;\n\n    match input_str.parse() {\n        Ok(n) => cents = (n * 100.0).round() as i64,\n        Err(_) => return Value::Null,\n    }\n\n    if cents.abs() > 100000000 {\n        return Value::Null;\n    }\n\n    Value::Number(cents.into())\n}\n```\n\nThis function takes a `serde_json::Value` as input and returns a `serde_json::Value`. The input is expected to be a string that represents a decimal monetary value. The function converts this string to a 64-bit integer representing the number of cents. If the input string is not a valid decimal number, the function returns `Value::Null`. If the number of cents is greater than 100000000 (1000000 pounds), the function also returns `Value::Null`. Otherwise, the function returns the number of cents as a `Value::Number`.\n",
+    "checkpoint_id": "92da6238854f2fa902d8b2ad79d548536af1d3ab06821f323bd5bbcea2013276",
+    "finish_reason": "stop",
+    "input_tokens": 326,
+    "output_tokens": 301,
+    "elapsed_ms": 9868,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/comparative/search/round-002/trials/deepseek-coder-6_7b-q4_k_m/comparison/deepseek-coder-6_7b-q4_k_m/money.parse.generation.json",
+    "sha256": "473e53e9e70603100702bdccc65cb5bd71d6fef8859946c332838227895db16d",
+    "bytes": 4885
+  },
+  "sandbox_report": {
+    "path": "reports/comparative/search/round-002/trials/deepseek-coder-6_7b-q4_k_m/comparison/sandbox/1216772f-6ea4-493f-8bb1-697c97921a92.json",
+    "sha256": "e9f86ff3b73daa303e0c141bc3c9d7fa0f5de4bff580f1c41e973ca7678dbff5",
+    "bytes": 10111
+  },
+  "grading_error": null,
+  "success": false
+}

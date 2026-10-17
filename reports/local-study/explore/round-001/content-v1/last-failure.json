@@ -1,0 +1,6 @@
+{
+  "error": "teacher content collection is incomplete or failed; original observations and valid partial evidence were retained",
+  "observed_unix_ms": 1792180774698,
+  "promotion": "incumbent_retained",
+  "status": "FAILURE"
+}

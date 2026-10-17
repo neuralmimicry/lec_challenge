@@ -1,5 +1,34 @@
 # Specialist agent execution plan
 
+## Provider setup repair — 16 October 2026
+
+The integration owner owns the Rust `provider-init` command, local readiness
+checks, path-aware configuration errors and matching README/provider guidance.
+Initialisation must create a valid, priced, bounded inference-only configuration
+without credentials, network access, spending or overwriting an existing file.
+Tests use labelled fixtures; real account access remains a separate observation.
+Existing runs, ledgers, unrelated edits and offline cache/model assets are retained.
+
+## Latest-log assessment audit — 16 October 2026
+
+The integration owner owns a read-only assessment evidence audit, its CLI and
+documentation, and the exploration failure-reporting correction in `explore`.
+The audit must compare original required evidence with the latest observed logs,
+preserve child failure causes and distinguish local research from assessment
+completion. Existing pinned runs, failed observations, held-out boundaries and
+cache/model assets remain intact. No paid calls or new sealed evaluations are
+authorised by this audit.
+
+## Provider connectivity follow-up — 16 October 2026
+
+The integration owner is extending `fleet`, `ledger`, provider CLI commands,
+configuration and documentation for native OpenAI Responses/Codex, Gemini
+(Developer API and GCP Vertex AI) and Anthropic Messages. This work includes
+credential-free checks, bounded retries/failover, durable money/token limits and
+offline asset preservation. No live spending or output-training clearance is
+implied. Existing unrelated working-tree changes and historical evidence remain
+intact; validation uses labelled fixtures without paid API calls.
+
 Created before implementation. Agents execute tasks in parallel after the design freeze, under one integration owner and shared evidence rules. All code and code comments use UK English.
 
 | Agent | Owned modules | Responsibilities and completion evidence |
@@ -29,3 +58,20 @@ The user extended the work to autonomous teacher replacement/pruning, offline ca
 | Integration | `platform`, `engine`, launchers, `study`, CLI, leaderboard and delivery documentation | Resource detection, immutable executable pinning, resumable command contracts, measured cross-method selection, secret scan and end-to-end QA |
 
 The repository skill `.agents/skills/rust-distillation-study/SKILL.md` captures the non-obvious execution contracts. Training examples, native target tensors, a model checkpoint, development improvement and assessment promotion are separate claims and each needs its own observed evidence. Failed or unsupported methods remain visible. Full powerset enumeration does not imply that every arm has run.
+
+## Assessment crosscheck — 16 October 2026
+
+The user's explicit audit reminder is tracked in `docs/assessment-audit.md`.
+Integration checks every original design/build/drill/delivery requirement,
+corrects current-source launcher and statistical-reporting gaps, and finishes
+immutable-output regrading. Fleet independently reconstructs the completed
+replacement search and audits portable execution dependencies without inference.
+Sandbox moves content publication off the async executor while preserving
+ownership, durable ordering and cancellation safety, with isolated slow-writer
+QA. Training investigates producer-bound BitNet projection arithmetic in excluded
+diagnostic state only; failed full-model parity and its fixed tolerance remain
+unchanged. Stale earlier task drafts are superseded by these bounded assignments.
+The external provider, assessment evaluation/control, cost and delivery gaps
+remain explicit; these agents cannot create absent credentials or billing
+authority, turn a local teacher into an independent API business, or invent a
+successful result.

@@ -1,0 +1,59 @@
+{
+  "schema_version": 3,
+  "run_id": "26088702-76b8-4eff-9557-441e7c87b759",
+  "ownership_nonce": "7f1a770d-68c2-4826-ae3c-8b924afb3637",
+  "attempt_key": "00827522a1a0f240d3a6695f8d2edfbc5c08834f133956c3c60bf440928011d1",
+  "receipt_path": "reports/local-study/regraded-v3-001/evaluation-005-train-2217a994f8b7/prepared/graph.indegrees.json",
+  "report_path": "reports/local-study/regraded-v3-001/evaluation-005-train-2217a994f8b7/sandbox/26088702-76b8-4eff-9557-441e7c87b759.json",
+  "task": {
+    "id": "graph.indegrees",
+    "source_id": "private-graph-v1",
+    "lineage_id": "local-contract-pack-04",
+    "split": "train",
+    "specification": "Input {n,edges} is a directed graph with unique edges on 0..n-1. Return indegree of each node in index order, including self-loops. Graph vertex counts are at most 64.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "21e7e645614a85b9c7abc9af7e6eb8e29b948f79dbea5ef046c8c06bfc3b8dbd",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": {
+          "edges": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "n": 4
+        },
+        "expected": [
+          0,
+          1,
+          1,
+          0
+        ]
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "use serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let n = input[\"n\"].as_u64().unwrap() as usize;\n    let edges = input[\"edges\"].as_array().unwrap();\n    let mut indegree = vec![0; n];\n    for edge in edges {\n        let u = edge[0].as_u64().unwrap() as usize;\n        let v = edge[1].as_u64().unwrap() as usize;\n        indegree[v] += 1;\n    }\n    Value::Array(indegree.into_iter().map(|&i| Value::from(i)).collect())\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/regraded-v3-001/evaluation-005-train-2217a994f8b7/sandbox"
+  },
+  "code_sha256": "02448c7a9b2f7d0afa069d2f451558f5528f6b8392f6f986612038be85212044",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

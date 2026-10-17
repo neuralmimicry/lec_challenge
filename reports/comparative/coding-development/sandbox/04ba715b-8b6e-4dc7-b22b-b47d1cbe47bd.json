@@ -1,0 +1,33 @@
+{
+  "run_id": "04ba715b-8b6e-4dc7-b22b-b47d1cbe47bd",
+  "task_id": "money.split",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: warning: unused import: `from_str`\n --> /candidate/main.rs:1:25\n  |\n1 | use serde_json::{Value, from_str};\n  |                         ^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nwarning: variable does not need to be mutable\n  --> /candidate/main.rs:11:9\n   |\n11 |     let mut remaining_cents = cents;\n   |         ----^^^^^^^^^^^^^^^\n   |         |\n   |         help: remove this `mut`\n   |\n   = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0384]: cannot assign twice to immutable variable `remainder`\n  --> /candidate/main.rs:19:13\n   |\n13 |     let remainder = remaining_cents % n;\n   |         --------- first assignment to `remainder`\n...\n19 |             remainder -= 1;\n   |             ^^^^^^^^^^^^^^ cannot assign twice to immutable variable\n   |\nhelp: consider making this binding mutable\n   |\n13 |     let mut remainder = remaining_cents % n;\n   |         +++\n\nerror: aborting due to 1 previous error; 2 warnings emitted\n\nFor more information about this error, try `rustc --explain E0384`.\n"
+  ],
+  "cases_total": 5,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "0bf995b5f69865792503015f6af52b457c861b679877956e939c2137ddb4a562",
+  "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+  "oracle_sha256": "a734f6d465714cbebb072790fedff161d2fc28cbb257b3d04cee0feaf8b5b5fe",
+  "code_sha256": "5bedfc4fd162905c9991fffc79ecfe04c9c4ad8a63bd0411055b5526eedae0d9",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:1",
+    "expected_image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/comparative/coding-development/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/comparative/coding-development/sandbox/04ba715b-8b6e-4dc7-b22b-b47d1cbe47bd.audit.json",
+  "audit_sha256": "d973d263fb1fab2728cb4448ba9f3c59047d06ca02127236b053058b465632ba",
+  "failure": "compilation failed: warning: unused import: `from_str`\n --> /candidate/main.rs:1:25\n  |\n1 | use serde_json::{Value, from_str};\n  |                         ^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nwarning: variable does not need to be mutable\n  --> /candidate/main.rs:11:9\n   |\n11 |     let mut remaining_cents = cents;\n   |         ----^^^^^^^^^^^^^^^\n   |         |\n   |         help: remove this `mut`\n   |\n   = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0384]: cannot assign twice to immutable variable `remainder`\n  --> /candidate/main.rs:19:13\n   |\n13 |     let remainder = remaining_cents % n;\n   |         --------- first assignment to `remainder`\n...\n19 |             remainder -= 1;\n   |             ^^^^^^^^^^^^^^ cannot assign twice to immutable variable\n   |\nhelp: consider making this binding mutable\n   |\n13 |     let mut remainder = remaining_cents % n;\n   |         +++\n\nerror: aborting due to 1 previous error; 2 warnings emitted\n\nFor more information about this error, try `rustc --explain E0384`.\n",
+  "duration_ms": 3611,
+  "timeout_evidence": null
+}

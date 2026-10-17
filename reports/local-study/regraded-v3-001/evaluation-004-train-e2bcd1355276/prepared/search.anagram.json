@@ -1,0 +1,45 @@
+{
+  "schema_version": 3,
+  "run_id": "57367abd-beac-47a0-b6f5-94871e6aa3f2",
+  "ownership_nonce": "0f6aa8fe-48c8-4191-8382-efac66c606af",
+  "attempt_key": "a0e8419c11255d778b1bfe8add32fe24bf1c570c963a0f45f41f0cf1ef15bba0",
+  "receipt_path": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/prepared/search.anagram.json",
+  "report_path": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/sandbox/57367abd-beac-47a0-b6f5-94871e6aa3f2.json",
+  "task": {
+    "id": "search.anagram",
+    "source_id": "private-search-v1",
+    "lineage_id": "local-contract-pack-07",
+    "split": "train",
+    "specification": "Input is [a,b], two ASCII strings. Ignore ASCII whitespace and letter case, keep punctuation; return whether their remaining character multisets agree.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "a358d318501a2ba44b59bcd28bb86b13878b83030de288c43a76348790e1333f",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": [
+          "Dormitory",
+          "Dirty room"
+        ],
+        "expected": true
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "use serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let (a, b) = input.as_array().unwrap();\n    let a_str = a[0].as_str().unwrap();\n    let b_str = b[0].as_str().unwrap();\n    let mut a_chars = a_str.chars().collect::<Vec<char>>();\n    let mut b_chars = b_str.chars().collect::<Vec<char>>();\n    a_chars.sort_unstable();\n    b_chars.sort_unstable();\n    a_chars.dedup();\n    b_chars.dedup();\n    a_chars == b_chars\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/sandbox"
+  },
+  "code_sha256": "d96d44934f4be6077c46e0b3fbf76ab984892d485eed71779fac76807d652555",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

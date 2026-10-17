@@ -1,0 +1,45 @@
+{
+  "schema_version": 3,
+  "run_id": "fa70e18c-4957-40ae-954a-8a1c64894db7",
+  "ownership_nonce": "75d41f17-605b-496f-b097-c272f77a86a2",
+  "attempt_key": "dc1d9a4f-a1a0-4358-b3e0-8173a2c4bb62",
+  "receipt_path": "reports/local-study/explore/round-001/study/quick/arms/arm-134a14dfa18d27267e5c720f/development/sandbox/dc1d9a4f-a1a0-4358-b3e0-8173a2c4bb62.prepared.json",
+  "report_path": "reports/local-study/explore/round-001/study/quick/arms/arm-134a14dfa18d27267e5c720f/development/sandbox/fa70e18c-4957-40ae-954a-8a1c64894db7.json",
+  "task": {
+    "id": "encoding.caesar",
+    "source_id": "private-encoding-v1",
+    "lineage_id": "local-contract-pack-14",
+    "split": "development",
+    "specification": "Input {text,shift} has ASCII text and integer shift. Rotate lowercase a..z only modulo 26; preserve all other characters.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "6d5a2e4829f195b5e54e08b45300ecba1a3b178763b2ee6e7a9c90c50c633efa",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": {
+          "shift": 3,
+          "text": "xyz A!"
+        },
+        "expected": "abc A!"
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "use serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let text = input[\"text\"].as_str().unwrap_or(\"\");\n    let shift = input[\"shift\"].as_i64().unwrap_or(0);\n    let mut result = String::new();\n\n    for c in text.chars() {\n        if c.is_ascii_lowercase() {\n            let new_char = ((c as u8 - b'a' + shift) % 26 + b'a') as char;\n            result.push(new_char);\n        } else {\n            result.push(c);\n        }\n    }\n\n    serde_json::Value::String(result)\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/explore/round-001/study/quick/arms/arm-134a14dfa18d27267e5c720f/development/sandbox"
+  },
+  "code_sha256": "59a82bf20984aa9a451ca533fbcee29596f42acc77654e0b00295cedcf64fe04",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

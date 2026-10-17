@@ -1,0 +1,158 @@
+{
+  "audit_json": "reports/assessment-audit/latest-log-review-001/audit.json",
+  "audit_markdown": "reports/assessment-audit/latest-log-review-001/audit.md",
+  "model_execution": false,
+  "original_request_satisfied": false,
+  "paid_api_calls": 0,
+  "requirements": [
+    {
+      "criterion": "At least 40 executable source-separated tasks",
+      "finding": "96 executable Rust contracts; train/development/held-out source separation verified",
+      "id": "tasks",
+      "next_action": "Repair corpus/source contracts before collecting outputs.",
+      "status": "VERIFIED"
+    },
+    {
+      "criterion": "Design written first, at most three pages; eight requested topics",
+      "finding": "Frozen design artefacts are inspected separately from executable evidence; page count, chronology and prose quality require the retained design review.",
+      "id": "design",
+      "next_action": "Review docs/assessment-audit.md and the frozen design/PDF; do not rewrite the original freeze.",
+      "status": "OBSERVED"
+    },
+    {
+      "criterion": "Three real independent providers with reusable recordings",
+      "finding": "0 real training-eligible provider businesses; 0 usable checksum-verified completions; three businesses required",
+      "id": "providers",
+      "next_action": "Supply locally configured API credentials, applicable training rights, exact models/prices and an explicit dollar ceiling; collect all three businesses.",
+      "status": "INCOMPLETE"
+    },
+    {
+      "criterion": "Real deduplicated/decontaminated run-traceable training set",
+      "finding": "No such file or directory (os error 2)",
+      "id": "curation",
+      "next_action": "Curate actual eligible passing provider runs; local-teacher bundles remain separate.",
+      "status": "INCOMPLETE"
+    },
+    {
+      "criterion": "One genuine provider-derived training round and checkpoint",
+      "finding": "No such file or directory (os error 2)",
+      "id": "training",
+      "next_action": "Run the real trainer on the verified provider dataset; retain optimiser, assistant-mask, changed-tensor and reload evidence.",
+      "status": "INCOMPLETE"
+    },
+    {
+      "criterion": "Two real checkpoints, held-out decision and interval",
+      "finding": "No such file or directory (os error 2)",
+      "id": "gate",
+      "next_action": "Freeze one primary candidate/decoding plan; evaluate complete source-held-out pairs once. NO SHIP is an acceptable valid result.",
+      "status": "INCOMPLETE"
+    },
+    {
+      "criterion": "Smallest detectable effect under the actual gate",
+      "finding": "Power report present; evidence_kind=\"simulation_assumptions_not_measured_learning\"; development calibration remains a separate requirement",
+      "id": "detectability",
+      "next_action": "Bind the simulation assumptions to complete development measurements and retain sensitivity/Monte Carlo uncertainty; no normal-approximation scalar substitution.",
+      "status": "OBSERVED"
+    },
+    {
+      "criterion": "kill_orchestrator_mid_round",
+      "finding": "Recorded status=\"INCOMPLETE\", evidence_kind=missing_required_real_evidence; Original real recording replay is incomplete: three independently owned, enabled and rights-cleared providers are required; found 0. Labelled local SIGKILL/UNKNOWN/retry assertions remain in invariant_qa, without substituting for real acquisition evidence.",
+      "id": "drill_kill_orchestrator_mid_round",
+      "next_action": "Retain actual assertions and full failure denominators. Missing real controls/recordings cannot be supplied by score/transport fixtures.",
+      "status": "INCOMPLETE"
+    },
+    {
+      "criterion": "provider_error_then_rate_limit",
+      "finding": "Recorded status=\"INCOMPLETE\", evidence_kind=missing_required_real_evidence; Original real recording replay is incomplete: three independently owned, enabled and rights-cleared providers are required; found 0. Labelled local SIGKILL/UNKNOWN/retry assertions remain in invariant_qa, without substituting for real acquisition evidence.",
+      "id": "drill_provider_error_then_rate_limit",
+      "next_action": "Retain actual assertions and full failure denominators. Missing real controls/recordings cannot be supplied by score/transport fixtures.",
+      "status": "INCOMPLETE"
+    },
+    {
+      "criterion": "grader_gaming",
+      "finding": "Recorded status=\"PASSED\", evidence_kind=executed_adversarial_candidates_with_trusted_exact_denial_assertions; historical assertion requires its original artefact chain",
+      "id": "drill_grader_gaming",
+      "next_action": "Retain actual assertions and full failure denominators. Missing real controls/recordings cannot be supplied by score/transport fixtures.",
+      "status": "OBSERVED"
+    },
+    {
+      "criterion": "escape_attempts",
+      "finding": "Recorded status=\"PASSED\", evidence_kind=executed_adversarial_candidates_with_trusted_exact_denial_assertions; historical assertion requires its original artefact chain",
+      "id": "drill_escape_attempts",
+      "next_action": "Retain actual assertions and full failure denominators. Missing real controls/recordings cannot be supplied by score/transport fixtures.",
+      "status": "OBSERVED"
+    },
+    {
+      "criterion": "planted_heldout_task",
+      "finding": "Recorded status=\"PASSED\", evidence_kind=temporary_planted_datasets_rejected_by_actual_training_entrypoint; historical assertion requires its original artefact chain",
+      "id": "drill_planted_heldout_task",
+      "next_action": "Retain actual assertions and full failure denominators. Missing real controls/recordings cannot be supplied by score/transport fixtures.",
+      "status": "OBSERVED"
+    },
+    {
+      "criterion": "deliberately_worse_checkpoint",
+      "finding": "Recorded status=\"INCOMPLETE\", evidence_kind=missing_required_real_evidence; missing required real artifacts: reports/incumbent-evaluation/evaluation.json, reports/degraded-control-evaluation/evaluation.json",
+      "id": "drill_deliberately_worse_checkpoint",
+      "next_action": "Retain actual assertions and full failure denominators. Missing real controls/recordings cannot be supplied by score/transport fixtures.",
+      "status": "INCOMPLETE"
+    },
+    {
+      "criterion": "train_gain_heldout_loss",
+      "finding": "Recorded status=\"INCOMPLETE\", evidence_kind=missing_required_real_evidence; missing required real artifacts: reports/incumbent-evaluation/evaluation.json, reports/overfit-control-evaluation/evaluation.json, reports/base-train-evaluation/evaluation.json, reports/overfit-train-evaluation/evaluation.json",
+      "id": "drill_train_gain_heldout_loss",
+      "next_action": "Retain actual assertions and full failure denominators. Missing real controls/recordings cannot be supplied by score/transport fixtures.",
+      "status": "INCOMPLETE"
+    },
+    {
+      "criterion": "seed_only_checkpoints",
+      "finding": "Recorded status=\"INCOMPLETE\", evidence_kind=missing_required_real_evidence; missing required real artifacts: reports/candidate-evaluation/evaluation.json, reports/seed-control-evaluation/evaluation.json",
+      "id": "drill_seed_only_checkpoints",
+      "next_action": "Retain actual assertions and full failure denominators. Missing real controls/recordings cannot be supplied by score/transport fixtures.",
+      "status": "INCOMPLETE"
+    },
+    {
+      "criterion": "round_budget_exceeded",
+      "finding": "Recorded status=\"PASSED\", evidence_kind=deterministic_budget_fault_through_production_reservation_and_no_dispatch_assertions; historical assertion requires its original artefact chain",
+      "id": "drill_round_budget_exceeded",
+      "next_action": "Retain actual assertions and full failure denominators. Missing real controls/recordings cannot be supplied by score/transport fixtures.",
+      "status": "OBSERVED"
+    },
+    {
+      "criterion": "Real cost per task, model, round and improvement point",
+      "finding": "Real businesses=0, acquisition complete=false, total USD=null, proven cost/point=null; nonpositive/inconclusive gains must remain N/A or descriptive",
+      "id": "costs",
+      "next_action": "Reconstruct ledger-derived task/model costs, cash/credit settlements and measured compute. Never invent a price, gain or scalar cost per point.",
+      "status": "INCOMPLETE"
+    },
+    {
+      "criterion": "Adapted checkpoint served locally; canary/rollback evidence",
+      "finding": "missing reports/candidate-endpoint.json: No such file or directory (os error 2)",
+      "id": "serving",
+      "next_action": "Serve the actual assessment adapter and retain matching health/generation identity and rollback evidence.",
+      "status": "INCOMPLETE"
+    },
+    {
+      "criterion": "One clean-machine command replays the real loop offline",
+      "finding": "Latest recorded assessment demo status: \"INCOMPLETE\"",
+      "id": "offline_command",
+      "next_action": "Complete upstream recordings/training/evaluation/drills, package exact dependencies and run the disconnected extracted archive.",
+      "status": "INCOMPLETE"
+    },
+    {
+      "criterion": "Fresh credential-free delivery rehearsal",
+      "finding": "Local QA passed=true; full assessment complete=false. A correctly failing rehearsal is not a complete assessment.",
+      "id": "disconnected_delivery",
+      "next_action": "Rebuild and independently verify the final exact archive; old inventories/binaries cannot certify current changes.",
+      "status": "INCOMPLETE"
+    },
+    {
+      "criterion": "Repository/zip, README/design/reports and video up to five minutes",
+      "finding": "Video duration=120 seconds; checksum verified=true; final snapshot currency remains unverified",
+      "id": "video",
+      "next_action": "Refresh delivery/video after final evidence stabilises. Do not publish or send without explicit instructions.",
+      "status": "OBSERVED"
+    }
+  ]
+}
+FAILURE: original assessment evidence is incomplete or unverified; inspect the audit for exact next actions
+{"error":"original assessment evidence is incomplete or unverified; inspect the audit for exact next actions","observed_unix_ms":1792167453762,"promotion":"incumbent_retained","status":"FAILURE"}

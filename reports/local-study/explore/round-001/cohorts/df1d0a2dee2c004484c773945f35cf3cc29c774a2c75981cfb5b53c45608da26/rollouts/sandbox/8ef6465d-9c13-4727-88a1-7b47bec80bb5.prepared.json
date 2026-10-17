@@ -1,0 +1,42 @@
+{
+  "schema_version": 3,
+  "run_id": "a34375ed-257a-4ee4-8a35-7e386fa58629",
+  "ownership_nonce": "cbea335c-86cd-4541-ab32-e14a7b83fb5c",
+  "attempt_key": "8ef6465d-9c13-4727-88a1-7b47bec80bb5",
+  "receipt_path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox/8ef6465d-9c13-4727-88a1-7b47bec80bb5.prepared.json",
+  "report_path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox/a34375ed-257a-4ee4-8a35-7e386fa58629.json",
+  "task": {
+    "id": "paths.extension",
+    "source_id": "private-paths-v1",
+    "lineage_id": "local-contract-pack-08",
+    "split": "train",
+    "specification": "Input is a filename without /. Return lowercase ASCII suffix after the final dot, except a sole leading dot or a trailing dot yields empty string.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "629749893ccb6a2be4be300d8ab31de43188730d25576696d11327e879417b90",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": "archive.TAR.GZ",
+        "expected": "gz"
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "```rust\nuse serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let filename = input.as_str().unwrap_or_default();\n    let suffix = filename.trim_end_matches(|c| c == '.' || c == '\\t' || c == '\\n' || c == '\\x0C' || c == '\\r');\n    if suffix.is_empty() {\n        return serde_json::Value::Null;\n    }\n    let suffix = suffix.to_lowercase();\n    let suffix = match suffix.as_str() {\n        \"gz\" => \"gz\",\n        \"tar.gz\" => \"gz\",\n        \"tar\" => \"tar\",\n        _ => suffix,\n    };\n    let suffix = suffix.trim_start_matches(|c| c == '.' || c == '\\t' || c == '\\n' || c == '\\x0C' || c == '\\r');\n    if suffix.is_empty() {\n        return serde_json::Value::Null;\n    }\n    let suffix = suffix.to_lowercase();\n    let suffix = match suffix.as_str() {\n        \"gz\" => \"gz\",\n        \"tar.gz\" => \"gz\",\n        \"tar\" => \"tar\",\n        _ => suffix,\n    };\n    let suffix = suffix.trim_start_matches(|c| c == '.' || c == '\\t' || c == '\\n' || c == '\\x0C' || c == '\\r');\n    if suffix.is_empty() {\n        return serde_json::Value::Null;\n    }\n    let suffix = suffix.to_lowercase();\n    let suffix = match suffix.as_str() {\n        \"gz\" => \"gz\",\n        \"tar.gz\" => \"gz\",\n        \"tar\" => \"tar\",\n        _ => suffix,\n    };\n    let suffix = suffix.trim_start_matches(|c| c == '.' || c == '\\t' || c == '\\n' || c == '\\x0C' || c == '\\r');\n    if suffix.is_empty() {\n        return serde_json::Value::Null;\n    }\n    let suffix = suffix.to_lowercase();\n    let suffix = match suffix.as_str() {\n        \"gz\" => \"gz\",\n        \"tar.gz\" => \"gz\",\n        \"tar\" => \"tar\",\n        _ => suffix,\n    };\n    let suffix = suffix.trim_start_matches(|c| c == '.' || c == '\\t' || c == '\\n' || c == '\\x0C' || c == '\\r');\n    if suffix.is_empty() {\n        return serde_json::Value::Null;\n    }\n    let suffix = suffix.to_lowercase();\n    let suffix = match suffix.as_str() {\n        \"gz\" => \"gz\",\n        \"tar.gz\" => \"gz\",\n        \"tar\" => \"tar\",\n        _ => suffix,\n    };\n    let suffix = suffix.trim_start_matches(|c| c == '.' || c == '\\t' || c == '\\n' || c == '\\x0C' || c == '\\r');\n    if suffix.is_empty() {\n        return serde_json::Value::Null;\n    }\n    let suffix = suffix.to_lowercase();\n    let suffix = match suffix.as_str() {\n        \"gz\" => \"gz\",\n        \"tar.gz\" => \"gz\",\n        \"tar\" => \"tar\",\n        _ => suffix,\n    };\n    let suffix = suffix.trim_start_matches(|c| c == '.' || c == '\\t' || c",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox"
+  },
+  "code_sha256": "25faf96f1dac2f4898dff053d58c32870b1ceb927f74f8c43452c580ed2d4a87",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

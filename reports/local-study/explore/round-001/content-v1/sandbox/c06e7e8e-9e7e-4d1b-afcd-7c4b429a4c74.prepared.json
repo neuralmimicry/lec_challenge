@@ -1,0 +1,45 @@
+{
+  "schema_version": 3,
+  "run_id": "e492dfb1-5f5d-43d8-8936-19c599b7db6d",
+  "ownership_nonce": "8789ef27-106b-4a13-bd20-923cfcc61c86",
+  "attempt_key": "c06e7e8e-9e7e-4d1b-afcd-7c4b429a4c74",
+  "receipt_path": "reports/local-study/explore/round-001/content-v1/sandbox/c06e7e8e-9e7e-4d1b-afcd-7c4b429a4c74.prepared.json",
+  "report_path": "reports/local-study/explore/round-001/content-v1/sandbox/e492dfb1-5f5d-43d8-8936-19c599b7db6d.json",
+  "task": {
+    "id": "bits.hamming",
+    "source_id": "private-bits-v1",
+    "lineage_id": "local-contract-pack-11",
+    "split": "train",
+    "specification": "Input is [a,b], unsigned 32-bit integers. Return the number of differing bit positions.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "bc18825458e0ecd82619effc2fd97273fe6364866bea7b19ecdfdb5d23d6facf",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": [
+          9,
+          3
+        ],
+        "expected": 2
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "// Plan:\n// 1. Extract the two unsigned 32-bit integers from the input array.\n// 2. Convert these integers to 64-bit signed integers.\n// 3. Compute the XOR of these two integers to find differing bits.\n// 4. Count the number of set bits (1s) in the XOR result.\n// 5. Return the count as a JSON number.\n\nuse serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    // Extract the two unsigned 32-bit integers from the input array\n    let arr = input.as_array().unwrap();\n    let a = arr[0].as_u64().unwrap() as i64;\n    let b = arr[1].as_u64().unwrap() as i64;\n\n    // Compute the XOR of the two integers\n    let xor_result = a ^ b;\n\n    // Count the number of set bits (1s) in the XOR result\n    let differing_bits_count = xor_result.count_ones() as u64;\n\n    // Return the count as a JSON number\n    Value::Number(serde_json::Number::from(differing_bits_count))\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/explore/round-001/content-v1/sandbox"
+  },
+  "code_sha256": "48d40a9dbbc44dd4efdd4b0c62848088b7c196442c1231c0d666dd992d2db290",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

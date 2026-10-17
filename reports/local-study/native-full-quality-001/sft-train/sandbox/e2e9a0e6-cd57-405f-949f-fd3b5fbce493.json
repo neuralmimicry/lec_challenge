@@ -1,0 +1,34 @@
+{
+  "run_id": "e2e9a0e6-cd57-405f-949f-fd3b5fbce493",
+  "task_id": "sequences.zip_longest",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error[E0277]: the type `[Value]` cannot be indexed by `i64`\n  --> /candidate/main.rs:12:17\n   |\n12 |         if arr1[i].as_i64().unwrap() < arr2[j].as_i64().unwrap() {\n   |                 ^ slice indices are of type `usize` or ranges of `usize`\n   |\n   = help: the trait `SliceIndex<[Value]>` is not implemented for `i64`\nhelp: `usize` implements trait `SliceIndex<T>`\n  --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/slice/index.rs:179:0\n   |\n   = note: `SliceIndex<[T]>`\n  --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/bstr/traits.rs:197:0\n   |\n   = note: `SliceIndex<ByteStr>`\n   = note: required for `Vec<Value>` to implement `std::ops::Index<i64>`\n\nerror[E0277]: the type `[Value]` cannot be indexed by `i64`\n  --> /candidate/main.rs:12:45\n   |\n12 |         if arr1[i].as_i64().unwrap() < arr2[j].as_i64().unwrap() {\n   |                                             ^ slice indices are of type `usize` or ranges of `usize`\n   |\n   = help: the trait `SliceIndex<[Value]>` is not implemented for `i64`\nhelp: `usize` implements trait `SliceIndex<T>`\n  --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/slice/index.rs:179:0\n   |\n   = note: `SliceIndex<[T]>`\n  --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/bstr/traits.rs:197:0\n   |\n   = note: `SliceIndex<ByteStr>`\n   = note: required for `Vec<Value>` to implement `std::ops::Index<i64>`\n\nerror[E0277]: the type `[Value]` cannot be indexed by `i64`\n  --> /candidate/main.rs:13:35\n   |\n13 |             result.push(Some(arr1[i].as_i64().unwrap()));\n   |                                   ^ slice indices are of type `usize` or ranges of `usize`\n   |\n   = help: the trait `SliceIndex<[Value]>` is not implemented for `i64`\nhelp: `usize` implements trait `SliceIndex<T>`\n  --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/slice/index.rs:179:0\n   |\n   = note: `SliceIndex<[T]>`\n  --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/bstr/traits.rs:197:0\n   |\n   = note: `SliceIndex<ByteStr>`\n   = note: required for `Vec<Value>` to implement `std::ops::Index<i64>`\n\nerror: aborting due to 3 previous errors\n\nFor more information about this error, try `rustc --explain E0277`.\n"
+  ],
+  "cases_total": 5,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "4b2556745b303526f354ded7f2c473b77f6da0c99a77f0a493c7272a8d800aac",
+  "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "f2a690237bc1ba54d94e6c17026d224d93456ec9dd83cea3152576e7dd456afa",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "controller_version": 2,
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:1",
+    "expected_image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/native-full-quality-001/sft-train/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/native-full-quality-001/sft-train/sandbox/e2e9a0e6-cd57-405f-949f-fd3b5fbce493.audit.json",
+  "audit_sha256": "1e3957688df1129bc1d60916822e1953d7c19dd44e8d959de7482c67eaf763a8",
+  "failure": "compilation failed: error[E0277]: the type `[Value]` cannot be indexed by `i64`\n  --> /candidate/main.rs:12:17\n   |\n12 |         if arr1[i].as_i64().unwrap() < arr2[j].as_i64().unwrap() {\n   |                 ^ slice indices are of type `usize` or ranges of `usize`\n   |\n   = help: the trait `SliceIndex<[Value]>` is not implemented for `i64`\nhelp: `usize` implements trait `SliceIndex<T>`\n  --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/slice/index.rs:179:0\n   |\n   = note: `SliceIndex<[T]>`\n  --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/bstr/traits.rs:197:0\n   |\n   = note: `SliceIndex<ByteStr>`\n   = note: required for `Vec<Value>` to implement `std::ops::Index<i64>`\n\nerror[E0277]: the type `[Value]` cannot be indexed by `i64`\n  --> /candidate/main.rs:12:45\n   |\n12 |         if arr1[i].as_i64().unwrap() < arr2[j].as_i64().unwrap() {\n   |                                             ^ slice indices are of type `usize` or ranges of `usize`\n   |\n   = help: the trait `SliceIndex<[Value]>` is not implemented for `i64`\nhelp: `usize` implements trait `SliceIndex<T>`\n  --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/slice/index.rs:179:0\n   |\n   = note: `SliceIndex<[T]>`\n  --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/bstr/traits.rs:197:0\n   |\n   = note: `SliceIndex<ByteStr>`\n   = note: required for `Vec<Value>` to implement `std::ops::Index<i64>`\n\nerror[E0277]: the type `[Value]` cannot be indexed by `i64`\n  --> /candidate/main.rs:13:35\n   |\n13 |             result.push(Some(arr1[i].as_i64().unwrap()));\n   |                                   ^ slice indices are of type `usize` or ranges of `usize`\n   |\n   = help: the trait `SliceIndex<[Value]>` is not implemented for `i64`\nhelp: `usize` implements trait `SliceIndex<T>`\n  --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/slice/index.rs:179:0\n   |\n   = note: `SliceIndex<[T]>`\n  --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/bstr/traits.rs:197:0\n   |\n   = note: `SliceIndex<ByteStr>`\n   = note: required for `Vec<Value>` to implement `std::ops::Index<i64>`\n\nerror: aborting due to 3 previous errors\n\nFor more information about this error, try `rustc --explain E0277`.\n",
+  "duration_ms": 3544,
+  "timeout_evidence": null
+}

@@ -1,0 +1,38 @@
+{
+  "model_id": "deepseek-coder-1_3b",
+  "task_id": "dispatch.round_robin",
+  "source_id": "private-dispatch-v1",
+  "specification_sha256": "e445e145f0405de8c854262451687ad1958cdfd2793c0f20d7b13efdf5c0a5fa",
+  "seed": 1729,
+  "plan_sha256": "9aefcaf935435b296c63229638aad5a22a416ae171eda011a6812dd745667ea8",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input {jobs,quantum} has nonnegative integer work amounts and positive quantum. Cycle job indices, giving up to quantum work each turn; return indices in order of completion, initially zero-work jobs first in index order.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":{\"jobs\":[3,1,2],\"quantum\":2},\"expected\":[1,2,0]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "Here is a simple implementation of the `solve` function in Rust. This function sorts the input jobs in order of completion.\n\n```rust\nuse serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let mut jobs: Vec<i32> = input.get(\"jobs\")\n        .and_then(|val| val.as_array().map_err(|_| ()))\n        .and_then(|arr| arr.iter().map(|val| val.as_i32().unwrap()).collect())\n        .unwrap_or_else(|| vec![].into_iter().collect());\n\n    let quantum = input.get(\"quantum\").and_then(|val| val.as_i32()).unwrap_or(0);\n\n    jobs.sort_unstable_by(|a, b| b.cmp(a));\n\n    let mut result = vec![];\n    for i in 0..quantum {\n        if let Some(index) = jobs.iter().position(|&x| x <= i) {\n            result.push(index as i32);\n            jobs.drain(index..);\n        } else {\n            result.push(0);\n        }\n    }\n\n    input.insert(\"expected\", result)\n}\n```\n\nThis function first extracts the jobs and quantum from the input JSON value. It then sorts the jobs in descending order. It then iterates over the range 0 to the quantum, and for each index, it checks if the job at that index is less than or equal to the current index. If it is, it adds the job index to the result and removes it from the jobs vector. If it is not, it adds 0 to the result. Finally, it returns the input JSON value with the expected result inserted.\n\nPlease note that this function assumes that the input JSON value is valid and contains the \"jobs\" and \"quantum\" keys. If the input JSON value is not valid, the function will panic.\n",
+    "checkpoint_id": "4ff570bf9a558d23c5cb4171bad00daf663be8282150cdb5769e0f6975b0007a",
+    "finish_reason": "stop",
+    "input_tokens": 333,
+    "output_tokens": 468,
+    "elapsed_ms": 23002,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/comparative/coding-development/deepseek-coder-1_3b/dispatch.round_robin.generation.json",
+    "sha256": "52a11c10d4e532a4f001214f5656af99c1f8e0a438b80504c872aa8d3b6789f4",
+    "bytes": 4000
+  },
+  "sandbox_report": {
+    "path": "reports/comparative/coding-development/sandbox/e1d325e1-fc6d-4a53-8bfa-59dee1849078.json",
+    "sha256": "e7fc3dcc5e9238652e377e65dcc7093d3d353ec085a0e9cfcd03a319103f0bf9",
+    "bytes": 5443
+  },
+  "grading_error": null,
+  "success": false
+}

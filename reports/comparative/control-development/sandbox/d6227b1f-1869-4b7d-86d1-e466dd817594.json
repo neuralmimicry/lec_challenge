@@ -1,0 +1,33 @@
+{
+  "run_id": "d6227b1f-1869-4b7d-86d1-e466dd817594",
+  "task_id": "money.basket",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error[E0308]: mismatched types\n --> /candidate/main.rs:8:13\n  |\n8 |         let (unit_price_cents, quantity) = item.as_array().unwrap()[0].as_array().unwrap()[0].as_i64().unwrap().to_owned();\n  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^   ------------------------------------------------------------------------------- this expression has type `i64`\n  |             |\n  |             expected `i64`, found `(_, _)`\n  |\n  = note: expected type `i64`\n            found tuple `(_, _)`\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0308`.\n"
+  ],
+  "cases_total": 5,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "0bf995b5f69865792503015f6af52b457c861b679877956e939c2137ddb4a562",
+  "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+  "oracle_sha256": "a734f6d465714cbebb072790fedff161d2fc28cbb257b3d04cee0feaf8b5b5fe",
+  "code_sha256": "ae21d95d6084a2d2e32519c4f5e9171d415d6f0d7a05166c04ec145d1cff87a0",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:1",
+    "expected_image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/comparative/control-development/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/comparative/control-development/sandbox/d6227b1f-1869-4b7d-86d1-e466dd817594.audit.json",
+  "audit_sha256": "b88e3f379ea7a0a1ea00cb8a6369fc18ea4e17687c7a6d70833b2d1de844e591",
+  "failure": "compilation failed: error[E0308]: mismatched types\n --> /candidate/main.rs:8:13\n  |\n8 |         let (unit_price_cents, quantity) = item.as_array().unwrap()[0].as_array().unwrap()[0].as_i64().unwrap().to_owned();\n  |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^   ------------------------------------------------------------------------------- this expression has type `i64`\n  |             |\n  |             expected `i64`, found `(_, _)`\n  |\n  = note: expected type `i64`\n            found tuple `(_, _)`\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0308`.\n",
+  "duration_ms": 3212,
+  "timeout_evidence": null
+}

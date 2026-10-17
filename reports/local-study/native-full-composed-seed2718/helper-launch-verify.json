@@ -1,0 +1,17 @@
+{
+  "canonical_request_sha256": "edc29d6ee33270ae570960f978b46c56e79dd2048e601c9c40411cc3e40a4fd7",
+  "common_launch": {
+    "bytes": 697,
+    "path": "reports/local-study/native-full-composed-seed2718/helper-launch.json",
+    "sha256": "ba5a7d76248a036dddf203d6c8848c0c7c323e6ff075e1ea773128311c9e587f"
+  },
+  "evidence_kind": "immutable_native_distillation_helper_phase_launch",
+  "phase": "verify",
+  "production_eligible": false,
+  "request": {
+    "bytes": 1065,
+    "path": "reports/local-study/native-full-composed-seed2718-request.json",
+    "sha256": "e938665812dcd439d470c8951ccd635b29aec521b88ea65741d2ba9ecdc527b1"
+  },
+  "schema_version": 1
+}

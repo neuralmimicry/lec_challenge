@@ -1,0 +1,91 @@
+{
+  "freeze_sha256": "7a9651ebec03b215b0e30d49fa983611fbe12095080cc45020c54042f1aad46a",
+  "steps": 2,
+  "adapter": {
+    "path": "reports/local-study/native-composed-operator/step-000002/adapter.safetensors",
+    "sha256": "3b6c9f4665cfda83681c4569a5eac06fd0559b35f2534d4c7488a871056af9f7",
+    "bytes": 551352
+  },
+  "optimizer": {
+    "path": "reports/local-study/native-composed-operator/step-000002/optimizer.safetensors",
+    "sha256": "bee9f70492ba2fc5dea3e6a2214cff29ee33a6da63fced99897324502123606a",
+    "bytes": 1103152
+  },
+  "initial_adapter_sha256": "595d2bf573776bdd779c6f5d67733e60848928e82de02946986ddb1abafc69dc",
+  "losses": [
+    0.8636103272438049,
+    0.9177457094192505
+  ],
+  "gradient_norms": [
+    1.0678220799056433,
+    1.3763720643859223
+  ],
+  "component_losses": [
+    {
+      "sequence_sft": 1.2542798519134521,
+      "soft_token_kl": 2.1646313667297363,
+      "hidden_feature": 0.03139670193195343,
+      "attention_relation": 0.004133554175496101
+    },
+    {
+      "sequence_sft": 1.4967482089996338,
+      "soft_token_kl": 2.1397812366485596,
+      "hidden_feature": 0.03105618990957737,
+      "attention_relation": 0.003397159744054079
+    }
+  ],
+  "alignment_diagnostics": [
+    {
+      "padding_mass": {
+        "discarded_probability_mass": 0.0,
+        "semantic_tokens": 151665,
+        "semantics": "Full-head temperature normalisation; exact shared semantic IDs plus one mass-preserving residual bucket for every padding/unmapped ID. Physical padding identities are deliberately coarsened; no probability tail is discarded.",
+        "student_padding_tokens": 271,
+        "student_residual_probability_mean": 0.00020152804790996015,
+        "teacher_padding_tokens": 399,
+        "teacher_residual_probability_mean": 0.0006104444619268179,
+        "temperature": 2.0
+      },
+      "sample_id": "9a709fd0afa880d7d61490074636b6a836aa05da5d9a338a46aa8aca31efdce4",
+      "step": 1,
+      "teacher_id": "qwen-coder-7b-q4_k_m",
+      "vocabulary_alignment": {
+        "semantic_token_count": 151665,
+        "semantic_token_ids_sha256": "881076570c6bc70fa9691bdb6713645fc2848f0d42de838030b2e3ae2f34ab2e",
+        "semantics": "Identical defined semantic token IDs plus one residual category containing every padding output. Full original-head normalisation before coarsening; zero discarded probability mass. Per-temperature residual masses are recorded with each optimisation update.",
+        "student_logits_width": 151936,
+        "student_residual_token_count": 271,
+        "teacher_logits_width": 152064,
+        "teacher_residual_token_count": 399
+      }
+    },
+    {
+      "padding_mass": {
+        "discarded_probability_mass": 0.0,
+        "semantic_tokens": 151665,
+        "semantics": "Full-head temperature normalisation; exact shared semantic IDs plus one mass-preserving residual bucket for every padding/unmapped ID. Physical padding identities are deliberately coarsened; no probability tail is discarded.",
+        "student_padding_tokens": 271,
+        "student_residual_probability_mean": 0.00020695604325737804,
+        "teacher_padding_tokens": 399,
+        "teacher_residual_probability_mean": 0.0007713345694355667,
+        "temperature": 2.0
+      },
+      "sample_id": "d34031fab7990f9d5bb1ac0465e3173de67d17f95496ed535260f239f3c4bc90",
+      "step": 2,
+      "teacher_id": "qwen-coder-7b-q4_k_m",
+      "vocabulary_alignment": {
+        "semantic_token_count": 151665,
+        "semantic_token_ids_sha256": "881076570c6bc70fa9691bdb6713645fc2848f0d42de838030b2e3ae2f34ab2e",
+        "semantics": "Identical defined semantic token IDs plus one residual category containing every padding output. Full original-head normalisation before coarsening; zero discarded probability mass. Per-temperature residual masses are recorded with each optimisation update.",
+        "student_logits_width": 151936,
+        "student_residual_token_count": 271,
+        "teacher_logits_width": 152064,
+        "teacher_residual_token_count": 399
+      }
+    }
+  ],
+  "sample_ids": [
+    "9a709fd0afa880d7d61490074636b6a836aa05da5d9a338a46aa8aca31efdce4",
+    "d34031fab7990f9d5bb1ac0465e3173de67d17f95496ed535260f239f3c4bc90"
+  ]
+}

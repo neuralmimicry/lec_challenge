@@ -1,0 +1,6 @@
+{
+  "error": "original assessment evidence is incomplete or unverified; inspect the audit for exact next actions",
+  "observed_unix_ms": 1792167453762,
+  "promotion": "incumbent_retained",
+  "status": "FAILURE"
+}

@@ -1,0 +1,34 @@
+{
+  "run_id": "6810fdc8-93b1-47bf-94c6-dd5ec90b6633",
+  "task_id": "matrices.transpose",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error[E0277]: `&Value` is not an iterator\n --> /candidate/main.rs:8:20\n  |\n8 |         for col in row {\n  |                    ^^^ `&Value` is not an iterator\n  |\n  = help: the trait `Iterator` is not implemented for `&Value`\n  = note: required for `&Value` to implement `IntoIterator`\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0277`.\n"
+  ],
+  "cases_total": 5,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "4b2556745b303526f354ded7f2c473b77f6da0c99a77f0a493c7272a8d800aac",
+  "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "b8afe13eac112e638290c0e927fde83bdb41334e7e16ed3617bee90e0674f62e",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "controller_version": 2,
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:1",
+    "expected_image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/native-full-quality-001/composed-train/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/native-full-quality-001/composed-train/sandbox/6810fdc8-93b1-47bf-94c6-dd5ec90b6633.audit.json",
+  "audit_sha256": "195b421d74f374532490ec4f0f524d5e1dba6d35eb9748d0d15ec49d65b431d0",
+  "failure": "compilation failed: error[E0277]: `&Value` is not an iterator\n --> /candidate/main.rs:8:20\n  |\n8 |         for col in row {\n  |                    ^^^ `&Value` is not an iterator\n  |\n  = help: the trait `Iterator` is not implemented for `&Value`\n  = note: required for `&Value` to implement `IntoIterator`\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0277`.\n",
+  "duration_ms": 5427,
+  "timeout_evidence": null
+}

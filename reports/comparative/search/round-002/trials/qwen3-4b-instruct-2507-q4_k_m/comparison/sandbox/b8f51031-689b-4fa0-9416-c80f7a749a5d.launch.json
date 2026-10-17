@@ -1,0 +1,8 @@
+{
+  "launch_unix_ms": 1792137628300,
+  "owner_pid": 1193032,
+  "prepared_receipt": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison/sandbox/4329f430-a73b-4f7d-aa04-86769f032082.prepared.json",
+  "prepared_sha256": "3cb48fb801fe348fe7061d0c5078be85b9956ca9d1085a2e32baec84b45cbb2a",
+  "run_id": "b8f51031-689b-4fa0-9416-c80f7a749a5d",
+  "schema_version": 3
+}

@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "protocol": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/cohort.json",
+    "sha256": "d53dafcb00d6f6e44156fa1bf37de5e3f3c14a412c6ef78b041ec551c1f1923a",
+    "bytes": 4415
+  },
+  "stages": {
+    "rollout-evidence": {
+      "status": "bounded_evidence_gaps",
+      "attempts": [
+        {
+          "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/attempts/rollout-evidence/2d745bcc-e6d1-4094-af90-57a564d594a9/request.json",
+          "sha256": "b7bb004cd100c0cc61eeec6b2b95457bfa59bc42020605894ad6cfa82c99b9c4",
+          "bytes": 3915
+        },
+        {
+          "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/attempts/rollout-evidence/72a1284a-2ff0-49dc-bf6c-74a64f282967/request.json",
+          "sha256": "37eb6b16cdae16b39c6b8d944d86547e20bd147b89df5d5bc1eeb3db8da2ebfc",
+          "bytes": 3915
+        }
+      ],
+      "artefacts": [
+        {
+          "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/bundle.json",
+          "sha256": "96dc790f75a50191226bee5157d5d5b6f19a8bc14e735df6b6d914481d3fde2b",
+          "bytes": 233414
+        },
+        {
+          "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/rollout-report.json",
+          "sha256": "dc1d58cd3d88e9ee58dbd3afd02db5c5ddd42badca973cb801e63d113f1c692c",
+          "bytes": 1040
+        }
+      ],
+      "details": {
+        "current_batch": {
+          "coverage_complete": true,
+          "error_records": 48,
+          "evidence_kind": "actual_current_batch_checkpoint_bound_rollout_report",
+          "expected_new_records": 48,
+          "failed_new_records": 48,
+          "feedback_generation_failures": 45,
+          "feedback_grading_failures": 45,
+          "feedback_not_attempted": 3,
+          "generation_or_infrastructure_errors": 92,
+          "healthy_complete": false,
+          "inherited_rollout_records": 0,
+          "inherited_samples": 22,
+          "mode": "on_policy",
+          "new_rollout_records": 48,
+          "new_verified_rollout_samples": 0,
+          "production_eligible": false,
+          "schema_version": 2,
+          "semantics": "Only this frozen batch counts. Inherited passing samples cannot turn absent/error/truncated/unsafe corrective observations into success. Failed rows remain in all record denominators; trusted compiler feedback is not a passing solution.",
+          "student_checkpoint_sha256": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+          "student_generation_failures": 2,
+          "student_grading_failures": 0,
+          "successful_new_records": 0,
+          "tasks": 48
+        },
+        "healthy": false
+      }
+    }
+  },
+  "selection": null,
+  "events": [
+    {
+      "attempt": {
+        "bytes": 1147,
+        "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/attempts/rollout-evidence/2d745bcc-e6d1-4094-af90-57a564d594a9/result.json",
+        "sha256": "f9eedeed15c092fbb4b5b07567e1b70949ac9cc78db106aaee04e323ace39749"
+      },
+      "stage": "rollout-evidence",
+      "unix_ms": 1792158563037
+    },
+    {
+      "attempt": {
+        "bytes": 1146,
+        "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/attempts/rollout-evidence/72a1284a-2ff0-49dc-bf6c-74a64f282967/result.json",
+        "sha256": "c173ff46a25b4b196e07217112ac3f62c7fd578dd12757095d99f24e44fbf6e9"
+      },
+      "stage": "rollout-evidence",
+      "unix_ms": 1792183240998
+    }
+  ]
+}

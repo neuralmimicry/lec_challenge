@@ -1,0 +1,51 @@
+{
+  "evidence_kind": "actual_pinned_bitnet_cpp_smoke",
+  "execution": {
+    "actual_device": "Cpu",
+    "actual_dtype": "F32",
+    "architecture": "bitnet",
+    "checkpoint_id": "8143ae115ed6babe5e5ada8fb8c5b769d8f417802b2db042ad98b4f7ed73975b",
+    "context_tokens": 4096,
+    "cpu_fallback": false,
+    "cpu_mask": null,
+    "cpu_threads": 4,
+    "cuda_active": false,
+    "engine": "pinned_bitnet_cpp_supervised_by_rust",
+    "engine_manifest": {
+      "bytes": 6170,
+      "path": "state/engines/bitnet-build/engine-manifest.json",
+      "sha256": "082535c5bf64d14c718a50a4829ba52f00f9f251f013df79d422862f3b056a2e"
+    },
+    "evaluation_only": true,
+    "gguf": {
+      "bytes": 1843959008,
+      "path": "offline_bundle/students/bitnet-2b-4t/model.i2_s.gguf",
+      "sha256": "2e097b3dda58f8308b03c8b62cce7cb8767470aafb7400e5f169c108b86c75a7"
+    },
+    "inherited_affinity": "0-15",
+    "kv_cache": true,
+    "lifetime_supervision": "persistent_native_owner_thread_linux_pdeathsig_sigkill_parent_pid_race_check",
+    "log": "reports/comparative/bitnet/engine-runs/19833f0b-dafe-4461-8147-1cc6c1e41f07.log",
+    "model_id": "microsoft/bitnet-b1.58-2B-4T",
+    "native_server_pid": 736779,
+    "original_tokeniser_parity_verified": true,
+    "production_eligible": false,
+    "requested": {
+      "device": "cpu",
+      "dtype": "f32"
+    },
+    "revision": "04c3b9ad9361b824064a1f25ea60a8be9599b127"
+  },
+  "generation": {
+    "checkpoint_id": "8143ae115ed6babe5e5ada8fb8c5b769d8f417802b2db042ad98b4f7ed73975b",
+    "complete": true,
+    "completion": "Hello! How can I assist you today?",
+    "elapsed_ms": 7876,
+    "finish_reason": "stop",
+    "input_tokens": 14,
+    "output_tokens": 10
+  },
+  "production_eligible": false,
+  "quality_evaluation": false,
+  "schema_version": 1
+}

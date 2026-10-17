@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "a5b39d544c85b76111246b8fda40c638ce104251a1c56368277fef8fe4033eb6",
+  "task_id": "ledger.bounds",
+  "source_id": "private-ledger-v1",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an integer array. Return [minimum,maximum], or null for an empty array.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[2,-4,8],\"expected\":[-4,8]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    if let Value::Array(arr) = input {\n        if arr.is_empty() {\n            return Value::Null;\n        }\n\n        let mut min_val = i64::MAX;\n        let mut max_val = i64::MIN;\n\n        for item in arr {\n            if let Value::Number(num) = item {\n                if let Some(n) = num.as_i64() {\n                    if n < min_val {\n                        min_val = n;\n                    }\n                    if n > max_val {\n                        max_val = n;\n                    }\n                }\n            }\n        }\n\n        Value::Array(vec![\n            Value::Number(serde_json::Number::from(min_val)),\n            Value::Number(serde_json::Number::from(max_val)),\n        ])\n    } else {\n        Value::Null\n    }\n}\n```",
+    "checkpoint_id": "e2bcd135527659042304d936fa56c7240f6f96a43b9f81f2a888c38b7762a949",
+    "finish_reason": "stop",
+    "input_tokens": 224,
+    "output_tokens": 185,
+    "elapsed_ms": 6939,
+    "complete": true
+  },
+  "model_error": null
+}

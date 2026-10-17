@@ -1,0 +1,40 @@
+{
+  "run_id": "e99de8ce-2d14-4ea5-b45d-16a08ce15424",
+  "task_id": "calendar.leap",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error: expected identifier, found keyword `true`\n --> /candidate/main.rs:6:28\n  |\n6 |         serde_json::Value::true\n  |                            ^^^^ expected identifier, found keyword\n  |\nhelp: escape `true` to use it as an identifier\n  |\n6 |         serde_json::Value::r#true\n  |                            ++\n\nerror: expected identifier, found keyword `false`\n --> /candidate/main.rs:8:28\n  |\n8 |         serde_json::Value::false\n  |                            ^^^^^ expected identifier, found keyword\n  |\nhelp: escape `false` to use it as an identifier\n  |\n8 |         serde_json::Value::r#false\n  |                            ++\n\nwarning: unused import: `serde_json::Value`\n --> /candidate/main.rs:1:5\n  |\n1 | use serde_json::Value;\n  |     ^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0599]: no variant, associated function, or constant named `r#true` found for enum `Value` in the current scope\n --> /candidate/main.rs:6:28\n  |\n6 |         serde_json::Value::true\n  |                            ^^^^ variant, associated function, or constant not found in `Value`\n\nerror[E0599]: no variant, associated function, or constant named `r#false` found for enum `Value` in the current scope\n --> /candidate/main.rs:8:28\n  |\n8 |         serde_json::Value::false\n  |                            ^^^^^ variant, associated function, or constant not found in `Value`\n\nerror: aborting due to 4 previous errors; 1 warning emitted\n\nFor more information about this error, try `rustc --explain E0599`.\n"
+  ],
+  "cases_total": 7,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "0fd2a99d7c108acdeb72279741ffe4b9444b5d930b4aecc91e22e31fb4d59742",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/regraded-v3-001/evaluation-003-train-f95238863522/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/regraded-v3-001/evaluation-003-train-f95238863522/sandbox/e99de8ce-2d14-4ea5-b45d-16a08ce15424.audit.json",
+  "audit_sha256": "f2773b14b78534bd92050886e8ff8b25ff564eedea7ba1041dc189bbf4dd3dde",
+  "failure": "compilation failed: error: expected identifier, found keyword `true`\n --> /candidate/main.rs:6:28\n  |\n6 |         serde_json::Value::true\n  |                            ^^^^ expected identifier, found keyword\n  |\nhelp: escape `true` to use it as an identifier\n  |\n6 |         serde_json::Value::r#true\n  |                            ++\n\nerror: expected identifier, found keyword `false`\n --> /candidate/main.rs:8:28\n  |\n8 |         serde_json::Value::false\n  |                            ^^^^^ expected identifier, found keyword\n  |\nhelp: escape `false` to use it as an identifier\n  |\n8 |         serde_json::Value::r#false\n  |                            ++\n\nwarning: unused import: `serde_json::Value`\n --> /candidate/main.rs:1:5\n  |\n1 | use serde_json::Value;\n  |     ^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0599]: no variant, associated function, or constant named `r#true` found for enum `Value` in the current scope\n --> /candidate/main.rs:6:28\n  |\n6 |         serde_json::Value::true\n  |                            ^^^^ variant, associated function, or constant not found in `Value`\n\nerror[E0599]: no variant, associated function, or constant named `r#false` found for enum `Value` in the current scope\n --> /candidate/main.rs:8:28\n  |\n8 |         serde_json::Value::false\n  |                            ^^^^^ variant, associated function, or constant not found in `Value`\n\nerror: aborting due to 4 previous errors; 1 warning emitted\n\nFor more information about this error, try `rustc --explain E0599`.\n",
+  "duration_ms": 20425,
+  "timeout_evidence": null,
+  "lifecycle_evidence": {
+    "receipt_path": "reports/local-study/regraded-v3-001/evaluation-003-train-f95238863522/sandbox/e99de8ce-2d14-4ea5-b45d-16a08ce15424.lifecycle.json",
+    "receipt_sha256": "de5ba15e1235da46e9453beb201c4882e06f59fad9da205768096fd572e3b0b0"
+  }
+}

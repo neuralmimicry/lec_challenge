@@ -1,0 +1,633 @@
+{
+  "schema_version": 1,
+  "model_id": "TheBloke/Magicoder-S-DS-6.7B-GGUF",
+  "revision": "d41a33f9393ebc06c6beb44b1ded091b6d19496c",
+  "licence": "other",
+  "filename": "magicoder-s-ds-6.7b.Q4_K_M.gguf",
+  "file_sha256": "4b340a9d033091627273fa0f95a4d43b5fe95500c714f9d2f683fbe266c9bc52",
+  "file_bytes": 4082886528,
+  "assets": {
+    "model_id": "TheBloke/Magicoder-S-DS-6.7B-GGUF",
+    "revision": "d41a33f9393ebc06c6beb44b1ded091b6d19496c",
+    "licence": "other",
+    "files": {
+      "README.md": "48afd0098e98e6cb37c93bdda54aa9b64315755c32b712486370ff76e1f7de57",
+      "magicoder-s-ds-6.7b.Q4_K_M.gguf": "4b340a9d033091627273fa0f95a4d43b5fe95500c714f9d2f683fbe266c9bc52",
+      "source/LICENSE": "84d3a9a13e4f671c3f90087f33d6926b5621baa6711b315ee9f0113436e2d0e2",
+      "source/README.md": "f944a8a38f6073b1578f5aa07f8221fde6146a21267c6f641c8eadba44a59cf2",
+      "source/added_tokens.json": "423a96e0e9e3e0c0d8dc142bddd7b70cd100360980d3017920f358c9163375b4",
+      "source/config.json": "5420661967bb4aa7c4a3e8bc8ed5913dfc62e3e05bdcb01f2857f41070353187",
+      "source/generation_config.json": "1e88670fbb59572c8f60c85dcb429f04d611a3b9910c28b78163beb769090abb",
+      "source/special_tokens_map.json": "acb949a6d246354249847f5e1f0dabe04c258271eab55a6d6fac251d7af41075",
+      "source/tokenizer.json": "5ea7c1cf401382d953c8a56df1786cefa9446bc6aa168571870063da9ecc7e89",
+      "source/tokenizer.model": "45ccb9c8b6b561889acea59191d66986d314e7cbd6a78abc6e49b139ca91c1e6",
+      "source/tokenizer_config.json": "6dd970498d4ad0237c2f4025e0efbddb188733cca871d6f8dc7aff30409f76ba"
+    }
+  },
+  "quantisation": {
+    "schema_version": 1,
+    "model_id": "TheBloke/Magicoder-S-DS-6.7B-GGUF",
+    "requested_revision": "d41a33f9393ebc06c6beb44b1ded091b6d19496c",
+    "revision": "d41a33f9393ebc06c6beb44b1ded091b6d19496c",
+    "licence": "other",
+    "licence_files": [],
+    "licence_evidence": "Original source licence retained in the independently pinned source bundle; quantisation repository model-card declarations retained separately",
+    "recorded_unix_seconds": 1792080995,
+    "metadata_url": "https://huggingface.co/api/models/TheBloke/Magicoder-S-DS-6.7B-GGUF/revision/d41a33f9393ebc06c6beb44b1ded091b6d19496c?blobs=true",
+    "metadata_sha256": "86aaf8d8940d37d54c505f88107789690164aab638a694134a79206e6839a783",
+    "metadata": {
+      "_id": "6570b4293e68d88fd6061f45",
+      "author": "TheBloke",
+      "cardData": {
+        "base_model": "ise-uiuc/Magicoder-S-DS-6.7B",
+        "datasets": [
+          "ise-uiuc/Magicoder-OSS-Instruct-75K",
+          "ise-uiuc/Magicoder-Evol-Instruct-110K"
+        ],
+        "inference": false,
+        "library_name": "transformers",
+        "license": "other",
+        "license_name": "deepseek",
+        "model_creator": "Intellligent Software Engineering (iSE",
+        "model_name": "Magicoder S DS 6.7B",
+        "model_type": "deepseek",
+        "pipeline_tag": "text-generation",
+        "prompt_template": "You are an exceptionally intelligent coding assistant that consistently delivers accurate and reliable responses to user instructions.\n\n@@ Instruction\n{prompt}\n\n@@ Response\n",
+        "quantized_by": "TheBloke"
+      },
+      "config": {
+        "model_type": "deepseek"
+      },
+      "createdAt": "2023-12-06T17:49:29.000Z",
+      "disabled": false,
+      "downloads": 3518,
+      "gated": false,
+      "gguf": {
+        "architecture": "llama",
+        "bos_token": "<｜begin▁of▁sentence｜>",
+        "context_length": 16384,
+        "eos_token": "<｜end▁of▁sentence｜>",
+        "total": 6740512768,
+        "totalFileSize": 2827577216
+      },
+      "id": "TheBloke/Magicoder-S-DS-6.7B-GGUF",
+      "lastModified": "2023-12-07T20:44:44.000Z",
+      "library_name": "transformers",
+      "likes": 75,
+      "model-index": null,
+      "modelId": "TheBloke/Magicoder-S-DS-6.7B-GGUF",
+      "pipeline_tag": "text-generation",
+      "private": false,
+      "sha": "d41a33f9393ebc06c6beb44b1ded091b6d19496c",
+      "siblings": [
+        {
+          "blobId": "b064444a223ba8d1d1b7813a026671f7fa5b7416",
+          "rfilename": ".gitattributes",
+          "size": 2325
+        },
+        {
+          "blobId": "7d7bf950cb0b03d88f661965869f04665691c724",
+          "rfilename": "README.md",
+          "size": 23808
+        },
+        {
+          "blobId": "a770c44de33628ff769cae6b62f8c84c1e1d2e6a",
+          "rfilename": "config.json",
+          "size": 32
+        },
+        {
+          "blobId": "9222175d779287b38b5a58fc0d3ec7c6c99ef7b2",
+          "lfs": {
+            "pointerSize": 135,
+            "sha256": "7c31cf5d54c3f2315658900e97cf44605084d9517c59591518b9a8fbce4f195b",
+            "size": 2827577216
+          },
+          "rfilename": "magicoder-s-ds-6.7b.Q2_K.gguf",
+          "size": 2827577216
+        },
+        {
+          "blobId": "889e68f7b52206cbbd90f00d0e89e23f9bae9ee1",
+          "lfs": {
+            "pointerSize": 135,
+            "sha256": "e4f54ecc54ec4378e86074725a44cdf80834918b0be55a512d23f6eb3baddae6",
+            "size": 3598854016
+          },
+          "rfilename": "magicoder-s-ds-6.7b.Q3_K_L.gguf",
+          "size": 3598854016
+        },
+        {
+          "blobId": "be3b04e6c075ed10adc573b403881bda6160f996",
+          "lfs": {
+            "pointerSize": 135,
+            "sha256": "7bac275870a6c9a992b7fab9bcf2010130b57625ad99bee4309e1f0d98904b6b",
+            "size": 3299747712
+          },
+          "rfilename": "magicoder-s-ds-6.7b.Q3_K_M.gguf",
+          "size": 3299747712
+        },
+        {
+          "blobId": "675ff61658cab5929982c2a5743f405c661407fb",
+          "lfs": {
+            "pointerSize": 135,
+            "sha256": "c3567e9d56285575a380c3d959fdc7639c9311625ccc9106c45314757e10a311",
+            "size": 2950047616
+          },
+          "rfilename": "magicoder-s-ds-6.7b.Q3_K_S.gguf",
+          "size": 2950047616
+        },
+        {
+          "blobId": "0207500e6c9beda20df00affd901d41e1cfce305",
+          "lfs": {
+            "pointerSize": 135,
+            "sha256": "dff24bb9061c24649fa77d9bfb475a5ebb1ed7102d4518450fc090e4c5c327f0",
+            "size": 3827689344
+          },
+          "rfilename": "magicoder-s-ds-6.7b.Q4_0.gguf",
+          "size": 3827689344
+        },
+        {
+          "blobId": "075e0a55b57e8ccebc78d4101af5de0d21ed49d9",
+          "lfs": {
+            "pointerSize": 135,
+            "sha256": "4b340a9d033091627273fa0f95a4d43b5fe95500c714f9d2f683fbe266c9bc52",
+            "size": 4082886528
+          },
+          "rfilename": "magicoder-s-ds-6.7b.Q4_K_M.gguf",
+          "size": 4082886528
+        },
+        {
+          "blobId": "48b931975a1dc383ac2666762028f657abe316ff",
+          "lfs": {
+            "pointerSize": 135,
+            "sha256": "339a38540b7bb150f4ac54b13b15527429ba03b2617c424acf48c27d228a403d",
+            "size": 3858622336
+          },
+          "rfilename": "magicoder-s-ds-6.7b.Q4_K_S.gguf",
+          "size": 3858622336
+        },
+        {
+          "blobId": "9f1a4224d3a61ab46264e9b78e5fe7a15e1663ef",
+          "lfs": {
+            "pointerSize": 135,
+            "sha256": "57862a757de80c30ae2a4abad955a1bef72965a25446d86be26415ffd7b5cdb9",
+            "size": 4653705088
+          },
+          "rfilename": "magicoder-s-ds-6.7b.Q5_0.gguf",
+          "size": 4653705088
+        },
+        {
+          "blobId": "9a2b3ef03c12ea4455adcdf6756340cf1bd9f690",
+          "lfs": {
+            "pointerSize": 135,
+            "sha256": "beaf8675e2e3bbb494903d974a54c7f369384a02d8cfff0a959999c4033026a0",
+            "size": 4785170304
+          },
+          "rfilename": "magicoder-s-ds-6.7b.Q5_K_M.gguf",
+          "size": 4785170304
+        },
+        {
+          "blobId": "b8e74bc990aa6ec35e4f6ddae7306cff5741fd6b",
+          "lfs": {
+            "pointerSize": 135,
+            "sha256": "baea24420e68753a0e7b0fc739b3616cab5b82a358cbc92b2b6afff1560b3012",
+            "size": 4653705088
+          },
+          "rfilename": "magicoder-s-ds-6.7b.Q5_K_S.gguf",
+          "size": 4653705088
+        },
+        {
+          "blobId": "1a9775ad8003d5b619afdd8a3d032dbfb7f6a0a2",
+          "lfs": {
+            "pointerSize": 135,
+            "sha256": "80dd0a12581628f9ade13ea98045d11b3564193afcddf97de4901df1244a8f44",
+            "size": 5531346816
+          },
+          "rfilename": "magicoder-s-ds-6.7b.Q6_K.gguf",
+          "size": 5531346816
+        },
+        {
+          "blobId": "6c750d3d919ad8f9b8cf864ee6d661253c52bfdc",
+          "lfs": {
+            "pointerSize": 135,
+            "sha256": "45e6b4c4ab2a44541c5f328c13232c9ab2ec4008ffc9a563e73ceca875240868",
+            "size": 7163750272
+          },
+          "rfilename": "magicoder-s-ds-6.7b.Q8_0.gguf",
+          "size": 7163750272
+        }
+      ],
+      "spaces": [],
+      "tags": [
+        "transformers",
+        "gguf",
+        "deepseek",
+        "text-generation",
+        "dataset:ise-uiuc/Magicoder-OSS-Instruct-75K",
+        "dataset:ise-uiuc/Magicoder-Evol-Instruct-110K",
+        "arxiv:2312.02120",
+        "arxiv:2305.06161",
+        "base_model:ise-uiuc/Magicoder-S-DS-6.7B",
+        "base_model:quantized:ise-uiuc/Magicoder-S-DS-6.7B",
+        "license:other",
+        "region:us"
+      ],
+      "transformersInfo": {
+        "auto_model": "AutoModel"
+      },
+      "usedStorage": 102467758720,
+      "widgetData": [
+        {
+          "text": "Hi, what can you help me with?"
+        },
+        {
+          "text": "What is 84 * 3 / 2?"
+        },
+        {
+          "text": "Tell me an interesting fact about the universe!"
+        },
+        {
+          "text": "Explain quantum computing in simple terms."
+        }
+      ]
+    },
+    "files": {
+      "README.md": {
+        "filename": "README.md",
+        "bytes": 23808,
+        "publisher_identity": {
+          "kind": "git_blob_sha1",
+          "digest": "7d7bf950cb0b03d88f661965869f04665691c724"
+        },
+        "canonical_url": "https://huggingface.co/TheBloke/Magicoder-S-DS-6.7B-GGUF/resolve/d41a33f9393ebc06c6beb44b1ded091b6d19496c/README.md",
+        "sha256": "48afd0098e98e6cb37c93bdda54aa9b64315755c32b712486370ff76e1f7de57"
+      },
+      "magicoder-s-ds-6.7b.Q4_K_M.gguf": {
+        "filename": "magicoder-s-ds-6.7b.Q4_K_M.gguf",
+        "bytes": 4082886528,
+        "publisher_identity": {
+          "kind": "lfs_sha256",
+          "digest": "4b340a9d033091627273fa0f95a4d43b5fe95500c714f9d2f683fbe266c9bc52"
+        },
+        "canonical_url": "https://huggingface.co/TheBloke/Magicoder-S-DS-6.7B-GGUF/resolve/d41a33f9393ebc06c6beb44b1ded091b6d19496c/magicoder-s-ds-6.7b.Q4_K_M.gguf",
+        "sha256": "4b340a9d033091627273fa0f95a4d43b5fe95500c714f9d2f683fbe266c9bc52"
+      }
+    },
+    "authentication_policy": "Optional bearer applied to initial HTTPS huggingface.co request only; all redirects strip authentication; no token persisted"
+  },
+  "source_assets": {
+    "directory": "source",
+    "manifest": {
+      "model_id": "ise-uiuc/Magicoder-S-DS-6.7B",
+      "revision": "b3ed7cb1578a3643ceaf2ebf996a3d8e85f75d8f",
+      "licence": "other",
+      "files": {
+        "LICENSE": "84d3a9a13e4f671c3f90087f33d6926b5621baa6711b315ee9f0113436e2d0e2",
+        "README.md": "f944a8a38f6073b1578f5aa07f8221fde6146a21267c6f641c8eadba44a59cf2",
+        "added_tokens.json": "423a96e0e9e3e0c0d8dc142bddd7b70cd100360980d3017920f358c9163375b4",
+        "config.json": "5420661967bb4aa7c4a3e8bc8ed5913dfc62e3e05bdcb01f2857f41070353187",
+        "generation_config.json": "1e88670fbb59572c8f60c85dcb429f04d611a3b9910c28b78163beb769090abb",
+        "special_tokens_map.json": "acb949a6d246354249847f5e1f0dabe04c258271eab55a6d6fac251d7af41075",
+        "tokenizer.json": "5ea7c1cf401382d953c8a56df1786cefa9446bc6aa168571870063da9ecc7e89",
+        "tokenizer.model": "45ccb9c8b6b561889acea59191d66986d314e7cbd6a78abc6e49b139ca91c1e6",
+        "tokenizer_config.json": "6dd970498d4ad0237c2f4025e0efbddb188733cca871d6f8dc7aff30409f76ba"
+      }
+    },
+    "provenance": {
+      "schema_version": 1,
+      "model_id": "ise-uiuc/Magicoder-S-DS-6.7B",
+      "requested_revision": "b3ed7cb1578a3643ceaf2ebf996a3d8e85f75d8f",
+      "revision": "b3ed7cb1578a3643ceaf2ebf996a3d8e85f75d8f",
+      "licence": "other",
+      "licence_files": [
+        "LICENSE"
+      ],
+      "licence_evidence": "Original pinned repository licence document(s) and model-card metadata retained",
+      "recorded_unix_seconds": 1792079628,
+      "metadata_url": "https://huggingface.co/api/models/ise-uiuc/Magicoder-S-DS-6.7B/revision/b3ed7cb1578a3643ceaf2ebf996a3d8e85f75d8f?blobs=true",
+      "metadata_sha256": "ed2e4bbbb9aba1a104ffcb844bb564c4d6d087dc3c38c7e13d615964af899d16",
+      "metadata": {
+        "_id": "656cd8f3b4020389020599e3",
+        "author": "ise-uiuc",
+        "cardData": {
+          "datasets": [
+            "ise-uiuc/Magicoder-OSS-Instruct-75K",
+            "ise-uiuc/Magicoder-Evol-Instruct-110K"
+          ],
+          "library_name": "transformers",
+          "license": "other",
+          "license_name": "deepseek",
+          "pipeline_tag": "text-generation"
+        },
+        "config": {
+          "architectures": [
+            "LlamaForCausalLM"
+          ],
+          "model_type": "llama",
+          "tokenizer_config": {
+            "bos_token": "<｜begin▁of▁sentence｜>",
+            "chat_template": "{{bos_token}}{{'You are an exceptionally intelligent coding assistant that consistently delivers accurate and reliable responses to user instructions.\n\n'}}\n{%- for message in messages %}\n    {%- if message['role'] == 'system' %}\n        {{ raise_exception('System messages are not allowed in this template.') }}\n    {%- else %}\n        {%- if message['role'] == 'user' %}\n{{'@@ Instruction\n' + message['content'] + '\n\n'}}\n        {%- else %}\n{{'@@ Response\n' + message['content'] + eos_token + '\n\n'}}\n        {%- endif %}\n    {%- endif %}\n{%- endfor %}\n{{'@@ Response\n'}}",
+            "eos_token": "<｜end▁of▁sentence｜>",
+            "pad_token": "<｜end▁of▁sentence｜>",
+            "unk_token": null,
+            "use_default_system_prompt": false
+          }
+        },
+        "createdAt": "2023-12-03T19:37:23.000Z",
+        "disabled": false,
+        "downloads": 4611,
+        "gated": false,
+        "id": "ise-uiuc/Magicoder-S-DS-6.7B",
+        "lastModified": "2024-03-06T07:40:23.000Z",
+        "library_name": "transformers",
+        "likes": 208,
+        "model-index": null,
+        "modelId": "ise-uiuc/Magicoder-S-DS-6.7B",
+        "pipeline_tag": "text-generation",
+        "private": false,
+        "safetensors": {
+          "parameters": {
+            "F32": 6740512768
+          },
+          "total": 6740512768
+        },
+        "sha": "b3ed7cb1578a3643ceaf2ebf996a3d8e85f75d8f",
+        "siblings": [
+          {
+            "blobId": "a6344aac8c09253b3b630fb776ae94478aa0275b",
+            "rfilename": ".gitattributes",
+            "size": 1519
+          },
+          {
+            "blobId": "18742eb20561aa70ba78efd74295771f76ac25ae",
+            "rfilename": "LICENSE",
+            "size": 13750
+          },
+          {
+            "blobId": "da88769944aed47ba052bb35e6014ef63df861a6",
+            "rfilename": "README.md",
+            "size": 4578
+          },
+          {
+            "blobId": "08d77431d4b1bc63a27a920f697ca328c7156b2b",
+            "rfilename": "added_tokens.json",
+            "size": 458
+          },
+          {
+            "blobId": "94f4256b0755b6bb5a50611bc2b933724ee7d83f",
+            "rfilename": "assets/overview.svg",
+            "size": 265916
+          },
+          {
+            "blobId": "faec2d0cf559928f0efb35c70e992a8648c15ad1",
+            "rfilename": "assets/result.png",
+            "size": 170667
+          },
+          {
+            "blobId": "0ab4309467c11a3b4351da3e47610b41016f9f88",
+            "rfilename": "config.json",
+            "size": 742
+          },
+          {
+            "blobId": "044edaf8c54caf5f8c78d53d991d2bcb1e665c3e",
+            "rfilename": "generation_config.json",
+            "size": 124
+          },
+          {
+            "blobId": "ff73fb32355e2a234129c43dfe58e5aeb7d6a156",
+            "lfs": {
+              "pointerSize": 135,
+              "sha256": "f0aa9176721014753ab7f10465fb4db7600d3899a2ff487ac86b04bceb3efb40",
+              "size": 4844590720
+            },
+            "rfilename": "model-00001-of-00006.safetensors",
+            "size": 4844590720
+          },
+          {
+            "blobId": "9f8b75d800f0fb1b7cf55b7522373c792bc8cd7a",
+            "lfs": {
+              "pointerSize": 135,
+              "sha256": "5356ff52d006111e9d07823e461d5205152ff56131359724c269e267ae4b80f1",
+              "size": 4857206856
+            },
+            "rfilename": "model-00002-of-00006.safetensors",
+            "size": 4857206856
+          },
+          {
+            "blobId": "72517b91375c8fe9dd3980f1de1ed7ad73d069c2",
+            "lfs": {
+              "pointerSize": 135,
+              "sha256": "1be051467308146b7196444cfd57b44ac0967537a31518e014e5d6a42469c0a0",
+              "size": 4857206904
+            },
+            "rfilename": "model-00003-of-00006.safetensors",
+            "size": 4857206904
+          },
+          {
+            "blobId": "adb9c50232131509e6e482674e87ffc5508893cd",
+            "lfs": {
+              "pointerSize": 135,
+              "sha256": "775447e165690964578dd9f6c8ca5f94169831e40f52b8ff667f3997b947f79a",
+              "size": 4857206904
+            },
+            "rfilename": "model-00004-of-00006.safetensors",
+            "size": 4857206904
+          },
+          {
+            "blobId": "0506fe8c0dc17af9762ac1329f33de7fa32163b0",
+            "lfs": {
+              "pointerSize": 135,
+              "sha256": "dda91b47771c4916315456eafff657a172f576ed4163d191fa014d77efda8331",
+              "size": 4857206904
+            },
+            "rfilename": "model-00005-of-00006.safetensors",
+            "size": 4857206904
+          },
+          {
+            "blobId": "6494f1140be5a3150b98569d9d77f66a151cb9c3",
+            "lfs": {
+              "pointerSize": 135,
+              "sha256": "5cb977be9484f101d0329643889c1cfa7d4863d2bcb0b1ebc93d74aa00dffcb6",
+              "size": 2688666416
+            },
+            "rfilename": "model-00006-of-00006.safetensors",
+            "size": 2688666416
+          },
+          {
+            "blobId": "178e79fbffc73d2f16e8eaab9667491e80f6ba15",
+            "rfilename": "model.safetensors.index.json",
+            "size": 23950
+          },
+          {
+            "blobId": "5ff8f57b46ed9d045d6a786cc8e89e79c0005742",
+            "rfilename": "special_tokens_map.json",
+            "size": 482
+          },
+          {
+            "blobId": "0a667f9a0a6fd585202c83fb5c0bfda68e1ea858",
+            "rfilename": "tokenizer.json",
+            "size": 1368830
+          },
+          {
+            "blobId": "f6722e8b170230ebdd4c0f5f2ce03f219be536d4",
+            "lfs": {
+              "pointerSize": 131,
+              "sha256": "45ccb9c8b6b561889acea59191d66986d314e7cbd6a78abc6e49b139ca91c1e6",
+              "size": 500058
+            },
+            "rfilename": "tokenizer.model",
+            "size": 500058
+          },
+          {
+            "blobId": "f9f6ff142e15132f1b113e3027a898952cefdf12",
+            "rfilename": "tokenizer_config.json",
+            "size": 4871
+          }
+        ],
+        "spaces": [
+          "ise-uiuc/Magicoder-S-DS-6.7B",
+          "PeepDaSlan9/ise-uiuc-Magicoder-S-DS-6.7B",
+          "AISafety/Magicoder",
+          "danteGPT/ise-uiuc-Magicoder-S-DS-6.7B",
+          "sirishai/ise-uiuc-Magicoder-S-DS-6.7B",
+          "slepikov/ise-uiuc-Magicoder-S-DS-6.7B",
+          "elghafiani/Magicoder-CL-7B",
+          "DoubleTechnologies/ise-uiuc-Magicoder-S-DS-6.7B",
+          "helenai/dataset-token-distribution",
+          "Rajut/CdGrt",
+          "Rajut/CodeGeneration",
+          "senthil3226w/sample"
+        ],
+        "tags": [
+          "transformers",
+          "safetensors",
+          "llama",
+          "text-generation",
+          "conversational",
+          "dataset:ise-uiuc/Magicoder-OSS-Instruct-75K",
+          "dataset:ise-uiuc/Magicoder-Evol-Instruct-110K",
+          "arxiv:2312.02120",
+          "arxiv:2305.06161",
+          "license:other",
+          "text-generation-inference",
+          "endpoints_compatible",
+          "deploy:azure",
+          "region:us"
+        ],
+        "transformersInfo": {
+          "auto_model": "AutoModelForCausalLM",
+          "pipeline_tag": "text-generation",
+          "processor": "AutoTokenizer"
+        },
+        "usedStorage": 53396185298,
+        "widgetData": [
+          {
+            "text": "Hi, what can you help me with?"
+          },
+          {
+            "text": "What is 84 * 3 / 2?"
+          },
+          {
+            "text": "Tell me an interesting fact about the universe!"
+          },
+          {
+            "text": "Explain quantum computing in simple terms."
+          }
+        ]
+      },
+      "files": {
+        "LICENSE": {
+          "filename": "LICENSE",
+          "bytes": 13750,
+          "publisher_identity": {
+            "kind": "git_blob_sha1",
+            "digest": "18742eb20561aa70ba78efd74295771f76ac25ae"
+          },
+          "canonical_url": "https://huggingface.co/ise-uiuc/Magicoder-S-DS-6.7B/resolve/b3ed7cb1578a3643ceaf2ebf996a3d8e85f75d8f/LICENSE",
+          "sha256": "84d3a9a13e4f671c3f90087f33d6926b5621baa6711b315ee9f0113436e2d0e2"
+        },
+        "README.md": {
+          "filename": "README.md",
+          "bytes": 4578,
+          "publisher_identity": {
+            "kind": "git_blob_sha1",
+            "digest": "da88769944aed47ba052bb35e6014ef63df861a6"
+          },
+          "canonical_url": "https://huggingface.co/ise-uiuc/Magicoder-S-DS-6.7B/resolve/b3ed7cb1578a3643ceaf2ebf996a3d8e85f75d8f/README.md",
+          "sha256": "f944a8a38f6073b1578f5aa07f8221fde6146a21267c6f641c8eadba44a59cf2"
+        },
+        "added_tokens.json": {
+          "filename": "added_tokens.json",
+          "bytes": 458,
+          "publisher_identity": {
+            "kind": "git_blob_sha1",
+            "digest": "08d77431d4b1bc63a27a920f697ca328c7156b2b"
+          },
+          "canonical_url": "https://huggingface.co/ise-uiuc/Magicoder-S-DS-6.7B/resolve/b3ed7cb1578a3643ceaf2ebf996a3d8e85f75d8f/added_tokens.json",
+          "sha256": "423a96e0e9e3e0c0d8dc142bddd7b70cd100360980d3017920f358c9163375b4"
+        },
+        "config.json": {
+          "filename": "config.json",
+          "bytes": 742,
+          "publisher_identity": {
+            "kind": "git_blob_sha1",
+            "digest": "0ab4309467c11a3b4351da3e47610b41016f9f88"
+          },
+          "canonical_url": "https://huggingface.co/ise-uiuc/Magicoder-S-DS-6.7B/resolve/b3ed7cb1578a3643ceaf2ebf996a3d8e85f75d8f/config.json",
+          "sha256": "5420661967bb4aa7c4a3e8bc8ed5913dfc62e3e05bdcb01f2857f41070353187"
+        },
+        "generation_config.json": {
+          "filename": "generation_config.json",
+          "bytes": 124,
+          "publisher_identity": {
+            "kind": "git_blob_sha1",
+            "digest": "044edaf8c54caf5f8c78d53d991d2bcb1e665c3e"
+          },
+          "canonical_url": "https://huggingface.co/ise-uiuc/Magicoder-S-DS-6.7B/resolve/b3ed7cb1578a3643ceaf2ebf996a3d8e85f75d8f/generation_config.json",
+          "sha256": "1e88670fbb59572c8f60c85dcb429f04d611a3b9910c28b78163beb769090abb"
+        },
+        "special_tokens_map.json": {
+          "filename": "special_tokens_map.json",
+          "bytes": 482,
+          "publisher_identity": {
+            "kind": "git_blob_sha1",
+            "digest": "5ff8f57b46ed9d045d6a786cc8e89e79c0005742"
+          },
+          "canonical_url": "https://huggingface.co/ise-uiuc/Magicoder-S-DS-6.7B/resolve/b3ed7cb1578a3643ceaf2ebf996a3d8e85f75d8f/special_tokens_map.json",
+          "sha256": "acb949a6d246354249847f5e1f0dabe04c258271eab55a6d6fac251d7af41075"
+        },
+        "tokenizer.json": {
+          "filename": "tokenizer.json",
+          "bytes": 1368830,
+          "publisher_identity": {
+            "kind": "git_blob_sha1",
+            "digest": "0a667f9a0a6fd585202c83fb5c0bfda68e1ea858"
+          },
+          "canonical_url": "https://huggingface.co/ise-uiuc/Magicoder-S-DS-6.7B/resolve/b3ed7cb1578a3643ceaf2ebf996a3d8e85f75d8f/tokenizer.json",
+          "sha256": "5ea7c1cf401382d953c8a56df1786cefa9446bc6aa168571870063da9ecc7e89"
+        },
+        "tokenizer.model": {
+          "filename": "tokenizer.model",
+          "bytes": 500058,
+          "publisher_identity": {
+            "kind": "lfs_sha256",
+            "digest": "45ccb9c8b6b561889acea59191d66986d314e7cbd6a78abc6e49b139ca91c1e6"
+          },
+          "canonical_url": "https://huggingface.co/ise-uiuc/Magicoder-S-DS-6.7B/resolve/b3ed7cb1578a3643ceaf2ebf996a3d8e85f75d8f/tokenizer.model",
+          "sha256": "45ccb9c8b6b561889acea59191d66986d314e7cbd6a78abc6e49b139ca91c1e6"
+        },
+        "tokenizer_config.json": {
+          "filename": "tokenizer_config.json",
+          "bytes": 4871,
+          "publisher_identity": {
+            "kind": "git_blob_sha1",
+            "digest": "f9f6ff142e15132f1b113e3027a898952cefdf12"
+          },
+          "canonical_url": "https://huggingface.co/ise-uiuc/Magicoder-S-DS-6.7B/resolve/b3ed7cb1578a3643ceaf2ebf996a3d8e85f75d8f/tokenizer_config.json",
+          "sha256": "6dd970498d4ad0237c2f4025e0efbddb188733cca871d6f8dc7aff30409f76ba"
+        }
+      },
+      "authentication_policy": "Optional bearer applied to initial HTTPS huggingface.co request only; all redirects strip authentication; no token persisted"
+    }
+  },
+  "source_binding": "Explicit original-source repository and immutable commit; original config/tokeniser/template/licence independently hash-verified. This records provenance, not proof that quantisation preserves every floating-point tensor."
+}

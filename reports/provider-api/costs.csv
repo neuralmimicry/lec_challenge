@@ -1,0 +1,3 @@
+attempt_id,round_id,task_id,provider_id,business_id,model,state,ordinal,historical_lower_usd,historical_upper_usd,new_api_lower_usd,new_api_upper_usd,input_tokens,cached_input_tokens,output_tokens,reasoning_tokens,reserved_tokens,token_upper_bound
+"e95fec6b-91e6-4e13-a3da-be08b29d260b","api-001","operator-e30277f296c1c5dc12252b9eab92c82880f5c1cf699fbfbbc10ee25de17b1368","openai","openai","gpt-6.1-sol","failed",1,0.000000000,0.023560000,0.000000000,0.023560000,,,,,3280,3280
+"4a99abc4-3cd4-4c07-b1c1-49440f05ce08","api-001","operator-e30277f296c1c5dc12252b9eab92c82880f5c1cf699fbfbbc10ee25de17b1368","openai","openai","gpt-6.1-sol","completed",2,0.000137500,0.000137500,0.000137500,0.000137500,27,0,7,0,3280,34

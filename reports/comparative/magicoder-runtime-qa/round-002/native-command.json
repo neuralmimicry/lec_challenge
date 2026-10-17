@@ -1,0 +1,25 @@
+{
+  "arguments": [
+    "serve",
+    "--device",
+    "cpu",
+    "--dtype",
+    "f32",
+    "--comparative",
+    "--base",
+    "offline_bundle/comparative/magicoder-s-ds-6_7b-q4_k_m",
+    "--config",
+    "reports/comparative/magicoder-runtime-qa/round-002/native-serving.toml"
+  ],
+  "environment": {
+    "CUDA_VISIBLE_DEVICES": "",
+    "LANG": "C.UTF-8",
+    "MKL_NUM_THREADS": "4",
+    "OMP_NUM_THREADS": "4",
+    "PATH": "/usr/bin:/bin",
+    "RAYON_NUM_THREADS": "4",
+    "TOKIO_WORKER_THREADS": "2"
+  },
+  "program": "state/engines/949b28471a3b47255ab102ead671a6a3e719dc1303844c1c66e0d69682d1dc99/lec-distil",
+  "program_sha256": "949b28471a3b47255ab102ead671a6a3e719dc1303844c1c66e0d69682d1dc99"
+}

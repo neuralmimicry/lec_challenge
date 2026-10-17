@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "registry": {
+    "path": "reports/comparative/search/round-001/trials/qwen-coder-7b-q4_k_m/registry.toml",
+    "sha256": "9baa0f5085e3b4f69c35e94c796ff0983b1868b689b8678d6b6a3b78e818a276",
+    "bytes": 347
+  },
+  "comparisons": [
+    "reports/local-study/qwen7b-train"
+  ],
+  "reused_plan": {
+    "path": "reports/local-study/qwen7b-train/plan.json",
+    "sha256": "f87637f90e8a1f80bb2ac95cc92d992944ce9d8fea1129a0fdacc535c177e509",
+    "bytes": 63232
+  },
+  "runtime": {
+    "device": {
+      "cuda": {
+        "ordinal": 0
+      }
+    },
+    "dtype": "f32"
+  },
+  "max_tokens": 512,
+  "seed": 1729,
+  "models": [
+    "qwen-coder-7b-q4_k_m"
+  ]
+}

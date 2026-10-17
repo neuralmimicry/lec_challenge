@@ -1,0 +1,53 @@
+{
+  "schema_version": 3,
+  "run_id": "f9898845-86c3-48d8-9094-8c8cdeb3d8e7",
+  "ownership_nonce": "d4a94f96-8dff-4e82-8fad-151e139e9af5",
+  "attempt_key": "8a4b36a2-9a02-4692-bb3c-c0a0ff85d80f",
+  "receipt_path": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison/sandbox/8a4b36a2-9a02-4692-bb3c-c0a0ff85d80f.prepared.json",
+  "report_path": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison/sandbox/f9898845-86c3-48d8-9094-8c8cdeb3d8e7.json",
+  "task": {
+    "id": "dispatch.round_robin",
+    "source_id": "private-dispatch-v1",
+    "lineage_id": "local-contract-pack-13",
+    "split": "development",
+    "specification": "Input {jobs,quantum} has nonnegative integer work amounts and positive quantum. Cycle job indices, giving up to quantum work each turn; return indices in order of completion, initially zero-work jobs first in index order.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "e445e145f0405de8c854262451687ad1958cdfd2793c0f20d7b13efdf5c0a5fa",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": {
+          "jobs": [
+            3,
+            1,
+            2
+          ],
+          "quantum": 2
+        },
+        "expected": [
+          1,
+          2,
+          0
+        ]
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "pub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let input_map: serde_json::Map<String, serde_json::Value> = input.as_object().unwrap();\n    let jobs = input_map\n        .get(\"jobs\")\n        .unwrap()\n        .as_array()\n        .unwrap()\n        .clone();\n    let quantum = input_map\n        .get(\"quantum\")\n        .unwrap()\n        .as_i64()\n        .unwrap()\n        .try_into()\n        .unwrap();\n\n    let mut work = jobs.clone();\n    let mut result = Vec::new();\n    let mut job_idx = 0;\n\n    while work.iter().any(|&w| w > 0) {\n        let mut completed = Vec::new();\n        let mut current_idx = 0;\n\n        while current_idx < work.len() {\n            if work[current_idx] > 0 {\n                let work_to_do = (work[current_idx] as i64).min(quantum as i64) as usize;\n                work[current_idx] -= work_to_do;\n                if work[current_idx] == 0 {\n                    completed.push(current_idx);\n                }\n            }\n            current_idx += 1;\n        }\n\n        if completed.is_empty() {\n            break;\n        }\n\n        // Sort by completion order: zero-work jobs first, then by index\n        completed.sort_by(|a, b| {\n            if work[*a] == 0 && work[*b] == 0 {\n                a.cmp(b)\n            } else if work[*a] == 0 {\n                std::cmp::Ordering::Less\n            } else if work[*b] == 0 {\n                std::cmp::Ordering::Greater\n            } else {\n                a.cmp(b)\n            }\n        });\n\n        result.extend(completed);\n    }\n\n    serde_json::json!(result)\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison/sandbox"
+  },
+  "code_sha256": "b38603392a3197ed6cef3df36c43c72956264c1fac4ee679cb916c97eb2e2d25",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

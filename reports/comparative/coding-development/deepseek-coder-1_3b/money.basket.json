@@ -1,0 +1,38 @@
+{
+  "model_id": "deepseek-coder-1_3b",
+  "task_id": "money.basket",
+  "source_id": "private-money-v1",
+  "specification_sha256": "87f50e8f3a163aaec0042d723e8da46a44c49d75746e0fbba18ebe04ceba4a08",
+  "seed": 1729,
+  "plan_sha256": "9aefcaf935435b296c63229638aad5a22a416ae171eda011a6812dd745667ea8",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an array of [unit_price_cents,quantity], both nonnegative integers. Return total cents without tax.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[[120,2],[99,3]],\"expected\":537}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "Here is the Rust code that solves the problem:\n\n```rust\nuse serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let mut total = 0;\n    if let Some(input_array) = input.as_array() {\n        for item in input_array {\n            if let Some(item_array) = item.as_array() {\n                for sub_item in item_array {\n                    if let Some(sub_item_array) = sub_item.as_array() {\n                        let unit_price_cents = sub_item_array[0].to_i64().unwrap();\n                        let quantity = sub_item_array[1].to_i64().unwrap();\n                        total += unit_price_cents * quantity;\n                    }\n                }\n            }\n        }\n    }\n    Value::I64(total)\n}\n```\n\nThis function first checks if the input is an array. If it is, it iterates over each item in the array. If each item is an array, it again iterates over each item in the sub-array. It then extracts the unit price and quantity from each sub-array and multiplies them together to get the total. The total is then returned as a `Value::I64`.\n",
+    "checkpoint_id": "4ff570bf9a558d23c5cb4171bad00daf663be8282150cdb5769e0f6975b0007a",
+    "finish_reason": "stop",
+    "input_tokens": 304,
+    "output_tokens": 303,
+    "elapsed_ms": 17254,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/comparative/coding-development/deepseek-coder-1_3b/money.basket.generation.json",
+    "sha256": "22c679e9c457b74aaf9b2b1f415705f89d271c4b34ac13a07f3aeb9ca8a4c3a8",
+    "bytes": 3385
+  },
+  "sandbox_report": {
+    "path": "reports/comparative/coding-development/sandbox/692bdb81-8526-44be-b24c-e39d1c79b059.json",
+    "sha256": "823b47504cc14dc800f387603d340e768a34777cba035b2cc2642fa38d4839f9",
+    "bytes": 6951
+  },
+  "grading_error": null,
+  "success": false
+}

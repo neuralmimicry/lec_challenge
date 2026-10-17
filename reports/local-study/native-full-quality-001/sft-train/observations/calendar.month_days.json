@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "a5b39d544c85b76111246b8fda40c638ce104251a1c56368277fef8fe4033eb6",
+  "task_id": "calendar.month_days",
+  "source_id": "private-calendar-v1",
+  "success": false,
+  "raw_generation": {
+    "path": "reports/local-study/native-full-quality-001/sft-train/generations/calendar.month_days.json",
+    "sha256": "60b91283bd6604e0037a75719ade54cd790b3a1215dba07e2823087f16de22bb",
+    "bytes": 2011
+  },
+  "sandbox_report": {
+    "path": "reports/local-study/native-full-quality-001/sft-train/sandbox/78d3a98d-1349-4049-b22e-4c89b5c32fae.json",
+    "sha256": "f84bd969b080689e917448c5b766aca626d0c7108ef72c20782eb7aaa27f1900",
+    "bytes": 1784
+  },
+  "grading_error": null
+}

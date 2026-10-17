@@ -1,0 +1,24 @@
+{
+  "exit_code": 1,
+  "request": {
+    "bytes": 3586,
+    "path": "reports/local-study/explore/round-001/attempts/baseline-ternary_bitnet/dcb1fac9-004c-44b4-ba9e-2cde3813599c/request.json",
+    "sha256": "90d3cb3eaa7fcb5e41609237eac927d6342c3464eb008ae4227335abfa433013"
+  },
+  "schema_version": 1,
+  "stage": "baseline-ternary_bitnet",
+  "status": "process_failed",
+  "stderr": {
+    "bytes": 843,
+    "path": "reports/local-study/explore/round-001/attempts/baseline-ternary_bitnet/dcb1fac9-004c-44b4-ba9e-2cde3813599c/stderr.log",
+    "sha256": "4cbae458145a25a857b55621d96f0dc101a5fcc41d39353627aafc5932cbb042"
+  },
+  "stderr_tee_error": null,
+  "stdout": {
+    "bytes": 2044,
+    "path": "reports/local-study/explore/round-001/attempts/baseline-ternary_bitnet/dcb1fac9-004c-44b4-ba9e-2cde3813599c/stdout.log",
+    "sha256": "aafdee4804a6cc0194ef9e23b7ae3d55832ec6ab11d689d08fbb53d185a4f4c3"
+  },
+  "success": false,
+  "wall_seconds": 138.495022883
+}

@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "448b2d86361801414c47e32433b6e0bce070909a486feaecc2fd744b94dca8f4",
+  "task_id": "dispatch.priority",
+  "source_id": "private-dispatch-v1",
+  "success": false,
+  "raw_generation": {
+    "path": "reports/local-study/sft-adapter-development-c7c/generations/dispatch.priority.json",
+    "sha256": "f8dfad56af21d588f4f9a5c9f2037bbeb0bce57a2a9ac86bcfb3625c78318fb2",
+    "bytes": 1852
+  },
+  "sandbox_report": null,
+  "grading_error": "owned sandbox inspection deadline exceeded: deadline has elapsed"
+}

@@ -1,0 +1,46 @@
+{
+  "schema_version": 3,
+  "run_id": "8bba2f4d-3c7b-48bc-828e-e9e6cc179e9d",
+  "ownership_nonce": "c9de4fc4-fd4a-4237-8e37-9d747f53d04b",
+  "attempt_key": "86bf56b5-db40-48a3-aab7-b065fea0f8fd",
+  "receipt_path": "reports/local-study/explore/round-001/cohorts/76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c/rollouts/sandbox/86bf56b5-db40-48a3-aab7-b065fea0f8fd.prepared.json",
+  "report_path": "reports/local-study/explore/round-001/cohorts/76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c/rollouts/sandbox/8bba2f4d-3c7b-48bc-828e-e9e6cc179e9d.json",
+  "task": {
+    "id": "ledger.sum",
+    "source_id": "private-ledger-v1",
+    "lineage_id": "local-contract-pack-00",
+    "split": "train",
+    "specification": "Input is an array of integers in [-10000,10000], length <=64. Return its sum; the empty sum is zero.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "6b9709db9c4c67cb3de98c661b272deb80d2ed969fca9ce2ebdda8e2fab68c78",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": [
+          2,
+          -4,
+          8
+        ],
+        "expected": 6
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "use serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let sum = input.as_array().iter().map(|&x| x as i64).sum();\n    serde_json::Value::Number(sum)\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/explore/round-001/cohorts/76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c/rollouts/sandbox"
+  },
+  "code_sha256": "7f36f68b60fd11db95b1375e9dc60be21e0b69db72212c8bb294cb12b7eb3569",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

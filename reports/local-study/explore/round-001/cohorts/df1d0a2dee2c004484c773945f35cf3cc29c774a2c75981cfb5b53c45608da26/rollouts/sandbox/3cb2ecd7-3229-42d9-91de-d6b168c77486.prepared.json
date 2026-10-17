@@ -1,0 +1,66 @@
+{
+  "schema_version": 3,
+  "run_id": "a9373d9b-8ed4-4c0e-9099-dfc6087f8eb3",
+  "ownership_nonce": "e5474584-4c06-40b4-8c61-2308e4eab9d0",
+  "attempt_key": "3cb2ecd7-3229-42d9-91de-d6b168c77486",
+  "receipt_path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox/3cb2ecd7-3229-42d9-91de-d6b168c77486.prepared.json",
+  "report_path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox/a9373d9b-8ed4-4c0e-9099-dfc6087f8eb3.json",
+  "task": {
+    "id": "matrices.rotate",
+    "source_id": "private-matrices-v1",
+    "lineage_id": "local-contract-pack-06",
+    "split": "train",
+    "specification": "Input is a rectangular integer matrix with at least one row and column. Return the matrix rotated clockwise by 90 degrees.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "87beb0af7aee423dfcf56da96349712cc1c3772d9c85f528428a0e8b45ee3508",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": [
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            4,
+            5,
+            6
+          ]
+        ],
+        "expected": [
+          [
+            4,
+            1
+          ],
+          [
+            5,
+            2
+          ],
+          [
+            6,
+            3
+          ]
+        ]
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "use serde_json::Value;\n\n/// Rotates a 2D integer matrix 90 degrees clockwise.\n///\n/// # Examples\n///\n/// ```\n/// assert_eq!(rotate_matrix(vec![vec![1, 2, 3], vec![4, 5, 6]]), vec![vec![4, 1], vec![5, 2], vec![6, 3]]);\n/// ```\nfn rotate_matrix(input: serde_json::Value) -> serde_json::Value {\n    let mut result = Vec::new();\n    for row in input.as_array() {\n        let mut row = row.as_array();\n        if row.len() != input.len() {\n            panic!(\"Input matrix must be square\");\n        }\n        for col in 0..row.len() {\n            result.push(row[row.len() - 1 - col]);\n        }\n    }\n    serde_json::Value::Object(result)\n}\n\nfn main() {\n    // Example usage\n    let input = serde_json::Value::Object(vec![\n        (String::from(\"input\"), serde_json::Value::Array(vec![\n            serde_json::Value::Array(vec![1, 2, 3]),\n            serde_json::Value::Array(vec![4, 5, 6]),\n        ])),\n    ]);\n    let expected = serde_json::Value::Object(vec![\n        (String::from(\"expected\"), serde_json::Value::Array(vec![\n            serde_json::Value::Array(vec![4, 1]),\n            serde_json::Value::Array(vec![5, 2]),\n            serde_json::Value::Array(vec![6, 3]),\n        ])),\n    ]);\n    assert_eq!(rotate_matrix(input), expected);\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox"
+  },
+  "code_sha256": "f179a38c0f920d401e246ea89294debc83e88a5c359fd10afea608f0a47b7531",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

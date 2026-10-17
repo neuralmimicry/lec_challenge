@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "candidate_id": "qwen-coder-7b-q6_k",
+  "model_id": "Qwen/Qwen2.5-Coder-7B-Instruct-GGUF",
+  "revision": "13fb94bfda8c8cf22497dc57b78f391a9acb426a",
+  "directory": "offline_bundle/comparative/qwen-coder-7b-q6_k",
+  "manifest_filename": "gguf-assets.json",
+  "manifest_sha256": "d4b2864aa6e4215703bf544579d5d941e2f97fbddb23ab7c9ea2ec742fae64fa",
+  "created_unix_ms": 1792101977615,
+  "removal_state": "completed",
+  "removed_weights": [
+    {
+      "filename": "qwen2.5-coder-7b-instruct-q6_k.gguf",
+      "sha256": "46291ddea1bfb608fe63d9a1907eea6918bda87a7626593edc4bf97c5fd73f9d",
+      "bytes": 6254198784
+    }
+  ]
+}

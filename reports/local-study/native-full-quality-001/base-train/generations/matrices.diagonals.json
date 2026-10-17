@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "55c6614d90fbff0e580fd8fbfa9e06ce99715d8d0c78320e0fe70605545cc489",
+  "task_id": "matrices.diagonals",
+  "source_id": "private-matrices-v1",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is a nonempty square integer matrix. Return [main diagonal sum,anti-diagonal sum]. A centre cell contributes once to each sum.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[[1,2],[3,4]],\"expected\":[5,5]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let mut sum_diagonal = 0;\n    let mut sum_anti_diagonal = 0;\n    let mut n = input.as_array().unwrap().len() as i64;\n\n    for i in 0..n {\n        for j in 0..n {\n            if i == j {\n                sum_diagonal += input[i as usize][j as usize];\n            } else if i == n - 1 - j {\n                sum_anti_diagonal += input[i as usize][j as usize];\n            }\n        }\n    }\n\n    serde_json::Value::Object(vec![\n        (String::from(\"sum_diagonal\"), serde_json::Value::Number(sum_diagonal)),\n        (String::from(\"sum_anti_diagonal\"), serde_json::Value::Number(sum_anti_diagonal)),\n    ])\n}\n\nfn main() {\n    let input = serde_json::Value::from(\"[[1,2],[3,4]]\");\n    let expected = serde_json::Value::from(\"[5,5]\");\n    assert_eq!(solve(input), expected);\n}\n```",
+    "checkpoint_id": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+    "finish_reason": "stop",
+    "input_tokens": 238,
+    "output_tokens": 245,
+    "elapsed_ms": 9392,
+    "complete": true
+  },
+  "model_error": null
+}

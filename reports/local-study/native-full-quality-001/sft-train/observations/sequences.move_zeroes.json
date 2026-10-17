@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "a5b39d544c85b76111246b8fda40c638ce104251a1c56368277fef8fe4033eb6",
+  "task_id": "sequences.move_zeroes",
+  "source_id": "private-sequences-v1",
+  "success": false,
+  "raw_generation": {
+    "path": "reports/local-study/native-full-quality-001/sft-train/generations/sequences.move_zeroes.json",
+    "sha256": "2b9e749e59b18a698c9e636e06edd7f0b24a17945a99fb5bbd64b65d93359626",
+    "bytes": 2589
+  },
+  "sandbox_report": {
+    "path": "reports/local-study/native-full-quality-001/sft-train/sandbox/56c31b0c-4a7e-46c6-9ed5-76075c595779.json",
+    "sha256": "4ff2a4de16e04e5389299a86ef5ca37f0d11176afc49e0f5ca2d5b9361ef317f",
+    "bytes": 7405
+  },
+  "grading_error": null
+}

@@ -1,0 +1,49 @@
+{
+  "schema_version": 3,
+  "run_id": "3bcd642e-0a38-4f4d-b2bf-69896dbff386",
+  "ownership_nonce": "779f43e7-0864-414a-84c4-d421b80dcb2d",
+  "attempt_key": "0905a9fc-8e5f-4fc5-a21a-b67c17917d1e",
+  "receipt_path": "reports/local-study/explore/round-001/content-v1/sandbox/0905a9fc-8e5f-4fc5-a21a-b67c17917d1e.prepared.json",
+  "report_path": "reports/local-study/explore/round-001/content-v1/sandbox/3bcd642e-0a38-4f4d-b2bf-69896dbff386.json",
+  "task": {
+    "id": "stock.stable_unique",
+    "source_id": "private-stock-v1",
+    "lineage_id": "local-contract-pack-01",
+    "split": "train",
+    "specification": "Input is an array of ASCII strings. Return first occurrences only, preserving their original order.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "d7a8e76c2e0bbd7912862104a0564044c3f275f58e955f88f9291441cf42a4e6",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": [
+          "b",
+          "a",
+          "b"
+        ],
+        "expected": [
+          "b",
+          "a"
+        ]
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "// Plan:\n// 1. Parse the input JSON array of strings.\n// 2. Use a HashSet to track seen strings.\n// 3. Iterate through the input array, collecting strings that haven't been seen yet.\n// 4. Convert the result back to a JSON array and return it.\n\nuse serde_json::{Value, json};\n\npub fn solve(input: Value) -> Value {\n    // Ensure the input is an array\n    let arr = input.as_array().expect(\"Input must be an array\");\n    \n    // Create a HashSet to track seen strings\n    let mut seen = std::collections::HashSet::new();\n    \n    // Collect first occurrences of strings\n    let result: Vec<Value> = arr.iter()\n        .filter_map(|item| {\n            if let Value::String(s) = item {\n                if seen.insert(s.clone()) {\n                    Some(item.clone())\n                } else {\n                    None\n                }\n            } else {\n                None\n            }\n        })\n        .collect();\n    \n    // Convert the result back to a JSON array\n    json!(result)\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/explore/round-001/content-v1/sandbox"
+  },
+  "code_sha256": "e1fec8c0d40bc50fb54bbdecbf120f49c6b374e5b1ff142b5b2c7918a356b539",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

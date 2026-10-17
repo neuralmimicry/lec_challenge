@@ -1,0 +1,54 @@
+{
+  "schema_version": 3,
+  "run_id": "b216a926-c1b5-4373-9300-90d0aaaa58ec",
+  "ownership_nonce": "ce5c5a53-517e-421a-9ec4-2d724beacee2",
+  "attempt_key": "4c3c44249ef26d55de412a4664cd5e5c11810fb7f06e221b1c7be69ab987b721",
+  "receipt_path": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/prepared/matrices.diagonals.json",
+  "report_path": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/sandbox/b216a926-c1b5-4373-9300-90d0aaaa58ec.json",
+  "task": {
+    "id": "matrices.diagonals",
+    "source_id": "private-matrices-v1",
+    "lineage_id": "local-contract-pack-06",
+    "split": "train",
+    "specification": "Input is a nonempty square integer matrix. Return [main diagonal sum,anti-diagonal sum]. A centre cell contributes once to each sum.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "72133e94b23f58060b66753478a3092920900b1a0faaf59f64c473d456fadd9d",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": [
+          [
+            1,
+            2
+          ],
+          [
+            3,
+            4
+          ]
+        ],
+        "expected": [
+          5,
+          5
+        ]
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "use serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let matrix = input.as_array().unwrap();\n    let n = matrix.len();\n    let mut main_diagonal_sum = 0;\n    let mut anti_diagonal_sum = 0;\n\n    for i in 0..n {\n        main_diagonal_sum += matrix[i][i] as i64;\n        anti_diagonal_sum += matrix[i][n - 1 - i] as i64;\n    }\n\n    Value::Array(vec![\n        Value::Number(main_diagonal_sum.into()),\n        Value::Number(anti_diagonal_sum.into()),\n    ])\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/sandbox"
+  },
+  "code_sha256": "39bc2cd720c8437d53e5d31f0015316ab4336ba3d3a22a0c73f88ae72217db3c",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

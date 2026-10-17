@@ -1,0 +1,18 @@
+{
+  "model_id": "TheBloke/Magicoder-S-DS-6.7B-GGUF",
+  "revision": "d41a33f9393ebc06c6beb44b1ded091b6d19496c",
+  "licence": "other",
+  "files": {
+    "README.md": "48afd0098e98e6cb37c93bdda54aa9b64315755c32b712486370ff76e1f7de57",
+    "magicoder-s-ds-6.7b.Q4_K_M.gguf": "4b340a9d033091627273fa0f95a4d43b5fe95500c714f9d2f683fbe266c9bc52",
+    "source/LICENSE": "84d3a9a13e4f671c3f90087f33d6926b5621baa6711b315ee9f0113436e2d0e2",
+    "source/README.md": "f944a8a38f6073b1578f5aa07f8221fde6146a21267c6f641c8eadba44a59cf2",
+    "source/added_tokens.json": "423a96e0e9e3e0c0d8dc142bddd7b70cd100360980d3017920f358c9163375b4",
+    "source/config.json": "5420661967bb4aa7c4a3e8bc8ed5913dfc62e3e05bdcb01f2857f41070353187",
+    "source/generation_config.json": "1e88670fbb59572c8f60c85dcb429f04d611a3b9910c28b78163beb769090abb",
+    "source/special_tokens_map.json": "acb949a6d246354249847f5e1f0dabe04c258271eab55a6d6fac251d7af41075",
+    "source/tokenizer.json": "5ea7c1cf401382d953c8a56df1786cefa9446bc6aa168571870063da9ecc7e89",
+    "source/tokenizer.model": "45ccb9c8b6b561889acea59191d66986d314e7cbd6a78abc6e49b139ca91c1e6",
+    "source/tokenizer_config.json": "6dd970498d4ad0237c2f4025e0efbddb188733cca871d6f8dc7aff30409f76ba"
+  }
+}

@@ -9,3 +9,5 @@ Never invent provider calls, usage, spending, weights, improvement, execution tr
 Coordinate edits by ownership in agents/PLAN.md. Do not overwrite another agent's modules. Update STATUS.md and documentation with measured evidence. Unit tests for real invariants and adversarial integration tests accompany important changes; avoid tests that simply restate implementation.
 
 Do not print credentials, publish the repository or send communications. Paid calls require explicit budget authority and applicable provider terms. Public open-source dependency/model downloads for the requested build are allowed. Record asset checksums and licences for offline packaging.
+
+When working with `--offline`, or when no internet connection can be detected, do not prune caches or models. Preserve downloaded assets, including weaker or inactive models, for offline reuse.

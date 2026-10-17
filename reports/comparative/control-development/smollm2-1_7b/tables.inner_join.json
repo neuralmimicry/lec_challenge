@@ -1,0 +1,38 @@
+{
+  "model_id": "smollm2-1_7b",
+  "task_id": "tables.inner_join",
+  "source_id": "private-tables-v1",
+  "specification_sha256": "369ef237ff250179b0b3e3c7af051af8aebc0329b6494d33af5f436c827ac699",
+  "seed": 1729,
+  "plan_sha256": "b2e46b0f4ac46ecbb1b6568e9669ef5157b8a6343802f749cfac8ae999e29d88",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input [left,right] has arrays of [key,value] integer rows, each side with unique keys. Return [key,left_value,right_value] for common keys in ascending key order.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[[[2,9],[1,4]],[[2,3],[3,8]]],\"expected\":[[2,9,3]]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::json;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let mut result = json!([]);\n    let mut left_map: std::collections::HashMap<i64, std::collections::HashSet<i64>> = std::collections::HashMap::new();\n    let mut right_map: std::collections::HashMap<i64, std::collections::HashSet<i64>> = std::collections::HashMap::new();\n\n    for row in input[\"input\"].as_array().unwrap().iter() {\n        let mut left_set: std::collections::HashSet<i64> = std::collections::HashSet::new();\n        let mut right_set: std::collections::HashSet<i64> = std::collections::HashSet::new();\n\n        for (key, value) in row.iter() {\n            left_set.insert(*key);\n            right_set.insert(*key);\n            if let Some(left_value) = left_map.get_mut(key) {\n                left_value.insert(*value);\n            } else {\n                left_map.insert(*key, left_set);\n            }\n            if let Some(right_value) = right_map.get_mut(key) {\n                right_value.insert(*value);\n            } else {\n                right_map.insert(*key, right_set);\n            }\n        }\n\n        result = json!([*key, *value, *left_value, *right_value]);\n    }\n\n    result\n}\n```",
+    "checkpoint_id": "f55217be716b6a997b97b9d8d7eb6fad02e00858f5010ec24f64603c3a98a0e8",
+    "finish_reason": "stop",
+    "input_tokens": 285,
+    "output_tokens": 357,
+    "elapsed_ms": 25828,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/comparative/control-development/smollm2-1_7b/tables.inner_join.generation.json",
+    "sha256": "e4fec6e41fd8622da672b10f795ace3a3e9ede6cfa6e3c5a741f712373a1a868",
+    "bytes": 3615
+  },
+  "sandbox_report": {
+    "path": "reports/comparative/control-development/sandbox/731490cd-b7fa-4b3d-aa5b-eea11fa3ab74.json",
+    "sha256": "8ba18e56e4a6b6d50c5fd98202d00692235ac9b9c95b33ed1a0e33e425b60e85",
+    "bytes": 4778
+  },
+  "grading_error": null,
+  "success": false
+}

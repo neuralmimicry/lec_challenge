@@ -4,23 +4,24 @@
   "reports": [
     {
       "audit_events": [],
-      "audit_path": "reports/sandbox-qa/runs/32a3f5e9-4d99-42bb-8984-116ac0ba4392.audit.json",
+      "audit_path": "reports/sandbox-qa/runs/82f852e1-0322-4fab-9b56-18cf71e72f38.audit.json",
       "audit_sha256": "822f6ed99d1393d96a135e88e1baef2674bba46ecf5151d0c79bef21b8ccdbb9",
       "cases_passed": 0,
       "cases_total": 14,
       "code_sha256": "4c93375dc29a23f3bc0aea750ac7df7f0cfce5a1ea9eedadab3a957a4c7db77b",
-      "duration_ms": 3126,
+      "duration_ms": 4128,
       "failure": "candidate output cap exceeded",
       "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
-      "oracle_sha256": "a734f6d465714cbebb072790fedff161d2fc28cbb257b3d04cee0feaf8b5b5fe",
+      "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
       "passed": false,
-      "policy_sha256": "0bf995b5f69865792503015f6af52b457c861b679877956e939c2137ddb4a562",
+      "policy_sha256": "4b2556745b303526f354ded7f2c473b77f6da0c99a77f0a493c7272a8d800aac",
       "quarantine_reasons": [
         "candidate output cap exceeded"
       ],
       "quarantined": true,
-      "run_id": "32a3f5e9-4d99-42bb-8984-116ac0ba4392",
+      "run_id": "82f852e1-0322-4fab-9b56-18cf71e72f38",
       "sandbox_config": {
+        "controller_version": 2,
         "cpu_limit": 1.0,
         "expected_image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
         "image": "localhost/lec-rust-sandbox:1",
@@ -206,17 +207,17 @@
           "target": "/lib/../../proc/1/fd/1"
         }
       ],
-      "audit_path": "reports/sandbox-qa/runs/1d9ef67c-805b-4e7f-95f1-b85490c12d47.audit.json",
+      "audit_path": "reports/sandbox-qa/runs/2beba1c0-83f5-4b58-8b40-81d349f1e1b5.audit.json",
       "audit_sha256": "13ff876af38dffea4f1707013aa980d62c591252e1c7d9a6496a6ffdb4e3afea",
       "cases_passed": 14,
       "cases_total": 14,
       "code_sha256": "7b263d820cfb8e2a5ec07edd47a98f769aa73171883f650a4e12e5315474933a",
-      "duration_ms": 9628,
+      "duration_ms": 10241,
       "failure": null,
       "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
-      "oracle_sha256": "a734f6d465714cbebb072790fedff161d2fc28cbb257b3d04cee0feaf8b5b5fe",
+      "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
       "passed": false,
-      "policy_sha256": "0bf995b5f69865792503015f6af52b457c861b679877956e939c2137ddb4a562",
+      "policy_sha256": "4b2556745b303526f354ded7f2c473b77f6da0c99a77f0a493c7272a8d800aac",
       "quarantine_reasons": [
         "prohibited process attempt: syscall 88 target ",
         "prohibited filesystem attempt: syscall 257 target /lib/../../proc/1/fd/1",
@@ -248,8 +249,9 @@
         "prohibited filesystem attempt: syscall 257 target /lib/../../proc/1/fd/1"
       ],
       "quarantined": true,
-      "run_id": "1d9ef67c-805b-4e7f-95f1-b85490c12d47",
+      "run_id": "2beba1c0-83f5-4b58-8b40-81d349f1e1b5",
       "sandbox_config": {
+        "controller_version": 2,
         "cpu_limit": 1.0,
         "expected_image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
         "image": "localhost/lec-rust-sandbox:1",
@@ -266,23 +268,24 @@
     },
     {
       "audit_events": [],
-      "audit_path": "reports/sandbox-qa/runs/bc242591-c65f-44e7-b7f8-d82e478c5aa7.audit.json",
+      "audit_path": "reports/sandbox-qa/runs/a6f0a7c1-f9b7-4af4-a5f0-2d15d87ee034.audit.json",
       "audit_sha256": "",
       "cases_passed": 0,
       "cases_total": 14,
       "code_sha256": "8a849481e09c6eed540a648fadff3924fd23527393d467030182f4a4af405a6f",
-      "duration_ms": 26629,
+      "duration_ms": 25767,
       "failure": "host wall-clock deadline exceeded; SIGKILL acknowledged and container removed",
       "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
-      "oracle_sha256": "a734f6d465714cbebb072790fedff161d2fc28cbb257b3d04cee0feaf8b5b5fe",
+      "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
       "passed": false,
-      "policy_sha256": "0bf995b5f69865792503015f6af52b457c861b679877956e939c2137ddb4a562",
+      "policy_sha256": "4b2556745b303526f354ded7f2c473b77f6da0c99a77f0a493c7272a8d800aac",
       "quarantine_reasons": [
         "host wall-clock deadline exceeded; SIGKILL acknowledged and container removed"
       ],
       "quarantined": true,
-      "run_id": "bc242591-c65f-44e7-b7f8-d82e478c5aa7",
+      "run_id": "a6f0a7c1-f9b7-4af4-a5f0-2d15d87ee034",
       "sandbox_config": {
+        "controller_version": 2,
         "cpu_limit": 1.0,
         "expected_image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
         "image": "localhost/lec-rust-sandbox:1",
@@ -295,12 +298,12 @@
       "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "task_id": "ledger.sum",
       "timeout_evidence": {
-        "cleanup_ms": 6506,
+        "cleanup_ms": 5054,
         "container_removed": true,
         "deadline_ms": 20000,
         "kill_acknowledged": true,
         "kill_method": "cgroup_v2_kill",
-        "kill_request_ms": 70,
+        "kill_request_ms": 101,
         "wait_elapsed_ms": 20001
       },
       "trace_complete": false

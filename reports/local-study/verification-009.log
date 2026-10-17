@@ -1,0 +1,36 @@
+   Compiling lec-distil v0.1.0 (/home/pbisaacs/Developer/neuralmimicry/lec_challenge)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 3.02s
+     Running `target/debug/examples/verify_project reports/local-study/verification-009`
+verification: START format
+verification: PASSED format 2.85s
+verification: START clippy
+verification: PASSED clippy 27.11s
+verification: START unit
+verification: PASSED unit 204.03s
+verification: START launcher_recovery
+verification: PASSED launcher_recovery 38.64s
+verification: START diagnostic_lifecycle
+verification: PASSED diagnostic_lifecycle 4.58s
+verification: START numerical_helper_launch
+verification: PASSED numerical_helper_launch 4.34s
+verification: START training_seed_audit
+verification: PASSED training_seed_audit 3.91s
+verification: START original_tokeniser
+verification: PASSED original_tokeniser 24.85s
+verification: START real_container_qa
+verification: PASSED real_container_qa 218.80s
+{
+  "assessment_complete": false,
+  "checks_passed": 9,
+  "checks_total": 9,
+  "dependency_notices_complete": false,
+  "original_notice_gaps": 1,
+  "report": {
+    "bytes": 44043,
+    "path": "reports/local-study/verification-009/verification.json",
+    "sha256": "f34003d58aba36acfdf6ed15a6c22bc8377776c91644b9388a5354e490be0bd0"
+  },
+  "software_checks_passed": true,
+  "source_inputs_unchanged": true
+}
+Error: original dependency notice gaps remain; software results and exact gaps were retained

@@ -1,0 +1,33 @@
+{
+  "run_id": "c8bc7f4c-3635-4edd-baa6-813f28b306e6",
+  "task_id": "ledger.differences",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: warning: unused import: `serde_json::Value`\n --> /candidate/main.rs:1:5\n  |\n1 | use serde_json::Value;\n  |     ^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0308]: mismatched types\n --> /candidate/main.rs:6:46\n  |\n6 |     for &value in input.as_array().unwrap_or(&[]).iter() {\n  |                                    --------- ^^^ expected `&Vec<Value>`, found `&[_; 0]`\n  |                                    |\n  |                                    arguments to this method are incorrect\n  |\n  = note: expected reference `&Vec<Value>`\n             found reference `&[_; 0]`\nhelp: the return type of this call is `&[_; 0]` due to the type of the argument passed\n --> /candidate/main.rs:6:19\n  |\n6 |     for &value in input.as_array().unwrap_or(&[]).iter() {\n  |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^---^\n  |                                              |\n  |                                              this argument influences the return type of `unwrap_or`\nnote: method defined here\n --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/option.rs:1036:17\nhelp: use `Option::map_or` to deref inner value of `Option`\n  |\n6 -     for &value in input.as_array().unwrap_or(&[]).iter() {\n6 +     for &value in input.as_array().map_or(&[], |v| v).iter() {\n  |\n\nerror[E0308]: mismatched types\n  --> /candidate/main.rs:11:5\n   |\n 3 | pub fn solve(input: serde_json::Value) -> serde_json::Value {\n   |                                           ----------------- expected `Value` because of return type\n...\n11 |     result\n   |     ^^^^^^ expected `Value`, found `Vec<i64>`\n   |\n   = note: expected enum `Value`\n            found struct `Vec<i64>`\nhelp: call `Into::into` on this expression to convert `Vec<i64>` into `Value`\n   |\n11 |     result.into()\n   |           +++++++\n\nerror: aborting due to 2 previous errors; 1 warning emitted\n\nFor more information about this error, try `rustc --explain E0308`.\n"
+  ],
+  "cases_total": 14,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "0bf995b5f69865792503015f6af52b457c861b679877956e939c2137ddb4a562",
+  "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "45354006fc4c28970d737a912b66a3b887548bd4683e91a4557d896b50c13baa",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:1",
+    "expected_image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/on-policy-qa/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/on-policy-qa/sandbox/c8bc7f4c-3635-4edd-baa6-813f28b306e6.audit.json",
+  "audit_sha256": "c598a713d4f34fceca98f0f05a0537d1b1ed25d9034d80ec34bc85eb7c603f85",
+  "failure": "compilation failed: warning: unused import: `serde_json::Value`\n --> /candidate/main.rs:1:5\n  |\n1 | use serde_json::Value;\n  |     ^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0308]: mismatched types\n --> /candidate/main.rs:6:46\n  |\n6 |     for &value in input.as_array().unwrap_or(&[]).iter() {\n  |                                    --------- ^^^ expected `&Vec<Value>`, found `&[_; 0]`\n  |                                    |\n  |                                    arguments to this method are incorrect\n  |\n  = note: expected reference `&Vec<Value>`\n             found reference `&[_; 0]`\nhelp: the return type of this call is `&[_; 0]` due to the type of the argument passed\n --> /candidate/main.rs:6:19\n  |\n6 |     for &value in input.as_array().unwrap_or(&[]).iter() {\n  |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^---^\n  |                                              |\n  |                                              this argument influences the return type of `unwrap_or`\nnote: method defined here\n --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/option.rs:1036:17\nhelp: use `Option::map_or` to deref inner value of `Option`\n  |\n6 -     for &value in input.as_array().unwrap_or(&[]).iter() {\n6 +     for &value in input.as_array().map_or(&[], |v| v).iter() {\n  |\n\nerror[E0308]: mismatched types\n  --> /candidate/main.rs:11:5\n   |\n 3 | pub fn solve(input: serde_json::Value) -> serde_json::Value {\n   |                                           ----------------- expected `Value` because of return type\n...\n11 |     result\n   |     ^^^^^^ expected `Value`, found `Vec<i64>`\n   |\n   = note: expected enum `Value`\n            found struct `Vec<i64>`\nhelp: call `Into::into` on this expression to convert `Vec<i64>` into `Value`\n   |\n11 |     result.into()\n   |           +++++++\n\nerror: aborting due to 2 previous errors; 1 warning emitted\n\nFor more information about this error, try `rustc --explain E0308`.\n",
+  "duration_ms": 2827,
+  "timeout_evidence": null
+}

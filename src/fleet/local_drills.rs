@@ -2,6 +2,8 @@
 use super::*;
 fn drill_provider(id: &str) -> ProviderConfig {
     ProviderConfig {
+        api: Default::default(),
+        inference_only: false,
         id: id.into(),
         business_id: format!("{id}-fixture-business"),
         enabled: true,
@@ -144,6 +146,7 @@ fn drill_runner(
                 task_nanos: budget,
                 provider_nanos: budget,
                 model_nanos: budget,
+                tokens: Default::default(),
             },
             providers,
         },

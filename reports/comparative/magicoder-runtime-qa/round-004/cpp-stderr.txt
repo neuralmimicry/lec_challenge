@@ -1,0 +1,16 @@
+warning: no usable GPU found, --gpu-layers option will be ignored
+warning: one possible reason is that llama.cpp was compiled without GPU support
+warning: consult docs/build.md for compilation instructions
+Read 278 bytes from binary file reports/comparative/magicoder-runtime-qa/round-004/original-rendered-prompt.txt
+0.00.009.916 I srv    load_model: loading model 'offline_bundle/comparative/magicoder-s-ds-6_7b-q4_k_m/magicoder-s-ds-6.7b.Q4_K_M.gguf'
+0.00.101.218 W load: control-looking token:  32015 '<｜fim▁hole｜>' was not control-type; this is probably a bug in the model. its type will be overridden
+0.00.106.833 W load: control-looking token:  32017 '<｜fim▁end｜>' was not control-type; this is probably a bug in the model. its type will be overridden
+0.00.106.911 W load: control-looking token:  32016 '<｜fim▁begin｜>' was not control-type; this is probably a bug in the model. its type will be overridden
+0.05.674.049 I srv    load_model: initializing, n_slots = 1, n_ctx_slot = 1024, kv_unified = 'false'
+0.05.682.785 I slot get_availabl: id  0 | task -1 | selected slot by LRU, t_last = -1
+0.05.682.829 I slot launch_slot_: id  0 | task 0 | processing task, is_child = 0
+0.21.027.373 I slot print_timing: id  0 | task 0 | prompt eval time =   10206.71 ms /    62 tokens (  164.62 ms per token,     6.07 tokens per second)
+0.21.027.386 I slot print_timing: id  0 | task 0 |        eval time =    5137.61 ms /    16 tokens (  321.10 ms per token,     3.11 tokens per second)
+0.21.027.388 I slot print_timing: id  0 | task 0 |       total time =   15344.32 ms /    78 tokens
+0.21.027.394 I slot print_timing: id  0 | task 0 |    graphs reused =         14
+0.21.027.560 I slot      release: id  0 | task 0 | stop processing: n_tokens = 77, truncated = 0

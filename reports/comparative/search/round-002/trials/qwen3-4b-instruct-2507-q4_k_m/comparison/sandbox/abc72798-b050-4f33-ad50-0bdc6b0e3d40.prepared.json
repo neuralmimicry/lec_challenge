@@ -1,0 +1,42 @@
+{
+  "schema_version": 3,
+  "run_id": "84c6b71b-5abc-4d6a-b82f-441657497181",
+  "ownership_nonce": "954a9534-b122-4bfa-8174-f0c04e8a6a5b",
+  "attempt_key": "abc72798-b050-4f33-ad50-0bdc6b0e3d40",
+  "receipt_path": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison/sandbox/abc72798-b050-4f33-ad50-0bdc6b0e3d40.prepared.json",
+  "report_path": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison/sandbox/84c6b71b-5abc-4d6a-b82f-441657497181.json",
+  "task": {
+    "id": "encoding.rot13",
+    "source_id": "private-encoding-v1",
+    "lineage_id": "local-contract-pack-14",
+    "split": "development",
+    "specification": "Input is an ASCII string. Apply ROT13 to upper/lowercase letters and preserve other characters.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "56794b6c25031b0931d378f8f3955bc2d10c4ef04da0be851795e2ca9a832cfa",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": "Hello, Z!",
+        "expected": "Uryyb, M!"
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "pub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let result = match input {\n        serde_json::Value::String(s) => {\n            let mut output = String::new();\n            for c in s.chars() {\n                if c.is_ascii() {\n                    if c.is_ascii_uppercase() {\n                        let rotated = ((c as u8 - b'A' + 13) % 26) + b'A';\n                        output.push(rotated as char);\n                    } else if c.is_ascii_lowercase() {\n                        let rotated = ((c as u8 - b'a' + 13) % 26) + b'a';\n                        output.push(rotated as char);\n                    } else {\n                        output.push(c);\n                    }\n                } else {\n                    output.push(c);\n                }\n            }\n            serde_json::Value::String(output)\n        }\n        serde_json::Value::Array(arr) => {\n            let mut result_array = Vec::new();\n            for item in arr {\n                result_array.push(solve(item));\n            }\n            serde_json::Value::Array(result_array)\n        }\n        serde_json::Value::Object(obj) => {\n            let mut result_object = std::collections::HashMap::new();\n            for (k, v) in obj {\n                result_object.insert(k, solve(v));\n            }\n            serde_json::Value::Object(result_object)\n        }\n        serde_json::Value::Null => serde_json::Value::Null,\n        serde_json::Value::Bool(b) => serde_json::Value::Bool(b),\n    };\n    result\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison/sandbox"
+  },
+  "code_sha256": "d6cf3bb08e90bfba46fd0ab11c7dff58557c7f04cacbde00b2fb53d4b4813384",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

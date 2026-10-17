@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "51e2a803f86359125c31f16c1d0da7fc35ac18527b51f85f956f4872bf05792e",
+  "task_id": "dispatch.waiting",
+  "source_id": "private-dispatch-v1",
+  "success": false,
+  "raw_generation": {
+    "path": "reports/local-study/explore/round-001/baselines/ternary_bitnet/generations/dispatch.waiting.json",
+    "sha256": "75e07211cd30ee247e3825a3e167d46f6841e782264d29b80a40b4ec94e7847b",
+    "bytes": 1372
+  },
+  "sandbox_report": null,
+  "grading_error": null
+}

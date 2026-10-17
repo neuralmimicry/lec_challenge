@@ -1,0 +1,33 @@
+{
+  "run_id": "4f8e2b42-9030-4470-aca5-438fbeee3f3f",
+  "task_id": "encoding.rot13",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: warning: unused import: `Value`\n --> /candidate/main.rs:1:18\n  |\n1 | use serde_json::{Value, from_str};\n  |                  ^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0369]: cannot add `{integer}` to `char`\n --> /candidate/main.rs:9:52\n  |\n9 |             output_str.push(c.to_ascii_lowercase() + 13);\n  |                             ---------------------- ^ -- {integer}\n  |                             |\n  |                             char\n\nerror[E0369]: cannot subtract `{integer}` from `char`\n  --> /candidate/main.rs:11:52\n   |\n11 |             output_str.push(c.to_ascii_uppercase() - 13);\n   |                             ---------------------- ^ -- {integer}\n   |                             |\n   |                             char\n\nerror: aborting due to 2 previous errors; 1 warning emitted\n\nFor more information about this error, try `rustc --explain E0369`.\n"
+  ],
+  "cases_total": 5,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "0bf995b5f69865792503015f6af52b457c861b679877956e939c2137ddb4a562",
+  "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+  "oracle_sha256": "a734f6d465714cbebb072790fedff161d2fc28cbb257b3d04cee0feaf8b5b5fe",
+  "code_sha256": "9d237dd74b358b2a959b1d5ac4dc2275f05b419de95242d7a5b8e1ded354fbf1",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:1",
+    "expected_image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/comparative/coding-development/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/comparative/coding-development/sandbox/4f8e2b42-9030-4470-aca5-438fbeee3f3f.audit.json",
+  "audit_sha256": "d22bdf0c97bdcaad1e1045b06c352dbbb66489a0c3fe492f9bad195c51b7f6bb",
+  "failure": "compilation failed: warning: unused import: `Value`\n --> /candidate/main.rs:1:18\n  |\n1 | use serde_json::{Value, from_str};\n  |                  ^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0369]: cannot add `{integer}` to `char`\n --> /candidate/main.rs:9:52\n  |\n9 |             output_str.push(c.to_ascii_lowercase() + 13);\n  |                             ---------------------- ^ -- {integer}\n  |                             |\n  |                             char\n\nerror[E0369]: cannot subtract `{integer}` from `char`\n  --> /candidate/main.rs:11:52\n   |\n11 |             output_str.push(c.to_ascii_uppercase() - 13);\n   |                             ---------------------- ^ -- {integer}\n   |                             |\n   |                             char\n\nerror: aborting due to 2 previous errors; 1 warning emitted\n\nFor more information about this error, try `rustc --explain E0369`.\n",
+  "duration_ms": 10066,
+  "timeout_evidence": null
+}

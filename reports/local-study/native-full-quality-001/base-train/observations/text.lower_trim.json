@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "55c6614d90fbff0e580fd8fbfa9e06ce99715d8d0c78320e0fe70605545cc489",
+  "task_id": "text.lower_trim",
+  "source_id": "private-text-v1",
+  "success": false,
+  "raw_generation": {
+    "path": "reports/local-study/native-full-quality-001/base-train/generations/text.lower_trim.json",
+    "sha256": "fdf02c5ad4abe5e7ad7ce5c5a7ba930be57b9843f4376189e661de0d50b37328",
+    "bytes": 4209
+  },
+  "sandbox_report": null,
+  "grading_error": null
+}

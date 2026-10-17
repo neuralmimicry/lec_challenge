@@ -1,0 +1,40 @@
+{
+  "run_id": "81b06be3-81e6-4490-8fb2-77f773bd9971",
+  "task_id": "tables.sort_rows",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error[E0599]: no method named `push` found for enum constructor `fn(Vec<Value>) -> Value {serde_json::Value::Array}` in the current scope\n  --> /candidate/main.rs:20:16\n   |\n20 |         result.push(Value::Number(serde_json::Number::from(key)));\n   |                ^^^^ method not found in `fn(Vec<Value>) -> Value {serde_json::Value::Array}`\n\nerror[E0599]: no method named `push` found for enum constructor `fn(Vec<Value>) -> Value {serde_json::Value::Array}` in the current scope\n  --> /candidate/main.rs:21:16\n   |\n21 |         result.push(Value::Number(serde_json::Number::from(value)));\n   |                ^^^^ method not found in `fn(Vec<Value>) -> Value {serde_json::Value::Array}`\n\nerror[E0308]: mismatched types\n  --> /candidate/main.rs:23:5\n   |\n 3 | pub fn solve(input: Value) -> Value {\n   |                               ----- expected `Value` because of return type\n...\n23 |     result\n   |     ^^^^^^ expected `Value`, found enum constructor\n   |\n   = note:          expected enum `Value`\n           found enum constructor `fn(Vec<Value>) -> Value {serde_json::Value::Array}`\nhelp: use parentheses to construct this tuple variant\n   |\n23 |     result(/* Vec<Value> */)\n   |           ++++++++++++++++++\n\nerror: aborting due to 3 previous errors\n\nSome errors have detailed explanations: E0308, E0599.\nFor more information about an error, try `rustc --explain E0308`.\n"
+  ],
+  "cases_total": 5,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "375f162a98599a607c0d83e3a1670dab56e26fe2b66556a393a26f14931f86a6",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/regraded-v3-001/evaluation-002-development-2217a994f8b7/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/regraded-v3-001/evaluation-002-development-2217a994f8b7/sandbox/81b06be3-81e6-4490-8fb2-77f773bd9971.audit.json",
+  "audit_sha256": "e13169048265ed1be5b82afbfb4d49fd6efbd10c2af5e45abe125a4b45815b91",
+  "failure": "compilation failed: error[E0599]: no method named `push` found for enum constructor `fn(Vec<Value>) -> Value {serde_json::Value::Array}` in the current scope\n  --> /candidate/main.rs:20:16\n   |\n20 |         result.push(Value::Number(serde_json::Number::from(key)));\n   |                ^^^^ method not found in `fn(Vec<Value>) -> Value {serde_json::Value::Array}`\n\nerror[E0599]: no method named `push` found for enum constructor `fn(Vec<Value>) -> Value {serde_json::Value::Array}` in the current scope\n  --> /candidate/main.rs:21:16\n   |\n21 |         result.push(Value::Number(serde_json::Number::from(value)));\n   |                ^^^^ method not found in `fn(Vec<Value>) -> Value {serde_json::Value::Array}`\n\nerror[E0308]: mismatched types\n  --> /candidate/main.rs:23:5\n   |\n 3 | pub fn solve(input: Value) -> Value {\n   |                               ----- expected `Value` because of return type\n...\n23 |     result\n   |     ^^^^^^ expected `Value`, found enum constructor\n   |\n   = note:          expected enum `Value`\n           found enum constructor `fn(Vec<Value>) -> Value {serde_json::Value::Array}`\nhelp: use parentheses to construct this tuple variant\n   |\n23 |     result(/* Vec<Value> */)\n   |           ++++++++++++++++++\n\nerror: aborting due to 3 previous errors\n\nSome errors have detailed explanations: E0308, E0599.\nFor more information about an error, try `rustc --explain E0308`.\n",
+  "duration_ms": 24902,
+  "timeout_evidence": null,
+  "lifecycle_evidence": {
+    "receipt_path": "reports/local-study/regraded-v3-001/evaluation-002-development-2217a994f8b7/sandbox/81b06be3-81e6-4490-8fb2-77f773bd9971.lifecycle.json",
+    "receipt_sha256": "6d11035415202e86413b2db29404392864eb3c6981d6d59af522fb84a5677ab3"
+  }
+}

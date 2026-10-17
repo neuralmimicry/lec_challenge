@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "a5b39d544c85b76111246b8fda40c638ce104251a1c56368277fef8fe4033eb6",
+  "task_id": "sequences.interleave",
+  "source_id": "private-sequences-v1",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is [a,b], integer arrays. Alternate elements starting with a; append the remaining tail when one array ends. The returned array may contain up to 128 items.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[[1,2,3],[8,9]],\"expected\":[1,8,2,9,3]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let arr1 = input.as_array().unwrap();\n    let arr2 = input.as_array().unwrap();\n    let mut result = Vec::new();\n    let mut i = 0;\n    let mut j = 0;\n\n    while i < arr1.len() && j < arr2.len() {\n        if arr1[i].is_i64() && arr2[j].is_i64() {\n            result.push(arr1[i].as_i64().unwrap() + arr2[j].as_i64().unwrap());\n            i += 1;\n            j += 1;\n        } else if arr1[i].is_i64() {\n            result.push(arr1[i].as_i64().unwrap());\n            i += 1;\n        } else if arr2[j].is_i64() {\n            result.push(arr2[j].as_i64().unwrap());\n            j += 1;\n        } else {\n            break;\n        }\n    }\n\n    if i < arr1.len() {\n        result.extend(arr1[i..].iter().cloned());\n    } else if j < arr2.len() {\n        result.extend(arr2[j..].iter().cloned());\n    }\n\n    Value::Array(result)\n}\n```",
+    "checkpoint_id": "e2bcd135527659042304d936fa56c7240f6f96a43b9f81f2a888c38b7762a949",
+    "finish_reason": "stop",
+    "input_tokens": 254,
+    "output_tokens": 277,
+    "elapsed_ms": 14615,
+    "complete": true
+  },
+  "model_error": null
+}

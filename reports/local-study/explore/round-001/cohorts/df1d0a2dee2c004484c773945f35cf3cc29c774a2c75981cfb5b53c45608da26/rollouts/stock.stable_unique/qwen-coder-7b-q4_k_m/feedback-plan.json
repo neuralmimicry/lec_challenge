@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "initial_plan": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/stock.stable_unique/student-plan.json",
+    "sha256": "689b050eca9eba8c4f8f8a279a05eb8a0c8151a71c8a9fab44ffd4d3af0b8954",
+    "bytes": 3866
+  },
+  "student_raw": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/stock.stable_unique/student-raw.json",
+    "sha256": "b90a2a78d43a1e36284a348bf8041194f52648731272634e91b0a878f7d7b3f0",
+    "bytes": 1880
+  },
+  "student_grade": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox/050f2a40-0140-490c-a14f-2cac4f47ef47.json",
+    "sha256": "c7d5f24c655acc64e6077b3bf02356d63bb11b31317901759bdda7131800ca86",
+    "bytes": 4561
+  },
+  "teacher_id": "qwen-coder-7b-q4_k_m",
+  "teacher_assets": {
+    "path": "offline_bundle/comparative/qwen-coder-7b-q4_k_m/gguf-assets.json",
+    "sha256": "606bfac02a103d208ccef73067cb6a4581e9b099e19bc9ed8e2021ebb1143114",
+    "bytes": 1206
+  },
+  "teacher_checkpoint": null,
+  "runtime": {
+    "device": {
+      "cuda": {
+        "ordinal": 0
+      }
+    },
+    "dtype": "f32"
+  },
+  "request": {
+    "prompt": "New task:\nWrite Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an array of ASCII strings. Return first occurrences only, preserving their original order.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[\"b\",\"a\",\"b\"],\"expected\":[\"b\",\"a\"]}]\nActual frozen student candidate:\n```rust\nuse serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let mut result = Vec::new();\n    for line in input.as_array().unwrap() {\n        let mut current_line = line.as_str().unwrap();\n        let mut found = false;\n        for &expected in &result {\n            if expected == current_line {\n                found = true;\n                break;\n            }\n        }\n        if !found {\n            result.push(current_line);\n        }\n    }\n    serde_json::Value::Array(result)\n}\n```\nActual trusted tool feedback:\n{\"bounded_diagnostic_untrusted_data\":\"compilation failed: warning: unused import: `serde_json::Value`\\n --> /candidate/main.rs:1:5\\n  |\\n1 | use serde_json::Value;\\n  |     ^^^^^^^^^^^^^^^^^\\n  |\\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\\n\\nerror[E0308]: mismatched types\\n   --> /candidate/main.rs:18:30\\n    |\\n 15 |             result.push(current_line);\\n    |             ------      ------------ this argument has type `&str`...\\n    |             |\\n    |             ... which causes `result` to have type `Vec<&str>`\\n...\\n 18 |     serde_json::Value::Array(result)\\n    |     ------------------------ ^^^^^^ expected `Vec<Value>`, found `Vec<&str>`\\n    |     |\\n    |     arguments to this enum variant are incorrect\\n    |\\n    = note: expected struct `Vec<Value>`\\n               found struct `Vec<&str>`\\nnote: tuple variant defined here\\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:160:5\\n    |\\n160 |     Array(Vec<Value>),\\n    |     ^^^^^\\nhelp: call `Into::into` on this expression to convert `&str` into `Value`\\n    |\\n 15 |             result.push(current_line.into());\\n    |                                     +++++++\\n\\nerror: aborting due to 1 previous error; 1 warning emitted\\n\\nFor more information about this error, try `rustc --explain E0308`.\\n\",\"cases_passed\":0,\"cases_total\":6,\"content_role\":\"compilation_feedback_only\",\"original_failure_is_not_a_success\":true,\"passed\":false,\"private_inputs_or_expected_outputs_exposed\":false,\"quarantined\":true,\"run_id\":\"050f2a40-0140-490c-a14f-2cac4f47ef47\",\"student_generation_complete\":true,\"tool\":\"trusted_container_grader\",\"trace_complete\":false}\nCritique and revise the candidate. Put any short explanation in Rust // comments and return complete compilable Rust source only. Do not invent tool results.",
+    "max_new_tokens": 768,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "supporting_sample_ids": []
+}

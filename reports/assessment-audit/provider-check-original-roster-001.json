@@ -1,0 +1,48 @@
+{
+  "providers": [
+    {
+      "id": "deepseek",
+      "api": "chat_completions",
+      "enabled": false,
+      "api_key_environment": "DEEPSEEK_API_KEY",
+      "credential_present": false,
+      "configuration_error": "model ID or revision policy is unresolved",
+      "training_eligible": false,
+      "network_contacted": false
+    },
+    {
+      "id": "together",
+      "api": "chat_completions",
+      "enabled": false,
+      "api_key_environment": "TOGETHER_API_KEY",
+      "credential_present": false,
+      "configuration_error": "model ID or revision policy is unresolved",
+      "training_eligible": false,
+      "network_contacted": false
+    },
+    {
+      "id": "mistral",
+      "api": "chat_completions",
+      "enabled": false,
+      "api_key_environment": "MISTRAL_API_KEY",
+      "credential_present": false,
+      "configuration_error": "model ID or revision policy is unresolved",
+      "training_eligible": false,
+      "network_contacted": false
+    }
+  ],
+  "budgets": {
+    "round_nanos": 20000000000,
+    "task_nanos": 250000000,
+    "provider_nanos": 10000000000,
+    "model_nanos": 10000000000,
+    "tokens": {
+      "round": 1000000,
+      "task": 100000,
+      "provider": 500000,
+      "model": 500000
+    }
+  },
+  "configuration_error": null,
+  "network_contacted": false
+}

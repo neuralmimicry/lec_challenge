@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "55c6614d90fbff0e580fd8fbfa9e06ce99715d8d0c78320e0fe70605545cc489",
+  "task_id": "intervals.largest_gap",
+  "source_id": "private-intervals-v1",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an array of integer half-open intervals, start<end. Merge touching/overlapping intervals and return the largest internal uncovered gap, or zero with fewer than two merged intervals.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[[3,5],[1,3],[8,9]],\"expected\":3}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let mut merged_intervals = Vec::new();\n    let mut current_interval = (0, 0);\n\n    for item in input.as_array() {\n        let start = item[0].as_i64().unwrap();\n        let end = item[1].as_i64().unwrap();\n\n        if current_interval.0 <= start && current_interval.1 >= end {\n            // Merge overlapping intervals\n            current_interval = (current_interval.0.min(start), current_interval.1.max(end));\n        } else {\n            // Add a new interval\n            merged_intervals.push(current_interval);\n            current_interval = (start, end);\n        }\n    }\n\n    // Add the last interval\n    merged_intervals.push(current_interval);\n\n    // Find the largest internal uncovered gap\n    let mut max_gap = 0;\n    for i in 1..merged_intervals.len() {\n        let gap = merged_intervals[i].0 - merged_intervals[i - 1].1;\n        if gap > max_gap {\n            max_gap = gap;\n        }\n    }\n\n    // Return the result as a JSON value\n    serde_json::Value::Object {\n        key: \"expected\".to_string(),\n        value: serde_json::Value::Number(max_gap as f64),\n    }\n}\n```",
+    "checkpoint_id": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+    "finish_reason": "stop",
+    "input_tokens": 247,
+    "output_tokens": 285,
+    "elapsed_ms": 11628,
+    "complete": true
+  },
+  "model_error": null
+}

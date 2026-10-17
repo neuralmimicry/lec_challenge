@@ -1,0 +1,103 @@
+{
+  "architecture": "conventional_qwen_lora",
+  "checkpoint_id": "2217a994f8b74ded1d52f30ef7add2cb190578e3d108168a85d1409160ad88c3",
+  "coverage_complete": true,
+  "evidence_kind": "actual_local_study_checkpoint_evaluation",
+  "healthy_complete": false,
+  "held_out_used": false,
+  "infrastructure_or_generation_errors": 1,
+  "input_tokens": 11440,
+  "limitations": [
+    "Local train/development measurement only; no learning or promotion claim.",
+    "One fixed evaluation seed and jointly authored source groups do not establish general superiority.",
+    "Generation time excludes loading, hashing and grading; overlapping work is not serial wall time.",
+    "Every failed, empty, truncated or missing output remains in the planned denominator."
+  ],
+  "max_new_tokens": 512,
+  "observed": 48,
+  "output_tokens": 6408,
+  "pass_rate": 0.125,
+  "passed": 6,
+  "per_source": [
+    {
+      "observed": 4,
+      "pass_rate": 0.5,
+      "passed": 2,
+      "source_id": "private-bits-v1"
+    },
+    {
+      "observed": 4,
+      "pass_rate": 0.25,
+      "passed": 1,
+      "source_id": "private-calendar-v1"
+    },
+    {
+      "observed": 4,
+      "pass_rate": 0.0,
+      "passed": 0,
+      "source_id": "private-graph-v1"
+    },
+    {
+      "observed": 4,
+      "pass_rate": 0.25,
+      "passed": 1,
+      "source_id": "private-intervals-v1"
+    },
+    {
+      "observed": 4,
+      "pass_rate": 0.0,
+      "passed": 0,
+      "source_id": "private-ledger-v1"
+    },
+    {
+      "observed": 4,
+      "pass_rate": 0.25,
+      "passed": 1,
+      "source_id": "private-matrices-v1"
+    },
+    {
+      "observed": 4,
+      "pass_rate": 0.0,
+      "passed": 0,
+      "source_id": "private-paths-v1"
+    },
+    {
+      "observed": 4,
+      "pass_rate": 0.0,
+      "passed": 0,
+      "source_id": "private-search-v1"
+    },
+    {
+      "observed": 4,
+      "pass_rate": 0.0,
+      "passed": 0,
+      "source_id": "private-sequences-v1"
+    },
+    {
+      "observed": 4,
+      "pass_rate": 0.0,
+      "passed": 0,
+      "source_id": "private-stock-v1"
+    },
+    {
+      "observed": 4,
+      "pass_rate": 0.25,
+      "passed": 1,
+      "source_id": "private-text-v1"
+    },
+    {
+      "observed": 4,
+      "pass_rate": 0.0,
+      "passed": 0,
+      "source_id": "private-validation-v1"
+    }
+  ],
+  "plan_sha256": "a52d044d05dc99f9af1879cdb69e7d80c4abc41b317440255f0ff27069084831",
+  "planned": 48,
+  "production_eligible": false,
+  "schema_version": 1,
+  "seed": 1729,
+  "split": "train",
+  "status": "complete_with_errors",
+  "summed_generation_ms": 446907
+}

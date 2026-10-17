@@ -1,0 +1,40 @@
+{
+  "run_id": "4f5e0ad6-447a-4bea-83a7-f09fc480a5e7",
+  "task_id": "sequences.move_zeroes",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error[E0599]: no method named `to_i64` found for enum `Value` in the current scope\n  --> /candidate/main.rs:10:20\n   |\n10 |             if val.to_i64().unwrap() != 0 {\n   |                    ^^^^^^\n   |\nhelp: there is a method `as_i64` with a similar name\n   |\n10 -             if val.to_i64().unwrap() != 0 {\n10 +             if val.as_i64().unwrap() != 0 {\n   |\n\nerror[E0599]: no variant, associated function, or constant named `new_array` found for enum `Value` in the current scope\n  --> /candidate/main.rs:18:29\n   |\n18 |     let mut result = Value::new_array();\n   |                             ^^^^^^^^^ variant, associated function, or constant not found in `Value`\n   |\nhelp: there is a method `as_array` with a similar name\n   |\n18 -     let mut result = Value::new_array();\n18 +     let mut result = Value::as_array();\n   |\n\nerror[E0599]: no method named `to_i64` found for enum `Value` in the current scope\n  --> /candidate/main.rs:24:20\n   |\n24 |             if val.to_i64().unwrap() != 0 {\n   |                    ^^^^^^\n   |\nhelp: there is a method `as_i64` with a similar name\n   |\n24 -             if val.to_i64().unwrap() != 0 {\n24 +             if val.as_i64().unwrap() != 0 {\n   |\n\nerror[E0599]: no variant, associated function, or constant named `new_i64` found for enum `Value` in the current scope\n  --> /candidate/main.rs:25:36\n   |\n25 |                 result.push(Value::new_i64(non_zero_indices[non_zero_index]));\n   |                                    ^^^^^^^ variant, associated function, or constant not found in `Value`\n\nerror[E0599]: no variant, associated function, or constant named `new_i64` found for enum `Value` in the current scope\n  --> /candidate/main.rs:28:36\n   |\n28 |                 result.push(Value::new_i64(zero_indices[zero_index]));\n   |                                    ^^^^^^^ variant, associated function, or constant not found in `Value`\n\nerror[E0599]: no variant, associated function, or constant named `new_i64` found for enum `Value` in the current scope\n  --> /candidate/main.rs:32:32\n   |\n32 |             result.push(Value::new_i64(val));\n   |                                ^^^^^^^ variant, associated function, or constant not found in `Value`\n\nerror[E0599]: no variant, associated function, or constant named `new_array` found for enum `Value` in the current scope\n   --> /candidate/main.rs:36:12\n    |\n 36 |     Value::new_array(result)\n    |            ^^^^^^^^^ variant, associated function, or constant not found in `Value`\n    |\nhelp: there is a method `as_array` with a similar name, but with different arguments\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:425:5\n    |\n425 |     pub fn as_array(&self) -> Option<&Vec<Value>> {\n    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\nerror: aborting due to 7 previous errors\n\nFor more information about this error, try `rustc --explain E0599`.\n"
+  ],
+  "cases_total": 5,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "f7be95b2248a3933824c6d5e54087cbd3e805cf6003eaf8746b22b0b8433eca6",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/sandbox/4f5e0ad6-447a-4bea-83a7-f09fc480a5e7.audit.json",
+  "audit_sha256": "a187a6a51d71c5b06783d623c133753cb5f37557a90d189b489cb814771c478b",
+  "failure": "compilation failed: error[E0599]: no method named `to_i64` found for enum `Value` in the current scope\n  --> /candidate/main.rs:10:20\n   |\n10 |             if val.to_i64().unwrap() != 0 {\n   |                    ^^^^^^\n   |\nhelp: there is a method `as_i64` with a similar name\n   |\n10 -             if val.to_i64().unwrap() != 0 {\n10 +             if val.as_i64().unwrap() != 0 {\n   |\n\nerror[E0599]: no variant, associated function, or constant named `new_array` found for enum `Value` in the current scope\n  --> /candidate/main.rs:18:29\n   |\n18 |     let mut result = Value::new_array();\n   |                             ^^^^^^^^^ variant, associated function, or constant not found in `Value`\n   |\nhelp: there is a method `as_array` with a similar name\n   |\n18 -     let mut result = Value::new_array();\n18 +     let mut result = Value::as_array();\n   |\n\nerror[E0599]: no method named `to_i64` found for enum `Value` in the current scope\n  --> /candidate/main.rs:24:20\n   |\n24 |             if val.to_i64().unwrap() != 0 {\n   |                    ^^^^^^\n   |\nhelp: there is a method `as_i64` with a similar name\n   |\n24 -             if val.to_i64().unwrap() != 0 {\n24 +             if val.as_i64().unwrap() != 0 {\n   |\n\nerror[E0599]: no variant, associated function, or constant named `new_i64` found for enum `Value` in the current scope\n  --> /candidate/main.rs:25:36\n   |\n25 |                 result.push(Value::new_i64(non_zero_indices[non_zero_index]));\n   |                                    ^^^^^^^ variant, associated function, or constant not found in `Value`\n\nerror[E0599]: no variant, associated function, or constant named `new_i64` found for enum `Value` in the current scope\n  --> /candidate/main.rs:28:36\n   |\n28 |                 result.push(Value::new_i64(zero_indices[zero_index]));\n   |                                    ^^^^^^^ variant, associated function, or constant not found in `Value`\n\nerror[E0599]: no variant, associated function, or constant named `new_i64` found for enum `Value` in the current scope\n  --> /candidate/main.rs:32:32\n   |\n32 |             result.push(Value::new_i64(val));\n   |                                ^^^^^^^ variant, associated function, or constant not found in `Value`\n\nerror[E0599]: no variant, associated function, or constant named `new_array` found for enum `Value` in the current scope\n   --> /candidate/main.rs:36:12\n    |\n 36 |     Value::new_array(result)\n    |            ^^^^^^^^^ variant, associated function, or constant not found in `Value`\n    |\nhelp: there is a method `as_array` with a similar name, but with different arguments\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:425:5\n    |\n425 |     pub fn as_array(&self) -> Option<&Vec<Value>> {\n    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\nerror: aborting due to 7 previous errors\n\nFor more information about this error, try `rustc --explain E0599`.\n",
+  "duration_ms": 15945,
+  "timeout_evidence": null,
+  "lifecycle_evidence": {
+    "receipt_path": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/sandbox/4f5e0ad6-447a-4bea-83a7-f09fc480a5e7.lifecycle.json",
+    "receipt_sha256": "1f952b716aa285b73428357efb9e5972755113ff93cf0041b037e18dad9783a8"
+  }
+}

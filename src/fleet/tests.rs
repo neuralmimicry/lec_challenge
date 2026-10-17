@@ -2,6 +2,8 @@
 use super::*;
 pub(super) fn provider(id: &str) -> ProviderConfig {
     ProviderConfig {
+        api: Default::default(),
+        inference_only: false,
         id: id.into(),
         business_id: format!("{id}-business"),
         enabled: true,
@@ -80,7 +82,7 @@ impl Transport for FixtureTransport {
         Ok(Recording::from_response(prepared, response, "synthetic_fixture").unwrap())
     }
 }
-fn fixture_runner(
+pub(super) fn fixture_runner(
     dir: &Path,
     mut providers: Vec<ProviderConfig>,
     transport: Arc<dyn Transport>,
@@ -97,6 +99,7 @@ fn fixture_runner(
                 task_nanos: budget,
                 provider_nanos: budget,
                 model_nanos: budget,
+                tokens: Default::default(),
             },
             providers,
         },

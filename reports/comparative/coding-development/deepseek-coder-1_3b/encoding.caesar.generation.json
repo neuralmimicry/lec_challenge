@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "evidence_kind": "actual_local_model_generation",
+  "recorded_unix_ms": 1792072850147,
+  "model_id": "deepseek-coder-1_3b",
+  "task_id": "encoding.caesar",
+  "source_id": "private-encoding-v1",
+  "specification_sha256": "6d5a2e4829f195b5e54e08b45300ecba1a3b178763b2ee6e7a9c90c50c633efa",
+  "seed": 1729,
+  "plan_sha256": "9aefcaf935435b296c63229638aad5a22a416ae171eda011a6812dd745667ea8",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input {text,shift} has ASCII text and integer shift. Rotate lowercase a..z only modulo 26; preserve all other characters.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":{\"shift\":3,\"text\":\"xyz A!\"},\"expected\":\"abc A!\"}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "Here is a simple Rust function that rotates the characters in a string by a given shift. The function uses the `chars()` method to iterate over the characters in the string, and the `collect::<String>()` method to create a new string with the rotated characters.\n\n```rust\nuse serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let mut text = input.as_str().unwrap();\n    let shift = input.as_i32().unwrap();\n\n    text.chars().map(|c| {\n        if c.is_lowercase() {\n            let mut new_c = c as i32;\n            new_c += shift;\n            if new_c > 'z' as i32 {\n                new_c -= 26;\n            }\n            if new_c < 'a' as i32 {\n                new_c += 26;\n            }\n            c as char as_u8::from(new_c)\n        } else {\n            c\n        }\n    }).collect()\n}\n```\n\nThis function works by first getting the text and shift from the input JSON value. It then iterates over each character in the text. If the character is a lowercase letter, it adds the shift to the character and wraps around to the start of the alphabet if necessary. If the character is not a lowercase letter, it leaves it as is.\n\nPlease note that this function assumes that the input JSON value is a string and an integer. If the input JSON value is not a string or an integer, the function will panic.\n",
+    "checkpoint_id": "4ff570bf9a558d23c5cb4171bad00daf663be8282150cdb5769e0f6975b0007a",
+    "finish_reason": "stop",
+    "input_tokens": 309,
+    "output_tokens": 374,
+    "elapsed_ms": 26569,
+    "complete": true
+  },
+  "generation_error": null,
+  "execution": {
+    "actual_device": "Cuda { gpu_id: 0 }",
+    "actual_dtype": "F16",
+    "checkpoint_id": "4ff570bf9a558d23c5cb4171bad00daf663be8282150cdb5769e0f6975b0007a",
+    "context_cap": 2048,
+    "cpu_fallback": false,
+    "cuda_active": true,
+    "cuda_feature_compiled": true,
+    "engine": "native_rust_candle",
+    "model_id": "deepseek-ai/deepseek-coder-1.3b-instruct",
+    "requested": {
+      "device": {
+        "cuda": {
+          "ordinal": 0
+        }
+      },
+      "dtype": "f16"
+    },
+    "revision": "e063262dac8366fc1f28a4da0ff3c50ea66259ca"
+  }
+}

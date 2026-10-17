@@ -1,0 +1,23 @@
+
+running 8 tests
+test tests::explicit_fresh_does_not_consult_previous_corrupt_progress ... ok
+test tests::legacy_policy_with_no_engine_bound_work_can_build_its_first_engine ... ok
+test tests::runtime_library_search_does_not_require_a_compiler_or_toolkit_binary ... ok
+test tests::launch_receipt_cannot_hide_corrupted_snapshot_bytes_or_length ... ok
+test tests::legacy_content_rejects_mixed_plan_origins_and_conflicting_receipts ... ok
+test tests::pre_protocol_export_interruption_recovers_its_original_launch_engine ... ok
+test tests::legacy_content_recovers_homogeneous_plans_without_rewriting_policy ... ok
+test tests::application_protocol_wins_over_a_stale_launcher_receipt ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+    Blocking waiting for file lock on build directory
+   Compiling ring v0.17.14
+   Compiling rustls v0.23.46
+   Compiling rustls-webpki v0.103.15
+   Compiling tokio-rustls v0.26.6
+   Compiling hyper-rustls v0.27.10
+   Compiling reqwest v0.12.28
+   Compiling lec-distil v0.1.0 (/home/pbisaacs/Developer/neuralmimicry/lec_challenge)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 46.63s
+     Running unittests examples/platform_launch.rs (target/debug/examples/platform_launch-a147bc444bf3d13d)

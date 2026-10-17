@@ -1,0 +1,40 @@
+{
+  "run_id": "83ef2ef0-ea38-40cb-bb87-96591f954d3b",
+  "task_id": "money.split",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error[E0308]: mismatched types\n  --> /candidate/main.rs:20:33\n   |\n20 |     let mut shares = vec![base; n];\n   |                      -----------^-\n   |                      |          |\n   |                      |          expected `usize`, found `i64`\n   |                      arguments to this function are incorrect\n   |\nnote: function defined here\n  --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/alloc/src/vec/mod.rs:3772:7\nhelp: you can convert an `i64` to a `usize` and panic if the converted value doesn't fit\n   |\n20 |     let mut shares = vec![base; n.try_into().unwrap()];\n   |                                  ++++++++++++++++++++\n\nerror[E0277]: the type `[i64]` cannot be indexed by `i64`\n  --> /candidate/main.rs:22:16\n   |\n22 |         shares[i] += 1;\n   |                ^ slice indices are of type `usize` or ranges of `usize`\n   |\n   = help: the trait `SliceIndex<[i64]>` is not implemented for `i64`\nhelp: `usize` implements trait `SliceIndex<T>`\n  --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/bstr/traits.rs:197:0\n   |\n   = note: `SliceIndex<ByteStr>`\n  --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/slice/index.rs:179:0\n   |\n   = note: `SliceIndex<[T]>`\n   = note: required for `Vec<i64>` to implement `std::ops::Index<i64>`\n\nerror: aborting due to 2 previous errors\n\nSome errors have detailed explanations: E0277, E0308.\nFor more information about an error, try `rustc --explain E0277`.\n"
+  ],
+  "cases_total": 5,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "65fa000ad0c5403322c29f0cce04408ae28ff56fe7fe208105d227709fcca0c9",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison/sandbox/83ef2ef0-ea38-40cb-bb87-96591f954d3b.audit.json",
+  "audit_sha256": "e607db6784e0982f7e0bd2927913044fb6738162d522d0c40b6fd4f9207c5def",
+  "failure": "compilation failed: error[E0308]: mismatched types\n  --> /candidate/main.rs:20:33\n   |\n20 |     let mut shares = vec![base; n];\n   |                      -----------^-\n   |                      |          |\n   |                      |          expected `usize`, found `i64`\n   |                      arguments to this function are incorrect\n   |\nnote: function defined here\n  --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/alloc/src/vec/mod.rs:3772:7\nhelp: you can convert an `i64` to a `usize` and panic if the converted value doesn't fit\n   |\n20 |     let mut shares = vec![base; n.try_into().unwrap()];\n   |                                  ++++++++++++++++++++\n\nerror[E0277]: the type `[i64]` cannot be indexed by `i64`\n  --> /candidate/main.rs:22:16\n   |\n22 |         shares[i] += 1;\n   |                ^ slice indices are of type `usize` or ranges of `usize`\n   |\n   = help: the trait `SliceIndex<[i64]>` is not implemented for `i64`\nhelp: `usize` implements trait `SliceIndex<T>`\n  --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/bstr/traits.rs:197:0\n   |\n   = note: `SliceIndex<ByteStr>`\n  --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/slice/index.rs:179:0\n   |\n   = note: `SliceIndex<[T]>`\n   = note: required for `Vec<i64>` to implement `std::ops::Index<i64>`\n\nerror: aborting due to 2 previous errors\n\nSome errors have detailed explanations: E0277, E0308.\nFor more information about an error, try `rustc --explain E0277`.\n",
+  "duration_ms": 25590,
+  "timeout_evidence": null,
+  "lifecycle_evidence": {
+    "receipt_path": "reports/comparative/search/round-002/trials/qwen3-4b-instruct-2507-q4_k_m/comparison/sandbox/83ef2ef0-ea38-40cb-bb87-96591f954d3b.lifecycle.json",
+    "receipt_sha256": "9fea06798e730b12ec1849bba070e6900fe2467e4eb767dd1471c46a7a6b1210"
+  }
+}

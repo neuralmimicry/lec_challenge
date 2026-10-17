@@ -1,0 +1,42 @@
+{
+  "schema_version": 3,
+  "run_id": "5fc549b6-cc91-450b-a996-8e98e01e3cbd",
+  "ownership_nonce": "6de3ccaf-455d-421c-a501-5f8ecd130fbf",
+  "attempt_key": "b7f12fd5c2591de6cffac496cc82b56eac2507af36d82089ec7ce1ee9543942f",
+  "receipt_path": "reports/local-study/regraded-v3-001/evaluation-003-train-f95238863522/prepared/text.squash.json",
+  "report_path": "reports/local-study/regraded-v3-001/evaluation-003-train-f95238863522/sandbox/5fc549b6-cc91-450b-a996-8e98e01e3cbd.json",
+  "task": {
+    "id": "text.squash",
+    "source_id": "private-text-v1",
+    "lineage_id": "local-contract-pack-02",
+    "split": "train",
+    "specification": "Input is an ASCII string. Split on ASCII whitespace and join words with one space, removing edge whitespace.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "83e5780cf416c73ac8e7ff28e0058c67f666526329fda6ec2f8d8416d989f132",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": "  Hi\t THERE \n",
+        "expected": "Hi THERE"
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "use serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let mut lines = input.as_str().split_whitespace().collect::<Vec<&str>>();\n    let mut result = String::new();\n    for line in lines {\n        let trimmed_line = line.trim();\n        if trimmed_line.is_empty() {\n            continue;\n        }\n        result.push(trimmed_line);\n        if !trimmed_line.ends_with('\\n') {\n            result.push(' ');\n        }\n    }\n    serde_json::Value::String(result)\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/regraded-v3-001/evaluation-003-train-f95238863522/sandbox"
+  },
+  "code_sha256": "a66fcaa6978e62eba716c5d279f4e1284be81fce927a4bc75832f214c22868e6",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

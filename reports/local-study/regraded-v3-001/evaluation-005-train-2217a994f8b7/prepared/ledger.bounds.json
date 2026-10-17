@@ -1,0 +1,49 @@
+{
+  "schema_version": 3,
+  "run_id": "ec492d92-3bf1-4158-9f10-a52f3e87e0ff",
+  "ownership_nonce": "34bf6aeb-f19c-4a61-a0b5-5dc01d0affd6",
+  "attempt_key": "402be17a9d8819ebfb26c16498b26293aae3dd4faf5f3d73f5a62a15424319df",
+  "receipt_path": "reports/local-study/regraded-v3-001/evaluation-005-train-2217a994f8b7/prepared/ledger.bounds.json",
+  "report_path": "reports/local-study/regraded-v3-001/evaluation-005-train-2217a994f8b7/sandbox/ec492d92-3bf1-4158-9f10-a52f3e87e0ff.json",
+  "task": {
+    "id": "ledger.bounds",
+    "source_id": "private-ledger-v1",
+    "lineage_id": "local-contract-pack-00",
+    "split": "train",
+    "specification": "Input is an integer array. Return [minimum,maximum], or null for an empty array.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "911dbccd1869b8f5a7bdb03e1c96dc2a312037586316684fbfa8d9675e2e8c33",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": [
+          2,
+          -4,
+          8
+        ],
+        "expected": [
+          -4,
+          8
+        ]
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "use serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let arr = input.as_array().unwrap();\n    let mut min = None;\n    let mut max = None;\n\n    for num in arr {\n        let num_value = num.as_i64().unwrap();\n        if min.is_none() || num_value < min.unwrap() {\n            min = Some(num_value);\n        }\n        if max.is_none() || num_value > max.unwrap() {\n            max = Some(num_value);\n        }\n    }\n\n    if min.is_none() || max.is_none() {\n        Value::Null\n    } else {\n        Value::Array(vec![Value::Number(min.unwrap()), Value::Number(max.unwrap())])\n    }\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/regraded-v3-001/evaluation-005-train-2217a994f8b7/sandbox"
+  },
+  "code_sha256": "9c3ff18582a1d818405811b5abad8fbc99b803fb19ffcdaf7c4504f9cc464dbf",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

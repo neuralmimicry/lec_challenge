@@ -1,0 +1,45 @@
+{
+  "schema_version": 3,
+  "run_id": "6785952f-8e5f-4278-933d-026852086e58",
+  "ownership_nonce": "9d1d3a09-57a2-4f08-81b2-4aa18c3d4227",
+  "attempt_key": "0b652170-d4ed-49e3-ac34-e5485a8856cc",
+  "receipt_path": "reports/local-study/explore/round-001/study/full/arms/arm-d81f55ca66908cb5884d507c/development/sandbox/0b652170-d4ed-49e3-ac34-e5485a8856cc.prepared.json",
+  "report_path": "reports/local-study/explore/round-001/study/full/arms/arm-d81f55ca66908cb5884d507c/development/sandbox/6785952f-8e5f-4278-933d-026852086e58.json",
+  "task": {
+    "id": "encoding.caesar",
+    "source_id": "private-encoding-v1",
+    "lineage_id": "local-contract-pack-14",
+    "split": "development",
+    "specification": "Input {text,shift} has ASCII text and integer shift. Rotate lowercase a..z only modulo 26; preserve all other characters.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "6d5a2e4829f195b5e54e08b45300ecba1a3b178763b2ee6e7a9c90c50c633efa",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": {
+          "shift": 3,
+          "text": "xyz A!"
+        },
+        "expected": "abc A!"
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "```rust\nuse serde_json::Value;\n\nfn solve(input: serde_json::Value) -> serde_json::Value {\n    let text = input[\"input\"][\"text\"].as_str().unwrap();\n    let shift = input[\"input\"][\"shift\"].as_i64().unwrap();\n    let mut result = String::new();\n    for c in text.chars() {\n        if c.is_lowercase() {\n            let offset = c as u8 - 'a' as u8;\n            let new_offset = (offset + shift) % 26 + 'a' as u8;\n            result.push(new_offset as char);\n        } else {\n            result.push(c);\n        }\n    }\n    result\n}\n\nfn main() {\n    let input = serde_json::Value::from(\"{\\\"input\\\":{\\\"text\\\":\\\"xyz A!\\\",\\\"shift\\\":3}}\");\n    let expected = serde_json::Value::from(\"{\\\"input\\\":{\\\"text\\\":\\\"abc A!\\\",\\\"shift\\\":3}}\");\n    assert_eq!(solve(input), expected);\n}\n```\n\nThis Rust code defines a function `solve` that takes a JSON input and returns a JSON output. The function processes the input text, rotates lowercase letters by the specified shift, and preserves other characters. The `main` function demonstrates how to use `solve` with a sample input.",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/explore/round-001/study/full/arms/arm-d81f55ca66908cb5884d507c/development/sandbox"
+  },
+  "code_sha256": "0dac75f2898acfa3d22e2593bed38a5feee1df85452b8f7376ccf36219874d3d",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

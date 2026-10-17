@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "55c6614d90fbff0e580fd8fbfa9e06ce99715d8d0c78320e0fe70605545cc489",
+  "task_id": "intervals.largest_gap",
+  "source_id": "private-intervals-v1",
+  "success": false,
+  "raw_generation": {
+    "path": "reports/local-study/native-full-quality-001/base-train/generations/intervals.largest_gap.json",
+    "sha256": "d36d41a7c5694c10536ae2ee6951b14cb0a9c28a22b2c880c97e64da9568c3a9",
+    "bytes": 2809
+  },
+  "sandbox_report": {
+    "path": "reports/local-study/native-full-quality-001/base-train/sandbox/15654953-54b4-41e7-b9f4-4f433cd413b9.json",
+    "sha256": "c734f0667e2dbb3af82e0ff63ec54cbee604d7816ea1f07a0f69f6a6c93fe132",
+    "bytes": 6311
+  },
+  "grading_error": null
+}

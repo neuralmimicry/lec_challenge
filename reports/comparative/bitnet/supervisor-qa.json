@@ -1,0 +1,18 @@
+{
+  "adopted_leaf_reaped": true,
+  "assessment_drill": false,
+  "controlled_rust_leaf_not_model_output": true,
+  "evidence_kind": "actual_native_supervisor_linux_lifetime_qa",
+  "holder_marker": {
+    "bytes": 49,
+    "path": "reports/comparative/bitnet/supervisor-holder-1172cbb9-d8fa-439c-a997-a0d96b0d7ab7.json",
+    "sha256": "7139e0fb613ff61f037f3d2a7a51352f7a30eafa4dfd902e40ede661f4756195"
+  },
+  "holder_sigkill_status": "signal: 9 (SIGKILL)",
+  "normal_drop_killed_and_reaped": true,
+  "parent_sigkill_kills_leaf": true,
+  "passed": true,
+  "probe_binary_sha256": "6af2793a4845e00e5b04666d89f4a83bdc82e0cee8bf9164023f35856f15f8d0",
+  "schema_version": 1,
+  "survives_creator_worker_exit": true
+}

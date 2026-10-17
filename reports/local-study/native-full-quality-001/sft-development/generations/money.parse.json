@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "0805ba5b12c7f6a3f7a46cf71c1c8db0aa8542d736a3dcd82b56da5f168b46c4",
+  "task_id": "money.parse",
+  "source_id": "private-money-v1",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an ASCII decimal monetary string. Accept optional leading minus, one or more digits, and optional dot followed by exactly two digits. Return signed cents, or null for invalid syntax; magnitudes <=1000000 pounds.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":\"-12.30\",\"expected\":-1230}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    if let Value::String(s) = input {\n        let mut num = 0;\n        let mut sign = 1;\n        let mut i = 0;\n\n        while i < s.len() && s[i] == '-' {\n            sign = -1;\n            i += 1;\n        }\n\n        let mut j = i;\n        while j < s.len() && s[j] >= '0' && s[j] <= '9' {\n            num = num * 10 + (s[j] - '0');\n            j += 1;\n        }\n\n        if j == i {\n            return Value::Null;\n        }\n\n        if s[i] == '.' {\n            i += 1;\n            let mut k = i;\n            while k < s.len() && s[k] >= '0' && s[k] <= '9' {\n                num = num * 10 + (s[k] - '0');\n                k += 1;\n            }\n\n            if k == i {\n                return Value::Null;\n            }\n\n            if j == i {\n                return Value::Null;\n            }\n\n            if s[i] != '0' {\n                return Value::Null;\n            }\n\n            i = k;\n        }\n\n        if j == i {\n            return Value::Null;\n        }\n\n        if s[i] != '0' {\n            return Value::Null;\n        }\n\n        if num < -1000000 || num > 1000000 {\n            return Value::Null;\n        }\n\n        Value::Number(serde_json::Number::from(num) * sign as f64)\n    } else {\n        Value::Null\n    }\n}\n```",
+    "checkpoint_id": "e2bcd135527659042304d936fa56c7240f6f96a43b9f81f2a888c38b7762a949",
+    "finish_reason": "stop",
+    "input_tokens": 255,
+    "output_tokens": 372,
+    "elapsed_ms": 14311,
+    "complete": true
+  },
+  "model_error": null
+}

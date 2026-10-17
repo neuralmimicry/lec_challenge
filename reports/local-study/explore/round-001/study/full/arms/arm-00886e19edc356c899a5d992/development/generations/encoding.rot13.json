@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "23183bfa90e4ec5f088260cbb0cdffc7321925e65ff2284b1086e4b85cbdf13e",
+  "task_id": "encoding.rot13",
+  "source_id": "private-encoding-v1",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an ASCII string. Apply ROT13 to upper/lowercase letters and preserve other characters.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":\"Hello, Z!\",\"expected\":\"Uryyb, M!\"}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let input_str = input.as_str().unwrap();\n    let mut result = String::new();\n    for c in input_str.chars() {\n        if c.is_alphabetic() {\n            let is_uppercase = c.is_uppercase();\n            let new_char = match c {\n                c if c.is_lowercase() => c.to_uppercase(),\n                c if c.is_uppercase() => c.to_lowercase(),\n                c if c.is_lowercase() => c.to_uppercase(),\n                c if c.is_uppercase() => c.to_lowercase(),\n                c if c.is_uppercase() => c.to_uppercase(),\n                c if c.is_lowercase() => c.to_uppercase(),\n                c if c.is_lowercase() => c.to_lowercase(),\n                _ => c,\n            };\n            result.push(new_char);\n        } else {\n            result.push(c);\n        }\n    }\n    Value::String(result)\n}\n```",
+    "checkpoint_id": "6e07fcdaa532adbc1916fa0a8ff21187e2eff3b2ead31205d6d48ec239f465d4",
+    "finish_reason": "stop",
+    "input_tokens": 227,
+    "output_tokens": 201,
+    "elapsed_ms": 33221,
+    "complete": true
+  },
+  "model_error": null
+}

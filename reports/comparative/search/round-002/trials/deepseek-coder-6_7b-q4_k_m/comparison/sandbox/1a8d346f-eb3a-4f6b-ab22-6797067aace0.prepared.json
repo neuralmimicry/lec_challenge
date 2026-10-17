@@ -1,0 +1,69 @@
+{
+  "schema_version": 3,
+  "run_id": "36adb3a1-d191-4b5e-945c-0d41422b1557",
+  "ownership_nonce": "03bfe83d-b651-42aa-b273-5652af4a5dbb",
+  "attempt_key": "1a8d346f-eb3a-4f6b-ab22-6797067aace0",
+  "receipt_path": "reports/comparative/search/round-002/trials/deepseek-coder-6_7b-q4_k_m/comparison/sandbox/1a8d346f-eb3a-4f6b-ab22-6797067aace0.prepared.json",
+  "report_path": "reports/comparative/search/round-002/trials/deepseek-coder-6_7b-q4_k_m/comparison/sandbox/36adb3a1-d191-4b5e-945c-0d41422b1557.json",
+  "task": {
+    "id": "tables.inner_join",
+    "source_id": "private-tables-v1",
+    "lineage_id": "local-contract-pack-15",
+    "split": "development",
+    "specification": "Input [left,right] has arrays of [key,value] integer rows, each side with unique keys. Return [key,left_value,right_value] for common keys in ascending key order.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "369ef237ff250179b0b3e3c7af051af8aebc0329b6494d33af5f436c827ac699",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": [
+          [
+            [
+              2,
+              9
+            ],
+            [
+              1,
+              4
+            ]
+          ],
+          [
+            [
+              2,
+              3
+            ],
+            [
+              3,
+              8
+            ]
+          ]
+        ],
+        "expected": [
+          [
+            2,
+            9,
+            3
+          ]
+        ]
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "Here is a Rust function that solves the problem. This function assumes that the input is a JSON array of arrays, where each inner array is a pair of integers. The function returns a JSON array of arrays, where each inner array is a triple of integers.\n\n```rust\nuse serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let input: Vec<Vec<Vec<i64>>> = input.into();\n    let left = input[0].into_iter().collect::<std::collections::HashMap<_, _>>();\n    let right = input[1].into_iter().collect::<std::collections::HashMap<_, _>>();\n    let mut common: Vec<Vec<i64>> = Vec::new();\n\n    for (key, left_value) in &left {\n        if let Some(&right_value) = right.get(key) {\n            common.push(vec![key.to_string().parse().unwrap(), *left_value, right_value]);\n        }\n    }\n\n    common.sort_by(|a, b| a[0].cmp(&b[0]));\n\n    Value::Array(common.into_iter().map(|mut v| {\n        v.drain(1..).collect::<Vec<_>>()\n    }).collect())\n}\n```\n\nThis function works by first converting the input JSON to a Rust data structure. It then converts the left and right arrays into hash maps, where the keys are the integers and the values are the integers. It then iterates over the left hash map, and for each key-value pair, if the key is also in the right hash map, it adds a new array to the result with the key, the left value, and the right value. Finally, it sorts the result by the key and converts it back to a JSON array.\n\nPlease note that this function assumes that the input is always valid and that the keys are always integers. If this is not the case, you should add error handling code to deal with invalid inputs.",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/comparative/search/round-002/trials/deepseek-coder-6_7b-q4_k_m/comparison/sandbox"
+  },
+  "code_sha256": "b09e437fbec644c0301a265605a7a7fe7b8842b30423809093a09531324ff87f",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

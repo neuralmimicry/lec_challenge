@@ -1,0 +1,3085 @@
+{
+  "adapted_values_examined": 245760000,
+  "alpha_over_rank": 2.0,
+  "base_assets": {
+    "bytes": 875,
+    "path": "offline_bundle/students/bitnet-2b-4t/assets.json",
+    "sha256": "15bd66c0b1b9528e88a3db9b4be88518410ac0ce56dc7d51c7fa651dd1e9a37a"
+  },
+  "build_receipt": {
+    "bytes": 1771,
+    "path": "state/diagnostics/bitnet-movement/build/receipt.json",
+    "sha256": "098edd59d4164bd6b6697683fb4d33c3504a6bf0205dbbf7aaa779fa5152384d"
+  },
+  "changed_latent_values": 498994,
+  "counterfactual_scaled_saved_update_only": [
+    {
+      "saved_update_gain": 1.0,
+      "values_that_would_change": 0
+    },
+    {
+      "saved_update_gain": 2.0,
+      "values_that_would_change": 1059943
+    },
+    {
+      "saved_update_gain": 4.0,
+      "values_that_would_change": 50690665
+    },
+    {
+      "saved_update_gain": 8.0,
+      "values_that_would_change": 106335383
+    },
+    {
+      "saved_update_gain": 16.0,
+      "values_that_would_change": 140013424
+    },
+    {
+      "saved_update_gain": 32.0,
+      "values_that_would_change": 156474774
+    },
+    {
+      "saved_update_gain": 64.0,
+      "values_that_would_change": 166208470
+    },
+    {
+      "saved_update_gain": 128.0,
+      "values_that_would_change": 171752160
+    }
+  ],
+  "diagnostic_executable_sha256": "e00c625600d30a8cc01e5d0552af092df7c88eda1dfeb6cd8700a2e85b5dad32",
+  "evidence_kind": "actual_saved_bitnet_latent_threshold_movement_diagnostic",
+  "final_adapter": {
+    "bytes": 2009448,
+    "path": "reports/local-study/native-bitnet-48-operator/adapter.safetensors",
+    "sha256": "2ccde5653e6a0099e8b92c5faa466b08154570c4ea27296e5d058758ef34e5aa"
+  },
+  "frozen_protocol": {
+    "bytes": 79770,
+    "path": "reports/local-study/native-bitnet-48-operator/freeze.json",
+    "sha256": "d92f6ff828ab12e448f10edddb8af875b1689272635488b168b27268ab3470d0"
+  },
+  "initial_adapter": {
+    "bytes": 2009448,
+    "path": "reports/local-study/native-bitnet-48-operator/initial-adapter.safetensors",
+    "sha256": "a83ebffa8cd35331a61b484d9a2b7c3ceeb9ed160ba58110e7ee9a1fc8c7a19a"
+  },
+  "limitations": [
+    "Reads selected original packed q/v matrices and scales, not a full model allocation. Base publisher integrity is bound by the original frozen worker and retained assets manifest; this diagnostic does not rehash the full base.",
+    "Low-rank products are reconstructed in f64 from saved f32 tensors; the actual worker's discrete lattice digest remains authoritative.",
+    "Counterfactual gains scale the saved update for diagnosis only. They are not trained checkpoints, measured learning, or permission to alter a frozen protocol."
+  ],
+  "maximum_absolute_update_over_scale": 0.3269575376427052,
+  "minimum_saved_update_gain_to_first_switch": 1.5292505675351438,
+  "nonzero_adam_moment_values": 997940,
+  "optimiser": {
+    "bytes": 4019504,
+    "path": "reports/local-study/native-bitnet-48-operator/optimizer.safetensors",
+    "sha256": "c0b26845951d95fa13622cccb36b7aa09ce20f084442ac28d64610f7e4013ce4"
+  },
+  "production_eligible": false,
+  "projections": [
+    {
+      "adam_moments": {
+        "model.layers.0.self_attn.q_proj.qat_a.m": {
+          "maximum_absolute_value": 0.015555472113192081,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.0.self_attn.q_proj.qat_a.v": {
+          "maximum_absolute_value": 9.443575436307583e-6,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.0.self_attn.q_proj.qat_b.m": {
+          "maximum_absolute_value": 0.06412098556756973,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.0.self_attn.q_proj.qat_b.v": {
+          "maximum_absolute_value": 0.00015881274885032326,
+          "nonzero_values": 5120,
+          "values": 5120
+        }
+      },
+      "adapter_a": {
+        "changed_l2": 16.685796261946862,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.2556430995464325,
+        "maximum_absolute_value": 0.2735522389411926,
+        "values": 5120
+      },
+      "adapter_b": {
+        "changed_l2": 14.609906409136144,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.2582698464393616,
+        "maximum_absolute_value": 0.2582698464393616,
+        "values": 5120
+      },
+      "half_bin_width": 0.609375,
+      "maximum_absolute_low_rank_update": 0.280628714096844,
+      "maximum_absolute_update_over_scale": 0.23025945772048736,
+      "minimum_saved_update_gain_to_first_switch": 2.171463465387604,
+      "minimum_signed_threshold_margin_in_scale_units": 0.2697405422795126,
+      "official_scale": 1.21875,
+      "projection": "model.layers.0.self_attn.q_proj",
+      "shape": [
+        2560,
+        2560
+      ],
+      "weights_moving_towards_switch": 4904444
+    },
+    {
+      "adam_moments": {
+        "model.layers.0.self_attn.v_proj.qat_a.m": {
+          "maximum_absolute_value": 0.00820660125464201,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.0.self_attn.v_proj.qat_a.v": {
+          "maximum_absolute_value": 2.6726938813226297e-6,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.0.self_attn.v_proj.qat_b.m": {
+          "maximum_absolute_value": 0.02499913051724434,
+          "nonzero_values": 1280,
+          "values": 1280
+        },
+        "model.layers.0.self_attn.v_proj.qat_b.v": {
+          "maximum_absolute_value": 0.00002414133632555604,
+          "nonzero_values": 1280,
+          "values": 1280
+        }
+      },
+      "adapter_a": {
+        "changed_l2": 17.38922814475578,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.2559773027896881,
+        "maximum_absolute_value": 0.2744223475456238,
+        "values": 5120
+      },
+      "adapter_b": {
+        "changed_l2": 7.452404391940895,
+        "changed_values": 1280,
+        "maximum_absolute_change": 0.25765299797058105,
+        "maximum_absolute_value": 0.25765299797058105,
+        "values": 1280
+      },
+      "half_bin_width": 1.1484375,
+      "maximum_absolute_low_rank_update": 0.28129327789133285,
+      "maximum_absolute_update_over_scale": 0.12246782166697484,
+      "minimum_saved_update_gain_to_first_switch": 4.082705099137335,
+      "minimum_signed_threshold_margin_in_scale_units": 0.37753217833302516,
+      "official_scale": 2.296875,
+      "projection": "model.layers.0.self_attn.v_proj",
+      "shape": [
+        640,
+        2560
+      ],
+      "weights_moving_towards_switch": 1157754
+    },
+    {
+      "adam_moments": {
+        "model.layers.1.self_attn.q_proj.qat_a.m": {
+          "maximum_absolute_value": 0.007023942656815052,
+          "nonzero_values": 5110,
+          "values": 5120
+        },
+        "model.layers.1.self_attn.q_proj.qat_a.v": {
+          "maximum_absolute_value": 1.971015763047035e-6,
+          "nonzero_values": 5110,
+          "values": 5120
+        },
+        "model.layers.1.self_attn.q_proj.qat_b.m": {
+          "maximum_absolute_value": 0.011865392327308655,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.1.self_attn.q_proj.qat_b.v": {
+          "maximum_absolute_value": 5.819618309033103e-6,
+          "nonzero_values": 5120,
+          "values": 5120
+        }
+      },
+      "adapter_a": {
+        "changed_l2": 16.039109581136767,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.25718289613723755,
+        "maximum_absolute_value": 0.2725183069705963,
+        "values": 5120
+      },
+      "adapter_b": {
+        "changed_l2": 14.568945196434903,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.260135293006897,
+        "maximum_absolute_value": 0.260135293006897,
+        "values": 5120
+      },
+      "half_bin_width": 0.41796875,
+      "maximum_absolute_low_rank_update": 0.27331606662319885,
+      "maximum_absolute_update_over_scale": 0.3269575376427052,
+      "minimum_saved_update_gain_to_first_switch": 1.5292505675351438,
+      "minimum_signed_threshold_margin_in_scale_units": 0.1730424623572948,
+      "official_scale": 0.8359375,
+      "projection": "model.layers.1.self_attn.q_proj",
+      "shape": [
+        2560,
+        2560
+      ],
+      "weights_moving_towards_switch": 4723757
+    },
+    {
+      "adam_moments": {
+        "model.layers.1.self_attn.v_proj.qat_a.m": {
+          "maximum_absolute_value": 0.004569240380078554,
+          "nonzero_values": 5110,
+          "values": 5120
+        },
+        "model.layers.1.self_attn.v_proj.qat_a.v": {
+          "maximum_absolute_value": 7.642835839760664e-7,
+          "nonzero_values": 5110,
+          "values": 5120
+        },
+        "model.layers.1.self_attn.v_proj.qat_b.m": {
+          "maximum_absolute_value": 0.013560682535171509,
+          "nonzero_values": 1242,
+          "values": 1280
+        },
+        "model.layers.1.self_attn.v_proj.qat_b.v": {
+          "maximum_absolute_value": 7.312121852010023e-6,
+          "nonzero_values": 1242,
+          "values": 1280
+        }
+      },
+      "adapter_a": {
+        "changed_l2": 16.760315201858226,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.2642773985862732,
+        "maximum_absolute_value": 0.2812706232070923,
+        "values": 5120
+      },
+      "adapter_b": {
+        "changed_l2": 7.156264613126601,
+        "changed_values": 1242,
+        "maximum_absolute_change": 0.26814988255500793,
+        "maximum_absolute_value": 0.26814988255500793,
+        "values": 1280
+      },
+      "half_bin_width": 1.125,
+      "maximum_absolute_low_rank_update": 0.2912782806871981,
+      "maximum_absolute_update_over_scale": 0.1294570136387547,
+      "minimum_saved_update_gain_to_first_switch": 3.8622859121038635,
+      "minimum_signed_threshold_margin_in_scale_units": 0.3705429863612453,
+      "official_scale": 2.25,
+      "projection": "model.layers.1.self_attn.v_proj",
+      "shape": [
+        640,
+        2560
+      ],
+      "weights_moving_towards_switch": 1101477
+    },
+    {
+      "adam_moments": {
+        "model.layers.10.self_attn.q_proj.qat_a.m": {
+          "maximum_absolute_value": 0.0056578777730464935,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.10.self_attn.q_proj.qat_a.v": {
+          "maximum_absolute_value": 1.2414657248882577e-6,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.10.self_attn.q_proj.qat_b.m": {
+          "maximum_absolute_value": 0.011904982849955559,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.10.self_attn.q_proj.qat_b.v": {
+          "maximum_absolute_value": 6.09443077337346e-6,
+          "nonzero_values": 5120,
+          "values": 5120
+        }
+      },
+      "adapter_a": {
+        "changed_l2": 16.24014680493545,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.2586056888103485,
+        "maximum_absolute_value": 0.2759614586830139,
+        "values": 5120
+      },
+      "adapter_b": {
+        "changed_l2": 14.814914752083576,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.2595329284667969,
+        "maximum_absolute_value": 0.2595329284667969,
+        "values": 5120
+      },
+      "half_bin_width": 0.80078125,
+      "maximum_absolute_low_rank_update": 0.28263158103435515,
+      "maximum_absolute_update_over_scale": 0.17647240181657298,
+      "minimum_saved_update_gain_to_first_switch": 2.833304215577598,
+      "minimum_signed_threshold_margin_in_scale_units": 0.323527598183427,
+      "official_scale": 1.6015625,
+      "projection": "model.layers.10.self_attn.q_proj",
+      "shape": [
+        2560,
+        2560
+      ],
+      "weights_moving_towards_switch": 4889051
+    },
+    {
+      "adam_moments": {
+        "model.layers.10.self_attn.v_proj.qat_a.m": {
+          "maximum_absolute_value": 0.0016492888098582625,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.10.self_attn.v_proj.qat_a.v": {
+          "maximum_absolute_value": 1.1108548392257944e-7,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.10.self_attn.v_proj.qat_b.m": {
+          "maximum_absolute_value": 0.006079059559851885,
+          "nonzero_values": 1280,
+          "values": 1280
+        },
+        "model.layers.10.self_attn.v_proj.qat_b.v": {
+          "maximum_absolute_value": 1.4426492498387233e-6,
+          "nonzero_values": 1280,
+          "values": 1280
+        }
+      },
+      "adapter_a": {
+        "changed_l2": 16.576007706382004,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.25749632716178894,
+        "maximum_absolute_value": 0.27631086111068726,
+        "values": 5120
+      },
+      "adapter_b": {
+        "changed_l2": 7.314976912145166,
+        "changed_values": 1280,
+        "maximum_absolute_change": 0.26096460223197937,
+        "maximum_absolute_value": 0.26096460223197937,
+        "values": 1280
+      },
+      "half_bin_width": 1.9140625,
+      "maximum_absolute_low_rank_update": 0.2823119084639316,
+      "maximum_absolute_update_over_scale": 0.07374678425180255,
+      "minimum_saved_update_gain_to_first_switch": 6.809227202746883,
+      "minimum_signed_threshold_margin_in_scale_units": 0.4265702281459639,
+      "official_scale": 3.828125,
+      "projection": "model.layers.10.self_attn.v_proj",
+      "shape": [
+        640,
+        2560
+      ],
+      "weights_moving_towards_switch": 1123101
+    },
+    {
+      "adam_moments": {
+        "model.layers.11.self_attn.q_proj.qat_a.m": {
+          "maximum_absolute_value": 0.004141382873058319,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.11.self_attn.q_proj.qat_a.v": {
+          "maximum_absolute_value": 6.359599638017244e-7,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.11.self_attn.q_proj.qat_b.m": {
+          "maximum_absolute_value": 0.00562240369617939,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.11.self_attn.q_proj.qat_b.v": {
+          "maximum_absolute_value": 1.2174901939943084e-6,
+          "nonzero_values": 5120,
+          "values": 5120
+        }
+      },
+      "adapter_a": {
+        "changed_l2": 16.12618903399794,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.25953540205955505,
+        "maximum_absolute_value": 0.2762346863746643,
+        "values": 5120
+      },
+      "adapter_b": {
+        "changed_l2": 14.508012110144355,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.2636587917804718,
+        "maximum_absolute_value": 0.2636587917804718,
+        "values": 5120
+      },
+      "half_bin_width": 0.83984375,
+      "maximum_absolute_low_rank_update": 0.2798440666236477,
+      "maximum_absolute_update_over_scale": 0.1666048396643112,
+      "minimum_saved_update_gain_to_first_switch": 3.008763169647214,
+      "minimum_signed_threshold_margin_in_scale_units": 0.33381875813820655,
+      "official_scale": 1.6796875,
+      "projection": "model.layers.11.self_attn.q_proj",
+      "shape": [
+        2560,
+        2560
+      ],
+      "weights_moving_towards_switch": 4872684
+    },
+    {
+      "adam_moments": {
+        "model.layers.11.self_attn.v_proj.qat_a.m": {
+          "maximum_absolute_value": 0.0017671913374215364,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.11.self_attn.v_proj.qat_a.v": {
+          "maximum_absolute_value": 1.2372740343380428e-7,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.11.self_attn.v_proj.qat_b.m": {
+          "maximum_absolute_value": 0.007094634231179953,
+          "nonzero_values": 1280,
+          "values": 1280
+        },
+        "model.layers.11.self_attn.v_proj.qat_b.v": {
+          "maximum_absolute_value": 2.0626437162718503e-6,
+          "nonzero_values": 1280,
+          "values": 1280
+        }
+      },
+      "adapter_a": {
+        "changed_l2": 17.21589808483746,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.2570101022720337,
+        "maximum_absolute_value": 0.2751060128211975,
+        "values": 5120
+      },
+      "adapter_b": {
+        "changed_l2": 7.149773591316198,
+        "changed_values": 1280,
+        "maximum_absolute_change": 0.2572634220123291,
+        "maximum_absolute_value": 0.2572634220123291,
+        "values": 1280
+      },
+      "half_bin_width": 1.9921875,
+      "maximum_absolute_low_rank_update": 0.2812371213783784,
+      "maximum_absolute_update_over_scale": 0.07058500301261263,
+      "minimum_saved_update_gain_to_first_switch": 7.086514629385263,
+      "minimum_signed_threshold_margin_in_scale_units": 0.42944345335481604,
+      "official_scale": 3.984375,
+      "projection": "model.layers.11.self_attn.v_proj",
+      "shape": [
+        640,
+        2560
+      ],
+      "weights_moving_towards_switch": 1119423
+    },
+    {
+      "adam_moments": {
+        "model.layers.12.self_attn.q_proj.qat_a.m": {
+          "maximum_absolute_value": 0.0033059974666684866,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.12.self_attn.q_proj.qat_a.v": {
+          "maximum_absolute_value": 4.4157491174701136e-7,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.12.self_attn.q_proj.qat_b.m": {
+          "maximum_absolute_value": 0.007809865288436413,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.12.self_attn.q_proj.qat_b.v": {
+          "maximum_absolute_value": 2.344756239835988e-6,
+          "nonzero_values": 5120,
+          "values": 5120
+        }
+      },
+      "adapter_a": {
+        "changed_l2": 16.41474947415877,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.25951746106147766,
+        "maximum_absolute_value": 0.27627140283584595,
+        "values": 5120
+      },
+      "adapter_b": {
+        "changed_l2": 14.825128845705041,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.26202282309532166,
+        "maximum_absolute_value": 0.26202282309532166,
+        "values": 5120
+      },
+      "half_bin_width": 0.921875,
+      "maximum_absolute_low_rank_update": 0.28217545678237066,
+      "maximum_absolute_update_over_scale": 0.1530443155429807,
+      "minimum_saved_update_gain_to_first_switch": 3.2691577790795927,
+      "minimum_signed_threshold_margin_in_scale_units": 0.3470554088274163,
+      "official_scale": 1.84375,
+      "projection": "model.layers.12.self_attn.q_proj",
+      "shape": [
+        2560,
+        2560
+      ],
+      "weights_moving_towards_switch": 4859844
+    },
+    {
+      "adam_moments": {
+        "model.layers.12.self_attn.v_proj.qat_a.m": {
+          "maximum_absolute_value": 0.0020188551861792803,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.12.self_attn.v_proj.qat_a.v": {
+          "maximum_absolute_value": 1.5599729863424727e-7,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.12.self_attn.v_proj.qat_b.m": {
+          "maximum_absolute_value": 0.007355628069490194,
+          "nonzero_values": 1280,
+          "values": 1280
+        },
+        "model.layers.12.self_attn.v_proj.qat_b.v": {
+          "maximum_absolute_value": 2.082814944515121e-6,
+          "nonzero_values": 1280,
+          "values": 1280
+        }
+      },
+      "adapter_a": {
+        "changed_l2": 16.66979902632935,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.26104986667633057,
+        "maximum_absolute_value": 0.27862125635147095,
+        "values": 5120
+      },
+      "adapter_b": {
+        "changed_l2": 7.229345788366067,
+        "changed_values": 1280,
+        "maximum_absolute_change": 0.25956040620803833,
+        "maximum_absolute_value": 0.25956040620803833,
+        "values": 1280
+      },
+      "half_bin_width": 1.953125,
+      "maximum_absolute_low_rank_update": 0.2825294872402253,
+      "maximum_absolute_update_over_scale": 0.07232754873349768,
+      "minimum_saved_update_gain_to_first_switch": 6.91299523840258,
+      "minimum_signed_threshold_margin_in_scale_units": 0.42767245126650233,
+      "official_scale": 3.90625,
+      "projection": "model.layers.12.self_attn.v_proj",
+      "shape": [
+        640,
+        2560
+      ],
+      "weights_moving_towards_switch": 1121054
+    },
+    {
+      "adam_moments": {
+        "model.layers.13.self_attn.q_proj.qat_a.m": {
+          "maximum_absolute_value": 0.0036599610466510057,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.13.self_attn.q_proj.qat_a.v": {
+          "maximum_absolute_value": 5.250960839475738e-7,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.13.self_attn.q_proj.qat_b.m": {
+          "maximum_absolute_value": 0.004731855820864439,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.13.self_attn.q_proj.qat_b.v": {
+          "maximum_absolute_value": 8.991818276626873e-7,
+          "nonzero_values": 5120,
+          "values": 5120
+        }
+      },
+      "adapter_a": {
+        "changed_l2": 16.149564997560574,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.262943834066391,
+        "maximum_absolute_value": 0.27871832251548767,
+        "values": 5120
+      },
+      "adapter_b": {
+        "changed_l2": 14.524692780698508,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.26371926069259644,
+        "maximum_absolute_value": 0.26371926069259644,
+        "values": 5120
+      },
+      "half_bin_width": 0.8203125,
+      "maximum_absolute_low_rank_update": 0.2836087493219903,
+      "maximum_absolute_update_over_scale": 0.17286628530102266,
+      "minimum_saved_update_gain_to_first_switch": 2.8924090034636847,
+      "minimum_signed_threshold_margin_in_scale_units": 0.32713371469897734,
+      "official_scale": 1.640625,
+      "projection": "model.layers.13.self_attn.q_proj",
+      "shape": [
+        2560,
+        2560
+      ],
+      "weights_moving_towards_switch": 4741014
+    },
+    {
+      "adam_moments": {
+        "model.layers.13.self_attn.v_proj.qat_a.m": {
+          "maximum_absolute_value": 0.0017704861238598824,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.13.self_attn.v_proj.qat_a.v": {
+          "maximum_absolute_value": 1.2074370658865519e-7,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.13.self_attn.v_proj.qat_b.m": {
+          "maximum_absolute_value": 0.004890649113804102,
+          "nonzero_values": 1280,
+          "values": 1280
+        },
+        "model.layers.13.self_attn.v_proj.qat_b.v": {
+          "maximum_absolute_value": 8.44627891183336e-7,
+          "nonzero_values": 1280,
+          "values": 1280
+        }
+      },
+      "adapter_a": {
+        "changed_l2": 16.474972643837756,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.26509496569633484,
+        "maximum_absolute_value": 0.2797148823738098,
+        "values": 5120
+      },
+      "adapter_b": {
+        "changed_l2": 7.239397338177144,
+        "changed_values": 1280,
+        "maximum_absolute_change": 0.2648918032646179,
+        "maximum_absolute_value": 0.2648918032646179,
+        "values": 1280
+      },
+      "half_bin_width": 2.078125,
+      "maximum_absolute_low_rank_update": 0.2899763607163699,
+      "maximum_absolute_update_over_scale": 0.06976874844303636,
+      "minimum_saved_update_gain_to_first_switch": 7.187711101782205,
+      "minimum_signed_threshold_margin_in_scale_units": 0.43043682572661773,
+      "official_scale": 4.15625,
+      "projection": "model.layers.13.self_attn.v_proj",
+      "shape": [
+        640,
+        2560
+      ],
+      "weights_moving_towards_switch": 1117296
+    },
+    {
+      "adam_moments": {
+        "model.layers.14.self_attn.q_proj.qat_a.m": {
+          "maximum_absolute_value": 0.0019828774966299534,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.14.self_attn.q_proj.qat_a.v": {
+          "maximum_absolute_value": 1.5138729736463574e-7,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.14.self_attn.q_proj.qat_b.m": {
+          "maximum_absolute_value": 0.005435840226709843,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.14.self_attn.q_proj.qat_b.v": {
+          "maximum_absolute_value": 1.2412534715622314e-6,
+          "nonzero_values": 5120,
+          "values": 5120
+        }
+      },
+      "adapter_a": {
+        "changed_l2": 16.29154314939109,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.25709542632102966,
+        "maximum_absolute_value": 0.2755754888057709,
+        "values": 5120
+      },
+      "adapter_b": {
+        "changed_l2": 14.093721444389848,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.2593870162963867,
+        "maximum_absolute_value": 0.2593870162963867,
+        "values": 5120
+      },
+      "half_bin_width": 0.953125,
+      "maximum_absolute_low_rank_update": 0.2798091705191652,
+      "maximum_absolute_update_over_scale": 0.14678513863300469,
+      "minimum_saved_update_gain_to_first_switch": 3.4063393927781105,
+      "minimum_signed_threshold_margin_in_scale_units": 0.3532148613669953,
+      "official_scale": 1.90625,
+      "projection": "model.layers.14.self_attn.q_proj",
+      "shape": [
+        2560,
+        2560
+      ],
+      "weights_moving_towards_switch": 4947205
+    },
+    {
+      "adam_moments": {
+        "model.layers.14.self_attn.v_proj.qat_a.m": {
+          "maximum_absolute_value": 0.00192225631326437,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.14.self_attn.v_proj.qat_a.v": {
+          "maximum_absolute_value": 1.501493045452662e-7,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.14.self_attn.v_proj.qat_b.m": {
+          "maximum_absolute_value": 0.0032272611279040575,
+          "nonzero_values": 1280,
+          "values": 1280
+        },
+        "model.layers.14.self_attn.v_proj.qat_b.v": {
+          "maximum_absolute_value": 3.960339540753921e-7,
+          "nonzero_values": 1280,
+          "values": 1280
+        }
+      },
+      "adapter_a": {
+        "changed_l2": 16.853292485030703,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.2610377073287964,
+        "maximum_absolute_value": 0.2791895568370819,
+        "values": 5120
+      },
+      "adapter_b": {
+        "changed_l2": 7.284260979478258,
+        "changed_values": 1280,
+        "maximum_absolute_change": 0.2647359073162079,
+        "maximum_absolute_value": 0.2647359073162079,
+        "values": 1280
+      },
+      "half_bin_width": 2.109375,
+      "maximum_absolute_low_rank_update": 0.2854338962670564,
+      "maximum_absolute_update_over_scale": 0.06765840504108003,
+      "minimum_saved_update_gain_to_first_switch": 7.39006483668091,
+      "minimum_signed_threshold_margin_in_scale_units": 0.43234159495892,
+      "official_scale": 4.21875,
+      "projection": "model.layers.14.self_attn.v_proj",
+      "shape": [
+        640,
+        2560
+      ],
+      "weights_moving_towards_switch": 1123979
+    },
+    {
+      "adam_moments": {
+        "model.layers.15.self_attn.q_proj.qat_a.m": {
+          "maximum_absolute_value": 0.0039522685110569,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.15.self_attn.q_proj.qat_a.v": {
+          "maximum_absolute_value": 6.56796942166693e-7,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.15.self_attn.q_proj.qat_b.m": {
+          "maximum_absolute_value": 0.006946760695427656,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.15.self_attn.q_proj.qat_b.v": {
+          "maximum_absolute_value": 1.9603637610998703e-6,
+          "nonzero_values": 5120,
+          "values": 5120
+        }
+      },
+      "adapter_a": {
+        "changed_l2": 15.975270153733344,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.25587591528892517,
+        "maximum_absolute_value": 0.2729107439517975,
+        "values": 5120
+      },
+      "adapter_b": {
+        "changed_l2": 15.11858188410611,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.25974851846694946,
+        "maximum_absolute_value": 0.25974851846694946,
+        "values": 5120
+      },
+      "half_bin_width": 0.83984375,
+      "maximum_absolute_low_rank_update": 0.27715769730637874,
+      "maximum_absolute_update_over_scale": 0.16500551281496037,
+      "minimum_saved_update_gain_to_first_switch": 3.0448908583170327,
+      "minimum_signed_threshold_margin_in_scale_units": 0.335790501773072,
+      "official_scale": 1.6796875,
+      "projection": "model.layers.15.self_attn.q_proj",
+      "shape": [
+        2560,
+        2560
+      ],
+      "weights_moving_towards_switch": 4771157
+    },
+    {
+      "adam_moments": {
+        "model.layers.15.self_attn.v_proj.qat_a.m": {
+          "maximum_absolute_value": 0.0019573532044887543,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.15.self_attn.v_proj.qat_a.v": {
+          "maximum_absolute_value": 1.3938952747594158e-7,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.15.self_attn.v_proj.qat_b.m": {
+          "maximum_absolute_value": 0.00351091381162405,
+          "nonzero_values": 1280,
+          "values": 1280
+        },
+        "model.layers.15.self_attn.v_proj.qat_b.v": {
+          "maximum_absolute_value": 4.406950040447555e-7,
+          "nonzero_values": 1280,
+          "values": 1280
+        }
+      },
+      "adapter_a": {
+        "changed_l2": 16.5875833299248,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.25863000750541687,
+        "maximum_absolute_value": 0.27659034729003906,
+        "values": 5120
+      },
+      "adapter_b": {
+        "changed_l2": 7.3663165457220385,
+        "changed_values": 1280,
+        "maximum_absolute_change": 0.26080426573753357,
+        "maximum_absolute_value": 0.26080426573753357,
+        "values": 1280
+      },
+      "half_bin_width": 2.25,
+      "maximum_absolute_low_rank_update": 0.2849365463971978,
+      "maximum_absolute_update_over_scale": 0.06331923253271061,
+      "minimum_saved_update_gain_to_first_switch": 7.8964949510672096,
+      "minimum_signed_threshold_margin_in_scale_units": 0.4366807674672894,
+      "official_scale": 4.5,
+      "projection": "model.layers.15.self_attn.v_proj",
+      "shape": [
+        640,
+        2560
+      ],
+      "weights_moving_towards_switch": 1116349
+    },
+    {
+      "adam_moments": {
+        "model.layers.16.self_attn.q_proj.qat_a.m": {
+          "maximum_absolute_value": 0.002584854606539011,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.16.self_attn.q_proj.qat_a.v": {
+          "maximum_absolute_value": 2.722020440160122e-7,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.16.self_attn.q_proj.qat_b.m": {
+          "maximum_absolute_value": 0.005576515104621649,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.16.self_attn.q_proj.qat_b.v": {
+          "maximum_absolute_value": 1.2807602161046816e-6,
+          "nonzero_values": 5120,
+          "values": 5120
+        }
+      },
+      "adapter_a": {
+        "changed_l2": 16.112591573530235,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.25527650117874146,
+        "maximum_absolute_value": 0.2737237811088562,
+        "values": 5120
+      },
+      "adapter_b": {
+        "changed_l2": 14.884565153466152,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.26068606972694397,
+        "maximum_absolute_value": 0.26068606972694397,
+        "values": 5120
+      },
+      "half_bin_width": 1.015625,
+      "maximum_absolute_low_rank_update": 0.2780843892849756,
+      "maximum_absolute_update_over_scale": 0.1369030839556803,
+      "minimum_saved_update_gain_to_first_switch": 3.6584687530021576,
+      "minimum_signed_threshold_margin_in_scale_units": 0.363330799370721,
+      "official_scale": 2.03125,
+      "projection": "model.layers.16.self_attn.q_proj",
+      "shape": [
+        2560,
+        2560
+      ],
+      "weights_moving_towards_switch": 4835974
+    },
+    {
+      "adam_moments": {
+        "model.layers.16.self_attn.v_proj.qat_a.m": {
+          "maximum_absolute_value": 0.001942191505804658,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.16.self_attn.v_proj.qat_a.v": {
+          "maximum_absolute_value": 1.4585413055101526e-7,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.16.self_attn.v_proj.qat_b.m": {
+          "maximum_absolute_value": 0.00305201206356287,
+          "nonzero_values": 1280,
+          "values": 1280
+        },
+        "model.layers.16.self_attn.v_proj.qat_b.v": {
+          "maximum_absolute_value": 3.3610638183745323e-7,
+          "nonzero_values": 1280,
+          "values": 1280
+        }
+      },
+      "adapter_a": {
+        "changed_l2": 16.597069343395,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.26125484704971313,
+        "maximum_absolute_value": 0.27852562069892883,
+        "values": 5120
+      },
+      "adapter_b": {
+        "changed_l2": 7.35901275297689,
+        "changed_values": 1280,
+        "maximum_absolute_change": 0.2630256712436676,
+        "maximum_absolute_value": 0.2630256712436676,
+        "values": 1280
+      },
+      "half_bin_width": 2.140625,
+      "maximum_absolute_low_rank_update": 0.2884033307637903,
+      "maximum_absolute_update_over_scale": 0.0673642816382576,
+      "minimum_saved_update_gain_to_first_switch": 7.422331060916999,
+      "minimum_signed_threshold_margin_in_scale_units": 0.4326357183617424,
+      "official_scale": 4.28125,
+      "projection": "model.layers.16.self_attn.v_proj",
+      "shape": [
+        640,
+        2560
+      ],
+      "weights_moving_towards_switch": 1123974
+    },
+    {
+      "adam_moments": {
+        "model.layers.17.self_attn.q_proj.qat_a.m": {
+          "maximum_absolute_value": 0.005205159541219473,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.17.self_attn.q_proj.qat_a.v": {
+          "maximum_absolute_value": 1.047496652972768e-6,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.17.self_attn.q_proj.qat_b.m": {
+          "maximum_absolute_value": 0.0086258789524436,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.17.self_attn.q_proj.qat_b.v": {
+          "maximum_absolute_value": 2.9023444767517503e-6,
+          "nonzero_values": 5120,
+          "values": 5120
+        }
+      },
+      "adapter_a": {
+        "changed_l2": 16.18044452817479,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.25491568446159363,
+        "maximum_absolute_value": 0.2739780843257904,
+        "values": 5120
+      },
+      "adapter_b": {
+        "changed_l2": 14.85545452532734,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.2589246928691864,
+        "maximum_absolute_value": 0.2589246928691864,
+        "values": 5120
+      },
+      "half_bin_width": 0.96484375,
+      "maximum_absolute_low_rank_update": 0.27956441104028684,
+      "maximum_absolute_update_over_scale": 0.14487548426379238,
+      "minimum_saved_update_gain_to_first_switch": 3.4512395422926723,
+      "minimum_signed_threshold_margin_in_scale_units": 0.3551245157362076,
+      "official_scale": 1.9296875,
+      "projection": "model.layers.17.self_attn.q_proj",
+      "shape": [
+        2560,
+        2560
+      ],
+      "weights_moving_towards_switch": 4892651
+    },
+    {
+      "adam_moments": {
+        "model.layers.17.self_attn.v_proj.qat_a.m": {
+          "maximum_absolute_value": 0.0017302010674029589,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.17.self_attn.v_proj.qat_a.v": {
+          "maximum_absolute_value": 1.1163531610236532e-7,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.17.self_attn.v_proj.qat_b.m": {
+          "maximum_absolute_value": 0.005754904821515083,
+          "nonzero_values": 1280,
+          "values": 1280
+        },
+        "model.layers.17.self_attn.v_proj.qat_b.v": {
+          "maximum_absolute_value": 1.2974884384675534e-6,
+          "nonzero_values": 1280,
+          "values": 1280
+        }
+      },
+      "adapter_a": {
+        "changed_l2": 17.022727737141196,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.2604089677333832,
+        "maximum_absolute_value": 0.2769046723842621,
+        "values": 5120
+      },
+      "adapter_b": {
+        "changed_l2": 7.192434018097675,
+        "changed_values": 1280,
+        "maximum_absolute_change": 0.2639927268028259,
+        "maximum_absolute_value": 0.2639927268028259,
+        "values": 1280
+      },
+      "half_bin_width": 2.296875,
+      "maximum_absolute_low_rank_update": 0.282807794749262,
+      "maximum_absolute_update_over_scale": 0.061563601578070636,
+      "minimum_saved_update_gain_to_first_switch": 8.122213333807782,
+      "minimum_signed_threshold_margin_in_scale_units": 0.4384404251093963,
+      "official_scale": 4.59375,
+      "projection": "model.layers.17.self_attn.v_proj",
+      "shape": [
+        640,
+        2560
+      ],
+      "weights_moving_towards_switch": 1119796
+    },
+    {
+      "adam_moments": {
+        "model.layers.18.self_attn.q_proj.qat_a.m": {
+          "maximum_absolute_value": 0.0037297308444976807,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.18.self_attn.q_proj.qat_a.v": {
+          "maximum_absolute_value": 5.407317757999408e-7,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.18.self_attn.q_proj.qat_b.m": {
+          "maximum_absolute_value": 0.004764197859913111,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.18.self_attn.q_proj.qat_b.v": {
+          "maximum_absolute_value": 8.566158271605673e-7,
+          "nonzero_values": 5120,
+          "values": 5120
+        }
+      },
+      "adapter_a": {
+        "changed_l2": 16.396515376258495,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.2579675316810608,
+        "maximum_absolute_value": 0.27544084191322327,
+        "values": 5120
+      },
+      "adapter_b": {
+        "changed_l2": 15.338629041747465,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.2663607895374298,
+        "maximum_absolute_value": 0.2663607895374298,
+        "values": 5120
+      },
+      "half_bin_width": 0.8359375,
+      "maximum_absolute_low_rank_update": 0.28618714991279326,
+      "maximum_absolute_update_over_scale": 0.17117736069550252,
+      "minimum_saved_update_gain_to_first_switch": 2.920947010565381,
+      "minimum_signed_threshold_margin_in_scale_units": 0.3288226393044975,
+      "official_scale": 1.671875,
+      "projection": "model.layers.18.self_attn.q_proj",
+      "shape": [
+        2560,
+        2560
+      ],
+      "weights_moving_towards_switch": 4834048
+    },
+    {
+      "adam_moments": {
+        "model.layers.18.self_attn.v_proj.qat_a.m": {
+          "maximum_absolute_value": 0.0018704363610595465,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.18.self_attn.v_proj.qat_a.v": {
+          "maximum_absolute_value": 1.3895754591430887e-7,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.18.self_attn.v_proj.qat_b.m": {
+          "maximum_absolute_value": 0.003460079664364457,
+          "nonzero_values": 1280,
+          "values": 1280
+        },
+        "model.layers.18.self_attn.v_proj.qat_b.v": {
+          "maximum_absolute_value": 4.729248246349016e-7,
+          "nonzero_values": 1280,
+          "values": 1280
+        }
+      },
+      "adapter_a": {
+        "changed_l2": 17.204038555165393,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.2567605972290039,
+        "maximum_absolute_value": 0.2751128673553467,
+        "values": 5120
+      },
+      "adapter_b": {
+        "changed_l2": 7.231564082906909,
+        "changed_values": 1280,
+        "maximum_absolute_change": 0.2573990821838379,
+        "maximum_absolute_value": 0.2573990821838379,
+        "values": 1280
+      },
+      "half_bin_width": 2.171875,
+      "maximum_absolute_low_rank_update": 0.28162866392760044,
+      "maximum_absolute_update_over_scale": 0.06483537586822456,
+      "minimum_saved_update_gain_to_first_switch": 7.720554841195155,
+      "minimum_signed_threshold_margin_in_scale_units": 0.435237815120215,
+      "official_scale": 4.34375,
+      "projection": "model.layers.18.self_attn.v_proj",
+      "shape": [
+        640,
+        2560
+      ],
+      "weights_moving_towards_switch": 1116928
+    },
+    {
+      "adam_moments": {
+        "model.layers.19.self_attn.q_proj.qat_a.m": {
+          "maximum_absolute_value": 0.0038978224620223045,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.19.self_attn.q_proj.qat_a.v": {
+          "maximum_absolute_value": 5.906839533054153e-7,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.19.self_attn.q_proj.qat_b.m": {
+          "maximum_absolute_value": 0.00998278521001339,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.19.self_attn.q_proj.qat_b.v": {
+          "maximum_absolute_value": 3.888066203217022e-6,
+          "nonzero_values": 5120,
+          "values": 5120
+        }
+      },
+      "adapter_a": {
+        "changed_l2": 16.3516686466912,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.2611036002635956,
+        "maximum_absolute_value": 0.27913349866867065,
+        "values": 5120
+      },
+      "adapter_b": {
+        "changed_l2": 14.678853626600691,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.2673020362854004,
+        "maximum_absolute_value": 0.2673020362854004,
+        "values": 5120
+      },
+      "half_bin_width": 0.8125,
+      "maximum_absolute_low_rank_update": 0.28738808317879005,
+      "maximum_absolute_update_over_scale": 0.17685420503310156,
+      "minimum_saved_update_gain_to_first_switch": 2.8271875124847363,
+      "minimum_signed_threshold_margin_in_scale_units": 0.32314579496689844,
+      "official_scale": 1.625,
+      "projection": "model.layers.19.self_attn.q_proj",
+      "shape": [
+        2560,
+        2560
+      ],
+      "weights_moving_towards_switch": 4738756
+    },
+    {
+      "adam_moments": {
+        "model.layers.19.self_attn.v_proj.qat_a.m": {
+          "maximum_absolute_value": 0.0016438812017440796,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.19.self_attn.v_proj.qat_a.v": {
+          "maximum_absolute_value": 1.0737877431665765e-7,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.19.self_attn.v_proj.qat_b.m": {
+          "maximum_absolute_value": 0.006625039968639612,
+          "nonzero_values": 1280,
+          "values": 1280
+        },
+        "model.layers.19.self_attn.v_proj.qat_b.v": {
+          "maximum_absolute_value": 1.691765305622539e-6,
+          "nonzero_values": 1280,
+          "values": 1280
+        }
+      },
+      "adapter_a": {
+        "changed_l2": 16.85804678626137,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.2573091983795166,
+        "maximum_absolute_value": 0.2747912108898163,
+        "values": 5120
+      },
+      "adapter_b": {
+        "changed_l2": 7.2141031926330035,
+        "changed_values": 1280,
+        "maximum_absolute_change": 0.25807464122772217,
+        "maximum_absolute_value": 0.25807464122772217,
+        "values": 1280
+      },
+      "half_bin_width": 2.234375,
+      "maximum_absolute_low_rank_update": 0.28085346232394315,
+      "maximum_absolute_update_over_scale": 0.06284832723332993,
+      "minimum_saved_update_gain_to_first_switch": 7.955661224581301,
+      "minimum_signed_threshold_margin_in_scale_units": 0.43715167276667005,
+      "official_scale": 4.46875,
+      "projection": "model.layers.19.self_attn.v_proj",
+      "shape": [
+        640,
+        2560
+      ],
+      "weights_moving_towards_switch": 1115256
+    },
+    {
+      "adam_moments": {
+        "model.layers.2.self_attn.q_proj.qat_a.m": {
+          "maximum_absolute_value": 0.01107971090823412,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.2.self_attn.q_proj.qat_a.v": {
+          "maximum_absolute_value": 4.409972007124452e-6,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.2.self_attn.q_proj.qat_b.m": {
+          "maximum_absolute_value": 0.010712970979511738,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.2.self_attn.q_proj.qat_b.v": {
+          "maximum_absolute_value": 4.756262114824494e-6,
+          "nonzero_values": 5120,
+          "values": 5120
+        }
+      },
+      "adapter_a": {
+        "changed_l2": 16.635568215857784,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.2631951868534088,
+        "maximum_absolute_value": 0.2817350924015045,
+        "values": 5120
+      },
+      "adapter_b": {
+        "changed_l2": 15.330241718375117,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.2627161741256714,
+        "maximum_absolute_value": 0.2627161741256714,
+        "values": 5120
+      },
+      "half_bin_width": 0.498046875,
+      "maximum_absolute_low_rank_update": 0.28520959712067295,
+      "maximum_absolute_update_over_scale": 0.2863280661289893,
+      "minimum_saved_update_gain_to_first_switch": 1.7462486537200044,
+      "minimum_signed_threshold_margin_in_scale_units": 0.2136719338710107,
+      "official_scale": 0.99609375,
+      "projection": "model.layers.2.self_attn.q_proj",
+      "shape": [
+        2560,
+        2560
+      ],
+      "weights_moving_towards_switch": 4651663
+    },
+    {
+      "adam_moments": {
+        "model.layers.2.self_attn.v_proj.qat_a.m": {
+          "maximum_absolute_value": 0.003456998849287629,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.2.self_attn.v_proj.qat_a.v": {
+          "maximum_absolute_value": 4.688178592004988e-7,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.2.self_attn.v_proj.qat_b.m": {
+          "maximum_absolute_value": 0.00904717668890953,
+          "nonzero_values": 1280,
+          "values": 1280
+        },
+        "model.layers.2.self_attn.v_proj.qat_b.v": {
+          "maximum_absolute_value": 3.139977707178332e-6,
+          "nonzero_values": 1280,
+          "values": 1280
+        }
+      },
+      "adapter_a": {
+        "changed_l2": 17.19713858395438,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.2628311514854431,
+        "maximum_absolute_value": 0.27818188071250916,
+        "values": 5120
+      },
+      "adapter_b": {
+        "changed_l2": 7.744465155337537,
+        "changed_values": 1280,
+        "maximum_absolute_change": 0.26287248730659485,
+        "maximum_absolute_value": 0.26287248730659485,
+        "values": 1280
+      },
+      "half_bin_width": 1.3515625,
+      "maximum_absolute_low_rank_update": 0.28364479294942235,
+      "maximum_absolute_update_over_scale": 0.10493217773851463,
+      "minimum_saved_update_gain_to_first_switch": 4.7652773668626285,
+      "minimum_signed_threshold_margin_in_scale_units": 0.39507431330714105,
+      "official_scale": 2.703125,
+      "projection": "model.layers.2.self_attn.v_proj",
+      "shape": [
+        640,
+        2560
+      ],
+      "weights_moving_towards_switch": 1116775
+    },
+    {
+      "adam_moments": {
+        "model.layers.20.self_attn.q_proj.qat_a.m": {
+          "maximum_absolute_value": 0.0028734926600009203,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.20.self_attn.q_proj.qat_a.v": {
+          "maximum_absolute_value": 3.192487838532543e-7,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.20.self_attn.q_proj.qat_b.m": {
+          "maximum_absolute_value": 0.009765437804162502,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.20.self_attn.q_proj.qat_b.v": {
+          "maximum_absolute_value": 3.976031621277798e-6,
+          "nonzero_values": 5120,
+          "values": 5120
+        }
+      },
+      "adapter_a": {
+        "changed_l2": 15.881674163260795,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.26412665843963623,
+        "maximum_absolute_value": 0.27943870425224304,
+        "values": 5120
+      },
+      "adapter_b": {
+        "changed_l2": 14.56709598935353,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.2698912024497986,
+        "maximum_absolute_value": 0.2698912024497986,
+        "values": 5120
+      },
+      "half_bin_width": 0.921875,
+      "maximum_absolute_low_rank_update": 0.28826814654983224,
+      "maximum_absolute_update_over_scale": 0.15634882524736662,
+      "minimum_saved_update_gain_to_first_switch": 3.1979773382302494,
+      "minimum_signed_threshold_margin_in_scale_units": 0.3436511747526334,
+      "official_scale": 1.84375,
+      "projection": "model.layers.20.self_attn.q_proj",
+      "shape": [
+        2560,
+        2560
+      ],
+      "weights_moving_towards_switch": 4906978
+    },
+    {
+      "adam_moments": {
+        "model.layers.20.self_attn.v_proj.qat_a.m": {
+          "maximum_absolute_value": 0.0026273068506270647,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.20.self_attn.v_proj.qat_a.v": {
+          "maximum_absolute_value": 2.6007637643488124e-7,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.20.self_attn.v_proj.qat_b.m": {
+          "maximum_absolute_value": 0.004115178715437651,
+          "nonzero_values": 1280,
+          "values": 1280
+        },
+        "model.layers.20.self_attn.v_proj.qat_b.v": {
+          "maximum_absolute_value": 6.214886525413021e-7,
+          "nonzero_values": 1280,
+          "values": 1280
+        }
+      },
+      "adapter_a": {
+        "changed_l2": 17.024514610199265,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.2567342519760132,
+        "maximum_absolute_value": 0.2764427661895752,
+        "values": 5120
+      },
+      "adapter_b": {
+        "changed_l2": 7.652926014419502,
+        "changed_values": 1280,
+        "maximum_absolute_change": 0.2615545392036438,
+        "maximum_absolute_value": 0.2615545392036438,
+        "values": 1280
+      },
+      "half_bin_width": 1.9765625,
+      "maximum_absolute_low_rank_update": 0.2841690305025022,
+      "maximum_absolute_update_over_scale": 0.07188465593739186,
+      "minimum_saved_update_gain_to_first_switch": 6.95558730134949,
+      "minimum_signed_threshold_margin_in_scale_units": 0.42811534406260815,
+      "official_scale": 3.953125,
+      "projection": "model.layers.20.self_attn.v_proj",
+      "shape": [
+        640,
+        2560
+      ],
+      "weights_moving_towards_switch": 1130156
+    },
+    {
+      "adam_moments": {
+        "model.layers.21.self_attn.q_proj.qat_a.m": {
+          "maximum_absolute_value": 0.004314663354307413,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.21.self_attn.q_proj.qat_a.v": {
+          "maximum_absolute_value": 7.433547466462187e-7,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.21.self_attn.q_proj.qat_b.m": {
+          "maximum_absolute_value": 0.014058283530175686,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.21.self_attn.q_proj.qat_b.v": {
+          "maximum_absolute_value": 7.943343007354997e-6,
+          "nonzero_values": 5120,
+          "values": 5120
+        }
+      },
+      "adapter_a": {
+        "changed_l2": 16.009323436311433,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.26317742466926575,
+        "maximum_absolute_value": 0.2791576087474823,
+        "values": 5120
+      },
+      "adapter_b": {
+        "changed_l2": 14.875052133941253,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.26974454522132874,
+        "maximum_absolute_value": 0.26974454522132874,
+        "values": 5120
+      },
+      "half_bin_width": 0.82421875,
+      "maximum_absolute_low_rank_update": 0.28703917265150913,
+      "maximum_absolute_update_over_scale": 0.17412802890707663,
+      "minimum_saved_update_gain_to_first_switch": 2.876573570433608,
+      "minimum_signed_threshold_margin_in_scale_units": 0.32618209207677895,
+      "official_scale": 1.6484375,
+      "projection": "model.layers.21.self_attn.q_proj",
+      "shape": [
+        2560,
+        2560
+      ],
+      "weights_moving_towards_switch": 4898111
+    },
+    {
+      "adam_moments": {
+        "model.layers.21.self_attn.v_proj.qat_a.m": {
+          "maximum_absolute_value": 0.0018559056334197521,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.21.self_attn.v_proj.qat_a.v": {
+          "maximum_absolute_value": 1.3903490980737843e-7,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.21.self_attn.v_proj.qat_b.m": {
+          "maximum_absolute_value": 0.0031050725374370813,
+          "nonzero_values": 1280,
+          "values": 1280
+        },
+        "model.layers.21.self_attn.v_proj.qat_b.v": {
+          "maximum_absolute_value": 3.7224739912744553e-7,
+          "nonzero_values": 1280,
+          "values": 1280
+        }
+      },
+      "adapter_a": {
+        "changed_l2": 17.532543959723952,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.2561018466949463,
+        "maximum_absolute_value": 0.2747500538825989,
+        "values": 5120
+      },
+      "adapter_b": {
+        "changed_l2": 7.959591212896117,
+        "changed_values": 1280,
+        "maximum_absolute_change": 0.2583540081977844,
+        "maximum_absolute_value": 0.2583540081977844,
+        "values": 1280
+      },
+      "half_bin_width": 1.9140625,
+      "maximum_absolute_low_rank_update": 0.2806987759790225,
+      "maximum_absolute_update_over_scale": 0.07332539454145894,
+      "minimum_saved_update_gain_to_first_switch": 6.818920008910348,
+      "minimum_signed_threshold_margin_in_scale_units": 0.4266746054585411,
+      "official_scale": 3.828125,
+      "projection": "model.layers.21.self_attn.v_proj",
+      "shape": [
+        640,
+        2560
+      ],
+      "weights_moving_towards_switch": 1133947
+    },
+    {
+      "adam_moments": {
+        "model.layers.22.self_attn.q_proj.qat_a.m": {
+          "maximum_absolute_value": 0.004700453951954842,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.22.self_attn.q_proj.qat_a.v": {
+          "maximum_absolute_value": 8.538818860870379e-7,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.22.self_attn.q_proj.qat_b.m": {
+          "maximum_absolute_value": 0.022554656490683556,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.22.self_attn.q_proj.qat_b.v": {
+          "maximum_absolute_value": 0.000019608492948464118,
+          "nonzero_values": 5120,
+          "values": 5120
+        }
+      },
+      "adapter_a": {
+        "changed_l2": 16.508763460041223,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.2568618059158325,
+        "maximum_absolute_value": 0.27540484070777893,
+        "values": 5120
+      },
+      "adapter_b": {
+        "changed_l2": 13.947806620548874,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.26037517189979553,
+        "maximum_absolute_value": 0.26037517189979553,
+        "values": 5120
+      },
+      "half_bin_width": 0.765625,
+      "maximum_absolute_low_rank_update": 0.2829239905076495,
+      "maximum_absolute_update_over_scale": 0.18476668767846496,
+      "minimum_saved_update_gain_to_first_switch": 2.7061155140157673,
+      "minimum_signed_threshold_margin_in_scale_units": 0.31523331232153506,
+      "official_scale": 1.53125,
+      "projection": "model.layers.22.self_attn.q_proj",
+      "shape": [
+        2560,
+        2560
+      ],
+      "weights_moving_towards_switch": 4810587
+    },
+    {
+      "adam_moments": {
+        "model.layers.22.self_attn.v_proj.qat_a.m": {
+          "maximum_absolute_value": 0.002010432304814458,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.22.self_attn.v_proj.qat_a.v": {
+          "maximum_absolute_value": 1.5794041985373042e-7,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.22.self_attn.v_proj.qat_b.m": {
+          "maximum_absolute_value": 0.004801182541996241,
+          "nonzero_values": 1280,
+          "values": 1280
+        },
+        "model.layers.22.self_attn.v_proj.qat_b.v": {
+          "maximum_absolute_value": 9.37114862153976e-7,
+          "nonzero_values": 1280,
+          "values": 1280
+        }
+      },
+      "adapter_a": {
+        "changed_l2": 17.433989603371653,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.2552129626274109,
+        "maximum_absolute_value": 0.27347517013549805,
+        "values": 5120
+      },
+      "adapter_b": {
+        "changed_l2": 7.335368362794558,
+        "changed_values": 1280,
+        "maximum_absolute_change": 0.2573617398738861,
+        "maximum_absolute_value": 0.2573617398738861,
+        "values": 1280
+      },
+      "half_bin_width": 1.984375,
+      "maximum_absolute_low_rank_update": 0.2800820748839534,
+      "maximum_absolute_update_over_scale": 0.07057186138808275,
+      "minimum_saved_update_gain_to_first_switch": 7.084976790543227,
+      "minimum_signed_threshold_margin_in_scale_units": 0.42942813861191725,
+      "official_scale": 3.96875,
+      "projection": "model.layers.22.self_attn.v_proj",
+      "shape": [
+        640,
+        2560
+      ],
+      "weights_moving_towards_switch": 1120051
+    },
+    {
+      "adam_moments": {
+        "model.layers.23.self_attn.q_proj.qat_a.m": {
+          "maximum_absolute_value": 0.0062055629678070545,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.23.self_attn.q_proj.qat_a.v": {
+          "maximum_absolute_value": 1.413626932844636e-6,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.23.self_attn.q_proj.qat_b.m": {
+          "maximum_absolute_value": 0.010213881731033325,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.23.self_attn.q_proj.qat_b.v": {
+          "maximum_absolute_value": 4.019504558527842e-6,
+          "nonzero_values": 5120,
+          "values": 5120
+        }
+      },
+      "adapter_a": {
+        "changed_l2": 16.147419654678377,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.2602058947086334,
+        "maximum_absolute_value": 0.277241587638855,
+        "values": 5120
+      },
+      "adapter_b": {
+        "changed_l2": 14.892814828181315,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.26522234082221985,
+        "maximum_absolute_value": 0.26522234082221985,
+        "values": 5120
+      },
+      "half_bin_width": 0.84765625,
+      "maximum_absolute_low_rank_update": 0.28739388344487793,
+      "maximum_absolute_update_over_scale": 0.16952265935919067,
+      "minimum_saved_update_gain_to_first_switch": 2.9494582133741907,
+      "minimum_signed_threshold_margin_in_scale_units": 0.33047734064080936,
+      "official_scale": 1.6953125,
+      "projection": "model.layers.23.self_attn.q_proj",
+      "shape": [
+        2560,
+        2560
+      ],
+      "weights_moving_towards_switch": 4893587
+    },
+    {
+      "adam_moments": {
+        "model.layers.23.self_attn.v_proj.qat_a.m": {
+          "maximum_absolute_value": 0.0031829269137233496,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.23.self_attn.v_proj.qat_a.v": {
+          "maximum_absolute_value": 3.966181054693152e-7,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.23.self_attn.v_proj.qat_b.m": {
+          "maximum_absolute_value": 0.008157358504831791,
+          "nonzero_values": 1280,
+          "values": 1280
+        },
+        "model.layers.23.self_attn.v_proj.qat_b.v": {
+          "maximum_absolute_value": 2.6373579657956725e-6,
+          "nonzero_values": 1280,
+          "values": 1280
+        }
+      },
+      "adapter_a": {
+        "changed_l2": 17.516817600383515,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.25654855370521545,
+        "maximum_absolute_value": 0.2752147316932678,
+        "values": 5120
+      },
+      "adapter_b": {
+        "changed_l2": 7.701467116410113,
+        "changed_values": 1280,
+        "maximum_absolute_change": 0.25875890254974365,
+        "maximum_absolute_value": 0.25875890254974365,
+        "values": 1280
+      },
+      "half_bin_width": 1.8515625,
+      "maximum_absolute_low_rank_update": 0.2818220034330601,
+      "maximum_absolute_update_over_scale": 0.07610383215069977,
+      "minimum_saved_update_gain_to_first_switch": 6.576050094396641,
+      "minimum_signed_threshold_margin_in_scale_units": 0.4239665159445724,
+      "official_scale": 3.703125,
+      "projection": "model.layers.23.self_attn.v_proj",
+      "shape": [
+        640,
+        2560
+      ],
+      "weights_moving_towards_switch": 1126093
+    },
+    {
+      "adam_moments": {
+        "model.layers.24.self_attn.q_proj.qat_a.m": {
+          "maximum_absolute_value": 0.010902761481702328,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.24.self_attn.q_proj.qat_a.v": {
+          "maximum_absolute_value": 4.795392669620924e-6,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.24.self_attn.q_proj.qat_b.m": {
+          "maximum_absolute_value": 0.044315725564956665,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.24.self_attn.q_proj.qat_b.v": {
+          "maximum_absolute_value": 0.00007981379167176783,
+          "nonzero_values": 5120,
+          "values": 5120
+        }
+      },
+      "adapter_a": {
+        "changed_l2": 16.884180893208494,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.254764586687088,
+        "maximum_absolute_value": 0.27331361174583435,
+        "values": 5120
+      },
+      "adapter_b": {
+        "changed_l2": 14.357968392368152,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.25798216462135315,
+        "maximum_absolute_value": 0.25798216462135315,
+        "values": 5120
+      },
+      "half_bin_width": 0.89453125,
+      "maximum_absolute_low_rank_update": 0.27774526571434244,
+      "maximum_absolute_update_over_scale": 0.15524626205867176,
+      "minimum_saved_update_gain_to_first_switch": 3.2206894605361676,
+      "minimum_signed_threshold_margin_in_scale_units": 0.34475373794132824,
+      "official_scale": 1.7890625,
+      "projection": "model.layers.24.self_attn.q_proj",
+      "shape": [
+        2560,
+        2560
+      ],
+      "weights_moving_towards_switch": 4933969
+    },
+    {
+      "adam_moments": {
+        "model.layers.24.self_attn.v_proj.qat_a.m": {
+          "maximum_absolute_value": 0.002811649115756154,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.24.self_attn.v_proj.qat_a.v": {
+          "maximum_absolute_value": 3.0662246786050673e-7,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.24.self_attn.v_proj.qat_b.m": {
+          "maximum_absolute_value": 0.004707026295363903,
+          "nonzero_values": 1280,
+          "values": 1280
+        },
+        "model.layers.24.self_attn.v_proj.qat_b.v": {
+          "maximum_absolute_value": 8.93966898729559e-7,
+          "nonzero_values": 1280,
+          "values": 1280
+        }
+      },
+      "adapter_a": {
+        "changed_l2": 17.28501729302695,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.2579178214073181,
+        "maximum_absolute_value": 0.2768007814884186,
+        "values": 5120
+      },
+      "adapter_b": {
+        "changed_l2": 7.506881834695764,
+        "changed_values": 1280,
+        "maximum_absolute_change": 0.25883591175079346,
+        "maximum_absolute_value": 0.25883591175079346,
+        "values": 1280
+      },
+      "half_bin_width": 1.90625,
+      "maximum_absolute_low_rank_update": 0.28117775616325247,
+      "maximum_absolute_update_over_scale": 0.07375154260019737,
+      "minimum_saved_update_gain_to_first_switch": 6.789293561233058,
+      "minimum_signed_threshold_margin_in_scale_units": 0.4263546353548467,
+      "official_scale": 3.8125,
+      "projection": "model.layers.24.self_attn.v_proj",
+      "shape": [
+        640,
+        2560
+      ],
+      "weights_moving_towards_switch": 1141019
+    },
+    {
+      "adam_moments": {
+        "model.layers.25.self_attn.q_proj.qat_a.m": {
+          "maximum_absolute_value": 0.007349587045609951,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.25.self_attn.q_proj.qat_a.v": {
+          "maximum_absolute_value": 2.047055886578164e-6,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.25.self_attn.q_proj.qat_b.m": {
+          "maximum_absolute_value": 0.012075016275048256,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.25.self_attn.q_proj.qat_b.v": {
+          "maximum_absolute_value": 5.666492143063806e-6,
+          "nonzero_values": 5120,
+          "values": 5120
+        }
+      },
+      "adapter_a": {
+        "changed_l2": 16.556517538512722,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.2593996822834015,
+        "maximum_absolute_value": 0.27698472142219543,
+        "values": 5120
+      },
+      "adapter_b": {
+        "changed_l2": 14.596800328234014,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.26348990201950073,
+        "maximum_absolute_value": 0.26348990201950073,
+        "values": 5120
+      },
+      "half_bin_width": 0.734375,
+      "maximum_absolute_low_rank_update": 0.2852046499137906,
+      "maximum_absolute_update_over_scale": 0.19418188930300634,
+      "minimum_saved_update_gain_to_first_switch": 2.574905423954277,
+      "minimum_signed_threshold_margin_in_scale_units": 0.30581811069699366,
+      "official_scale": 1.46875,
+      "projection": "model.layers.25.self_attn.q_proj",
+      "shape": [
+        2560,
+        2560
+      ],
+      "weights_moving_towards_switch": 4761580
+    },
+    {
+      "adam_moments": {
+        "model.layers.25.self_attn.v_proj.qat_a.m": {
+          "maximum_absolute_value": 0.0025973948650062084,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.25.self_attn.v_proj.qat_a.v": {
+          "maximum_absolute_value": 2.608724400943174e-7,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.25.self_attn.v_proj.qat_b.m": {
+          "maximum_absolute_value": 0.007155710365623236,
+          "nonzero_values": 1280,
+          "values": 1280
+        },
+        "model.layers.25.self_attn.v_proj.qat_b.v": {
+          "maximum_absolute_value": 1.987727046071086e-6,
+          "nonzero_values": 1280,
+          "values": 1280
+        }
+      },
+      "adapter_a": {
+        "changed_l2": 17.28344352280726,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.25613221526145935,
+        "maximum_absolute_value": 0.2742694318294525,
+        "values": 5120
+      },
+      "adapter_b": {
+        "changed_l2": 7.032053302916513,
+        "changed_values": 1280,
+        "maximum_absolute_change": 0.25874701142311096,
+        "maximum_absolute_value": 0.25874701142311096,
+        "values": 1280
+      },
+      "half_bin_width": 1.6796875,
+      "maximum_absolute_low_rank_update": 0.28157963520963136,
+      "maximum_absolute_update_over_scale": 0.08381905420193678,
+      "minimum_saved_update_gain_to_first_switch": 5.978810824252247,
+      "minimum_signed_threshold_margin_in_scale_units": 0.41637132956744227,
+      "official_scale": 3.359375,
+      "projection": "model.layers.25.self_attn.v_proj",
+      "shape": [
+        640,
+        2560
+      ],
+      "weights_moving_towards_switch": 1128241
+    },
+    {
+      "adam_moments": {
+        "model.layers.26.self_attn.q_proj.qat_a.m": {
+          "maximum_absolute_value": 0.0036446808371692896,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.26.self_attn.q_proj.qat_a.v": {
+          "maximum_absolute_value": 4.974122589374019e-7,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.26.self_attn.q_proj.qat_b.m": {
+          "maximum_absolute_value": 0.005332048982381821,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.26.self_attn.q_proj.qat_b.v": {
+          "maximum_absolute_value": 1.1709241789503722e-6,
+          "nonzero_values": 5120,
+          "values": 5120
+        }
+      },
+      "adapter_a": {
+        "changed_l2": 15.684223127566408,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.26280713081359863,
+        "maximum_absolute_value": 0.27832427620887756,
+        "values": 5120
+      },
+      "adapter_b": {
+        "changed_l2": 13.250210209534808,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.26858213543891907,
+        "maximum_absolute_value": 0.26858213543891907,
+        "values": 5120
+      },
+      "half_bin_width": 0.80078125,
+      "maximum_absolute_low_rank_update": 0.28616363594296956,
+      "maximum_absolute_update_over_scale": 0.17867778244243954,
+      "minimum_saved_update_gain_to_first_switch": 2.7983333639204604,
+      "minimum_signed_threshold_margin_in_scale_units": 0.32132221755756046,
+      "official_scale": 1.6015625,
+      "projection": "model.layers.26.self_attn.q_proj",
+      "shape": [
+        2560,
+        2560
+      ],
+      "weights_moving_towards_switch": 4754668
+    },
+    {
+      "adam_moments": {
+        "model.layers.26.self_attn.v_proj.qat_a.m": {
+          "maximum_absolute_value": 0.0028561472427099943,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.26.self_attn.v_proj.qat_a.v": {
+          "maximum_absolute_value": 3.2103196190291783e-7,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.26.self_attn.v_proj.qat_b.m": {
+          "maximum_absolute_value": 0.0045478991232812405,
+          "nonzero_values": 1280,
+          "values": 1280
+        },
+        "model.layers.26.self_attn.v_proj.qat_b.v": {
+          "maximum_absolute_value": 8.237913675657182e-7,
+          "nonzero_values": 1280,
+          "values": 1280
+        }
+      },
+      "adapter_a": {
+        "changed_l2": 17.34976400690385,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.25732749700546265,
+        "maximum_absolute_value": 0.2752506136894226,
+        "values": 5120
+      },
+      "adapter_b": {
+        "changed_l2": 7.405232468430817,
+        "changed_values": 1280,
+        "maximum_absolute_change": 0.25944843888282776,
+        "maximum_absolute_value": 0.25944843888282776,
+        "values": 1280
+      },
+      "half_bin_width": 1.625,
+      "maximum_absolute_low_rank_update": 0.2827505372465726,
+      "maximum_absolute_update_over_scale": 0.08700016530663773,
+      "minimum_saved_update_gain_to_first_switch": 5.764517066752561,
+      "minimum_signed_threshold_margin_in_scale_units": 0.4132624651449467,
+      "official_scale": 3.25,
+      "projection": "model.layers.26.self_attn.v_proj",
+      "shape": [
+        640,
+        2560
+      ],
+      "weights_moving_towards_switch": 1134217
+    },
+    {
+      "adam_moments": {
+        "model.layers.27.self_attn.q_proj.qat_a.m": {
+          "maximum_absolute_value": 0.0051617794670164585,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.27.self_attn.q_proj.qat_a.v": {
+          "maximum_absolute_value": 1.095066181733273e-6,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.27.self_attn.q_proj.qat_b.m": {
+          "maximum_absolute_value": 0.017722073942422867,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.27.self_attn.q_proj.qat_b.v": {
+          "maximum_absolute_value": 0.00001291222361032851,
+          "nonzero_values": 5120,
+          "values": 5120
+        }
+      },
+      "adapter_a": {
+        "changed_l2": 16.16675813424986,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.2563791275024414,
+        "maximum_absolute_value": 0.2739027738571167,
+        "values": 5120
+      },
+      "adapter_b": {
+        "changed_l2": 13.816358020611085,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.257781058549881,
+        "maximum_absolute_value": 0.257781058549881,
+        "values": 5120
+      },
+      "half_bin_width": 0.77734375,
+      "maximum_absolute_low_rank_update": 0.28054127882751345,
+      "maximum_absolute_update_over_scale": 0.1804486617584006,
+      "minimum_saved_update_gain_to_first_switch": 2.7708712003053853,
+      "minimum_signed_threshold_margin_in_scale_units": 0.3195513382415994,
+      "official_scale": 1.5546875,
+      "projection": "model.layers.27.self_attn.q_proj",
+      "shape": [
+        2560,
+        2560
+      ],
+      "weights_moving_towards_switch": 4761694
+    },
+    {
+      "adam_moments": {
+        "model.layers.27.self_attn.v_proj.qat_a.m": {
+          "maximum_absolute_value": 0.0022381888702511787,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.27.self_attn.v_proj.qat_a.v": {
+          "maximum_absolute_value": 1.9454392941042897e-7,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.27.self_attn.v_proj.qat_b.m": {
+          "maximum_absolute_value": 0.004023589193820953,
+          "nonzero_values": 1280,
+          "values": 1280
+        },
+        "model.layers.27.self_attn.v_proj.qat_b.v": {
+          "maximum_absolute_value": 6.439540811697952e-7,
+          "nonzero_values": 1280,
+          "values": 1280
+        }
+      },
+      "adapter_a": {
+        "changed_l2": 16.96569552664716,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.2565486431121826,
+        "maximum_absolute_value": 0.27592092752456665,
+        "values": 5120
+      },
+      "adapter_b": {
+        "changed_l2": 7.542216305683136,
+        "changed_values": 1280,
+        "maximum_absolute_change": 0.26004037261009216,
+        "maximum_absolute_value": 0.26004037261009216,
+        "values": 1280
+      },
+      "half_bin_width": 1.84375,
+      "maximum_absolute_low_rank_update": 0.28383625720391414,
+      "maximum_absolute_update_over_scale": 0.07697254432648519,
+      "minimum_saved_update_gain_to_first_switch": 6.498335989721471,
+      "minimum_signed_threshold_margin_in_scale_units": 0.4230572256050074,
+      "official_scale": 3.6875,
+      "projection": "model.layers.27.self_attn.v_proj",
+      "shape": [
+        640,
+        2560
+      ],
+      "weights_moving_towards_switch": 1118893
+    },
+    {
+      "adam_moments": {
+        "model.layers.28.self_attn.q_proj.qat_a.m": {
+          "maximum_absolute_value": 0.006612025201320648,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.28.self_attn.q_proj.qat_a.v": {
+          "maximum_absolute_value": 1.6969114540188457e-6,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.28.self_attn.q_proj.qat_b.m": {
+          "maximum_absolute_value": 0.014325860887765884,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.28.self_attn.q_proj.qat_b.v": {
+          "maximum_absolute_value": 7.905601705715526e-6,
+          "nonzero_values": 5120,
+          "values": 5120
+        }
+      },
+      "adapter_a": {
+        "changed_l2": 16.36464759276492,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.26219403743743896,
+        "maximum_absolute_value": 0.27830934524536133,
+        "values": 5120
+      },
+      "adapter_b": {
+        "changed_l2": 14.437111391168571,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.26761293411254883,
+        "maximum_absolute_value": 0.26761293411254883,
+        "values": 5120
+      },
+      "half_bin_width": 0.68359375,
+      "maximum_absolute_low_rank_update": 0.28554578877758274,
+      "maximum_absolute_update_over_scale": 0.20885634836303196,
+      "minimum_saved_update_gain_to_first_switch": 2.3939899549086494,
+      "minimum_signed_threshold_margin_in_scale_units": 0.29114365163696804,
+      "official_scale": 1.3671875,
+      "projection": "model.layers.28.self_attn.q_proj",
+      "shape": [
+        2560,
+        2560
+      ],
+      "weights_moving_towards_switch": 4681475
+    },
+    {
+      "adam_moments": {
+        "model.layers.28.self_attn.v_proj.qat_a.m": {
+          "maximum_absolute_value": 0.004027152433991432,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.28.self_attn.v_proj.qat_a.v": {
+          "maximum_absolute_value": 6.540894332829339e-7,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.28.self_attn.v_proj.qat_b.m": {
+          "maximum_absolute_value": 0.011524898931384087,
+          "nonzero_values": 1280,
+          "values": 1280
+        },
+        "model.layers.28.self_attn.v_proj.qat_b.v": {
+          "maximum_absolute_value": 5.1383399295446e-6,
+          "nonzero_values": 1280,
+          "values": 1280
+        }
+      },
+      "adapter_a": {
+        "changed_l2": 17.041816272414746,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.2629241943359375,
+        "maximum_absolute_value": 0.2792547941207886,
+        "values": 5120
+      },
+      "adapter_b": {
+        "changed_l2": 7.436790923519436,
+        "changed_values": 1280,
+        "maximum_absolute_change": 0.26559141278266907,
+        "maximum_absolute_value": 0.26559141278266907,
+        "values": 1280
+      },
+      "half_bin_width": 1.5078125,
+      "maximum_absolute_low_rank_update": 0.2866620269321647,
+      "maximum_absolute_update_over_scale": 0.09505891048527741,
+      "minimum_saved_update_gain_to_first_switch": 5.259896178564337,
+      "minimum_signed_threshold_margin_in_scale_units": 0.4049410895147226,
+      "official_scale": 3.015625,
+      "projection": "model.layers.28.self_attn.v_proj",
+      "shape": [
+        640,
+        2560
+      ],
+      "weights_moving_towards_switch": 1126460
+    },
+    {
+      "adam_moments": {
+        "model.layers.29.self_attn.q_proj.qat_a.m": {
+          "maximum_absolute_value": 0.006676760967820883,
+          "nonzero_values": 5118,
+          "values": 5120
+        },
+        "model.layers.29.self_attn.q_proj.qat_a.v": {
+          "maximum_absolute_value": 1.7020252016664017e-6,
+          "nonzero_values": 5118,
+          "values": 5120
+        },
+        "model.layers.29.self_attn.q_proj.qat_b.m": {
+          "maximum_absolute_value": 0.015708506107330322,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.29.self_attn.q_proj.qat_b.v": {
+          "maximum_absolute_value": 0.000010224161997030023,
+          "nonzero_values": 5120,
+          "values": 5120
+        }
+      },
+      "adapter_a": {
+        "changed_l2": 16.465128228881525,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.2627114951610565,
+        "maximum_absolute_value": 0.2817486822605133,
+        "values": 5120
+      },
+      "adapter_b": {
+        "changed_l2": 14.175766546085603,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.2645425498485565,
+        "maximum_absolute_value": 0.2645425498485565,
+        "values": 5120
+      },
+      "half_bin_width": 0.5625,
+      "maximum_absolute_low_rank_update": 0.2858873233565795,
+      "maximum_absolute_update_over_scale": 0.25412206520584846,
+      "minimum_saved_update_gain_to_first_switch": 1.9707973127501466,
+      "minimum_signed_threshold_margin_in_scale_units": 0.24629557450417078,
+      "official_scale": 1.125,
+      "projection": "model.layers.29.self_attn.q_proj",
+      "shape": [
+        2560,
+        2560
+      ],
+      "weights_moving_towards_switch": 4655610
+    },
+    {
+      "adam_moments": {
+        "model.layers.29.self_attn.v_proj.qat_a.m": {
+          "maximum_absolute_value": 0.0051587847992777824,
+          "nonzero_values": 5118,
+          "values": 5120
+        },
+        "model.layers.29.self_attn.v_proj.qat_a.v": {
+          "maximum_absolute_value": 1.1180226238138857e-6,
+          "nonzero_values": 5118,
+          "values": 5120
+        },
+        "model.layers.29.self_attn.v_proj.qat_b.m": {
+          "maximum_absolute_value": 0.012046575546264648,
+          "nonzero_values": 1122,
+          "values": 1280
+        },
+        "model.layers.29.self_attn.v_proj.qat_b.v": {
+          "maximum_absolute_value": 5.963351668469841e-6,
+          "nonzero_values": 1122,
+          "values": 1280
+        }
+      },
+      "adapter_a": {
+        "changed_l2": 16.9035476006534,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.26307153701782227,
+        "maximum_absolute_value": 0.278748482465744,
+        "values": 5120
+      },
+      "adapter_b": {
+        "changed_l2": 7.278549916047402,
+        "changed_values": 1122,
+        "maximum_absolute_change": 0.27164584398269653,
+        "maximum_absolute_value": 0.27164584398269653,
+        "values": 1280
+      },
+      "half_bin_width": 0.88671875,
+      "maximum_absolute_low_rank_update": 0.28623005364899967,
+      "maximum_absolute_update_over_scale": 0.1613984443483346,
+      "minimum_saved_update_gain_to_first_switch": 3.0979232917566795,
+      "minimum_signed_threshold_margin_in_scale_units": 0.3386015556516654,
+      "official_scale": 1.7734375,
+      "projection": "model.layers.29.self_attn.v_proj",
+      "shape": [
+        640,
+        2560
+      ],
+      "weights_moving_towards_switch": 978516
+    },
+    {
+      "adam_moments": {
+        "model.layers.3.self_attn.q_proj.qat_a.m": {
+          "maximum_absolute_value": 0.007936270907521248,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.3.self_attn.q_proj.qat_a.v": {
+          "maximum_absolute_value": 2.327081347175408e-6,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.3.self_attn.q_proj.qat_b.m": {
+          "maximum_absolute_value": 0.008991421200335026,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.3.self_attn.q_proj.qat_b.v": {
+          "maximum_absolute_value": 3.3355399864376523e-6,
+          "nonzero_values": 5120,
+          "values": 5120
+        }
+      },
+      "adapter_a": {
+        "changed_l2": 16.036088405553556,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.2594667971134186,
+        "maximum_absolute_value": 0.27467578649520874,
+        "values": 5120
+      },
+      "adapter_b": {
+        "changed_l2": 14.746802694500033,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.2609417140483856,
+        "maximum_absolute_value": 0.2609417140483856,
+        "values": 5120
+      },
+      "half_bin_width": 0.51171875,
+      "maximum_absolute_low_rank_update": 0.28427837551257795,
+      "maximum_absolute_update_over_scale": 0.2777681837069464,
+      "minimum_saved_update_gain_to_first_switch": 1.810305117044154,
+      "minimum_signed_threshold_margin_in_scale_units": 0.2238034653426852,
+      "official_scale": 1.0234375,
+      "projection": "model.layers.3.self_attn.q_proj",
+      "shape": [
+        2560,
+        2560
+      ],
+      "weights_moving_towards_switch": 4703759
+    },
+    {
+      "adam_moments": {
+        "model.layers.3.self_attn.v_proj.qat_a.m": {
+          "maximum_absolute_value": 0.0015720827504992485,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.3.self_attn.v_proj.qat_a.v": {
+          "maximum_absolute_value": 9.61620827411025e-8,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.3.self_attn.v_proj.qat_b.m": {
+          "maximum_absolute_value": 0.0072316695004701614,
+          "nonzero_values": 1280,
+          "values": 1280
+        },
+        "model.layers.3.self_attn.v_proj.qat_b.v": {
+          "maximum_absolute_value": 2.0163520275673363e-6,
+          "nonzero_values": 1280,
+          "values": 1280
+        }
+      },
+      "adapter_a": {
+        "changed_l2": 16.681203720709103,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.26257532835006714,
+        "maximum_absolute_value": 0.2801678478717804,
+        "values": 5120
+      },
+      "adapter_b": {
+        "changed_l2": 7.6404062793805965,
+        "changed_values": 1280,
+        "maximum_absolute_change": 0.2675817608833313,
+        "maximum_absolute_value": 0.2675817608833313,
+        "values": 1280
+      },
+      "half_bin_width": 1.34375,
+      "maximum_absolute_low_rank_update": 0.2816583343229855,
+      "maximum_absolute_update_over_scale": 0.10480310114343645,
+      "minimum_saved_update_gain_to_first_switch": 4.797772112399857,
+      "minimum_signed_threshold_margin_in_scale_units": 0.3957849626271851,
+      "official_scale": 2.6875,
+      "projection": "model.layers.3.self_attn.v_proj",
+      "shape": [
+        640,
+        2560
+      ],
+      "weights_moving_towards_switch": 1124161
+    },
+    {
+      "adam_moments": {
+        "model.layers.4.self_attn.q_proj.qat_a.m": {
+          "maximum_absolute_value": 0.011800440028309822,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.4.self_attn.q_proj.qat_a.v": {
+          "maximum_absolute_value": 5.251662969385507e-6,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.4.self_attn.q_proj.qat_b.m": {
+          "maximum_absolute_value": 0.011607957072556019,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.4.self_attn.q_proj.qat_b.v": {
+          "maximum_absolute_value": 5.310590040608076e-6,
+          "nonzero_values": 5120,
+          "values": 5120
+        }
+      },
+      "adapter_a": {
+        "changed_l2": 16.48089750759342,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.25901225209236145,
+        "maximum_absolute_value": 0.27689293026924133,
+        "values": 5120
+      },
+      "adapter_b": {
+        "changed_l2": 14.677223022151237,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.2597682774066925,
+        "maximum_absolute_value": 0.2597682774066925,
+        "values": 5120
+      },
+      "half_bin_width": 0.5703125,
+      "maximum_absolute_low_rank_update": 0.28137512765698247,
+      "maximum_absolute_update_over_scale": 0.2466850434252997,
+      "minimum_saved_update_gain_to_first_switch": 2.026876024007545,
+      "minimum_signed_threshold_margin_in_scale_units": 0.25331495657470027,
+      "official_scale": 1.140625,
+      "projection": "model.layers.4.self_attn.q_proj",
+      "shape": [
+        2560,
+        2560
+      ],
+      "weights_moving_towards_switch": 4746399
+    },
+    {
+      "adam_moments": {
+        "model.layers.4.self_attn.v_proj.qat_a.m": {
+          "maximum_absolute_value": 0.002214239677414298,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.4.self_attn.v_proj.qat_a.v": {
+          "maximum_absolute_value": 1.7951799691218184e-7,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.4.self_attn.v_proj.qat_b.m": {
+          "maximum_absolute_value": 0.010491736233234406,
+          "nonzero_values": 1280,
+          "values": 1280
+        },
+        "model.layers.4.self_attn.v_proj.qat_b.v": {
+          "maximum_absolute_value": 4.243860075803241e-6,
+          "nonzero_values": 1280,
+          "values": 1280
+        }
+      },
+      "adapter_a": {
+        "changed_l2": 16.553907196722733,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.26176366209983826,
+        "maximum_absolute_value": 0.27752190828323364,
+        "values": 5120
+      },
+      "adapter_b": {
+        "changed_l2": 7.36600261406221,
+        "changed_values": 1280,
+        "maximum_absolute_change": 0.26111122965812683,
+        "maximum_absolute_value": 0.26111122965812683,
+        "values": 1280
+      },
+      "half_bin_width": 1.515625,
+      "maximum_absolute_low_rank_update": 0.28521231875778597,
+      "maximum_absolute_update_over_scale": 0.09409066185823867,
+      "minimum_saved_update_gain_to_first_switch": 5.35566823964712,
+      "minimum_signed_threshold_margin_in_scale_units": 0.4066409684792304,
+      "official_scale": 3.03125,
+      "projection": "model.layers.4.self_attn.v_proj",
+      "shape": [
+        640,
+        2560
+      ],
+      "weights_moving_towards_switch": 1114657
+    },
+    {
+      "adam_moments": {
+        "model.layers.5.self_attn.q_proj.qat_a.m": {
+          "maximum_absolute_value": 0.01092643290758133,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.5.self_attn.q_proj.qat_a.v": {
+          "maximum_absolute_value": 4.746906597574707e-6,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.5.self_attn.q_proj.qat_b.m": {
+          "maximum_absolute_value": 0.009442275390028954,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.5.self_attn.q_proj.qat_b.v": {
+          "maximum_absolute_value": 3.6243504837329965e-6,
+          "nonzero_values": 5120,
+          "values": 5120
+        }
+      },
+      "adapter_a": {
+        "changed_l2": 16.27456891382009,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.25751110911369324,
+        "maximum_absolute_value": 0.27463072538375854,
+        "values": 5120
+      },
+      "adapter_b": {
+        "changed_l2": 14.70200739493681,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.26280951499938965,
+        "maximum_absolute_value": 0.26280951499938965,
+        "values": 5120
+      },
+      "half_bin_width": 0.64453125,
+      "maximum_absolute_low_rank_update": 0.2825491401589808,
+      "maximum_absolute_update_over_scale": 0.21918963600211844,
+      "minimum_saved_update_gain_to_first_switch": 2.281129751933926,
+      "minimum_signed_threshold_margin_in_scale_units": 0.28081036399788156,
+      "official_scale": 1.2890625,
+      "projection": "model.layers.5.self_attn.q_proj",
+      "shape": [
+        2560,
+        2560
+      ],
+      "weights_moving_towards_switch": 4798021
+    },
+    {
+      "adam_moments": {
+        "model.layers.5.self_attn.v_proj.qat_a.m": {
+          "maximum_absolute_value": 0.002945210784673691,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.5.self_attn.v_proj.qat_a.v": {
+          "maximum_absolute_value": 3.241733566028415e-7,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.5.self_attn.v_proj.qat_b.m": {
+          "maximum_absolute_value": 0.008524850942194462,
+          "nonzero_values": 1280,
+          "values": 1280
+        },
+        "model.layers.5.self_attn.v_proj.qat_b.v": {
+          "maximum_absolute_value": 2.7957673864875687e-6,
+          "nonzero_values": 1280,
+          "values": 1280
+        }
+      },
+      "adapter_a": {
+        "changed_l2": 16.792781239449813,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.26574575901031494,
+        "maximum_absolute_value": 0.28104186058044434,
+        "values": 5120
+      },
+      "adapter_b": {
+        "changed_l2": 7.3672265731507505,
+        "changed_values": 1280,
+        "maximum_absolute_change": 0.26398518681526184,
+        "maximum_absolute_value": 0.26398518681526184,
+        "values": 1280
+      },
+      "half_bin_width": 1.578125,
+      "maximum_absolute_low_rank_update": 0.2858876522441225,
+      "maximum_absolute_update_over_scale": 0.09057826605754377,
+      "minimum_saved_update_gain_to_first_switch": 5.5266672254706135,
+      "minimum_signed_threshold_margin_in_scale_units": 0.40952956282664127,
+      "official_scale": 3.15625,
+      "projection": "model.layers.5.self_attn.v_proj",
+      "shape": [
+        640,
+        2560
+      ],
+      "weights_moving_towards_switch": 1115342
+    },
+    {
+      "adam_moments": {
+        "model.layers.6.self_attn.q_proj.qat_a.m": {
+          "maximum_absolute_value": 0.013811132870614529,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.6.self_attn.q_proj.qat_a.v": {
+          "maximum_absolute_value": 7.577684300485998e-6,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.6.self_attn.q_proj.qat_b.m": {
+          "maximum_absolute_value": 0.02018073759973049,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.6.self_attn.q_proj.qat_b.v": {
+          "maximum_absolute_value": 0.000016106483599287458,
+          "nonzero_values": 5120,
+          "values": 5120
+        }
+      },
+      "adapter_a": {
+        "changed_l2": 16.137934079163447,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.26180094480514526,
+        "maximum_absolute_value": 0.2779143154621124,
+        "values": 5120
+      },
+      "adapter_b": {
+        "changed_l2": 14.351097472235022,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.272269606590271,
+        "maximum_absolute_value": 0.272269606590271,
+        "values": 5120
+      },
+      "half_bin_width": 0.68359375,
+      "maximum_absolute_low_rank_update": 0.2866462640791081,
+      "maximum_absolute_update_over_scale": 0.20966126744071906,
+      "minimum_saved_update_gain_to_first_switch": 2.3847990909497536,
+      "minimum_signed_threshold_margin_in_scale_units": 0.29033873255928094,
+      "official_scale": 1.3671875,
+      "projection": "model.layers.6.self_attn.q_proj",
+      "shape": [
+        2560,
+        2560
+      ],
+      "weights_moving_towards_switch": 4820644
+    },
+    {
+      "adam_moments": {
+        "model.layers.6.self_attn.v_proj.qat_a.m": {
+          "maximum_absolute_value": 0.0027914883103221655,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.6.self_attn.v_proj.qat_a.v": {
+          "maximum_absolute_value": 2.9918447808086057e-7,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.6.self_attn.v_proj.qat_b.m": {
+          "maximum_absolute_value": 0.011132328771054745,
+          "nonzero_values": 1280,
+          "values": 1280
+        },
+        "model.layers.6.self_attn.v_proj.qat_b.v": {
+          "maximum_absolute_value": 4.975663159711985e-6,
+          "nonzero_values": 1280,
+          "values": 1280
+        }
+      },
+      "adapter_a": {
+        "changed_l2": 16.866797291007817,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.2558985650539398,
+        "maximum_absolute_value": 0.2735791504383087,
+        "values": 5120
+      },
+      "adapter_b": {
+        "changed_l2": 7.277607256872583,
+        "changed_values": 1280,
+        "maximum_absolute_change": 0.25658395886421204,
+        "maximum_absolute_value": 0.25658395886421204,
+        "values": 1280
+      },
+      "half_bin_width": 1.7421875,
+      "maximum_absolute_low_rank_update": 0.27973329356442633,
+      "maximum_absolute_update_over_scale": 0.08028220084360217,
+      "minimum_saved_update_gain_to_first_switch": 6.228030556537064,
+      "minimum_signed_threshold_margin_in_scale_units": 0.41971779915639784,
+      "official_scale": 3.484375,
+      "projection": "model.layers.6.self_attn.v_proj",
+      "shape": [
+        640,
+        2560
+      ],
+      "weights_moving_towards_switch": 1124257
+    },
+    {
+      "adam_moments": {
+        "model.layers.7.self_attn.q_proj.qat_a.m": {
+          "maximum_absolute_value": 0.0067140934988856316,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.7.self_attn.q_proj.qat_a.v": {
+          "maximum_absolute_value": 1.6751212115195813e-6,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.7.self_attn.q_proj.qat_b.m": {
+          "maximum_absolute_value": 0.010609111748635769,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.7.self_attn.q_proj.qat_b.v": {
+          "maximum_absolute_value": 4.459472165763145e-6,
+          "nonzero_values": 5120,
+          "values": 5120
+        }
+      },
+      "adapter_a": {
+        "changed_l2": 15.970812698373924,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.2592810094356537,
+        "maximum_absolute_value": 0.27572715282440186,
+        "values": 5120
+      },
+      "adapter_b": {
+        "changed_l2": 14.172922031853936,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.2670765817165375,
+        "maximum_absolute_value": 0.2670765817165375,
+        "values": 5120
+      },
+      "half_bin_width": 0.7109375,
+      "maximum_absolute_low_rank_update": 0.2829952594016376,
+      "maximum_absolute_update_over_scale": 0.19902963298576712,
+      "minimum_saved_update_gain_to_first_switch": 2.51750240917957,
+      "minimum_signed_threshold_margin_in_scale_units": 0.30139045818711047,
+      "official_scale": 1.421875,
+      "projection": "model.layers.7.self_attn.q_proj",
+      "shape": [
+        2560,
+        2560
+      ],
+      "weights_moving_towards_switch": 4810326
+    },
+    {
+      "adam_moments": {
+        "model.layers.7.self_attn.v_proj.qat_a.m": {
+          "maximum_absolute_value": 0.0030436404049396515,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.7.self_attn.v_proj.qat_a.v": {
+          "maximum_absolute_value": 3.7305247246877116e-7,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.7.self_attn.v_proj.qat_b.m": {
+          "maximum_absolute_value": 0.009989684447646141,
+          "nonzero_values": 1270,
+          "values": 1280
+        },
+        "model.layers.7.self_attn.v_proj.qat_b.v": {
+          "maximum_absolute_value": 3.896464477293193e-6,
+          "nonzero_values": 1270,
+          "values": 1280
+        }
+      },
+      "adapter_a": {
+        "changed_l2": 16.708116664694177,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.2550433576107025,
+        "maximum_absolute_value": 0.2738378345966339,
+        "values": 5120
+      },
+      "adapter_b": {
+        "changed_l2": 7.352049886229326,
+        "changed_values": 1270,
+        "maximum_absolute_change": 0.2589690089225769,
+        "maximum_absolute_value": 0.2589690089225769,
+        "values": 1280
+      },
+      "half_bin_width": 1.6171875,
+      "maximum_absolute_low_rank_update": 0.27710695820082876,
+      "maximum_absolute_update_over_scale": 0.08567558127948328,
+      "minimum_saved_update_gain_to_first_switch": 5.849623994606771,
+      "minimum_signed_threshold_margin_in_scale_units": 0.4145244206360974,
+      "official_scale": 3.234375,
+      "projection": "model.layers.7.self_attn.v_proj",
+      "shape": [
+        640,
+        2560
+      ],
+      "weights_moving_towards_switch": 1113422
+    },
+    {
+      "adam_moments": {
+        "model.layers.8.self_attn.q_proj.qat_a.m": {
+          "maximum_absolute_value": 0.006213120184838772,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.8.self_attn.q_proj.qat_a.v": {
+          "maximum_absolute_value": 1.5125038999030949e-6,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.8.self_attn.q_proj.qat_b.m": {
+          "maximum_absolute_value": 0.010078240185976028,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.8.self_attn.q_proj.qat_b.v": {
+          "maximum_absolute_value": 4.163497578701936e-6,
+          "nonzero_values": 5120,
+          "values": 5120
+        }
+      },
+      "adapter_a": {
+        "changed_l2": 16.25860335586726,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.25847774744033813,
+        "maximum_absolute_value": 0.276874840259552,
+        "values": 5120
+      },
+      "adapter_b": {
+        "changed_l2": 14.235076224628775,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.26189541816711426,
+        "maximum_absolute_value": 0.26189541816711426,
+        "values": 5120
+      },
+      "half_bin_width": 0.734375,
+      "maximum_absolute_low_rank_update": 0.2814427269545767,
+      "maximum_absolute_update_over_scale": 0.1916205800541799,
+      "minimum_saved_update_gain_to_first_switch": 2.6093230688406597,
+      "minimum_signed_threshold_margin_in_scale_units": 0.3083794199458201,
+      "official_scale": 1.46875,
+      "projection": "model.layers.8.self_attn.q_proj",
+      "shape": [
+        2560,
+        2560
+      ],
+      "weights_moving_towards_switch": 4914164
+    },
+    {
+      "adam_moments": {
+        "model.layers.8.self_attn.v_proj.qat_a.m": {
+          "maximum_absolute_value": 0.001835003960877657,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.8.self_attn.v_proj.qat_a.v": {
+          "maximum_absolute_value": 1.3750141647506098e-7,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.8.self_attn.v_proj.qat_b.m": {
+          "maximum_absolute_value": 0.006151624955236912,
+          "nonzero_values": 1280,
+          "values": 1280
+        },
+        "model.layers.8.self_attn.v_proj.qat_b.v": {
+          "maximum_absolute_value": 1.559365614411945e-6,
+          "nonzero_values": 1280,
+          "values": 1280
+        }
+      },
+      "adapter_a": {
+        "changed_l2": 16.588697204084035,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.2596404254436493,
+        "maximum_absolute_value": 0.27785834670066833,
+        "values": 5120
+      },
+      "adapter_b": {
+        "changed_l2": 7.320828720661621,
+        "changed_values": 1280,
+        "maximum_absolute_change": 0.2615065276622772,
+        "maximum_absolute_value": 0.2615065276622772,
+        "values": 1280
+      },
+      "half_bin_width": 1.6875,
+      "maximum_absolute_low_rank_update": 0.28184552203211055,
+      "maximum_absolute_update_over_scale": 0.08350978430581053,
+      "minimum_saved_update_gain_to_first_switch": 5.987322373735439,
+      "minimum_signed_threshold_margin_in_scale_units": 0.4164902156941895,
+      "official_scale": 3.375,
+      "projection": "model.layers.8.self_attn.v_proj",
+      "shape": [
+        640,
+        2560
+      ],
+      "weights_moving_towards_switch": 1118328
+    },
+    {
+      "adam_moments": {
+        "model.layers.9.self_attn.q_proj.qat_a.m": {
+          "maximum_absolute_value": 0.005439767148345709,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.9.self_attn.q_proj.qat_a.v": {
+          "maximum_absolute_value": 1.203155761686503e-6,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.9.self_attn.q_proj.qat_b.m": {
+          "maximum_absolute_value": 0.010111819952726364,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.9.self_attn.q_proj.qat_b.v": {
+          "maximum_absolute_value": 3.992837264377158e-6,
+          "nonzero_values": 5120,
+          "values": 5120
+        }
+      },
+      "adapter_a": {
+        "changed_l2": 16.231819079739402,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.2571989893913269,
+        "maximum_absolute_value": 0.27558454871177673,
+        "values": 5120
+      },
+      "adapter_b": {
+        "changed_l2": 14.913477003944035,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.2623424530029297,
+        "maximum_absolute_value": 0.2623424530029297,
+        "values": 5120
+      },
+      "half_bin_width": 0.7421875,
+      "maximum_absolute_low_rank_update": 0.2815613665616681,
+      "maximum_absolute_update_over_scale": 0.18968344694680797,
+      "minimum_saved_update_gain_to_first_switch": 2.6359706555744564,
+      "minimum_signed_threshold_margin_in_scale_units": 0.31031655305319206,
+      "official_scale": 1.484375,
+      "projection": "model.layers.9.self_attn.q_proj",
+      "shape": [
+        2560,
+        2560
+      ],
+      "weights_moving_towards_switch": 4747155
+    },
+    {
+      "adam_moments": {
+        "model.layers.9.self_attn.v_proj.qat_a.m": {
+          "maximum_absolute_value": 0.0021024849265813828,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.9.self_attn.v_proj.qat_a.v": {
+          "maximum_absolute_value": 1.6850091810738377e-7,
+          "nonzero_values": 5120,
+          "values": 5120
+        },
+        "model.layers.9.self_attn.v_proj.qat_b.m": {
+          "maximum_absolute_value": 0.007492001634091139,
+          "nonzero_values": 1280,
+          "values": 1280
+        },
+        "model.layers.9.self_attn.v_proj.qat_b.v": {
+          "maximum_absolute_value": 2.12347640626831e-6,
+          "nonzero_values": 1280,
+          "values": 1280
+        }
+      },
+      "adapter_a": {
+        "changed_l2": 16.98415133250617,
+        "changed_values": 5120,
+        "maximum_absolute_change": 0.2581310272216797,
+        "maximum_absolute_value": 0.27548742294311523,
+        "values": 5120
+      },
+      "adapter_b": {
+        "changed_l2": 7.2969121695073715,
+        "changed_values": 1280,
+        "maximum_absolute_change": 0.25905051827430725,
+        "maximum_absolute_value": 0.25905051827430725,
+        "values": 1280
+      },
+      "half_bin_width": 1.8125,
+      "maximum_absolute_low_rank_update": 0.28060686571433635,
+      "maximum_absolute_update_over_scale": 0.07740879054188589,
+      "minimum_saved_update_gain_to_first_switch": 6.461286472656158,
+      "minimum_signed_threshold_margin_in_scale_units": 0.42261602977735546,
+      "official_scale": 3.625,
+      "projection": "model.layers.9.self_attn.v_proj",
+      "shape": [
+        640,
+        2560
+      ],
+      "weights_moving_towards_switch": 1121218
+    }
+  ],
+  "rank": 2,
+  "schema_version": 1,
+  "selected_base_header_sha256": "1d8f1bbcaeb6153057ad8c478ebf17c9ad573602fb98d307e858acc659154a21"
+}

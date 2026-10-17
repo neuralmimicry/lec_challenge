@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "51e2a803f86359125c31f16c1d0da7fc35ac18527b51f85f956f4872bf05792e",
+  "task_id": "money.parse",
+  "source_id": "private-money-v1",
+  "success": false,
+  "raw_generation": {
+    "path": "reports/local-study/explore/round-001/baselines/ternary_bitnet/generations/money.parse.json",
+    "sha256": "15c32ae9b865e3dfb95b9f871b12d190e94423b72a94685860c6b5b54711d847",
+    "bytes": 1432
+  },
+  "sandbox_report": null,
+  "grading_error": null
+}

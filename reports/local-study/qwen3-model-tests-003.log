@@ -1,0 +1,33 @@
+   Compiling lec-distil v0.1.0 (/home/pbisaacs/Developer/neuralmimicry/lec_challenge)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 27.31s
+     Running unittests src/lib.rs (target/debug/deps/lec_distil-5c552d14ca9c7a48)
+
+running 25 tests
+test model::asset_lease::tests::an_unwound_load_releases_its_shared_lease ... ok
+test model::asset_lease::tests::concurrent_readers_block_pruning_until_the_final_runtime_lease_drops ... ok
+test model::asset_lease::tests::a_symlink_cannot_redirect_the_lock_descriptor ... ok
+test model::quantised::tests::memory_plan_accounts_for_embedding_expansion_and_quadratic_attention ... ok
+test model::tests::deterministic_sampling_and_rejection ... ok
+test model::qwen3_tests::legacy_configuration_omits_new_dimension_and_preserves_its_serialised_contract ... ok
+test model::quantised::tests::gguf_vocabulary_and_termination_cannot_override_the_original_tokeniser ... ok
+test model::quantised::tests::gguf_metadata_cannot_override_original_architecture_or_tensor_dimensions ... ok
+test model::quantised::tests::legacy_linear_rope_factor_must_match_source_and_any_modern_key ... ok
+test model::quantised::tests::requested_context_cannot_exceed_the_quantised_publishers_contract ... ok
+test model::tests::finite_float16_queries_cannot_overflow_attention_scores_before_scaling ... ok
+test model::tests::explicit_device_selection_never_silently_falls_back ... ok
+test model::qwen3_tests::original_qwen3_non_thinking_template_and_multiple_eos_are_preserved ... ok
+test model::tests::original_llama_configuration_rejects_invalid_dimensions_and_semantics ... ok
+test model::tests::chat_template_plain_message_branch ... ok
+test model::tests::original_deepseek_template_and_eos_preserve_family_contract ... ok
+test model::tests::original_chat_rendering_bounds_output_and_computation ... ok
+test model::quantised::tests::qwen3_gguf_rejects_missing_norms_and_mismatched_explicit_head_widths ... ok
+test model::qwen3_tests::qwen3_requires_correct_head_norms_and_expanded_projection_shapes ... ok
+test model::tests::frozen_projection_matches_generic_forward_and_input_gradient ... ok
+test model::quantised::tests::qwen3_gguf_f32_projections_match_dense_layout_with_expanded_heads ... ok
+test model::quantised::tests::real_quantised_tensor_round_trip_runs_the_shared_cpu_transformer ... ok
+test model::qwen3_tests::asymmetric_qwen3_matches_independent_scalar_attention_and_cached_decoding ... ok
+test model::qwen3_tests::qwen3_explicit_width_retains_real_adapter_gradients_and_frozen_head_norms ... ok
+test model::tests::full_qwen_architecture_backpropagates_and_preserves_frozen_base ... ok
+
+test result: ok. 25 passed; 0 failed; 0 ignored; 0 measured; 229 filtered out; finished in 0.04s
+

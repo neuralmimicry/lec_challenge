@@ -1,0 +1,597 @@
+{
+  "schema_version": 1,
+  "evidence_kind": "verified_local_teacher_experimental_distillation",
+  "spec": {
+    "schema_version": 1,
+    "arm_id": "native_full_sft_seed1729",
+    "student_base": "offline_bundle/base",
+    "student_kind": "conventional_qwen_lora",
+    "evidence_bundle": "reports/local-study/qwen7b-evidence/bundle.json",
+    "output": "reports/local-study/native-full-sft-seed1729",
+    "seed": 1729,
+    "steps": 48,
+    "max_sequence_tokens": 512,
+    "sequence_policy": "reject_overlength",
+    "rank": 8,
+    "alpha": 16.0,
+    "learning_rate": 0.0002,
+    "temperature": 2.0,
+    "dpo_beta": 0.1,
+    "losses": [
+      {
+        "kind": "sequence_sft",
+        "weight": 1.0
+      }
+    ],
+    "teacher_ids": [
+      "qwen-coder-7b-q4_k_m"
+    ],
+    "contents": [
+      "complete_sequence"
+    ],
+    "teacher_runtime": {
+      "device": {
+        "cuda": {
+          "ordinal": 0
+        }
+      },
+      "dtype": "f32"
+    },
+    "teacher_target_policy": "cache_only",
+    "student_runtime": {
+      "device": "cpu",
+      "dtype": "f32"
+    },
+    "initial_checkpoint": null,
+    "data_policy": "offline",
+    "progressive": false,
+    "self_distillation": false
+  },
+  "freeze_sha256": "26a469a3b6d9311d9df716a60f60a1dab9c13f581607b60f94678b441a908842",
+  "base_sha256": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+  "base_sha256_after": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+  "tokenizer_sha256": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+  "evidence_bundle": {
+    "path": "reports/local-study/qwen7b-evidence/bundle.json",
+    "sha256": "d6899a4dff1b7c5180c006b38f9441f916eb7bda2f59df21df1f64784e8f1417",
+    "bytes": 166535
+  },
+  "adapter": {
+    "rank": 8,
+    "alpha": 16.0
+  },
+  "adapter_sha256": "e2bcd135527659042304d936fa56c7240f6f96a43b9f81f2a888c38b7762a949",
+  "optimizer_sha256": "8aa83d2ff672840f1e685ced522115e43968911b5b092a6c252dbd828aaeaf16",
+  "initial_adapter_sha256": "97f700bf02c1bd271edb8c743d5b28a3557d8617c8b68b143e88f5d87ed2cd76",
+  "initial_adapter": {
+    "path": "reports/local-study/native-full-sft-seed1729/initial-adapter.safetensors",
+    "sha256": "97f700bf02c1bd271edb8c743d5b28a3557d8617c8b68b143e88f5d87ed2cd76",
+    "bytes": 2173504
+  },
+  "initial_checkpoint": null,
+  "dpo_reference": null,
+  "steps": 48,
+  "losses": [
+    0.30095919966697693,
+    0.3961876332759857,
+    0.3554884195327759,
+    0.37027207016944885,
+    0.3611921966075897,
+    0.4276617169380188,
+    0.32390496134757996,
+    0.18068034946918488,
+    0.1778036653995514,
+    0.21425069868564606,
+    0.29797589778900146,
+    0.1995258331298828,
+    0.2881415784358978,
+    0.22513873875141144,
+    0.22883346676826477,
+    0.406982421875,
+    0.22457359731197357,
+    0.13352537155151367,
+    0.20364497601985931,
+    0.24183876812458038,
+    0.19560129940509796,
+    0.2684621512889862,
+    0.25142061710357666,
+    0.1937352567911148,
+    0.09847057610750198,
+    0.10510466247797012,
+    0.13262762129306793,
+    0.1779153198003769,
+    0.08093070238828659,
+    0.17203612625598907,
+    0.12510772049427032,
+    0.12962396442890167,
+    0.2911524176597595,
+    0.14042139053344727,
+    0.0855066254734993,
+    0.15248137712478638,
+    0.1657252311706543,
+    0.1242673471570015,
+    0.2019093781709671,
+    0.21725603938102722,
+    0.1107320785522461,
+    0.060444485396146774,
+    0.060207299888134,
+    0.07012038677930832,
+    0.10100964456796646,
+    0.04656446725130081,
+    0.09872330725193024,
+    0.06479421257972717
+  ],
+  "gradient_norms": [
+    1.8930055037172029,
+    2.1845483911931978,
+    1.4369010748160724,
+    1.8336945121204642,
+    1.4200529642856285,
+    3.3157941125168398,
+    1.6578743877208093,
+    1.1729211364580387,
+    1.3483929713661,
+    1.0244774618100032,
+    1.702365657108268,
+    1.738543237380988,
+    1.917651571453378,
+    1.5928427905943805,
+    2.599849003802373,
+    2.432867279350376,
+    1.3505321147930283,
+    1.0469497700643764,
+    1.185201015018513,
+    1.3138987689075714,
+    1.5117559028842091,
+    1.4482503644191091,
+    2.603416715420538,
+    1.38762777108603,
+    0.9607167431321351,
+    1.11307422722872,
+    1.1138239848127434,
+    1.3347656366217113,
+    1.2606582821990138,
+    1.7993792518313951,
+    1.3610680145687803,
+    2.30312087860846,
+    1.9861244461333853,
+    1.2821890639856994,
+    1.1964765441773848,
+    1.4082786068741349,
+    1.2716408521029363,
+    1.9203671882145885,
+    1.4008709005992315,
+    3.0219487947798376,
+    1.375913017972994,
+    0.9323944596673314,
+    1.0415831890780234,
+    0.9666356913666067,
+    1.228658685383312,
+    1.5074660466797833,
+    1.5927566959019894,
+    1.0725006880705152
+  ],
+  "component_losses": [
+    {
+      "sequence_sft": 0.30095919966697693
+    },
+    {
+      "sequence_sft": 0.3961876332759857
+    },
+    {
+      "sequence_sft": 0.3554884195327759
+    },
+    {
+      "sequence_sft": 0.37027207016944885
+    },
+    {
+      "sequence_sft": 0.3611921966075897
+    },
+    {
+      "sequence_sft": 0.4276617169380188
+    },
+    {
+      "sequence_sft": 0.32390496134757996
+    },
+    {
+      "sequence_sft": 0.18068034946918488
+    },
+    {
+      "sequence_sft": 0.1778036653995514
+    },
+    {
+      "sequence_sft": 0.21425069868564606
+    },
+    {
+      "sequence_sft": 0.29797589778900146
+    },
+    {
+      "sequence_sft": 0.1995258331298828
+    },
+    {
+      "sequence_sft": 0.2881415784358978
+    },
+    {
+      "sequence_sft": 0.22513873875141144
+    },
+    {
+      "sequence_sft": 0.22883346676826477
+    },
+    {
+      "sequence_sft": 0.406982421875
+    },
+    {
+      "sequence_sft": 0.22457359731197357
+    },
+    {
+      "sequence_sft": 0.13352537155151367
+    },
+    {
+      "sequence_sft": 0.20364497601985931
+    },
+    {
+      "sequence_sft": 0.24183876812458038
+    },
+    {
+      "sequence_sft": 0.19560129940509796
+    },
+    {
+      "sequence_sft": 0.2684621512889862
+    },
+    {
+      "sequence_sft": 0.25142061710357666
+    },
+    {
+      "sequence_sft": 0.1937352567911148
+    },
+    {
+      "sequence_sft": 0.09847057610750198
+    },
+    {
+      "sequence_sft": 0.10510466247797012
+    },
+    {
+      "sequence_sft": 0.13262762129306793
+    },
+    {
+      "sequence_sft": 0.1779153198003769
+    },
+    {
+      "sequence_sft": 0.08093070238828659
+    },
+    {
+      "sequence_sft": 0.17203612625598907
+    },
+    {
+      "sequence_sft": 0.12510772049427032
+    },
+    {
+      "sequence_sft": 0.12962396442890167
+    },
+    {
+      "sequence_sft": 0.2911524176597595
+    },
+    {
+      "sequence_sft": 0.14042139053344727
+    },
+    {
+      "sequence_sft": 0.0855066254734993
+    },
+    {
+      "sequence_sft": 0.15248137712478638
+    },
+    {
+      "sequence_sft": 0.1657252311706543
+    },
+    {
+      "sequence_sft": 0.1242673471570015
+    },
+    {
+      "sequence_sft": 0.2019093781709671
+    },
+    {
+      "sequence_sft": 0.21725603938102722
+    },
+    {
+      "sequence_sft": 0.1107320785522461
+    },
+    {
+      "sequence_sft": 0.060444485396146774
+    },
+    {
+      "sequence_sft": 0.060207299888134
+    },
+    {
+      "sequence_sft": 0.07012038677930832
+    },
+    {
+      "sequence_sft": 0.10100964456796646
+    },
+    {
+      "sequence_sft": 0.04656446725130081
+    },
+    {
+      "sequence_sft": 0.09872330725193024
+    },
+    {
+      "sequence_sft": 0.06479421257972717
+    }
+  ],
+  "alignment_diagnostics": [],
+  "qat_effective_trits": null,
+  "sample_ids": [
+    "5b46a85ec5f9398290c023c26ef8cb662e6e4d19da293a71b2bcee316514f6b7",
+    "f23b74be49ae4fb9f5a42d58f33244ef0c157aa0e4afe342a565baa7e7493c91",
+    "12106a8bfb9356904186b558fd37127f1ee55e650cb57a6e843d8983be952bd0",
+    "279b6d10fb8f3e4f1d9e8b547e1207c9c65214b57d0270ab76e419d02e5165d2",
+    "9f34cf373961913a3cf1067f1f2a71e0bef8368e1557d10e998cc099a00fab71",
+    "d34031fab7990f9d5bb1ac0465e3173de67d17f95496ed535260f239f3c4bc90",
+    "b385fb6bb3931d6b39a919d387b625b8e5c0db4506f12df96b46489b5f340498",
+    "83cc42aa11a66d768d6f952f81812adff3032a39e39b89bfa188e7270ab75a62",
+    "be57ee99f53e14a44a210dee5a0a227fbee04ea80f1c914f14447c3db087cded",
+    "6f54a188344a4c4834c5a9bfe0969e33003547ea371fbf2ba03a4e5fd88d6e07",
+    "21748f9f3a9dec33f5c19fb7179ecdada908a2b27e6486b333f8a379f57d93bb",
+    "5dedbab9841301331ad4a8a4ef9d893e994c7abd27be5b97777071860da49a35",
+    "2d22b678d0bb8aadd704350c150da710a8be0fe59dc30172accfbbb0b25f792b",
+    "e89aa62fc9a189c19a13370ba9410f99991e685167f68b4f7ce97f6a4c78f965",
+    "ff06039fd8278f904a9e03151a5b46d0452d3c207474b4da9dd4b770fe9d6d26",
+    "9a709fd0afa880d7d61490074636b6a836aa05da5d9a338a46aa8aca31efdce4",
+    "60cad86431ce13f24f3525d348b75936b4659f22832705f61513e6920d3c0913",
+    "5b46a85ec5f9398290c023c26ef8cb662e6e4d19da293a71b2bcee316514f6b7",
+    "f23b74be49ae4fb9f5a42d58f33244ef0c157aa0e4afe342a565baa7e7493c91",
+    "12106a8bfb9356904186b558fd37127f1ee55e650cb57a6e843d8983be952bd0",
+    "279b6d10fb8f3e4f1d9e8b547e1207c9c65214b57d0270ab76e419d02e5165d2",
+    "9f34cf373961913a3cf1067f1f2a71e0bef8368e1557d10e998cc099a00fab71",
+    "d34031fab7990f9d5bb1ac0465e3173de67d17f95496ed535260f239f3c4bc90",
+    "b385fb6bb3931d6b39a919d387b625b8e5c0db4506f12df96b46489b5f340498",
+    "83cc42aa11a66d768d6f952f81812adff3032a39e39b89bfa188e7270ab75a62",
+    "be57ee99f53e14a44a210dee5a0a227fbee04ea80f1c914f14447c3db087cded",
+    "6f54a188344a4c4834c5a9bfe0969e33003547ea371fbf2ba03a4e5fd88d6e07",
+    "21748f9f3a9dec33f5c19fb7179ecdada908a2b27e6486b333f8a379f57d93bb",
+    "5dedbab9841301331ad4a8a4ef9d893e994c7abd27be5b97777071860da49a35",
+    "2d22b678d0bb8aadd704350c150da710a8be0fe59dc30172accfbbb0b25f792b",
+    "e89aa62fc9a189c19a13370ba9410f99991e685167f68b4f7ce97f6a4c78f965",
+    "ff06039fd8278f904a9e03151a5b46d0452d3c207474b4da9dd4b770fe9d6d26",
+    "9a709fd0afa880d7d61490074636b6a836aa05da5d9a338a46aa8aca31efdce4",
+    "60cad86431ce13f24f3525d348b75936b4659f22832705f61513e6920d3c0913",
+    "5b46a85ec5f9398290c023c26ef8cb662e6e4d19da293a71b2bcee316514f6b7",
+    "f23b74be49ae4fb9f5a42d58f33244ef0c157aa0e4afe342a565baa7e7493c91",
+    "12106a8bfb9356904186b558fd37127f1ee55e650cb57a6e843d8983be952bd0",
+    "279b6d10fb8f3e4f1d9e8b547e1207c9c65214b57d0270ab76e419d02e5165d2",
+    "9f34cf373961913a3cf1067f1f2a71e0bef8368e1557d10e998cc099a00fab71",
+    "d34031fab7990f9d5bb1ac0465e3173de67d17f95496ed535260f239f3c4bc90",
+    "b385fb6bb3931d6b39a919d387b625b8e5c0db4506f12df96b46489b5f340498",
+    "83cc42aa11a66d768d6f952f81812adff3032a39e39b89bfa188e7270ab75a62",
+    "be57ee99f53e14a44a210dee5a0a227fbee04ea80f1c914f14447c3db087cded",
+    "6f54a188344a4c4834c5a9bfe0969e33003547ea371fbf2ba03a4e5fd88d6e07",
+    "21748f9f3a9dec33f5c19fb7179ecdada908a2b27e6486b333f8a379f57d93bb",
+    "5dedbab9841301331ad4a8a4ef9d893e994c7abd27be5b97777071860da49a35",
+    "2d22b678d0bb8aadd704350c150da710a8be0fe59dc30172accfbbb0b25f792b",
+    "e89aa62fc9a189c19a13370ba9410f99991e685167f68b4f7ce97f6a4c78f965"
+  ],
+  "realised_update_counts": {
+    "content/complete_sequence": 48,
+    "teacher/qwen-coder-7b-q4_k_m": 48
+  },
+  "trace_records": [],
+  "teacher_rights": [
+    {
+      "assets": {
+        "bytes": 1206,
+        "path": "offline_bundle/comparative/qwen-coder-7b-q4_k_m/gguf-assets.json",
+        "sha256": "606bfac02a103d208ccef73067cb6a4581e9b099e19bc9ed8e2021ebb1143114"
+      },
+      "capabilities": {
+        "attention": {
+          "artefacts": [],
+          "available": false,
+          "reason": "Not recorded: require actual causal attention matrices and declared head mapping",
+          "supported": true
+        },
+        "complete_sequences": {
+          "artefacts": [
+            {
+              "bytes": 4160,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/bits.hamming.generation.json",
+              "sha256": "19172d7b4c738dac55e7dc508eeeea43bbd27a824b54d1cd20a7d257e9f03d0c"
+            },
+            {
+              "bytes": 4023,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/bits.popcount.generation.json",
+              "sha256": "580efb002272a51f28c13547f99fd1b12627b078a43a0d4dcf3b7ae3212a82e9"
+            },
+            {
+              "bytes": 4078,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/calendar.leap.generation.json",
+              "sha256": "1ddc8215a1627afee40421627b1a8bcbcb9da3994f595e0645de4f5babb1186a"
+            },
+            {
+              "bytes": 4327,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/calendar.month_days.generation.json",
+              "sha256": "dd6cf8aad9bb5927dd348e169d71b45bf1866edbdcb252458b95ca740709520a"
+            },
+            {
+              "bytes": 4524,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/calendar.ordinal.generation.json",
+              "sha256": "06c36a2f6080a85452632e489e07afe357df6a9fa00e33e4a3b52bff8c333e6b"
+            },
+            {
+              "bytes": 4291,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/graph.indegrees.generation.json",
+              "sha256": "88c9bcad44eb92e454e4841dffd5cc281edd3722e7dc76cf7f43e301568984e7"
+            },
+            {
+              "bytes": 4853,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/intervals.coverage.generation.json",
+              "sha256": "99a1c524d6f042a1842ed25778ae33ec9240b053b5a63addfb777a94ec5904d9"
+            },
+            {
+              "bytes": 4468,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/intervals.peak.generation.json",
+              "sha256": "32bd9858cddc772409654bc7aed2fadd6d58e25088966e50400430a1d612ae2a"
+            },
+            {
+              "bytes": 4618,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/ledger.bounds.generation.json",
+              "sha256": "c029ffe946a0cb28c8dee81560093c198540df081b2d39cc50f4c2e2eaf78c93"
+            },
+            {
+              "bytes": 4347,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/ledger.prefix.generation.json",
+              "sha256": "b525f34b6fc4d10be932ac48de97fb17eae958bbd651c9e26dc78ac07152749e"
+            },
+            {
+              "bytes": 4078,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/ledger.sum.generation.json",
+              "sha256": "6f3d4bba8600110d5989ff6b79c4dbeb0b5c4506b4e5e456f91c6b04dedba773"
+            },
+            {
+              "bytes": 4553,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/matrices.diagonals.generation.json",
+              "sha256": "f4f91c4bc8e21777e536532b67191bfb3d995720dcc4a5d2991278f07ac4dade"
+            },
+            {
+              "bytes": 4397,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/matrices.rotate.generation.json",
+              "sha256": "979fdab750ffd71c3c4db9704589d6ed167a72ec5ce73db0e4a690c5f6b951e2"
+            },
+            {
+              "bytes": 4228,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/paths.basename.generation.json",
+              "sha256": "f36bacb2143af3429a30fb69a0613cd660c1747735b92dbd012d10f31bc05230"
+            },
+            {
+              "bytes": 4354,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/search.runs.generation.json",
+              "sha256": "5d4d8a7d851490bf4e2b910ac532b0286b45f6e4d888474a9e23b5a980b99a74"
+            },
+            {
+              "bytes": 4692,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/stock.mode.generation.json",
+              "sha256": "cbd509dbfada7161d8f5d39465101e6ecb9d7a8c8517dff743f3cc5fe317ee3c"
+            },
+            {
+              "bytes": 4113,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/text.lower_trim.generation.json",
+              "sha256": "18c986ab02ef8587e9bfcef5a240cc768b6a2b95f917c183d1ebcba73e71dabb"
+            },
+            {
+              "bytes": 4565,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/validation.brackets.generation.json",
+              "sha256": "dfd9cf6ef938865e8b564079016bfaee11aaf943a5a00b0c6c7543f010b3d54d"
+            }
+          ],
+          "available": true,
+          "reason": "Complete, nonempty generations passed every trusted container case",
+          "supported": true
+        },
+        "context": {
+          "artefacts": [],
+          "available": false,
+          "reason": "No generation with pinned additional train-only context",
+          "supported": true
+        },
+        "hidden_states": {
+          "artefacts": [],
+          "available": false,
+          "reason": "Not recorded: require actual layer states and declared dimensional projection",
+          "supported": true
+        },
+        "logits": {
+          "artefacts": [],
+          "available": false,
+          "reason": "Not recorded: a native teacher-forced worker must produce and bind actual token logits; KL also requires tokeniser alignment",
+          "supported": true
+        },
+        "on_policy": {
+          "artefacts": [],
+          "available": false,
+          "reason": "No checkpoint-bound student rollout plus teacher feedback and regrading",
+          "supported": true
+        },
+        "preferences": {
+          "artefacts": [],
+          "available": false,
+          "reason": "No safe same-task verified positive/negative pair",
+          "supported": true
+        },
+        "process": {
+          "artefacts": [],
+          "available": false,
+          "reason": "No independently generated and checked planning/process trace",
+          "supported": true
+        },
+        "self_distillation": {
+          "artefacts": [],
+          "available": false,
+          "reason": "No original student-checkpoint teacher outputs; supervised teacher rows cannot be relabelled",
+          "supported": true
+        },
+        "student_tokeniser_sha256": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+        "tokeniser_aligned": true,
+        "tokeniser_sha256": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+        "tool_trajectories": {
+          "artefacts": [],
+          "available": false,
+          "reason": "A sandbox grade alone is not a teacher feedback/revision trajectory",
+          "supported": true
+        }
+      },
+      "id": "qwen-coder-7b-q4_k_m",
+      "model": {
+        "architecture": "qwen2",
+        "developer_id": "alibaba-qwen",
+        "directory": "offline_bundle/comparative/qwen-coder-7b-q4_k_m",
+        "id": "qwen-coder-7b-q4_k_m",
+        "licence": "Apache-2.0",
+        "model_id": "Qwen/Qwen2.5-Coder-7B-Instruct-GGUF",
+        "revision": "13fb94bfda8c8cf22497dc57b78f391a9acb426a",
+        "role": "coding_teacher",
+        "weight_format": "gguf"
+      },
+      "rights": {
+        "eligible": true,
+        "inherited_restrictions": [
+          "Retain original model licence, copyright notices and attribution; no ownership guarantee for independently reproduced code."
+        ],
+        "licence": "apache-2.0",
+        "licence_artefacts": [
+          {
+            "bytes": 11343,
+            "path": "offline_bundle/comparative/qwen-coder-7b-q4_k_m/source/LICENSE",
+            "sha256": "832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e"
+          },
+          {
+            "bytes": 6392,
+            "path": "offline_bundle/comparative/qwen-coder-7b-q4_k_m/source/README.md",
+            "sha256": "3c090be37f829adc1e4cdb78733667437732541470430ab2cd785d7f0d460077"
+          }
+        ],
+        "reasoning": "Explicit recognised original model licence and publisher-verified local assets, subject to preserved licence obligations",
+        "scope": "local open-weight output adaptation only; no API terms inferred"
+      }
+    }
+  ],
+  "student_execution": {
+    "actual_device": "Cpu",
+    "actual_dtype": "F32",
+    "available_cpu_threads": 16,
+    "candle_cpu_threads": 4,
+    "cpu_fallback": false,
+    "cuda_active": false,
+    "engine": "native_rust_candle",
+    "student_backend": "conventional_qwen_lora",
+    "ternary_quantisation_during_every_forward": false,
+    "trainable_adapter_tensors": 96
+  },
+  "reloaded": true,
+  "production_eligible": false,
+  "elapsed_seconds": 705.176850178,
+  "limitations": [
+    "48 tasks from 12 locally authored train source groups; no held-out or development data enters training.",
+    "Local model developers do not count as independent paid API provider businesses.",
+    "No learning, promotion, cash saving or teacher trace is inferred from this bundle alone.",
+    "Process, contextual revision, teacher-feedback trajectories, on-policy and self-distillation require additional genuine generation evidence.",
+    "Exploratory local-teacher adaptation; no independent API-provider or held-out promotion claim. Reload is a fresh model instance inside the worker; external evaluation must reload in its own process."
+  ]
+}

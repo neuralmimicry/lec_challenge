@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "1351e83f15e1c1e39add4277a3eeb9000a9112c2cd32b1ddc0c0e4d1fba24aa0",
+  "task_id": "tables.inner_join",
+  "source_id": "private-tables-v1",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input [left,right] has arrays of [key,value] integer rows, each side with unique keys. Return [key,left_value,right_value] for common keys in ascending key order.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[[[2,9],[1,4]],[[2,3],[3,8]]],\"expected\":[[2,9,3]]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\nfn solve(input: serde_json::Value) -> serde_json::Value {\n    let input = input.as_array();\n    if input.len() != 2 {\n        return serde_json::Value::Error(\"Input must be a list with two arrays.\");\n    }\n\n    let left = input[0].as_array();\n    let right = input[1].as_array();\n\n    let mut result = Vec::new();\n    let mut left_index = 0;\n    let mut right_index = 0;\n\n    while left_index < left.len() && right_index < right.len() {\n        let left_key = left[left_index][0];\n        let right_key = right[right_index][0];\n\n        if left_key == right_key {\n            result.push(vec![left_key, left[left_index][1], right[left_index][1]]);\n            left_index += 1;\n            right_index += 1;\n        } else if left_key < right_key {\n            left_index += 1;\n        } else {\n            right_index += 1;\n        }\n    }\n\n    serde_json::Value::Array(result)\n}\n\nfn main() {\n    let input = serde_json::Value::from_json_str(\"{\\\"input\\\":[[[2,9],[1,4]],[[2,3],[3,8]]],\"expected\":[[2,9,3]]}]\");\n    let result = solve(input);\n    println!(\"{:?}\", result);\n}\n```\n\nThis Rust code defines a function `solve` that takes a JSON array as input, processes it to find common keys and their corresponding values, and returns the result as a JSON array. The function uses `serde_json` to parse the input and handle arrays, and it iterates through the arrays to find common keys and their values.",
+    "checkpoint_id": "ea8a16e57b8fefe63b4bf3f891bdfb28009fccd0056d4cd5741953ada830fa20",
+    "finish_reason": "stop",
+    "input_tokens": 259,
+    "output_tokens": 367,
+    "elapsed_ms": 59110,
+    "complete": true
+  },
+  "model_error": null
+}

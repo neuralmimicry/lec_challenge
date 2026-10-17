@@ -1,0 +1,31 @@
+   Compiling ring v0.17.14
+   Compiling rustls v0.23.46
+    Checking rustls-webpki v0.103.15
+    Checking tokio-rustls v0.26.6
+    Checking hyper-rustls v0.27.10
+    Checking reqwest v0.12.28
+    Checking lec-distil v0.1.0 (/home/pbisaacs/Developer/neuralmimicry/lec_challenge)
+error: large size difference between variants
+   --> src/teacher_evidence/variants/collection.rs:276:1
+    |
+276 | / enum PreparedRequest {
+277 | |     Resumed,
+278 | |     Unavailable(serde_json::Value),
+    | |     ------------------------------ the second-largest variant contains at least 32 bytes
+279 | |     Pending(ContentPlan, Artefact),
+    | |     ------------------------------ the largest variant contains at least 672 bytes
+280 | | }
+    | |_^ the entire enum is at least 672 bytes
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.98.0/index.html#large_enum_variant
+    = note: `-D clippy::large-enum-variant` implied by `-D warnings`
+    = help: to override `-D warnings` add `#[allow(clippy::large_enum_variant)]`
+help: consider boxing the large fields or introducing indirection in some other way to reduce the total size of the enum
+    |
+279 -     Pending(ContentPlan, Artefact),
+279 +     Pending(Box<ContentPlan>, Artefact),
+    |
+
+error: could not compile `lec-distil` (lib) due to 1 previous error
+warning: build failed, waiting for other jobs to finish...
+error: could not compile `lec-distil` (lib test) due to 1 previous error

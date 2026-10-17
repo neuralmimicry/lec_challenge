@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "a52d044d05dc99f9af1879cdb69e7d80c4abc41b317440255f0ff27069084831",
+  "task_id": "sequences.zip_longest",
+  "source_id": "private-sequences-v1",
+  "success": false,
+  "raw_generation": {
+    "path": "reports/local-study/native-full-quality-001/composed-train/generations/sequences.zip_longest.json",
+    "sha256": "5b9df046885f2b033f1bc6c91cb8bd167587ae008b2b9ad6e5942e7e858273d8",
+    "bytes": 2103
+  },
+  "sandbox_report": {
+    "path": "reports/local-study/native-full-quality-001/composed-train/sandbox/a4a2902f-ddb2-457d-83b9-1577ff4776a9.json",
+    "sha256": "6e993eafadc91c45fa62d60712885476c06d9dd983623d9f452f437742ce0f47",
+    "bytes": 4777
+  },
+  "grading_error": null
+}

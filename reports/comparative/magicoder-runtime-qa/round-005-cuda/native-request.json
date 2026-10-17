@@ -1,0 +1,8 @@
+{
+  "max_new_tokens": 16,
+  "prompt": "Write a Rust function add(a: i64, b: i64) -> i64. Return only the complete function.",
+  "seed": 1729,
+  "temperature": 0.0,
+  "timeout_seconds": 120,
+  "top_p": 1.0
+}

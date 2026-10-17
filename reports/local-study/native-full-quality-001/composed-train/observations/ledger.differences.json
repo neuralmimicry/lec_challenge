@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "a52d044d05dc99f9af1879cdb69e7d80c4abc41b317440255f0ff27069084831",
+  "task_id": "ledger.differences",
+  "source_id": "private-ledger-v1",
+  "success": false,
+  "raw_generation": {
+    "path": "reports/local-study/native-full-quality-001/composed-train/generations/ledger.differences.json",
+    "sha256": "0b01b9a63d9682d134dd826e1a8282e7f2eaba2247f866f7c2355ec8f459d753",
+    "bytes": 1832
+  },
+  "sandbox_report": {
+    "path": "reports/local-study/native-full-quality-001/composed-train/sandbox/fe97cc75-11ed-498d-9a88-99e01c46af4f.json",
+    "sha256": "99bed79d77946b8dac1d796274fdcaa7da4abb520cc536f38643be5d788bfbab",
+    "bytes": 2754
+  },
+  "grading_error": null
+}

@@ -5,8 +5,13 @@ use crate::{
     model::{Generation, GenerationRequest},
     sandbox::{self, SandboxConfig},
 };
-use std::os::fd::AsRawFd;
+use std::os::{fd::AsRawFd, unix::fs::OpenOptionsExt};
+mod collection;
+mod publication;
+use collection::collect_content_inner;
+use publication::Publication;
 
+#[derive(Clone)]
 pub struct ContentCollectOptions {
     pub bundle: PathBuf,
     pub output: PathBuf,
@@ -65,6 +70,7 @@ impl Lease {
             .write(true)
             .create(true)
             .truncate(false)
+            .custom_flags(libc::O_NOFOLLOW)
             .open(path)?;
         // SAFETY: flock uses a retained live descriptor and no Rust pointers.
         ensure!(
@@ -160,26 +166,28 @@ fn prompt(
 /// The policy and each request are frozen before inference. Completed raw
 /// generations and grades survive restarts; a new policy needs a new directory.
 pub async fn collect_content(options: ContentCollectOptions) -> Result<EvidenceBundle> {
+    validate_options(&options)?;
     let output = options.output.clone();
-    let result = collect_content_inner(options).await;
-    if let Err(error) = &result
-        && output.is_dir()
-        && !output.join("content-report.json").exists()
-    {
-        artefact::write_json(
-            &output.join("content-report.json"),
-            &serde_json::json!({
-                "schema_version":1,"evidence_kind":"current_batch_teacher_content_collection",
-                "healthy_complete":false,"collection_completed":false,"production_eligible":false,
-                "failure":format!("{error:#}"),
-                "limitation":"Earlier inherited examples cannot establish a successful current collection."
-            }),
-        )?;
+    let publication = Publication::acquire(output.clone()).await?;
+    let result = collect_content_inner(options, publication.clone()).await;
+    if let Err(error) = &result {
+        let failure = format!("{error:#}");
+        publication.run(move|| {
+            if output.is_dir()&&!output.join("content-report.json").exists() {
+                artefact::write_json(&output.join("content-report.json"),&serde_json::json!({
+                    "schema_version":1,"evidence_kind":"current_batch_teacher_content_collection",
+                    "healthy_complete":false,"collection_completed":false,"production_eligible":false,
+                    "failure":failure,
+                    "limitation":"Earlier inherited examples cannot establish a successful current collection."
+                }))?;
+            }
+            Ok(())
+        }).await?;
     }
     result
 }
 
-async fn collect_content_inner(options: ContentCollectOptions) -> Result<EvidenceBundle> {
+fn validate_options(options: &ContentCollectOptions) -> Result<()> {
     relative(&options.output)?;
     ensure!(
         options.output.starts_with("reports") || options.output.starts_with("data"),
@@ -198,268 +206,7 @@ async fn collect_content_inner(options: ContentCollectOptions) -> Result<Evidenc
             )),
         "unsupported generated content type"
     );
-    let input = options.bundle.clone();
-    let mut bundle = tokio::task::spawn_blocking(move || load_verified(&input)).await??;
-    ensure!(
-        bundle.rollout_records.is_empty(),
-        "content variants after student/self rollouts require ordered dependency replay, which is not implemented; no base-only fallback is permitted"
-    );
-    fs::create_dir_all(&options.output)?;
-    let _lease = Lease::acquire(&options.output.join(".content-collection.lock"))?;
-    let root = std::env::current_dir()?.canonicalize()?;
-    let input_path = if options.bundle.is_dir() {
-        options.bundle.join("bundle.json")
-    } else {
-        options.bundle.clone()
-    };
-    ensure!(
-        input_path.canonicalize()?.parent() != Some(options.output.canonicalize()?.as_path()),
-        "content output must not overwrite its verified input bundle"
-    );
-    let policy_path = options.output.join("content-policy.json");
-    let mut policy = serde_json::json!({"schema_version":1,"input":capture(&root,&input_path)?,"content":options.content,"runtime":options.runtime,"max_tokens":options.max_tokens,"seed":options.seed,"maximum_tasks":options.maximum_tasks,"teachers":bundle.teachers.iter().map(|t|&t.id).collect::<Vec<_>>()});
-    if let Some(context_tokens) = options.context_tokens {
-        policy["context_tokens"] = context_tokens.into();
-    }
-    // New protocols bind their executable before any variant is generated.
-    // Historical policy bytes retain their original serialised shape; their
-    // individual generation plans already bind the original engine identity.
-    if !policy_path.exists()
-        || serde_json::from_slice::<serde_json::Value>(&fs::read(&policy_path)?)?
-            .get("engine_binary_sha256")
-            .is_some()
-    {
-        policy["engine_binary_sha256"] = artefact::file_hash(&std::env::current_exe()?)?.into();
-    }
-    if policy_path.exists() {
-        ensure!(
-            serde_json::from_slice::<serde_json::Value>(&fs::read(&policy_path)?)? == policy,
-            "saved policy changed; use a new output directory for a fresh study"
-        );
-    } else {
-        artefact::write_json(&policy_path, &policy)?;
-    }
-    let mut sandbox = SandboxConfig {
-        report_dir: options.output.join("sandbox"),
-        ..Default::default()
-    };
-    let preflight_path = options.output.join("sandbox-preflight.json");
-    if preflight_path.exists() {
-        let saved: sandbox::PreflightReport = serde_json::from_slice(&fs::read(&preflight_path)?)?;
-        ensure!(saved.probes_passed, "saved sandbox preflight failed");
-        sandbox.expected_image_id = saved.image_id;
-    } else {
-        let observed = sandbox::preflight(&sandbox).await?;
-        ensure!(
-            observed.probes_passed,
-            "content sandbox controls unavailable"
-        );
-        sandbox.expected_image_id = observed.image_id.clone();
-        artefact::write_json(&preflight_path, &observed)?;
-    }
-    let preflight = capture(&root, &preflight_path)?;
-    let engine = artefact::file_hash(&std::env::current_exe()?)?;
-    let mut unavailable = Vec::new();
-    for teacher in bundle.teachers.clone() {
-        let mut loaded: Option<RecordedModel> = None;
-        for task in train_tasks().into_iter().take(options.maximum_tasks) {
-            for content in &options.content {
-                let tag = serde_json::to_value(content)?
-                    .as_str()
-                    .context("content tag absent")?
-                    .to_owned();
-                let directory = options.output.join(&teacher.id).join(&task.id).join(tag);
-                fs::create_dir_all(&directory)?;
-                let record_path = directory.join("record.json");
-                if record_path.exists() {
-                    append_verified(&root, &mut bundle, &capture(&root, &record_path)?)?;
-                    continue;
-                }
-                let (text, supporting_sample_ids, feedback_candidate, feedback_summary) =
-                    match prompt(&root, &bundle, &teacher, &task, *content) {
-                        Ok(value) => value,
-                        Err(error) => {
-                            unavailable.push(serde_json::json!({"teacher":teacher.id,"task":task.id,"content":content,"reason":error.to_string()}));
-                            continue;
-                        }
-                    };
-                let plan = ContentPlan {
-                    schema_version: 1,
-                    task_id: task.id.clone(),
-                    teacher_id: teacher.id.clone(),
-                    content: *content,
-                    request: GenerationRequest {
-                        prompt: text,
-                        max_new_tokens: options.max_tokens,
-                        seed: options.seed,
-                        temperature: 0.2,
-                        top_p: 0.95,
-                        timeout_seconds: 120,
-                    },
-                    runtime: options.runtime.clone(),
-                    context_tokens: options.context_tokens,
-                    teacher_assets: teacher.assets.clone(),
-                    teacher_checkpoint: teacher.adapter_checkpoint.clone(),
-                    supporting_sample_ids,
-                    feedback_candidate,
-                    feedback_summary,
-                    sandbox: sandbox.clone(),
-                    preflight: preflight.clone(),
-                    engine_binary_sha256: engine.clone(),
-                };
-                let plan_path = directory.join("plan.json");
-                let raw_path = directory.join("raw-generation.json");
-                let plan = if plan_path.exists() {
-                    let old: ContentPlan = serde_json::from_slice(&fs::read(&plan_path)?)?;
-                    let mut expected = plan.clone();
-                    if raw_path.exists() {
-                        // An already-recorded generation retains the binary
-                        // identity that actually produced it. Regrading after
-                        // an unrelated rebuild must not regenerate that work.
-                        expected.engine_binary_sha256 = old.engine_binary_sha256.clone();
-                    }
-                    ensure!(
-                        json_equal(&old, &expected)?,
-                        "saved content request changed; refusing implicit resampling"
-                    );
-                    old
-                } else {
-                    artefact::write_json(&plan_path, &plan)?;
-                    plan
-                };
-                let plan_artifact = capture(&root, &plan_path)?;
-                let raw: ContentRaw = if raw_path.exists() {
-                    let saved: ContentRaw = serde_json::from_slice(&fs::read(&raw_path)?)?;
-                    ensure!(
-                        json_equal(&saved.plan, &plan_artifact)?,
-                        "saved raw content belongs to another request"
-                    );
-                    saved
-                } else {
-                    let teacher_spec = teacher.clone();
-                    let runtime = options.runtime.clone();
-                    let request = plan.request.clone();
-                    let context_tokens = plan.context_tokens;
-                    let result = tokio::task::spawn_blocking(move || {
-                        rollouts::validate_teacher_request(
-                            &teacher_spec,
-                            context_tokens,
-                            &request,
-                        )?;
-                        let mut model = match loaded {
-                            Some(model) => model,
-                            None => RecordedModel::teacher_with_context(
-                                &teacher_spec,
-                                runtime,
-                                context_tokens,
-                            )?,
-                        };
-                        let execution = model.execution_metadata();
-                        let result = model.generate(request);
-                        Ok::<_, anyhow::Error>((model, execution, result))
-                    })
-                    .await?;
-                    let (generation, generation_error, execution) = match result {
-                        Ok((model, execution, result)) => {
-                            loaded = Some(model);
-                            match result {
-                                Ok(g) => (Some(g), None, Some(execution)),
-                                Err(e) => (None, Some(format!("{e:#}")), Some(execution)),
-                            }
-                        }
-                        Err(e) => {
-                            loaded = None;
-                            (None, Some(format!("{e:#}")), None)
-                        }
-                    };
-                    let raw = ContentRaw {
-                        schema_version: 1,
-                        evidence_kind: "actual_local_teacher_content_generation".into(),
-                        plan: plan_artifact.clone(),
-                        generation,
-                        generation_error,
-                        execution,
-                    };
-                    artefact::write_json(&raw_path, &raw)?;
-                    raw
-                };
-                let (grade, grading_error) = if let Some(g) = raw
-                    .generation
-                    .as_ref()
-                    .filter(|g| g.complete && !g.completion.trim().is_empty())
-                {
-                    let link = directory.join("grade-link.json");
-                    if link.exists() {
-                        (
-                            Some(serde_json::from_slice::<Artefact>(&fs::read(&link)?)?),
-                            None,
-                        )
-                    } else {
-                        match sandbox::grade(
-                            &task,
-                            &crate::evaluate::extract_code(&g.completion),
-                            &sandbox,
-                        )
-                        .await
-                        {
-                            Ok(report) => {
-                                let a = capture(
-                                    &root,
-                                    &sandbox.report_dir.join(format!("{}.json", report.run_id)),
-                                )?;
-                                artefact::write_json(&link, &a)?;
-                                (Some(a), None)
-                            }
-                            Err(e) => (None, Some(format!("{e:#}"))),
-                        }
-                    }
-                } else {
-                    (None, None)
-                };
-                let success = if let Some(a) = &grade {
-                    let r: SandboxReport = serde_json::from_slice(&fs::read(a.verify(&root)?)?)?;
-                    r.passed
-                        && !r.quarantined
-                        && r.trace_complete
-                        && (*content != ContentKind::Process
-                            || raw.generation.as_ref().is_some_and(|g| {
-                                g.completion
-                                    .lines()
-                                    .any(|l| l.trim_start().starts_with("//"))
-                            }))
-                } else {
-                    false
-                };
-                let record = ContentRecord {
-                    schema_version: 1,
-                    evidence_kind: "actual_local_teacher_content_observation".into(),
-                    plan: plan_artifact,
-                    raw_generation: capture(&root, &raw_path)?,
-                    sandbox_report: grade,
-                    grading_error,
-                    success,
-                };
-                artefact::write_json(&record_path, &record)?;
-                append_verified(&root, &mut bundle, &capture(&root, &record_path)?)?;
-                eprintln!(
-                    "teacher content progress teacher={} task={} content={:?} accepted={} total_samples={}",
-                    teacher.id,
-                    task.id,
-                    content,
-                    success,
-                    bundle.samples.len()
-                );
-            }
-        }
-    }
-    artefact::write_json(&options.output.join("unavailable.json"), &unavailable)?;
-    artefact::write_json(&options.output.join("bundle.json"), &bundle)?;
-    artefact::write_json(
-        &options.output.join("manifest.json"),
-        &serde_json::json!({"schema_version":1,"bundle":capture(&root,&options.output.join("bundle.json"))?,"train_corpus_sha256":bundle.train_corpus_sha256,"samples":bundle.samples.len(),"preferences":bundle.preferences.len(),"promotable":false}),
-    )?;
-    write_content_report(&root, &options, &bundle, &unavailable)?;
-    Ok(bundle)
+    Ok(())
 }
 
 /// Count only observations produced by this policy/output, including validated

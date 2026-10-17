@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "4a9a9f574d803ba166ed2b6c53148e9e64617b9cc03c46c4b6950f86ca4d1fc8",
+  "task_id": "tables.inner_join",
+  "source_id": "private-tables-v1",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input [left,right] has arrays of [key,value] integer rows, each side with unique keys. Return [key,left_value,right_value] for common keys in ascending key order.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[[[2,9],[1,4]],[[2,3],[3,8]]],\"expected\":[[2,9,3]]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\nfn solve(input: serde_json::Value) -> serde_json::Value {\n    let mut result = Vec::new();\n    for line in input.as_array() {\n        let left = line.as_array();\n        let right = line.as_array();\n        let mut common_keys = Vec::new();\n        for key in left.iter() {\n            for value in right.iter() {\n                if key == value {\n                    common_keys.push(key);\n                }\n            }\n        }\n        common_keys.sort_unstable();\n        result.push(vec![key, left[0], right[0]]);\n    }\n    result\n}\n\nfn main() {\n    // Example usage\n    let input = serde_json::Value::from(\"{\\\"input\\\":[[[2,9],[1,4]],[[2,3],[3,8]]],\"expected\":[[2,9,3]]}]\");\n    let output = solve(input);\n    println!(\"{:?}\", output);\n}\n```\n\nThis Rust code defines a function `solve` that takes a JSON input and returns a JSON output. The function iterates over each line in the input, checks for common keys, and returns the result in the specified format.",
+    "checkpoint_id": "c593e197161a62bf5d103260a2cd2f9aa79ab9d66eaa3d379df21a24c0d916c0",
+    "finish_reason": "stop",
+    "input_tokens": 259,
+    "output_tokens": 246,
+    "elapsed_ms": 42083,
+    "complete": true
+  },
+  "model_error": null
+}

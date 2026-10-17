@@ -1,0 +1,53 @@
+{
+  "schema_version": 3,
+  "run_id": "d9a12980-220d-4d6f-9435-f6a344d8998a",
+  "ownership_nonce": "ce47a8e5-f66e-447d-95ff-1290bbf72d0f",
+  "attempt_key": "d3914672-aea6-4918-8036-3bce0acf89e5",
+  "receipt_path": "reports/comparative/search/round-002/trials/deepseek-coder-6_7b-q4_k_m/comparison/sandbox/d3914672-aea6-4918-8036-3bce0acf89e5.prepared.json",
+  "report_path": "reports/comparative/search/round-002/trials/deepseek-coder-6_7b-q4_k_m/comparison/sandbox/d9a12980-220d-4d6f-9435-f6a344d8998a.json",
+  "task": {
+    "id": "dispatch.round_robin",
+    "source_id": "private-dispatch-v1",
+    "lineage_id": "local-contract-pack-13",
+    "split": "development",
+    "specification": "Input {jobs,quantum} has nonnegative integer work amounts and positive quantum. Cycle job indices, giving up to quantum work each turn; return indices in order of completion, initially zero-work jobs first in index order.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "e445e145f0405de8c854262451687ad1958cdfd2793c0f20d7b13efdf5c0a5fa",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": {
+          "jobs": [
+            3,
+            1,
+            2
+          ],
+          "quantum": 2
+        },
+        "expected": [
+          1,
+          2,
+          0
+        ]
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "Here is a Rust function that solves the problem:\n\n```rust\nuse serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let jobs = input[\"jobs\"].as_array().unwrap();\n    let quantum = input[\"quantum\"].as_i64().unwrap();\n\n    let mut job_indices: Vec<usize> = jobs.iter().enumerate().collect();\n    let mut result: Vec<i64> = vec![0; jobs.len()];\n\n    let mut quantum_left = quantum;\n    while quantum_left > 0 {\n        for i in 0..job_indices.len() {\n            if result[job_indices[i]] == 0 && jobs[job_indices[i]].as_i64().unwrap() <= quantum_left {\n                result[job_indices[i]] = quantum_left;\n                quantum_left -= jobs[job_indices[i]].as_i64().unwrap();\n            }\n        }\n    }\n\n    Value::Array(result.into_iter().map(|v| Value::Number(Number::from(v))).collect())\n}\n```\n\nThis function first extracts the jobs and quantum from the input JSON. It then creates a vector of job indices and a vector of results, both of size equal to the number of jobs. It then enters a loop where it tries to assign the quantum to jobs. If a job has not been assigned yet and its work is less than or equal to the remaining quantum, it is assigned the quantum and the remaining quantum is decreased by the job's work. This process is repeated until the quantum is fully assigned. Finally, it returns the vector of results as a JSON array.",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/comparative/search/round-002/trials/deepseek-coder-6_7b-q4_k_m/comparison/sandbox"
+  },
+  "code_sha256": "7ddbc0b057c3c7fc7c833769d02c7b3bfdd30a47c98f67f68202d7667194267d",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

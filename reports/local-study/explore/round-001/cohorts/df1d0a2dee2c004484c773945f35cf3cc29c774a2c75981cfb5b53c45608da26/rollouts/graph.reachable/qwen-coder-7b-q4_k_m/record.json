@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "evidence_kind": "actual_checkpoint_bound_rollout_observation",
+  "teacher_id": "qwen-coder-7b-q4_k_m",
+  "plan": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/graph.reachable/student-plan.json",
+    "sha256": "daa7d7e1dcd02aadc1a624305dc985483d0958a3bbac15f80193789c975de621",
+    "bytes": 4243
+  },
+  "student_raw": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/graph.reachable/student-raw.json",
+    "sha256": "2fb1e8e096babef3d9946c8505623fb556cf2472ba8d694bb7f26b88f26db219",
+    "bytes": 1994
+  },
+  "student_grade": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox/f4f7a3d1-985f-41a6-84c1-85c66aafba81.json",
+    "sha256": "97de188974f41d5b5587a2da3f793351d290b3cd733deef3297f909742528355",
+    "bytes": 1940
+  },
+  "student_content_eligibility": {
+    "policy": "verified_content_roles_v1",
+    "role": "oracle_negative",
+    "report": {
+      "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox/f4f7a3d1-985f-41a6-84c1-85c66aafba81.json",
+      "sha256": "97de188974f41d5b5587a2da3f793351d290b3cd733deef3297f909742528355",
+      "bytes": 1940
+    },
+    "audit": {
+      "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox/f4f7a3d1-985f-41a6-84c1-85c66aafba81.audit.json",
+      "sha256": "c8106ccf7ec9bb94052dc5a97d49bb3f9be720b9847b28d70ab6bab7686e517e",
+      "bytes": 398
+    },
+    "completion_sha256": "ac3c291ec6176b1b238ce7843ef04d0f682f70b66da329698356addea47e7d38",
+    "generation_complete": true,
+    "original_quarantined": true,
+    "reason": "Complete executed answer has an oracle-only mismatch, valid complete JSON responses, exit zero and no audit events, runtime errors or truncation. Its original failure/quarantine remains unchanged; it is a negative only."
+  },
+  "feedback_plan": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/graph.reachable/qwen-coder-7b-q4_k_m/feedback-plan.json",
+    "sha256": "dfc5222b2bd51942accfe2c817e118319d7b31e249a6a9f7db69b2511c53533a",
+    "bytes": 3830
+  },
+  "feedback_raw": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/graph.reachable/qwen-coder-7b-q4_k_m/feedback-raw.json",
+    "sha256": "021fde8304d600057d50d21fc5aa94671d69c18e37f41f02c9de333b2f289c9f",
+    "bytes": 2542
+  },
+  "feedback_grade": null,
+  "errors": [
+    "No student/corrective output; this observation is a failure"
+  ],
+  "success": false
+}

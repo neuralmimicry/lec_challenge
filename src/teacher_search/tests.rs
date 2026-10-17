@@ -89,6 +89,49 @@ fn duplicate_quantisation_variants_do_not_inflate_qualified_target() {
     assert!(retained.contains("q6") && !retained.contains("q4"));
 }
 
+#[tokio::test]
+async fn offline_and_failed_connectivity_preserve_inactive_model_bytes() {
+    let directory = tempfile::tempdir_in("offline_bundle").unwrap();
+    let weight = directory.path().join("fixture.safetensors");
+    fs::write(&weight, b"LABELLED weight fixture; never a real model").unwrap();
+    let original = fs::read(&weight).unwrap();
+    let mut inactive = trial("inactive", "source", 0, false);
+    inactive.directory = directory
+        .path()
+        .canonicalize()
+        .unwrap()
+        .strip_prefix(std::env::current_dir().unwrap())
+        .unwrap()
+        .to_path_buf();
+    let mut config = fixture_config();
+    config.managed_roots = vec![PathBuf::from("offline_bundle")];
+    let mut state = state(vec![trial("stronger", "other-source", 16, true), inactive]);
+    let output = tempfile::tempdir().unwrap();
+    workflow::prune_scored_with_probe(output.path(), &mut state, &config, || async {
+        panic!("explicit offline must perform zero connectivity probes")
+    })
+    .await
+    .unwrap();
+    assert_eq!(fs::read(&weight).unwrap(), original);
+    assert!(!state.trials[1].pruned);
+    state.cached_only = false;
+    let probes = std::sync::atomic::AtomicUsize::new(0);
+    workflow::prune_scored_with_probe(output.path(), &mut state, &config, || async {
+        probes.fetch_add(1, std::sync::atomic::Ordering::Relaxed);
+        false
+    })
+    .await
+    .unwrap();
+    assert_eq!(probes.load(std::sync::atomic::Ordering::Relaxed), 1);
+    assert!(state.cached_only);
+    assert!(!state.trials[1].pruned);
+    assert_eq!(fs::read(&weight).unwrap(), original);
+    assert_eq!(
+        state.events.last().unwrap()["kind"],
+        "pruning_skipped_no_connectivity"
+    );
+}
+
 #[test]
 fn best_unqualified_incumbent_and_assessment_baseline_remain_protected() {
     let config = fixture_config();

@@ -11,6 +11,8 @@ pub struct TransportResponse {
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Recording {
+    #[serde(default)]
+    pub api: ProviderApi,
     pub schema_version: u32,
     pub origin: String,
     pub acquired_unix_millis: i64,
@@ -36,6 +38,7 @@ impl Recording {
         origin: &str,
     ) -> Result<Self> {
         Ok(Self {
+            api: prepared.provider.api,
             schema_version: 2,
             origin: origin.to_owned(),
             acquired_unix_millis: unix_millis(),
@@ -50,7 +53,14 @@ impl Recording {
             request: prepared.request.clone(),
             request_body: prepared.body.clone(),
             price: prepared.provider.price.clone().context("missing price")?,
-            permission: prepared.provider.permission.clone(),
+            permission: PermissionDecision {
+                approved_for_output_training: prepared
+                    .provider
+                    .permission
+                    .approved_for_output_training
+                    && !prepared.provider.inference_only,
+                ..prepared.provider.permission.clone()
+            },
             response,
         })
     }
@@ -67,20 +77,25 @@ impl Recording {
             self.attempt_ordinal > 0 && self.acquired_unix_millis > 0,
             "recording attempt/time missing"
         );
+        self.api.validate_endpoint(
+            &reqwest::Url::parse(&self.endpoint)?,
+            &self.model,
+            &self.output_cap_parameter,
+        )?;
         ensure!(
             matches!(
                 self.output_cap_parameter.as_str(),
-                "max_tokens" | "max_completion_tokens"
+                "max_tokens" | "max_completion_tokens" | "max_output_tokens" | "maxOutputTokens"
             ),
             "unknown billable output cap"
         );
         ensure!(
             canonical_json(&self.request_body)?
-                == canonical_json(&chat_body(
+                == canonical_json(&self.api.request_body(
                     &self.model,
                     &self.output_cap_parameter,
                     &self.request
-                ))?,
+                )?)?,
             "recorded prompt/parameters do not match canonical request body"
         );
         ensure!(
@@ -112,6 +127,7 @@ impl Recording {
         );
         ensure!(
             self.provider_id == request.provider.id
+                && self.api == request.provider.api
                 && self.business_id == request.provider.business_id
                 && self.model == request.provider.model
                 && self.model_revision == request.provider.model_revision
@@ -166,6 +182,26 @@ impl LiveTransport {
                 .build()?,
         })
     }
+    pub(super) fn authenticated_request(
+        &self,
+        request: &PreparedRequest,
+        key: &str,
+    ) -> std::result::Result<reqwest::RequestBuilder, TransportFailure> {
+        let mut header = reqwest::header::HeaderValue::from_str(key).map_err(|_| {
+            TransportFailure::BeforeDispatch(
+                "credential is not a valid HTTP header; value redacted".into(),
+            )
+        })?;
+        header.set_sensitive(true);
+        let builder = self.client.post(&request.provider.endpoint);
+        Ok(match request.provider.api {
+            ProviderApi::AnthropicMessages => builder
+                .header("x-api-key", header)
+                .header("anthropic-version", "2023-06-01"),
+            ProviderApi::GeminiGenerateContent => builder.header("x-goog-api-key", header),
+            _ => builder.bearer_auth(key),
+        })
+    }
 }
 
 #[async_trait]
@@ -181,6 +217,12 @@ impl Transport for LiveTransport {
             "credential {} is absent (value redacted)",
             request.provider.api_key_environment
         );
+        let key = std::env::var(&request.provider.api_key_environment)
+            .context("credential unavailable; value redacted")?;
+        ensure!(
+            reqwest::header::HeaderValue::from_str(&key).is_ok(),
+            "credential is not a valid HTTP header; value redacted"
+        );
         Ok(())
     }
     async fn execute(
@@ -195,21 +237,25 @@ impl Transport for LiveTransport {
                 "empty credential; value redacted".into(),
             ));
         }
+        let builder = self.authenticated_request(request, &key)?;
         let start = std::time::Instant::now();
         // Transport errors may occur after remote acceptance. Their display text can
         // contain URLs, so ledger diagnostics deliberately use a fixed redacted reason.
-        let response = self
-            .client
-            .post(&request.provider.endpoint)
-            .bearer_auth(key)
+        let response = builder
             .timeout(Duration::from_secs(request.provider.timeout_seconds))
             .json(&request.body)
             .send()
             .await
-            .map_err(|_| {
-                TransportFailure::Unknown(
-                    "HTTP send failed or timed out; reconcile with provider".into(),
-                )
+            .map_err(|error| {
+                if error.is_connect() || error.is_builder() {
+                    TransportFailure::BeforeDispatch(
+                        "connection could not be established; URL and credential redacted".into(),
+                    )
+                } else {
+                    TransportFailure::Unknown(
+                        "HTTP send failed or timed out; reconcile with provider".into(),
+                    )
+                }
             })?;
         let status = response.status().as_u16();
         let mut headers = BTreeMap::new();

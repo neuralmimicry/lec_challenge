@@ -1,0 +1,34 @@
+{
+  "run_id": "df5c8479-d836-4d48-a9fd-045201826d48",
+  "task_id": "tables.sort_rows",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: error[E0599]: `Value` is not an iterator\n   --> /candidate/main.rs:8:18\n    |\n  8 |             a[1].cmp(&b[1])\n    |                  ^^^ `Value` is not an iterator\n    |\n   ::: /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:116:1\n    |\n116 | pub enum Value {\n    | -------------- doesn't satisfy `Value: Iterator`\n    |\n    = note: the following trait bounds were not satisfied:\n            `Value: Iterator`\n            which is required by `&mut Value: Iterator`\n\nerror[E0599]: `Value` is not an iterator\n   --> /candidate/main.rs:10:18\n    |\n 10 |             a[0].cmp(&b[0])\n    |                  ^^^ `Value` is not an iterator\n    |\n   ::: /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:116:1\n    |\n116 | pub enum Value {\n    | -------------- doesn't satisfy `Value: Iterator`\n    |\n    = note: the following trait bounds were not satisfied:\n            `Value: Iterator`\n            which is required by `&mut Value: Iterator`\n\nerror: aborting due to 2 previous errors\n\nFor more information about this error, try `rustc --explain E0599`.\n"
+  ],
+  "cases_total": 5,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "4b2556745b303526f354ded7f2c473b77f6da0c99a77f0a493c7272a8d800aac",
+  "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "36a6a8b974b675f1beafab28a098a7f2644a805e7be127ca759bd89d101c6b7d",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "controller_version": 2,
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:1",
+    "expected_image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/native-full-quality-001/sft-development/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/native-full-quality-001/sft-development/sandbox/df5c8479-d836-4d48-a9fd-045201826d48.audit.json",
+  "audit_sha256": "927ddc14c4b1f4729e4c24fcc0ff2029d045f890353732ec15a8957c16281e6e",
+  "failure": "compilation failed: error[E0599]: `Value` is not an iterator\n   --> /candidate/main.rs:8:18\n    |\n  8 |             a[1].cmp(&b[1])\n    |                  ^^^ `Value` is not an iterator\n    |\n   ::: /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:116:1\n    |\n116 | pub enum Value {\n    | -------------- doesn't satisfy `Value: Iterator`\n    |\n    = note: the following trait bounds were not satisfied:\n            `Value: Iterator`\n            which is required by `&mut Value: Iterator`\n\nerror[E0599]: `Value` is not an iterator\n   --> /candidate/main.rs:10:18\n    |\n 10 |             a[0].cmp(&b[0])\n    |                  ^^^ `Value` is not an iterator\n    |\n   ::: /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:116:1\n    |\n116 | pub enum Value {\n    | -------------- doesn't satisfy `Value: Iterator`\n    |\n    = note: the following trait bounds were not satisfied:\n            `Value: Iterator`\n            which is required by `&mut Value: Iterator`\n\nerror: aborting due to 2 previous errors\n\nFor more information about this error, try `rustc --explain E0599`.\n",
+  "duration_ms": 9934,
+  "timeout_evidence": null
+}

@@ -1,0 +1,103 @@
+study-regrade: immutable local generations only; no model loading or regeneration; offline=true
+{
+  "batch_plan": {
+    "bytes": 431447,
+    "path": "reports/local-study/regraded-v3-001/batch-plan.json",
+    "sha256": "61efeb7afb1ef5e1f662a11c2361809185e2f01e8f457e5a133f311473c55915"
+  },
+  "coverage_complete": true,
+  "evaluations": [
+    {
+      "checkpoint_id": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+      "directory": "reports/local-study/regraded-v3-001/evaluation-000-development-f95238863522",
+      "healthy_complete": true,
+      "passed": 0,
+      "planned": 16,
+      "report": {
+        "bytes": 2787,
+        "path": "reports/local-study/regraded-v3-001/evaluation-000-development-f95238863522/report.json",
+        "sha256": "3a62b1403f676c215a910bbbbd315a79664b9544b4049f4b84088f047204aefa"
+      },
+      "split": "development"
+    },
+    {
+      "checkpoint_id": "e2bcd135527659042304d936fa56c7240f6f96a43b9f81f2a888c38b7762a949",
+      "directory": "reports/local-study/regraded-v3-001/evaluation-001-development-e2bcd1355276",
+      "healthy_complete": false,
+      "passed": 0,
+      "planned": 16,
+      "report": {
+        "bytes": 2800,
+        "path": "reports/local-study/regraded-v3-001/evaluation-001-development-e2bcd1355276/report.json",
+        "sha256": "783dcf31deada93abc233ec0c9a28a1274856c041aa7f754f20a0dc83029e4b0"
+      },
+      "split": "development"
+    },
+    {
+      "checkpoint_id": "2217a994f8b74ded1d52f30ef7add2cb190578e3d108168a85d1409160ad88c3",
+      "directory": "reports/local-study/regraded-v3-001/evaluation-002-development-2217a994f8b7",
+      "healthy_complete": true,
+      "passed": 0,
+      "planned": 16,
+      "report": {
+        "bytes": 2792,
+        "path": "reports/local-study/regraded-v3-001/evaluation-002-development-2217a994f8b7/report.json",
+        "sha256": "9e001b208799ecdaa487e96164b9cf9c21539c15a0661ba15a6eb63121bf8414"
+      },
+      "split": "development"
+    },
+    {
+      "checkpoint_id": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+      "directory": "reports/local-study/regraded-v3-001/evaluation-003-train-f95238863522",
+      "healthy_complete": false,
+      "passed": 0,
+      "planned": 48,
+      "report": {
+        "bytes": 3722,
+        "path": "reports/local-study/regraded-v3-001/evaluation-003-train-f95238863522/report.json",
+        "sha256": "4c7cedfc21ae15e259916309da67dc935783f9efb2e7ccea501a9a910f3c0543"
+      },
+      "split": "train"
+    },
+    {
+      "checkpoint_id": "e2bcd135527659042304d936fa56c7240f6f96a43b9f81f2a888c38b7762a949",
+      "directory": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276",
+      "healthy_complete": true,
+      "passed": 11,
+      "planned": 48,
+      "report": {
+        "bytes": 3730,
+        "path": "reports/local-study/regraded-v3-001/evaluation-004-train-e2bcd1355276/report.json",
+        "sha256": "99f856f283297cb0a0f77b8b9d8431eee7cab6e10d1628474cb48c9f8154ed4e"
+      },
+      "split": "train"
+    },
+    {
+      "checkpoint_id": "2217a994f8b74ded1d52f30ef7add2cb190578e3d108168a85d1409160ad88c3",
+      "directory": "reports/local-study/regraded-v3-001/evaluation-005-train-2217a994f8b7",
+      "healthy_complete": true,
+      "passed": 6,
+      "planned": 48,
+      "report": {
+        "bytes": 3719,
+        "path": "reports/local-study/regraded-v3-001/evaluation-005-train-2217a994f8b7/report.json",
+        "sha256": "cb7596df95bf566f303ff520fb96bf130ec17dfaa0ea7d83ede23389ee27a7f3"
+      },
+      "split": "train"
+    }
+  ],
+  "evidence_kind": "completed_immutable_generation_regrade_batch",
+  "healthy_complete": false,
+  "held_out_used": false,
+  "infrastructure_or_generation_errors": 3,
+  "limitation": "Original generation failures remain failures. New complete trusted candidate failures score zero; missing/partial/invalid ownership/audit remains infrastructure failure. This is descriptive regrading under an explicit new host protocol, never SHIP.",
+  "new_inference_tokens": 0,
+  "new_model_calls": 0,
+  "observed": 192,
+  "passed": 17,
+  "planned": 192,
+  "production_eligible": false,
+  "schema_version": 1
+}
+FAILURE: derived regrading retains original generation or new infrastructure failures; complete evidence preserved
+{"error":"derived regrading retains original generation or new infrastructure failures; complete evidence preserved","observed_unix_ms":1792142651156,"promotion":"incumbent_retained","status":"FAILURE"}

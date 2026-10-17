@@ -1,0 +1,33 @@
+{
+  "run_id": "f0172167-8b45-4bc0-b2ba-e17dc85c750e",
+  "task_id": "ledger.sum",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: warning: unused import: `serde_json::Value`\n --> /candidate/main.rs:1:5\n  |\n1 | use serde_json::Value;\n  |     ^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0277]: a value of type `serde_json::Number` cannot be made by summing an iterator over elements of type `i64`\n --> /candidate/main.rs:4:58\n  |\n4 |     let sum = input.as_array().iter().map(|&x| x as i64).sum();\n  |                                                          ^^^ value of type `serde_json::Number` cannot be made by summing a `std::iter::Iterator<Item=i64>`\n  |\n  = help: the trait `Sum<i64>` is not implemented for `serde_json::Number`\nhelp: the trait `Sum` is implemented for `i64`\n --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/iter/traits/accum.rs:50:8\n ::: /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/iter/traits/accum.rs:206:0\n  |\n  = note: in this macro invocation\nnote: the method call chain might not have had the expected associated types\n --> /candidate/main.rs:4:39\n  |\n4 |     let sum = input.as_array().iter().map(|&x| x as i64).sum();\n  |               -----            ------ ^^^^^^^^^^^^^^^^^^ `Iterator::Item` changed to `i64` here\n  |               |                |\n  |               |                `Iterator::Item` is `&&Vec<Value>` here\n  |               this expression has type `Value`\nnote: required by a bound in `std::iter::Iterator::sum`\n --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/iter/traits/iterator.rs:3665:4\n  = note: this error originates in the macro `integer_sum_product` (in Nightly builds, run with -Z macro-backtrace for more info)\n\nerror[E0606]: casting `&Vec<Value>` as `i64` is invalid\n --> /candidate/main.rs:4:48\n  |\n4 |     let sum = input.as_array().iter().map(|&x| x as i64).sum();\n  |                                                ^^^^^^^^\n  |\n  = help: cast through a raw pointer first\n\nerror: aborting due to 2 previous errors; 1 warning emitted\n\nSome errors have detailed explanations: E0277, E0606.\nFor more information about an error, try `rustc --explain E0277`.\n"
+  ],
+  "cases_total": 14,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "0bf995b5f69865792503015f6af52b457c861b679877956e939c2137ddb4a562",
+  "image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "7f36f68b60fd11db95b1375e9dc60be21e0b69db72212c8bb294cb12b7eb3569",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:1",
+    "expected_image_id": "08effc41d98ff53847d35ffb209758dbdf48d731e75b873571f2d2494aa0c873",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/on-policy-qa/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/on-policy-qa/sandbox/f0172167-8b45-4bc0-b2ba-e17dc85c750e.audit.json",
+  "audit_sha256": "8aa8d3bba1df7e7a24d19ca9f02361d58c820f0853629e274574706684abaa12",
+  "failure": "compilation failed: warning: unused import: `serde_json::Value`\n --> /candidate/main.rs:1:5\n  |\n1 | use serde_json::Value;\n  |     ^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0277]: a value of type `serde_json::Number` cannot be made by summing an iterator over elements of type `i64`\n --> /candidate/main.rs:4:58\n  |\n4 |     let sum = input.as_array().iter().map(|&x| x as i64).sum();\n  |                                                          ^^^ value of type `serde_json::Number` cannot be made by summing a `std::iter::Iterator<Item=i64>`\n  |\n  = help: the trait `Sum<i64>` is not implemented for `serde_json::Number`\nhelp: the trait `Sum` is implemented for `i64`\n --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/iter/traits/accum.rs:50:8\n ::: /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/iter/traits/accum.rs:206:0\n  |\n  = note: in this macro invocation\nnote: the method call chain might not have had the expected associated types\n --> /candidate/main.rs:4:39\n  |\n4 |     let sum = input.as_array().iter().map(|&x| x as i64).sum();\n  |               -----            ------ ^^^^^^^^^^^^^^^^^^ `Iterator::Item` changed to `i64` here\n  |               |                |\n  |               |                `Iterator::Item` is `&&Vec<Value>` here\n  |               this expression has type `Value`\nnote: required by a bound in `std::iter::Iterator::sum`\n --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/iter/traits/iterator.rs:3665:4\n  = note: this error originates in the macro `integer_sum_product` (in Nightly builds, run with -Z macro-backtrace for more info)\n\nerror[E0606]: casting `&Vec<Value>` as `i64` is invalid\n --> /candidate/main.rs:4:48\n  |\n4 |     let sum = input.as_array().iter().map(|&x| x as i64).sum();\n  |                                                ^^^^^^^^\n  |\n  = help: cast through a raw pointer first\n\nerror: aborting due to 2 previous errors; 1 warning emitted\n\nSome errors have detailed explanations: E0277, E0606.\nFor more information about an error, try `rustc --explain E0277`.\n",
+  "duration_ms": 14015,
+  "timeout_evidence": null
+}

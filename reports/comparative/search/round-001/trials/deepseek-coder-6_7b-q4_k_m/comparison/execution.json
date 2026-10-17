@@ -1,0 +1,69 @@
+[
+  {
+    "actual_execution": null,
+    "after_loading": {
+      "compute_processes": {
+        "csv": "1289757, /home/pbisaacs/Developer/neuralmimicry/lec_challenge/state/engines/949b28471a3b47255ab102ead671a6a3e719dc1303844c1c66e0d69682d1dc99/lec-distil, 114\n",
+        "observed_unix_ms": 1792147853117
+      },
+      "gpu": {
+        "csv": "0, NVIDIA GeForce RTX 2080, 595.91.07, 8192, 241, 0\n",
+        "observed_unix_ms": 1792147853097
+      }
+    },
+    "before_loading": {
+      "compute_processes": {
+        "csv": "",
+        "observed_unix_ms": 1792147830047
+      },
+      "gpu": {
+        "csv": "0, NVIDIA GeForce RTX 2080, 595.91.07, 8192, 125, 0\n",
+        "observed_unix_ms": 1792147830025
+      }
+    },
+    "event": "model_loading",
+    "loading_error": "model loading failed: GGUF/source rotary scaling differs",
+    "model": "deepseek-coder-6_7b-q4_k_m",
+    "plan_sha256": "7e8ac08343327333638e13a48db34cc069c251aad12e7848d71fd8942d83cc6f",
+    "requested_runtime": {
+      "device": {
+        "cuda": {
+          "ordinal": 0
+        }
+      },
+      "dtype": "f32"
+    }
+  },
+  {
+    "actual_execution": null,
+    "after_generation": {
+      "compute_processes": {
+        "csv": "1289757, /home/pbisaacs/Developer/neuralmimicry/lec_challenge/state/engines/949b28471a3b47255ab102ead671a6a3e719dc1303844c1c66e0d69682d1dc99/lec-distil, 114\n",
+        "observed_unix_ms": 1792147855958
+      },
+      "gpu": {
+        "csv": "0, NVIDIA GeForce RTX 2080, 595.91.07, 8192, 241, 0\n",
+        "observed_unix_ms": 1792147855938
+      }
+    },
+    "event": "model_generation_complete",
+    "model": "deepseek-coder-6_7b-q4_k_m",
+    "plan_sha256": "7e8ac08343327333638e13a48db34cc069c251aad12e7848d71fd8942d83cc6f"
+  },
+  {
+    "after_release": {
+      "compute_processes": {
+        "csv": "1289757, /home/pbisaacs/Developer/neuralmimicry/lec_challenge/state/engines/949b28471a3b47255ab102ead671a6a3e719dc1303844c1c66e0d69682d1dc99/lec-distil, 114\n",
+        "observed_unix_ms": 1792147856021
+      },
+      "gpu": {
+        "csv": "0, NVIDIA GeForce RTX 2080, 595.91.07, 8192, 241, 0\n",
+        "observed_unix_ms": 1792147856001
+      }
+    },
+    "event": "model_released",
+    "model": "deepseek-coder-6_7b-q4_k_m",
+    "plan_sha256": "7e8ac08343327333638e13a48db34cc069c251aad12e7848d71fd8942d83cc6f",
+    "synchronized_before_release": false
+  }
+]

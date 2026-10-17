@@ -24,6 +24,8 @@ impl Fixture {
         )
         .unwrap();
         let provider = ProviderConfig {
+            api: Default::default(),
+            inference_only: false,
             id: "fixture-provider".into(),
             business_id: "fixture-business".into(),
             enabled: true,
@@ -85,6 +87,9 @@ impl Fixture {
             request_json: String::from_utf8(canonical_json(&prepared.body).unwrap()).unwrap(),
             price_json: serde_json::to_string(provider.price.as_ref().unwrap()).unwrap(),
             reserved_nanos: prepared.reservation_nanos,
+            reserved_tokens: Some(
+                prepared.input_token_upper_bound + request.generation.max_output_tokens,
+            ),
             replay: true,
         };
         let limits = BudgetLimits {
@@ -92,11 +97,13 @@ impl Fixture {
             task_nanos: 100_000,
             provider_nanos: 100_000,
             model_nanos: 100_000,
+            tokens: Default::default(),
         };
         let Claim::Reserved(claim) = ledger.claim_and_reserve(&acquisition, limits).unwrap() else {
             panic!("fixture reservation failed")
         };
         let record = Recording {
+            api: Default::default(),
             schema_version: 2,
             origin: "synthetic_fixture".into(),
             acquired_unix_millis: unix_millis(),

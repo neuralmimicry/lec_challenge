@@ -1,0 +1,44 @@
+Hub hashing model.safetensors: 0/1178623988 bytes, 0.00 MiB/s, ETA unknown (publisher checksum pending)
+Hub hashing qwen2.5-coder-7b-instruct-q4_k_m.gguf: 0/4683073536 bytes, 0.00 MiB/s, ETA unknown (publisher checksum pending)
+Hub hashing qwen2.5-coder-7b-instruct-q4_k_m.gguf: 1249902592/4683073536 bytes, 79.45 MiB/s, ETA 00:00:42 (publisher checksum pending)
+Hub hashing qwen2.5-coder-7b-instruct-q4_k_m.gguf: 2027945984/4683073536 bytes, 64.42 MiB/s, ETA 00:00:40 (publisher checksum pending)
+Hub hashing qwen2.5-coder-7b-instruct-q4_k_m.gguf: 2663383040/4683073536 bytes, 56.40 MiB/s, ETA 00:00:35 (publisher checksum pending)
+Hub hashing qwen2.5-coder-7b-instruct-q4_k_m.gguf: 4005560320/4683073536 bytes, 63.62 MiB/s, ETA 00:00:11 (publisher checksum pending)
+Hub hashing qwen2.5-coder-7b-instruct-q4_k_m.gguf: 0/4683073536 bytes, 0.00 MiB/s, ETA unknown (publisher checksum pending)
+Hub hashing qwen2.5-coder-7b-instruct-q4_k_m.gguf: 1204813824/4683073536 bytes, 76.56 MiB/s, ETA 00:00:44 (publisher checksum pending)
+Hub hashing qwen2.5-coder-7b-instruct-q4_k_m.gguf: 2434793472/4683073536 bytes, 77.37 MiB/s, ETA 00:00:28 (publisher checksum pending)
+Hub hashing qwen2.5-coder-7b-instruct-q4_k_m.gguf: 3395289088/4683073536 bytes, 71.93 MiB/s, ETA 00:00:18 (publisher checksum pending)
+Hub hashing qwen2.5-coder-7b-instruct-q4_k_m.gguf: 4546625536/4683073536 bytes, 72.25 MiB/s, ETA 00:00:02 (publisher checksum pending)
+Hub hashing model.safetensors: 0/1178623988 bytes, 0.00 MiB/s, ETA unknown (publisher checksum pending)
+BitNet loading official packed tensors on CPU F32; no GPU fallback
+BitNet decoded official ternary layer 1/30 on CPU
+BitNet decoded official ternary layer 2/30 on CPU
+BitNet decoded official ternary layer 3/30 on CPU
+BitNet decoded official ternary layer 4/30 on CPU
+BitNet decoded official ternary layer 5/30 on CPU
+BitNet decoded official ternary layer 6/30 on CPU
+BitNet decoded official ternary layer 7/30 on CPU
+BitNet decoded official ternary layer 8/30 on CPU
+BitNet decoded official ternary layer 9/30 on CPU
+BitNet decoded official ternary layer 10/30 on CPU
+BitNet decoded official ternary layer 11/30 on CPU
+BitNet decoded official ternary layer 12/30 on CPU
+BitNet decoded official ternary layer 13/30 on CPU
+BitNet decoded official ternary layer 14/30 on CPU
+BitNet decoded official ternary layer 15/30 on CPU
+BitNet decoded official ternary layer 16/30 on CPU
+BitNet decoded official ternary layer 17/30 on CPU
+BitNet decoded official ternary layer 18/30 on CPU
+BitNet decoded official ternary layer 19/30 on CPU
+BitNet decoded official ternary layer 20/30 on CPU
+BitNet decoded official ternary layer 21/30 on CPU
+BitNet decoded official ternary layer 22/30 on CPU
+BitNet decoded official ternary layer 23/30 on CPU
+BitNet decoded official ternary layer 24/30 on CPU
+BitNet decoded official ternary layer 25/30 on CPU
+BitNet decoded official ternary layer 26/30 on CPU
+BitNet decoded official ternary layer 27/30 on CPU
+BitNet decoded official ternary layer 28/30 on CPU
+BitNet decoded official ternary layer 29/30 on CPU
+BitNet decoded official ternary layer 30/30 on CPU
+Fresh-process reload verified 256512 finite logits

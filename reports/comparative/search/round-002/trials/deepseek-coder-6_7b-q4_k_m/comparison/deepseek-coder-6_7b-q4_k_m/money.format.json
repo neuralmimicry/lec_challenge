@@ -1,0 +1,38 @@
+{
+  "model_id": "deepseek-coder-6_7b-q4_k_m",
+  "task_id": "money.format",
+  "source_id": "private-money-v1",
+  "specification_sha256": "9213c0114b6d1a6399d5db8ec1a7dcf0f9087c2d65b589e583ee9b1cba646aa9",
+  "seed": 1729,
+  "plan_sha256": "79e25584f785f04f53b60d4cf3e4a730d2cf181ce11620a413bb1e0123bc1de2",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is signed cents, magnitude <=100000000. Return pounds with optional minus and exactly two fractional digits.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":-1230,\"expected\":\"-12.30\"}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "Sure, here is the Rust code that converts cents to pounds:\n\n```rust\nuse serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let cents = input.as_i64().unwrap();\n    let pounds = cents as f64 / 100.0;\n    let pounds_str = format!(\"{:.2}\", pounds);\n    Value::String(pounds_str)\n}\n```\n\nThis function takes a `serde_json::Value` as input, which is expected to be a signed 64-bit integer representing the number of cents. It converts this to a `f64`, divides by 100 to convert to pounds, formats this to a string with exactly two fractional digits, and then wraps this string in a `serde_json::Value` before returning it.\n\nPlease note that this function assumes that the input is always a valid signed 64-bit integer. If this is not the case, you should add error handling to deal with invalid inputs.\n",
+    "checkpoint_id": "92da6238854f2fa902d8b2ad79d548536af1d3ab06821f323bd5bbcea2013276",
+    "finish_reason": "stop",
+    "input_tokens": 303,
+    "output_tokens": 243,
+    "elapsed_ms": 6941,
+    "complete": true
+  },
+  "generation_error": null,
+  "raw_generation": {
+    "path": "reports/comparative/search/round-002/trials/deepseek-coder-6_7b-q4_k_m/comparison/deepseek-coder-6_7b-q4_k_m/money.format.generation.json",
+    "sha256": "d5dd4decc389c47884a5be10bc8ab4b4fff9dbcf1654ad9fb9be94f6564e77c6",
+    "bytes": 4638
+  },
+  "sandbox_report": {
+    "path": "reports/comparative/search/round-002/trials/deepseek-coder-6_7b-q4_k_m/comparison/sandbox/90deda74-acc6-4f93-a1a4-35f10ab53bc5.json",
+    "sha256": "36630b6c52f26363d75d81a91bca82f6fa2c7c74f56dcc9fdf5b420d070a8a7f",
+    "bytes": 10136
+  },
+  "grading_error": null,
+  "success": false
+}

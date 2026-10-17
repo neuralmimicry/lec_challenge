@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "51e2a803f86359125c31f16c1d0da7fc35ac18527b51f85f956f4872bf05792e",
+  "task_id": "money.split",
+  "source_id": "private-money-v1",
+  "success": false,
+  "raw_generation": {
+    "path": "reports/local-study/explore/round-001/baselines/ternary_bitnet/generations/money.split.json",
+    "sha256": "f552b7323495fdf53fe66f0c254ca54b4fa993d60df0f7afa2c556aae5d668bd",
+    "bytes": 1373
+  },
+  "sandbox_report": null,
+  "grading_error": null
+}

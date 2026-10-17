@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "55c6614d90fbff0e580fd8fbfa9e06ce99715d8d0c78320e0fe70605545cc489",
+  "task_id": "matrices.row_sums",
+  "source_id": "private-matrices-v1",
+  "success": false,
+  "raw_generation": {
+    "path": "reports/local-study/native-full-quality-001/base-train/generations/matrices.row_sums.json",
+    "sha256": "ba8de3f79a33bc57f780ea8d8834eace96a8e339788a318769e64baedf332e64",
+    "bytes": 1858
+  },
+  "sandbox_report": {
+    "path": "reports/local-study/native-full-quality-001/base-train/sandbox/d6146b7f-2fc5-4b4f-a5b0-0a4ba481005c.json",
+    "sha256": "7b6eb4182f5a7de42d6a24ce6bb2b0a3dbaae9ceac41c4ac971498c2633f7914",
+    "bytes": 4295
+  },
+  "grading_error": null
+}

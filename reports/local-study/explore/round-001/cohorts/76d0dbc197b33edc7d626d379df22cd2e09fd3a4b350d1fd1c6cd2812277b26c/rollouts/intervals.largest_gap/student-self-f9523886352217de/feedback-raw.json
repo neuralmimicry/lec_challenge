@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "evidence_kind": "actual_checkpoint_bound_rollout_generation",
+  "plan": {
+    "path": "reports/local-study/explore/round-001/cohorts/76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c/rollouts/intervals.largest_gap/student-self-f9523886352217de/feedback-plan.json",
+    "sha256": "8027b9b66bf38f63fd39a6e094226c3b131176d4cc172bf4719c042953876b39",
+    "bytes": 8497
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let mut merged_intervals = Vec::new();\n    let mut current_interval = (0, 0);\n\n    for item in input.as_array() {\n        let start = item[0].as_i64().unwrap();\n        let end = item[1].as_i64().unwrap();\n\n        if current_interval.0 <= start && current_interval.1 >= end {\n            // Merge overlapping intervals\n            current_interval = (current_interval.0.min(start), current_interval.1.max(end));\n        } else {\n            // Add a new interval\n            merged_intervals.push(current_interval);\n            current_interval = (start, end);\n        }\n    }\n\n    // Add the last interval\n    merged_intervals.push(current_interval);\n\n    // Find the largest internal uncovered gap\n    let mut max_gap = 0;\n    for i in 1..merged_intervals.len() {\n        let gap = merged_intervals[i].0 - merged_intervals[i - 1].1;\n        if gap > max_gap {\n            max_gap = gap;\n        }\n    }\n\n    // Return the result as a JSON value\n    serde_json::Value::Object {\n        key: \"expected\".to_string(),\n        value: serde_json::Value::Number(max_gap as f64),\n    }\n}\n```",
+    "checkpoint_id": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+    "finish_reason": "stop",
+    "input_tokens": 1862,
+    "output_tokens": 285,
+    "elapsed_ms": 12006,
+    "complete": true
+  },
+  "generation_error": null,
+  "execution": {
+    "actual_device": "Cuda { gpu_id: 0 }",
+    "actual_dtype": "F32",
+    "asset_lifetime_shared_lease": false,
+    "available_cpu_threads": 16,
+    "candle_cpu_threads": 16,
+    "checkpoint_id": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+    "context_cap": 4096,
+    "cpu_fallback": false,
+    "cuda_active": true,
+    "cuda_feature_compiled": true,
+    "engine": "native_rust_candle",
+    "model_id": "Qwen/Qwen2.5-Coder-0.5B-Instruct",
+    "quantisation": null,
+    "requested": {
+      "device": {
+        "cuda": {
+          "ordinal": 0
+        }
+      },
+      "dtype": "f32"
+    },
+    "revision": "ea3f2471cf1b1f0db85067f1ef93848e38e88c25",
+    "weight_format": "safetensors"
+  }
+}

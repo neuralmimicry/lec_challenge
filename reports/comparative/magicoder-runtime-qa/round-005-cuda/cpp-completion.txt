@@ -1,0 +1,4 @@
+Here is a simple Rust function that adds two numbers:
+
+
+```

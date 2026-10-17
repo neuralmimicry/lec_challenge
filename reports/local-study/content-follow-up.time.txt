@@ -1,0 +1,24 @@
+Command exited with non-zero status 1
+	Command being timed: "timeout --signal=TERM --kill-after=30s 3600s state/engines/f5d2f2f520f0c7a69186163c33bd28207c37414fb3cdae0499c169957a846944/lec-distil collect-teacher-content --offline --bundle reports/local-study/qwen7b-evidence/bundle.json --output reports/local-study/content-follow-up/round-001 --content process,context,tool_trajectory --maximum-tasks 4 --max-tokens 768 --device cuda --dtype f32"
+	User time (seconds): 51.21
+	System time (seconds): 6.66
+	Percent of CPU this job got: 43%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 2:13.94
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 829192
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 33
+	Minor (reclaiming a frame) page faults: 1206623
+	Voluntary context switches: 22497
+	Involuntary context switches: 1943
+	Swaps: 0
+	File system inputs: 9164032
+	File system outputs: 12984
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 1
