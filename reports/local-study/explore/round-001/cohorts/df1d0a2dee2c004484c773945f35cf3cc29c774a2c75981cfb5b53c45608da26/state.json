@@ -18,6 +18,11 @@
           "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/attempts/rollout-evidence/72a1284a-2ff0-49dc-bf6c-74a64f282967/request.json",
           "sha256": "37eb6b16cdae16b39c6b8d944d86547e20bd147b89df5d5bc1eeb3db8da2ebfc",
           "bytes": 3915
+        },
+        {
+          "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/attempts/rollout-evidence/eeac6f88-1129-4d2f-ad73-91e571cbc035/request.json",
+          "sha256": "7f401158d9b1e56286a64e2dbaa3e4f52fa672cc6c8470459e65d8063ef1a79e",
+          "bytes": 3915
         }
       ],
       "artefacts": [
@@ -81,6 +86,15 @@
       },
       "stage": "rollout-evidence",
       "unix_ms": 1792183240998
+    },
+    {
+      "attempt": {
+        "bytes": 1146,
+        "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/attempts/rollout-evidence/eeac6f88-1129-4d2f-ad73-91e571cbc035/result.json",
+        "sha256": "2431202ad377b3feecf99999c526dbd19ef96b58c9af113a18960bdc035eeec5"
+      },
+      "stage": "rollout-evidence",
+      "unix_ms": 1792411800927
     }
   ]
 }

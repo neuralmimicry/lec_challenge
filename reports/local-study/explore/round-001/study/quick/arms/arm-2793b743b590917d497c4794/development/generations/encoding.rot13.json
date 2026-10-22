@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "e021c55682a0d62791d7ee4afaba8210b0bb9babc7aab489b93402d8dae639dd",
+  "task_id": "encoding.rot13",
+  "source_id": "private-encoding-v1",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an ASCII string. Apply ROT13 to upper/lowercase letters and preserve other characters.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":\"Hello, Z!\",\"expected\":\"Uryyb, M!\"}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\n/// Rotates each character in the input string by 13 positions in the alphabet.\n/// Non-alphabetic characters remain unchanged.\n/// \n/// # Examples\n/// \n/// ```\n/// assert_eq!(solve(String::from(\"Hello, Z!\")), String::from(\"Uryyb, M!\"));\n/// ```\nfn solve(input: serde_json::Value) -> serde_json::Value {\n    input.to_string()\n        .chars()\n        .map(|c| {\n            if c.is_alphabetic() {\n                let base = if c.is_uppercase() { 'A' } else { 'a' };\n                (c as u8 - base + 13) % 26 + base\n            } else {\n                c\n            }\n        })\n        .collect()\n}\n\nfn main() {\n    // Example usage\n    let input = serde_json::Value::from(\"Hello, Z!\");\n    let expected = serde_json::Value::from(\"Uryyb, M!\");\n    let result = solve(input);\n    println!(\"{:?}\", result);\n}\n```\n\nThis Rust code snippet defines a function `solve` that takes a JSON string as input, performs the specified transformation on each character, and returns the transformed string. The function uses `serde_json::Value` to handle JSON data and `chars` to iterate over each character. Non-alphabetic characters are left unchanged. The `main` function demonstrates how to use the `solve` function with an example input and prints the result.",
+    "checkpoint_id": "ae6e22bf858359186e261fd41d5c180cb020bf79d29fccc2dbb611ea12dc4870",
+    "finish_reason": "stop",
+    "input_tokens": 227,
+    "output_tokens": 315,
+    "elapsed_ms": 41460,
+    "complete": true
+  },
+  "model_error": null
+}

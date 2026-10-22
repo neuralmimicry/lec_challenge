@@ -1,0 +1,40 @@
+{
+  "run_id": "b6e99bd7-581c-4cea-a4c1-66d6a1454117",
+  "task_id": "bits.popcount",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: warning: unused import: `serde_json::Value`\n --> /candidate/main.rs:1:5\n  |\n1 | use serde_json::Value;\n  |     ^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0308]: mismatched types\n --> /candidate/main.rs:5:5\n  |\n3 | pub fn solve(input: serde_json::Value) -> serde_json::Value {\n  |                                           ----------------- expected `Value` because of return type\n4 |     let num = input.as_i64().unwrap();\n5 |     num.count_ones() as i64\n  |     ^^^^^^^^^^^^^^^^^^^^^^^ expected `Value`, found `i64`\n  |\nhelp: call `Into::into` on this expression to convert `i64` into `Value`\n  |\n5 |     (num.count_ones() as i64).into()\n  |     +                       ++++++++\n\nerror: aborting due to 1 previous error; 1 warning emitted\n\nFor more information about this error, try `rustc --explain E0308`.\n"
+  ],
+  "cases_total": 7,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "28bb0c3b6e3b236e13d14007d9a9cc4b9149ed2e3cf49f5afa076550f41b8db8",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/explore/round-001/cohorts/76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c/rollouts/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/explore/round-001/cohorts/76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c/rollouts/sandbox/b6e99bd7-581c-4cea-a4c1-66d6a1454117.audit.json",
+  "audit_sha256": "421dfe519dcca7826296ea5463155519b7511921af03052c221a278598bcb3c0",
+  "failure": "compilation failed: warning: unused import: `serde_json::Value`\n --> /candidate/main.rs:1:5\n  |\n1 | use serde_json::Value;\n  |     ^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0308]: mismatched types\n --> /candidate/main.rs:5:5\n  |\n3 | pub fn solve(input: serde_json::Value) -> serde_json::Value {\n  |                                           ----------------- expected `Value` because of return type\n4 |     let num = input.as_i64().unwrap();\n5 |     num.count_ones() as i64\n  |     ^^^^^^^^^^^^^^^^^^^^^^^ expected `Value`, found `i64`\n  |\nhelp: call `Into::into` on this expression to convert `i64` into `Value`\n  |\n5 |     (num.count_ones() as i64).into()\n  |     +                       ++++++++\n\nerror: aborting due to 1 previous error; 1 warning emitted\n\nFor more information about this error, try `rustc --explain E0308`.\n",
+  "duration_ms": 12575,
+  "timeout_evidence": null,
+  "lifecycle_evidence": {
+    "receipt_path": "reports/local-study/explore/round-001/cohorts/76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c/rollouts/sandbox/b6e99bd7-581c-4cea-a4c1-66d6a1454117.lifecycle.json",
+    "receipt_sha256": "f93070d791464f9613e5cee69facbf85dd08608a350bf6ff3fe7489f731b2079"
+  }
+}

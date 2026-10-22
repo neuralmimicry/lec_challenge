@@ -1,0 +1,438 @@
+{
+  "schema_version": 1,
+  "evidence_kind": "verified_local_teacher_experimental_distillation",
+  "spec": {
+    "schema_version": 1,
+    "arm_id": "arm-b1ee8c0e1c0ffe7465f83fe0",
+    "student_base": "offline_bundle/base",
+    "student_kind": "conventional_qwen_lora",
+    "evidence_bundle": "reports/local-study/explore/round-001/content-v1/bundle.json",
+    "output": "reports/local-study/explore/round-001/study/quick/arms/arm-b1ee8c0e1c0ffe7465f83fe0/checkpoint",
+    "seed": 2718,
+    "steps": 3,
+    "max_sequence_tokens": 64,
+    "sequence_policy": "assistant_window",
+    "rank": 2,
+    "alpha": 4.0,
+    "learning_rate": 0.0002,
+    "temperature": 2.0,
+    "dpo_beta": 0.1,
+    "losses": [
+      {
+        "kind": "soft_token_kl",
+        "weight": 1.0
+      }
+    ],
+    "teacher_ids": [
+      "qwen-coder-7b-q4_k_m"
+    ],
+    "contents": [
+      "complete_sequence"
+    ],
+    "teacher_runtime": {
+      "device": {
+        "cuda": {
+          "ordinal": 0
+        }
+      },
+      "dtype": "f32"
+    },
+    "teacher_target_policy": "acquire",
+    "student_runtime": {
+      "device": "cpu",
+      "dtype": "f32"
+    },
+    "initial_checkpoint": null,
+    "data_policy": "offline",
+    "progressive": false,
+    "self_distillation": false
+  },
+  "freeze_sha256": "dbfba52216cae750dab0bc65dff10a57d81820fa0399fe7d0a6b7add55a199bc",
+  "base_sha256": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+  "base_sha256_after": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+  "tokenizer_sha256": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+  "evidence_bundle": {
+    "path": "reports/local-study/explore/round-001/content-v1/bundle.json",
+    "sha256": "6256372fa9e690dbf230f5042904001db2bb1583b195015ddce53b0def40c8c6",
+    "bytes": 218818
+  },
+  "adapter": {
+    "rank": 2,
+    "alpha": 4.0
+  },
+  "adapter_sha256": "4351a75954516591f3b63dc70637b9406cadcece06d674a4f91d02204d6f919f",
+  "optimizer_sha256": "41de8ee2924109ee474e8cab0b7a611f9cf1d13575f373af0acb95802011c0f9",
+  "initial_adapter_sha256": "1a4269d3f672e73a2478ed2ba67b0eaedfe0c7649954ffebf59121a98ddf4dc6",
+  "initial_adapter": {
+    "path": "reports/local-study/explore/round-001/study/quick/arms/arm-b1ee8c0e1c0ffe7465f83fe0/checkpoint/initial-adapter.safetensors",
+    "sha256": "1a4269d3f672e73a2478ed2ba67b0eaedfe0c7649954ffebf59121a98ddf4dc6",
+    "bytes": 551352
+  },
+  "initial_checkpoint": null,
+  "dpo_reference": null,
+  "steps": 3,
+  "losses": [
+    1.9005630016326904,
+    2.1736528873443604,
+    1.9504896402359009
+  ],
+  "gradient_norms": [
+    2.7751844304370854,
+    2.3999114058070785,
+    2.8916057831955837
+  ],
+  "component_losses": [
+    {
+      "soft_token_kl": 1.9005630016326904
+    },
+    {
+      "soft_token_kl": 2.1736528873443604
+    },
+    {
+      "soft_token_kl": 1.9504896402359009
+    }
+  ],
+  "alignment_diagnostics": [
+    {
+      "padding_mass": {
+        "discarded_probability_mass": 0.0,
+        "semantic_tokens": 151665,
+        "semantics": "Full-head temperature normalisation; exact shared semantic IDs plus one mass-preserving residual bucket for every padding/unmapped ID. Physical padding identities are deliberately coarsened; no probability tail is discarded.",
+        "student_padding_tokens": 271,
+        "student_residual_probability_mean": 0.00020317373855505139,
+        "teacher_padding_tokens": 399,
+        "teacher_residual_probability_mean": 0.0006994414143264294,
+        "temperature": 2.0
+      },
+      "sample_id": "e89aa62fc9a189c19a13370ba9410f99991e685167f68b4f7ce97f6a4c78f965",
+      "step": 1,
+      "teacher_id": "qwen-coder-7b-q4_k_m",
+      "vocabulary_alignment": {
+        "semantic_token_count": 151665,
+        "semantic_token_ids_sha256": "881076570c6bc70fa9691bdb6713645fc2848f0d42de838030b2e3ae2f34ab2e",
+        "semantics": "Identical defined semantic token IDs plus one residual category containing every padding output. Full original-head normalisation before coarsening; zero discarded probability mass. Per-temperature residual masses are recorded with each optimisation update.",
+        "student_logits_width": 151936,
+        "student_residual_token_count": 271,
+        "teacher_logits_width": 152064,
+        "teacher_residual_token_count": 399
+      }
+    },
+    {
+      "padding_mass": {
+        "discarded_probability_mass": 0.0,
+        "semantic_tokens": 151665,
+        "semantics": "Full-head temperature normalisation; exact shared semantic IDs plus one mass-preserving residual bucket for every padding/unmapped ID. Physical padding identities are deliberately coarsened; no probability tail is discarded.",
+        "student_padding_tokens": 271,
+        "student_residual_probability_mean": 0.00022198235092218965,
+        "teacher_padding_tokens": 399,
+        "teacher_residual_probability_mean": 0.0007030906854197383,
+        "temperature": 2.0
+      },
+      "sample_id": "21748f9f3a9dec33f5c19fb7179ecdada908a2b27e6486b333f8a379f57d93bb",
+      "step": 2,
+      "teacher_id": "qwen-coder-7b-q4_k_m",
+      "vocabulary_alignment": {
+        "semantic_token_count": 151665,
+        "semantic_token_ids_sha256": "881076570c6bc70fa9691bdb6713645fc2848f0d42de838030b2e3ae2f34ab2e",
+        "semantics": "Identical defined semantic token IDs plus one residual category containing every padding output. Full original-head normalisation before coarsening; zero discarded probability mass. Per-temperature residual masses are recorded with each optimisation update.",
+        "student_logits_width": 151936,
+        "student_residual_token_count": 271,
+        "teacher_logits_width": 152064,
+        "teacher_residual_token_count": 399
+      }
+    },
+    {
+      "padding_mass": {
+        "discarded_probability_mass": 0.0,
+        "semantic_tokens": 151665,
+        "semantics": "Full-head temperature normalisation; exact shared semantic IDs plus one mass-preserving residual bucket for every padding/unmapped ID. Physical padding identities are deliberately coarsened; no probability tail is discarded.",
+        "student_padding_tokens": 271,
+        "student_residual_probability_mean": 0.0002201736206188798,
+        "teacher_padding_tokens": 399,
+        "teacher_residual_probability_mean": 0.0007111345184966922,
+        "temperature": 2.0
+      },
+      "sample_id": "9f34cf373961913a3cf1067f1f2a71e0bef8368e1557d10e998cc099a00fab71",
+      "step": 3,
+      "teacher_id": "qwen-coder-7b-q4_k_m",
+      "vocabulary_alignment": {
+        "semantic_token_count": 151665,
+        "semantic_token_ids_sha256": "881076570c6bc70fa9691bdb6713645fc2848f0d42de838030b2e3ae2f34ab2e",
+        "semantics": "Identical defined semantic token IDs plus one residual category containing every padding output. Full original-head normalisation before coarsening; zero discarded probability mass. Per-temperature residual masses are recorded with each optimisation update.",
+        "student_logits_width": 151936,
+        "student_residual_token_count": 271,
+        "teacher_logits_width": 152064,
+        "teacher_residual_token_count": 399
+      }
+    }
+  ],
+  "qat_effective_trits": null,
+  "sample_ids": [
+    "e89aa62fc9a189c19a13370ba9410f99991e685167f68b4f7ce97f6a4c78f965",
+    "21748f9f3a9dec33f5c19fb7179ecdada908a2b27e6486b333f8a379f57d93bb",
+    "9f34cf373961913a3cf1067f1f2a71e0bef8368e1557d10e998cc099a00fab71"
+  ],
+  "realised_update_counts": {
+    "content/complete_sequence": 3,
+    "teacher/qwen-coder-7b-q4_k_m": 3
+  },
+  "trace_records": [
+    {
+      "path": "offline_bundle/distillation-traces/0e9a7a3bed6104432c7beac7e98b8ccc0892f65c3e7639899400a819dcdb096b.json",
+      "sha256": "d5e4839ad0468d6b5e657ad1d5879dec332d9796034d99131f6bca090744286a",
+      "bytes": 3457
+    },
+    {
+      "path": "offline_bundle/distillation-traces/be80475c999834c26e651aa43f187a6df3770ed534a33c029648c3044189c972.json",
+      "sha256": "d461c35bb49198acd8fb21e499de5d863982356af78c6debc557cb53cfb52c93",
+      "bytes": 3453
+    },
+    {
+      "path": "offline_bundle/distillation-traces/8556165cd5cac3318d35ed870baa860738fd26e502675b0859a32eec1d769876.json",
+      "sha256": "5c61b21f806ad33c0acd954acd80264c24396d568e123051412e979003b96d05",
+      "bytes": 3456
+    }
+  ],
+  "teacher_rights": [
+    {
+      "assets": {
+        "bytes": 1206,
+        "path": "offline_bundle/comparative/qwen-coder-7b-q4_k_m/gguf-assets.json",
+        "sha256": "606bfac02a103d208ccef73067cb6a4581e9b099e19bc9ed8e2021ebb1143114"
+      },
+      "capabilities": {
+        "attention": {
+          "artefacts": [],
+          "available": false,
+          "reason": "Not recorded: require actual causal attention matrices and declared head mapping",
+          "supported": true
+        },
+        "complete_sequences": {
+          "artefacts": [
+            {
+              "bytes": 4160,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/bits.hamming.generation.json",
+              "sha256": "19172d7b4c738dac55e7dc508eeeea43bbd27a824b54d1cd20a7d257e9f03d0c"
+            },
+            {
+              "bytes": 4023,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/bits.popcount.generation.json",
+              "sha256": "580efb002272a51f28c13547f99fd1b12627b078a43a0d4dcf3b7ae3212a82e9"
+            },
+            {
+              "bytes": 4078,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/calendar.leap.generation.json",
+              "sha256": "1ddc8215a1627afee40421627b1a8bcbcb9da3994f595e0645de4f5babb1186a"
+            },
+            {
+              "bytes": 4327,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/calendar.month_days.generation.json",
+              "sha256": "dd6cf8aad9bb5927dd348e169d71b45bf1866edbdcb252458b95ca740709520a"
+            },
+            {
+              "bytes": 4524,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/calendar.ordinal.generation.json",
+              "sha256": "06c36a2f6080a85452632e489e07afe357df6a9fa00e33e4a3b52bff8c333e6b"
+            },
+            {
+              "bytes": 4291,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/graph.indegrees.generation.json",
+              "sha256": "88c9bcad44eb92e454e4841dffd5cc281edd3722e7dc76cf7f43e301568984e7"
+            },
+            {
+              "bytes": 4853,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/intervals.coverage.generation.json",
+              "sha256": "99a1c524d6f042a1842ed25778ae33ec9240b053b5a63addfb777a94ec5904d9"
+            },
+            {
+              "bytes": 4468,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/intervals.peak.generation.json",
+              "sha256": "32bd9858cddc772409654bc7aed2fadd6d58e25088966e50400430a1d612ae2a"
+            },
+            {
+              "bytes": 4618,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/ledger.bounds.generation.json",
+              "sha256": "c029ffe946a0cb28c8dee81560093c198540df081b2d39cc50f4c2e2eaf78c93"
+            },
+            {
+              "bytes": 4347,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/ledger.prefix.generation.json",
+              "sha256": "b525f34b6fc4d10be932ac48de97fb17eae958bbd651c9e26dc78ac07152749e"
+            },
+            {
+              "bytes": 4078,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/ledger.sum.generation.json",
+              "sha256": "6f3d4bba8600110d5989ff6b79c4dbeb0b5c4506b4e5e456f91c6b04dedba773"
+            },
+            {
+              "bytes": 4553,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/matrices.diagonals.generation.json",
+              "sha256": "f4f91c4bc8e21777e536532b67191bfb3d995720dcc4a5d2991278f07ac4dade"
+            },
+            {
+              "bytes": 4397,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/matrices.rotate.generation.json",
+              "sha256": "979fdab750ffd71c3c4db9704589d6ed167a72ec5ce73db0e4a690c5f6b951e2"
+            },
+            {
+              "bytes": 4228,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/paths.basename.generation.json",
+              "sha256": "f36bacb2143af3429a30fb69a0613cd660c1747735b92dbd012d10f31bc05230"
+            },
+            {
+              "bytes": 4354,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/search.runs.generation.json",
+              "sha256": "5d4d8a7d851490bf4e2b910ac532b0286b45f6e4d888474a9e23b5a980b99a74"
+            },
+            {
+              "bytes": 4692,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/stock.mode.generation.json",
+              "sha256": "cbd509dbfada7161d8f5d39465101e6ecb9d7a8c8517dff743f3cc5fe317ee3c"
+            },
+            {
+              "bytes": 4113,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/text.lower_trim.generation.json",
+              "sha256": "18c986ab02ef8587e9bfcef5a240cc768b6a2b95f917c183d1ebcba73e71dabb"
+            },
+            {
+              "bytes": 4565,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/validation.brackets.generation.json",
+              "sha256": "dfd9cf6ef938865e8b564079016bfaee11aaf943a5a00b0c6c7543f010b3d54d"
+            }
+          ],
+          "available": true,
+          "reason": "Complete, nonempty generations passed every trusted container case",
+          "supported": true
+        },
+        "context": {
+          "artefacts": [],
+          "available": false,
+          "reason": "No generation with pinned additional train-only context",
+          "supported": true
+        },
+        "hidden_states": {
+          "artefacts": [],
+          "available": false,
+          "reason": "Not recorded: require actual layer states and declared dimensional projection",
+          "supported": true
+        },
+        "logits": {
+          "artefacts": [],
+          "available": false,
+          "reason": "Not recorded: a native teacher-forced worker must produce and bind actual token logits; KL also requires tokeniser alignment",
+          "supported": true
+        },
+        "on_policy": {
+          "artefacts": [],
+          "available": false,
+          "reason": "No checkpoint-bound student rollout plus teacher feedback and regrading",
+          "supported": true
+        },
+        "preferences": {
+          "artefacts": [],
+          "available": false,
+          "reason": "No safe same-task verified positive/negative pair",
+          "supported": true
+        },
+        "process": {
+          "artefacts": [
+            {
+              "bytes": 862,
+              "path": "reports/local-study/explore/round-001/content-v1/qwen-coder-7b-q4_k_m/ledger.bounds/process/record.json",
+              "sha256": "6a231bc66eb7b365e0cb1f108a85bad831774e07aa7db00f37340e954dc92c31"
+            },
+            {
+              "bytes": 874,
+              "path": "reports/local-study/explore/round-001/content-v1/qwen-coder-7b-q4_k_m/stock.stable_unique/process/record.json",
+              "sha256": "c9581b58aab08bd5e28f884a4fb713718f15871627447d15723e57a4eb586b6f"
+            },
+            {
+              "bytes": 874,
+              "path": "reports/local-study/explore/round-001/content-v1/qwen-coder-7b-q4_k_m/validation.brackets/process/record.json",
+              "sha256": "00a9d45c744076353ad7087b9f85b408b2c324b1acc1bba4df68157f2b5b0065"
+            },
+            {
+              "bytes": 860,
+              "path": "reports/local-study/explore/round-001/content-v1/qwen-coder-7b-q4_k_m/bits.hamming/process/record.json",
+              "sha256": "426d00c894088d5c3fee02e7419e6c36aa366c4df22c05fc45735f6c8c4b4629"
+            }
+          ],
+          "available": true,
+          "reason": "Actual additional generation, frozen train-only context/feedback and verified final solution; generated comments do not prove faithful internal reasoning",
+          "supported": true
+        },
+        "self_distillation": {
+          "artefacts": [],
+          "available": false,
+          "reason": "No original student-checkpoint teacher outputs; supervised teacher rows cannot be relabelled",
+          "supported": true
+        },
+        "student_tokeniser_sha256": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+        "tokeniser_aligned": true,
+        "tokeniser_sha256": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+        "tool_trajectories": {
+          "artefacts": [],
+          "available": false,
+          "reason": "A sandbox grade alone is not a teacher feedback/revision trajectory",
+          "supported": true
+        }
+      },
+      "id": "qwen-coder-7b-q4_k_m",
+      "model": {
+        "architecture": "qwen2",
+        "developer_id": "alibaba-qwen",
+        "directory": "offline_bundle/comparative/qwen-coder-7b-q4_k_m",
+        "id": "qwen-coder-7b-q4_k_m",
+        "licence": "Apache-2.0",
+        "model_id": "Qwen/Qwen2.5-Coder-7B-Instruct-GGUF",
+        "revision": "13fb94bfda8c8cf22497dc57b78f391a9acb426a",
+        "role": "coding_teacher",
+        "weight_format": "gguf"
+      },
+      "rights": {
+        "eligible": true,
+        "inherited_restrictions": [
+          "Retain original model licence, copyright notices and attribution; no ownership guarantee for independently reproduced code."
+        ],
+        "licence": "apache-2.0",
+        "licence_artefacts": [
+          {
+            "bytes": 11343,
+            "path": "offline_bundle/comparative/qwen-coder-7b-q4_k_m/source/LICENSE",
+            "sha256": "832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e"
+          },
+          {
+            "bytes": 6392,
+            "path": "offline_bundle/comparative/qwen-coder-7b-q4_k_m/source/README.md",
+            "sha256": "3c090be37f829adc1e4cdb78733667437732541470430ab2cd785d7f0d460077"
+          }
+        ],
+        "reasoning": "Explicit recognised original model licence and publisher-verified local assets, subject to preserved licence obligations",
+        "scope": "local open-weight output adaptation only; no API terms inferred"
+      }
+    }
+  ],
+  "student_execution": {
+    "actual_device": "Cpu",
+    "actual_dtype": "F32",
+    "available_cpu_threads": 16,
+    "candle_cpu_threads": 3,
+    "cpu_fallback": false,
+    "cuda_active": false,
+    "engine": "native_rust_candle",
+    "student_backend": "conventional_qwen_lora",
+    "ternary_quantisation_during_every_forward": false,
+    "trainable_adapter_tensors": 96
+  },
+  "reloaded": true,
+  "production_eligible": false,
+  "elapsed_seconds": 52.255970567,
+  "limitations": [
+    "48 tasks from 12 locally authored train source groups; no held-out or development data enters training.",
+    "Local model developers do not count as independent paid API provider businesses.",
+    "No learning, promotion, cash saving or teacher trace is inferred from this bundle alone.",
+    "Process, contextual revision, teacher-feedback trajectories, on-policy and self-distillation require additional genuine generation evidence.",
+    "Exploratory local-teacher adaptation; no independent API-provider or held-out promotion claim. Reload is a fresh model instance inside the worker; external evaluation must reload in its own process.",
+    "Declared assistant-token windows exercise actual operators and optimiser updates; omitted context/targets are recorded in freeze.json and these quick arms do not establish task learning."
+  ]
+}

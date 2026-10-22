@@ -1,0 +1,2 @@
+study planning: cached verified evidence only; explicit offline=true
+execution: Explicit CPU selected with 16 available threads and 43724697191 guarded RAM bytes; available CPU threads=16, usable RAM=43724697191 bytes

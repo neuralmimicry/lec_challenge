@@ -1,0 +1,40 @@
+{
+  "run_id": "eb5bd90c-489b-44cb-94c9-1d7a4fdbced7",
+  "task_id": "dispatch.round_robin",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: warning: unused import: `serde_json::Value`\n --> /candidate/main.rs:1:5\n  |\n1 | use serde_json::Value;\n  |     ^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0599]: no method named `as_integer` found for enum `Value` in the current scope\n --> /candidate/main.rs:6:29\n  |\n6 |     let mut quantum = input.as_integer().unwrap();\n  |                             ^^^^^^^^^^\n  |\nhelp: there is a method `as_str` with a similar name\n  |\n6 -     let mut quantum = input.as_integer().unwrap();\n6 +     let mut quantum = input.as_str().unwrap();\n  |\n\nerror[E0308]: mismatched types\n  --> /candidate/main.rs:22:13\n   |\n22 |             indices[a as usize] - indices[b as usize]\n   |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `Ordering`, found `i64`\n\nerror[E0606]: casting `&i64` as `usize` is invalid\n  --> /candidate/main.rs:22:21\n   |\n22 |             indices[a as usize] - indices[b as usize]\n   |                     ^^^^^^^^^^\n   |\nhelp: dereference the expression\n   |\n22 |             indices[*a as usize] - indices[b as usize]\n   |                     +\n\nerror[E0606]: casting `&i64` as `usize` is invalid\n  --> /candidate/main.rs:22:43\n   |\n22 |             indices[a as usize] - indices[b as usize]\n   |                                           ^^^^^^^^^^\n   |\nhelp: dereference the expression\n   |\n22 |             indices[a as usize] - indices[*b as usize]\n   |                                           +\n\nerror[E0606]: casting `&i64` as `usize` is invalid\n  --> /candidate/main.rs:24:21\n   |\n24 |             indices[a as usize].cmp(&indices[b as usize])\n   |                     ^^^^^^^^^^\n   |\nhelp: dereference the expression\n   |\n24 |             indices[*a as usize].cmp(&indices[b as usize])\n   |                     +\n\nerror[E0606]: casting `&i64` as `usize` is invalid\n  --> /candidate/main.rs:24:46\n   |\n24 |             indices[a as usize].cmp(&indices[b as usize])\n   |                                              ^^^^^^^^^^\n   |\nhelp: dereference the expression\n   |\n24 |             indices[a as usize].cmp(&indices[*b as usize])\n   |                                              +\n\nerror: aborting due to 6 previous errors; 1 warning emitted\n\nSome errors have detailed explanations: E0308, E0599, E0606.\nFor more information about an error, try `rustc --explain E0308`.\n"
+  ],
+  "cases_total": 5,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "dad3616f43992419dce95e48fe26e6bf16b1dd8782c6d0b00a0244728183791c",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/explore/round-001/study/quick/arms/arm-2793b743b590917d497c4794/development/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/explore/round-001/study/quick/arms/arm-2793b743b590917d497c4794/development/sandbox/eb5bd90c-489b-44cb-94c9-1d7a4fdbced7.audit.json",
+  "audit_sha256": "718f3b28e2c12243a287311ac1098875d4c682227a13dbaa9fb8c2d63e05f744",
+  "failure": "compilation failed: warning: unused import: `serde_json::Value`\n --> /candidate/main.rs:1:5\n  |\n1 | use serde_json::Value;\n  |     ^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0599]: no method named `as_integer` found for enum `Value` in the current scope\n --> /candidate/main.rs:6:29\n  |\n6 |     let mut quantum = input.as_integer().unwrap();\n  |                             ^^^^^^^^^^\n  |\nhelp: there is a method `as_str` with a similar name\n  |\n6 -     let mut quantum = input.as_integer().unwrap();\n6 +     let mut quantum = input.as_str().unwrap();\n  |\n\nerror[E0308]: mismatched types\n  --> /candidate/main.rs:22:13\n   |\n22 |             indices[a as usize] - indices[b as usize]\n   |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `Ordering`, found `i64`\n\nerror[E0606]: casting `&i64` as `usize` is invalid\n  --> /candidate/main.rs:22:21\n   |\n22 |             indices[a as usize] - indices[b as usize]\n   |                     ^^^^^^^^^^\n   |\nhelp: dereference the expression\n   |\n22 |             indices[*a as usize] - indices[b as usize]\n   |                     +\n\nerror[E0606]: casting `&i64` as `usize` is invalid\n  --> /candidate/main.rs:22:43\n   |\n22 |             indices[a as usize] - indices[b as usize]\n   |                                           ^^^^^^^^^^\n   |\nhelp: dereference the expression\n   |\n22 |             indices[a as usize] - indices[*b as usize]\n   |                                           +\n\nerror[E0606]: casting `&i64` as `usize` is invalid\n  --> /candidate/main.rs:24:21\n   |\n24 |             indices[a as usize].cmp(&indices[b as usize])\n   |                     ^^^^^^^^^^\n   |\nhelp: dereference the expression\n   |\n24 |             indices[*a as usize].cmp(&indices[b as usize])\n   |                     +\n\nerror[E0606]: casting `&i64` as `usize` is invalid\n  --> /candidate/main.rs:24:46\n   |\n24 |             indices[a as usize].cmp(&indices[b as usize])\n   |                                              ^^^^^^^^^^\n   |\nhelp: dereference the expression\n   |\n24 |             indices[a as usize].cmp(&indices[*b as usize])\n   |                                              +\n\nerror: aborting due to 6 previous errors; 1 warning emitted\n\nSome errors have detailed explanations: E0308, E0599, E0606.\nFor more information about an error, try `rustc --explain E0308`.\n",
+  "duration_ms": 13278,
+  "timeout_evidence": null,
+  "lifecycle_evidence": {
+    "receipt_path": "reports/local-study/explore/round-001/study/quick/arms/arm-2793b743b590917d497c4794/development/sandbox/eb5bd90c-489b-44cb-94c9-1d7a4fdbced7.lifecycle.json",
+    "receipt_sha256": "bd812041c133a211f86419048c0b9085449b7bda0efd50eff97dbd355030a3fd"
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "schema_version": 3,
+  "run_id": "2dd36c5a-1981-4a6e-b000-29de6bda610f",
+  "ownership_nonce": "61672017-1b20-4b4a-8b1d-c4967df5c064",
+  "attempt_key": "b8b279b0-eecd-4662-93dd-a63e0737fbdc",
+  "receipt_path": "reports/repair-20261022/sandbox-adversarial/runs/b8b279b0-eecd-4662-93dd-a63e0737fbdc.prepared.json",
+  "report_path": "reports/repair-20261022/sandbox-adversarial/runs/2dd36c5a-1981-4a6e-b000-29de6bda610f.json",
+  "task": {
+    "id": "ledger.sum",
+    "source_id": "private-ledger-v1",
+    "lineage_id": "local-contract-pack-00",
+    "split": "train",
+    "specification": "Input is an array of integers in [-10000,10000], length <=64. Return its sum; the empty sum is zero.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "6b9709db9c4c67cb3de98c661b272deb80d2ed969fca9ce2ebdda8e2fab68c78",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": [
+          2,
+          -4,
+          8
+        ],
+        "expected": 6
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "pub fn solve(input:serde_json::Value)->serde_json::Value{use std::io::Write; let _=std::io::stderr().write_all(&vec![b'x';300000]);serde_json::json!(input.as_array().unwrap().iter().map(|x|x.as_i64().unwrap()).sum::<i64>())}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/repair-20261022/sandbox-adversarial/runs"
+  },
+  "code_sha256": "4c93375dc29a23f3bc0aea750ac7df7f0cfce5a1ea9eedadab3a957a4c7db77b",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

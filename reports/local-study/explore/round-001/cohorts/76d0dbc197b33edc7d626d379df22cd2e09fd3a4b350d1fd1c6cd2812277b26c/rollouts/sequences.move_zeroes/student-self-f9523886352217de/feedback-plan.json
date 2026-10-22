@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "initial_plan": {
+    "path": "reports/local-study/explore/round-001/cohorts/76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c/rollouts/sequences.move_zeroes/student-plan.json",
+    "sha256": "22b794ebebe03674df79aa38bd41c8392423718232ee0669430ca784d7f98e70",
+    "bytes": 5306
+  },
+  "student_raw": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sequences.move_zeroes/student-raw.json",
+    "sha256": "898533d4173b737ebc1cb7e90d8d73e45f916346df2e176caa036fd0b1220907",
+    "bytes": 1962
+  },
+  "student_grade": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox/e213143e-e875-4888-a7bb-5e15a214d779.json",
+    "sha256": "c6a01f9f64e9e51c5296d23d91613e97e078eeda67907737d24ae41cfb7cf65b",
+    "bytes": 6839
+  },
+  "teacher_id": "student-self-f9523886352217de",
+  "teacher_assets": {
+    "path": "offline_bundle/base/assets.json",
+    "sha256": "54304e7f41519a4196674cba5e86593802f852b2b47882d6c19706f85f303ad4",
+    "bytes": 788
+  },
+  "teacher_checkpoint": null,
+  "runtime": {
+    "device": {
+      "cuda": {
+        "ordinal": 0
+      }
+    },
+    "dtype": "f32"
+  },
+  "request": {
+    "prompt": "New task:\nWrite Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an integer array. Move all zeros to the end, preserving the order of nonzero elements and the length.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[0,1,0,-2,3],\"expected\":[1,-2,3,0,0]}]\nActual frozen student candidate:\n```rust\nuse serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let mut result = Vec::new();\n    let mut zero_count = 0;\n\n    for &item in input.as_array() {\n        if item.is_u64() {\n            result.push(item);\n        } else if item.is_null() {\n            zero_count += 1;\n        } else {\n            result.push(item);\n        }\n    }\n\n    let mut zero_index = 0;\n    for i in 0..result.len() {\n        if result[i].is_u64() {\n            result[i] = zero_index as u64;\n            zero_index += 1;\n        }\n    }\n\n    serde_json::Value::Array(result)\n}\n```\nActual trusted tool feedback:\n{\"bounded_diagnostic_untrusted_data\":\"compilation failed: warning: unused import: `serde_json::Value`\\n --> /candidate/main.rs:1:5\\n  |\\n1 | use serde_json::Value;\\n  |     ^^^^^^^^^^^^^^^^^\\n  |\\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\\n\\nerror[E0599]: no method named `is_u64` found for struct `Vec<Value>` in the current scope\\n --> /candidate/main.rs:8:17\\n  |\\n8 |         if item.is_u64() {\\n  |                 ^^^^^^ method not found in `Vec<Value>`\\n\\nerror[E0599]: no method named `is_null` found for struct `Vec<Value>` in the current scope\\n  --> /candidate/main.rs:10:24\\n   |\\n10 |         } else if item.is_null() {\\n   |                        ^^^^^^^ method not found in `Vec<Value>`\\n\\nerror[E0599]: no method named `is_u64` found for struct `Vec<Value>` in the current scope\\n  --> /candidate/main.rs:19:22\\n   |\\n19 |         if result[i].is_u64() {\\n   |                      ^^^^^^ method not found in `Vec<Value>`\\n\\nerror[E0308]: mismatched types\\n  --> /candidate/main.rs:20:25\\n   |\\n20 |             result[i] = zero_index as u64;\\n   |             ---------   ^^^^^^^^^^^^^^^^^ expected `Vec<Value>`, found `u64`\\n   |             |\\n   |             expected due to the type of this binding\\n   |\\n   = note: expected struct `Vec<Value>`\\n                found type `u64`\\n\\nerror[E0308]: mismatched types\\n   --> /candidate/main.rs:25:30\\n    |\\n  9 |             result.push(item);\\n    |             ------      ---- this argument has type `Vec<Value>`...\\n    |             |\\n    |             ... which causes `result` to have type `Vec<Vec<Value>>`\\n...\\n 25 |     serde_json::Value::Array(result)\\n    |     ------------------------ ^^^^^^ expected `Vec<Value>`, found `Vec<Vec<Value>>`\\n    |     |\\n    |     arguments to this enum variant are incorrect\\n    |\\n    = note: expected struct `Vec<Value>`\\n               found struct `Vec<Vec<Value>>`\\nnote: tuple variant defined here\\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:160:5\\n    |\\n160 |     Array(Vec<Value>),\\n    |     ^^^^^\\nhelp: try wrapping the expression in `serde_json::Value::Array`\\n    |\\n  9 |             result.push(serde_json::Value::Array(item));\\n    |                         +++++++++++++++++++++++++    +\\n\\nerror: aborting due to 5 previous errors; 1 warning emitted\\n\\nSome errors have detailed explanations: E0308, E0599.\\nFor more information about an error, try `rustc --explain E0308`.\\n\",\"cases_passed\":0,\"cases_total\":5,\"content_role\":\"compilation_feedback_only\",\"original_failure_is_not_a_success\":true,\"passed\":false,\"private_inputs_or_expected_outputs_exposed\":false,\"quarantined\":true,\"run_id\":\"e213143e-e875-4888-a7bb-5e15a214d779\",\"student_generation_complete\":true,\"tool\":\"trusted_container_grader\",\"trace_complete\":false}\nCritique and revise the candidate. Put any short explanation in Rust // comments and return complete compilable Rust source only. Do not invent tool results.",
+    "max_new_tokens": 768,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "supporting_sample_ids": []
+}

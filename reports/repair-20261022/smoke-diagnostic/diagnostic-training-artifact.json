@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "arm_id": "arm-ecbb3f2de999eff0860c582b",
+  "checkpoint": "reports/repair-20261022/smoke-arm/checkpoint",
+  "manifest": {
+    "path": "reports/repair-20261022/smoke-arm/checkpoint/manifest.json",
+    "sha256": "ae7fd50070eda0ae77ecce49c7c44e59b5ca92737afc0261d7bd01ec8b5a7666",
+    "bytes": 12755
+  },
+  "adapter_sha256": "7e89f7fa0fa19435d5c95aeaa623be8d2f246ac26686ae9606bf5bf19fcfb612",
+  "base_sha256": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+  "evidence_bundle_sha256": "d6899a4dff1b7c5180c006b38f9441f916eb7bda2f59df21df1f64784e8f1417",
+  "steps": 1,
+  "losses": [
+    0.3009267747402191
+  ],
+  "gradient_norms": [
+    0.8854487270066959
+  ],
+  "changed_adapter": true,
+  "reloaded": true,
+  "production_eligible": false,
+  "limitations": [
+    "48 tasks from 12 locally authored train source groups; no held-out or development data enters training.",
+    "Local model developers do not count as independent paid API provider businesses.",
+    "No learning, promotion, cash saving or teacher trace is inferred from this bundle alone.",
+    "Process, contextual revision, teacher-feedback trajectories, on-policy and self-distillation require additional genuine generation evidence.",
+    "Exploratory local-teacher adaptation; no independent API-provider or held-out promotion claim. Reload is a fresh model instance inside the worker; external evaluation must reload in its own process."
+  ]
+}

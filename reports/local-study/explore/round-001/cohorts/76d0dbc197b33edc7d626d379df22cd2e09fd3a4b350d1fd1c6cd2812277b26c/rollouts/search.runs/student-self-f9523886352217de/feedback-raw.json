@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "evidence_kind": "actual_checkpoint_bound_rollout_generation",
+  "plan": {
+    "path": "reports/local-study/explore/round-001/cohorts/76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c/rollouts/search.runs/student-self-f9523886352217de/feedback-plan.json",
+    "sha256": "290122b514200f6f73dff5d10965f7839f4d8945a3969aa4a959252399aa4cde",
+    "bytes": 6848
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let mut result = Vec::new();\n    let mut current_run = Vec::new();\n    let mut count = 0;\n\n    for c in input.as_str().chars() {\n        if c == '\\n' || c == '\\r' || c == '\\t' || c == '\\f' || c == ' ' {\n            if !current_run.is_empty() {\n                result.push(current_run);\n                current_run.clear();\n            }\n            count = 0;\n        } else {\n            current_run.push(c);\n            count += 1;\n        }\n    }\n\n    if !current_run.is_empty() {\n        result.push(current_run);\n    }\n\n    serde_json::Value::Array(result)\n}\n```",
+    "checkpoint_id": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+    "finish_reason": "stop",
+    "input_tokens": 1498,
+    "output_tokens": 170,
+    "elapsed_ms": 5317,
+    "complete": true
+  },
+  "generation_error": null,
+  "execution": {
+    "actual_device": "Cuda { gpu_id: 0 }",
+    "actual_dtype": "F32",
+    "asset_lifetime_shared_lease": false,
+    "available_cpu_threads": 16,
+    "candle_cpu_threads": 16,
+    "checkpoint_id": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+    "context_cap": 4096,
+    "cpu_fallback": false,
+    "cuda_active": true,
+    "cuda_feature_compiled": true,
+    "engine": "native_rust_candle",
+    "model_id": "Qwen/Qwen2.5-Coder-0.5B-Instruct",
+    "quantisation": null,
+    "requested": {
+      "device": {
+        "cuda": {
+          "ordinal": 0
+        }
+      },
+      "dtype": "f32"
+    },
+    "revision": "ea3f2471cf1b1f0db85067f1ef93848e38e88c25",
+    "weight_format": "safetensors"
+  }
+}

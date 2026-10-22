@@ -1,6 +1,6 @@
 {
   "error": "student rollout collection is incomplete or failed; original observations and valid partial evidence were retained",
-  "observed_unix_ms": 1792183238561,
+  "observed_unix_ms": 1792411799699,
   "promotion": "incumbent_retained",
   "status": "FAILURE"
 }

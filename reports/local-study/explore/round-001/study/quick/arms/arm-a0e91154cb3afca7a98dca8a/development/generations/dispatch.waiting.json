@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "28ab3200183f66276c4e958454cd35b7667b83c06b011edd71c6d345e91f1540",
+  "task_id": "dispatch.waiting",
+  "source_id": "private-dispatch-v1",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an array of [arrival,duration] processed in input order by one server, initially free at zero. Return total time jobs wait before service.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[[0,3],[1,2],[8,1]],\"expected\":2}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let mut total_time = 0;\n    for line in input.as_array() {\n        let (arrival, duration) = line.as_array().unwrap();\n        total_time += arrival * duration;\n    }\n    serde_json::Value::Number(total_time as f64)\n}\n```",
+    "checkpoint_id": "ce24b6aee02fd1ab4d951cacaba0a091b6fc55dc8573d85f34778f23dd44d6c9",
+    "finish_reason": "stop",
+    "input_tokens": 241,
+    "output_tokens": 83,
+    "elapsed_ms": 11675,
+    "complete": true
+  },
+  "model_error": null
+}

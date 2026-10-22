@@ -1,0 +1,44 @@
+{
+  "downloads_performed": 0,
+  "files": [
+    {
+      "expected_sha256": "b1e58593cd31852f7da5c2fc31ddf6135b9c066c0fd9177a4bbe95717083adff",
+      "path": "offline_bundle/base/config.json",
+      "state": "valid_regular_file"
+    },
+    {
+      "expected_sha256": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+      "path": "offline_bundle/base/tokenizer.json",
+      "state": "valid_regular_file"
+    },
+    {
+      "expected_sha256": "959e7f1d9a1b7641a6d6ce05ca97b75c7894fcb66cbe5a040406458fb1128ee4",
+      "path": "offline_bundle/base/tokenizer_config.json",
+      "state": "valid_regular_file"
+    },
+    {
+      "expected_sha256": "fdaccbcb02f3e1e7914ccb0f69ebe899071ffd27cf825166d823163e156870f2",
+      "path": "offline_bundle/base/generation_config.json",
+      "state": "valid_regular_file"
+    },
+    {
+      "expected_sha256": "832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e",
+      "path": "offline_bundle/base/LICENSE",
+      "state": "valid_regular_file"
+    },
+    {
+      "expected_sha256": "50cd33dcab1f7b9d206d4691df527a419cfddadd0c4648b8d9bffd5a1b7a032d",
+      "path": "offline_bundle/base/README.md",
+      "state": "valid_regular_file"
+    },
+    {
+      "expected_sha256": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+      "path": "offline_bundle/base/model.safetensors",
+      "state": "valid_regular_file"
+    }
+  ],
+  "network_used": false,
+  "note": "Quarantine renames conflicts without deleting their contents. Bootstrap-online can restore absent pinned payloads; valid manifests and payloads are preserved.",
+  "quarantine_explicitly_requested": false,
+  "schema_version": 1
+}

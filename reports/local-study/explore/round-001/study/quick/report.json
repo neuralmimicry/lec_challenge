@@ -329,8 +329,25 @@
       "fidelity_inapplicable_reasons": [],
       "id": "arm-b1ee8c0e1c0ffe7465f83fe0",
       "inapplicable_reasons": [],
-      "status": "queued",
-      "trial": null
+      "status": "completed_real_training",
+      "trial": {
+        "attempts": 1,
+        "elapsed_seconds": 507.117066169,
+        "exit_code": 0,
+        "id": "arm-b1ee8c0e1c0ffe7465f83fe0",
+        "outcome": {
+          "bytes": 2587,
+          "path": "reports/local-study/explore/round-001/study/quick/arms/arm-b1ee8c0e1c0ffe7465f83fe0/outcome.json",
+          "sha256": "bfc57e512190e364f6738fd50f209022fc1ed26a2dfc69abb7142b675563794e"
+        },
+        "reason": null,
+        "request": {
+          "bytes": 16668,
+          "path": "reports/local-study/explore/round-001/study/quick/arms/arm-b1ee8c0e1c0ffe7465f83fe0/request.json",
+          "sha256": "a314436cb6ff58be6bcad725a2d5d4b94dfe69b62685f3ff801b50757519042c"
+        },
+        "status": "completed_real_training"
+      }
     },
     {
       "fidelity_inapplicable_reasons": [],
@@ -946,27 +963,48 @@
       "fidelity_inapplicable_reasons": [],
       "id": "arm-b5c1964d2b49d0b0089f6f23",
       "inapplicable_reasons": [],
-      "status": "queued",
-      "trial": null
+      "status": "completed_real_training",
+      "trial": {
+        "attempts": 1,
+        "elapsed_seconds": 437.488242716,
+        "exit_code": 0,
+        "id": "arm-b5c1964d2b49d0b0089f6f23",
+        "outcome": {
+          "bytes": 2597,
+          "path": "reports/local-study/explore/round-001/study/quick/arms/arm-b5c1964d2b49d0b0089f6f23/outcome.json",
+          "sha256": "70a591dbef483f58b685af3955d2aa812cd6022106100eb6053dcf680a320305"
+        },
+        "reason": null,
+        "request": {
+          "bytes": 16669,
+          "path": "reports/local-study/explore/round-001/study/quick/arms/arm-b5c1964d2b49d0b0089f6f23/request.json",
+          "sha256": "5e0dd0da2ef98e759a17197c4d7d36de089491a5838ac545cd5bc4419157e6b1"
+        },
+        "status": "completed_real_training"
+      }
     },
     {
       "fidelity_inapplicable_reasons": [],
       "id": "arm-2793b743b590917d497c4794",
       "inapplicable_reasons": [],
-      "status": "interrupted_progress_saved",
+      "status": "completed_real_training",
       "trial": {
-        "attempts": 1,
-        "elapsed_seconds": 305.276589172,
-        "exit_code": null,
+        "attempts": 2,
+        "elapsed_seconds": 313.015338765,
+        "exit_code": 0,
         "id": "arm-2793b743b590917d497c4794",
-        "outcome": null,
-        "reason": "study worker was interrupted or reached its time budget; validated optimiser progress is retained",
+        "outcome": {
+          "bytes": 2598,
+          "path": "reports/local-study/explore/round-001/study/quick/arms/arm-2793b743b590917d497c4794/outcome.json",
+          "sha256": "b4dd90112dc0deb74e9ee0c06373f5475075ddcb6289aa35fe519e75d6f1a4ac"
+        },
+        "reason": null,
         "request": {
           "bytes": 16690,
           "path": "reports/local-study/explore/round-001/study/quick/arms/arm-2793b743b590917d497c4794/request.json",
           "sha256": "b17c5dc7e228bbf9cdc0abc348b497575f1f60914f54238cc7b74d709c656a2c"
         },
-        "status": "interrupted_progress_saved"
+        "status": "completed_real_training"
       }
     },
     {
@@ -4303,8 +4341,21 @@
       "fidelity_inapplicable_reasons": [],
       "id": "arm-a0e91154cb3afca7a98dca8a",
       "inapplicable_reasons": [],
-      "status": "queued",
-      "trial": null
+      "status": "interrupted_progress_saved",
+      "trial": {
+        "attempts": 1,
+        "elapsed_seconds": 368.165660723,
+        "exit_code": null,
+        "id": "arm-a0e91154cb3afca7a98dca8a",
+        "outcome": null,
+        "reason": "study worker was interrupted or reached its time budget; validated optimiser progress is retained",
+        "request": {
+          "bytes": 16742,
+          "path": "reports/local-study/explore/round-001/study/quick/arms/arm-a0e91154cb3afca7a98dca8a/request.json",
+          "sha256": "f74da61acd0985b29a9a3efbf75dfae4c9f387a201170b925cdb93a4fae03249"
+        },
+        "status": "interrupted_progress_saved"
+      }
     },
     {
       "fidelity_inapplicable_reasons": [],
@@ -50923,8 +50974,21 @@
       "fidelity_inapplicable_reasons": [],
       "id": "arm-e0f1e899df5266bf075ca1f0",
       "inapplicable_reasons": [],
-      "status": "queued",
-      "trial": null
+      "status": "failed",
+      "trial": {
+        "attempts": 1,
+        "elapsed_seconds": 78.871318214,
+        "exit_code": 1,
+        "id": "arm-e0f1e899df5266bf075ca1f0",
+        "outcome": null,
+        "reason": "study worker failed with exit code Some(1); see retained stderr.log",
+        "request": {
+          "bytes": 16651,
+          "path": "reports/local-study/explore/round-001/study/quick/arms/arm-e0f1e899df5266bf075ca1f0/request.json",
+          "sha256": "d9864f0710d4d1c509bb36a1f0eba462387c506a2202e59a0df40dce2b8d4a62"
+        },
+        "status": "failed"
+      }
     },
     {
       "fidelity_inapplicable_reasons": [],
@@ -53200,8 +53264,21 @@
       "fidelity_inapplicable_reasons": [],
       "id": "arm-847339aa0a30649540064132",
       "inapplicable_reasons": [],
-      "status": "queued",
-      "trial": null
+      "status": "failed",
+      "trial": {
+        "attempts": 1,
+        "elapsed_seconds": 88.186224634,
+        "exit_code": 1,
+        "id": "arm-847339aa0a30649540064132",
+        "outcome": null,
+        "reason": "study worker failed with exit code Some(1); see retained stderr.log",
+        "request": {
+          "bytes": 16666,
+          "path": "reports/local-study/explore/round-001/study/quick/arms/arm-847339aa0a30649540064132/request.json",
+          "sha256": "cdc5acddcf867b641c5b17915550075e4d3e3b089efda648bef772560ae44aca"
+        },
+        "status": "failed"
+      }
     },
     {
       "fidelity_inapplicable_reasons": [],
@@ -103847,10 +103924,10 @@
     }
   ],
   "catalogue_arms": 7680,
-  "completed_arms": 5,
+  "completed_arms": 8,
   "configured_catalogue_exhausted": false,
   "evidence_kind": "bounded_local_distillation_study_execution",
-  "failed_arms": 2,
+  "failed_arms": 4,
   "fidelity": "quick",
   "held_out_used": false,
   "limitations": [
@@ -103861,7 +103938,7 @@
   ],
   "monetary_cost": "No paid provider calls; local energy/hardware cash cost remains unmeasured unless the worker supplies actual measurement.",
   "production_eligible": false,
-  "queued_applicable_arms": 81,
+  "queued_applicable_arms": 76,
   "quick_coverage_gaps": [
     "content:Context",
     "content:Preference",
@@ -103919,9 +103996,9 @@
     "organiser:self_distillation",
     "policy:OnPolicy"
   ],
-  "reserved_training_steps": 24,
+  "reserved_training_steps": 39,
   "schema_version": 1,
   "selected_profile_succeeded": false,
   "status": "budget_stopped_progress_saved",
-  "summed_worker_wall_seconds": 3590.2831459
+  "summed_worker_wall_seconds": 5383.1269971209995
 }

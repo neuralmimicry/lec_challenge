@@ -1,0 +1,58 @@
+{
+  "freeze_sha256": "fa1ea95c9018c4482b306fd2a2b66be5bf8ebc9252633057b6be03efc84913a3",
+  "steps": 1,
+  "adapter": {
+    "path": "reports/local-study/explore/round-001/study/quick/arms/arm-a0e91154cb3afca7a98dca8a/checkpoint/step-000001/adapter.safetensors",
+    "sha256": "a4d8c7cf114e55c3bfbd31900f9ead54f1bcdc0dba2b09c1028d893f0705aaff",
+    "bytes": 551352
+  },
+  "optimizer": {
+    "path": "reports/local-study/explore/round-001/study/quick/arms/arm-a0e91154cb3afca7a98dca8a/checkpoint/step-000001/optimizer.safetensors",
+    "sha256": "72be704939f81389a9e28dac35f0e415a52096e81196fb1f3259c892562f3636",
+    "bytes": 1103152
+  },
+  "initial_adapter_sha256": "8331552c78d2dbe0d5c6a72cf2d334e35ff84f0a49eb29115399ac953ded92e7",
+  "losses": [
+    0.8857443332672119
+  ],
+  "gradient_norms": [
+    0.8845369968618928
+  ],
+  "component_losses": [
+    {
+      "sequence_sft": 1.2783300876617432,
+      "soft_token_kl": 2.2297143936157227,
+      "hidden_feature": 0.031629256904125214,
+      "attention_relation": 0.0033035902306437492
+    }
+  ],
+  "alignment_diagnostics": [
+    {
+      "padding_mass": {
+        "discarded_probability_mass": 0.0,
+        "semantic_tokens": 151665,
+        "semantics": "Full-head temperature normalisation; exact shared semantic IDs plus one mass-preserving residual bucket for every padding/unmapped ID. Physical padding identities are deliberately coarsened; no probability tail is discarded.",
+        "student_padding_tokens": 271,
+        "student_residual_probability_mean": 0.00021764080156572163,
+        "teacher_padding_tokens": 399,
+        "teacher_residual_probability_mean": 0.0006779534742236137,
+        "temperature": 2.0
+      },
+      "sample_id": "be57ee99f53e14a44a210dee5a0a227fbee04ea80f1c914f14447c3db087cded",
+      "step": 1,
+      "teacher_id": "qwen-coder-7b-q4_k_m",
+      "vocabulary_alignment": {
+        "semantic_token_count": 151665,
+        "semantic_token_ids_sha256": "881076570c6bc70fa9691bdb6713645fc2848f0d42de838030b2e3ae2f34ab2e",
+        "semantics": "Identical defined semantic token IDs plus one residual category containing every padding output. Full original-head normalisation before coarsening; zero discarded probability mass. Per-temperature residual masses are recorded with each optimisation update.",
+        "student_logits_width": 151936,
+        "student_residual_token_count": 271,
+        "teacher_logits_width": 152064,
+        "teacher_residual_token_count": 399
+      }
+    }
+  ],
+  "sample_ids": [
+    "be57ee99f53e14a44a210dee5a0a227fbee04ea80f1c914f14447c3db087cded"
+  ]
+}

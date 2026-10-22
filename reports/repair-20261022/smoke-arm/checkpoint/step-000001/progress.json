@@ -1,0 +1,30 @@
+{
+  "freeze_sha256": "6151756861d3e68e36eaa6e59a05287fae004024ad7ba6c14e49c475e62af36e",
+  "steps": 1,
+  "adapter": {
+    "path": "reports/repair-20261022/smoke-arm/checkpoint/step-000001/adapter.safetensors",
+    "sha256": "7e89f7fa0fa19435d5c95aeaa623be8d2f246ac26686ae9606bf5bf19fcfb612",
+    "bytes": 551352
+  },
+  "optimizer": {
+    "path": "reports/repair-20261022/smoke-arm/checkpoint/step-000001/optimizer.safetensors",
+    "sha256": "0d5b793864c38855c5e4db6c8bc94b85a6ebea872c9f109f652920cd6626f92e",
+    "bytes": 1103152
+  },
+  "initial_adapter_sha256": "8331552c78d2dbe0d5c6a72cf2d334e35ff84f0a49eb29115399ac953ded92e7",
+  "losses": [
+    0.3009267747402191
+  ],
+  "gradient_norms": [
+    0.8854487270066959
+  ],
+  "component_losses": [
+    {
+      "sequence_sft": 0.3009267747402191
+    }
+  ],
+  "alignment_diagnostics": [],
+  "sample_ids": [
+    "5b46a85ec5f9398290c023c26ef8cb662e6e4d19da293a71b2bcee316514f6b7"
+  ]
+}

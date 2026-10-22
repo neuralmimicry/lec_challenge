@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "arm_id": "arm-2793b743b590917d497c4794",
+  "request_sha256": "b17c5dc7e228bbf9cdc0abc348b497575f1f60914f54238cc7b74d709c656a2c",
+  "training_artifact": {
+    "path": "reports/local-study/explore/round-001/study/quick/arms/arm-2793b743b590917d497c4794/training-artifact.json",
+    "sha256": "b7e369ce138fb87dc40bcab4e3cc827551dc438adff5544576d5e27dceecb2f0",
+    "bytes": 1857
+  },
+  "checkpoint_artifacts": [
+    {
+      "path": "reports/local-study/explore/round-001/study/quick/arms/arm-2793b743b590917d497c4794/checkpoint/manifest.json",
+      "sha256": "dc0eb6a7b86ee15857f1cd7f9351b40d7309a6be6d3d20c857e5ded29d3b1ee7",
+      "bytes": 15419
+    },
+    {
+      "path": "reports/local-study/explore/round-001/study/quick/arms/arm-2793b743b590917d497c4794/checkpoint/adapter.safetensors",
+      "sha256": "ae6e22bf858359186e261fd41d5c180cb020bf79d29fccc2dbb611ea12dc4870",
+      "bytes": 551352
+    }
+  ],
+  "checkpoint_changed": true,
+  "checkpoint_reloaded": true,
+  "completed_steps": 3,
+  "finite_losses": [
+    0.031682029366493225,
+    0.031261928379535675,
+    0.03194489702582359
+  ],
+  "finite_gradient_norms": [
+    0.005901904839004416,
+    0.006467377951661479,
+    0.005527408411088556
+  ],
+  "train_evaluation": null,
+  "development_evaluation": {
+    "path": "reports/local-study/explore/round-001/study/quick/arms/arm-2793b743b590917d497c4794/development/report.json",
+    "sha256": "b57e3a0d895a83f3924828c4972888e31f539eac9b6c73bf96a98f42748ff001",
+    "bytes": 1603
+  },
+  "measured_costs": {
+    "cost_per_point_usd": null,
+    "electricity_usd": null,
+    "hardware_amortisation_usd": null,
+    "local_worker_wall_seconds": 306.710831907,
+    "new_remote_api_spend_usd": "0"
+  },
+  "limitations": [
+    "48 tasks from 12 locally authored train source groups; no held-out or development data enters training.",
+    "Local model developers do not count as independent paid API provider businesses.",
+    "No learning, promotion, cash saving or teacher trace is inferred from this bundle alone.",
+    "Process, contextual revision, teacher-feedback trajectories, on-policy and self-distillation require additional genuine generation evidence.",
+    "Exploratory local-teacher adaptation; no independent API-provider or held-out promotion claim. Reload is a fresh model instance inside the worker; external evaluation must reload in its own process.",
+    "Declared assistant-token windows exercise actual operators and optimiser updates; omitted context/targets are recorded in freeze.json and these quick arms do not establish task learning."
+  ]
+}

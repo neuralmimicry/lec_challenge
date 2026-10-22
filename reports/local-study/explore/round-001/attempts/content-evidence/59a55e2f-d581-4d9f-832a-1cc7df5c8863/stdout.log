@@ -1,0 +1,32 @@
+{
+  "bundle": {
+    "bytes": 218818,
+    "path": "reports/local-study/explore/round-001/content-v1/bundle.json",
+    "sha256": "6256372fa9e690dbf230f5042904001db2bb1583b195015ddce53b0def40c8c6"
+  },
+  "collection_completed": true,
+  "complete_nonempty_generations": 5,
+  "completed_current_content_records": 127,
+  "current_positive_samples": 4,
+  "current_preference_pairs": 0,
+  "evidence_kind": "current_batch_teacher_content_collection",
+  "generation_errors": 122,
+  "grading_errors": 0,
+  "healthy_complete": false,
+  "incomplete_or_empty_generations": 0,
+  "infrastructure_failures": 0,
+  "inherited_positive_samples": 18,
+  "passing_current_records": 4,
+  "policy": {
+    "bytes": 604,
+    "path": "reports/local-study/explore/round-001/content-v1/content-policy.json",
+    "sha256": "2440ba0511c5139a702c0f943b5aa5a4e5d797fcf5d387f85c888bc54fe96904"
+  },
+  "production_eligible": false,
+  "requested_content_requests": 144,
+  "schema_version": 1,
+  "semantics": "Current batch includes validated resumed work from this output only. Inherited positives never establish successful new content collection; passing samples do not establish model learning.",
+  "total_positive_samples": 22,
+  "unavailable_requests": 17
+}
+{"error":"teacher content collection is incomplete or failed; original observations and valid partial evidence were retained","observed_unix_ms":1792409328366,"promotion":"incumbent_retained","status":"FAILURE"}

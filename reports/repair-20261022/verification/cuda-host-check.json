@@ -1,0 +1,20 @@
+{
+  "evidence_kind": "local_cuda_header_compatibility_overlay_and_actual_compile_check",
+  "modification": "Add matching noexcept(true) to six original CUDA host math declarations; numerical kernels are unchanged.",
+  "nvcc_version": "nvcc: NVIDIA (R) Cuda compiler driver\nCopyright (c) 2005-2025 NVIDIA Corporation\nBuilt on Tue_May_27_02:21:03_PDT_2025\nCuda compilation tools, release 12.9, V12.9.86\nBuild cuda_12.9.r12.9/compiler.36037853_0\n",
+  "original_header_sha256": "2f2189d1752d862e96122f985484c89e16bd03a485a01e1f114514f738a2ed4f",
+  "overlay": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/state/repair-20261022-cuda-compat",
+  "patched_header_sha256": "16b0d2fa4401b477cd11c5761ffa0e0abb13575718687832227f6ac393d90d36",
+  "ptx_sha256": "3f702a87a4afc5fbeb404334bbc5a998622a1fc827ebde50df85c2045d8aa542",
+  "redistribution": "Copied proprietary headers remain in excluded local state; the deliverable contains only this Rust preparation tool and patch rules.",
+  "rules": [
+    "rsqrt(double x)",
+    "rsqrtf(float x)",
+    "sinpi(double x)",
+    "sinpif(float x)",
+    "cospi(double x)",
+    "cospif(float x)"
+  ],
+  "system_headers_modified": false,
+  "toolkit": "/usr/local/cuda-12.9"
+}

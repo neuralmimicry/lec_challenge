@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "evidence_kind": "actual_checkpoint_bound_rollout_observation",
+  "teacher_id": "student-self-f9523886352217de",
+  "plan": {
+    "path": "reports/local-study/explore/round-001/cohorts/76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c/rollouts/matrices.diagonals/student-plan.json",
+    "sha256": "18f537ce98407f140ee0eaa47a5ac1f36fd0b5900464900f15f11169634cc3fe",
+    "bytes": 5333
+  },
+  "student_raw": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/matrices.diagonals/student-raw.json",
+    "sha256": "56a2877e98ef5651ab7056667be8167207bf2d5cc1234fdcead5db25e2862150",
+    "bytes": 2239
+  },
+  "student_grade": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox/7ae52fcb-ce8e-4ab1-804f-a0c0ce57cff6.json",
+    "sha256": "8101e9bc007f16a4903386cf1dcc111fd19b78a71d44163c7344579d7af71ac1",
+    "bytes": 10328
+  },
+  "student_content_eligibility": {
+    "policy": "verified_content_roles_v1",
+    "role": "compilation_feedback_only",
+    "report": {
+      "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox/7ae52fcb-ce8e-4ab1-804f-a0c0ce57cff6.json",
+      "sha256": "8101e9bc007f16a4903386cf1dcc111fd19b78a71d44163c7344579d7af71ac1",
+      "bytes": 10328
+    },
+    "audit": {
+      "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox/7ae52fcb-ce8e-4ab1-804f-a0c0ce57cff6.audit.json",
+      "sha256": "c276ccc5c721dd35574d9ef88941b0e7414820ea3fe912a39e48e942e0a34d92",
+      "bytes": 4513
+    },
+    "completion_sha256": "f10f8037b4af8bafb4e95ec4bc5597e747829d42d8d5608bf14b75184cbfa3a2",
+    "generation_complete": true,
+    "original_quarantined": true,
+    "reason": "Trusted compiler failure with no candidate execution or audit event. Bounded original text may be shown as untrusted correction context; it is never a positive or DPO negative."
+  },
+  "feedback_plan": {
+    "path": "reports/local-study/explore/round-001/cohorts/76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c/rollouts/matrices.diagonals/student-self-f9523886352217de/feedback-plan.json",
+    "sha256": "1c97179ee5d7ecf978d6502423c8641db1fc0a7ef85ed3b24253f043756d9841",
+    "bytes": 9417
+  },
+  "feedback_raw": {
+    "path": "reports/local-study/explore/round-001/cohorts/76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c/rollouts/matrices.diagonals/student-self-f9523886352217de/feedback-raw.json",
+    "sha256": "24498db29d91ca8c6f5655a08c7f2b726a105276e09cab161e2aef9761a58d59",
+    "bytes": 2335
+  },
+  "feedback_grade": {
+    "path": "reports/local-study/explore/round-001/cohorts/76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c/rollouts/sandbox/a221618f-8072-4410-87f5-3e38c128a6e3.json",
+    "sha256": "0657c561c88880ee9b32e151b6ef4c90dd20663188093a899317cf01345d57a5",
+    "bytes": 10328
+  },
+  "errors": [],
+  "success": false
+}

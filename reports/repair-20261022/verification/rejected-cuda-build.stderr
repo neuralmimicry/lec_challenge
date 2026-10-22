@@ -1,0 +1,3 @@
+study planning: cached verified evidence only; explicit offline=true
+execution: Explicit CPU selected with 16 available threads and 42908756788 guarded RAM bytes; available CPU threads=16, usable RAM=42908756788 bytes
+FAILURE: unsupported evaluation runtime before planning or model allocation: CUDA was requested but this executable has no cuda feature; no CPU fallback is allowed

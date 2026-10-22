@@ -1,0 +1,11 @@
+Verify exact eligibility and write a fresh immutable arm request without training
+
+Usage: lec-distil study-prepare-arm [OPTIONS] --study <STUDY> --arm <ARM> --output <OUTPUT>
+
+Options:
+      --study <STUDY>      
+      --arm <ARM>          
+      --profile <PROFILE>  [default: quick] [possible values: quick, full]
+      --output <OUTPUT>    
+      --offline            
+  -h, --help               Print help

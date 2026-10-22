@@ -1,0 +1,42 @@
+{
+  "schema_version": 3,
+  "run_id": "c48dcc74-05c5-4748-8e6d-6acea6289dc2",
+  "ownership_nonce": "d561e7ca-0fa4-4203-b4cb-806469da1d1e",
+  "attempt_key": "353c48b5-0610-4a79-a7fd-5fe549483f53",
+  "receipt_path": "reports/local-study/explore/round-001/cohorts/76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c/rollouts/sandbox/353c48b5-0610-4a79-a7fd-5fe549483f53.prepared.json",
+  "report_path": "reports/local-study/explore/round-001/cohorts/76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c/rollouts/sandbox/c48dcc74-05c5-4748-8e6d-6acea6289dc2.json",
+  "task": {
+    "id": "validation.ipv4",
+    "source_id": "private-validation-v1",
+    "lineage_id": "local-contract-pack-05",
+    "split": "train",
+    "specification": "Input is an ASCII string. Return true iff exactly four decimal components separated by dots each have value 0..255 and no leading zero unless the component is exactly 0.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "bf8f578204f794b6fe252a92eff8379346ef1ecd81c845544833a2079b08f963",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": "192.168.0.1",
+        "expected": true
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "use serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let input_str = input.to_string();\n    let mut parts: Vec<&str> = input_str.split('.').collect();\n    let mut result = Vec::new();\n\n    for part in parts {\n        if let Ok(num) = part.parse::<i64>() {\n            if num == 0 {\n                result.push(\"0\");\n            } else if num < 0 {\n                result.push(\"-\");\n            }\n            result.push(format!(\"{num:04x}\", num));\n        } else {\n            result.push(\"0\");\n        }\n    }\n\n    serde_json::Value::from(result)\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/explore/round-001/cohorts/76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c/rollouts/sandbox"
+  },
+  "code_sha256": "e6bc5348017be32883a569a7d66fe2807f6d28dd0ae8541d18b3bc43c4df1745",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

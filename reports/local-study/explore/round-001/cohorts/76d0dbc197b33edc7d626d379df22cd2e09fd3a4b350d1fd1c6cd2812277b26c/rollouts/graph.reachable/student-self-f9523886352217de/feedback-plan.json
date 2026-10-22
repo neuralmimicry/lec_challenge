@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "initial_plan": {
+    "path": "reports/local-study/explore/round-001/cohorts/76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c/rollouts/graph.reachable/student-plan.json",
+    "sha256": "ccdd331708126a8a029de25a4ac250fdec44c1fdbbd427a00c6041ee0f6a1693",
+    "bytes": 5588
+  },
+  "student_raw": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/graph.reachable/student-raw.json",
+    "sha256": "2fb1e8e096babef3d9946c8505623fb556cf2472ba8d694bb7f26b88f26db219",
+    "bytes": 1994
+  },
+  "student_grade": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox/f4f7a3d1-985f-41a6-84c1-85c66aafba81.json",
+    "sha256": "97de188974f41d5b5587a2da3f793351d290b3cd733deef3297f909742528355",
+    "bytes": 1940
+  },
+  "teacher_id": "student-self-f9523886352217de",
+  "teacher_assets": {
+    "path": "offline_bundle/base/assets.json",
+    "sha256": "54304e7f41519a4196674cba5e86593802f852b2b47882d6c19706f85f303ad4",
+    "bytes": 788
+  },
+  "teacher_checkpoint": null,
+  "runtime": {
+    "device": {
+      "cuda": {
+        "ordinal": 0
+      }
+    },
+    "dtype": "f32"
+  },
+  "request": {
+    "prompt": "Verified different training contract: Input {n,edges} is a directed graph with unique edges on 0..n-1. Return indegree of each node in index order, including self-loops. Graph vertex counts are at most 64.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nVerified solution:\n```rust\nuse serde_json::{Value, json};\n\npub fn solve(input: Value) -> Value {\n    let n = input[\"n\"].as_u64().unwrap() as usize;\n    let edges = input[\"edges\"].as_array().unwrap();\n    let mut indegree = vec![0; n];\n\n    for edge in edges {\n        let u = edge[0].as_u64().unwrap() as usize;\n        let v = edge[1].as_u64().unwrap() as usize;\n        indegree[v] += 1;\n    }\n\n    json!(indegree)\n}\n```\nNew task:\nWrite Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input {n,start,edges} describes a directed graph on 0..n-1, n>=1, edges unique [from,to]. Return all nodes reachable from start, including start, sorted ascending. Graph vertex counts are at most 64.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":{\"edges\":[[0,1],[1,2]],\"n\":4,\"start\":0},\"expected\":[0,1,2]}]\nActual frozen student candidate:\n```rust\nuse serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let n = input[\"n\"].as_u64().unwrap();\n    let start = input[\"start\"].as_u64().unwrap();\n    let edges = input[\"edges\"].as_array().unwrap();\n\n    let mut reachable_nodes = Vec::new();\n\n    for edge in edges {\n        let from = edge[0].as_u64().unwrap();\n        let to = edge[1].as_u64().unwrap();\n\n        if from == start {\n            reachable_nodes.push(start);\n        } else if to == start {\n            reachable_nodes.push(to);\n        }\n    }\n\n    reachable_nodes.sort_unstable();\n    reachable_nodes.into_iter().collect()\n}\n```\nActual trusted tool feedback:\n{\"bounded_diagnostic_untrusted_data\":\"host oracle mismatch at case 0\",\"cases_passed\":0,\"cases_total\":6,\"content_role\":\"oracle_negative\",\"original_failure_is_not_a_success\":true,\"passed\":false,\"private_inputs_or_expected_outputs_exposed\":false,\"quarantined\":true,\"run_id\":\"f4f7a3d1-985f-41a6-84c1-85c66aafba81\",\"student_generation_complete\":true,\"tool\":\"trusted_container_grader\",\"trace_complete\":true}\nCritique and revise the candidate. Put any short explanation in Rust // comments and return complete compilable Rust source only. Do not invent tool results.",
+    "max_new_tokens": 768,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "supporting_sample_ids": [
+    "be57ee99f53e14a44a210dee5a0a227fbee04ea80f1c914f14447c3db087cded"
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "run_id": "74f0ae47-5264-4b36-b070-4969972fdc74",
+  "task_id": "dispatch.round_robin",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: warning: unused import: `serde_json::Value`\n --> /candidate/main.rs:1:5\n  |\n1 | use serde_json::Value;\n  |     ^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0308]: mismatched types\n  --> /candidate/main.rs:23:30\n   |\n23 |     indices.into_iter().map(|&index| serde_json::Value::from(index)).collect()\n   |                              ^^^^^^\n   |                              |\n   |                              expected `usize`, found `&_`\n   |                              expected due to this\n   |\n   = note:   expected type `usize`\n           found reference `&_`\nhelp: consider removing `&` from the pattern\n   |\n23 -     indices.into_iter().map(|&index| serde_json::Value::from(index)).collect()\n23 +     indices.into_iter().map(|index| serde_json::Value::from(index)).collect()\n   |\n\nerror: aborting due to 1 previous error; 1 warning emitted\n\nFor more information about this error, try `rustc --explain E0308`.\n"
+  ],
+  "cases_total": 5,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "30f302f72c072dd4bf7f29e94605f70108d6e4f18730bd1398ccffad9306ee05",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/explore/round-001/study/quick/arms/arm-a0e91154cb3afca7a98dca8a/development/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/explore/round-001/study/quick/arms/arm-a0e91154cb3afca7a98dca8a/development/sandbox/74f0ae47-5264-4b36-b070-4969972fdc74.audit.json",
+  "audit_sha256": "0a3d04a1e809ccffdeaa0991c4099659941ee5d1e79fb1356f87d62c4a2b1254",
+  "failure": "compilation failed: warning: unused import: `serde_json::Value`\n --> /candidate/main.rs:1:5\n  |\n1 | use serde_json::Value;\n  |     ^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0308]: mismatched types\n  --> /candidate/main.rs:23:30\n   |\n23 |     indices.into_iter().map(|&index| serde_json::Value::from(index)).collect()\n   |                              ^^^^^^\n   |                              |\n   |                              expected `usize`, found `&_`\n   |                              expected due to this\n   |\n   = note:   expected type `usize`\n           found reference `&_`\nhelp: consider removing `&` from the pattern\n   |\n23 -     indices.into_iter().map(|&index| serde_json::Value::from(index)).collect()\n23 +     indices.into_iter().map(|index| serde_json::Value::from(index)).collect()\n   |\n\nerror: aborting due to 1 previous error; 1 warning emitted\n\nFor more information about this error, try `rustc --explain E0308`.\n",
+  "duration_ms": 13414,
+  "timeout_evidence": null,
+  "lifecycle_evidence": {
+    "receipt_path": "reports/local-study/explore/round-001/study/quick/arms/arm-a0e91154cb3afca7a98dca8a/development/sandbox/74f0ae47-5264-4b36-b070-4969972fdc74.lifecycle.json",
+    "receipt_sha256": "3a97700855e701903eb6e4c91b58593a79d185baedec18ab66489b01871f0c25"
+  }
+}

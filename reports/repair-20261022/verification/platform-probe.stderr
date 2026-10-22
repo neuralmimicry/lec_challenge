@@ -1,0 +1,8 @@
+    Blocking waiting for file lock on build directory
+   Compiling lec-distil v0.1.0 (/home/pbisaacs/Developer/neuralmimicry/lec_challenge)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 7.01s
+     Running `target/debug/examples/platform_launch --probe`
+launcher: linux x86_64 — 16 available CPU threads, 44.07 GiB available RAM, 1 detected CUDA GPUs
+launcher: rejected CUDA toolkit 13.3 at /usr/local/cuda-13.3 is unsupported by locked cudarc 0.16.6; choose an installed supported toolkit (for example 12.9) with LEC_CUDA_TOOLKIT; the driver's maximum CUDA version does not determine dependency support
+launcher: rejected CUDA toolkit 13.3 at /usr/local/cuda-13.3 is unsupported by locked cudarc 0.16.6; choose an installed supported toolkit (for example 12.9) with LEC_CUDA_TOOLKIT; the driver's maximum CUDA version does not determine dependency support
+launcher: rejected CUDA toolkit 13.3 at /usr/local/cuda-13.3 is unsupported by locked cudarc 0.16.6; choose an installed supported toolkit (for example 12.9) with LEC_CUDA_TOOLKIT; the driver's maximum CUDA version does not determine dependency support

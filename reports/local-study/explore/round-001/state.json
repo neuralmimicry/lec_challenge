@@ -78,22 +78,46 @@
       "artefacts": [
         {
           "path": "reports/local-study/explore/round-001/cohorts/76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c/report.json",
-          "sha256": "d9691d6b1134881070a972ed89450fb63c4ad132e47b79a78cfd8442b7a94e08",
-          "bytes": 4977
+          "sha256": "0b87e5dcc843ea08ae561ff5a5ebfd94a9129474c8411f788b1822ef9d18e496",
+          "bytes": 6094
         },
         {
           "path": "reports/local-study/explore/round-001/cohorts/76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c/state.json",
-          "sha256": "fc9d3edac943e2077d6d478c8e5f53c3eb8679cac37ba6ff5d4ff09c13f399e6",
-          "bytes": 1254
+          "sha256": "773e559ef591bfb89adad7104c02c956df8d887f6c32c71c13e7821376764502",
+          "bytes": 4232
         }
       ],
       "details": {
         "cohort_key": "76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c",
         "healthy": false,
         "result": {
-          "error": "No such file or directory (os error 2)",
+          "collection": {
+            "coverage_complete": true,
+            "error_records": 3,
+            "evidence_kind": "actual_current_batch_checkpoint_bound_rollout_report",
+            "expected_new_records": 48,
+            "failed_new_records": 48,
+            "feedback_generation_failures": 0,
+            "feedback_grading_failures": 0,
+            "feedback_not_attempted": 3,
+            "generation_or_infrastructure_errors": 2,
+            "healthy_complete": false,
+            "inherited_rollout_records": 0,
+            "inherited_samples": 22,
+            "mode": "self_distillation",
+            "new_rollout_records": 48,
+            "new_verified_rollout_samples": 0,
+            "production_eligible": false,
+            "schema_version": 2,
+            "semantics": "Only this frozen batch counts. Inherited passing samples cannot turn absent/error/truncated/unsafe corrective observations into success. Failed rows remain in all record denominators; trusted compiler feedback is not a passing solution.",
+            "student_checkpoint_sha256": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+            "student_generation_failures": 2,
+            "student_grading_failures": 0,
+            "successful_new_records": 0,
+            "tasks": 48
+          },
           "healthy": false,
-          "status": "incomplete_progress_saved"
+          "status": "unavailable_no_new_passing_corrections"
         }
       }
     },
@@ -125,8 +149,8 @@
         },
         {
           "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/state.json",
-          "sha256": "3bf6babeef77140d2c847288ae4ec258c81e33cd72b2ead95cf227ef1cb68b4e",
-          "bytes": 3887
+          "sha256": "b40596bd19ad6bcaa9f9cfc5867fc710762c9066b3fdf0d86ba4bc8bf8e1e193",
+          "bytes": 4648
         }
       ],
       "details": {
@@ -174,6 +198,16 @@
         {
           "path": "reports/local-study/explore/round-001/attempts/content-evidence/9cd9026c-2394-4091-9793-0b11b32f084b/request.json",
           "sha256": "a8e584bca520e1dccd67cf95c9eeebedf48892a19f65dc9faa12aeb510471852",
+          "bytes": 3661
+        },
+        {
+          "path": "reports/local-study/explore/round-001/attempts/content-evidence/59a55e2f-d581-4d9f-832a-1cc7df5c8863/request.json",
+          "sha256": "c7e0664959f2c03ffb4cfc380b80e9f3f23ac140429e233f2b804d620638f6a1",
+          "bytes": 3660
+        },
+        {
+          "path": "reports/local-study/explore/round-001/attempts/content-evidence/4c0691bc-2acf-4324-b863-abeefc0ac46c/request.json",
+          "sha256": "2b6525b00b04965bb84aa7f0ad19763145f516b1826a01c6bca2e0212d092176",
           "bytes": 3661
         }
       ],
@@ -488,6 +522,11 @@
           "path": "reports/local-study/explore/round-001/attempts/full-study/e70e6c2f-40b5-4722-870c-d3d5ae608810/request.json",
           "sha256": "1d6e0d75f9f4911b2671d3942f2a932b69a73bc2333c31fa03bda0ff3ff69370",
           "bytes": 3665
+        },
+        {
+          "path": "reports/local-study/explore/round-001/attempts/full-study/7020f959-3f49-4c81-9808-afc07c6a2e60/request.json",
+          "sha256": "f75bb5fcb22cf53472b23eeb938d7edd66e41e30082b754d35668f299fb9074e",
+          "bytes": 3665
         }
       ],
       "artefacts": [
@@ -593,19 +632,19 @@
       "artefacts": [
         {
           "path": "reports/local-study/explore/round-001/study/quick/baseline-comparisons.json",
-          "sha256": "1591392f2d76ffd0e5055097e28fccb7160f7d3b3a44acf3a32c715fbe0b0dc8",
-          "bytes": 22449
+          "sha256": "f3ebf0f490673b2d179ee694c336ad4ad21b595dffc4c3f309d4d83a3720184a",
+          "bytes": 35608
         }
       ],
       "details": {
         "positive_observed_deltas": 0,
-        "quality_comparisons_valid": 5,
-        "rows": 5,
+        "quality_comparisons_valid": 8,
+        "rows": 8,
         "table": "reports/local-study/explore/round-001/study/quick/baseline-comparisons.json"
       }
     },
     "quick-study": {
-      "status": "bounded_incomplete",
+      "status": "running",
       "attempts": [
         {
           "path": "reports/local-study/explore/round-001/attempts/quick-study/178387dd-dff5-42df-9f86-746c93c344f2/request.json",
@@ -616,26 +655,36 @@
           "path": "reports/local-study/explore/round-001/attempts/quick-study/ad6f3674-478d-4da6-b2be-3a40b23609d1/request.json",
           "sha256": "145e5ea04679d85ed3397a1d7fb689363b81450ae24c297261c3310f0078a39a",
           "bytes": 3426
+        },
+        {
+          "path": "reports/local-study/explore/round-001/attempts/quick-study/80b254f9-4476-42a6-b8e9-8e8e0bbc341d/request.json",
+          "sha256": "677f7eb502a9ecace1c895638941cc885996c9d9ae7b2a0ed89da9b3d052675b",
+          "bytes": 3426
+        },
+        {
+          "path": "reports/local-study/explore/round-001/attempts/quick-study/e4048a64-5161-424b-a466-45bc073ed48e/request.json",
+          "sha256": "5ea88ba65f5164f80c30c83a1226eb2974ac2d57aa8af843d859bd84b3572fd7",
+          "bytes": 3426
         }
       ],
       "artefacts": [
         {
           "path": "reports/local-study/explore/round-001/study/quick/report.json",
-          "sha256": "241ba743174a252c50947b86bfc2128596a100963b8b170906b0fe929b0adb84",
-          "bytes": 5914169
+          "sha256": "a610fbe809045942eba7da9af8f42eb95b188d69417f640be60f012cd221f686",
+          "bytes": 5917511
         }
       ],
       "details": {
         "applicable_arms": 88,
         "catalogue_arms": 7680,
-        "completed_arms": 5,
-        "failed_arms": 2,
+        "completed_arms": 8,
+        "failed_arms": 4,
         "full_report": {
-          "bytes": 5914169,
+          "bytes": 5917511,
           "path": "reports/local-study/explore/round-001/study/quick/report.json",
-          "sha256": "241ba743174a252c50947b86bfc2128596a100963b8b170906b0fe929b0adb84"
+          "sha256": "a610fbe809045942eba7da9af8f42eb95b188d69417f640be60f012cd221f686"
         },
-        "queued_applicable_arms": 81,
+        "queued_applicable_arms": 76,
         "quick_coverage_gaps": [
           "content:Context",
           "content:Preference",
@@ -693,10 +742,10 @@
           "organiser:self_distillation",
           "policy:OnPolicy"
         ],
-        "reserved_training_steps": 24,
+        "reserved_training_steps": 39,
         "selected_profile_succeeded": false,
         "status": "budget_stopped_progress_saved",
-        "summed_worker_wall_seconds": 3590.2831459
+        "summed_worker_wall_seconds": 5383.1269971209995
       }
     },
     "study-plan": {
@@ -1005,6 +1054,42 @@
       },
       "stage": "full-study",
       "unix_ms": 1792182885677
+    },
+    {
+      "attempt": {
+        "bytes": 924,
+        "path": "reports/local-study/explore/round-001/attempts/content-evidence/59a55e2f-d581-4d9f-832a-1cc7df5c8863/result.json",
+        "sha256": "c52863c0f5d4c5a39e1b02a3c670987fe95f1baa1db228c9270c317b9055b790"
+      },
+      "stage": "content-evidence",
+      "unix_ms": 1792409330983
+    },
+    {
+      "attempt": {
+        "bytes": 912,
+        "path": "reports/local-study/explore/round-001/attempts/quick-study/80b254f9-4476-42a6-b8e9-8e8e0bbc341d/result.json",
+        "sha256": "1aa4a0a161ce0e2fcb49b3c40bf5d5d4a092bde680372a43197ed150b6c247e8"
+      },
+      "stage": "quick-study",
+      "unix_ms": 1792411211315
+    },
+    {
+      "attempt": {
+        "bytes": 904,
+        "path": "reports/local-study/explore/round-001/attempts/full-study/7020f959-3f49-4c81-9808-afc07c6a2e60/result.json",
+        "sha256": "1f3ebe4347824277a9b8574809af0f2d0ed97d46a700941b026cb784b2defa7d"
+      },
+      "stage": "full-study",
+      "unix_ms": 1792411488770
+    },
+    {
+      "attempt": {
+        "bytes": 924,
+        "path": "reports/local-study/explore/round-001/attempts/content-evidence/4c0691bc-2acf-4324-b863-abeefc0ac46c/result.json",
+        "sha256": "e9377a21931c3c162c5386c2eb8fddfd6e86c72f0000f4c37ee791c4fd663434"
+      },
+      "stage": "content-evidence",
+      "unix_ms": 1792676429506
     }
   ]
 }

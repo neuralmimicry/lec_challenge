@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "evidence_kind": "actual_checkpoint_bound_rollout_generation",
+  "plan": {
+    "path": "reports/local-study/explore/round-001/cohorts/76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c/rollouts/matrices.diagonals/student-self-f9523886352217de/feedback-plan.json",
+    "sha256": "1c97179ee5d7ecf978d6502423c8641db1fc0a7ef85ed3b24253f043756d9841",
+    "bytes": 9417
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let mut sum_diagonal = 0;\n    let mut sum_anti_diagonal = 0;\n    let n = input.as_array().unwrap().len() as i64;\n\n    for i in 0..n {\n        for j in 0..n {\n            if i == j {\n                sum_diagonal += input[i as usize][j as usize];\n            } else if i == n - 1 - j {\n                sum_anti_diagonal += input[i as usize][j as usize];\n            }\n        }\n    }\n\n    serde_json::Value::Object(vec![\n        (String::from(\"sum_diagonal\"), serde_json::Value::Number(sum_diagonal)),\n        (String::from(\"sum_anti_diagonal\"), serde_json::Value::Number(sum_anti_diagonal)),\n    ])\n}\n\nfn main() {\n    let input = serde_json::Value::from(\"[[1,2],[3,4]]\");\n    let expected = serde_json::Value::from(\"[5,5]\");\n    assert_eq!(solve(input), expected);\n}\n```",
+    "checkpoint_id": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+    "finish_reason": "stop",
+    "input_tokens": 2123,
+    "output_tokens": 244,
+    "elapsed_ms": 8115,
+    "complete": true
+  },
+  "generation_error": null,
+  "execution": {
+    "actual_device": "Cuda { gpu_id: 0 }",
+    "actual_dtype": "F32",
+    "asset_lifetime_shared_lease": false,
+    "available_cpu_threads": 16,
+    "candle_cpu_threads": 16,
+    "checkpoint_id": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+    "context_cap": 4096,
+    "cpu_fallback": false,
+    "cuda_active": true,
+    "cuda_feature_compiled": true,
+    "engine": "native_rust_candle",
+    "model_id": "Qwen/Qwen2.5-Coder-0.5B-Instruct",
+    "quantisation": null,
+    "requested": {
+      "device": {
+        "cuda": {
+          "ordinal": 0
+        }
+      },
+      "dtype": "f32"
+    },
+    "revision": "ea3f2471cf1b1f0db85067f1ef93848e38e88c25",
+    "weight_format": "safetensors"
+  }
+}

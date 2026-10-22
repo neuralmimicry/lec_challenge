@@ -1,0 +1,1 @@
+{"error":"unsupported evaluation runtime before planning or model allocation: CPU inference requires explicit float32 precision","observed_unix_ms":1792674111023,"promotion":"incumbent_retained","status":"FAILURE"}

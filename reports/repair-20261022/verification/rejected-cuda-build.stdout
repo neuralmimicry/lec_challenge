@@ -1,0 +1,1 @@
+{"error":"unsupported evaluation runtime before planning or model allocation: CUDA was requested but this executable has no cuda feature; no CPU fallback is allowed","observed_unix_ms":1792674111036,"promotion":"incumbent_retained","status":"FAILURE"}

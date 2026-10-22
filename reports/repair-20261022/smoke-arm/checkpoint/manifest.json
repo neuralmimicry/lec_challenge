@@ -1,0 +1,311 @@
+{
+  "schema_version": 2,
+  "evidence_kind": "verified_local_teacher_experimental_distillation",
+  "spec": {
+    "schema_version": 2,
+    "arm_id": "arm-ecbb3f2de999eff0860c582b",
+    "student_base": "offline_bundle/base",
+    "student_kind": "conventional_qwen_lora",
+    "evidence_bundle": "reports/local-study/qwen7b-evidence/bundle.json",
+    "output": "reports/repair-20261022/smoke-arm/checkpoint",
+    "seed": 1729,
+    "steps": 1,
+    "max_sequence_tokens": 512,
+    "sequence_policy": "reject_overlength",
+    "rank": 2,
+    "alpha": 4.0,
+    "learning_rate": 0.0002,
+    "temperature": 2.0,
+    "dpo_beta": 0.1,
+    "losses": [
+      {
+        "kind": "sequence_sft",
+        "weight": 1.0
+      }
+    ],
+    "teacher_ids": [
+      "qwen-coder-7b-q4_k_m"
+    ],
+    "contents": [
+      "complete_sequence"
+    ],
+    "teacher_runtime": {
+      "device": "cpu",
+      "dtype": "f32"
+    },
+    "teacher_target_policy": "acquire",
+    "student_runtime": {
+      "device": "cpu",
+      "dtype": "f32"
+    },
+    "initial_checkpoint": null,
+    "data_policy": "offline",
+    "progressive": false,
+    "self_distillation": false
+  },
+  "freeze_sha256": "6151756861d3e68e36eaa6e59a05287fae004024ad7ba6c14e49c475e62af36e",
+  "base_sha256": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+  "base_sha256_after": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+  "tokenizer_sha256": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+  "evidence_bundle": {
+    "path": "reports/local-study/qwen7b-evidence/bundle.json",
+    "sha256": "d6899a4dff1b7c5180c006b38f9441f916eb7bda2f59df21df1f64784e8f1417",
+    "bytes": 166535
+  },
+  "adapter": {
+    "rank": 2,
+    "alpha": 4.0
+  },
+  "adapter_sha256": "7e89f7fa0fa19435d5c95aeaa623be8d2f246ac26686ae9606bf5bf19fcfb612",
+  "optimizer_sha256": "0d5b793864c38855c5e4db6c8bc94b85a6ebea872c9f109f652920cd6626f92e",
+  "initial_adapter_sha256": "8331552c78d2dbe0d5c6a72cf2d334e35ff84f0a49eb29115399ac953ded92e7",
+  "initial_adapter": {
+    "path": "reports/repair-20261022/smoke-arm/checkpoint/initial-adapter.safetensors",
+    "sha256": "8331552c78d2dbe0d5c6a72cf2d334e35ff84f0a49eb29115399ac953ded92e7",
+    "bytes": 551352
+  },
+  "initial_checkpoint": null,
+  "dpo_reference": null,
+  "steps": 1,
+  "losses": [
+    0.3009267747402191
+  ],
+  "gradient_norms": [
+    0.8854487270066959
+  ],
+  "component_losses": [
+    {
+      "sequence_sft": 0.3009267747402191
+    }
+  ],
+  "alignment_diagnostics": [],
+  "qat_effective_trits": null,
+  "sample_ids": [
+    "5b46a85ec5f9398290c023c26ef8cb662e6e4d19da293a71b2bcee316514f6b7"
+  ],
+  "realised_update_counts": {
+    "content/complete_sequence": 1,
+    "teacher/qwen-coder-7b-q4_k_m": 1
+  },
+  "trace_records": [],
+  "teacher_rights": [
+    {
+      "assets": {
+        "bytes": 1206,
+        "path": "offline_bundle/comparative/qwen-coder-7b-q4_k_m/gguf-assets.json",
+        "sha256": "606bfac02a103d208ccef73067cb6a4581e9b099e19bc9ed8e2021ebb1143114"
+      },
+      "capabilities": {
+        "attention": {
+          "artefacts": [],
+          "available": false,
+          "reason": "Not recorded: require actual causal attention matrices and declared head mapping",
+          "supported": true
+        },
+        "complete_sequences": {
+          "artefacts": [
+            {
+              "bytes": 4160,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/bits.hamming.generation.json",
+              "sha256": "19172d7b4c738dac55e7dc508eeeea43bbd27a824b54d1cd20a7d257e9f03d0c"
+            },
+            {
+              "bytes": 4023,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/bits.popcount.generation.json",
+              "sha256": "580efb002272a51f28c13547f99fd1b12627b078a43a0d4dcf3b7ae3212a82e9"
+            },
+            {
+              "bytes": 4078,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/calendar.leap.generation.json",
+              "sha256": "1ddc8215a1627afee40421627b1a8bcbcb9da3994f595e0645de4f5babb1186a"
+            },
+            {
+              "bytes": 4327,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/calendar.month_days.generation.json",
+              "sha256": "dd6cf8aad9bb5927dd348e169d71b45bf1866edbdcb252458b95ca740709520a"
+            },
+            {
+              "bytes": 4524,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/calendar.ordinal.generation.json",
+              "sha256": "06c36a2f6080a85452632e489e07afe357df6a9fa00e33e4a3b52bff8c333e6b"
+            },
+            {
+              "bytes": 4291,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/graph.indegrees.generation.json",
+              "sha256": "88c9bcad44eb92e454e4841dffd5cc281edd3722e7dc76cf7f43e301568984e7"
+            },
+            {
+              "bytes": 4853,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/intervals.coverage.generation.json",
+              "sha256": "99a1c524d6f042a1842ed25778ae33ec9240b053b5a63addfb777a94ec5904d9"
+            },
+            {
+              "bytes": 4468,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/intervals.peak.generation.json",
+              "sha256": "32bd9858cddc772409654bc7aed2fadd6d58e25088966e50400430a1d612ae2a"
+            },
+            {
+              "bytes": 4618,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/ledger.bounds.generation.json",
+              "sha256": "c029ffe946a0cb28c8dee81560093c198540df081b2d39cc50f4c2e2eaf78c93"
+            },
+            {
+              "bytes": 4347,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/ledger.prefix.generation.json",
+              "sha256": "b525f34b6fc4d10be932ac48de97fb17eae958bbd651c9e26dc78ac07152749e"
+            },
+            {
+              "bytes": 4078,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/ledger.sum.generation.json",
+              "sha256": "6f3d4bba8600110d5989ff6b79c4dbeb0b5c4506b4e5e456f91c6b04dedba773"
+            },
+            {
+              "bytes": 4553,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/matrices.diagonals.generation.json",
+              "sha256": "f4f91c4bc8e21777e536532b67191bfb3d995720dcc4a5d2991278f07ac4dade"
+            },
+            {
+              "bytes": 4397,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/matrices.rotate.generation.json",
+              "sha256": "979fdab750ffd71c3c4db9704589d6ed167a72ec5ce73db0e4a690c5f6b951e2"
+            },
+            {
+              "bytes": 4228,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/paths.basename.generation.json",
+              "sha256": "f36bacb2143af3429a30fb69a0613cd660c1747735b92dbd012d10f31bc05230"
+            },
+            {
+              "bytes": 4354,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/search.runs.generation.json",
+              "sha256": "5d4d8a7d851490bf4e2b910ac532b0286b45f6e4d888474a9e23b5a980b99a74"
+            },
+            {
+              "bytes": 4692,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/stock.mode.generation.json",
+              "sha256": "cbd509dbfada7161d8f5d39465101e6ecb9d7a8c8517dff743f3cc5fe317ee3c"
+            },
+            {
+              "bytes": 4113,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/text.lower_trim.generation.json",
+              "sha256": "18c986ab02ef8587e9bfcef5a240cc768b6a2b95f917c183d1ebcba73e71dabb"
+            },
+            {
+              "bytes": 4565,
+              "path": "reports/local-study/qwen7b-train/qwen-coder-7b-q4_k_m/validation.brackets.generation.json",
+              "sha256": "dfd9cf6ef938865e8b564079016bfaee11aaf943a5a00b0c6c7543f010b3d54d"
+            }
+          ],
+          "available": true,
+          "reason": "Complete, nonempty generations passed every trusted container case",
+          "supported": true
+        },
+        "context": {
+          "artefacts": [],
+          "available": false,
+          "reason": "No generation with pinned additional train-only context",
+          "supported": true
+        },
+        "hidden_states": {
+          "artefacts": [],
+          "available": false,
+          "reason": "Not recorded: require actual layer states and declared dimensional projection",
+          "supported": true
+        },
+        "logits": {
+          "artefacts": [],
+          "available": false,
+          "reason": "Not recorded: a native teacher-forced worker must produce and bind actual token logits; KL also requires tokeniser alignment",
+          "supported": true
+        },
+        "on_policy": {
+          "artefacts": [],
+          "available": false,
+          "reason": "No checkpoint-bound student rollout plus teacher feedback and regrading",
+          "supported": true
+        },
+        "preferences": {
+          "artefacts": [],
+          "available": false,
+          "reason": "No safe same-task verified positive/negative pair",
+          "supported": true
+        },
+        "process": {
+          "artefacts": [],
+          "available": false,
+          "reason": "No independently generated and checked planning/process trace",
+          "supported": true
+        },
+        "self_distillation": {
+          "artefacts": [],
+          "available": false,
+          "reason": "No original student-checkpoint teacher outputs; supervised teacher rows cannot be relabelled",
+          "supported": true
+        },
+        "student_tokeniser_sha256": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+        "tokeniser_aligned": true,
+        "tokeniser_sha256": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+        "tool_trajectories": {
+          "artefacts": [],
+          "available": false,
+          "reason": "A sandbox grade alone is not a teacher feedback/revision trajectory",
+          "supported": true
+        }
+      },
+      "id": "qwen-coder-7b-q4_k_m",
+      "model": {
+        "architecture": "qwen2",
+        "developer_id": "alibaba-qwen",
+        "directory": "offline_bundle/comparative/qwen-coder-7b-q4_k_m",
+        "id": "qwen-coder-7b-q4_k_m",
+        "licence": "Apache-2.0",
+        "model_id": "Qwen/Qwen2.5-Coder-7B-Instruct-GGUF",
+        "revision": "13fb94bfda8c8cf22497dc57b78f391a9acb426a",
+        "role": "coding_teacher",
+        "weight_format": "gguf"
+      },
+      "rights": {
+        "eligible": true,
+        "inherited_restrictions": [
+          "Retain original model licence, copyright notices and attribution; no ownership guarantee for independently reproduced code."
+        ],
+        "licence": "apache-2.0",
+        "licence_artefacts": [
+          {
+            "bytes": 11343,
+            "path": "offline_bundle/comparative/qwen-coder-7b-q4_k_m/source/LICENSE",
+            "sha256": "832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e"
+          },
+          {
+            "bytes": 6392,
+            "path": "offline_bundle/comparative/qwen-coder-7b-q4_k_m/source/README.md",
+            "sha256": "3c090be37f829adc1e4cdb78733667437732541470430ab2cd785d7f0d460077"
+          }
+        ],
+        "reasoning": "Explicit recognised original model licence and publisher-verified local assets, subject to preserved licence obligations",
+        "scope": "local open-weight output adaptation only; no API terms inferred"
+      }
+    }
+  ],
+  "student_execution": {
+    "actual_device": "Cpu",
+    "actual_dtype": "F32",
+    "available_cpu_threads": 16,
+    "candle_cpu_threads": 4,
+    "cpu_fallback": false,
+    "cuda_active": false,
+    "engine": "native_rust_candle",
+    "student_backend": "conventional_qwen_lora",
+    "ternary_quantisation_during_every_forward": false,
+    "trainable_adapter_tensors": 96
+  },
+  "reloaded": true,
+  "production_eligible": false,
+  "elapsed_seconds": 31.989671124,
+  "limitations": [
+    "48 tasks from 12 locally authored train source groups; no held-out or development data enters training.",
+    "Local model developers do not count as independent paid API provider businesses.",
+    "No learning, promotion, cash saving or teacher trace is inferred from this bundle alone.",
+    "Process, contextual revision, teacher-feedback trajectories, on-policy and self-distillation require additional genuine generation evidence.",
+    "Exploratory local-teacher adaptation; no independent API-provider or held-out promotion claim. Reload is a fresh model instance inside the worker; external evaluation must reload in its own process."
+  ]
+}

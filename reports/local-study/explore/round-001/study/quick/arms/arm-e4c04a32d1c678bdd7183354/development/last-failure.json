@@ -1,0 +1,6 @@
+{
+  "error": "sandbox image unavailable: Failed to obtain podman configuration: stat /home/pbisaacs/Developer/lec_challenge/state/lec-cortex-storage.conf: no such file or directory\n",
+  "observed_unix_ms": 1792676632001,
+  "promotion": "incumbent_retained",
+  "status": "FAILURE"
+}

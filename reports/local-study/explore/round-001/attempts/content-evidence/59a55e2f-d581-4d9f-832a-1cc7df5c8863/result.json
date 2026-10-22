@@ -1,0 +1,24 @@
+{
+  "exit_code": 1,
+  "request": {
+    "bytes": 3660,
+    "path": "reports/local-study/explore/round-001/attempts/content-evidence/59a55e2f-d581-4d9f-832a-1cc7df5c8863/request.json",
+    "sha256": "c7e0664959f2c03ffb4cfc380b80e9f3f23ac140429e233f2b804d620638f6a1"
+  },
+  "schema_version": 1,
+  "stage": "content-evidence",
+  "status": "process_failed",
+  "stderr": {
+    "bytes": 362,
+    "path": "reports/local-study/explore/round-001/attempts/content-evidence/59a55e2f-d581-4d9f-832a-1cc7df5c8863/stderr.log",
+    "sha256": "d42fc867435b237b69245623881571fef38ff038c7e3a5069bcba267a63ac712"
+  },
+  "stderr_tee_error": null,
+  "stdout": {
+    "bytes": 1438,
+    "path": "reports/local-study/explore/round-001/attempts/content-evidence/59a55e2f-d581-4d9f-832a-1cc7df5c8863/stdout.log",
+    "sha256": "0ed4145d473e7cd62ec315f7401ccf4c9f8ff29984a3d427b8937d208b80b82a"
+  },
+  "success": false,
+  "wall_seconds": 5.037607006
+}

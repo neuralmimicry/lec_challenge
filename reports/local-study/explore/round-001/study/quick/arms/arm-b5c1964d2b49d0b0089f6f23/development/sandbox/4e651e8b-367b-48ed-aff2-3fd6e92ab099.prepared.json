@@ -1,0 +1,45 @@
+{
+  "schema_version": 3,
+  "run_id": "c99beff9-76d5-4434-8b53-732f24453c16",
+  "ownership_nonce": "bc374298-cd1b-4eec-806e-2559d80ba2fe",
+  "attempt_key": "4e651e8b-367b-48ed-aff2-3fd6e92ab099",
+  "receipt_path": "reports/local-study/explore/round-001/study/quick/arms/arm-b5c1964d2b49d0b0089f6f23/development/sandbox/4e651e8b-367b-48ed-aff2-3fd6e92ab099.prepared.json",
+  "report_path": "reports/local-study/explore/round-001/study/quick/arms/arm-b5c1964d2b49d0b0089f6f23/development/sandbox/c99beff9-76d5-4434-8b53-732f24453c16.json",
+  "task": {
+    "id": "encoding.hex_decode",
+    "source_id": "private-encoding-v1",
+    "lineage_id": "local-contract-pack-14",
+    "split": "development",
+    "specification": "Input is an ASCII string. Decode even-length hexadecimal accepting upper/lowercase; return byte array, or null for invalid digits or odd length. The returned array may contain up to 128 items.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "535cec08e7ca750ff6426c55df5e10382b5d98dd2b972889c664a544c49c2a87",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": "00aF",
+        "expected": [
+          0,
+          175
+        ]
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "use serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let hex_input = input.as_str().unwrap_or_default();\n    let bytes = hex_input.chars().map(|c| c.to_digit(16).unwrap()).collect::<Vec<_>>();\n    if bytes.len() % 2 != 0 {\n        return serde_json::Value::Null;\n    }\n    let mut result = Vec::new();\n    for i in 0..bytes.len() / 2 {\n        let byte1 = bytes[i];\n        let byte2 = bytes[i + 1];\n        result.push(byte1 as i64);\n        result.push(byte2 as i64);\n    }\n    serde_json::Value::Array(result)\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/explore/round-001/study/quick/arms/arm-b5c1964d2b49d0b0089f6f23/development/sandbox"
+  },
+  "code_sha256": "63f344cbf1908e6f6a9cceb8ad2f43584ea9f10e2d2db34e323395e028a4676d",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

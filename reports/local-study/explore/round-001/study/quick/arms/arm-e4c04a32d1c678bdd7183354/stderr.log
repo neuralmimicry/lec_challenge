@@ -1,0 +1,13 @@
+Hub hashing qwen2.5-coder-7b-instruct-q4_k_m.gguf: 0/4683073536 bytes, 0.00 MiB/s, ETA unknown (publisher checksum pending)
+Hub hashing qwen2.5-coder-7b-instruct-q4_k_m.gguf: 3485466624/4683073536 bytes, 221.54 MiB/s, ETA 00:00:06 (publisher checksum pending)
+distillation: cached native teacher trace qwen-coder-7b-q4_k_m / 21748f9f3a9dec33f5c19fb7179ecdada908a2b27e6486b333f8a379f57d93bb
+distillation: cached native teacher trace qwen-coder-7b-q4_k_m / 9f34cf373961913a3cf1067f1f2a71e0bef8368e1557d10e998cc099a00fab71
+distillation: cached native teacher trace qwen-coder-7b-q4_k_m / e89aa62fc9a189c19a13370ba9410f99991e685167f68b4f7ce97f6a4c78f965
+distillation: durable update 1/3 loss=0.747122 gradient_norm=1.001948
+distillation: durable update 2/3 loss=0.911169 gradient_norm=1.032499
+distillation: durable update 3/3 loss=0.786960 gradient_norm=1.101360
+study: fresh-process checkpoint evaluation started, PID=249315
+study-evaluate: verifying effective sandbox controls
+FAILURE: sandbox image unavailable: Failed to obtain podman configuration: stat /home/pbisaacs/Developer/lec_challenge/state/lec-cortex-storage.conf: no such file or directory
+
+FAILURE: fresh-process development evaluation failed; training and partial evaluation retained

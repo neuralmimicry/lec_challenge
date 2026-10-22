@@ -1,0 +1,42 @@
+{
+  "schema_version": 3,
+  "run_id": "60ca14b8-abe1-4783-bc76-64db14269b74",
+  "ownership_nonce": "142618df-4fd5-42b1-ab34-cf1ef042c94a",
+  "attempt_key": "2c4376e7-bddf-4eb9-9c1b-24465290446b",
+  "receipt_path": "reports/local-study/explore/round-001/cohorts/76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c/rollouts/sandbox/2c4376e7-bddf-4eb9-9c1b-24465290446b.prepared.json",
+  "report_path": "reports/local-study/explore/round-001/cohorts/76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c/rollouts/sandbox/60ca14b8-abe1-4783-bc76-64db14269b74.json",
+  "task": {
+    "id": "validation.brackets",
+    "source_id": "private-validation-v1",
+    "lineage_id": "local-contract-pack-05",
+    "split": "train",
+    "specification": "Input is an ASCII string. Return whether (), [] and {} are properly nested, ignoring every other character.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "006489d5855e5f09d9a5c420de36d7d939d0d539a9452be2075abe7282b26b20",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": "a{b[c](d)}",
+        "expected": true
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "use serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let mut stack = Vec::new();\n    let mut current_value = String::new();\n\n    for ch in input.as_str() {\n        match ch {\n            '{' => {\n                stack.push(ch);\n                current_value.push(ch);\n            },\n            '}' => {\n                if stack.pop().is_none() {\n                    return serde_json::Value::Null;\n                }\n                current_value.push(ch);\n            },\n            ',' => {\n                if stack.pop().is_none() {\n                    return serde_json::Value::Null;\n                }\n                current_value.push(ch);\n            },\n            '[' => {\n                stack.push(ch);\n                current_value.push(ch);\n            },\n            ']' => {\n                if stack.pop().is_none() {\n                    return serde_json::Value::Null;\n                }\n                current_value.push(ch);\n            },\n            '\"' => {\n                if stack.pop().is_none() {\n                    return serde_json::Value::Null;\n                }\n                current_value.push(ch);\n            },\n            '0'..='9' => {\n                current_value.push(ch);\n            },\n            _ => {\n                return serde_json::Value::Null;\n            }\n        }\n    }\n\n    if stack.len() != 0 {\n        return serde_json::Value::Null;\n    }\n\n    serde_json::Value::Bool(current_value.chars().all(|c| c.is_ascii_digit() || c == '[' || c == ']'))\n}\n\nfn main() {\n    let input = serde_json::Value::from(\"{a{b[c](d)}\");\n    let expected = serde_json::Value::from(true);\n    assert_eq!(solve(input), expected);\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/explore/round-001/cohorts/76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c/rollouts/sandbox"
+  },
+  "code_sha256": "6dfbe6d921754028aa4867040231e90d73f1d1838be18512718ef5e122f858a9",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

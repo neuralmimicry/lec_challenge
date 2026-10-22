@@ -199,6 +199,570 @@
         "actual_peak_rss_bytes": null,
         "actual_runtime_matched": true,
         "architecture": "conventional_qwen_lora",
+        "arm_id": "arm-134a14dfa18d27267e5c720f",
+        "baseline": {
+          "bytes": 1603,
+          "path": "reports/local-study/explore/round-001/baselines/conventional_qwen_lora/report.json",
+          "sha256": "9653d18a1546676be5a4273d397e3b604818863f2a068cafd27ba079be900369"
+        },
+        "baseline_checkpoint_id": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+        "baseline_errors": 0,
+        "baseline_generation_ms": 353980,
+        "baseline_grading_identity": {
+          "controller_version": 3,
+          "engine_sha256": "3f348bdfa71c49df5b5d0b7581ae9ad3114645127f99abbec9e4aac1064563bd",
+          "extractor_sha256": null,
+          "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+          "kind": "original_local_study_grading",
+          "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2"
+        },
+        "baseline_inference_threads": 3,
+        "baseline_numerical_equivalence": {
+          "attachment": null,
+          "qualified": true,
+          "reasons": [],
+          "reconstructed": null,
+          "report": null,
+          "required": false,
+          "status": "not_required"
+        },
+        "baseline_output_tokens": 2234,
+        "baseline_passed": 0,
+        "baseline_source_macro_pass_rate": 0.0,
+        "candidate": {
+          "bytes": 1603,
+          "path": "reports/local-study/explore/round-001/study/quick/arms/arm-134a14dfa18d27267e5c720f/development/report.json",
+          "sha256": "40407ce193c1f02c18cb2ee003a5bcfbc765235541bbe23ed33a4f6511027cf3"
+        },
+        "candidate_checkpoint_id": "e6713df8c19665188e2394befaacf4e15837cc9064066d38776cc59662c8e9e7",
+        "candidate_errors": 0,
+        "candidate_generation_ms": 365169,
+        "candidate_grading_identity": {
+          "controller_version": 3,
+          "engine_sha256": "3f348bdfa71c49df5b5d0b7581ae9ad3114645127f99abbec9e4aac1064563bd",
+          "extractor_sha256": null,
+          "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+          "kind": "original_local_study_grading",
+          "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2"
+        },
+        "candidate_inference_threads": 3,
+        "candidate_minus_baseline_percentage_points": 0.0,
+        "candidate_numerical_equivalence": {
+          "attachment": null,
+          "qualified": true,
+          "reasons": [],
+          "reconstructed": null,
+          "report": null,
+          "required": false,
+          "status": "not_required"
+        },
+        "candidate_output_tokens": 2225,
+        "candidate_passed": 0,
+        "candidate_source_macro_pass_rate": 0.0,
+        "cost_per_observed_percentage_point_usd": null,
+        "declared_worker_attempts": 1,
+        "evidence_kind": "descriptive_matched_local_student_baseline_comparison",
+        "held_out_used": false,
+        "latest_worker_attempt_wall_seconds": 596.352397099,
+        "limitations": [
+          "Observed local train/development differences only; no confidence interval, significant win, learning guarantee or global optimum is inferred.",
+          "Generation time excludes loading, training and grading; different thread allocations are disclosed rather than treated as a fair speed comparison.",
+          "Any baseline/candidate generation or infrastructure failure prevents a model-quality improvement claim.",
+          "BitNet quality comparisons require independently reconstructed checkpoint-bound Rust/C++ numerical equivalence; missing, stale and failed receipts preserve descriptive scores but cannot establish improvement."
+        ],
+        "measured_energy_usd": null,
+        "observed_score_delta_percentage_points": 0.0,
+        "planned_tasks": 16,
+        "positive_observed_delta": false,
+        "production_eligible": false,
+        "profile": "quick",
+        "quality_comparison_valid": true,
+        "realised_optimizer_steps": 3,
+        "recorded_worker_attempts": 1,
+        "reserved_cpu_threads": 4,
+        "reserved_ram_bytes": 8589934592,
+        "reserved_vram_bytes": 6538528768,
+        "same_inference_thread_allocation": true,
+        "schema_version": 2,
+        "split": "development",
+        "summed_recorded_worker_attempt_seconds": 596.352397099,
+        "timings_support_matched_resource_comparison": true,
+        "training_seed": 2718
+      },
+      {
+        "actual_peak_rss_bytes": null,
+        "actual_runtime_matched": true,
+        "architecture": "conventional_qwen_lora",
+        "arm_id": "arm-2793b743b590917d497c4794",
+        "baseline": {
+          "bytes": 1603,
+          "path": "reports/local-study/explore/round-001/baselines/conventional_qwen_lora/report.json",
+          "sha256": "9653d18a1546676be5a4273d397e3b604818863f2a068cafd27ba079be900369"
+        },
+        "baseline_checkpoint_id": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+        "baseline_errors": 0,
+        "baseline_generation_ms": 353980,
+        "baseline_grading_identity": {
+          "controller_version": 3,
+          "engine_sha256": "3f348bdfa71c49df5b5d0b7581ae9ad3114645127f99abbec9e4aac1064563bd",
+          "extractor_sha256": null,
+          "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+          "kind": "original_local_study_grading",
+          "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2"
+        },
+        "baseline_inference_threads": 3,
+        "baseline_numerical_equivalence": {
+          "attachment": null,
+          "qualified": true,
+          "reasons": [],
+          "reconstructed": null,
+          "report": null,
+          "required": false,
+          "status": "not_required"
+        },
+        "baseline_output_tokens": 2234,
+        "baseline_passed": 0,
+        "baseline_source_macro_pass_rate": 0.0,
+        "candidate": {
+          "bytes": 1603,
+          "path": "reports/local-study/explore/round-001/study/quick/arms/arm-2793b743b590917d497c4794/development/report.json",
+          "sha256": "b57e3a0d895a83f3924828c4972888e31f539eac9b6c73bf96a98f42748ff001"
+        },
+        "candidate_checkpoint_id": "ae6e22bf858359186e261fd41d5c180cb020bf79d29fccc2dbb611ea12dc4870",
+        "candidate_errors": 0,
+        "candidate_generation_ms": 334212,
+        "candidate_grading_identity": {
+          "controller_version": 3,
+          "engine_sha256": "3f348bdfa71c49df5b5d0b7581ae9ad3114645127f99abbec9e4aac1064563bd",
+          "extractor_sha256": null,
+          "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+          "kind": "original_local_study_grading",
+          "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2"
+        },
+        "candidate_inference_threads": 3,
+        "candidate_minus_baseline_percentage_points": 0.0,
+        "candidate_numerical_equivalence": {
+          "attachment": null,
+          "qualified": true,
+          "reasons": [],
+          "reconstructed": null,
+          "report": null,
+          "required": false,
+          "status": "not_required"
+        },
+        "candidate_output_tokens": 2351,
+        "candidate_passed": 0,
+        "candidate_source_macro_pass_rate": 0.0,
+        "cost_per_observed_percentage_point_usd": null,
+        "declared_worker_attempts": 2,
+        "evidence_kind": "descriptive_matched_local_student_baseline_comparison",
+        "held_out_used": false,
+        "latest_worker_attempt_wall_seconds": 313.015338765,
+        "limitations": [
+          "Observed local train/development differences only; no confidence interval, significant win, learning guarantee or global optimum is inferred.",
+          "Generation time excludes loading, training and grading; different thread allocations are disclosed rather than treated as a fair speed comparison.",
+          "Any baseline/candidate generation or infrastructure failure prevents a model-quality improvement claim.",
+          "BitNet quality comparisons require independently reconstructed checkpoint-bound Rust/C++ numerical equivalence; missing, stale and failed receipts preserve descriptive scores but cannot establish improvement."
+        ],
+        "measured_energy_usd": null,
+        "observed_score_delta_percentage_points": 0.0,
+        "planned_tasks": 16,
+        "positive_observed_delta": false,
+        "production_eligible": false,
+        "profile": "quick",
+        "quality_comparison_valid": true,
+        "realised_optimizer_steps": 3,
+        "recorded_worker_attempts": 2,
+        "reserved_cpu_threads": 4,
+        "reserved_ram_bytes": 8589934592,
+        "reserved_vram_bytes": 6538528768,
+        "same_inference_thread_allocation": true,
+        "schema_version": 2,
+        "split": "development",
+        "summed_recorded_worker_attempt_seconds": 618.2919279370001,
+        "timings_support_matched_resource_comparison": true,
+        "training_seed": 1729
+      },
+      {
+        "actual_peak_rss_bytes": null,
+        "actual_runtime_matched": true,
+        "architecture": "conventional_qwen_lora",
+        "arm_id": "arm-62a00141a349715002f468e5",
+        "baseline": {
+          "bytes": 1603,
+          "path": "reports/local-study/explore/round-001/baselines/conventional_qwen_lora/report.json",
+          "sha256": "9653d18a1546676be5a4273d397e3b604818863f2a068cafd27ba079be900369"
+        },
+        "baseline_checkpoint_id": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+        "baseline_errors": 0,
+        "baseline_generation_ms": 353980,
+        "baseline_grading_identity": {
+          "controller_version": 3,
+          "engine_sha256": "3f348bdfa71c49df5b5d0b7581ae9ad3114645127f99abbec9e4aac1064563bd",
+          "extractor_sha256": null,
+          "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+          "kind": "original_local_study_grading",
+          "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2"
+        },
+        "baseline_inference_threads": 3,
+        "baseline_numerical_equivalence": {
+          "attachment": null,
+          "qualified": true,
+          "reasons": [],
+          "reconstructed": null,
+          "report": null,
+          "required": false,
+          "status": "not_required"
+        },
+        "baseline_output_tokens": 2234,
+        "baseline_passed": 0,
+        "baseline_source_macro_pass_rate": 0.0,
+        "candidate": {
+          "bytes": 1603,
+          "path": "reports/local-study/explore/round-001/study/quick/arms/arm-62a00141a349715002f468e5/development/report.json",
+          "sha256": "07e52312980aadb590970fe56b66babe3f02304b91f8bd4167ad893bfdd63e4a"
+        },
+        "candidate_checkpoint_id": "b43771435431e48f3531fd823590d1c8af48342249a3fc21a451ba50ab850b7a",
+        "candidate_errors": 0,
+        "candidate_generation_ms": 401913,
+        "candidate_grading_identity": {
+          "controller_version": 3,
+          "engine_sha256": "3f348bdfa71c49df5b5d0b7581ae9ad3114645127f99abbec9e4aac1064563bd",
+          "extractor_sha256": null,
+          "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+          "kind": "original_local_study_grading",
+          "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2"
+        },
+        "candidate_inference_threads": 3,
+        "candidate_minus_baseline_percentage_points": 0.0,
+        "candidate_numerical_equivalence": {
+          "attachment": null,
+          "qualified": true,
+          "reasons": [],
+          "reconstructed": null,
+          "report": null,
+          "required": false,
+          "status": "not_required"
+        },
+        "candidate_output_tokens": 2394,
+        "candidate_passed": 0,
+        "candidate_source_macro_pass_rate": 0.0,
+        "cost_per_observed_percentage_point_usd": null,
+        "declared_worker_attempts": 2,
+        "evidence_kind": "descriptive_matched_local_student_baseline_comparison",
+        "held_out_used": false,
+        "latest_worker_attempt_wall_seconds": 216.565930238,
+        "limitations": [
+          "Observed local train/development differences only; no confidence interval, significant win, learning guarantee or global optimum is inferred.",
+          "Generation time excludes loading, training and grading; different thread allocations are disclosed rather than treated as a fair speed comparison.",
+          "Any baseline/candidate generation or infrastructure failure prevents a model-quality improvement claim.",
+          "BitNet quality comparisons require independently reconstructed checkpoint-bound Rust/C++ numerical equivalence; missing, stale and failed receipts preserve descriptive scores but cannot establish improvement."
+        ],
+        "measured_energy_usd": null,
+        "observed_score_delta_percentage_points": 0.0,
+        "planned_tasks": 16,
+        "positive_observed_delta": false,
+        "production_eligible": false,
+        "profile": "quick",
+        "quality_comparison_valid": true,
+        "realised_optimizer_steps": 3,
+        "recorded_worker_attempts": 2,
+        "reserved_cpu_threads": 4,
+        "reserved_ram_bytes": 8589934592,
+        "reserved_vram_bytes": 6538528768,
+        "same_inference_thread_allocation": true,
+        "schema_version": 2,
+        "split": "development",
+        "summed_recorded_worker_attempt_seconds": 701.668256122,
+        "timings_support_matched_resource_comparison": true,
+        "training_seed": 1729
+      },
+      {
+        "actual_peak_rss_bytes": null,
+        "actual_runtime_matched": true,
+        "architecture": "conventional_qwen_lora",
+        "arm_id": "arm-b1ee8c0e1c0ffe7465f83fe0",
+        "baseline": {
+          "bytes": 1603,
+          "path": "reports/local-study/explore/round-001/baselines/conventional_qwen_lora/report.json",
+          "sha256": "9653d18a1546676be5a4273d397e3b604818863f2a068cafd27ba079be900369"
+        },
+        "baseline_checkpoint_id": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+        "baseline_errors": 0,
+        "baseline_generation_ms": 353980,
+        "baseline_grading_identity": {
+          "controller_version": 3,
+          "engine_sha256": "3f348bdfa71c49df5b5d0b7581ae9ad3114645127f99abbec9e4aac1064563bd",
+          "extractor_sha256": null,
+          "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+          "kind": "original_local_study_grading",
+          "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2"
+        },
+        "baseline_inference_threads": 3,
+        "baseline_numerical_equivalence": {
+          "attachment": null,
+          "qualified": true,
+          "reasons": [],
+          "reconstructed": null,
+          "report": null,
+          "required": false,
+          "status": "not_required"
+        },
+        "baseline_output_tokens": 2234,
+        "baseline_passed": 0,
+        "baseline_source_macro_pass_rate": 0.0,
+        "candidate": {
+          "bytes": 1603,
+          "path": "reports/local-study/explore/round-001/study/quick/arms/arm-b1ee8c0e1c0ffe7465f83fe0/development/report.json",
+          "sha256": "e4de5ce86ea9c3af82247a588197476012a91a95623633b689920eff2d848ef7"
+        },
+        "candidate_checkpoint_id": "4351a75954516591f3b63dc70637b9406cadcece06d674a4f91d02204d6f919f",
+        "candidate_errors": 0,
+        "candidate_generation_ms": 326857,
+        "candidate_grading_identity": {
+          "controller_version": 3,
+          "engine_sha256": "3f348bdfa71c49df5b5d0b7581ae9ad3114645127f99abbec9e4aac1064563bd",
+          "extractor_sha256": null,
+          "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+          "kind": "original_local_study_grading",
+          "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2"
+        },
+        "candidate_inference_threads": 3,
+        "candidate_minus_baseline_percentage_points": 0.0,
+        "candidate_numerical_equivalence": {
+          "attachment": null,
+          "qualified": true,
+          "reasons": [],
+          "reconstructed": null,
+          "report": null,
+          "required": false,
+          "status": "not_required"
+        },
+        "candidate_output_tokens": 2302,
+        "candidate_passed": 0,
+        "candidate_source_macro_pass_rate": 0.0,
+        "cost_per_observed_percentage_point_usd": null,
+        "declared_worker_attempts": 1,
+        "evidence_kind": "descriptive_matched_local_student_baseline_comparison",
+        "held_out_used": false,
+        "latest_worker_attempt_wall_seconds": 507.117066169,
+        "limitations": [
+          "Observed local train/development differences only; no confidence interval, significant win, learning guarantee or global optimum is inferred.",
+          "Generation time excludes loading, training and grading; different thread allocations are disclosed rather than treated as a fair speed comparison.",
+          "Any baseline/candidate generation or infrastructure failure prevents a model-quality improvement claim.",
+          "BitNet quality comparisons require independently reconstructed checkpoint-bound Rust/C++ numerical equivalence; missing, stale and failed receipts preserve descriptive scores but cannot establish improvement."
+        ],
+        "measured_energy_usd": null,
+        "observed_score_delta_percentage_points": 0.0,
+        "planned_tasks": 16,
+        "positive_observed_delta": false,
+        "production_eligible": false,
+        "profile": "quick",
+        "quality_comparison_valid": true,
+        "realised_optimizer_steps": 3,
+        "recorded_worker_attempts": 1,
+        "reserved_cpu_threads": 4,
+        "reserved_ram_bytes": 8589934592,
+        "reserved_vram_bytes": 6538528768,
+        "same_inference_thread_allocation": true,
+        "schema_version": 2,
+        "split": "development",
+        "summed_recorded_worker_attempt_seconds": 507.117066169,
+        "timings_support_matched_resource_comparison": true,
+        "training_seed": 2718
+      },
+      {
+        "actual_peak_rss_bytes": null,
+        "actual_runtime_matched": true,
+        "architecture": "conventional_qwen_lora",
+        "arm_id": "arm-b5c1964d2b49d0b0089f6f23",
+        "baseline": {
+          "bytes": 1603,
+          "path": "reports/local-study/explore/round-001/baselines/conventional_qwen_lora/report.json",
+          "sha256": "9653d18a1546676be5a4273d397e3b604818863f2a068cafd27ba079be900369"
+        },
+        "baseline_checkpoint_id": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+        "baseline_errors": 0,
+        "baseline_generation_ms": 353980,
+        "baseline_grading_identity": {
+          "controller_version": 3,
+          "engine_sha256": "3f348bdfa71c49df5b5d0b7581ae9ad3114645127f99abbec9e4aac1064563bd",
+          "extractor_sha256": null,
+          "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+          "kind": "original_local_study_grading",
+          "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2"
+        },
+        "baseline_inference_threads": 3,
+        "baseline_numerical_equivalence": {
+          "attachment": null,
+          "qualified": true,
+          "reasons": [],
+          "reconstructed": null,
+          "report": null,
+          "required": false,
+          "status": "not_required"
+        },
+        "baseline_output_tokens": 2234,
+        "baseline_passed": 0,
+        "baseline_source_macro_pass_rate": 0.0,
+        "candidate": {
+          "bytes": 1603,
+          "path": "reports/local-study/explore/round-001/study/quick/arms/arm-b5c1964d2b49d0b0089f6f23/development/report.json",
+          "sha256": "e534226e2a2250b2e73973535d246f1c0ab187e8a103c92f2c94e80897c1739b"
+        },
+        "candidate_checkpoint_id": "04c40d515e10ac9575c45b2debc7bc3e90e46e1ae9b25bf2469f34c9e2c9f7ae",
+        "candidate_errors": 0,
+        "candidate_generation_ms": 290801,
+        "candidate_grading_identity": {
+          "controller_version": 3,
+          "engine_sha256": "3f348bdfa71c49df5b5d0b7581ae9ad3114645127f99abbec9e4aac1064563bd",
+          "extractor_sha256": null,
+          "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+          "kind": "original_local_study_grading",
+          "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2"
+        },
+        "candidate_inference_threads": 3,
+        "candidate_minus_baseline_percentage_points": 0.0,
+        "candidate_numerical_equivalence": {
+          "attachment": null,
+          "qualified": true,
+          "reasons": [],
+          "reconstructed": null,
+          "report": null,
+          "required": false,
+          "status": "not_required"
+        },
+        "candidate_output_tokens": 2206,
+        "candidate_passed": 0,
+        "candidate_source_macro_pass_rate": 0.0,
+        "cost_per_observed_percentage_point_usd": null,
+        "declared_worker_attempts": 1,
+        "evidence_kind": "descriptive_matched_local_student_baseline_comparison",
+        "held_out_used": false,
+        "latest_worker_attempt_wall_seconds": 437.488242716,
+        "limitations": [
+          "Observed local train/development differences only; no confidence interval, significant win, learning guarantee or global optimum is inferred.",
+          "Generation time excludes loading, training and grading; different thread allocations are disclosed rather than treated as a fair speed comparison.",
+          "Any baseline/candidate generation or infrastructure failure prevents a model-quality improvement claim.",
+          "BitNet quality comparisons require independently reconstructed checkpoint-bound Rust/C++ numerical equivalence; missing, stale and failed receipts preserve descriptive scores but cannot establish improvement."
+        ],
+        "measured_energy_usd": null,
+        "observed_score_delta_percentage_points": 0.0,
+        "planned_tasks": 16,
+        "positive_observed_delta": false,
+        "production_eligible": false,
+        "profile": "quick",
+        "quality_comparison_valid": true,
+        "realised_optimizer_steps": 3,
+        "recorded_worker_attempts": 1,
+        "reserved_cpu_threads": 4,
+        "reserved_ram_bytes": 8589934592,
+        "reserved_vram_bytes": 6538528768,
+        "same_inference_thread_allocation": true,
+        "schema_version": 2,
+        "split": "development",
+        "summed_recorded_worker_attempt_seconds": 437.488242716,
+        "timings_support_matched_resource_comparison": true,
+        "training_seed": 2718
+      },
+      {
+        "actual_peak_rss_bytes": null,
+        "actual_runtime_matched": true,
+        "architecture": "conventional_qwen_lora",
+        "arm_id": "arm-d81f55ca66908cb5884d507c",
+        "baseline": {
+          "bytes": 1603,
+          "path": "reports/local-study/explore/round-001/baselines/conventional_qwen_lora/report.json",
+          "sha256": "9653d18a1546676be5a4273d397e3b604818863f2a068cafd27ba079be900369"
+        },
+        "baseline_checkpoint_id": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+        "baseline_errors": 0,
+        "baseline_generation_ms": 353980,
+        "baseline_grading_identity": {
+          "controller_version": 3,
+          "engine_sha256": "3f348bdfa71c49df5b5d0b7581ae9ad3114645127f99abbec9e4aac1064563bd",
+          "extractor_sha256": null,
+          "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+          "kind": "original_local_study_grading",
+          "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2"
+        },
+        "baseline_inference_threads": 3,
+        "baseline_numerical_equivalence": {
+          "attachment": null,
+          "qualified": true,
+          "reasons": [],
+          "reconstructed": null,
+          "report": null,
+          "required": false,
+          "status": "not_required"
+        },
+        "baseline_output_tokens": 2234,
+        "baseline_passed": 0,
+        "baseline_source_macro_pass_rate": 0.0,
+        "candidate": {
+          "bytes": 1603,
+          "path": "reports/local-study/explore/round-001/study/quick/arms/arm-d81f55ca66908cb5884d507c/development/report.json",
+          "sha256": "4e6a8e6be0989f577369d26e820e9125485b28c84b24fce6441249604ddbe035"
+        },
+        "candidate_checkpoint_id": "a1b3dab3b462d634e40a3a4f47b48c68c8e1880040b1cf3b9201cac8bfd5b1d9",
+        "candidate_errors": 0,
+        "candidate_generation_ms": 398641,
+        "candidate_grading_identity": {
+          "controller_version": 3,
+          "engine_sha256": "3f348bdfa71c49df5b5d0b7581ae9ad3114645127f99abbec9e4aac1064563bd",
+          "extractor_sha256": null,
+          "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+          "kind": "original_local_study_grading",
+          "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2"
+        },
+        "candidate_inference_threads": 3,
+        "candidate_minus_baseline_percentage_points": 0.0,
+        "candidate_numerical_equivalence": {
+          "attachment": null,
+          "qualified": true,
+          "reasons": [],
+          "reconstructed": null,
+          "report": null,
+          "required": false,
+          "status": "not_required"
+        },
+        "candidate_output_tokens": 2221,
+        "candidate_passed": 0,
+        "candidate_source_macro_pass_rate": 0.0,
+        "cost_per_observed_percentage_point_usd": null,
+        "declared_worker_attempts": 1,
+        "evidence_kind": "descriptive_matched_local_student_baseline_comparison",
+        "held_out_used": false,
+        "latest_worker_attempt_wall_seconds": 583.701986779,
+        "limitations": [
+          "Observed local train/development differences only; no confidence interval, significant win, learning guarantee or global optimum is inferred.",
+          "Generation time excludes loading, training and grading; different thread allocations are disclosed rather than treated as a fair speed comparison.",
+          "Any baseline/candidate generation or infrastructure failure prevents a model-quality improvement claim.",
+          "BitNet quality comparisons require independently reconstructed checkpoint-bound Rust/C++ numerical equivalence; missing, stale and failed receipts preserve descriptive scores but cannot establish improvement."
+        ],
+        "measured_energy_usd": null,
+        "observed_score_delta_percentage_points": 0.0,
+        "planned_tasks": 16,
+        "positive_observed_delta": false,
+        "production_eligible": false,
+        "profile": "quick",
+        "quality_comparison_valid": true,
+        "realised_optimizer_steps": 3,
+        "recorded_worker_attempts": 1,
+        "reserved_cpu_threads": 4,
+        "reserved_ram_bytes": 8589934592,
+        "reserved_vram_bytes": 6538528768,
+        "same_inference_thread_allocation": true,
+        "schema_version": 2,
+        "split": "development",
+        "summed_recorded_worker_attempt_seconds": 583.701986779,
+        "timings_support_matched_resource_comparison": true,
+        "training_seed": 1729
+      },
+      {
+        "actual_peak_rss_bytes": null,
+        "actual_runtime_matched": true,
+        "architecture": "conventional_qwen_lora",
         "arm_id": "arm-00886e19edc356c899a5d992",
         "baseline": {
           "bytes": 1603,
@@ -514,9 +1078,33 @@
       {
         "cohort_key": "76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c",
         "result": {
-          "error": "No such file or directory (os error 2)",
+          "collection": {
+            "coverage_complete": true,
+            "error_records": 3,
+            "evidence_kind": "actual_current_batch_checkpoint_bound_rollout_report",
+            "expected_new_records": 48,
+            "failed_new_records": 48,
+            "feedback_generation_failures": 0,
+            "feedback_grading_failures": 0,
+            "feedback_not_attempted": 3,
+            "generation_or_infrastructure_errors": 2,
+            "healthy_complete": false,
+            "inherited_rollout_records": 0,
+            "inherited_samples": 22,
+            "mode": "self_distillation",
+            "new_rollout_records": 48,
+            "new_verified_rollout_samples": 0,
+            "production_eligible": false,
+            "schema_version": 2,
+            "semantics": "Only this frozen batch counts. Inherited passing samples cannot turn absent/error/truncated/unsafe corrective observations into success. Failed rows remain in all record denominators; trusted compiler feedback is not a passing solution.",
+            "student_checkpoint_sha256": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+            "student_generation_failures": 2,
+            "student_grading_failures": 0,
+            "successful_new_records": 0,
+            "tasks": 48
+          },
           "healthy": false,
-          "status": "incomplete_progress_saved"
+          "status": "unavailable_no_new_passing_corrections"
         }
       },
       {
@@ -984,11 +1572,65 @@
       },
       "stage": "full-study",
       "unix_ms": 1792155678211
+    },
+    {
+      "attempt": {
+        "bytes": 924,
+        "path": "reports/local-study/explore/round-001/attempts/content-evidence/9cd9026c-2394-4091-9793-0b11b32f084b/result.json",
+        "sha256": "299a61b6f7c3458c3c94833f16eddf54a0ee24a823e24c65577c9e878f22d580"
+      },
+      "stage": "content-evidence",
+      "unix_ms": 1792180775884
+    },
+    {
+      "attempt": {
+        "bytes": 911,
+        "path": "reports/local-study/explore/round-001/attempts/quick-study/ad6f3674-478d-4da6-b2be-3a40b23609d1/result.json",
+        "sha256": "726758575597bb5c67bbce17e28b2358480ca765bae0bef6e0a9aabb4493bcdc"
+      },
+      "stage": "quick-study",
+      "unix_ms": 1792182648645
+    },
+    {
+      "attempt": {
+        "bytes": 903,
+        "path": "reports/local-study/explore/round-001/attempts/full-study/e70e6c2f-40b5-4722-870c-d3d5ae608810/result.json",
+        "sha256": "78da307e92497f078eeba2cbefcb498855fd052c3ed077e4588a5c76e49d583b"
+      },
+      "stage": "full-study",
+      "unix_ms": 1792182885677
+    },
+    {
+      "attempt": {
+        "bytes": 924,
+        "path": "reports/local-study/explore/round-001/attempts/content-evidence/59a55e2f-d581-4d9f-832a-1cc7df5c8863/result.json",
+        "sha256": "c52863c0f5d4c5a39e1b02a3c670987fe95f1baa1db228c9270c317b9055b790"
+      },
+      "stage": "content-evidence",
+      "unix_ms": 1792409330983
+    },
+    {
+      "attempt": {
+        "bytes": 912,
+        "path": "reports/local-study/explore/round-001/attempts/quick-study/80b254f9-4476-42a6-b8e9-8e8e0bbc341d/result.json",
+        "sha256": "1aa4a0a161ce0e2fcb49b3c40bf5d5d4a092bde680372a43197ed150b6c247e8"
+      },
+      "stage": "quick-study",
+      "unix_ms": 1792411211315
+    },
+    {
+      "attempt": {
+        "bytes": 904,
+        "path": "reports/local-study/explore/round-001/attempts/full-study/7020f959-3f49-4c81-9808-afc07c6a2e60/result.json",
+        "sha256": "1f3ebe4347824277a9b8574809af0f2d0ed97d46a700941b026cb784b2defa7d"
+      },
+      "stage": "full-study",
+      "unix_ms": 1792411488770
     }
   ],
   "evidence_kind": "actual_resumable_local_exploration_pipeline",
   "held_out_used": false,
-  "invocation_wall_seconds": 11237.062611286,
+  "invocation_wall_seconds": 4697.488538469,
   "limitations": [
     "Local open-weight teachers are not three independent API provider businesses.",
     "Development-only screening and selection do not authorise ship or establish learning/general superiority.",
@@ -1151,14 +1793,14 @@
     "cohort-76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c": {
       "artefacts": [
         {
-          "bytes": 4977,
+          "bytes": 6094,
           "path": "reports/local-study/explore/round-001/cohorts/76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c/report.json",
-          "sha256": "d9691d6b1134881070a972ed89450fb63c4ad132e47b79a78cfd8442b7a94e08"
+          "sha256": "0b87e5dcc843ea08ae561ff5a5ebfd94a9129474c8411f788b1822ef9d18e496"
         },
         {
-          "bytes": 1254,
+          "bytes": 4232,
           "path": "reports/local-study/explore/round-001/cohorts/76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c/state.json",
-          "sha256": "fc9d3edac943e2077d6d478c8e5f53c3eb8679cac37ba6ff5d4ff09c13f399e6"
+          "sha256": "773e559ef591bfb89adad7104c02c956df8d887f6c32c71c13e7821376764502"
         }
       ],
       "attempts": [],
@@ -1166,9 +1808,33 @@
         "cohort_key": "76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c",
         "healthy": false,
         "result": {
-          "error": "No such file or directory (os error 2)",
+          "collection": {
+            "coverage_complete": true,
+            "error_records": 3,
+            "evidence_kind": "actual_current_batch_checkpoint_bound_rollout_report",
+            "expected_new_records": 48,
+            "failed_new_records": 48,
+            "feedback_generation_failures": 0,
+            "feedback_grading_failures": 0,
+            "feedback_not_attempted": 3,
+            "generation_or_infrastructure_errors": 2,
+            "healthy_complete": false,
+            "inherited_rollout_records": 0,
+            "inherited_samples": 22,
+            "mode": "self_distillation",
+            "new_rollout_records": 48,
+            "new_verified_rollout_samples": 0,
+            "production_eligible": false,
+            "schema_version": 2,
+            "semantics": "Only this frozen batch counts. Inherited passing samples cannot turn absent/error/truncated/unsafe corrective observations into success. Failed rows remain in all record denominators; trusted compiler feedback is not a passing solution.",
+            "student_checkpoint_sha256": "f9523886352217ded3aeeef552b381af79d568c6d49a4b9e423288cea56b0a44",
+            "student_generation_failures": 2,
+            "student_grading_failures": 0,
+            "successful_new_records": 0,
+            "tasks": 48
+          },
           "healthy": false,
-          "status": "incomplete_progress_saved"
+          "status": "unavailable_no_new_passing_corrections"
         }
       },
       "status": "bounded_evidence_gaps"
@@ -1198,9 +1864,9 @@
           "sha256": "c7d35254956a610f4f16cbaba6438c0d31392a8088fbba6bf61b8acc9f3eb948"
         },
         {
-          "bytes": 3126,
+          "bytes": 4648,
           "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/state.json",
-          "sha256": "af54ec171ccf07121347db09bc8ead620c7a4abaa6aae93c1b1eb146a96f386a"
+          "sha256": "b40596bd19ad6bcaa9f9cfc5867fc710762c9066b3fdf0d86ba4bc8bf8e1e193"
         }
       ],
       "attempts": [],
@@ -1262,6 +1928,16 @@
           "bytes": 3661,
           "path": "reports/local-study/explore/round-001/attempts/content-evidence/fe5ee0fe-1c20-41d7-bf2b-f734737ed4a0/request.json",
           "sha256": "84dce9825046f6f3c85f51efb7f8b3174fd6bea753b6b1e65ce2733d892a32cd"
+        },
+        {
+          "bytes": 3661,
+          "path": "reports/local-study/explore/round-001/attempts/content-evidence/9cd9026c-2394-4091-9793-0b11b32f084b/request.json",
+          "sha256": "a8e584bca520e1dccd67cf95c9eeebedf48892a19f65dc9faa12aeb510471852"
+        },
+        {
+          "bytes": 3660,
+          "path": "reports/local-study/explore/round-001/attempts/content-evidence/59a55e2f-d581-4d9f-832a-1cc7df5c8863/request.json",
+          "sha256": "c7e0664959f2c03ffb4cfc380b80e9f3f23ac140429e233f2b804d620638f6a1"
         }
       ],
       "details": {
@@ -1560,6 +2236,16 @@
           "bytes": 3665,
           "path": "reports/local-study/explore/round-001/attempts/full-study/6da12b42-8869-4c3c-aed6-c3309547c944/request.json",
           "sha256": "422feb7cc1fc21165ba07de4c15a48d748bb0b41503a0cac6fa449ecc97c762b"
+        },
+        {
+          "bytes": 3665,
+          "path": "reports/local-study/explore/round-001/attempts/full-study/e70e6c2f-40b5-4722-870c-d3d5ae608810/request.json",
+          "sha256": "1d6e0d75f9f4911b2671d3942f2a932b69a73bc2333c31fa03bda0ff3ff69370"
+        },
+        {
+          "bytes": 3665,
+          "path": "reports/local-study/explore/round-001/attempts/full-study/7020f959-3f49-4c81-9808-afc07c6a2e60/request.json",
+          "sha256": "f75bb5fcb22cf53472b23eeb938d7edd66e41e30082b754d35668f299fb9074e"
         }
       ],
       "details": {
@@ -1656,16 +2342,16 @@
     "quick-baseline-comparisons": {
       "artefacts": [
         {
-          "bytes": 9294,
+          "bytes": 35608,
           "path": "reports/local-study/explore/round-001/study/quick/baseline-comparisons.json",
-          "sha256": "76f7cc6a2ae7d54b8dce250d16a186f62c6a24183013a558f09e5e003f4c6f2e"
+          "sha256": "f3ebf0f490673b2d179ee694c336ad4ad21b595dffc4c3f309d4d83a3720184a"
         }
       ],
       "attempts": [],
       "details": {
         "positive_observed_deltas": 0,
-        "quality_comparisons_valid": 2,
-        "rows": 2,
+        "quality_comparisons_valid": 8,
+        "rows": 8,
         "table": "reports/local-study/explore/round-001/study/quick/baseline-comparisons.json"
       },
       "status": "verified_complete"
@@ -1673,9 +2359,9 @@
     "quick-study": {
       "artefacts": [
         {
-          "bytes": 5911382,
+          "bytes": 5917511,
           "path": "reports/local-study/explore/round-001/study/quick/report.json",
-          "sha256": "415f7815430bfc3a28698edabf0f3de18266080104d31d9431c9be314f0f983e"
+          "sha256": "a610fbe809045942eba7da9af8f42eb95b188d69417f640be60f012cd221f686"
         }
       ],
       "attempts": [
@@ -1683,19 +2369,29 @@
           "bytes": 3426,
           "path": "reports/local-study/explore/round-001/attempts/quick-study/178387dd-dff5-42df-9f86-746c93c344f2/request.json",
           "sha256": "5cc689cb6f98fb08ea2d5489c5bbee83b5859f258cf63b6d2d37e61f4186069f"
+        },
+        {
+          "bytes": 3426,
+          "path": "reports/local-study/explore/round-001/attempts/quick-study/ad6f3674-478d-4da6-b2be-3a40b23609d1/request.json",
+          "sha256": "145e5ea04679d85ed3397a1d7fb689363b81450ae24c297261c3310f0078a39a"
+        },
+        {
+          "bytes": 3426,
+          "path": "reports/local-study/explore/round-001/attempts/quick-study/80b254f9-4476-42a6-b8e9-8e8e0bbc341d/request.json",
+          "sha256": "677f7eb502a9ecace1c895638941cc885996c9d9ae7b2a0ed89da9b3d052675b"
         }
       ],
       "details": {
         "applicable_arms": 88,
         "catalogue_arms": 7680,
-        "completed_arms": 2,
-        "failed_arms": 1,
+        "completed_arms": 8,
+        "failed_arms": 4,
         "full_report": {
-          "bytes": 5911382,
+          "bytes": 5917511,
           "path": "reports/local-study/explore/round-001/study/quick/report.json",
-          "sha256": "415f7815430bfc3a28698edabf0f3de18266080104d31d9431c9be314f0f983e"
+          "sha256": "a610fbe809045942eba7da9af8f42eb95b188d69417f640be60f012cd221f686"
         },
-        "queued_applicable_arms": 85,
+        "queued_applicable_arms": 76,
         "quick_coverage_gaps": [
           "content:Context",
           "content:Preference",
@@ -1753,10 +2449,10 @@
           "organiser:self_distillation",
           "policy:OnPolicy"
         ],
-        "reserved_training_steps": 12,
+        "reserved_training_steps": 39,
         "selected_profile_succeeded": false,
         "status": "budget_stopped_progress_saved",
-        "summed_worker_wall_seconds": 1795.8319932680001
+        "summed_worker_wall_seconds": 5383.1269971209995
       },
       "status": "bounded_incomplete"
     },

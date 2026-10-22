@@ -1,0 +1,29 @@
+{
+  "active_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "archive": {
+    "exact_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "path": "/home/pbisaacs/Developer/neuralmimicry/lec_challenge/offline_bundle/images/policy-3/x86_64/lec-rust-sandbox.tar",
+    "verified": true
+  },
+  "configuration_environment_paths": {
+    "CONTAINERS_CONF": null,
+    "CONTAINERS_STORAGE_CONF": null
+  },
+  "controller_version": 3,
+  "effective_storage_config": "/home/pbisaacs/.config/containers/storage.conf",
+  "effective_uid": 1000,
+  "expected_image_id": "",
+  "grading_authorised_by_doctor": false,
+  "graph_root": "/home/pbisaacs/.local/share/containers/storage",
+  "next_step": "Full sandbox-preflight remains mandatory before grading. Historical plans require their original exact image IDs. A rebuild creates a new identity and needs new study bindings.",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "policy_version": 3,
+  "restored_exact_image_id": null,
+  "rootless": true,
+  "run_root": "/run/user/1000/containers",
+  "runtime": "podman",
+  "runtime_error": null,
+  "sandbox_tag": "localhost/lec-rust-sandbox:3-x86_64",
+  "schema_version": 1,
+  "warnings": []
+}

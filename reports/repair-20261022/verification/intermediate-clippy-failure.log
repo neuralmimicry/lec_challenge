@@ -1,0 +1,17 @@
+    Checking lec-distil v0.1.0 (/home/pbisaacs/Developer/neuralmimicry/lec_challenge)
+error: items after a test module
+   --> src/distillation/diagnose.rs:236:1
+    |
+236 | mod tests {
+    | ^^^^^^^^^
+...
+267 | pub async fn run_worker(protocol: &Path) -> Result<Value> {
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.98.0/index.html#items_after_test_module
+    = note: `-D clippy::items-after-test-module` implied by `-D warnings`
+    = help: to override `-D warnings` add `#[allow(clippy::items_after_test_module)]`
+    = help: move the items to before the test module was defined
+
+error: could not compile `lec-distil` (lib test) due to 1 previous error
+warning: build failed, waiting for other jobs to finish...

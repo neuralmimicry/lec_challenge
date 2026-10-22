@@ -1,0 +1,40 @@
+{
+  "run_id": "137b9404-b89e-4ffc-a027-be13da42d391",
+  "task_id": "sequences.move_zeroes",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: warning: unused import: `serde_json::Value`\n --> /candidate/main.rs:1:5\n  |\n1 | use serde_json::Value;\n  |     ^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0599]: no method named `is_u64` found for struct `Vec<Value>` in the current scope\n --> /candidate/main.rs:8:17\n  |\n8 |         if item.is_u64() {\n  |                 ^^^^^^ method not found in `Vec<Value>`\n\nerror[E0599]: no method named `is_null` found for struct `Vec<Value>` in the current scope\n  --> /candidate/main.rs:10:24\n   |\n10 |         } else if item.is_null() {\n   |                        ^^^^^^^ method not found in `Vec<Value>`\n\nerror[E0599]: no method named `is_u64` found for struct `Vec<Value>` in the current scope\n  --> /candidate/main.rs:19:22\n   |\n19 |         if result[i].is_u64() {\n   |                      ^^^^^^ method not found in `Vec<Value>`\n\nerror[E0308]: mismatched types\n  --> /candidate/main.rs:20:25\n   |\n20 |             result[i] = zero_index as u64;\n   |             ---------   ^^^^^^^^^^^^^^^^^ expected `Vec<Value>`, found `u64`\n   |             |\n   |             expected due to the type of this binding\n   |\n   = note: expected struct `Vec<Value>`\n                found type `u64`\n\nerror[E0308]: mismatched types\n   --> /candidate/main.rs:25:30\n    |\n  9 |             result.push(item);\n    |             ------      ---- this argument has type `Vec<Value>`...\n    |             |\n    |             ... which causes `result` to have type `Vec<Vec<Value>>`\n...\n 25 |     serde_json::Value::Array(result)\n    |     ------------------------ ^^^^^^ expected `Vec<Value>`, found `Vec<Vec<Value>>`\n    |     |\n    |     arguments to this enum variant are incorrect\n    |\n    = note: expected struct `Vec<Value>`\n               found struct `Vec<Vec<Value>>`\nnote: tuple variant defined here\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:160:5\n    |\n160 |     Array(Vec<Value>),\n    |     ^^^^^\nhelp: try wrapping the expression in `serde_json::Value::Array`\n    |\n  9 |             result.push(serde_json::Value::Array(item));\n    |                         +++++++++++++++++++++++++    +\n\nerror: aborting due to 5 previous errors; 1 warning emitted\n\nSome errors have detailed explanations: E0308, E0599.\nFor more information about an error, try `rustc --explain E0308`.\n"
+  ],
+  "cases_total": 5,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "76e695d7c60240c68a0e5eff4ff0880eb4a8fb270a30bb0ec9e3f5056845205b",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/explore/round-001/cohorts/76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c/rollouts/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/explore/round-001/cohorts/76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c/rollouts/sandbox/137b9404-b89e-4ffc-a027-be13da42d391.audit.json",
+  "audit_sha256": "010b1d3bbbd64868cb65659b8d24f57b96c9433d7ac855974e3d389782b76bc1",
+  "failure": "compilation failed: warning: unused import: `serde_json::Value`\n --> /candidate/main.rs:1:5\n  |\n1 | use serde_json::Value;\n  |     ^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0599]: no method named `is_u64` found for struct `Vec<Value>` in the current scope\n --> /candidate/main.rs:8:17\n  |\n8 |         if item.is_u64() {\n  |                 ^^^^^^ method not found in `Vec<Value>`\n\nerror[E0599]: no method named `is_null` found for struct `Vec<Value>` in the current scope\n  --> /candidate/main.rs:10:24\n   |\n10 |         } else if item.is_null() {\n   |                        ^^^^^^^ method not found in `Vec<Value>`\n\nerror[E0599]: no method named `is_u64` found for struct `Vec<Value>` in the current scope\n  --> /candidate/main.rs:19:22\n   |\n19 |         if result[i].is_u64() {\n   |                      ^^^^^^ method not found in `Vec<Value>`\n\nerror[E0308]: mismatched types\n  --> /candidate/main.rs:20:25\n   |\n20 |             result[i] = zero_index as u64;\n   |             ---------   ^^^^^^^^^^^^^^^^^ expected `Vec<Value>`, found `u64`\n   |             |\n   |             expected due to the type of this binding\n   |\n   = note: expected struct `Vec<Value>`\n                found type `u64`\n\nerror[E0308]: mismatched types\n   --> /candidate/main.rs:25:30\n    |\n  9 |             result.push(item);\n    |             ------      ---- this argument has type `Vec<Value>`...\n    |             |\n    |             ... which causes `result` to have type `Vec<Vec<Value>>`\n...\n 25 |     serde_json::Value::Array(result)\n    |     ------------------------ ^^^^^^ expected `Vec<Value>`, found `Vec<Vec<Value>>`\n    |     |\n    |     arguments to this enum variant are incorrect\n    |\n    = note: expected struct `Vec<Value>`\n               found struct `Vec<Vec<Value>>`\nnote: tuple variant defined here\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:160:5\n    |\n160 |     Array(Vec<Value>),\n    |     ^^^^^\nhelp: try wrapping the expression in `serde_json::Value::Array`\n    |\n  9 |             result.push(serde_json::Value::Array(item));\n    |                         +++++++++++++++++++++++++    +\n\nerror: aborting due to 5 previous errors; 1 warning emitted\n\nSome errors have detailed explanations: E0308, E0599.\nFor more information about an error, try `rustc --explain E0308`.\n",
+  "duration_ms": 14000,
+  "timeout_evidence": null,
+  "lifecycle_evidence": {
+    "receipt_path": "reports/local-study/explore/round-001/cohorts/76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c/rollouts/sandbox/137b9404-b89e-4ffc-a027-be13da42d391.lifecycle.json",
+    "receipt_sha256": "ebc3b07eeb7edca4c777a48c03ca94058d83d3e1da243d737a83c1a1c19c9bb9"
+  }
+}

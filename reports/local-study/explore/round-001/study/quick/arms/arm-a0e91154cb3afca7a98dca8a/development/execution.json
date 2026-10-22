@@ -1,0 +1,21 @@
+{
+  "actual_device": "Cpu",
+  "actual_dtype": "F32",
+  "asset_lifetime_shared_lease": false,
+  "available_cpu_threads": 16,
+  "candle_cpu_threads": 3,
+  "checkpoint_id": "ce24b6aee02fd1ab4d951cacaba0a091b6fc55dc8573d85f34778f23dd44d6c9",
+  "context_cap": 4096,
+  "cpu_fallback": false,
+  "cuda_active": false,
+  "cuda_feature_compiled": true,
+  "engine": "native_rust_candle",
+  "model_id": "Qwen/Qwen2.5-Coder-0.5B-Instruct",
+  "quantisation": null,
+  "requested": {
+    "device": "cpu",
+    "dtype": "f32"
+  },
+  "revision": "ea3f2471cf1b1f0db85067f1ef93848e38e88c25",
+  "weight_format": "safetensors"
+}

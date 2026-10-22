@@ -1,0 +1,30 @@
+{
+  "freeze_sha256": "c417948d95646ed349b5b71005e38285369037946b99f1094d035ef7ed7c7c16",
+  "steps": 1,
+  "adapter": {
+    "path": "reports/local-study/explore/round-001/study/quick/arms/arm-e0f1e899df5266bf075ca1f0/checkpoint/step-000001/adapter.safetensors",
+    "sha256": "a762977141dbcf334b57f6f284fb0736bc57c8fc28ed3088adc15f2e0c821943",
+    "bytes": 2009448
+  },
+  "optimizer": {
+    "path": "reports/local-study/explore/round-001/study/quick/arms/arm-e0f1e899df5266bf075ca1f0/checkpoint/step-000001/optimizer.safetensors",
+    "sha256": "20d4c13547b9c24c247069ef9db1a7d2df20f60f6aec8d74cac97b0225a3a65e",
+    "bytes": 4019504
+  },
+  "initial_adapter_sha256": "17c71036bdf15f6fa230818fda96560e15a4c7fa79d23fff88d8022fad19927b",
+  "losses": [
+    2.3240244388580322
+  ],
+  "gradient_norms": [
+    0.0040810355362964285
+  ],
+  "component_losses": [
+    {
+      "sequence_sft": 2.3240244388580322
+    }
+  ],
+  "alignment_diagnostics": [],
+  "sample_ids": [
+    "be57ee99f53e14a44a210dee5a0a227fbee04ea80f1c914f14447c3db087cded"
+  ]
+}

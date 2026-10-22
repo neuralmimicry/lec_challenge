@@ -1,0 +1,16 @@
+{
+  "held_out_used": false,
+  "planned_updates": 1,
+  "prepared_selection": {
+    "bytes": 228219,
+    "path": "reports/repair-20261022/smoke-arm/prepared-selection.json",
+    "sha256": "4bea2ae86eb6c5643e8a6243311c91b2a7c56a1636d4ee294d0daaa0872aa0af"
+  },
+  "request": {
+    "bytes": 15037,
+    "path": "reports/repair-20261022/smoke-arm/request.json",
+    "sha256": "f6fc3055d28cbd6e1ad51c753ecdbcef67148d5fe1c8aa9f29511ab6c405d523"
+  },
+  "selected_unique_samples": 1,
+  "training_started": false
+}

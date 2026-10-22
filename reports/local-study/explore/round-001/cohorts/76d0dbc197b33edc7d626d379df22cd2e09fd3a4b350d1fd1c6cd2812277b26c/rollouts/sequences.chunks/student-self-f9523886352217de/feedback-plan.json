@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "initial_plan": {
+    "path": "reports/local-study/explore/round-001/cohorts/76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c/rollouts/sequences.chunks/student-plan.json",
+    "sha256": "d85696bb1310ab76bcefa0741b5c68dd80e1926749f13d6486ef4adccfecd1e7",
+    "bytes": 5513
+  },
+  "student_raw": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sequences.chunks/student-raw.json",
+    "sha256": "19bf9e23115de2fcd15faf2e7465b340c35c82dba48d7fa9f9a4b56a8b44d427",
+    "bytes": 1809
+  },
+  "student_grade": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox/0d3b5828-9df3-440d-a5b9-c5cbb108990f.json",
+    "sha256": "9091103d42cd3c0ff20d8d6e479639665d939640c8a91576e6e40a592cd05b85",
+    "bytes": 5982
+  },
+  "teacher_id": "student-self-f9523886352217de",
+  "teacher_assets": {
+    "path": "offline_bundle/base/assets.json",
+    "sha256": "54304e7f41519a4196674cba5e86593802f852b2b47882d6c19706f85f303ad4",
+    "bytes": 788
+  },
+  "teacher_checkpoint": null,
+  "runtime": {
+    "device": {
+      "cuda": {
+        "ordinal": 0
+      }
+    },
+    "dtype": "f32"
+  },
+  "request": {
+    "prompt": "New task:\nWrite Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input {values,size} has an integer array and positive integer size. Return consecutive chunks of at most size elements, preserving order.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":{\"size\":2,\"values\":[1,2,3,4,5]},\"expected\":[[1,2],[3,4],[5]]}]\nActual frozen student candidate:\n```rust\nuse serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let values: Vec<i64> = input[\"values\"].as_array().unwrap().iter().map(|&x| x as i64).collect();\n    let size: usize = input[\"size\"].as_u64().unwrap();\n    let mut result = Vec::new();\n\n    for i in 0..values.len() {\n        if i + size <= values.len() {\n            result.extend(&values[i..i + size]);\n        }\n    }\n\n    serde_json::Value::Array(result)\n}\n```\nActual trusted tool feedback:\n{\"bounded_diagnostic_untrusted_data\":\"compilation failed: warning: unused import: `serde_json::Value`\\n --> /candidate/main.rs:1:5\\n  |\\n1 | use serde_json::Value;\\n  |     ^^^^^^^^^^^^^^^^^\\n  |\\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\\n\\nerror[E0308]: mismatched types\\n --> /candidate/main.rs:5:23\\n  |\\n5 |     let size: usize = input[\\\"size\\\"].as_u64().unwrap();\\n  |               -----   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `usize`, found `u64`\\n  |               |\\n  |               expected due to this\\n  |\\nhelp: you can convert a `u64` to a `usize` and panic if the converted value doesn't fit\\n  |\\n5 |     let size: usize = input[\\\"size\\\"].as_u64().unwrap().try_into().unwrap();\\n  |                                                      ++++++++++++++++++++\\n\\nerror[E0277]: the trait bound `Vec<Value>: Extend<&i64>` is not satisfied\\n  --> /candidate/main.rs:10:20\\n   |\\n10 |             result.extend(&values[i..i + size]);\\n   |                    ^^^^^^ the trait `Extend<&i64>` is not implemented for `Vec<Value>`\\n   |\\nhelp: `Vec<T, A>` implements trait `Extend<A>`\\n  --> /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/alloc/src/vec/mod.rs:4061:0\\n   |\\n   = note: `Extend<T>`\\n  ::: /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/alloc/src/vec/mod.rs:4296:0\\n   |\\n   = note: `Extend<&T>`\\n\\nerror[E0605]: non-primitive cast: `Value` as `i64`\\n --> /candidate/main.rs:4:80\\n  |\\n4 |     let values: Vec<i64> = input[\\\"values\\\"].as_array().unwrap().iter().map(|&x| x as i64).collect();\\n  |                                                                                ^^^^^^^^ an `as` expression can be used to convert enum types to numeric types only if the enum type is unit-only or field-less\\n  |\\n  = note: see https://doc.rust-lang.org/reference/items/enumerations.html#casting for more information\\n\\nerror: aborting due to 3 previous errors; 1 warning emitted\\n\\nSome errors have detailed explanations: E0277, E0308, E0605.\\nFor more information about an error, try `rustc --explain E0277`.\\n\",\"cases_passed\":0,\"cases_total\":5,\"content_role\":\"compilation_feedback_only\",\"original_failure_is_not_a_success\":true,\"passed\":false,\"private_inputs_or_expected_outputs_exposed\":false,\"quarantined\":true,\"run_id\":\"0d3b5828-9df3-440d-a5b9-c5cbb108990f\",\"student_generation_complete\":true,\"tool\":\"trusted_container_grader\",\"trace_complete\":false}\nCritique and revise the candidate. Put any short explanation in Rust // comments and return complete compilable Rust source only. Do not invent tool results.",
+    "max_new_tokens": 768,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "supporting_sample_ids": []
+}

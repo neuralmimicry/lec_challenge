@@ -1,0 +1,53 @@
+{
+  "schema_version": 3,
+  "run_id": "eb5bd90c-489b-44cb-94c9-1d7a4fdbced7",
+  "ownership_nonce": "86eeb21f-20fb-4b4d-95c9-b73da5f4c832",
+  "attempt_key": "58611c6f-c185-41e4-b4ce-dbc6d1ffe94e",
+  "receipt_path": "reports/local-study/explore/round-001/study/quick/arms/arm-2793b743b590917d497c4794/development/sandbox/58611c6f-c185-41e4-b4ce-dbc6d1ffe94e.prepared.json",
+  "report_path": "reports/local-study/explore/round-001/study/quick/arms/arm-2793b743b590917d497c4794/development/sandbox/eb5bd90c-489b-44cb-94c9-1d7a4fdbced7.json",
+  "task": {
+    "id": "dispatch.round_robin",
+    "source_id": "private-dispatch-v1",
+    "lineage_id": "local-contract-pack-13",
+    "split": "development",
+    "specification": "Input {jobs,quantum} has nonnegative integer work amounts and positive quantum. Cycle job indices, giving up to quantum work each turn; return indices in order of completion, initially zero-work jobs first in index order.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "e445e145f0405de8c854262451687ad1958cdfd2793c0f20d7b13efdf5c0a5fa",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": {
+          "jobs": [
+            3,
+            1,
+            2
+          ],
+          "quantum": 2
+        },
+        "expected": [
+          1,
+          2,
+          0
+        ]
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "use serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let jobs = input.as_array().unwrap();\n    let mut indices = Vec::new();\n    let mut quantum = input.as_integer().unwrap();\n\n    for (index, job) in jobs.iter().enumerate() {\n        if job.is_u64() {\n            indices.push(index as i64);\n        } else {\n            panic!(\"Invalid job type\");\n        }\n    }\n\n    if quantum <= 0 {\n        panic!(\"Quantum must be positive\");\n    }\n\n    indices.sort_unstable_by(|a, b| {\n        if a == b {\n            indices[a as usize] - indices[b as usize]\n        } else {\n            indices[a as usize].cmp(&indices[b as usize])\n        }\n    });\n\n    indices.into_iter().map(|index| index as i64).collect()\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/explore/round-001/study/quick/arms/arm-2793b743b590917d497c4794/development/sandbox"
+  },
+  "code_sha256": "dad3616f43992419dce95e48fe26e6bf16b1dd8782c6d0b00a0244728183791c",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

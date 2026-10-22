@@ -1,0 +1,4 @@
+3a9f21e726e7571d21aac94133a0a757cb8c67143e102bbdfb573eb4805e1342  source-snapshot.tar
+error: rustc 1.93.1 is not supported by the following package:
+  lec-distil@0.1.0 requires rustc 1.98
+

@@ -127,6 +127,20 @@
       "exit_code": 0,
       "elapsed_seconds": 603.769336759
     },
+    "arm-04541766c8addf1579c15fb1": {
+      "id": "arm-04541766c8addf1579c15fb1",
+      "status": "failed",
+      "attempts": 1,
+      "request": {
+        "path": "reports/local-study/explore/round-001/study/quick/arms/arm-04541766c8addf1579c15fb1/request.json",
+        "sha256": "0e76742171b60fe7a22109fa302e9b7fece17e016facacbe18c42396cf6fd41f",
+        "bytes": 16712
+      },
+      "outcome": null,
+      "reason": "study worker failed with exit code Some(1); see retained stderr.log",
+      "exit_code": 1,
+      "elapsed_seconds": 77.811942312
+    },
     "arm-10219d27497b8da52d90f257": {
       "id": "arm-10219d27497b8da52d90f257",
       "status": "completed_real_training",
@@ -165,17 +179,21 @@
     },
     "arm-2793b743b590917d497c4794": {
       "id": "arm-2793b743b590917d497c4794",
-      "status": "interrupted_progress_saved",
-      "attempts": 1,
+      "status": "completed_real_training",
+      "attempts": 2,
       "request": {
         "path": "reports/local-study/explore/round-001/study/quick/arms/arm-2793b743b590917d497c4794/request.json",
         "sha256": "b17c5dc7e228bbf9cdc0abc348b497575f1f60914f54238cc7b74d709c656a2c",
         "bytes": 16690
       },
-      "outcome": null,
-      "reason": "study worker was interrupted or reached its time budget; validated optimiser progress is retained",
-      "exit_code": null,
-      "elapsed_seconds": 305.276589172
+      "outcome": {
+        "path": "reports/local-study/explore/round-001/study/quick/arms/arm-2793b743b590917d497c4794/outcome.json",
+        "sha256": "b4dd90112dc0deb74e9ee0c06373f5475075ddcb6289aa35fe519e75d6f1a4ac",
+        "bytes": 2598
+      },
+      "reason": null,
+      "exit_code": 0,
+      "elapsed_seconds": 313.015338765
     },
     "arm-3028a5aca5b8c80b3def6618": {
       "id": "arm-3028a5aca5b8c80b3def6618",
@@ -223,6 +241,84 @@
       "exit_code": 1,
       "elapsed_seconds": 92.554249344
     },
+    "arm-847339aa0a30649540064132": {
+      "id": "arm-847339aa0a30649540064132",
+      "status": "failed",
+      "attempts": 1,
+      "request": {
+        "path": "reports/local-study/explore/round-001/study/quick/arms/arm-847339aa0a30649540064132/request.json",
+        "sha256": "cdc5acddcf867b641c5b17915550075e4d3e3b089efda648bef772560ae44aca",
+        "bytes": 16666
+      },
+      "outcome": null,
+      "reason": "study worker failed with exit code Some(1); see retained stderr.log",
+      "exit_code": 1,
+      "elapsed_seconds": 88.186224634
+    },
+    "arm-989bab1aa424fef5a34fdc98": {
+      "id": "arm-989bab1aa424fef5a34fdc98",
+      "status": "failed",
+      "attempts": 1,
+      "request": {
+        "path": "reports/local-study/explore/round-001/study/quick/arms/arm-989bab1aa424fef5a34fdc98/request.json",
+        "sha256": "8af868e6c4765d39a25a881f55dc4919cb92eaf51ce9e17d0784635bcbe55ae1",
+        "bytes": 16712
+      },
+      "outcome": null,
+      "reason": "study worker failed with exit code Some(1); see retained stderr.log",
+      "exit_code": 1,
+      "elapsed_seconds": 78.397540722
+    },
+    "arm-a0e91154cb3afca7a98dca8a": {
+      "id": "arm-a0e91154cb3afca7a98dca8a",
+      "status": "failed",
+      "attempts": 2,
+      "request": {
+        "path": "reports/local-study/explore/round-001/study/quick/arms/arm-a0e91154cb3afca7a98dca8a/request.json",
+        "sha256": "f74da61acd0985b29a9a3efbf75dfae4c9f387a201170b925cdb93a4fae03249",
+        "bytes": 16742
+      },
+      "outcome": null,
+      "reason": "study worker failed with exit code Some(1); see retained stderr.log",
+      "exit_code": 1,
+      "elapsed_seconds": 19.846660754
+    },
+    "arm-b1ee8c0e1c0ffe7465f83fe0": {
+      "id": "arm-b1ee8c0e1c0ffe7465f83fe0",
+      "status": "completed_real_training",
+      "attempts": 1,
+      "request": {
+        "path": "reports/local-study/explore/round-001/study/quick/arms/arm-b1ee8c0e1c0ffe7465f83fe0/request.json",
+        "sha256": "a314436cb6ff58be6bcad725a2d5d4b94dfe69b62685f3ff801b50757519042c",
+        "bytes": 16668
+      },
+      "outcome": {
+        "path": "reports/local-study/explore/round-001/study/quick/arms/arm-b1ee8c0e1c0ffe7465f83fe0/outcome.json",
+        "sha256": "bfc57e512190e364f6738fd50f209022fc1ed26a2dfc69abb7142b675563794e",
+        "bytes": 2587
+      },
+      "reason": null,
+      "exit_code": 0,
+      "elapsed_seconds": 507.117066169
+    },
+    "arm-b5c1964d2b49d0b0089f6f23": {
+      "id": "arm-b5c1964d2b49d0b0089f6f23",
+      "status": "completed_real_training",
+      "attempts": 1,
+      "request": {
+        "path": "reports/local-study/explore/round-001/study/quick/arms/arm-b5c1964d2b49d0b0089f6f23/request.json",
+        "sha256": "5e0dd0da2ef98e759a17197c4d7d36de089491a5838ac545cd5bc4419157e6b1",
+        "bytes": 16669
+      },
+      "outcome": {
+        "path": "reports/local-study/explore/round-001/study/quick/arms/arm-b5c1964d2b49d0b0089f6f23/outcome.json",
+        "sha256": "70a591dbef483f58b685af3955d2aa812cd6022106100eb6053dcf680a320305",
+        "bytes": 2597
+      },
+      "reason": null,
+      "exit_code": 0,
+      "elapsed_seconds": 437.488242716
+    },
     "arm-d81f55ca66908cb5884d507c": {
       "id": "arm-d81f55ca66908cb5884d507c",
       "status": "completed_real_training",
@@ -240,10 +336,52 @@
       "reason": null,
       "exit_code": 0,
       "elapsed_seconds": 583.701986779
+    },
+    "arm-e0f1e899df5266bf075ca1f0": {
+      "id": "arm-e0f1e899df5266bf075ca1f0",
+      "status": "failed",
+      "attempts": 1,
+      "request": {
+        "path": "reports/local-study/explore/round-001/study/quick/arms/arm-e0f1e899df5266bf075ca1f0/request.json",
+        "sha256": "d9864f0710d4d1c509bb36a1f0eba462387c506a2202e59a0df40dce2b8d4a62",
+        "bytes": 16651
+      },
+      "outcome": null,
+      "reason": "study worker failed with exit code Some(1); see retained stderr.log",
+      "exit_code": 1,
+      "elapsed_seconds": 78.871318214
+    },
+    "arm-e3c36df2275a0125ab210b76": {
+      "id": "arm-e3c36df2275a0125ab210b76",
+      "status": "running",
+      "attempts": 1,
+      "request": {
+        "path": "reports/local-study/explore/round-001/study/quick/arms/arm-e3c36df2275a0125ab210b76/request.json",
+        "sha256": "a8c4fd3ad68def5427b866deb786bfe5820d30e4a158c8b20ba95690e3bab0b5",
+        "bytes": 16697
+      },
+      "outcome": null,
+      "reason": null,
+      "exit_code": null,
+      "elapsed_seconds": 0.0
+    },
+    "arm-e4c04a32d1c678bdd7183354": {
+      "id": "arm-e4c04a32d1c678bdd7183354",
+      "status": "failed",
+      "attempts": 1,
+      "request": {
+        "path": "reports/local-study/explore/round-001/study/quick/arms/arm-e4c04a32d1c678bdd7183354/request.json",
+        "sha256": "6a6eb550e5d616d318af5890735f08247bfa2693a40e186a0606ea92b9e5ec82",
+        "bytes": 16742
+      },
+      "outcome": null,
+      "reason": "study worker failed with exit code Some(1); see retained stderr.log",
+      "exit_code": 1,
+      "elapsed_seconds": 76.23222325
     }
   },
-  "reserved_training_steps": 24,
-  "worker_wall_seconds": 3590.2831459,
+  "reserved_training_steps": 51,
+  "worker_wall_seconds": 5635.415364158999,
   "events": [
     {
       "arm_id": "arm-00886e19edc356c899a5d992",
@@ -444,6 +582,228 @@
       "outcome": null,
       "reason": "study worker was interrupted or reached its time budget; validated optimiser progress is retained",
       "status": "interrupted_progress_saved"
+    },
+    {
+      "arm_id": "arm-2793b743b590917d497c4794",
+      "kind": "worker_resources_reserved_before_spawn",
+      "resources": {
+        "cpu_threads": 4,
+        "ram_bytes": 8589934592,
+        "vram_bytes": 6538528768
+      },
+      "steps": 3
+    },
+    {
+      "arm_id": "arm-2793b743b590917d497c4794",
+      "attempt": 2,
+      "elapsed_seconds": 313.015338765,
+      "exit_code": 0,
+      "kind": "worker_attempt_finished",
+      "outcome": {
+        "bytes": 2598,
+        "path": "reports/local-study/explore/round-001/study/quick/arms/arm-2793b743b590917d497c4794/outcome.json",
+        "sha256": "b4dd90112dc0deb74e9ee0c06373f5475075ddcb6289aa35fe519e75d6f1a4ac"
+      },
+      "reason": null,
+      "status": "completed_real_training"
+    },
+    {
+      "arm_id": "arm-b5c1964d2b49d0b0089f6f23",
+      "kind": "worker_resources_reserved_before_spawn",
+      "resources": {
+        "cpu_threads": 4,
+        "ram_bytes": 8589934592,
+        "vram_bytes": 6538528768
+      },
+      "steps": 3
+    },
+    {
+      "arm_id": "arm-b5c1964d2b49d0b0089f6f23",
+      "attempt": 1,
+      "elapsed_seconds": 437.488242716,
+      "exit_code": 0,
+      "kind": "worker_attempt_finished",
+      "outcome": {
+        "bytes": 2597,
+        "path": "reports/local-study/explore/round-001/study/quick/arms/arm-b5c1964d2b49d0b0089f6f23/outcome.json",
+        "sha256": "70a591dbef483f58b685af3955d2aa812cd6022106100eb6053dcf680a320305"
+      },
+      "reason": null,
+      "status": "completed_real_training"
+    },
+    {
+      "arm_id": "arm-b1ee8c0e1c0ffe7465f83fe0",
+      "kind": "worker_resources_reserved_before_spawn",
+      "resources": {
+        "cpu_threads": 4,
+        "ram_bytes": 8589934592,
+        "vram_bytes": 6538528768
+      },
+      "steps": 3
+    },
+    {
+      "arm_id": "arm-b1ee8c0e1c0ffe7465f83fe0",
+      "attempt": 1,
+      "elapsed_seconds": 507.117066169,
+      "exit_code": 0,
+      "kind": "worker_attempt_finished",
+      "outcome": {
+        "bytes": 2587,
+        "path": "reports/local-study/explore/round-001/study/quick/arms/arm-b1ee8c0e1c0ffe7465f83fe0/outcome.json",
+        "sha256": "bfc57e512190e364f6738fd50f209022fc1ed26a2dfc69abb7142b675563794e"
+      },
+      "reason": null,
+      "status": "completed_real_training"
+    },
+    {
+      "arm_id": "arm-847339aa0a30649540064132",
+      "kind": "worker_resources_reserved_before_spawn",
+      "resources": {
+        "cpu_threads": 16,
+        "ram_bytes": 25769803776,
+        "vram_bytes": 6538528768
+      },
+      "steps": 3
+    },
+    {
+      "arm_id": "arm-847339aa0a30649540064132",
+      "attempt": 1,
+      "elapsed_seconds": 88.186224634,
+      "exit_code": 1,
+      "kind": "worker_attempt_finished",
+      "outcome": null,
+      "reason": "study worker failed with exit code Some(1); see retained stderr.log",
+      "status": "failed"
+    },
+    {
+      "arm_id": "arm-e0f1e899df5266bf075ca1f0",
+      "kind": "worker_resources_reserved_before_spawn",
+      "resources": {
+        "cpu_threads": 16,
+        "ram_bytes": 25769803776,
+        "vram_bytes": 0
+      },
+      "steps": 3
+    },
+    {
+      "arm_id": "arm-e0f1e899df5266bf075ca1f0",
+      "attempt": 1,
+      "elapsed_seconds": 78.871318214,
+      "exit_code": 1,
+      "kind": "worker_attempt_finished",
+      "outcome": null,
+      "reason": "study worker failed with exit code Some(1); see retained stderr.log",
+      "status": "failed"
+    },
+    {
+      "arm_id": "arm-a0e91154cb3afca7a98dca8a",
+      "kind": "worker_resources_reserved_before_spawn",
+      "resources": {
+        "cpu_threads": 4,
+        "ram_bytes": 8589934592,
+        "vram_bytes": 6538528768
+      },
+      "steps": 3
+    },
+    {
+      "arm_id": "arm-a0e91154cb3afca7a98dca8a",
+      "attempt": 1,
+      "elapsed_seconds": 368.165660723,
+      "exit_code": null,
+      "kind": "worker_attempt_finished",
+      "outcome": null,
+      "reason": "study worker was interrupted or reached its time budget; validated optimiser progress is retained",
+      "status": "interrupted_progress_saved"
+    },
+    {
+      "arm_id": "arm-a0e91154cb3afca7a98dca8a",
+      "kind": "worker_resources_reserved_before_spawn",
+      "resources": {
+        "cpu_threads": 4,
+        "ram_bytes": 8589934592,
+        "vram_bytes": 6538528768
+      },
+      "steps": 3
+    },
+    {
+      "arm_id": "arm-a0e91154cb3afca7a98dca8a",
+      "attempt": 2,
+      "elapsed_seconds": 19.846660754,
+      "exit_code": 1,
+      "kind": "worker_attempt_finished",
+      "outcome": null,
+      "reason": "study worker failed with exit code Some(1); see retained stderr.log",
+      "status": "failed"
+    },
+    {
+      "arm_id": "arm-e4c04a32d1c678bdd7183354",
+      "kind": "worker_resources_reserved_before_spawn",
+      "resources": {
+        "cpu_threads": 4,
+        "ram_bytes": 8589934592,
+        "vram_bytes": 6538528768
+      },
+      "steps": 3
+    },
+    {
+      "arm_id": "arm-e4c04a32d1c678bdd7183354",
+      "attempt": 1,
+      "elapsed_seconds": 76.23222325,
+      "exit_code": 1,
+      "kind": "worker_attempt_finished",
+      "outcome": null,
+      "reason": "study worker failed with exit code Some(1); see retained stderr.log",
+      "status": "failed"
+    },
+    {
+      "arm_id": "arm-989bab1aa424fef5a34fdc98",
+      "kind": "worker_resources_reserved_before_spawn",
+      "resources": {
+        "cpu_threads": 16,
+        "ram_bytes": 25769803776,
+        "vram_bytes": 6538528768
+      },
+      "steps": 3
+    },
+    {
+      "arm_id": "arm-989bab1aa424fef5a34fdc98",
+      "attempt": 1,
+      "elapsed_seconds": 78.397540722,
+      "exit_code": 1,
+      "kind": "worker_attempt_finished",
+      "outcome": null,
+      "reason": "study worker failed with exit code Some(1); see retained stderr.log",
+      "status": "failed"
+    },
+    {
+      "arm_id": "arm-04541766c8addf1579c15fb1",
+      "kind": "worker_resources_reserved_before_spawn",
+      "resources": {
+        "cpu_threads": 16,
+        "ram_bytes": 25769803776,
+        "vram_bytes": 6538528768
+      },
+      "steps": 3
+    },
+    {
+      "arm_id": "arm-04541766c8addf1579c15fb1",
+      "attempt": 1,
+      "elapsed_seconds": 77.811942312,
+      "exit_code": 1,
+      "kind": "worker_attempt_finished",
+      "outcome": null,
+      "reason": "study worker failed with exit code Some(1); see retained stderr.log",
+      "status": "failed"
+    },
+    {
+      "arm_id": "arm-e3c36df2275a0125ab210b76",
+      "kind": "worker_resources_reserved_before_spawn",
+      "resources": {
+        "cpu_threads": 4,
+        "ram_bytes": 8589934592,
+        "vram_bytes": 6538528768
+      },
+      "steps": 3
     }
   ]
 }

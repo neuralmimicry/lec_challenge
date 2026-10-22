@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "initial_plan": {
+    "path": "reports/local-study/explore/round-001/cohorts/76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c/rollouts/sequences.zip_longest/student-plan.json",
+    "sha256": "c1fb060950f3423b3105908c34686b9ac3fc1ab21e6a4d397d86ad6af8c62c1c",
+    "bytes": 5387
+  },
+  "student_raw": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sequences.zip_longest/student-raw.json",
+    "sha256": "09dd8af62424a992e3f15a0430d5d3d017f96e84a3f7716059ea5982792d9ccb",
+    "bytes": 1825
+  },
+  "student_grade": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox/18e1465d-cd4e-43b1-bb53-cfb09b4302cb.json",
+    "sha256": "3b28af1e1a1af03ba2226cddc8a86af7b5aa02eda8755c8f1195d309a20e3843",
+    "bytes": 5377
+  },
+  "teacher_id": "student-self-f9523886352217de",
+  "teacher_assets": {
+    "path": "offline_bundle/base/assets.json",
+    "sha256": "54304e7f41519a4196674cba5e86593802f852b2b47882d6c19706f85f303ad4",
+    "bytes": 788
+  },
+  "teacher_checkpoint": null,
+  "runtime": {
+    "device": {
+      "cuda": {
+        "ordinal": 0
+      }
+    },
+    "dtype": "f32"
+  },
+  "request": {
+    "prompt": "New task:\nWrite Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is [a,b], integer arrays. Return pairs by position, using null for a missing side, up to the longer length.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[[1,2],[9]],\"expected\":[[1,9],[2,null]]}]\nActual frozen student candidate:\n```rust\nuse serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let mut result = Vec::new();\n    let mut a = input.as_array().unwrap();\n    let mut b = input.as_array().unwrap();\n\n    for (i, &a_val) in a.iter().enumerate() {\n        if let Some(&b_val) = b.iter().nth(i) {\n            result.push(vec![a_val, b_val]);\n        } else {\n            result.push(vec![a_val, null]);\n        }\n    }\n\n    serde_json::Value::Array(result)\n}\n```\nActual trusted tool feedback:\n{\"bounded_diagnostic_untrusted_data\":\"compilation failed: error[E0425]: cannot find value `null` in this scope\\n  --> /candidate/main.rs:12:37\\n   |\\n12 |             result.push(vec![a_val, null]);\\n   |                                     ^^^^ not found in this scope\\n   |\\nhelp: consider importing this function\\n   |\\n 1 + use std::ptr::null;\\n   |\\n\\nwarning: unused import: `serde_json::Value`\\n --> /candidate/main.rs:1:5\\n  |\\n1 | use serde_json::Value;\\n  |     ^^^^^^^^^^^^^^^^^\\n  |\\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\\n\\nerror[E0308]: mismatched types\\n   --> /candidate/main.rs:16:30\\n    |\\n 10 |             result.push(vec![a_val, b_val]);\\n    |             ------      ------------------ this argument has type `Vec<Value>`...\\n    |             |\\n    |             ... which causes `result` to have type `Vec<Vec<Value>>`\\n...\\n 16 |     serde_json::Value::Array(result)\\n    |     ------------------------ ^^^^^^ expected `Vec<Value>`, found `Vec<Vec<Value>>`\\n    |     |\\n    |     arguments to this enum variant are incorrect\\n    |\\n    = note: expected struct `Vec<Value>`\\n               found struct `Vec<Vec<Value>>`\\nnote: tuple variant defined here\\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:160:5\\n    |\\n160 |     Array(Vec<Value>),\\n    |     ^^^^^\\nhelp: call `Into::into` on this expression to convert `Vec<Value>` into `Value`\\n    |\\n 10 |             result.push(vec![a_val, b_val].into());\\n    |                                           +++++++\\n\\nerror: aborting due to 2 previous errors; 1 warning emitted\\n\\nSome errors have detailed explanations: E0308, E0425.\\nFor more information about an error, try `rustc --explain E0308`.\\n\",\"cases_passed\":0,\"cases_total\":5,\"content_role\":\"compilation_feedback_only\",\"original_failure_is_not_a_success\":true,\"passed\":false,\"private_inputs_or_expected_outputs_exposed\":false,\"quarantined\":true,\"run_id\":\"18e1465d-cd4e-43b1-bb53-cfb09b4302cb\",\"student_generation_complete\":true,\"tool\":\"trusted_container_grader\",\"trace_complete\":false}\nCritique and revise the candidate. Put any short explanation in Rust // comments and return complete compilable Rust source only. Do not invent tool results.",
+    "max_new_tokens": 768,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "supporting_sample_ids": []
+}

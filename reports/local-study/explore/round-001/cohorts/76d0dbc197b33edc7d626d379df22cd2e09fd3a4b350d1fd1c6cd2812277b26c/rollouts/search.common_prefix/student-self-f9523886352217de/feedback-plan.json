@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "initial_plan": {
+    "path": "reports/local-study/explore/round-001/cohorts/76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c/rollouts/search.common_prefix/student-plan.json",
+    "sha256": "a8e13cdd68cf5a1fff52f37d4249b0f86864e4ebf9f6919784b9551085c2f525",
+    "bytes": 5235
+  },
+  "student_raw": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/search.common_prefix/student-raw.json",
+    "sha256": "bc65c63ddab50e00c4753d69440877cfece5e24aa659b06dcc10053b2e47a748",
+    "bytes": 1834
+  },
+  "student_grade": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox/e1871945-50a1-4c66-b176-6c3486f3c37d.json",
+    "sha256": "cfe82185db755af46cb8492efa45363719fe0994cef58b653aecc5639e7e94c3",
+    "bytes": 4624
+  },
+  "teacher_id": "student-self-f9523886352217de",
+  "teacher_assets": {
+    "path": "offline_bundle/base/assets.json",
+    "sha256": "54304e7f41519a4196674cba5e86593802f852b2b47882d6c19706f85f303ad4",
+    "bytes": 788
+  },
+  "teacher_checkpoint": null,
+  "runtime": {
+    "device": {
+      "cuda": {
+        "ordinal": 0
+      }
+    },
+    "dtype": "f32"
+  },
+  "request": {
+    "prompt": "Verified different training contract: Input is an ASCII string. Return consecutive character runs as [[one-character string,count],...]. Empty input returns []. The returned array may contain up to 256 items.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nVerified solution:\n```rust\nuse serde_json::{Value, json};\n\npub fn solve(input: Value) -> Value {\n    let input_str = input.as_str().unwrap();\n    let mut result = Vec::new();\n    let mut chars = input_str.chars().peekable();\n\n    while let Some(c) = chars.next() {\n        let mut count = 1;\n        while chars.peek() == Some(&c) {\n            chars.next();\n            count += 1;\n        }\n        result.push(json!([c.to_string(), count]));\n    }\n\n    json!(result)\n}\n```\nNew task:\nWrite Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an array of ASCII strings. Return their longest common prefix, or the empty string for an empty array.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":[\"flower\",\"flow\",\"flight\"],\"expected\":\"fl\"}]\nActual frozen student candidate:\n```rust\nuse serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let mut longest_prefix = String::new();\n    let mut current_prefix = String::new();\n\n    for item in input.as_array() {\n        let mut current_item = item.as_str().unwrap();\n        while !current_item.is_empty() && !current_item.starts_with(&current_prefix) {\n            current_prefix.pop();\n        }\n        longest_prefix = current_prefix.clone();\n    }\n\n    longest_prefix\n}\n```\nActual trusted tool feedback:\n{\"bounded_diagnostic_untrusted_data\":\"compilation failed: warning: unused import: `serde_json::Value`\\n --> /candidate/main.rs:1:5\\n  |\\n1 | use serde_json::Value;\\n  |     ^^^^^^^^^^^^^^^^^\\n  |\\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\\n\\nerror[E0599]: no method named `as_str` found for reference `&Vec<Value>` in the current scope\\n --> /candidate/main.rs:8:37\\n  |\\n8 |         let mut current_item = item.as_str().unwrap();\\n  |                                     ^^^^^^\\n  |\\nhelp: there is a method `as_ptr` with a similar name\\n  |\\n8 -         let mut current_item = item.as_str().unwrap();\\n8 +         let mut current_item = item.as_ptr().unwrap();\\n  |\\n\\nerror[E0308]: mismatched types\\n  --> /candidate/main.rs:15:5\\n   |\\n 3 | pub fn solve(input: serde_json::Value) -> serde_json::Value {\\n   |                                           ----------------- expected `Value` because of return type\\n...\\n15 |     longest_prefix\\n   |     ^^^^^^^^^^^^^^ expected `Value`, found `String`\\n   |\\nhelp: try wrapping the expression in `serde_json::Value::String`\\n   |\\n15 |     serde_json::Value::String(longest_prefix)\\n   |     ++++++++++++++++++++++++++              +\\n\\nerror: aborting due to 2 previous errors; 1 warning emitted\\n\\nSome errors have detailed explanations: E0308, E0599.\\nFor more information about an error, try `rustc --explain E0308`.\\n\",\"cases_passed\":0,\"cases_total\":7,\"content_role\":\"compilation_feedback_only\",\"original_failure_is_not_a_success\":true,\"passed\":false,\"private_inputs_or_expected_outputs_exposed\":false,\"quarantined\":true,\"run_id\":\"e1871945-50a1-4c66-b176-6c3486f3c37d\",\"student_generation_complete\":true,\"tool\":\"trusted_container_grader\",\"trace_complete\":false}\nCritique and revise the candidate. Put any short explanation in Rust // comments and return complete compilable Rust source only. Do not invent tool results.",
+    "max_new_tokens": 768,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "supporting_sample_ids": [
+    "f23b74be49ae4fb9f5a42d58f33244ef0c157aa0e4afe342a565baa7e7493c91"
+  ]
+}

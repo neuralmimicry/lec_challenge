@@ -1,0 +1,9 @@
+   Compiling lec-distil v0.1.0 (/home/pbisaacs/Developer/neuralmimicry/lec_challenge)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 12.53s
+     Running unittests src/lib.rs (target/debug/deps/lec_distil-ad74e58875deb58a)
+
+running 1 test
+test train::tests::original_tokenizer_masks_prompt_and_preserves_assistant_eos ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 319 filtered out; finished in 1.16s
+

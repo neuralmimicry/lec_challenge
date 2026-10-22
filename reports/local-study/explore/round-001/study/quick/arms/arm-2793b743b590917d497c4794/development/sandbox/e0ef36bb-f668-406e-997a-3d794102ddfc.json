@@ -1,0 +1,40 @@
+{
+  "run_id": "e0ef36bb-f668-406e-997a-3d794102ddfc",
+  "task_id": "tables.group_sums",
+  "passed": false,
+  "quarantined": true,
+  "quarantine_reasons": [
+    "compilation failed: warning: unused import: `serde_json::Value`\n --> /candidate/main.rs:1:5\n  |\n1 | use serde_json::Value;\n  |     ^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0308]: mismatched types\n   --> /candidate/main.rs:8:47\n    |\n  8 |         result.push(serde_json::Value::Number(value));\n    |                     ------------------------- ^^^^^ expected `Number`, found `i64`\n    |                     |\n    |                     arguments to this enum variant are incorrect\n    |\nnote: tuple variant defined here\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:142:5\n    |\n142 |     Number(Number),\n    |     ^^^^^^\nhelp: call `Into::into` on this expression to convert `i64` into `serde_json::Number`\n    |\n  8 |         result.push(serde_json::Value::Number(value.into()));\n    |                                                    +++++++\n\nerror[E0593]: closure is expected to take 1 argument, but it takes 2 arguments\n  --> /candidate/main.rs:10:12\n   |\n10 |     result.sort_by_key(|a, b| a.as_i64().unwrap().cmp(&b.as_i64().unwrap()));\n   |            ^^^^^^^^^^^ ------ takes 2 arguments\n   |            |\n   |            expected closure that takes 1 argument\n\nerror: aborting due to 2 previous errors; 1 warning emitted\n\nSome errors have detailed explanations: E0308, E0593.\nFor more information about an error, try `rustc --explain E0308`.\n"
+  ],
+  "cases_total": 5,
+  "cases_passed": 0,
+  "trace_complete": false,
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+  "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+  "code_sha256": "65311702762fcf2eef979d0cb3a35bdd942844a5af7fa98d0757a5e1f7623adf",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "sandbox_config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/explore/round-001/study/quick/arms/arm-2793b743b590917d497c4794/development/sandbox"
+  },
+  "audit_events": [],
+  "audit_path": "reports/local-study/explore/round-001/study/quick/arms/arm-2793b743b590917d497c4794/development/sandbox/e0ef36bb-f668-406e-997a-3d794102ddfc.audit.json",
+  "audit_sha256": "3cfe7e82fb6f471cd0d1040512e27239e0434348fa8d00db7ffad94ebe365915",
+  "failure": "compilation failed: warning: unused import: `serde_json::Value`\n --> /candidate/main.rs:1:5\n  |\n1 | use serde_json::Value;\n  |     ^^^^^^^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0308]: mismatched types\n   --> /candidate/main.rs:8:47\n    |\n  8 |         result.push(serde_json::Value::Number(value));\n    |                     ------------------------- ^^^^^ expected `Number`, found `i64`\n    |                     |\n    |                     arguments to this enum variant are incorrect\n    |\nnote: tuple variant defined here\n   --> /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.149/src/value/mod.rs:142:5\n    |\n142 |     Number(Number),\n    |     ^^^^^^\nhelp: call `Into::into` on this expression to convert `i64` into `serde_json::Number`\n    |\n  8 |         result.push(serde_json::Value::Number(value.into()));\n    |                                                    +++++++\n\nerror[E0593]: closure is expected to take 1 argument, but it takes 2 arguments\n  --> /candidate/main.rs:10:12\n   |\n10 |     result.sort_by_key(|a, b| a.as_i64().unwrap().cmp(&b.as_i64().unwrap()));\n   |            ^^^^^^^^^^^ ------ takes 2 arguments\n   |            |\n   |            expected closure that takes 1 argument\n\nerror: aborting due to 2 previous errors; 1 warning emitted\n\nSome errors have detailed explanations: E0308, E0593.\nFor more information about an error, try `rustc --explain E0308`.\n",
+  "duration_ms": 14662,
+  "timeout_evidence": null,
+  "lifecycle_evidence": {
+    "receipt_path": "reports/local-study/explore/round-001/study/quick/arms/arm-2793b743b590917d497c4794/development/sandbox/e0ef36bb-f668-406e-997a-3d794102ddfc.lifecycle.json",
+    "receipt_sha256": "b04456f080035784db28d46ef5452a7a9b33b93b671fe62c932cc2999dfff034"
+  }
+}

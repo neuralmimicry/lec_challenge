@@ -1,0 +1,58 @@
+{
+  "schema_version": 3,
+  "run_id": "66e5387e-eb17-497e-a3d8-362a7be8ce85",
+  "ownership_nonce": "a598ce81-0aec-48b6-a591-932ba1aef848",
+  "attempt_key": "10aef360-466b-4280-ae8b-c9466ed26d22",
+  "receipt_path": "reports/local-study/explore/round-001/cohorts/76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c/rollouts/sandbox/10aef360-466b-4280-ae8b-c9466ed26d22.prepared.json",
+  "report_path": "reports/local-study/explore/round-001/cohorts/76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c/rollouts/sandbox/66e5387e-eb17-497e-a3d8-362a7be8ce85.json",
+  "task": {
+    "id": "sequences.interleave",
+    "source_id": "private-sequences-v1",
+    "lineage_id": "local-contract-pack-09",
+    "split": "train",
+    "specification": "Input is [a,b], integer arrays. Alternate elements starting with a; append the remaining tail when one array ends. The returned array may contain up to 128 items.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "0c6d0f0a545057929139837323f7b4707a25b3f12265778988215b551a79dbaa",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": [
+          [
+            1,
+            2,
+            3
+          ],
+          [
+            8,
+            9
+          ]
+        ],
+        "expected": [
+          1,
+          8,
+          2,
+          9,
+          3
+        ]
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "use serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let mut result = Vec::new();\n    let mut current = Vec::new();\n    let mut current_index = 0;\n\n    for item in input.as_array() {\n        if let Some(sub_item) = item.as_array() {\n            for sub_item in sub_item {\n                current.push(sub_item);\n            }\n        } else {\n            current.push(item);\n        }\n    }\n\n    while current_index < current.len() {\n        result.push(current[current_index]);\n        current_index += 1;\n    }\n\n    serde_json::Value::from(result)\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/explore/round-001/cohorts/76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c/rollouts/sandbox"
+  },
+  "code_sha256": "cbe76963f7a8950b7dce3e3d2b7029a247d2a1933c969846a070e04821489642",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

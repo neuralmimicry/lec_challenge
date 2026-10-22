@@ -1,0 +1,4 @@
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.24s
+     Running `target/debug/examples/platform_launch --probe`
+launcher: linux x86_64 — 16 available CPU threads, 44.60 GiB available RAM, 1 detected CUDA GPUs
+Error: CUDA toolkit 13.3 at /usr/local/cuda-13.3 is unsupported by locked cudarc 0.16.6; choose an installed supported toolkit (for example 12.9) with LEC_CUDA_TOOLKIT; the driver's maximum CUDA version does not determine dependency support

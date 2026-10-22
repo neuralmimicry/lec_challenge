@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "evidence_kind": "actual_checkpoint_bound_rollout_observation",
+  "teacher_id": "student-self-f9523886352217de",
+  "plan": {
+    "path": "reports/local-study/explore/round-001/cohorts/76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c/rollouts/validation.identifier/student-plan.json",
+    "sha256": "a9607e9d39769cbdcbf04af28999d92b361f3c91c204d811bbd6f0e08b316561",
+    "bytes": 5153
+  },
+  "student_raw": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/validation.identifier/student-raw.json",
+    "sha256": "b975777c34e4a24d63e4860c7ae0468e7d4b42d6448070b859427fe8fa1d6989",
+    "bytes": 1685
+  },
+  "student_grade": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox/d02add32-aa91-48ca-aa9e-493af8984fbe.json",
+    "sha256": "713bf66d4adc986e6e615b7d47ca38fe3bd643325af4feea7e3ef26def64ccd7",
+    "bytes": 1946
+  },
+  "student_content_eligibility": {
+    "policy": "verified_content_roles_v1",
+    "role": "oracle_negative",
+    "report": {
+      "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox/d02add32-aa91-48ca-aa9e-493af8984fbe.json",
+      "sha256": "713bf66d4adc986e6e615b7d47ca38fe3bd643325af4feea7e3ef26def64ccd7",
+      "bytes": 1946
+    },
+    "audit": {
+      "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox/d02add32-aa91-48ca-aa9e-493af8984fbe.audit.json",
+      "sha256": "ffb3ab62169ef74f2cad62be731b5855917f3000f095161241d5bb4e0b0b2fdb",
+      "bytes": 405
+    },
+    "completion_sha256": "6c5d26694f228eada4f02a5ac9dfd5d3322f7763325b164a6b4c6db0100b84f0",
+    "generation_complete": true,
+    "original_quarantined": true,
+    "reason": "Complete executed answer has an oracle-only mismatch, valid complete JSON responses, exit zero and no audit events, runtime errors or truncation. Its original failure/quarantine remains unchanged; it is a negative only."
+  },
+  "feedback_plan": {
+    "path": "reports/local-study/explore/round-001/cohorts/76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c/rollouts/validation.identifier/student-self-f9523886352217de/feedback-plan.json",
+    "sha256": "f4314a371e9bd057a4f64559ad694e7455752862fa6678a9f0749a9af49ee350",
+    "bytes": 4719
+  },
+  "feedback_raw": {
+    "path": "reports/local-study/explore/round-001/cohorts/76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c/rollouts/validation.identifier/student-self-f9523886352217de/feedback-raw.json",
+    "sha256": "7e7a1f223ceb654336245451eea26d3a93b52c4ebbf1eb555f9fcd5f033cb887",
+    "bytes": 1784
+  },
+  "feedback_grade": {
+    "path": "reports/local-study/explore/round-001/cohorts/76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c/rollouts/sandbox/89c0a7b9-4561-4196-a323-e6b1ac2e1042.json",
+    "sha256": "acad00024005825cf48bcb9c91ab177ca765339ab9bd5279519bf8c572f45a4d",
+    "bytes": 1946
+  },
+  "errors": [],
+  "success": false
+}

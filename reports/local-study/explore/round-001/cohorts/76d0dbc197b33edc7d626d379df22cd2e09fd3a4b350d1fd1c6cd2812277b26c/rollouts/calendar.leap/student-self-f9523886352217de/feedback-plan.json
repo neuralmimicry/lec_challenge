@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "initial_plan": {
+    "path": "reports/local-study/explore/round-001/cohorts/76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c/rollouts/calendar.leap/student-plan.json",
+    "sha256": "9e549a736e0772afff9f576deeda06d13b71be4ea03f07e785d539e434e96336",
+    "bytes": 5167
+  },
+  "student_raw": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/calendar.leap/student-raw.json",
+    "sha256": "3e49ab4d240bd4635668550a970d1ae85d4185c1fda6d8c07229c297990c89cf",
+    "bytes": 1622
+  },
+  "student_grade": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox/1220efa3-8d79-43c8-819a-738268b64c56.json",
+    "sha256": "e8a913cf8efe89c368c9949f8e05ad6d60df3cb7b262299c34a9a9cd27176ae5",
+    "bytes": 5123
+  },
+  "teacher_id": "student-self-f9523886352217de",
+  "teacher_assets": {
+    "path": "offline_bundle/base/assets.json",
+    "sha256": "54304e7f41519a4196674cba5e86593802f852b2b47882d6c19706f85f303ad4",
+    "bytes": 788
+  },
+  "teacher_checkpoint": null,
+  "runtime": {
+    "device": {
+      "cuda": {
+        "ordinal": 0
+      }
+    },
+    "dtype": "f32"
+  },
+  "request": {
+    "prompt": "Verified different training contract: Input is [year,month] with year 1..9999 and month 1..12. Return Gregorian days in that month.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nVerified solution:\n```rust\nuse serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let arr = input.as_array().unwrap();\n    let year = arr[0].as_i64().unwrap();\n    let month = arr[1].as_i64().unwrap();\n\n    let days_in_month = match month {\n        1 | 3 | 5 | 7 | 8 | 10 | 12 => 31,\n        4 | 6 | 9 | 11 => 30,\n        2 => {\n            if (year % 4 == 0 && year % 100 != 0) || year % 400 == 0 {\n                29\n            } else {\n                28\n            }\n        }\n        _ => 0,\n    };\n\n    Value::from(days_in_month)\n}\n```\nNew task:\nWrite Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is a Gregorian year integer in 1..9999. Return whether it is a leap year (divisible by four except centuries not divisible by 400).\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":2000,\"expected\":true}]\nActual frozen student candidate:\n```rust\nuse serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let year = input.as_i64().unwrap();\n    if year % 4 == 0 && (year % 100 != 0 || year % 400 == 0) {\n        serde_json::Value::true\n    } else {\n        serde_json::Value::false\n    }\n}\n```\nActual trusted tool feedback:\n{\"bounded_diagnostic_untrusted_data\":\"compilation failed: error: expected identifier, found keyword `true`\\n --> /candidate/main.rs:6:28\\n  |\\n6 |         serde_json::Value::true\\n  |                            ^^^^ expected identifier, found keyword\\n  |\\nhelp: escape `true` to use it as an identifier\\n  |\\n6 |         serde_json::Value::r#true\\n  |                            ++\\n\\nerror: expected identifier, found keyword `false`\\n --> /candidate/main.rs:8:28\\n  |\\n8 |         serde_json::Value::false\\n  |                            ^^^^^ expected identifier, found keyword\\n  |\\nhelp: escape `false` to use it as an identifier\\n  |\\n8 |         serde_json::Value::r#false\\n  |                            ++\\n\\nwarning: unused import: `serde_json::Value`\\n --> /candidate/main.rs:1:5\\n  |\\n1 | use serde_json::Value;\\n  |     ^^^^^^^^^^^^^^^^^\\n  |\\n  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default\\n\\nerror[E0599]: no variant, associated function, or constant named `r#true` found for enum `Value` in the current scope\\n --> /candidate/main.rs:6:28\\n  |\\n6 |         serde_json::Value::true\\n  |                            ^^^^ variant, associated function, or constant not found in `Value`\\n\\nerror[E0599]: no variant, associated function, or constant named `r#false` found for enum `Value` in the current scope\\n --> /candidate/main.rs:8:28\\n  |\\n8 |         serde_json::Value::false\\n  |                            ^^^^^ variant, associated function, or constant not found in `Value`\\n\\nerror: aborting due to 4 previous errors; 1 warning emitted\\n\\nFor more information about this error, try `rustc --explain E0599`.\\n\",\"cases_passed\":0,\"cases_total\":7,\"content_role\":\"compilation_feedback_only\",\"original_failure_is_not_a_success\":true,\"passed\":false,\"private_inputs_or_expected_outputs_exposed\":false,\"quarantined\":true,\"run_id\":\"1220efa3-8d79-43c8-819a-738268b64c56\",\"student_generation_complete\":true,\"tool\":\"trusted_container_grader\",\"trace_complete\":false}\nCritique and revise the candidate. Put any short explanation in Rust // comments and return complete compilable Rust source only. Do not invent tool results.",
+    "max_new_tokens": 768,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "supporting_sample_ids": [
+    "83cc42aa11a66d768d6f952f81812adff3032a39e39b89bfa188e7270ab75a62"
+  ]
+}

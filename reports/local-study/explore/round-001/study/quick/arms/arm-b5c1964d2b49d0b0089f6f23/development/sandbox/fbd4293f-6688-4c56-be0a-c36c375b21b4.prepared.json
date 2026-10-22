@@ -1,0 +1,69 @@
+{
+  "schema_version": 3,
+  "run_id": "00712a12-a4d6-4a4d-a220-f76c82dc74dd",
+  "ownership_nonce": "a6d870d8-70cf-407a-95a9-74636c35eff8",
+  "attempt_key": "fbd4293f-6688-4c56-be0a-c36c375b21b4",
+  "receipt_path": "reports/local-study/explore/round-001/study/quick/arms/arm-b5c1964d2b49d0b0089f6f23/development/sandbox/fbd4293f-6688-4c56-be0a-c36c375b21b4.prepared.json",
+  "report_path": "reports/local-study/explore/round-001/study/quick/arms/arm-b5c1964d2b49d0b0089f6f23/development/sandbox/00712a12-a4d6-4a4d-a220-f76c82dc74dd.json",
+  "task": {
+    "id": "tables.inner_join",
+    "source_id": "private-tables-v1",
+    "lineage_id": "local-contract-pack-15",
+    "split": "development",
+    "specification": "Input [left,right] has arrays of [key,value] integer rows, each side with unique keys. Return [key,left_value,right_value] for common keys in ascending key order.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.",
+    "specification_sha256": "369ef237ff250179b0b3e3c7af051af8aebc0329b6494d33af5f436c827ac699",
+    "oracle_sha256": "2596ad3ecd96b5af41e1c83d833ad686af8f92615826856e49eae5612e129cba",
+    "public_examples": [
+      {
+        "input": [
+          [
+            [
+              2,
+              9
+            ],
+            [
+              1,
+              4
+            ]
+          ],
+          [
+            [
+              2,
+              3
+            ],
+            [
+              3,
+              8
+            ]
+          ]
+        ],
+        "expected": [
+          [
+            2,
+            9,
+            3
+          ]
+        ]
+      }
+    ],
+    "provenance": "Locally AI-authored synthetic contract, 15 October 2026; shared author; novel specification lineage, not proof of algorithm novelty or independent human authorship",
+    "licence": "Apache-2.0"
+  },
+  "code": "use serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let mut result = Vec::new();\n    let mut left = Vec::new();\n    let mut right = Vec::new();\n\n    for line in input.as_array() {\n        let mut row = Vec::new();\n        for item in line.as_array() {\n            row.push(item.as_i64().unwrap());\n        }\n        left.push(row);\n    }\n\n    for line in input.as_array() {\n        let mut row = Vec::new();\n        for item in line.as_array() {\n            row.push(item.as_i64().unwrap());\n        }\n        right.push(row);\n    }\n\n    let mut common_keys = Vec::new();\n    for (key, left_row) in left.iter().enumerate() {\n        for (key, right_row) in right.iter().enumerate() {\n            if left_row.iter().any(|&value| right_row.iter().any(|&value| value == value)) {\n                common_keys.push((key, left_row.iter().min().unwrap(), right_row.iter().min().unwrap()));\n            }\n        }\n    }\n\n    common_keys.sort_by(|&(k1, v1, v2)| (k1, v1, v2));\n\n    let mut result = Vec::new();\n    for (key, left_value, right_value) in common_keys {\n        result.push(serde_json::Value::Array(vec![serde_json::Value::String(key), serde_json::Value::Number(left_value), serde_json::Value::Number(right_value)]));\n    }\n\n    serde_json::Value::Array(result)\n}",
+  "config": {
+    "policy_version": 3,
+    "controller_version": 3,
+    "architecture": "x86_64",
+    "runtime": "podman",
+    "image": "localhost/lec-rust-sandbox:3-x86_64",
+    "expected_image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939",
+    "wall_timeout_secs": 20,
+    "memory_mb": 512,
+    "pids_limit": 64,
+    "cpu_limit": 1.0,
+    "report_dir": "reports/local-study/explore/round-001/study/quick/arms/arm-b5c1964d2b49d0b0089f6f23/development/sandbox"
+  },
+  "code_sha256": "1d9965e5e2b3572c22c24137202e5f2b001177aaeae1fa79d5b423277cb5d178",
+  "policy_sha256": "c21d49723fd56d64c2455b1de105da5bcf013f9ef1526bfcc984a234c86395e2",
+  "image_id": "f86951873ef3392af722d4c1adc94ed64bd5badbef681fd0a4f9ff6aff1a3939"
+}

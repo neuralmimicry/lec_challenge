@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "initial_plan": {
+    "path": "reports/local-study/explore/round-001/cohorts/76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c/rollouts/validation.identifier/student-plan.json",
+    "sha256": "a9607e9d39769cbdcbf04af28999d92b361f3c91c204d811bbd6f0e08b316561",
+    "bytes": 5153
+  },
+  "student_raw": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/validation.identifier/student-raw.json",
+    "sha256": "b975777c34e4a24d63e4860c7ae0468e7d4b42d6448070b859427fe8fa1d6989",
+    "bytes": 1685
+  },
+  "student_grade": {
+    "path": "reports/local-study/explore/round-001/cohorts/df1d0a2dee2c004484c773945f35cf3cc29c774a2c75981cfb5b53c45608da26/rollouts/sandbox/d02add32-aa91-48ca-aa9e-493af8984fbe.json",
+    "sha256": "713bf66d4adc986e6e615b7d47ca38fe3bd643325af4feea7e3ef26def64ccd7",
+    "bytes": 1946
+  },
+  "teacher_id": "student-self-f9523886352217de",
+  "teacher_assets": {
+    "path": "offline_bundle/base/assets.json",
+    "sha256": "54304e7f41519a4196674cba5e86593802f852b2b47882d6c19706f85f303ad4",
+    "bytes": 788
+  },
+  "teacher_checkpoint": null,
+  "runtime": {
+    "device": {
+      "cuda": {
+        "ordinal": 0
+      }
+    },
+    "dtype": "f32"
+  },
+  "request": {
+    "prompt": "Verified different training contract: Input is an ASCII string. Return whether (), [] and {} are properly nested, ignoring every other character.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nVerified solution:\n```rust\nuse serde_json::Value;\n\npub fn solve(input: Value) -> Value {\n    let input_str = input.as_str().unwrap();\n    let mut stack = Vec::new();\n    let mut chars = input_str.chars().peekable();\n\n    while let Some(c) = chars.next() {\n        match c {\n            '{' | '[' | '(' => stack.push(c),\n            '}' | ']' | ')' => {\n                if let Some(open) = stack.pop() {\n                    if (c == '}' && open != '{') || (c == ']' && open != '[') || (c == ')' && open != '(') {\n                        return Value::Bool(false);\n                    }\n                } else {\n                    return Value::Bool(false);\n                }\n            }\n            _ => {}\n        }\n    }\n\n    Value::Bool(stack.is_empty())\n}\n```\nNew task:\nWrite Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an ASCII string. Return whether it matches [A-Za-z_][A-Za-z0-9_]*. Do not reject language keywords.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":\"_name2\",\"expected\":true}]\nActual frozen student candidate:\n```rust\nuse serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let input_str = input.to_string();\n    if input_str.chars().all(|c| c.is_alphabetic() || c.is_digit(10)) {\n        let result = serde_json::from_str(&input_str).unwrap();\n        result\n    } else {\n        serde_json::Value::Null\n    }\n}\n```\nActual trusted tool feedback:\n{\"bounded_diagnostic_untrusted_data\":\"host oracle mismatch at case 0\",\"cases_passed\":0,\"cases_total\":7,\"content_role\":\"oracle_negative\",\"original_failure_is_not_a_success\":true,\"passed\":false,\"private_inputs_or_expected_outputs_exposed\":false,\"quarantined\":true,\"run_id\":\"d02add32-aa91-48ca-aa9e-493af8984fbe\",\"student_generation_complete\":true,\"tool\":\"trusted_container_grader\",\"trace_complete\":true}\nCritique and revise the candidate. Put any short explanation in Rust // comments and return complete compilable Rust source only. Do not invent tool results.",
+    "max_new_tokens": 768,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "supporting_sample_ids": [
+    "60cad86431ce13f24f3525d348b75936b4659f22832705f61513e6920d3c0913"
+  ]
+}

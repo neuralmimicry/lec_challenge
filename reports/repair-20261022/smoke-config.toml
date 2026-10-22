@@ -1,0 +1,39 @@
+# Bounded plumbing smoke, frozen before execution; no quality selection.
+schema_version = 1
+student_base_model = "Qwen/Qwen2.5-Coder-0.5B-Instruct"
+signals = ["sequence_sft"]
+contents = []
+policies = ["offline"]
+students = ["conventional_qwen_lora"]
+progressive = [false]
+self_distillation = [false]
+seeds = [1729]
+minimum_teachers = 1
+maximum_teachers = 1
+maximum_catalogue_arms = 8
+
+[quick]
+steps = 1
+max_sequence_tokens = 512
+sequence_policy = "reject_overlength"
+rank = 2
+alpha = 4.0
+learning_rate = 0.0002
+temperature = 2.0
+dpo_beta = 0.1
+maximum_trials = 1
+maximum_total_steps = 1
+timeout_seconds = 900
+
+[full]
+steps = 1
+max_sequence_tokens = 512
+sequence_policy = "reject_overlength"
+rank = 2
+alpha = 4.0
+learning_rate = 0.0002
+temperature = 2.0
+dpo_beta = 0.1
+maximum_trials = 1
+maximum_total_steps = 1
+timeout_seconds = 900

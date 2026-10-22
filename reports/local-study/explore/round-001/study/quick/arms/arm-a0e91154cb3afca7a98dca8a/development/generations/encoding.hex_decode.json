@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "plan_sha256": "28ab3200183f66276c4e958454cd35b7667b83c06b011edd71c6d345e91f1540",
+  "task_id": "encoding.hex_decode",
+  "source_id": "private-encoding-v1",
+  "request": {
+    "prompt": "Write Rust 2024 code defining `pub fn solve(input: serde_json::Value) -> serde_json::Value`. Use only std and serde_json. Return only Rust source, without a main function or Markdown. A trusted wrapper reads one JSON line and writes the returned JSON value. Do not read files, use the network, spawn processes or access tests. Inputs satisfy the stated contract. Contract: Input is an ASCII string. Decode even-length hexadecimal accepting upper/lowercase; return byte array, or null for invalid digits or odd length. The returned array may contain up to 128 items.\nShared domain: Numbers are signed 64-bit integers; all required intermediate and final arithmetic fits i64. Arrays contain at most 64 items and strings are ASCII with at most 256 bytes, unless an explicit task exception says otherwise. Whitespace means space, TAB, LF, FF or CR. JSON booleans and null retain their normal types.\nPublic examples: [{\"input\":\"00aF\",\"expected\":[0,175]}]",
+    "max_new_tokens": 512,
+    "seed": 1729,
+    "temperature": 0.2,
+    "top_p": 0.95,
+    "timeout_seconds": 120
+  },
+  "generation": {
+    "completion": "```rust\nuse serde_json::Value;\n\npub fn solve(input: serde_json::Value) -> serde_json::Value {\n    let hex_input = input.as_str().unwrap_or_default();\n    let bytes = hex_input.chars().map(|c| c.to_digit(16).unwrap()).collect::<Vec<_>>();\n    if bytes.len() % 2 != 0 {\n        return serde_json::Value::Null;\n    }\n    let mut result = Vec::new();\n    for i in 0..bytes.len() / 2 {\n        let byte1 = bytes[i];\n        let byte2 = bytes[i + 1];\n        result.push(byte1 as i64);\n        result.push(byte2 as i64);\n    }\n    serde_json::Value::Array(result)\n}\n```",
+    "checkpoint_id": "ce24b6aee02fd1ab4d951cacaba0a091b6fc55dc8573d85f34778f23dd44d6c9",
+    "finish_reason": "stop",
+    "input_tokens": 248,
+    "output_tokens": 162,
+    "elapsed_ms": 23618,
+    "complete": true
+  },
+  "model_error": null
+}

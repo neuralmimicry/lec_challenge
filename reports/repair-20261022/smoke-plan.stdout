@@ -1,0 +1,10 @@
+{
+  "applicable_arms": 1,
+  "catalogue_arms": 1,
+  "held_out_used": false,
+  "production_eligible": false,
+  "quick_coverage_gaps": [],
+  "quick_selected": [
+    "arm-ecbb3f2de999eff0860c582b"
+  ]
+}

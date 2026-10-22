@@ -1,0 +1,36 @@
+study: starting arm=arm-a0e91154cb3afca7a98dca8a fidelity=Quick threads=4 RAM=8589934592 VRAM=6538528768
+study: heartbeat active=1 selected_queued=11 completed=8 reserved_steps=39
+study: heartbeat active=1 selected_queued=11 completed=8 reserved_steps=39
+study: heartbeat active=1 selected_queued=11 completed=8 reserved_steps=39
+study: arm=arm-a0e91154cb3afca7a98dca8a status=failed elapsed=19.85s
+study: starting arm=arm-e4c04a32d1c678bdd7183354 fidelity=Quick threads=4 RAM=8589934592 VRAM=6538528768
+study: heartbeat active=1 selected_queued=10 completed=8 reserved_steps=42
+study: heartbeat active=1 selected_queued=10 completed=8 reserved_steps=42
+study: heartbeat active=1 selected_queued=10 completed=8 reserved_steps=42
+study: heartbeat active=1 selected_queued=10 completed=8 reserved_steps=42
+study: heartbeat active=1 selected_queued=10 completed=8 reserved_steps=42
+study: heartbeat active=1 selected_queued=10 completed=8 reserved_steps=42
+study: heartbeat active=1 selected_queued=10 completed=8 reserved_steps=42
+study: arm=arm-e4c04a32d1c678bdd7183354 status=failed elapsed=76.23s
+study: starting arm=arm-989bab1aa424fef5a34fdc98 fidelity=Quick threads=16 RAM=25769803776 VRAM=6538528768
+study: heartbeat active=1 selected_queued=9 completed=8 reserved_steps=45
+study: heartbeat active=1 selected_queued=9 completed=8 reserved_steps=45
+study: heartbeat active=1 selected_queued=9 completed=8 reserved_steps=45
+study: heartbeat active=1 selected_queued=9 completed=8 reserved_steps=45
+study: heartbeat active=1 selected_queued=9 completed=8 reserved_steps=45
+study: heartbeat active=1 selected_queued=9 completed=8 reserved_steps=45
+study: heartbeat active=1 selected_queued=9 completed=8 reserved_steps=45
+study: heartbeat active=1 selected_queued=9 completed=8 reserved_steps=45
+study: arm=arm-989bab1aa424fef5a34fdc98 status=failed elapsed=78.40s
+study: starting arm=arm-04541766c8addf1579c15fb1 fidelity=Quick threads=16 RAM=25769803776 VRAM=6538528768
+study: heartbeat active=1 selected_queued=8 completed=8 reserved_steps=48
+study: heartbeat active=1 selected_queued=8 completed=8 reserved_steps=48
+study: heartbeat active=1 selected_queued=8 completed=8 reserved_steps=48
+study: heartbeat active=1 selected_queued=8 completed=8 reserved_steps=48
+study: heartbeat active=1 selected_queued=8 completed=8 reserved_steps=48
+study: heartbeat active=1 selected_queued=8 completed=8 reserved_steps=48
+study: heartbeat active=1 selected_queued=8 completed=8 reserved_steps=48
+study: heartbeat active=1 selected_queued=8 completed=8 reserved_steps=48
+study: arm=arm-04541766c8addf1579c15fb1 status=failed elapsed=77.81s
+study: starting arm=arm-e3c36df2275a0125ab210b76 fidelity=Quick threads=4 RAM=8589934592 VRAM=6538528768
+study: heartbeat active=1 selected_queued=7 completed=8 reserved_steps=51

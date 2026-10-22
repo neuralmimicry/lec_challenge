@@ -1,0 +1,6 @@
+{
+  "error": "checkpoint overlength exclusions differ from its frozen sequence policy and verified evidence",
+  "observed_unix_ms": 1792671545758,
+  "promotion": "incumbent_retained",
+  "status": "FAILURE"
+}

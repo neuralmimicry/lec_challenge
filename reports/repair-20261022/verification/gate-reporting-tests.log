@@ -1,0 +1,11 @@
+   Compiling lec-distil v0.1.0 (/home/pbisaacs/Developer/neuralmimicry/lec_challenge)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 2.58s
+     Running tests/gate_reporting.rs (target/debug/deps/gate_reporting-4b9301c1b8828548)
+
+running 3 tests
+test empty_sensitivity_assumptions_cannot_report_detectability ... ok
+test confidence_labels_follow_frozen_alpha_and_survive_roundtrip ... ok
+test detectability_labels_use_the_actual_power_target ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

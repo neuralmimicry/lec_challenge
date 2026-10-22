@@ -1,0 +1,19 @@
+    Blocking waiting for file lock on build directory
+   Compiling lec-distil v0.1.0 (/home/pbisaacs/Developer/neuralmimicry/lec_challenge)
+error[E0425]: cannot find function `prepare_arm_request` in module `lec_distil::study`
+    --> src/main.rs:1668:40
+     |
+1668 |                     lec_distil::study::prepare_arm_request(
+     |                                        ^^^^^^^^^^^^^^^^^^^ not found in `lec_distil::study`
+
+error[E0560]: struct `Options` has no field named `train_updates`
+    --> src/main.rs:1648:25
+     |
+1648 |                         train_updates,
+     |                         ^^^^^^^^^^^^^ `Options` does not have this field
+     |
+     = note: all struct fields are already assigned
+
+Some errors have detailed explanations: E0425, E0560.
+For more information about an error, try `rustc --explain E0425`.
+error: could not compile `lec-distil` (bin "lec-distil") due to 2 previous errors

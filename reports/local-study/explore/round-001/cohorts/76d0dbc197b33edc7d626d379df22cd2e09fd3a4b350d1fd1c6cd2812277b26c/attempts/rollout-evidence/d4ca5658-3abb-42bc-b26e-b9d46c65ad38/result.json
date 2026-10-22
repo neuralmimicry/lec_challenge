@@ -1,0 +1,24 @@
+{
+  "exit_code": 1,
+  "request": {
+    "bytes": 4041,
+    "path": "reports/local-study/explore/round-001/cohorts/76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c/attempts/rollout-evidence/d4ca5658-3abb-42bc-b26e-b9d46c65ad38/request.json",
+    "sha256": "ba1ad57a20bba59738f66f0cb3b99f4e0435760d4a3487647bd2974052ddd1ab"
+  },
+  "schema_version": 1,
+  "stage": "rollout-evidence",
+  "status": "process_failed",
+  "stderr": {
+    "bytes": 6529,
+    "path": "reports/local-study/explore/round-001/cohorts/76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c/attempts/rollout-evidence/d4ca5658-3abb-42bc-b26e-b9d46c65ad38/stderr.log",
+    "sha256": "5c49fdf3eb24d63d553656b6c397d4d91c5b6e67c1061e44d04487dbff218ba9"
+  },
+  "stderr_tee_error": null,
+  "stdout": {
+    "bytes": 1256,
+    "path": "reports/local-study/explore/round-001/cohorts/76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c/attempts/rollout-evidence/d4ca5658-3abb-42bc-b26e-b9d46c65ad38/stdout.log",
+    "sha256": "2180815dfe3e7734992013a0c3c55b174fb0a5c9ef00c5c139bf07c12b6a5f38"
+  },
+  "success": false,
+  "wall_seconds": 1304.323136479
+}

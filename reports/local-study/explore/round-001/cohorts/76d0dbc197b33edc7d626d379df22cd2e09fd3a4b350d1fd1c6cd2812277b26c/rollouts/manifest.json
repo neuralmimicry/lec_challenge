@@ -1,0 +1,12 @@
+{
+  "bundle": {
+    "bytes": 239602,
+    "path": "reports/local-study/explore/round-001/cohorts/76d0dbc197b33edc7d626d379df22cd2e09fd3a4b350d1fd1c6cd2812277b26c/rollouts/bundle.json",
+    "sha256": "ed7f8ad0827c8c78024c9b8e9fdadc8afe7a0ae6dfe4cfa29e6c105a08ae1819"
+  },
+  "preferences": 0,
+  "promotable": false,
+  "samples": 22,
+  "schema_version": 1,
+  "train_corpus_sha256": "037e9f5719624d6c411c8c354295697f6ef87c8d95e1771ac60696e93a487b6d"
+}

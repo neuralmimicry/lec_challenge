@@ -4,7 +4,7 @@
     "path": "state/engines/3f348bdfa71c49df5b5d0b7581ae9ad3114645127f99abbec9e4aac1064563bd/lec-distil",
     "sha256": "3f348bdfa71c49df5b5d0b7581ae9ad3114645127f99abbec9e4aac1064563bd"
   },
-  "evaluation_process_id": 1610075,
+  "evaluation_process_id": 89034,
   "evidence_kind": "actual_fresh_process_checkpoint_reload",
   "schema_version": 1,
   "training_artifact": {
@@ -12,5 +12,5 @@
     "path": "reports/local-study/explore/round-001/study/quick/arms/arm-2793b743b590917d497c4794/training-artifact.json",
     "sha256": "b7e369ce138fb87dc40bcab4e3cc827551dc438adff5544576d5e27dceecb2f0"
   },
-  "training_process_id": 1609408
+  "training_process_id": 88889
 }

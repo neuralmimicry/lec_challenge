@@ -1,0 +1,54 @@
+Native Rust, evidence-bound coding model distillation
+
+Usage: lec-distil <COMMAND>
+
+Commands:
+  explore                   Resume adaptive teacher selection and bounded local distillation studies
+  hardware                  Detect CPU affinity, usable RAM and available accelerator memory
+  select-teachers           Retain verified teachers and replace weak models with pinned Hub alternatives
+  collect-teacher-evidence  Collect independently graded local-teacher training evidence
+  collect-teacher-content   Acquire genuine process, context and tool-feedback variants on train only
+  collect-student-rollouts  Collect frozen-student attempts, actual corrective generations and regrades
+  study-plan                Freeze the finite, capability-checked local distillation catalogue
+  study-run                 Resume a bounded set of real native training subprocesses
+  study-prepare-arm         Verify exact eligibility and write a fresh immutable arm request without training
+  study-select              Rank verified development outcomes and freeze full-fidelity seed groups
+  study-evaluate            Measure a real local student baseline or adapter on train/development
+  study-regrade             Regrade every saved train/development output under an explicit new host policy
+  study-verify              Independently verify a completed original or derived local evaluation
+  study-diagnose-training   Inspect exact optimisation examples; optionally measure training-set memorisation
+  study-compare             Descriptively compare complete local evaluations; never authorise ship
+  preflight                 Measure this host; no provider key values are read into the report
+  sandbox-doctor            Inspect the active rootless store and verify an exact offline image archive
+  assets-doctor             Inspect pinned base payloads; optional quarantine renames conflicts without deletion
+  tasks                     Materialise and validate all 96 source-disjoint contracts and private cases
+  bootstrap-online          Download pinned public model assets and build the candidate image explicitly
+  hub-download              Explicit authenticated, immutable-revision Hub download; no credential cache
+  compare-models            Compare locally hosted weights on exploratory train/development tasks only
+  sandbox-preflight         Verify actual isolation and resource enforcement using executable probes
+  grade                     Compile and grade Rust candidate code inside a fresh isolated container
+  provider-init             Create a bounded inference configuration without credentials, HTTP or spending
+  provider-check            Inspect provider configuration and credential presence without HTTP or spending
+  provider-request          Make one bounded text request or exact offline replay; never execute its output
+  collect                   Acquire/replay all three configured businesses; persist responses before grading
+  curate                    Build the dataset from verified real run/recording artifacts
+  train                     Execute genuine native Rust CPU LoRA forward/backward/optimiser steps
+  infer                     Generate with the real pinned base and optional validated trained adapter
+  evaluate                  Freeze a complete decoding plan and evaluate actual checkpoint generations
+  gate                      Two checkpoint directories (or complete verified evaluation manifests), one decision
+  power                     Simulate the actual promotion rule under declared development assumptions
+  serve                     
+  route-init                
+  stage-evaluation          
+  canary                    
+  rollback                  
+  costs                     
+  assessment-audit          Audit original assessment evidence without API calls or model execution
+  drill                     
+  demo                      
+  package                   Create an honest local delivery archive and asset inventory
+  help                      Print this message or the help of the given subcommand(s)
+
+Options:
+  -h, --help     Print help
+  -V, --version  Print version

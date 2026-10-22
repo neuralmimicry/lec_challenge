@@ -1,0 +1,35 @@
+Inspect exact optimisation examples; optionally measure training-set memorisation
+
+Usage: lec-distil study-diagnose-training [OPTIONS]
+
+Options:
+      --request <REQUEST>
+          
+      --checkpoint <CHECKPOINT>
+          
+      --output <OUTPUT>
+          Numerical operations require a new output directory
+      --nll
+          Teacher-forced assistant NLL, accuracy and EOS likelihood, base versus reload
+      --generate
+          Paired generation and real sandbox grading on the selected training prompts
+      --train-updates <TRAIN_UPDATES>
+          Explicit diagnostic training: 1–3 updates from a matching verified one-example SFT request [default: 0]
+      --maximum-examples <MAXIMUM_EXAMPLES>
+          [default: 1]
+      --max-new-tokens <MAX_NEW_TOKENS>
+          [default: 512]
+      --maximum-seconds <MAXIMUM_SECONDS>
+          [default: 900]
+      --cpu-threads <CPU_THREADS>
+          [default: 1]
+      --offline
+          
+      --device <DEVICE>
+          CUDA requests fail explicitly when this binary or host cannot support them [possible values: auto, cpu, cuda]
+      --gpu <GPU>
+          [default: 0]
+      --dtype <DTYPE>
+          [possible values: f32, f16]
+  -h, --help
+          Print help
