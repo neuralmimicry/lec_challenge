@@ -324,6 +324,14 @@ enum Command {
         output: PathBuf,
         #[arg(long)]
         maximum_parallel_jobs: Option<usize>,
+        #[arg(long, default_value = "cpu",value_parser=["cpu","cuda"])]
+        student_device: String,
+        #[arg(long, default_value = "cpu",value_parser=["cpu","cuda"])]
+        evaluation_device: String,
+        #[arg(long, default_value = "f32",value_parser=["f32","f16"])]
+        evaluation_dtype: String,
+        #[arg(long)]
+        evaluation_cpu_threads: Option<u32>,
         #[arg(long)]
         offline: bool,
         #[arg(long)]
@@ -349,6 +357,19 @@ enum Command {
         offline: bool,
         #[arg(long)]
         fresh: bool,
+    },
+    /// Verify exact eligibility and write a fresh immutable arm request without training.
+    StudyPrepareArm {
+        #[arg(long)]
+        study: PathBuf,
+        #[arg(long)]
+        arm: String,
+        #[arg(long,default_value="quick",value_parser=["quick","full"])]
+        profile: String,
+        #[arg(long)]
+        output: PathBuf,
+        #[arg(long)]
+        offline: bool,
     },
     /// Rank verified development outcomes and freeze full-fidelity seed groups.
     StudySelect {
@@ -408,6 +429,51 @@ enum Command {
     StudyVerify {
         #[arg(long)]
         evaluation: PathBuf,
+        /// Also enforce the worker's declared split and checkpoint with structured rejection.
+        #[arg(long,value_parser=["train","development"],requires="expected_checkpoint")]
+        expected_split: Option<String>,
+        #[arg(long, requires = "expected_split")]
+        expected_checkpoint: Option<String>,
+    },
+    /// Inspect exact optimisation examples; optionally measure training-set memorisation.
+    StudyDiagnoseTraining {
+        #[arg(
+            long,
+            conflicts_with = "checkpoint",
+            required_unless_present = "checkpoint"
+        )]
+        request: Option<PathBuf>,
+        #[arg(long, conflicts_with = "request", required_unless_present = "request")]
+        checkpoint: Option<PathBuf>,
+        /// Numerical operations require a new output directory.
+        #[arg(long)]
+        output: Option<PathBuf>,
+        /// Teacher-forced assistant NLL, accuracy and EOS likelihood, base versus reload.
+        #[arg(long)]
+        nll: bool,
+        /// Paired generation and real sandbox grading on the selected training prompts.
+        #[arg(long)]
+        generate: bool,
+        /// Explicit diagnostic training: 1–3 updates from a matching verified one-example SFT request.
+        #[arg(long, default_value_t = 0)]
+        train_updates: usize,
+        #[arg(long, default_value_t = 1)]
+        maximum_examples: usize,
+        #[arg(long, default_value_t = 512)]
+        max_new_tokens: usize,
+        #[arg(long, default_value_t = 900)]
+        maximum_seconds: u64,
+        #[arg(long, default_value_t = 1)]
+        cpu_threads: usize,
+        #[arg(long)]
+        offline: bool,
+        #[command(flatten)]
+        execution: ExecutionArguments,
+    },
+    #[command(hide = true)]
+    StudyDiagnoseWorker {
+        #[arg(long)]
+        protocol: PathBuf,
     },
     /// Descriptively compare complete local evaluations; never authorise ship.
     StudyCompare {
@@ -435,6 +501,25 @@ enum Command {
     },
     /// Measure this host; no provider key values are read into the report.
     Preflight,
+    /// Inspect the active rootless store and verify an exact offline image archive.
+    SandboxDoctor {
+        #[arg(long, default_value = "podman")]
+        runtime: String,
+        #[arg(long)]
+        archive_directory: Option<PathBuf>,
+        /// Explicitly load the verified exact archive into the selected active store.
+        #[arg(long, requires = "archive_directory")]
+        restore_archive: bool,
+    },
+    /// Inspect pinned base payloads; optional quarantine renames conflicts without deletion.
+    AssetsDoctor {
+        #[arg(long, default_value = "offline_bundle/base")]
+        base: PathBuf,
+        #[arg(long)]
+        quarantine_conflicts: bool,
+        #[arg(long, conflicts_with = "quarantine_conflicts")]
+        offline: bool,
+    },
     /// Materialise and validate all 96 source-disjoint contracts and private cases.
     Tasks {
         #[arg(long, default_value = ".")]
@@ -770,6 +855,24 @@ async fn main() {
         Command::StudySelect { study, .. } => study.join("selection-failure.json"),
         Command::AssessmentAudit { .. } => PathBuf::from("reports/assessment-audit")
             .join(format!("failure-{}.json", uuid::Uuid::new_v4())),
+        Command::StudyDiagnoseTraining { output, .. } => output
+            .as_ref()
+            .filter(|p| p.join("protocol.json").exists())
+            .map_or_else(
+                || {
+                    PathBuf::from("reports/repair-20261022")
+                        .join(format!("diagnostic-failure-{}.json", uuid::Uuid::new_v4()))
+                },
+                |p| p.join("last-failure.json"),
+            ),
+        Command::StudyDiagnoseWorker { protocol } => protocol
+            .parent()
+            .unwrap_or(Path::new("reports/repair-20261022"))
+            .join("worker-failure.json"),
+        Command::SandboxDoctor { .. }
+        | Command::AssetsDoctor { .. }
+        | Command::StudyPrepareArm { .. } => PathBuf::from("reports/repair-20261022")
+            .join(format!("doctor-failure-{}.json", uuid::Uuid::new_v4())),
         _ => PathBuf::from("reports/last-failure.json"),
     };
     if let Err(error) = execute(cli.command).await {
@@ -1128,6 +1231,10 @@ async fn execute(command: Command) -> Result<()> {
             bitnet_base,
             output,
             maximum_parallel_jobs,
+            student_device,
+            evaluation_device,
+            evaluation_dtype,
+            evaluation_cpu_threads,
             offline,
             fresh,
             execution,
@@ -1165,6 +1272,31 @@ async fn execute(command: Command) -> Result<()> {
                     output,
                     maximum_parallel_jobs,
                     teacher_runtime: runtime,
+                    student_runtime: model::RuntimeOptions {
+                        device: if student_device == "cuda" {
+                            model::ExecutionDevice::Cuda {
+                                ordinal: execution.gpu,
+                            }
+                        } else {
+                            model::ExecutionDevice::Cpu
+                        },
+                        dtype: model::InferenceDtype::F32,
+                    },
+                    evaluation_runtime: model::RuntimeOptions {
+                        device: if evaluation_device == "cuda" {
+                            model::ExecutionDevice::Cuda {
+                                ordinal: execution.gpu,
+                            }
+                        } else {
+                            model::ExecutionDevice::Cpu
+                        },
+                        dtype: if evaluation_dtype == "f16" {
+                            model::InferenceDtype::F16
+                        } else {
+                            model::InferenceDtype::F32
+                        },
+                    },
+                    evaluation_cpu_threads,
                 })
             })
             .await??;
@@ -1217,7 +1349,29 @@ async fn execute(command: Command) -> Result<()> {
                 "derived regrading retains original generation or new infrastructure failures; complete evidence preserved"
             );
         }
-        Command::StudyVerify { evaluation } => {
+        Command::StudyVerify {
+            evaluation,
+            expected_split,
+            expected_checkpoint,
+        } => {
+            if let (Some(split), Some(checkpoint)) = (expected_split, expected_checkpoint) {
+                let report = tokio::task::spawn_blocking(move || {
+                    lec_distil::experiments::evaluation_failure::verify(
+                        &evaluation.join("report.json"),
+                        &split,
+                        &serde_json::json!(checkpoint),
+                    )
+                })
+                .await?;
+                match report {
+                    Ok(report) => print(&report)?,
+                    Err(reason) => {
+                        print(&reason)?;
+                        return Err(reason.into());
+                    }
+                }
+                return Ok(());
+            }
             let report = tokio::task::spawn_blocking(move || {
                 lec_distil::study_evaluate::verify_completed(&evaluation)
             })
@@ -1423,6 +1577,117 @@ async fn execute(command: Command) -> Result<()> {
             let p = tokio::task::spawn_blocking(preflight::inspect).await??;
             artefact::write_json(Path::new("reports/preflight.json"), &p)?;
             print(&p)?;
+        }
+        Command::SandboxDoctor {
+            runtime,
+            archive_directory,
+            restore_archive,
+        } => {
+            print(
+                &lec_distil::sandbox_doctor::inspect(
+                    &SandboxConfig {
+                        runtime,
+                        ..SandboxConfig::default()
+                    },
+                    archive_directory.as_deref(),
+                    restore_archive,
+                )
+                .await?,
+            )?;
+        }
+        Command::AssetsDoctor {
+            base,
+            quarantine_conflicts,
+            offline: _,
+        } => {
+            print(
+                &tokio::task::spawn_blocking(move || {
+                    lec_distil::assets::inspect_base(&base, quarantine_conflicts)
+                })
+                .await??,
+            )?;
+        }
+        Command::StudyDiagnoseTraining {
+            request,
+            checkpoint,
+            output,
+            nll,
+            generate,
+            train_updates,
+            maximum_examples,
+            max_new_tokens,
+            maximum_seconds,
+            cpu_threads,
+            offline: _,
+            execution,
+        } => {
+            // Diagnostics have no network path. CPU/F32 is an explicit default;
+            // a requested CUDA runtime must resolve without automatic fallback.
+            let runtime = match execution.device.as_deref().unwrap_or("cpu") {
+                "cpu" => {
+                    ensure!(
+                        execution.dtype.as_deref().is_none_or(|s| s == "f32"),
+                        "CPU training diagnostics require explicit F32; requested dtype cannot be silently changed"
+                    );
+                    model::RuntimeOptions::default()
+                }
+                "cuda" => model::RuntimeOptions {
+                    device: model::ExecutionDevice::Cuda {
+                        ordinal: execution.gpu,
+                    },
+                    dtype: if execution.dtype.as_deref() == Some("f16") {
+                        model::InferenceDtype::F16
+                    } else {
+                        model::InferenceDtype::F32
+                    },
+                },
+                _ => bail!("diagnostics require an explicit cpu or cuda runtime"),
+            };
+            print(
+                &lec_distil::distillation::diagnose::run(
+                    lec_distil::distillation::diagnose::Options {
+                        request,
+                        checkpoint,
+                        output,
+                        nll,
+                        generate,
+                        train_updates,
+                        maximum_examples,
+                        max_new_tokens,
+                        maximum_seconds,
+                        cpu_threads,
+                        runtime,
+                    },
+                )
+                .await?,
+            )?;
+        }
+        Command::StudyPrepareArm {
+            study,
+            arm,
+            profile,
+            output,
+            offline,
+        } => {
+            print(
+                &tokio::task::spawn_blocking(move || {
+                    lec_distil::study::prepare_arm_request(
+                        &study.join("plan.json"),
+                        &arm,
+                        if profile == "quick" {
+                            lec_distil::experiments::Fidelity::Quick
+                        } else {
+                            lec_distil::experiments::Fidelity::Full
+                        },
+                        &output,
+                        offline,
+                    )
+                })
+                .await??,
+            )?;
+        }
+        Command::StudyDiagnoseWorker { protocol } => {
+            lec_distil::distillation::diagnose::run_worker(&protocol).await?;
         }
         Command::Tasks { output } => {
             print(&tasks::write_corpus(&output)?)?;

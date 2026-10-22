@@ -117,6 +117,17 @@ fn selection_value(
             (key, score / count, milliseconds / count, arms)
         })
         .collect::<Vec<_>>();
+    if schema_version >= 3 {
+        let expected_seeds = experiments::StudyConfig::load(&plan.config.path)?.seeds;
+        ranking.retain(|(key,score,_,arms)| {
+            let observed=completed.iter().filter(|r|arms.contains(&r.arm.id)).map(|r|r.arm.seed).collect::<BTreeSet<_>>();
+            let complete=expected_seeds.iter().all(|s|observed.contains(s));
+            if !complete || *score<=0. {
+                exclusions.push(serde_json::json!({"method_group":key,"reason":if !complete {"incomplete preregistered seed group"}else{"zero score: no demonstrated quality winner; latency cannot establish learning"}}));
+            }
+            complete && *score>0.
+        });
+    }
     ranking.sort_by(|a, b| {
         b.1.total_cmp(&a.1)
             .then_with(|| a.2.total_cmp(&b.2))
@@ -191,6 +202,10 @@ fn selection_value(
         };
         value["selection_rule"] = "Exclude BitNet without independently reconstructed checkpoint-bound schema-2 numerical parity; retain its descriptive score. Average source-macro development success within qualified method groups across every observed training seed; break ties by lower measured generation time, then group hash. Freeze every applicable preregistered seed of selected groups within the full trial cap.".into();
     }
+    if schema_version >= 3 {
+        value["quality_winner_demonstrated"] = false.into();
+        value["interpretation"] = "Only complete seed groups with nonzero descriptive scores can continue automatically. Even nonzero development scores require a compatible baseline comparison to establish improvement. Zero scores or inconclusive groups have no demonstrated quality winner; an exploratory continuation requires an explicit new protocol.".into();
+    }
     Ok(value)
 }
 
@@ -210,7 +225,7 @@ pub fn select(
         );
         return Ok(recorded);
     }
-    let selection = selection_value(plan_path, quick_output, top_groups, None, 2)?;
+    let selection = selection_value(plan_path, quick_output, top_groups, None, 3)?;
     artefact::write_json(output, &selection)?;
     Ok(selection)
 }
@@ -228,7 +243,7 @@ fn verify_record(
 ) -> Result<()> {
     let recorded: serde_json::Value = serde_json::from_slice(&fs::read(path)?)?;
     ensure!(
-        matches!(recorded["schema_version"].as_u64(), Some(1 | 2))
+        matches!(recorded["schema_version"].as_u64(), Some(1..=3))
             && recorded["evidence_kind"] == "verified_development_only_study_selection"
             && recorded["held_out_used"] == false
             && recorded["production_eligible"] == false,

@@ -10,6 +10,9 @@ pub(super) fn sequence_summary(sequence: &EncodedSequence) -> Value {
         "supervised_tokens":sequence.targets.len(),
         "assistant_tokens_supervised":sequence.target_spans.iter().filter(|span|span.is_some()).count(),
         "eos_supervised":sequence.target_spans.iter().any(|span|span.is_none()),
+        "prediction_positions":sequence.prediction_positions,
+        "supervised_byte_spans":sequence.target_spans,
+        "input_ids_sha256":artefact::hash(&serde_json::to_vec(&sequence.input_ids).expect("token IDs serialise")),
         "window":sequence.window,
     })
 }
@@ -63,8 +66,18 @@ pub fn preflight_eligibility(spec: &DistillationWorkerSpec) -> Result<Value> {
     let tokenizer = Tokenizer::from_file(spec.student_base.join("tokenizer.json"))
         .map_err(|error| anyhow::anyhow!(error.to_string()))?;
     let selected = choose(spec, &bundle, &tokenizer)?;
+    if spec.teacher_target_policy == TeacherTargetPolicy::CacheOnly {
+        targets::prepare(
+            spec,
+            &bundle,
+            &selected.samples,
+            &selected.encoded,
+            &tokenizer,
+        )?;
+    }
     let mut accepted = BTreeMap::new();
     let mut excluded = BTreeMap::new();
+    let mut outside = BTreeMap::new();
     for sample in &bundle.samples {
         let mut row = if let Some(sequence) = selected.eligible_sequences.get(&sample.id) {
             let mut row = sequence.clone();
@@ -75,12 +88,20 @@ pub fn preflight_eligibility(spec: &DistillationWorkerSpec) -> Result<Value> {
             row["reason"] = json!(reason);
             row
         } else {
+            outside.insert(sample.id.clone(),json!({"reason":"Outside the declared teacher/content/verified preference/rollout selection","task_id":sample.task.id,"source_id":sample.task.source_id,"teacher_id":sample.teacher_id,"content":sample.content}));
             continue;
         };
         row["task_id"] = json!(sample.task.id);
         row["source_id"] = json!(sample.task.source_id);
         row["teacher_id"] = json!(sample.teacher_id);
         row["content"] = json!(sample.content);
+        row["content_origin"] = json!({"kind":sample.provenance_kind,"observation":sample.observation,"raw_generation":sample.raw_generation,"sequence_sha256":sample.sequence_sha256});
+        if spec.schema_version >= 2 && targets::required(spec) {
+            row["teacher_sequence"] = match targets::encode_teacher(spec, &bundle, sample) {
+                Ok(sequence) => sequence_summary(&sequence),
+                Err(error) => json!({"rejection":format!("{error:#}")}),
+            };
+        }
         if selected.eligible_sequences.contains_key(&sample.id) {
             accepted.insert(sample.id.clone(), row);
         } else {
@@ -90,7 +111,7 @@ pub fn preflight_eligibility(spec: &DistillationWorkerSpec) -> Result<Value> {
     let selection =
         json!({"accepted":accepted,"excluded_overlength":excluded,"order":selected.order});
     Ok(json!({
-        "schema_version":1,
+        "schema_version":2,
         "evidence_kind":"verified_native_worker_selection_preflight",
         "arm_id":spec.arm_id,
         "canonical_request_sha256":artefact::hash(&serde_json::to_vec(spec)?),
@@ -100,7 +121,11 @@ pub fn preflight_eligibility(spec: &DistillationWorkerSpec) -> Result<Value> {
         "tokeniser":Artefact::capture(&root,spec.student_base.join("tokenizer.json"))?,
         "engine_sha256":artefact::file_hash(&std::env::current_exe()?)?,
         "sequence_policy":spec.sequence_policy,"max_sequence_tokens":spec.max_sequence_tokens,
+        "teacher_sequence_cap_including_eos":spec.max_sequence_tokens,
+        "student_sequence_cap_including_eos":spec.max_sequence_tokens,
+        "teacher_target_policy":spec.teacher_target_policy,"target_requirements":spec.losses,
         "accepted_samples":accepted.len(),"excluded_overlength_samples":excluded.len(),
+        "excluded_inapplicable_samples":outside,
         "selected_unique_samples":selected.samples.len(),"planned_updates":selected.order.len(),
         "selection_sha256":artefact::hash(&serde_json::to_vec(&selection)?),"selection":selection,
         "model_weights_allocated":false,"optimiser_created":false,"teacher_targets_acquired":false,
@@ -154,7 +179,7 @@ mod tests {
             student_rollout: None,
         })
         .collect();
-        let bundle = EvidenceBundle {
+        let mut bundle = EvidenceBundle {
             schema_version: 1,
             evidence_kind: "labelled policy fixture only".into(),
             created_unix_ms: 0,
@@ -217,6 +242,11 @@ mod tests {
                 .collect::<Vec<_>>(),
             vec!["long".to_owned()]
         );
+        assert_eq!(
+            composed.rejected_overlength["long"],
+            "distillation sequence exceeds its frozen token cap",
+            "schema-1 checkpoint readers must preserve their historical frozen exclusion strings"
+        );
         let long = bundle
             .samples
             .iter()
@@ -225,5 +255,132 @@ mod tests {
         let measured = rejected_summary(&spec, &bundle, long, &tokenizer).unwrap();
         assert!(measured["original_input_tokens"].as_u64().unwrap() > 512);
         assert_eq!(measured["window"], Value::Null);
+        // Labelled auxiliary files exercise the real weight-free teacher encoder.
+        // No model weights, provider output or sandbox success is fabricated.
+        let auxiliary = tempfile::tempdir().unwrap();
+        tokenizer
+            .save(auxiliary.path().join("tokenizer.json"), false)
+            .unwrap();
+        let template = json!({"chat_template":"{% for message in messages %}{{ message['content'] }} {% endfor %}assistant "});
+        fs::write(
+            auxiliary.path().join("tokenizer_config.json"),
+            serde_json::to_vec(&template).unwrap(),
+        )
+        .unwrap();
+        fs::write(auxiliary.path().join("config.json"),br#"{"vocab_size":100,"hidden_size":4,"num_attention_heads":1,"max_position_embeddings":1024,"eos_token_id":99}"#).unwrap();
+        let manifest = json!({"model_id":"labelled/fixture","revision":"1".repeat(40),"licence":"unit_fixture_only","files":{
+            "tokenizer.json":artefact::file_hash(&auxiliary.path().join("tokenizer.json")).unwrap(),
+            "tokenizer_config.json":artefact::file_hash(&auxiliary.path().join("tokenizer_config.json")).unwrap()
+        }});
+        fs::write(
+            auxiliary.path().join("assets.json"),
+            serde_json::to_vec(&manifest).unwrap(),
+        )
+        .unwrap();
+        bundle.teachers[0].model.directory = auxiliary.path().to_owned();
+        let mut context = bundle.samples[0].clone();
+        context.content = ContentKind::Context;
+        context.prompt = format!("{} {}", "privileged ".repeat(700), context.task.prompt());
+        spec.schema_version = 2;
+        spec.contents = vec![ContentKind::Context];
+        spec.losses = vec![WeightedLoss {
+            kind: LossKind::HiddenFeature,
+            weight: 1.,
+        }];
+        let short_student = encode_sample(&spec, &context, &tokenizer).unwrap();
+        assert!(short_student.input_ids.len() < 512);
+        let error = targets::encode_teacher(&spec, &bundle, &context).unwrap_err();
+        let capacity = error
+            .downcast_ref::<alignment::SequenceCapacityError>()
+            .unwrap();
+        assert_eq!(capacity.cap, 512);
+        assert!(capacity.measured_tokens_including_eos > 700);
+        bundle.samples = vec![context];
+        let error = choose(&spec, &bundle, &tokenizer).err().unwrap();
+        assert!(format!("{error:#}").contains("teacher sequence"));
+        // A fitting teacher with absent immutable traces is rejected in cache-only
+        // mode before a model is loaded; no trace may be invented by preflight.
+        bundle.samples[0].content = ContentKind::CompleteSequence;
+        bundle.samples[0].prompt = "labelled prompt".into();
+        spec.contents = vec![ContentKind::CompleteSequence];
+        spec.student_base = auxiliary.path().to_owned();
+        let selected = choose(&spec, &bundle, &tokenizer).unwrap();
+        let error = targets::prepare(
+            &spec,
+            &bundle,
+            &selected.samples,
+            &selected.encoded,
+            &tokenizer,
+        )
+        .err()
+        .unwrap();
+        assert!(format!("{error:#}").contains("missing"));
+        let raw_directory = tempfile::tempdir_in(std::env::current_dir().unwrap()).unwrap();
+        let raw_path = raw_directory.path().join("labelled-negative.json");
+        let sample = &mut bundle.samples[0];
+        sample.content = ContentKind::Process;
+        let original_prompt = sample.task.prompt();
+        fs::write(&raw_path,serde_json::to_vec(&json!({"fixture_only":true,"evidence_kind":"actual_local_model_generation","task_id":sample.task.id,"request":{"prompt":original_prompt}})).unwrap()).unwrap();
+        let relative = raw_path
+            .strip_prefix(std::env::current_dir().unwrap())
+            .unwrap()
+            .to_owned();
+        let raw = Artefact::capture(&std::env::current_dir().unwrap(), relative).unwrap();
+        let (prompt, transform) = teacher_evidence::preference_conditioning(
+            &sample.task,
+            &sample.prompt,
+            &original_prompt,
+        );
+        let negative = teacher_evidence::EvidenceCandidate {
+            task_id: sample.task.id.clone(),
+            teacher_id: sample.teacher_id.clone(),
+            completion: "answer answer".into(),
+            observation: sample.observation.clone(),
+            raw_generation: raw,
+            sandbox_report: sample.sandbox_report.clone(),
+            audit: sample.audit.clone(),
+            passed: false,
+            quarantined: true,
+        };
+        let eligibility = teacher_evidence::ContentEligibility {
+            policy: teacher_evidence::CONTENT_ROLE_POLICY.into(),
+            role: teacher_evidence::ContentRole::OracleNegative,
+            report: negative.sandbox_report.clone(),
+            audit: negative.audit.clone(),
+            completion_sha256: artefact::hash(negative.completion.as_bytes()),
+            generation_complete: true,
+            original_quarantined: true,
+            reason: "Labelled selector fixture; never independently verified training evidence"
+                .into(),
+        };
+        bundle.preferences = vec![teacher_evidence::PreferencePair {
+            id: "labelled-pair".into(),
+            task_id: sample.task.id.clone(),
+            chosen_sample_id: sample.id.clone(),
+            rejected: negative,
+            reason: "Labelled unit fixture".into(),
+            rejected_eligibility: Some(eligibility),
+            preference_prompt: Some(prompt),
+            prompt_transform: Some(transform),
+        }];
+        spec.contents = vec![ContentKind::Preference];
+        spec.losses = vec![WeightedLoss {
+            kind: LossKind::PreferenceDpo,
+            weight: 1.,
+        }];
+        let preference_only = choose(&spec, &bundle, &tokenizer).unwrap();
+        assert_eq!(preference_only.samples.len(), 1);
+        assert_eq!(
+            preference_only.samples.values().next().unwrap().content,
+            ContentKind::Process
+        );
+        assert!(
+            preference_only
+                .order
+                .iter()
+                .all(|step| step.sample_id == bundle.samples[0].id)
+        );
+        bundle.preferences[0].chosen_sample_id = "unlinked".into();
+        assert!(choose(&spec, &bundle, &tokenizer).is_err());
     }
 }

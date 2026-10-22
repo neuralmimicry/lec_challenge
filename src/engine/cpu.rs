@@ -119,6 +119,9 @@ pub struct CpuBuildConfig {
     /// Historical executable replay remains independent of compiler availability.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub resolved_rustc: Option<ResolvedRustCompiler>,
+    /// CUDA provenance is frozen alongside the CPU ISA used by the same binary.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub cuda_toolchain: Option<serde_json::Value>,
 }
 
 #[derive(Clone, Debug, Serialize, Deserialize, PartialEq, Eq)]
@@ -282,6 +285,7 @@ impl CpuBuildConfig {
             cargo_lock_sha256: artefact::file_hash(Path::new("Cargo.lock"))?,
             cargo_features: Vec::new(),
             resolved_rustc: Some(compiler),
+            cuda_toolchain: None,
         };
         config.verify_host()?;
         Ok(config)
@@ -291,6 +295,17 @@ impl CpuBuildConfig {
     /// wrapper variables override both Cargo configuration files and aliases.
     /// Verifying/replaying an already pinned executable never calls this method.
     pub fn build_environment(&self) -> Result<BTreeMap<String, OsString>> {
+        if let Some(cuda) = &self.cuda_toolchain {
+            ensure!(
+                self.cargo_features == ["cuda"]
+                    && cuda["locked_cudarc"] == "0.16.6"
+                    && cuda["host_compiler_sha256"]
+                        .as_str()
+                        .is_some_and(|s| s.len() == 64)
+                    && cuda["nvcc_sha256"].as_str().is_some_and(|s| s.len() == 64),
+                "invalid frozen CUDA compiler/toolkit provenance"
+            );
+        }
         self.verify_host()?;
         let compiler = self.resolved_rustc.as_ref().context(
             "historical CPU receipt has no resolved compiler; replay its pinned executable or start a new build protocol",
@@ -443,6 +458,7 @@ pub(super) fn fixture_config(profile: CpuProfile) -> CpuBuildConfig {
         cargo_lock_sha256: "a".repeat(64),
         cargo_features: Vec::new(),
         resolved_rustc: None,
+        cuda_toolchain: None,
     }
 }
 

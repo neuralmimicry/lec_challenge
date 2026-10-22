@@ -26,20 +26,20 @@ mod eligibility;
 pub use eligibility::preflight_eligibility;
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
-struct Step {
-    sample_id: String,
-    teacher_id: String,
-    stage: usize,
+pub(super) struct Step {
+    pub(super) sample_id: String,
+    pub(super) teacher_id: String,
+    pub(super) stage: usize,
 }
 
-struct Selection {
-    order: Vec<Step>,
-    samples: BTreeMap<String, EvidenceSample>,
-    encoded: BTreeMap<String, EncodedSequence>,
-    preferences: BTreeMap<String, preference::FrozenPreference>,
+pub(super) struct Selection {
+    pub(super) order: Vec<Step>,
+    pub(super) samples: BTreeMap<String, EvidenceSample>,
+    pub(super) encoded: BTreeMap<String, EncodedSequence>,
+    pub(super) preferences: BTreeMap<String, preference::FrozenPreference>,
     context_transforms: BTreeMap<String, conditioning::PromptTransform>,
-    rejected_overlength: BTreeMap<String, String>,
-    eligible_sequences: BTreeMap<String, serde_json::Value>,
+    pub(super) rejected_overlength: BTreeMap<String, String>,
+    pub(super) eligible_sequences: BTreeMap<String, serde_json::Value>,
 }
 
 fn validate_origins(bundle: &EvidenceBundle) -> Result<()> {
@@ -53,8 +53,32 @@ fn validate_origins(bundle: &EvidenceBundle) -> Result<()> {
 }
 
 fn validate(spec: &DistillationWorkerSpec) -> Result<()> {
+    spec.student_runtime
+        .validate_build_support()
+        .context("unsupported student runtime before selection or optimisation")?;
+    if targets::required(spec) {
+        spec.teacher_runtime
+            .validate_build_support()
+            .context("unsupported teacher capture runtime before selection or optimisation")?;
+    }
+    if let Some(policy) = &spec.health_check {
+        ensure!(
+            spec.schema_version >= 2
+                && spec.student_kind == DistillationStudent::ConventionalQwenLora
+                && !policy.checkpoints.is_empty()
+                && policy.checkpoints.len() <= 4
+                && policy.checkpoints.windows(2).all(|p| p[0] < p[1])
+                && policy
+                    .checkpoints
+                    .iter()
+                    .all(|s| *s > 0 && *s <= spec.steps)
+                && (1..=512).contains(&policy.max_new_tokens)
+                && (1..=120).contains(&policy.timeout_seconds),
+            "unsupported train-only generation health policy"
+        );
+    }
     ensure!(
-        spec.schema_version == 1
+        matches!(spec.schema_version, 1 | 2)
             && !spec.arm_id.is_empty()
             && spec.arm_id.len() <= 128
             && spec
@@ -63,15 +87,19 @@ fn validate(spec: &DistillationWorkerSpec) -> Result<()> {
                 .all(|b| b.is_ascii_alphanumeric() || b"_-".contains(&b)),
         "invalid distillation arm identity"
     );
+    validate_training_bounds(
+        spec.steps,
+        spec.max_sequence_tokens,
+        spec.rank,
+        spec.alpha,
+        spec.learning_rate,
+    )?;
     ensure!(
-        (1..=64).contains(&spec.steps)
-            && (4..=1024).contains(&spec.max_sequence_tokens)
-            && (1..=32).contains(&spec.rank)
-            && spec.alpha.is_finite()
-            && spec.alpha > 0.
-            && spec.learning_rate.is_finite()
-            && (0.0000001..=0.01).contains(&spec.learning_rate),
-        "distillation fidelity exceeds bounded worker policy"
+        spec.temperature.is_finite()
+            && (0.1..=10.).contains(&spec.temperature)
+            && spec.dpo_beta.is_finite()
+            && (0.001..=10.).contains(&spec.dpo_beta),
+        "unsupported frozen temperature or DPO beta"
     );
     ensure!(
         !spec.teacher_ids.is_empty()
@@ -135,7 +163,7 @@ fn encode_sample(
     )
 }
 
-fn choose(
+pub(super) fn choose(
     spec: &DistillationWorkerSpec,
     bundle: &EvidenceBundle,
     tokenizer: &Tokenizer,
@@ -218,10 +246,21 @@ fn choose(
                 Ok(pair) => Some(pair),
                 Err(error)
                     if spec.sequence_policy == SequencePolicy::RejectOverlength
-                        && error.to_string()
-                            == "distillation sequence exceeds its frozen token cap" =>
+                        && error
+                            .downcast_ref::<alignment::SequenceCapacityError>()
+                            .is_some() =>
                 {
-                    rejected_overlength.insert(sample.id.clone(), error.to_string());
+                    rejected_overlength.insert(
+                        sample.id.clone(),
+                        if spec.schema_version == 1 {
+                            "distillation sequence exceeds its frozen token cap".into()
+                        } else {
+                            format!(
+                                "preference student sequence; sample={} content={:?}: {error:#}",
+                                sample.id, sample.content
+                            )
+                        },
+                    );
                     continue;
                 }
                 Err(error) => return Err(error),
@@ -243,15 +282,48 @@ fn choose(
                 Ok(s) => s,
                 Err(error)
                     if spec.sequence_policy == SequencePolicy::RejectOverlength
-                        && error.to_string()
-                            == "distillation sequence exceeds its frozen token cap" =>
+                        && error
+                            .downcast_ref::<alignment::SequenceCapacityError>()
+                            .is_some() =>
                 {
-                    rejected_overlength.insert(sample.id.clone(), error.to_string());
+                    rejected_overlength.insert(
+                        sample.id.clone(),
+                        if spec.schema_version == 1 {
+                            "distillation sequence exceeds its frozen token cap".into()
+                        } else {
+                            format!(
+                                "student sequence; sample={} content={:?}: {error:#}",
+                                sample.id, sample.content
+                            )
+                        },
+                    );
                     continue;
                 }
                 Err(e) => return Err(e),
             }
         };
+        if spec.schema_version >= 2 && targets::required(spec) {
+            match targets::encode_teacher(spec, bundle, sample) {
+                Ok(teacher) => {
+                    targets::validate_capacity(spec, bundle, sample, &sequence, &teacher)?;
+                }
+                Err(error)
+                    if error
+                        .downcast_ref::<alignment::SequenceCapacityError>()
+                        .is_some() =>
+                {
+                    rejected_overlength.insert(
+                        sample.id.clone(),
+                        format!(
+                            "teacher sequence; sample={} content={:?}: {error:#}",
+                            sample.id, sample.content
+                        ),
+                    );
+                    continue;
+                }
+                Err(error) => return Err(error),
+            }
+        }
         if let Some(transform) = conditioning::transform(sample)? {
             context_transforms.insert(sample.id.clone(), transform);
         }
@@ -269,7 +341,7 @@ fn choose(
         if *content != ContentKind::Preference {
             ensure!(
                 samples.values().any(|s| &s.content == content),
-                "requested content has no verified in-capacity samples: {content:?}"
+                "requested content has no verified in-capacity samples: {content:?}; exclusions={rejected_overlength:?}"
             );
         }
     }
@@ -448,6 +520,10 @@ pub fn run_worker(spec: &DistillationWorkerSpec) -> Result<DistillationArtifact>
     validate(spec)?;
     let started = Instant::now();
     let root = std::env::current_dir()?;
+    ensure!(
+        !spec.output.join("train-health-stop.json").exists(),
+        "predeclared train health policy already stopped this run; preserve the failed observation and use a separately declared experiment"
+    );
     let assets = student::assets(spec)?;
     let base_hash = assets
         .files
@@ -505,6 +581,24 @@ pub fn run_worker(spec: &DistillationWorkerSpec) -> Result<DistillationArtifact>
         .transpose()?;
     let evidence = Artefact::capture(&root, spec.evidence_bundle.clone())?;
     let mut freeze = serde_json::json!({"schema_version":1,"spec":spec,"evidence":evidence,"base":assets,"engine_binary_sha256":artefact::file_hash(&std::env::current_exe()?)?,"order":order,"initial_checkpoint":initial,"encoded_sequences":encoded});
+    if spec.schema_version >= 2 {
+        let prepared = preflight_eligibility(spec)?;
+        let scheduler_receipt = spec
+            .output
+            .parent()
+            .context("checkpoint parent absent")?
+            .join("prepared-selection.json");
+        if scheduler_receipt.exists() {
+            let planned: serde_json::Value =
+                serde_json::from_slice(&fs::read(&scheduler_receipt)?)?;
+            ensure!(
+                planned == prepared,
+                "planner/prewarm/worker prepared selection differs before optimisation"
+            );
+        }
+        freeze["schema_version"] = 2.into();
+        freeze["prepared_selection"] = prepared;
+    }
     // Omit empty extensions so historical non-context/non-DPO freezes remain
     // byte-semantically valid and interrupted work can still be reverified.
     if !preferences.is_empty() {
@@ -655,6 +749,24 @@ pub fn run_worker(spec: &DistillationWorkerSpec) -> Result<DistillationArtifact>
             sample_ids: vec![],
         }
     };
+    if let Some(policy) = &spec.health_check {
+        for step in policy
+            .checkpoints
+            .iter()
+            .filter(|step| **step <= progress.steps)
+        {
+            let path = spec
+                .output
+                .join(format!("step-{step:06}/train-generation-health.json"));
+            let saved:serde_json::Value=serde_json::from_slice(&fs::read(&path).with_context(||format!("committed update lacks its predeclared health observation at {}; interrupted evidence is retained without silently bypassing it",path.display()))?)?;
+            ensure!(
+                saved["policy"] == serde_json::to_value(policy)?
+                    && saved["step"] == *step
+                    && (!policy.stop_on_unhealthy || saved["generation_healthy"] == true),
+                "saved train-only health policy stopped or changed; use a new declared experiment"
+            );
+        }
+    }
     let mut optimiser = if progress.steps > 0 {
         drop(student);
         student = load_student(spec, Some(&progress.adapter.verify(&root)?))?;
@@ -796,8 +908,28 @@ pub fn run_worker(spec: &DistillationWorkerSpec) -> Result<DistillationArtifact>
         }
         let loss = total.context("no distillation objective constructed")?;
         let scalar = loss.to_scalar::<f32>()? as f64;
+        let before = adapter_tensors(&student);
         let norm = optimiser.update_selected(student.variables(), &loss)?;
         let directory = spec.output.join(format!("step-{:06}", step + 1));
+        let update_norms = student
+            .variables()
+            .iter()
+            .map(|(name, var)| -> Result<_> {
+                let norm = (var.as_tensor() - &before[name])?
+                    .sqr()?
+                    .sum_all()?
+                    .to_scalar::<f32>()?
+                    .sqrt();
+                ensure!(norm.is_finite(), "non-finite selected adapter update");
+                Ok((name.clone(), norm))
+            })
+            .collect::<Result<BTreeMap<_, _>>>()?;
+        if spec.schema_version >= 2 {
+            artefact::write_json(
+                &directory.join("update-diagnostics.json"),
+                &serde_json::json!({"schema_version":1,"sample_id":plan.sample_id,"step":step+1,"component_losses":components,"normalised_weights":spec.losses.iter().map(|l|serde_json::json!({"kind":l.kind,"weight":l.weight/normaliser})).collect::<Vec<_>>(),"gradient_norm":norm,"adapter_update_l2_by_tensor":update_norms,"interpretation":"Numerical objective/update evidence only; no coding improvement claim."}),
+            )?;
+        }
         checkpoint::save_tensors(
             &directory.join("adapter.safetensors"),
             &adapter_tensors(&student),
@@ -818,6 +950,63 @@ pub fn run_worker(spec: &DistillationWorkerSpec) -> Result<DistillationArtifact>
         progress.optimizer = Artefact::capture(&root, directory.join("optimizer.safetensors"))?;
         artefact::write_json(&directory.join("progress.json"), &progress)?;
         artefact::write_json(&progress_path, &progress)?;
+        if let Some(policy) = &spec.health_check
+            && policy.checkpoints.contains(&(step + 1))
+        {
+            let model = match student {
+                student::Student::Qwen(model) => model,
+                student::Student::BitNet(_) => anyhow::bail!("health policy requires Qwen"),
+            };
+            let mut runtime = ModelRuntime::from_pinned_qwen_model(
+                model,
+                tokenizer.clone(),
+                assets.clone(),
+                progress.adapter.sha256.clone(),
+                spec.student_runtime.clone(),
+            );
+            let first = &order[0].sample_id;
+            let prompt = if spec
+                .losses
+                .iter()
+                .all(|l| l.kind == LossKind::PreferenceDpo)
+            {
+                preferences[first].common_prompt.clone()
+            } else {
+                conditioning::student_prompt(&samples[first])
+            };
+            let request = model::GenerationRequest {
+                prompt,
+                max_new_tokens: policy.max_new_tokens,
+                seed: spec.seed,
+                temperature: 0.2,
+                top_p: 0.95,
+                timeout_seconds: policy.timeout_seconds,
+            };
+            let execution = runtime.execution_metadata();
+            let generation = runtime
+                .generate(request.clone())
+                .map_err(|error| format!("{error:#}"));
+            let healthy = generation
+                .as_ref()
+                .is_ok_and(|g| g.complete && !g.completion.trim().is_empty());
+            runtime.model.clear_cache();
+            student = student::Student::Qwen(runtime.model);
+            artefact::write_json(
+                &directory.join("train-generation-health.json"),
+                &serde_json::json!({"schema_version":1,"policy":policy,"step":step+1,"sample_id":first,"task_id":samples[first].task.id,"source_id":samples[first].task.source_id,"adapter":progress.adapter,"request":request,"execution":execution,"generation":generation,"generation_healthy":healthy,"sandbox_correctness_measured":false,"held_out_used":false,"interpretation":"Predeclared train-only generation health; normal termination does not establish correct code."}),
+            )?;
+            if !healthy && policy.stop_on_unhealthy {
+                artefact::write_json(
+                    &spec.output.join("train-health-stop.json"),
+                    &serde_json::json!({"step":step+1,"policy":policy,"observation":Artefact::capture(&root,directory.join("train-generation-health.json"))?}),
+                )?;
+            }
+            ensure!(
+                healthy || !policy.stop_on_unhealthy,
+                "predeclared train-only generation health stop at step {}; failed observation and numerical checkpoint retained",
+                step + 1
+            );
+        }
         eprintln!(
             "distillation: durable update {}/{} loss={scalar:.6} gradient_norm={norm:.6}",
             step + 1,
@@ -903,7 +1092,7 @@ pub fn run_worker(spec: &DistillationWorkerSpec) -> Result<DistillationArtifact>
         limitations.push("Declared assistant-token windows exercise actual operators and optimiser updates; omitted context/targets are recorded in freeze.json and these quick arms do not establish task learning.".into());
     }
     let manifest = ExperimentalCheckpointManifest {
-        schema_version: 1,
+        schema_version: spec.schema_version,
         evidence_kind: "verified_local_teacher_experimental_distillation".into(),
         spec: spec.clone(),
         freeze_sha256: freeze_hash,
@@ -965,6 +1154,23 @@ pub fn run_worker(spec: &DistillationWorkerSpec) -> Result<DistillationArtifact>
         production_eligible: false,
         elapsed_seconds: started.elapsed().as_secs_f64(),
         limitations,
+        training_health: spec
+            .health_check
+            .as_ref()
+            .map(|p| {
+                p.checkpoints
+                    .iter()
+                    .map(|step| {
+                        Artefact::capture(
+                            &root,
+                            spec.output
+                                .join(format!("step-{step:06}/train-generation-health.json")),
+                        )
+                    })
+                    .collect::<Result<Vec<_>>>()
+            })
+            .transpose()?
+            .unwrap_or_default(),
     };
     ensure!(
         manifest.adapter_sha256 != manifest.initial_adapter_sha256,
@@ -989,16 +1195,21 @@ pub fn load_runtime(
     let mut spec = m.spec.clone();
     spec.student_base = base.to_owned();
     spec.student_runtime = options.clone();
-    let mut runtime = ModelRuntime::load_with_options(base, None, options)?;
-    runtime.model =
-        match student::load_for_inference(&spec, &checkpoint.join("adapter.safetensors"))? {
-            student::Student::Qwen(model) => model,
-            student::Student::BitNet(_) => {
-                anyhow::bail!("load native BitNet checkpoints through BitNetRuntime")
-            }
-        };
-    runtime.checkpoint_id = m.adapter_sha256;
-    Ok(runtime)
+    let model = match student::load_for_inference(&spec, &checkpoint.join("adapter.safetensors"))? {
+        student::Student::Qwen(model) => model,
+        student::Student::BitNet(_) => {
+            anyhow::bail!("load native BitNet checkpoints through BitNetRuntime")
+        }
+    };
+    let tokenizer = Tokenizer::from_file(base.join("tokenizer.json"))
+        .map_err(|error| anyhow::anyhow!(error.to_string()))?;
+    Ok(ModelRuntime::from_pinned_qwen_model(
+        model,
+        tokenizer,
+        assets,
+        m.adapter_sha256,
+        options,
+    ))
 }
 
 /// Prewarm native targets once on the reserved teacher device. Subsequent CPU

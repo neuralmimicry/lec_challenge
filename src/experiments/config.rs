@@ -15,19 +15,28 @@ pub struct FidelityConfig {
     pub maximum_trials: usize,
     pub maximum_total_steps: u64,
     pub timeout_seconds: u64,
+    #[serde(default, skip_serializing_if = "BTreeMap::is_empty")]
+    pub objective_weights: BTreeMap<crate::distillation::LossKind, f64>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub health_check: Option<crate::distillation::TrainingHealthPolicy>,
 }
 impl FidelityConfig {
     fn validate(&self) -> Result<()> {
+        crate::distillation::validate_training_bounds(
+            self.steps,
+            self.max_sequence_tokens,
+            self.rank,
+            self.alpha,
+            self.learning_rate,
+        )?;
         ensure!(
-            (1..=100_000).contains(&self.steps)
-                && (16..=4096).contains(&self.max_sequence_tokens)
-                && (1..=128).contains(&self.rank)
-                && self.alpha.is_finite()
-                && self.alpha > 0.
-                && self.learning_rate.is_finite()
-                && self.learning_rate > 0.
-                && self.learning_rate <= 0.1
-                && self.temperature.is_finite()
+            self.objective_weights
+                .values()
+                .all(|w| w.is_finite() && *w > 0. && *w <= 100.),
+            "invalid declared objective weights"
+        );
+        ensure!(
+            self.temperature.is_finite()
                 && (0.1..=10.).contains(&self.temperature)
                 && self.dpo_beta.is_finite()
                 && (0.001..=10.).contains(&self.dpo_beta)
@@ -119,7 +128,7 @@ impl StudyConfig {
                     && self.students.contains(&override_.student)
                     && [override_.quick_learning_rate, override_.full_learning_rate]
                         .iter()
-                        .all(|rate| rate.is_finite() && *rate > 0. && *rate <= 0.1),
+                        .all(|rate| rate.is_finite() && (0.0000001..=0.01).contains(rate)),
                 "invalid or duplicate preregistered student training override"
             );
         }
@@ -133,6 +142,15 @@ impl StudyConfig {
 }
 
 pub(super) fn validate_inputs(inputs: &StudyInputs) -> Result<()> {
+    if let Some(profile) = &inputs.evaluation {
+        ensure!(
+            profile.cpu_threads > 0
+                && profile.cpu_threads <= inputs.resources.cpu_threads
+                && profile.max_new_tokens == 512
+                && profile.timeout_seconds == 120,
+            "unsupported frozen evaluation runtime/decoding/thread allocation"
+        );
+    }
     ensure!(
         inputs.schema_version == 1
             && !inputs.teachers.is_empty()
@@ -161,6 +179,12 @@ pub(super) fn validate_inputs(inputs: &StudyInputs) -> Result<()> {
             "duplicate student resource profile"
         );
         for request in [&profile.quick, &profile.full] {
+            if let Some(evaluation) = &inputs.evaluation {
+                ensure!(
+                    evaluation.cpu_threads <= request.cpu_threads,
+                    "evaluation phase exceeds frozen worker CPU reservation"
+                );
+            }
             ensure!(
                 request.cpu_threads > 0
                     && request.cpu_threads <= inputs.resources.cpu_threads

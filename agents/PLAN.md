@@ -1,5 +1,22 @@
 # Specialist agent execution plan
 
+## Bounded training repair — 22 October 2026
+
+The single integration owner owns this repair on branch
+`repair/training-20261022`, starting at
+`d78d127fc3c9da546fe4b9bee3ef4e3cf0e9076d`. No additional agents are used.
+Scope: distillation eligibility/numerical diagnostics, study evaluation failure
+reporting/runtime contracts, launch compatibility and non-destructive asset/
+sandbox diagnosis, regression tests and documentation. Existing report edits
+and untracked exploration evidence are user work and remain untouched. Source
+is edited on the RTX 2080 laptop; remote evidence is read from
+`pbisaacs@192.168.1.66:/home/pbisaacs/Developer/lec_challenge`.
+Historical engines, freezes, caches and failed observations are immutable.
+The same owner maintains `docs/LEC_Challenge_Installation_Guide.md` against
+the implemented launcher/CLI contracts and measured repair evidence.
+The user has authorised committing this repair and merging it into local `main`.
+Keep unrelated exploration report edits outside the commit; do not push.
+
 ## Provider setup repair — 16 October 2026
 
 The integration owner owns the Rust `provider-init` command, local readiness

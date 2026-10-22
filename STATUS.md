@@ -1,5 +1,68 @@
 # Assessment status
 
+## Bounded training repair — 22 October 2026
+
+Single-owner work on `repair/training-20261022`, from
+`d78d127fc3c9da546fe4b9bee3ef4e3cf0e9076d`, preserves existing exploration
+report edits and historical engines. Structured evaluation rejections, shared
+teacher/student eligibility, selected-training diagnostics, frozen evaluation
+runtimes, guarded feature experiments and non-destructive launch/asset/store
+diagnostics are implemented. The adapter inference loader no longer allocates
+two bases. Source is edited only on the RTX 2080 laptop; an isolated remote clone
+is prepared for validation on the RTX 3060 host.
+
+Final CPU checks: 320 library tests passed on both laptop and isolated remote
+clone, with two ignored; four shell launcher tests and 12 native launcher tests
+passed. Formatting, strict all-target Clippy, release build and actual CLI help
+passed. Original-tokeniser QA was additionally run explicitly and passed. The real
+forward/backward tiny-task overfit and fresh-process fixed-logit reload passed.
+The remote all-target check passed with the already-installed Rust 1.98.1;
+the initial system-Rust 1.93.1 rejection is preserved.
+Three gate-reporting tests and the explicitly executed train-only sandbox
+output/deadline/alias adversarial test also passed. Final runtime guards reject
+unsupported phase device/dtype choices before planning or optimisation; NLL-only
+diagnostics leave coding scores unknown. Asset conflict handling preserves
+dangling symlinks as well as corrupt files and file-path directory conflicts.
+
+A real bounded smoke used `matrices.diagonals`, seed 1729, one full-sequence SFT
+update and matched CPU/F32/four-thread diagnostics under new engine
+`61645f9cf2872284da85d954f187d709da0c020de3437cc366575300d4284558`.
+Sandbox preflight passed. Assistant NLL fell **0.300927 → 0.284432**, while token
+accuracy stayed **166/182**. Both generations stopped normally at **245 tokens**
+and both scored **0/1** because their Rust failed compilation. The new checkpoint
+exported/reloaded and the base file stayed unchanged. This establishes plumbing
+and an objective change, not improved coding or generalisation. The observed
+start/finish envelope was 12:34:20–12:38:54 UTC, below the 15-minute budget.
+Full evidence and exact commands are in `docs/repair-20261022.md` and
+`reports/repair-20261022/`; no whole catalogue or new teacher search was run.
+The supplied remote SFT configuration SHA and historical pinned engine SHA were
+read and matched; their old scores were not rerun or relabelled. Feature collapse
+and absent independent provider/promotion evidence remain unresolved. Toolkit
+discovery/early rejection and a CUDA 12.9/g++-14 header compile were observed;
+the repaired full engine's CUDA execution and ARM hardware paths remain untested.
+
+The final delivery engine is
+`6d3e8eba5ef0af2b8f680c2507c37f6bc6891da1891b2a3587c56db80a0db95d`.
+It retains the smoke engine/checkpoint unchanged. A fresh NLL-only run under the
+delivery engine reproduced both NLL values exactly with zero additional updates
+or generation and unknown coding scores. Actual CLI probes rejected unsupported
+CPU/F16 and CPU-build/CUDA evaluation profiles before optimisation. Both final
+releases and their distinct protocols are recorded rather than relabelling the
+original smoke as execution from the later binary.
+
+The installation guide now documents the implemented native doctors, selected-
+training diagnostics, phase runtimes, Cargo network policy and compatibility
+rules. Its commands were checked against release help and source contracts;
+historical sm00 results and outstanding repaired-engine CUDA validation remain
+explicitly separate. This documentation follow-up did not repeat training,
+downloads, archive restoration or host installation.
+
+Local integration into `main` is now explicitly requested by the user. The
+repair source, tests and documentation are committed together on the repair
+branch for a fast-forward; unrelated exploration report edits remain uncommitted.
+The previously observed source checks remain applicable; this integration adds
+no numerical or application changes and does not push to a remote.
+
 ## Provider setup repair — 16 October 2026
 
 The reported failure came from an absent `state/api-providers.local.toml`;

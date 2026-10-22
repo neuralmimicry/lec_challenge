@@ -9,6 +9,7 @@ use std::{fs, path::Path, process::Command};
 
 const MIB: u64 = 1024 * 1024;
 
+pub mod cuda_build;
 pub mod cuda_probe;
 
 #[derive(Clone, Debug, Serialize, Deserialize)]

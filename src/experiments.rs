@@ -17,6 +17,7 @@ use std::{
 
 mod catalogue;
 mod config;
+pub mod evaluation_failure;
 mod rollout;
 mod scheduler;
 pub use rollout::{RolloutProfile, rollout_profile};
@@ -119,6 +120,17 @@ pub struct StudyInputs {
     pub student_resources: Vec<StudentResources>,
     pub teacher_runtime: RuntimeOptions,
     pub student_runtime: RuntimeOptions,
+    /// Historical schema-1 plans used the optimisation runtime for evaluation.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub evaluation: Option<EvaluationProfile>,
+}
+
+#[derive(Clone, Debug, Serialize, Deserialize)]
+pub struct EvaluationProfile {
+    pub runtime: RuntimeOptions,
+    pub cpu_threads: u32,
+    pub max_new_tokens: usize,
+    pub timeout_seconds: u64,
 }
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
@@ -350,7 +362,7 @@ pub fn create_plan(config_path: &Path, output: &Path, inputs: StudyInputs) -> Re
     let (quick_arms, quick_coverage_gaps) =
         catalogue::quick_cover(&arms, config.quick.maximum_trials, &config.quick);
     let plan = StudyPlan {
-        schema_version: 1,
+        schema_version: 2,
         evidence_kind: "preregistered_finite_local_distillation_study".into(),
         config: Artefact::capture(&root, config_path.to_owned())?,
         inputs,
@@ -380,7 +392,7 @@ pub fn create_plan(config_path: &Path, output: &Path, inputs: StudyInputs) -> Re
 pub fn load_plan(path: &Path) -> Result<StudyPlan> {
     let plan: StudyPlan = serde_json::from_slice(&fs::read(path)?)?;
     ensure!(
-        plan.schema_version == 1 && !plan.held_out_used && !plan.production_eligible,
+        matches!(plan.schema_version, 1 | 2) && !plan.held_out_used && !plan.production_eligible,
         "invalid study plan or unapproved held-out/production claim"
     );
     plan.config.verify(&std::env::current_dir()?)?;
@@ -407,7 +419,7 @@ pub fn validate_worker_request(path: &Path) -> Result<WorkerRequest> {
         .strip_prefix(&root)?
         .to_owned();
     ensure!(
-        request.schema_version == 1
+        request.schema_version == plan.schema_version
             && serde_json::to_value(arm)? == serde_json::to_value(&request.arm)?
             && serde_json::to_value(&fidelity)? == serde_json::to_value(&request.training)?
             && serde_json::to_value(&plan.inputs)? == serde_json::to_value(&request.inputs)?

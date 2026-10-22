@@ -1,5 +1,42 @@
 # Design decisions and departures
 
+## 22 October 2026 — bounded correctness and diagnostic repair
+
+New local study plans and worker specifications use schema 2. Their executable
+selection checks both original teacher conditioning and student conditioning
+before a numerical reservation; the same bounded validator governs study
+configuration and optimisation. The existing shared sequence cap is retained,
+including EOS; collection and evaluation limits do not expand it. No old freeze,
+trace, image identity, score or executable is rewritten. Schema-1 readers retain
+historical preference-content and sequence selection semantics.
+
+The native `study-diagnose-training` command inspects the actual selected update
+order and optionally measures base versus reloaded-adapter assistant NLL and
+paired sandbox generation on a bounded subset of those training examples.
+This is training-set memorisation evidence under a separate runtime protocol.
+Tiny differentiable Qwen fixtures and independent-process logit reloads are
+explicit numerical QA, not assessment outputs.
+
+New feature experiments record declared train-only generation-health probes,
+normalised objective weights and per-tensor update norms. Optional early stopping
+is frozen before training; failure and interruption cannot silently bypass it.
+Feature-only objectives remain available without automatic SFT additions.
+The actual collapse mechanism remains unproved.
+
+New evaluation runtime/thread allocations are independent of optimisation and
+teacher capture. Serial phase reservations use measured free VRAM. Existing
+evaluation-only recovery and strict matched-baseline comparison remain required
+when a runtime changes. Selection schema 3 refuses zero-score or incomplete-seed
+groups as automatic quality choices; earlier selection schemas remain readable.
+
+Cargo acquisition is explicit and separate from application offline policy.
+Toolkit discovery respects locked cudarc 0.16.6 support and the driver ceiling,
+validates the host compiler and freezes local overlay provenance in the build
+receipt. No system headers, drivers or toolchains are edited. Native asset/store
+diagnostics share exact-archive verification with restoration; quarantine is an
+explicit rename. The frozen V3 controller and grading checks remain unchanged.
+See `docs/repair-20261022.md` for observed checks and remaining limitations.
+
 ## 16 October 2026 — repeatable original-assessment log audit
 
 The user requested a check of the newest logs against the original assessment.

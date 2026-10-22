@@ -226,6 +226,37 @@ mod tests {
     use candle_core::{Device, Var};
 
     #[test]
+    fn asymmetric_attention_has_real_student_gradients_and_detects_anchor_permutation() -> Result<()>
+    {
+        let student = Var::new(&[[1_f32, 0.], [0.8, 0.2]], &Device::Cpu)?;
+        let teacher = Var::new(&[[1_f32, 0.], [0.2, 0.8]], &Device::Cpu)?;
+        let hidden = Var::new(&[[1_f32, 0.], [0.4, 1.]], &Device::Cpu)?;
+        let target = Var::new(&[[0_f32, 1.], [1., 0.3]], &Device::Cpu)?;
+        let loss = attention_relation(&student, &teacher, &hidden, &target)?;
+        assert!(loss.to_scalar::<f32>()? > 0.01);
+        let grads = loss.backward()?;
+        for var in [&student, &hidden] {
+            let norm = grads
+                .get(var)
+                .unwrap()
+                .sqr()?
+                .sum_all()?
+                .to_scalar::<f32>()?;
+            assert!(norm.is_finite() && norm > 0.);
+        }
+        assert!(grads.get(&teacher).is_none() && grads.get(&target).is_none());
+        let same = hidden_feature(&hidden, &hidden)?.to_scalar::<f32>()?;
+        let index = Tensor::new(&[1_u32, 0], &Device::Cpu)?;
+        let permuted =
+            hidden_feature(&hidden, &hidden.index_select(&index, 0)?)?.to_scalar::<f32>()?;
+        assert!(
+            same < 1e-7 && permuted > 0.1,
+            "misaligned assistant rows must not look like an aligned minimum"
+        );
+        Ok(())
+    }
+
+    #[test]
     fn full_distribution_kl_matches_known_value_and_never_updates_teacher() {
         let device = Device::Cpu;
         let student = Var::new(&[[0_f32, 0.]], &device).unwrap();

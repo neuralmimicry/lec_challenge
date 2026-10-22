@@ -7,6 +7,7 @@ use std::path::PathBuf;
 pub mod alignment;
 pub mod checkpoint;
 pub mod conditioning;
+pub mod diagnose;
 pub mod losses;
 mod preference;
 mod student;
@@ -14,6 +15,27 @@ mod targets;
 mod worker;
 pub use student::DistillationStudent;
 pub use worker::{load_runtime, preflight_eligibility, prepare_teacher_targets, run_worker};
+
+/// The executable worker bounds also constrain configuration and planning.
+pub fn validate_training_bounds(
+    steps: usize,
+    tokens: usize,
+    rank: usize,
+    alpha: f64,
+    rate: f64,
+) -> anyhow::Result<()> {
+    anyhow::ensure!(
+        (1..=64).contains(&steps)
+            && (4..=1024).contains(&tokens)
+            && (1..=32).contains(&rank)
+            && alpha.is_finite()
+            && alpha > 0.
+            && rate.is_finite()
+            && (0.0000001..=0.01).contains(&rate),
+        "unsupported native training bounds: steps={steps} (1–64), sequence including EOS={tokens} (4–1024), rank={rank} (1–32), alpha={alpha}, learning_rate={rate} (1e-7–0.01)"
+    );
+    Ok(())
+}
 
 #[derive(Clone, Copy, Debug, Serialize, Deserialize, PartialEq, Eq, PartialOrd, Ord)]
 #[serde(rename_all = "snake_case")]
@@ -83,6 +105,17 @@ pub struct DistillationWorkerSpec {
     pub data_policy: DataPolicy,
     pub progressive: bool,
     pub self_distillation: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub health_check: Option<TrainingHealthPolicy>,
+}
+
+#[derive(Clone, Debug, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct TrainingHealthPolicy {
+    pub checkpoints: Vec<usize>,
+    pub max_new_tokens: usize,
+    pub timeout_seconds: u64,
+    pub stop_on_unhealthy: bool,
 }
 
 #[derive(Clone, Debug, Serialize, Deserialize)]

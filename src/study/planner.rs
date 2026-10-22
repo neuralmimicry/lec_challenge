@@ -8,6 +8,82 @@ pub struct PlanOptions {
     pub output: PathBuf,
     pub maximum_parallel_jobs: Option<usize>,
     pub teacher_runtime: RuntimeOptions,
+    pub student_runtime: RuntimeOptions,
+    pub evaluation_runtime: RuntimeOptions,
+    pub evaluation_cpu_threads: Option<u32>,
+}
+
+/// Executable data applicability is shared with target prewarm and optimisation.
+/// Capability catalogue membership alone never reserves a numerical trial.
+pub fn prepare_selection(request: &experiments::WorkerRequest) -> Result<serde_json::Value> {
+    distillation::preflight_eligibility(&super::worker_spec(request)?)
+}
+
+/// Materialise a verified request/selection without reserving or starting a trial.
+/// This is also the native input boundary for bounded diagnostic training.
+pub fn prepare_arm_request(
+    plan_path: &Path,
+    arm_id: &str,
+    fidelity: experiments::Fidelity,
+    output: &Path,
+    offline: bool,
+) -> Result<serde_json::Value> {
+    let plan = experiments::load_plan(plan_path)?;
+    ensure!(
+        plan.schema_version == 2,
+        "prepared repair requests require a new schema-2 study; historical plans retain their original engine"
+    );
+    let arm = plan
+        .arms
+        .iter()
+        .find(|a| a.id == arm_id && a.applicable)
+        .context("requested arm is absent or capability-inapplicable")?
+        .clone();
+    let training = experiments::training_for(&plan, &arm, fidelity);
+    ensure!(
+        experiments::fidelity_inapplicable_reasons(&arm, &training).is_empty(),
+        "requested arm is inapplicable at this frozen fidelity"
+    );
+    let request = experiments::WorkerRequest {
+        schema_version: 2,
+        study_plan: capture(plan_path)?,
+        resources: experiments::resources_for(&plan.inputs, &arm, fidelity),
+        teacher_targets_cache_only: plan
+            .inputs
+            .student_resources
+            .iter()
+            .find(|p| p.student == arm.student)
+            .is_some_and(|p| p.teacher_targets_cache_only),
+        arm,
+        fidelity,
+        training,
+        inputs: plan.inputs,
+        output: output.to_owned(),
+        offline,
+    };
+    ensure!(
+        !output.exists(),
+        "prepared arm output already exists; use a fresh directory"
+    );
+    fs::create_dir_all(output.parent().context("prepared arm parent absent")?)?;
+    fs::create_dir(output)?;
+    let selection = match prepare_selection(&request) {
+        Ok(selection) => selection,
+        Err(error) => {
+            artefact::write_json(
+                &output.join("eligibility-rejection.json"),
+                &serde_json::json!({"schema_version":2,"reason":format!("{error:#}"),"steps_reserved":0,"optimiser_created":false}),
+            )?;
+            return Err(error);
+        }
+    };
+    artefact::write_json(&output.join("prepared-selection.json"), &selection)?;
+    let path = output.join("request.json");
+    artefact::write_json(&path, &request)?;
+    experiments::validate_worker_request(&path)?;
+    Ok(
+        serde_json::json!({"request":capture(&path)?,"prepared_selection":capture(&output.join("prepared-selection.json"))?,"selected_unique_samples":selection["selected_unique_samples"],"planned_updates":selection["planned_updates"],"training_started":false,"held_out_used":false}),
+    )
 }
 
 pub(super) fn capture(path: &Path) -> Result<Artefact> {
@@ -82,6 +158,15 @@ fn student_capability(qa: &Path, bitnet: bool) -> Result<Capability> {
 /// Existing plans retain their measured capacity and original semantic inputs.
 /// Current resource availability is rechecked by the scheduler before dispatch.
 pub fn create_plan(options: PlanOptions) -> Result<experiments::StudyPlan> {
+    for (phase, runtime) in [
+        ("teacher capture", &options.teacher_runtime),
+        ("student optimisation", &options.student_runtime),
+        ("evaluation", &options.evaluation_runtime),
+    ] {
+        runtime.validate_build_support().with_context(|| {
+            format!("unsupported {phase} runtime before planning or model allocation")
+        })?;
+    }
     let bundle_path = if options.evidence_bundle.is_dir() {
         options.evidence_bundle.join("bundle.json")
     } else {
@@ -252,19 +337,34 @@ pub fn create_plan(options: PlanOptions) -> Result<experiments::StudyPlan> {
         .min(hardware.available_cpu_threads)
         .min((hardware.usable_ram_bytes / (8u64 << 30)) as usize)
         .max(1);
-    let gpu = match options.teacher_runtime.device {
+    let gpu_ordinals = [
+        &options.teacher_runtime,
+        &options.student_runtime,
+        &options.evaluation_runtime,
+    ]
+    .iter()
+    .filter_map(|r| match r.device {
         model::ExecutionDevice::Cpu => None,
         model::ExecutionDevice::Cuda { ordinal } => Some(ordinal),
-    };
+    })
+    .collect::<BTreeSet<_>>();
+    ensure!(
+        gpu_ordinals.len() <= 1,
+        "one study resource envelope cannot span disjoint CUDA devices"
+    );
+    let gpu = gpu_ordinals.first().copied();
     let vram = gpu
         .and_then(|ordinal| hardware.gpus.iter().find(|g| g.ordinal == ordinal))
         .map_or(0, |g| {
-            g.total_memory_bytes
-                .saturating_sub(g.total_memory_bytes / 10)
+            g.free_memory_bytes
+                .saturating_sub(g.free_memory_bytes / 10)
                 .saturating_sub(256 << 20)
         });
     let mut capture_vram = 0;
-    if gpu.is_some() {
+    if matches!(
+        options.teacher_runtime.device,
+        model::ExecutionDevice::Cuda { .. }
+    ) {
         for teacher in &bundle.teachers {
             let quantised = teacher.model.directory.join("gguf-assets.json").is_file();
             let config_path = teacher.model.directory.join(if quantised {
@@ -307,17 +407,50 @@ pub fn create_plan(options: PlanOptions) -> Result<experiments::StudyPlan> {
         .min((hardware.usable_ram_bytes / ram_per_worker) as usize)
         .max(1);
     let full_threads = u32::try_from(hardware.available_cpu_threads / full_jobs)?;
+    let evaluation_threads = options
+        .evaluation_cpu_threads
+        .unwrap_or(quick_threads.min(full_threads));
+    ensure!(
+        evaluation_threads > 0 && evaluation_threads <= quick_threads.min(full_threads),
+        "evaluation threads exceed a frozen worker CPU reservation"
+    );
+    let student_weight_bytes = fs::metadata(options.base.join("model.safetensors"))?.len();
+    let student_vram = if matches!(
+        options.student_runtime.device,
+        model::ExecutionDevice::Cuda { .. }
+    ) {
+        student_weight_bytes
+            .saturating_mul(2)
+            .saturating_add(2_u64 << 30)
+    } else {
+        0
+    };
+    let evaluation_vram = if matches!(
+        options.evaluation_runtime.device,
+        model::ExecutionDevice::Cuda { .. }
+    ) {
+        student_weight_bytes
+            .saturating_mul(2)
+            .saturating_add(1_u64 << 30)
+    } else {
+        0
+    };
+    let phase_vram = student_vram.max(evaluation_vram);
+    ensure!(
+        phase_vram <= vram,
+        "student optimisation/evaluation cannot fit currently measured free VRAM: needs {phase_vram}, available envelope {vram}"
+    );
     let mut student_resources = vec![experiments::StudentResources {
         student: StudentArchitecture::ConventionalQwenLora,
         quick: experiments::ResourceRequest {
             cpu_threads: quick_threads,
             ram_bytes: 8u64 << 30,
-            vram_bytes: 0,
+            vram_bytes: phase_vram,
         },
         full: experiments::ResourceRequest {
             cpu_threads: full_threads,
             ram_bytes: ram_per_worker,
-            vram_bytes: 0,
+            vram_bytes: phase_vram,
         },
         tensor_capture_vram_bytes: capture_vram,
         teacher_targets_cache_only: false,
@@ -370,7 +503,41 @@ pub fn create_plan(options: PlanOptions) -> Result<experiments::StudyPlan> {
         },
         student_resources,
         teacher_runtime: options.teacher_runtime,
-        student_runtime: RuntimeOptions::default(),
+        student_runtime: options.student_runtime,
+        evaluation: Some(experiments::EvaluationProfile {
+            runtime: options.evaluation_runtime,
+            cpu_threads: evaluation_threads,
+            max_new_tokens: 512,
+            timeout_seconds: 120,
+        }),
     };
     experiments::create_plan(&options.config, &options.output, inputs)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn unsupported_evaluation_fails_before_reading_assets_or_creating_a_plan() {
+        let directory = tempfile::tempdir().unwrap();
+        let output = directory.path().join("must-not-be-created");
+        let error = create_plan(PlanOptions {
+            config: "labelled-missing-config".into(),
+            evidence_bundle: "labelled-missing-evidence".into(),
+            base: "labelled-missing-base".into(),
+            bitnet_base: "labelled-missing-bitnet".into(),
+            output: output.clone(),
+            maximum_parallel_jobs: Some(1),
+            teacher_runtime: RuntimeOptions::default(),
+            student_runtime: RuntimeOptions::default(),
+            evaluation_runtime: RuntimeOptions {
+                device: model::ExecutionDevice::Cpu,
+                dtype: model::InferenceDtype::F16,
+            },
+            evaluation_cpu_threads: Some(1),
+        })
+        .unwrap_err();
+        assert!(format!("{error:#}").contains("unsupported evaluation runtime"));
+        assert!(!output.exists());
+    }
 }

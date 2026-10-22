@@ -58,8 +58,47 @@ fn exercise(marker: Option<bool>, bundled: Option<bool>, source: bool) -> Result
         .env("PATH", paths)
         .env("LEC_LAUNCH_QA_LOG", &log)
         .env("LEC_BUILD_FROM_SOURCE", if source { "1" } else { "0" })
+        .env_remove("LEC_CARGO_ONLINE")
         .output()?;
     Ok((output, fs::read_to_string(log)?))
+}
+
+#[test]
+fn bootstrap_online_and_explicit_offline_use_distinct_locked_build_policies() -> Result<()> {
+    let directory = tempfile::tempdir()?;
+    let root = directory.path();
+    fs::write(root.join("run.sh"), include_bytes!("../run.sh"))?;
+    fs::create_dir(root.join(".git"))?;
+    fs::create_dir(root.join("commands"))?;
+    script(
+        &root.join("commands/cargo"),
+        "#!/bin/sh\nprintf '%s\\n' \"$@\" > \"$LEC_LAUNCH_QA_LOG\"\nexit 23\n",
+    )?;
+    let paths = std::env::join_paths([root.join("commands"), "/usr/bin".into(), "/bin".into()])?;
+    for (arguments, online, offline) in [
+        (vec!["bootstrap-online"], "0", false),
+        (vec!["sandbox-preflight"], "1", false),
+        (vec!["sandbox-preflight"], "0", true),
+        (vec!["sandbox-preflight", "--offline"], "1", true),
+    ] {
+        let log = root.join("arguments");
+        let output = Command::new("/bin/bash")
+            .arg(root.join("run.sh"))
+            .args(&arguments)
+            .env("PATH", &paths)
+            .env("LEC_CARGO_ONLINE", online)
+            .env("LEC_LAUNCH_QA_LOG", &log)
+            .output()?;
+        assert_eq!(output.status.code(), Some(23));
+        let text = fs::read_to_string(log)?;
+        let cargo_flags = text.split("\n--\n").next().unwrap();
+        assert!(cargo_flags.lines().any(|s| s == "--locked"));
+        assert_eq!(cargo_flags.lines().any(|s| s == "--offline"), offline);
+        if offline {
+            assert!(String::from_utf8_lossy(&output.stderr).contains("cargo fetch --locked"));
+        }
+    }
+    Ok(())
 }
 
 #[test]

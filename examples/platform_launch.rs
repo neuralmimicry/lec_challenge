@@ -57,6 +57,9 @@ fn toolkit_roots() -> Vec<PathBuf> {
                 roots.push(PathBuf::from(value));
             }
         }
+        if !roots.is_empty() {
+            return roots;
+        }
         if let Ok(entries) = fs::read_dir("/usr/local") {
             for entry in entries.flatten() {
                 if entry.file_name().to_string_lossy().starts_with("cuda") {
@@ -70,6 +73,14 @@ fn toolkit_roots() -> Vec<PathBuf> {
 }
 
 fn toolkit_candidates() -> Result<Vec<Toolkit>> {
+    let explicit = [
+        "LEC_CUDA_TOOLKIT",
+        "CUDA_ROOT",
+        "CUDA_PATH",
+        "CUDA_TOOLKIT_ROOT_DIR",
+    ]
+    .iter()
+    .any(|k| std::env::var_os(k).is_some());
     let mut toolkits = Vec::new();
     for root in toolkit_roots() {
         let Ok(root) = root.canonicalize() else {
@@ -92,13 +103,32 @@ fn toolkit_candidates() -> Result<Vec<Toolkit>> {
         }
         let text = String::from_utf8_lossy(&output.stdout);
         if let Some((major, minor)) = text.split("release ").nth(1).and_then(version_pair) {
+            if !platform::cuda_build::supported(major, minor) {
+                let message = format!(
+                    "CUDA toolkit {major}.{minor} at {} is unsupported by locked cudarc 0.16.6; choose an installed supported toolkit (for example 12.9) with LEC_CUDA_TOOLKIT; the driver's maximum CUDA version does not determine dependency support",
+                    root.display()
+                );
+                ensure!(!explicit, "{message}");
+                eprintln!("launcher: rejected {message}");
+                continue;
+            }
             toolkits.push(Toolkit { root, major, minor });
         }
     }
     toolkits.sort_by_key(|toolkit| std::cmp::Reverse((toolkit.major, toolkit.minor)));
     if let Some(ceiling) = driver_ceiling() {
+        if explicit {
+            ensure!(
+                toolkits.iter().all(|t| (t.major, t.minor) <= ceiling),
+                "explicit CUDA toolkit exceeds driver ceiling {ceiling:?}"
+            );
+        }
         toolkits.retain(|toolkit| (toolkit.major, toolkit.minor) <= ceiling);
     }
+    ensure!(
+        !explicit || !toolkits.is_empty(),
+        "explicit CUDA toolkit has no working supported bin/nvcc; correct LEC_CUDA_TOOLKIT/CUDA_ROOT/CUDA_PATH/CUDA_TOOLKIT_ROOT_DIR"
+    );
     Ok(toolkits)
 }
 
@@ -128,9 +158,6 @@ fn runtime_library_paths(roots: &[PathBuf], existing: &OsStr) -> Result<OsString
 }
 
 fn host_compiler(toolkit: &Toolkit) -> Option<PathBuf> {
-    if let Some(explicit) = std::env::var_os("LEC_CUDA_HOST_COMPILER") {
-        return Some(explicit.into());
-    }
     let maximum = fs::read_to_string(toolkit.root.join("include/crt/host_config.h"))
         .ok()
         .and_then(|text| {
@@ -146,8 +173,15 @@ fn host_compiler(toolkit: &Toolkit) -> Option<PathBuf> {
                 .parse::<u32>()
                 .ok()
         });
-    let mut names = Vec::from(["g++".to_owned()]);
-    if let Some(maximum) = maximum {
+    let explicit =
+        std::env::var_os("LEC_CUDA_HOST_COMPILER").or_else(|| std::env::var_os("NVCC_CCBIN"));
+    let mut names = explicit.as_ref().map_or_else(
+        || vec!["g++".to_owned()],
+        |p| vec![p.to_string_lossy().into_owned()],
+    );
+    if explicit.is_none()
+        && let Some(maximum) = maximum
+    {
         for major in (7..=maximum).rev() {
             names.push(format!("g++-{major}"));
         }
@@ -576,12 +610,13 @@ fn main() -> Result<()> {
             .any(|pair| pair[0] == "--device" && pair[1] == "cpu");
     let previous_engine = resume_engine(&arguments)?;
     let mut cargo_arguments = vec![OsString::from("build"), "--locked".into()];
-    if offline {
+    if offline || std::env::var("LEC_CARGO_ONLINE").as_deref() != Ok("1") {
         cargo_arguments.push("--offline".into());
     }
     cargo_arguments.push("--release".into());
     let mut environment = Vec::<(OsString, OsString)>::new();
     let mut cuda_build = false;
+    let mut cuda_toolchain = None;
     environment.push((
         "RAYON_NUM_THREADS".into(),
         hardware.available_cpu_threads.to_string().into(),
@@ -621,7 +656,7 @@ fn main() -> Result<()> {
         });
         if let Some(toolkit) = toolkit {
             let compiler = host_compiler(&toolkit)
-                .context("no compatible installed CUDA C++ host compiler")?;
+                .context("no compatible CUDA C++ host compiler; explicit LEC_CUDA_HOST_COMPILER/NVCC_CCBIN must execute and satisfy this toolkit's host_config.h GCC limit")?;
             let mut root = toolkit.root.clone();
             if requires_local_header_overlay(&toolkit) {
                 let overlay = std::path::absolute("state/cuda-compat")?;
@@ -654,6 +689,39 @@ fn main() -> Result<()> {
                     format!("-I{}", root.join("include").display()).into(),
                 ));
             }
+            let probe = tempfile::tempdir()?;
+            let source = probe.path().join("host-check.cu");
+            fs::write(
+                &source,
+                "#include <cuda_runtime.h>\n__global__ void lec_host_check(float* p) { p[0] = 1.0f; }\n",
+            )?;
+            let checked = Command::new(root.join("bin/nvcc"))
+                .arg("-ccbin")
+                .arg(&compiler)
+                .arg("-ptx")
+                .arg(format!("-arch=compute_{capability}"))
+                .arg(&source)
+                .arg("-o")
+                .arg(probe.path().join("host-check.ptx"))
+                .output()?;
+            ensure!(
+                checked.status.success(),
+                "CUDA toolkit/C++ host compiler/header compile check failed before native build: {}",
+                String::from_utf8_lossy(&checked.stderr)
+            );
+            let compiler_path = if compiler.components().count() > 1 {
+                compiler.canonicalize()?
+            } else {
+                std::env::split_paths(&std::env::var_os("PATH").unwrap_or_default())
+                    .map(|p| p.join(&compiler))
+                    .find(|p| p.is_file())
+                    .context("selected C++ compiler is absent from PATH")?
+                    .canonicalize()?
+            };
+            let version = Command::new(&compiler_path).arg("--version").output()?;
+            cuda_toolchain = Some(
+                serde_json::json!({"schema_version":1,"locked_cudarc":"0.16.6","toolkit":toolkit.root,"toolkit_major":toolkit.major,"toolkit_minor":toolkit.minor,"nvcc_sha256":artefact::file_hash(&toolkit.root.join("bin/nvcc"))?,"host_compiler":compiler_path,"host_compiler_sha256":artefact::file_hash(&compiler_path)?,"host_compiler_version":String::from_utf8_lossy(&version.stdout),"compute_capability":capability,"effective_header_root":root,"overlay":if root!=toolkit.root {Some(serde_json::from_slice::<serde_json::Value>(&fs::read(root.join("manifest.json"))?)?)} else {None},"actual_compile_check_ptx_sha256":artefact::file_hash(&probe.path().join("host-check.ptx"))?,"gpu_execution_demonstrated":false}),
+            );
             eprintln!(
                 "launcher: selecting CUDA {}.{} at {} for {} (SM {})",
                 toolkit.major,
@@ -700,6 +768,7 @@ fn main() -> Result<()> {
         let mut build = engine::cpu::CpuBuildConfig::inspect(profile)?;
         if cuda_build {
             build.cargo_features = vec!["cuda".into()];
+            build.cuda_toolchain = cuda_toolchain;
         }
         build.verify_host()?;
         eprintln!(
@@ -798,6 +867,7 @@ mod tests {
             ],
             cargo_lock_sha256: "a".repeat(64),
             cargo_features: Vec::new(),
+            cuda_toolchain: None,
             resolved_rustc: None,
         }
     }

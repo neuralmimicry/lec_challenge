@@ -306,16 +306,7 @@ pub(super) fn validate_outcome(
                 path.file_name().is_some_and(|n| n == "report.json"),
                 "study evaluation artefact must name its independently verifiable report"
             );
-            let report = crate::study_evaluate::verify_completed(
-                path.parent()
-                    .context("evaluation report directory missing")?,
-            )?;
-            ensure!(
-                report["split"] == split
-                    && report["checkpoint_id"] == training["adapter_sha256"]
-                    && report["healthy_complete"] == true,
-                "worker evaluation uses an undeclared or held-out split"
-            );
+            super::evaluation_failure::verify(&path, split, &training["adapter_sha256"])?;
         }
     }
     Ok(outcome)
@@ -573,11 +564,16 @@ fn report(plan: &StudyPlan, state: &State, status: &str) -> serde_json::Value {
                     .is_empty()
         })
         .count();
+    let rejected = state
+        .trials
+        .values()
+        .filter(|t| t.status == "not_applicable_actual_selection")
+        .count();
     serde_json::json!({"schema_version":1,"evidence_kind":"bounded_local_distillation_study_execution","status":status,
         "selected_profile_succeeded":!state.selected_arms.is_empty() && completed==state.selected_arms.len() && failed==0,
         "fidelity":state.fidelity,"catalogue_arms":plan.arms.len(),"applicable_arms":applicable,"completed_arms":completed,
-        "failed_arms":failed,"queued_applicable_arms":applicable.saturating_sub(completed+failed),
-        "configured_catalogue_exhausted":completed+failed==applicable,"arms":arms,"quick_coverage_gaps":plan.quick_coverage_gaps,
+        "failed_arms":failed,"inapplicable_actual_selection_arms":rejected,"queued_applicable_arms":applicable.saturating_sub(completed+failed+rejected),
+        "configured_catalogue_exhausted":completed+failed+rejected==applicable,"arms":arms,"quick_coverage_gaps":plan.quick_coverage_gaps,
         "reserved_training_steps":state.reserved_training_steps,"summed_worker_wall_seconds":state.worker_wall_seconds,
         "monetary_cost":"No paid provider calls; local energy/hardware cash cost remains unmeasured unless the worker supplies actual measurement.",
         "held_out_used":false,"production_eligible":false,
@@ -797,14 +793,6 @@ pub async fn run(options: RunOptions) -> Result<serde_json::Value> {
                 }
                 continue;
             }
-            if !resources.reserve(&request_resources) {
-                pending.rotate_left(1);
-                considered += 1;
-                if considered >= pending.len() {
-                    break;
-                }
-                continue;
-            }
             pending.pop_front();
             considered = 0;
             let teacher_targets_cache_only = plan
@@ -817,7 +805,7 @@ pub async fn run(options: RunOptions) -> Result<serde_json::Value> {
             fs::create_dir_all(&directory)?;
             let training = training_for(&plan, &arm, options.fidelity);
             let mut request = WorkerRequest {
-                schema_version: 1,
+                schema_version: plan.schema_version,
                 study_plan: Artefact::capture(&root, options.plan.clone())?,
                 arm,
                 fidelity: options.fidelity,
@@ -829,6 +817,43 @@ pub async fn run(options: RunOptions) -> Result<serde_json::Value> {
                 offline: options.offline,
             };
             let request_path = directory.join("request.json");
+            if plan.schema_version >= 2 && !request_path.exists() {
+                let checked = request.clone();
+                let eligibility =
+                    tokio::task::spawn_blocking(move || crate::study::prepare_selection(&checked))
+                        .await?;
+                match eligibility {
+                    Ok(receipt) => {
+                        artefact::write_json(&directory.join("prepared-selection.json"), &receipt)?
+                    }
+                    Err(error) => {
+                        let reason = format!("{error:#}");
+                        artefact::write_json(
+                            &directory.join("eligibility-rejection.json"),
+                            &serde_json::json!({"schema_version":2,"arm_id":id,"reason":reason,"optimiser_created":false,"steps_reserved":0}),
+                        )?;
+                        state.trials.insert(
+                            id.clone(),
+                            Trial {
+                                id,
+                                status: "not_applicable_actual_selection".into(),
+                                attempts: 0,
+                                request: None,
+                                outcome: None,
+                                reason: Some(reason),
+                                exit_code: None,
+                                elapsed_seconds: 0.,
+                            },
+                        );
+                        save(&state_path, &state).await?;
+                        continue;
+                    }
+                }
+            }
+            if !resources.reserve(&request.resources) {
+                pending.push_back(id);
+                break;
+            }
             if request_path.exists() {
                 let previous: WorkerRequest = serde_json::from_slice(&fs::read(&request_path)?)?;
                 request.offline = previous.offline;
@@ -915,6 +940,12 @@ pub async fn run(options: RunOptions) -> Result<serde_json::Value> {
         "budget_stopped_progress_saved"
     } else if state.trials.values().any(|t| t.status == "failed") {
         "completed_with_failures"
+    } else if state
+        .trials
+        .values()
+        .any(|t| t.status == "not_applicable_actual_selection")
+    {
+        "completed_with_inapplicable_data_selections"
     } else if state
         .trials
         .values()

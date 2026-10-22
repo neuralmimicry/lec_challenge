@@ -23,6 +23,6 @@ mod selection;
 mod worker;
 pub use evaluation::{CheckpointEvalOptions, evaluate_checkpoint};
 use planner::capture;
-pub use planner::{PlanOptions, create_plan};
+pub use planner::{PlanOptions, create_plan, prepare_arm_request, prepare_selection};
 pub use selection::{select, verify_selection};
 pub use worker::{evaluate_worker, run_worker, worker_spec};

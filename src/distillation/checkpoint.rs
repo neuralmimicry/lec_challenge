@@ -44,6 +44,8 @@ pub struct ExperimentalCheckpointManifest {
     pub production_eligible: bool,
     pub elapsed_seconds: f64,
     pub limitations: Vec<String>,
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub training_health: Vec<Artefact>,
 }
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
@@ -137,7 +139,8 @@ fn validate_checkpoint_inner(
     let m: ExperimentalCheckpointManifest =
         serde_json::from_slice(&fs::read(path.join("manifest.json"))?)?;
     ensure!(
-        m.schema_version == 1
+        matches!(m.schema_version, 1 | 2)
+            && m.schema_version == m.spec.schema_version
             && m.evidence_kind == "verified_local_teacher_experimental_distillation"
             && !m.production_eligible
             && m.reloaded,
@@ -215,6 +218,19 @@ fn validate_checkpoint_inner(
         .any(|l| l.kind == LossKind::PreferenceDpo);
     let tokenizer = tokenizers::Tokenizer::from_file(m.spec.student_base.join("tokenizer.json"))
         .map_err(|error| anyhow::anyhow!(error.to_string()))?;
+    if m.schema_version >= 2 {
+        let selection = super::worker::choose(&m.spec, &bundle, &tokenizer)?;
+        ensure!(
+            frozen["schema_version"] == 2
+                && frozen["order"] == serde_json::to_value(&selection.order)?
+                && frozen["encoded_sequences"] == serde_json::to_value(&selection.encoded)?
+                && frozen["prepared_selection"]["canonical_request_sha256"]
+                    == artefact::hash(&serde_json::to_vec(&m.spec)?)
+                && frozen["prepared_selection"]["engine_sha256"] == frozen["engine_binary_sha256"]
+                && frozen["prepared_selection"]["selection"]["order"] == frozen["order"],
+            "prepared selection, optimiser order, student encoding or original engine differs"
+        );
+    }
     let mut expected_contexts = BTreeMap::new();
     let mut expected_preferences = BTreeMap::new();
     for (index, step) in order.iter().enumerate() {
@@ -324,6 +340,73 @@ fn validate_checkpoint_inner(
                 .get(&format!("teacher/{teacher}"))
                 .is_some_and(|n| *n > 0),
             "checkpoint never updated a named teacher"
+        );
+    }
+    if let Some(policy) = &m.spec.health_check {
+        ensure!(
+            m.training_health.len() == policy.checkpoints.len(),
+            "checkpoint lacks predeclared train generation health observations"
+        );
+        for (artifact, step) in m.training_health.iter().zip(&policy.checkpoints) {
+            let observation: serde_json::Value =
+                serde_json::from_slice(&fs::read(artifact.verify(&root)?)?)?;
+            ensure!(
+                observation["step"] == *step
+                    && observation["policy"] == serde_json::to_value(policy)?
+                    && observation["sample_id"] == m.sample_ids[0]
+                    && observation["held_out_used"] == false,
+                "train generation health binding differs"
+            );
+            let adapter: Artefact = serde_json::from_value(observation["adapter"].clone())?;
+            adapter.verify(&root)?;
+            ensure!(
+                adapter.path
+                    == m.spec
+                        .output
+                        .join(format!("step-{step:06}/adapter.safetensors")),
+                "health probe used another checkpoint"
+            );
+            let healthy = observation["generation"]["Ok"]["complete"] == true
+                && observation["generation"]["Ok"]["completion"]
+                    .as_str()
+                    .is_some_and(|s| !s.trim().is_empty());
+            let sample = bundle
+                .samples
+                .iter()
+                .find(|s| s.id == m.sample_ids[0])
+                .context("health sample absent")?;
+            let prompt = if m
+                .spec
+                .losses
+                .iter()
+                .all(|l| l.kind == LossKind::PreferenceDpo)
+            {
+                expected_preferences[&sample.id].common_prompt.clone()
+            } else {
+                conditioning::student_prompt(sample)
+            };
+            let expected_request = crate::model::GenerationRequest {
+                prompt,
+                max_new_tokens: policy.max_new_tokens,
+                seed: m.spec.seed,
+                temperature: 0.2,
+                top_p: 0.95,
+                timeout_seconds: policy.timeout_seconds,
+            };
+            ensure!(
+                observation["generation_healthy"] == healthy
+                    && (healthy || !policy.stop_on_unhealthy)
+                    && observation["request"] == serde_json::to_value(expected_request)?
+                    && observation["execution"]["checkpoint_id"] == adapter.sha256
+                    && observation["execution"]["requested"]
+                        == serde_json::to_value(&m.spec.student_runtime)?,
+                "health status differs from original generation or failed frozen stop policy"
+            );
+        }
+    } else {
+        ensure!(
+            m.training_health.is_empty(),
+            "undeclared health observations in checkpoint"
         );
     }
     for content in &m.spec.contents {

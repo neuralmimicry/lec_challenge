@@ -83,6 +83,7 @@ fn inputs() -> StudyInputs {
         student_resources: vec![],
         teacher_runtime: RuntimeOptions::default(),
         student_runtime: RuntimeOptions::default(),
+        evaluation: None,
     }
 }
 fn config() -> StudyConfig {
@@ -116,6 +117,8 @@ fn config() -> StudyConfig {
             maximum_trials: 24,
             maximum_total_steps: 72,
             timeout_seconds: 60,
+            objective_weights: BTreeMap::new(),
+            health_check: None,
         },
         full: FidelityConfig {
             steps: 48,
@@ -129,6 +132,8 @@ fn config() -> StudyConfig {
             maximum_trials: 8,
             maximum_total_steps: 384,
             timeout_seconds: 600,
+            objective_weights: BTreeMap::new(),
+            health_check: None,
         },
     }
 }

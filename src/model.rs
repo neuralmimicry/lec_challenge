@@ -35,7 +35,7 @@ pub const TOKENIZER_SHA256: &str =
     "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539";
 pub const SYSTEM_PROMPT: &str =
     "You are Qwen, created by Alibaba Cloud. You are a helpful assistant.";
-const PINNED_FILES: &[(&str, &str)] = &[
+pub(crate) const PINNED_FILES: &[(&str, &str)] = &[
     (
         "config.json",
         "b1e58593cd31852f7da5c2fc31ddf6135b9c066c0fd9177a4bbe95717083adff",
@@ -94,6 +94,20 @@ pub struct RuntimeOptions {
 }
 
 impl RuntimeOptions {
+    /// Check executable support without loading weights or creating a GPU context.
+    pub fn validate_build_support(&self) -> Result<()> {
+        match self.device {
+            ExecutionDevice::Cpu => ensure!(
+                self.dtype == InferenceDtype::F32,
+                "CPU inference requires explicit float32 precision"
+            ),
+            ExecutionDevice::Cuda { .. } => ensure!(
+                cfg!(feature = "cuda"),
+                "CUDA was requested but this executable has no cuda feature; no CPU fallback is allowed"
+            ),
+        }
+        Ok(())
+    }
     pub fn cuda(ordinal: usize) -> Self {
         Self {
             device: ExecutionDevice::Cuda { ordinal },
@@ -102,6 +116,7 @@ impl RuntimeOptions {
     }
 
     pub(crate) fn resolve(&self) -> Result<(Device, DType)> {
+        self.validate_build_support()?;
         let dtype = match self.dtype {
             InferenceDtype::F32 => DType::F32,
             InferenceDtype::F16 => DType::F16,
@@ -180,7 +195,19 @@ pub async fn bootstrap(base_dir: &Path) -> Result<AssetManifest> {
     let mut files = BTreeMap::new();
     for &(name, expected) in PINNED_FILES {
         let path = base_dir.join(name);
-        if !path.exists() {
+        let checked = path.clone();
+        let state =
+            tokio::task::spawn_blocking(move || crate::assets::inspect_file(&checked, expected))
+                .await??;
+        if state["state"] != "missing" {
+            ensure!(
+                state["state"] == "valid_regular_file",
+                "pinned asset conflict at {}: {}; inspect with assets-doctor and explicitly quarantine before restoring; no existing payload was removed",
+                path.display(),
+                state["state"]
+            );
+        }
+        if state["state"] == "missing" {
             eprintln!("bootstrap: downloading pinned {name}");
             let url = format!("https://huggingface.co/{MODEL_ID}/resolve/{MODEL_REVISION}/{name}");
             let mut response = client.get(url).send().await?.error_for_status()?;
@@ -192,6 +219,12 @@ pub async fn bootstrap(base_dir: &Path) -> Result<AssetManifest> {
             }
             file.sync_all().await?;
             drop(file);
+            let hash_path = partial.clone();
+            let downloaded = tokio::task::spawn_blocking(move || sha256_file(&hash_path)).await??;
+            ensure!(
+                downloaded == expected,
+                "downloaded asset checksum mismatch before publication: {name}; partial payload retained"
+            );
             tokio::fs::rename(&partial, &path).await?;
         }
         let hash_path = path.clone();
@@ -208,10 +241,16 @@ pub async fn bootstrap(base_dir: &Path) -> Result<AssetManifest> {
         licence: "Apache-2.0".into(),
         files,
     };
-    atomic_write(
-        &base_dir.join("assets.json"),
-        &serde_json::to_vec_pretty(&manifest)?,
-    )?;
+    let manifest_path = base_dir.join("assets.json");
+    if manifest_path.exists() {
+        let saved: AssetManifest = serde_json::from_slice(&fs::read(&manifest_path)?)?;
+        ensure!(
+            serde_json::to_value(saved)? == serde_json::to_value(&manifest)?,
+            "existing asset provenance differs; preserve and explicitly resolve the manifest conflict"
+        );
+    } else {
+        atomic_write(&manifest_path, &serde_json::to_vec_pretty(&manifest)?)?;
+    }
     let validate_dir = base_dir.to_owned();
     tokio::task::spawn_blocking(move || validate_assets(&validate_dir)).await??;
     Ok(manifest)
@@ -1111,6 +1150,20 @@ pub struct ComparativePromptEncoder {
 }
 
 impl ComparativePromptEncoder {
+    pub fn tokenizer(&self) -> &Tokenizer {
+        &self.tokenizer
+    }
+
+    pub fn formatted_prompt(&self, prompt: &str) -> Result<String> {
+        match &self.chat {
+            ChatFormat::PinnedQwen => Ok(chat_prefix(prompt)),
+            ChatFormat::Original {
+                template,
+                configuration,
+            } => render_original_chat(template, configuration, prompt),
+        }
+    }
+
     pub fn load(base_dir: &Path, gguf: bool) -> Result<Self> {
         let manifest: AssetManifest = serde_json::from_slice(&fs::read(base_dir.join(if gguf {
             "gguf-assets.json"
@@ -1271,7 +1324,7 @@ fn original_chat_format(configuration: serde_json::Value) -> Result<ChatFormat> 
     })
 }
 
-fn parse_eos_ids(value: &serde_json::Value) -> Result<Vec<u32>> {
+pub(crate) fn parse_eos_ids(value: &serde_json::Value) -> Result<Vec<u32>> {
     let values = match value {
         serde_json::Value::Array(values) => values.clone(),
         _ => vec![value.clone()],
@@ -1290,6 +1343,27 @@ fn parse_eos_ids(value: &serde_json::Value) -> Result<Vec<u32>> {
 }
 
 impl ModelRuntime {
+    /// Trusted train-only health probe reuses the resident model. No second base
+    /// is allocated and no optimiser state is altered by this constructor.
+    pub(crate) fn from_pinned_qwen_model(
+        model: QwenModel,
+        tokenizer: Tokenizer,
+        assets: AssetManifest,
+        checkpoint_id: String,
+        options: RuntimeOptions,
+    ) -> Self {
+        let context_cap = 4096.min(model.configuration().max_position_embeddings);
+        Self {
+            model,
+            tokenizer,
+            assets,
+            checkpoint_id,
+            options,
+            chat: ChatFormat::PinnedQwen,
+            eos_token_ids: vec![151645, 151643],
+            context_cap,
+        }
+    }
     pub fn formatted_prompt(&self, prompt: &str) -> Result<String> {
         match &self.chat {
             ChatFormat::PinnedQwen => Ok(chat_prefix(prompt)),
@@ -1717,6 +1791,21 @@ pub(crate) fn sample(
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn unsupported_phase_runtimes_fail_without_allocating_a_model() {
+        RuntimeOptions::default().validate_build_support().unwrap();
+        assert!(
+            RuntimeOptions {
+                device: ExecutionDevice::Cpu,
+                dtype: InferenceDtype::F16
+            }
+            .validate_build_support()
+            .is_err()
+        );
+        if !cfg!(feature = "cuda") {
+            assert!(RuntimeOptions::cuda(0).validate_build_support().is_err());
+        }
+    }
     #[test]
     fn deterministic_sampling_and_rejection() {
         let logits = [0., 1., 2.];

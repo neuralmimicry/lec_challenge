@@ -51,12 +51,36 @@ pub fn worker_spec(request: &experiments::WorkerRequest) -> Result<DistillationW
             kind: LossKind::PreferenceDpo,
             weight: 1.,
         });
-        // A preference row identifies its original positive sequence through
-        // the chosen sample ID; the worker independently verifies that link.
-        if contents.iter().all(|c| *c == ContentKind::Preference) {
+        // The chosen ID resolves its real content in the shared selector.
+        if request.schema_version == 1 && contents.iter().all(|c| *c == ContentKind::Preference) {
             contents.push(ContentKind::CompleteSequence);
         }
     }
+    for loss in &mut losses {
+        if let Some(weight) = request.training.objective_weights.get(&loss.kind) {
+            loss.weight = *weight;
+        }
+    }
+    let health_check = request.training.health_check.clone().or_else(|| {
+        (request.schema_version >= 2
+            && request.arm.student == StudentArchitecture::ConventionalQwenLora
+            && losses.iter().any(|l| {
+                matches!(
+                    l.kind,
+                    LossKind::HiddenFeature | LossKind::AttentionRelation
+                )
+            }))
+        .then(|| distillation::TrainingHealthPolicy {
+            checkpoints: vec![1, request.training.steps]
+                .into_iter()
+                .collect::<BTreeSet<_>>()
+                .into_iter()
+                .collect(),
+            max_new_tokens: 64,
+            timeout_seconds: 30,
+            stop_on_unhealthy: false,
+        })
+    });
     let initial_checkpoint = if request.arm.data_policy == experiments::DataPolicy::OnPolicy
         || request.arm.self_distillation
     {
@@ -66,7 +90,7 @@ pub fn worker_spec(request: &experiments::WorkerRequest) -> Result<DistillationW
         None
     };
     Ok(DistillationWorkerSpec {
-        schema_version: 1,
+        schema_version: request.schema_version,
         arm_id: request.arm.id.clone(),
         student_kind: match request.arm.student {
             StudentArchitecture::ConventionalQwenLora => {
@@ -110,6 +134,7 @@ pub fn worker_spec(request: &experiments::WorkerRequest) -> Result<DistillationW
         },
         progressive: request.arm.progressive,
         self_distillation: request.arm.self_distillation,
+        health_check,
     })
 }
 
@@ -133,6 +158,16 @@ pub async fn run_worker(
     let trained = tokio::task::spawn_blocking(move || distillation::run_worker(&spec)).await??;
     let path = output.join("training-artifact.json");
     artefact::write_json(&path, &trained)?;
+    artefact::write_json(
+        &output.join("worker-progress.json"),
+        &serde_json::json!({
+            "schema_version":2,"training_completed":true,"completed_steps":trained.steps,
+            "checkpoint_exported":true,"checkpoint_reload_verified_in_training_process":trained.reloaded,
+            "training_artifact":capture(&path)?,"manifest":trained.manifest,
+            "evaluation_attempted":true,"evaluation_healthy":null,"score":null,
+            "limitation":"Training and checkpoint evidence survive an evaluation failure; neither establishes coding improvement."
+        }),
+    )?;
     let mut command = tokio::process::Command::new(std::env::current_exe()?);
     command
         .args(["study-evaluate-worker", "--request"])
@@ -142,6 +177,13 @@ pub async fn run_worker(
         .arg("--output")
         .arg(output.join("development"))
         .kill_on_drop(true);
+    if let Some(profile) = &request.inputs.evaluation {
+        let threads = profile.cpu_threads.saturating_sub(1).max(1).to_string();
+        command
+            .env("RAYON_NUM_THREADS", &threads)
+            .env("OMP_NUM_THREADS", &threads)
+            .env("MKL_NUM_THREADS", &threads);
+    }
     #[cfg(target_os = "linux")]
     {
         let expected_parent = std::process::id() as libc::pid_t;
@@ -170,15 +212,28 @@ pub async fn run_worker(
         }),
     )?;
     eprintln!("study: fresh-process checkpoint evaluation started, PID={evaluation_pid}");
-    ensure!(
-        child.wait().await?.success(),
-        "fresh-process development evaluation failed; training and partial evaluation retained"
-    );
-    let evaluation_output = output.join("development");
+    let status = child.wait().await?;
+    artefact::write_json(
+        &output.join("evaluation-exit.json"),
+        &serde_json::json!({"schema_version":1,"exit_code":status.code(),"training_completed":true,"checkpoint_exported":true,"evaluation_attempted":true,"score":null}),
+    )?;
+    let evaluation_path = output.join("development/report.json");
+    let expected = serde_json::json!(trained.adapter_sha256);
     let development = tokio::task::spawn_blocking(move || {
-        crate::study_evaluate::verify_completed(&evaluation_output)
+        experiments::evaluation_failure::verify(&evaluation_path, "development", &expected)
     })
-    .await??;
+    .await?;
+    let development = match development {
+        Ok(report) => report,
+        Err(error) => {
+            artefact::write_json(&output.join("evaluation-failure.json"), &error)?;
+            return Err(error.into());
+        }
+    };
+    ensure!(
+        status.success(),
+        "evaluation process failed despite its report; checkpoint and evaluation evidence retained"
+    );
     ensure!(
         development["coverage_complete"] == true,
         "study arm lacks complete matched development observations"
@@ -274,10 +329,17 @@ pub async fn evaluate_worker(
         base: base_directory,
         checkpoint: Some(trained.checkpoint),
         architecture: request.arm.student,
-        runtime: request.inputs.student_runtime,
+        runtime: request.inputs.evaluation.as_ref().map_or_else(
+            || request.inputs.student_runtime.clone(),
+            |p| p.runtime.clone(),
+        ),
         output,
         split: crate::study_evaluate::StudySplit::Development,
-        cpu_threads: request.resources.cpu_threads as usize,
+        cpu_threads: request
+            .inputs
+            .evaluation
+            .as_ref()
+            .map_or(request.resources.cpu_threads, |p| p.cpu_threads) as usize,
         offline: request.offline,
         bitnet_backend,
     })

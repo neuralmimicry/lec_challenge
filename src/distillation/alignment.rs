@@ -6,6 +6,16 @@ use serde::{Deserialize, Serialize};
 use std::collections::BTreeMap;
 use tokenizers::Tokenizer;
 
+#[derive(Clone, Debug, Serialize, Deserialize, thiserror::Error)]
+#[error(
+    "distillation sequence exceeds its frozen token cap: measured={measured_tokens_including_eos}, cap={cap}, policy={policy:?} (including EOS)"
+)]
+pub struct SequenceCapacityError {
+    pub measured_tokens_including_eos: usize,
+    pub cap: usize,
+    pub policy: SequencePolicy,
+}
+
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct SequenceWindow {
     pub original_input_tokens: usize,
@@ -103,10 +113,14 @@ pub fn encode_with_policy(
     out.targets.push(eos);
     out.target_spans.push(None);
     if out.input_ids.len() + 1 > max_tokens {
-        ensure!(
-            policy == SequencePolicy::AssistantWindow,
-            "distillation sequence exceeds its frozen token cap"
-        );
+        if policy != SequencePolicy::AssistantWindow {
+            return Err(SequenceCapacityError {
+                measured_tokens_including_eos: out.input_ids.len() + 1,
+                cap: max_tokens,
+                policy,
+            }
+            .into());
+        }
         let original = out.input_ids.len();
         let first = *out
             .feature_positions

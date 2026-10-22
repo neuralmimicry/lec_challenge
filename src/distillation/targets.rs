@@ -20,6 +20,148 @@ use std::{
 };
 use tokenizers::Tokenizer;
 
+pub(super) fn required(spec: &DistillationWorkerSpec) -> bool {
+    spec.losses.iter().any(|l| {
+        matches!(
+            l.kind,
+            LossKind::SoftTokenKl | LossKind::HiddenFeature | LossKind::AttentionRelation
+        )
+    })
+}
+
+/// Render the original teacher template and tokenise without loading weights.
+/// The teacher keeps privileged context; the student prompt is never substituted.
+pub(super) fn encode_teacher(
+    spec: &DistillationWorkerSpec,
+    bundle: &EvidenceBundle,
+    sample: &EvidenceSample,
+) -> Result<EncodedSequence> {
+    let teacher = bundle
+        .teachers
+        .iter()
+        .find(|t| t.id == sample.teacher_id)
+        .context("teacher absent")?;
+    let directory = &teacher.model.directory;
+    let gguf = directory.join("gguf-assets.json").is_file();
+    let source = if gguf {
+        directory.join("source")
+    } else {
+        directory.clone()
+    };
+    let config: serde_json::Value = serde_json::from_slice(&fs::read(source.join("config.json"))?)?;
+    let (tokenizer, prefix, eos) = if teacher.model.architecture == "bitnet" {
+        (
+            Tokenizer::from_file(source.join("tokenizer.json"))
+                .map_err(|e| anyhow::anyhow!(e.to_string()))?,
+            crate::bitnet::formatted_prompt(&sample.prompt),
+            crate::bitnet::END_OF_TURN,
+        )
+    } else {
+        let encoder = crate::model::ComparativePromptEncoder::load(directory, gguf)?;
+        let generation = source.join("generation_config.json");
+        let generation: serde_json::Value = if generation.is_file() {
+            serde_json::from_slice(&fs::read(generation)?)?
+        } else {
+            serde_json::Value::Null
+        };
+        let eos = if directory == Path::new("offline_bundle/base") {
+            151645
+        } else {
+            crate::model::parse_eos_ids(
+                generation
+                    .get("eos_token_id")
+                    .filter(|v| !v.is_null())
+                    .unwrap_or(&config["eos_token_id"]),
+            )?[0]
+        };
+        (
+            encoder.tokenizer().clone(),
+            encoder.formatted_prompt(&sample.prompt)?,
+            eos,
+        )
+    };
+    let capacity = config["max_position_embeddings"]
+        .as_u64()
+        .context("teacher context capacity absent")? as usize;
+    let cap = spec.max_sequence_tokens.min(capacity);
+    alignment::encode_with_policy(&tokenizer, &prefix, &sample.completion, eos, cap, spec.sequence_policy)
+        .with_context(|| format!("teacher sequence sample={} content={:?}, teacher={}, effective cap={cap}, frozen training cap={} (collection/evaluation limits are independent)", sample.id, sample.content, sample.teacher_id, spec.max_sequence_tokens))
+}
+
+pub(super) fn validate_capacity(
+    spec: &DistillationWorkerSpec,
+    bundle: &EvidenceBundle,
+    sample: &EvidenceSample,
+    student: &EncodedSequence,
+    teacher: &EncodedSequence,
+) -> Result<()> {
+    let selected = bundle
+        .teachers
+        .iter()
+        .find(|t| t.id == sample.teacher_id)
+        .context("teacher absent")?;
+    let source = if selected.model.directory.join("gguf-assets.json").is_file() {
+        selected.model.directory.join("source")
+    } else {
+        selected.model.directory.clone()
+    };
+    let cfg: serde_json::Value = serde_json::from_slice(&fs::read(source.join("config.json"))?)?;
+    let width = cfg["vocab_size"]
+        .as_u64()
+        .context("teacher vocabulary capacity absent")?;
+    let hidden = cfg["hidden_size"]
+        .as_u64()
+        .context("teacher feature width absent")?;
+    let features = spec.losses.iter().any(|l| {
+        matches!(
+            l.kind,
+            LossKind::HiddenFeature | LossKind::AttentionRelation
+        )
+    });
+    let logits = spec.losses.iter().any(|l| l.kind == LossKind::SoftTokenKl);
+    let anchors = if features {
+        Some(alignment::feature_anchors(student, teacher)?)
+    } else {
+        None
+    };
+    if logits {
+        let teacher_tokens = Tokenizer::from_file(source.join("tokenizer.json"))
+            .map_err(|e| anyhow::anyhow!(e.to_string()))?;
+        let student_tokens = Tokenizer::from_file(spec.student_base.join("tokenizer.json"))
+            .map_err(|e| anyhow::anyhow!(e.to_string()))?;
+        ensure!(
+            teacher_tokens.get_vocab(true) == student_tokens.get_vocab(true),
+            "full-vocabulary KL unavailable before capture: teacher/student semantic token-ID mappings differ for sample {}",
+            sample.id
+        );
+        alignment::prediction_rows(student, teacher)?;
+    }
+    let n = anchors.as_ref().map_or(0, |a| a.teacher_rows.len() as u64);
+    let payload = 4
+        * (if logits {
+            student.targets.len() as u64 * width
+        } else {
+            0
+        } + n * hidden
+            + n * n);
+    ensure!(
+        payload <= 512_u64 << 20,
+        "teacher trace payload {payload} bytes exceeds 512 MiB for sample {}",
+        sample.id
+    );
+    // forward_trace materialises head attention before reducing to anchors.
+    let heads = cfg["num_attention_heads"]
+        .as_u64()
+        .context("teacher attention capacity absent")?;
+    let t = teacher.input_ids.len() as u64;
+    ensure!(
+        !features || 4 * heads * t * t <= 512_u64 << 20,
+        "teacher attention capture exceeds 512 MiB for sample {}: heads={heads}, sequence={t}",
+        sample.id
+    );
+    Ok(())
+}
+
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct TraceRecord {
     pub schema_version: u32,
@@ -108,7 +250,9 @@ pub(super) fn prepare(
         return Ok(BTreeMap::new());
     }
     let cache_directory = Path::new("offline_bundle/distillation-traces");
-    fs::create_dir_all(cache_directory)?;
+    if spec.teacher_target_policy == super::TeacherTargetPolicy::Acquire {
+        fs::create_dir_all(cache_directory)?;
+    }
     // Only capture mutates the shared cache. Cache-only CPU workers remain
     // parallel readers; acquisition is a separately reserved prewarm phase.
     let _cache_lease = if spec.teacher_target_policy == super::TeacherTargetPolicy::Acquire {
@@ -157,7 +301,12 @@ pub(super) fn prepare(
             .collect::<Vec<_>>();
         let mut pending = Vec::<(&EvidenceSample, String, PathBuf)>::new();
         for sample in selected {
-            let binding = serde_json::json!({"sample":sample.sequence_sha256,"sample_id":sample.id,"teacher_assets":teacher.assets,"teacher_checkpoint":teacher.adapter_checkpoint,"student_tokeniser":tokeniser_hash,"student_sequence":encoded[&sample.id],"sequence_policy":spec.sequence_policy,"runtime":spec.teacher_runtime,"logits":logits,"features":features,"attention":attention,"max_tokens":spec.max_sequence_tokens,"engine":engine});
+            let mut binding = serde_json::json!({"sample":sample.sequence_sha256,"sample_id":sample.id,"teacher_assets":teacher.assets,"teacher_checkpoint":teacher.adapter_checkpoint,"student_tokeniser":tokeniser_hash,"student_sequence":encoded[&sample.id],"sequence_policy":spec.sequence_policy,"runtime":spec.teacher_runtime,"logits":logits,"features":features,"attention":attention,"max_tokens":spec.max_sequence_tokens,"engine":engine});
+            if spec.schema_version >= 2 {
+                binding["teacher_sequence"] =
+                    serde_json::to_value(encode_teacher(spec, bundle, sample)?)?;
+                binding["selection_contract_version"] = 2.into();
+            }
             let fingerprint = artefact::hash(&serde_json::to_vec(&binding)?);
             let mut selected_fingerprint = fingerprint.clone();
             let mut metadata = cache_directory.join(format!("{fingerprint}.json"));
@@ -223,7 +372,8 @@ pub(super) fn prepare(
         }
         for (sample, fingerprint, metadata) in pending {
             let student = &encoded[&sample.id];
-            let teacher_sequence = alignment::encode_with_policy(
+            let teacher_sequence = encode_teacher(spec, bundle, sample)?;
+            let actual_sequence = alignment::encode_with_policy(
                 runtime.tokenizer(),
                 &runtime.formatted_prompt(&sample.prompt)?,
                 &sample.completion,
@@ -231,6 +381,10 @@ pub(super) fn prepare(
                 spec.max_sequence_tokens,
                 spec.sequence_policy,
             )?;
+            ensure!(
+                serde_json::to_value(&teacher_sequence)? == serde_json::to_value(actual_sequence)?,
+                "weight-free teacher encoding differs from loaded capture runtime"
+            );
             let anchors = if features {
                 Some(alignment::feature_anchors(student, &teacher_sequence)?)
             } else {

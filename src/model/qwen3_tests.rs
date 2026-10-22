@@ -3,6 +3,7 @@
 //! These tiny synthetic models test implementation correctness. They do not
 //! establish publisher numerical parity, task quality or assessment promotion.
 use super::*;
+use std::path::PathBuf;
 
 fn configuration() -> QwenConfig {
     QwenConfig {
@@ -74,6 +75,176 @@ fn weights() -> HashMap<String, Tensor> {
 
 fn vector(tensor: &Tensor) -> Vec<f32> {
     tensor.flatten_all().unwrap().to_vec1::<f32>().unwrap()
+}
+
+#[test]
+fn tiny_labelled_task_overfits_assistant_tokens_and_reloads_in_a_fresh_process() -> Result<()> {
+    use crate::{
+        distillation::{SequencePolicy, alignment},
+        train::{ResumableAdam, TrainConfig},
+    };
+    let wordlevel = tokenizers::models::wordlevel::WordLevel::builder()
+        .vocab(
+            [
+                ("[UNK]".into(), 0),
+                ("instruction".into(), 1),
+                ("answer".into(), 2),
+                ("prompt".into(), 3),
+                ("result".into(), 5),
+            ]
+            .into_iter()
+            .collect(),
+        )
+        .unk_token("[UNK]".into())
+        .build()
+        .unwrap();
+    let mut tokenizer = Tokenizer::new(wordlevel);
+    tokenizer.with_pre_tokenizer(Some(tokenizers::pre_tokenizers::whitespace::Whitespace));
+    let sequence = alignment::encode_with_policy(
+        &tokenizer,
+        "instruction prompt ",
+        "answer result",
+        7,
+        5,
+        SequencePolicy::RejectOverlength,
+    )?;
+    assert_eq!(sequence.input_ids, vec![1, 3, 2, 5]);
+    assert_eq!(sequence.prediction_positions, vec![1, 2, 3]);
+    assert_eq!(sequence.targets, vec![2, 5, 7]);
+    assert_eq!(
+        sequence.target_spans,
+        vec![Some((0, 6)), Some((7, 13)), None]
+    );
+    assert!(alignment::encode(&tokenizer, "instruction prompt ", "answer result", 7, 4).is_err());
+    let tensors = weights();
+    let frozen = tensors
+        .iter()
+        .map(|(k, v)| (k.clone(), (v.clone(), vector(v))))
+        .collect::<BTreeMap<_, _>>();
+    let mut adapted = QwenModel::from_weights(
+        configuration(),
+        tensors,
+        Some(AdapterConfig { rank: 4, alpha: 8. }),
+        1729,
+        None,
+        true,
+    )?;
+    let sample = crate::train::EncodedSample {
+        id: "labelled numerical QA, never assessment evidence".into(),
+        input_ids: sequence.input_ids.clone(),
+        positions: sequence.prediction_positions.clone(),
+        targets: sequence.targets.clone(),
+    };
+    let cfg = TrainConfig {
+        learning_rate: 0.01,
+        weight_decay: 0.,
+        ..TrainConfig::default()
+    };
+    let mut optimiser = ResumableAdam::new(&adapted.adapter_vars, &cfg)?;
+    let initial = crate::train::assistant_loss(&mut adapted, &sample)?.to_scalar::<f32>()?;
+    let mut base = QwenModel::from_weights(configuration(), weights(), None, 1729, None, false)?;
+    let baseline = crate::train::assistant_loss(&mut base, &sample)?.to_scalar::<f32>()?;
+    assert!(
+        (initial - baseline).abs() < 1e-6,
+        "zero-B LoRA must initially equal adapter-disabled base"
+    );
+    let mut norms = Vec::new();
+    for _ in 0..64 {
+        let loss = crate::train::assistant_loss(&mut adapted, &sample)?;
+        norms.push(optimiser.update(&adapted.adapter_vars, &loss)?);
+    }
+    let after = crate::train::assistant_loss(&mut adapted, &sample)?.to_scalar::<f32>()?;
+    assert!(
+        after < initial * 0.5,
+        "real forward/backward/Adam must lower correctly shifted assistant NLL: {initial} -> {after}"
+    );
+    eprintln!(
+        "labelled numerical fixture: assistant NLL {initial:.6} -> {after:.6}; no assessment evidence"
+    );
+    assert!(norms.iter().all(|n| n.is_finite() && *n > 0.));
+    for (tensor, before) in frozen.values() {
+        assert_eq!(vector(tensor), *before, "base tensors must remain frozen");
+    }
+    let input = Tensor::new(&[[1_u32, 3, 2, 5]], &Device::Cpu)?;
+    let fixed_hidden = adapted.hidden(&input, 0, false)?;
+    let fixed_logits = adapted.logits(&fixed_hidden)?;
+    let directory = tempfile::tempdir()?;
+    let adapter = adapted
+        .adapter_vars
+        .iter()
+        .map(|(k, v)| (k.clone(), v.as_tensor().clone()))
+        .collect::<HashMap<_, _>>();
+    candle_core::safetensors::save(&adapter, directory.path().join("adapter.safetensors"))?;
+    fs::write(
+        directory.path().join("expected.json"),
+        serde_json::to_vec(&vector(&fixed_logits))?,
+    )?;
+    let status = std::process::Command::new(std::env::current_exe()?)
+        .args([
+            "--exact",
+            "model::qwen3_tests::fresh_process_reload_fixture",
+            "--nocapture",
+        ])
+        .env("LEC_LABELLED_NUMERICAL_RELOAD", directory.path())
+        .status()?;
+    ensure!(status.success(), "fresh-process numerical reload failed");
+    let receipt: serde_json::Value =
+        serde_json::from_slice(&fs::read(directory.path().join("reload.json"))?)?;
+    assert!(receipt["maximum_absolute_logit_error"].as_f64().unwrap() <= 1e-6);
+    assert!(
+        receipt["adapter_disabled_maximum_difference"]
+            .as_f64()
+            .unwrap()
+            > 0.001
+    );
+    Ok(())
+}
+
+#[test]
+fn fresh_process_reload_fixture() -> Result<()> {
+    let Some(directory) = std::env::var_os("LEC_LABELLED_NUMERICAL_RELOAD").map(PathBuf::from)
+    else {
+        return Ok(());
+    };
+    let adapter =
+        candle_core::safetensors::load(directory.join("adapter.safetensors"), &Device::Cpu)?;
+    let mut reloaded = QwenModel::from_weights(
+        configuration(),
+        weights(),
+        Some(AdapterConfig { rank: 4, alpha: 8. }),
+        1729,
+        Some(adapter),
+        false,
+    )?;
+    let input = Tensor::new(&[[1_u32, 3, 2, 5]], &Device::Cpu)?;
+    let hidden = reloaded.hidden(&input, 0, false)?;
+    let actual = vector(&reloaded.logits(&hidden)?);
+    let expected: Vec<f32> = serde_json::from_slice(&fs::read(directory.join("expected.json"))?)?;
+    let mut base = QwenModel::from_weights(configuration(), weights(), None, 1729, None, false)?;
+    let hidden = base.hidden(&input, 0, false)?;
+    let disabled = vector(&base.logits(&hidden)?);
+    assert_eq!(actual.len(), expected.len());
+    let max = actual
+        .iter()
+        .zip(&expected)
+        .map(|(a, b)| (a - b).abs())
+        .fold(0_f32, f32::max);
+    let difference = actual
+        .iter()
+        .zip(disabled)
+        .map(|(a, b)| (a - b).abs())
+        .fold(0_f32, f32::max);
+    ensure!(
+        max <= 1e-6 && difference > 0.001,
+        "fixed-token logits differ after export/reload, or adapter was disabled"
+    );
+    fs::write(
+        directory.join("reload.json"),
+        serde_json::to_vec(
+            &serde_json::json!({"maximum_absolute_logit_error":max,"adapter_disabled_maximum_difference":difference,"tolerance":1e-6,"justification":"Same deterministic CPU F32 kernels, weights, tokens and engine across independent processes; one micro-unit allows float serialisation round trips."}),
+        )?,
+    )?;
+    Ok(())
 }
 
 fn matrix_product(matrix: &Tensor, input: &[f64]) -> Vec<f64> {

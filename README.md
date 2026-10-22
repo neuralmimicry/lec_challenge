@@ -1,5 +1,16 @@
 # Coding-fleet distillation in Rust
 
+The bounded training/orchestration repair and its verification are documented in
+[docs/repair-20261022.md](docs/repair-20261022.md). Native
+`study-diagnose-training` inspects the exact optimisation set and can measure
+assistant NLL separately from paired training-prompt generation and sandbox
+correctness. It makes no development-improvement or assessment-promotion claim.
+`assets-doctor` and `sandbox-doctor` inspect existing assets and the active store.
+Builds remain locked: `bootstrap-online` permits online Cargo preparation;
+otherwise `LEC_CARGO_ONLINE=1` explicitly enables it. An explicit `--offline`
+always prevents Cargo acquisition and application network access. Prepare a
+missing dependency cache with `cargo fetch --locked` during an online phase.
+
 A native Rust implementation of the LEC Principal AI Engineer assessment: configurable teacher acquisition, durable budgets, isolated executable grading, source-separated curation, real differentiable Qwen LoRA, checkpoint evaluation and conservative promotion.
 
 **The assessment is not yet complete.** No teacher API credentials, spending authority or account-specific API output-training decisions were supplied. Hugging Face access was subsequently authorised for local comparative weights, without saving credentials. There are no real teacher API recordings or provider-trained assessment checkpoints. The offline demonstration fails explicitly when these required artifacts are absent. Local transport fixtures, random small-model tests and full-size synthetic tensor training are labelled QA evidence; they do not establish learning from teachers. See [STATUS.md](STATUS.md) and [limitations](docs/limitations.md).

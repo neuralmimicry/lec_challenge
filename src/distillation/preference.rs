@@ -38,8 +38,8 @@ fn encode_responses(
             spec.sequence_policy,
         )
     };
-    let chosen = encode(chosen)?;
-    let rejected = encode(rejected)?;
+    let chosen = encode(chosen).context("preference chosen student sequence")?;
+    let rejected = encode(rejected).context("preference rejected student sequence")?;
     validate_shared_context(&chosen, &rejected)?;
     Ok((chosen, rejected))
 }
@@ -148,6 +148,7 @@ mod tests {
             data_policy: DataPolicy::Offline,
             progressive: false,
             self_distillation: false,
+            health_check: None,
         };
         let model = tokenizers::models::wordlevel::WordLevel::builder()
             .vocab(

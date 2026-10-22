@@ -32,6 +32,15 @@ fn permutations<T: Clone>(items: &[T]) -> Vec<Vec<T>> {
 
 fn applicability(arm: &ArmSpec, inputs: &StudyInputs) -> Vec<String> {
     let mut reasons = BTreeSet::new();
+    if arm.student == StudentArchitecture::TernaryBitnet
+        && (inputs.student_runtime != RuntimeOptions::default()
+            || inputs
+                .evaluation
+                .as_ref()
+                .is_some_and(|e| e.runtime != RuntimeOptions::default()))
+    {
+        reasons.insert("BitNet native optimisation/evaluation require explicit CPU/F32; this plan requested another phase runtime".into());
+    }
     match inputs
         .students
         .iter()
